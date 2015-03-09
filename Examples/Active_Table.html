@@ -1,0 +1,87 @@
+
+    <html>
+        <head>
+            <style> 
+                 
+    body {
+        margin: 10px;
+    }
+
+            </style>
+        </head>
+        <body>
+            
+            <table id="myActiveTable" border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th>Last name</th>
+      <th>First name</th>
+      <th>Birth Year</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>   Obama</td>
+      <td>  Barack</td>
+      <td> <input id="0___BirthYear" class="Active" size="10px"></input></td>
+    </tr>
+    <tr>
+      <td>    Bush</td>
+      <td>  George</td>
+      <td> <input id="1___BirthYear" class="Active" size="10px"></input></td>
+    </tr>
+    <tr>
+      <td> Clinton</td>
+      <td> William</td>
+      <td> <input id="2___BirthYear" class="Active" size="10px"></input></td>
+    </tr>
+  </tbody>
+</table>
+            
+            <!-- COMMENT: Buttons below are used to add debugging features to an interactive. Console logging allows you to see
+            output within a browser's console. Try reading about Chrome's console. -->
+        
+ <!--            <input class="btn" type="button" value="Grab Table Data" onClick="getState()">
+            <div id="spaceBelow">State:</div> -->
+        
+            <script src="https://code.jquery.com/jquery-2.1.3.min.js"></script>
+            <script type='text/javascript'>
+            
+    //Standard edX JSinput functions
+    setState = function(){
+        return 'None';
+    }
+
+    getState = function(){
+        state = getInput();
+        statestr = JSON.stringify(state);
+        
+        // document.getElementById('spaceBelow').innerHTML += '<br>'+statestr;
+        // var command = "state = '" + statestr + "'";
+        // console.log(command);
+
+        // //Kernel
+        // var kernel = IPython.notebook.kernel;
+        // kernel.execute(command);
+        
+        return statestr;
+    }
+    
+    getInput = function() {
+        var data = {};
+        data['response'] = {};
+        data['colors'] = {};
+        var cells = document.getElementsByClassName('Active');
+        for (i=0;i<cells.length;i++) {
+            data['response'][cells[i].id] = cells[i].value;
+            data['colors'][cells[i].id] = 'white';
+        }
+        console.log(data);
+        return data;
+    }
+
+
+            </script>
+            
+        </body>
+    </html>

@@ -1,0 +1,124 @@
+
+
+<!DOCTYPE html>
+<html>
+    <head>
+        <style> 
+            body {
+                margin: 10px;
+                /*padding-top: 40px;*/
+            }
+        </style>
+    </head>
+
+    <body>
+        <!-- COMMENT: Define the jxgbox - aka, where all the interactive graphing will go. -->
+        <div style="width: 100%; overflow: hidden;">
+            <div id='jxgbox1' class='jxgbox' style='width:450px; height:350px; float:left; border: solid #1f628d 2px;'></div>
+        </div>
+        
+        <ul class="stack button-group">
+        <li><input class="btn" type="button" value="Show Animation" onClick="increaseA()"></li>
+        <li><input class="btn" type="button" value="Reset" onClick="resetAnimation()"></li>
+        
+        
+        <!-- COMMENT: Where our Javascript begins. -->
+        <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jsxgraph/0.98/jsxgraphcore.js"></script>
+        <script type='text/javascript'>
+
+            JXG.Options.point.showInfobox = false;
+        
+            bboxlimits = [-1.1, 12, 12, -1.1];
+            var board = JXG.JSXGraph.initBoard('jxgbox1', {axis:false, 
+                                                    showCopyright: false,
+                                                    showNavigation: false,
+                                                    zoom: false,
+                                                    pan: false,
+                                                    boundingbox:bboxlimits,
+                                                    grid: false,
+                                                    hasMouseUp: true, 
+            });
+            
+            xaxis = board.create('axis', [[0, 0], [12, 0]], {withLabel: true, name: "Real GDP", label: {offset: [320,-20]}});
+            yaxis = board.create('axis', [[0, 0], [0, 12]], {withLabel: true, name: "Price Level", label: {offset: [-60,260]}});
+
+            //Axes
+            xaxis.removeAllTicks();
+            yaxis.removeAllTicks();
+            var ylabel = board.create('text',[-0.75,10,"PL"],{fixed:true,fontsize:18,highlight:false});
+            var xlabel = board.create('text',[9,-0.5,"RGDP"],{fixed:true,fontsize:18,highlight:false});
+            
+            //Define Segments
+            var xi1 = 2.0
+            var yi1 = 10.0
+            var xi2 = 10.0
+            var yi2 = 2.0
+            var f1 = board.create('point',[xi1,yi1],{withLabel:false,visible:false});
+            var f2 = board.create('point',[xi2,yi2],{withLabel:false,visible:false});
+            
+            //AD1
+            var AD1 = board.create('segment',[f1,f2],{strokeColor:'Gray',strokeWidth:'3',
+                                                      name:'AD1',withLabel:true,dash:'1',
+                                                      fixed:true,highlight:false,
+                                                      label:{color:'Gray',highlight:false,offset:[125,-85]}});
+            
+            //AD2
+            var S1 = board.create('point',[xi1,yi1],{withLabel:false,visible:false});
+            var S2 = board.create('point',[xi2,yi2],{withLabel:false,visible:false});
+            var AD2 = board.create('segment',[S1,S2],{strokeColor:'Blue',strokeWidth:'3',
+                                                      name:'AD2',withLabel:false,
+                                                      label:{highlight:false,offset:[125,-85]}});
+            
+            G = board.create('glider',[6.0,6.0,AD2],{name:'A'});
+            
+            board.on('mousedown', function() {      
+                AD2.setAttribute({withLabel:true,offset:[125,-85]});
+                board.update()
+            });
+            
+            //Animation for shifting curve SouthWest
+            decreaseXY = function() {
+                resetAnimation();
+                board.update();
+                S1.moveTo([1.0,9.0],1000);
+                S2.moveTo([9.0,1.0],1000);
+                AD2.setAttribute({withLabel:true,offset:[125,-85]});                
+                board.update();
+            }
+            
+            //Animation for shifting curve NorthEast
+            increaseXY = function() {
+                resetAnimation();
+                board.update();
+                S1.moveTo([3.0,11.0],1000);
+                S2.moveTo([11.0,3.0],1000);
+                AD2.setAttribute({withLabel:true,offset:[125,-85]});
+                board.update();
+            }
+            
+            increaseA = function() {
+                resetAnimation();
+                board.update();
+                G.moveTo([4.0,8.0],1000);
+                board.update();
+            }
+            
+            decreaseA = function() {
+                resetAnimation();
+                board.update();
+                G.moveTo([8.0,4.0],1000);
+                board.update();
+            }
+            
+            resetAnimation = function() {
+                S1.moveTo([2.0,10.0],10);
+                S2.moveTo([10.0,2.0],10);
+                G.moveTo([6.0,6.0],10);
+                board.update();
+                AD2.setAttribute({withLabel:false,offset:[125,-85]});
+            }
+            
+            
+        </script>
+    </body>
+</html>

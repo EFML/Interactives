@@ -1,0 +1,340 @@
+
+<!DOCTYPE html>
+<html>
+    <head>
+        <style> 
+            body {
+                margin: 10px;
+                /*padding-top: 40px;*/
+            }
+        </style>
+    </head>
+
+    <body>
+        
+        <div style="width: 100%; overflow: hidden;">
+            <div id='jxgbox1' class='jxgbox' style='width:350px; height:300px; float:left; border: solid #1f628d 2px;'></div>        
+            <div id='jxgbox2' class='jxgbox' style='width:350px; height:300px; margin-left: 375px; border: solid #1f628d 2px;'></div>
+        </div>
+
+        <!-- TURNED OFF
+        <input class="btn" type="button" value="Shift in Aggregate Demand" onClick="startAnimation()">
+        <input class="btn" type="button" value="Reset" onClick="resetAnimation()">
+        -->
+        
+        
+        <!-- COMMENT: Where our Javascript begins. -->
+        <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jsxgraph/0.98/jsxgraphcore.js"></script>
+        
+        <!-- COMMENT: Specific Davidson Next calls built on JSXGraph. Must be loaded after JSXgraph. -->
+        <script type="text/javascript" src="../../../JS/Macro_JSXgraph.js"></script>
+        
+        <script type='text/javascript'>
+            
+            //General Parameters for Macro
+            JXG.Options.point.showInfobox = false;
+            JXG.Options.segment.strokeColor = 'Pink';
+
+            createDragLine = function(board,point1,point2,gname,color,xo,yo) {
+                return board.create('segment',[point1,point2],{strokeColor:color,strokeWidth:'3',name:gname,withLabel:true,label:{offset:[xo,yo]}});
+            }
+
+            createSupply = function(board,gname,color) {
+                var c1 = [1.0,2.0];
+                var c2 = [9.0,10.0];
+                var S1 = board.create('point',c1,{withLabel:false,visible:false});
+                var S2 = board.create('point',c2,{withLabel:false,visible:false});
+                return board.create('segment',[S1,S2],{'strokeColor':color,'strokeWidth':'3',
+                                                       'name':gname,'withLabel':true,
+                                                       'label':{'offset':[105,105]}
+                                                      });
+            }
+
+            createDemand = function(board,gname,color) {
+                var c1 = [1.0,10.0];
+                var c2 = [9.0,2.0];
+                var D1 = board.create('point',c1,{withLabel:false,visible:false});
+                var D2 = board.create('point',c2,{withLabel:false,visible:false});
+                return board.create('segment',[D1,D2],{'strokeColor':color,'strokeWidth':'3',
+                                                       'name':gname,'withLabel':true,
+                                                       'label':{'offset':[105,-105]}
+                                                      });
+            }
+
+
+            /////////////////////////////////////////////////////////////
+            // Dashed Lines
+            createDashedLines2Axis = function(board,intersection,options) {
+                var fixed = options.fixed || true;  // defaults
+                var withLabel = options.withLabel || false;
+                var xlabel = options.xlabel || '';  
+                var ylabel = options.ylabel || '';
+                var color = options.color || 'gray';
+
+                var dashYp1 = board.create('point',[0, intersection.Y()],
+                                            {withLabel:withLabel,name:ylabel,visible:true,size:'0.5',strokeColor:'Gray','label':{'offset':[-25,-2]}});
+
+                var dashYp2 = board.create('point',[intersection.X(), intersection.Y()],
+                                            {withLabel:false,visible:false});
+                var dashY1 = board.create('segment',[dashYp1,dashYp2],
+                                           {strokeColor:color,strokeWidth:'2',dash:'1',fixed:fixed});
+
+                var dashXp1 = board.create('point',[intersection.X(), 0],
+                                            {withLabel:withLabel,name:xlabel,visible:true,size:'0.5',strokeColor:'Gray','label':{'offset':[-5,-8]}});
+
+                var dashXp2 = board.create('point',[intersection.X(), intersection.Y()],
+                                            {withLabel:false,visible:false});
+
+                var dashX1 = board.create('segment',[dashXp1,dashXp2],
+                                           {strokeColor:color,strokeWidth:'2',dash:'1',fixed:fixed});
+
+                return [dashXp1,dashXp2,dashYp1,dashYp2];
+            }
+            
+            ////////////
+            // BOARD 1
+            ////////////
+            bboxlimits = [-1.5, 12, 12, -1];
+            var brd1 = JXG.JSXGraph.initBoard('jxgbox1', {axis:false, 
+                                                    showCopyright: false,
+                                                    showNavigation: false,
+                                                    zoom: false,
+                                                    pan: false,
+                                                    boundingbox:bboxlimits,
+                                                    grid: false,
+                                                    hasMouseUp: true, 
+            });
+            
+            xaxis1 = brd1.create('axis', [[0, 0], [11, 0]], {withLabel: false});
+            yaxis1 = brd1.create('axis', [[0, 0], [0, 11]], {withLabel: false});
+
+            //Axes
+            xaxis1.removeAllTicks();
+            yaxis1.removeAllTicks();
+            var xlabel1 = brd1.create('text',[-1.2,10,"PL"],{fixed:true});
+            var ylabel1 = brd1.create('text',[9,-0.5,"RGDP"],{fixed:true});
+            
+            //Supply Line 1 - fixed
+            var Supply = createSupply(brd1,'SRAS','DodgerBlue');
+            Supply.setAttribute({'name':'SRAS','fixed':true,'highlight':false});
+            
+            //Demand Line 1 - fixed
+            var AD1 = createDemand(brd1,'AD1','Orange');
+            AD1.setAttribute({'dash':1,'fixed':true,'highlight':false});
+            
+            //Demand Line 2 - moveable
+            var AD2 = createDemand(brd1,'AD2','Orange');
+            AD2.setAttribute({withLabel:false});
+            
+             
+            ////////////
+            // Intersection Box 1
+            ////////////
+            var iSDfix = brd1.create('intersection', [AD1, Supply, 0], {visible:false}); 
+            var iS2D = brd1.create('intersection', [AD2, Supply, 0], {visible:false});
+            
+            ////////////
+            // Draggable Dashed Lines for Board 1
+            ////////////
+            var dashesDragB1 = createDashedLines2Axis(brd1,iS2D,
+                                                      {fixed:false,
+                                                       withLabel:false,
+                                                       xlabel:'Y2',
+                                                       ylabel:'PL2',
+                                                       color:'Orange'});
+            var dashS2Xp1 = dashesDragB1[0];
+            var dashS2Xp2 = dashesDragB1[1];
+            var dashS2Yp1 = dashesDragB1[2];
+            var dashS2Yp2 = dashesDragB1[3];
+            
+            
+            ////////////
+            // Fixed Dashed Lines for Board 1
+            ////////////
+            var dashesFixedB1 = createDashedLines2Axis(brd1,iSDfix,
+                                                      {withLabel:true,
+                                                       xlabel:'Y1',
+                                                       ylabel:'PL1',
+                                                       color:'DodgerBlue'});
+            
+            ////////////
+            //LRAS - straight line
+            ////////////
+            var LRAS = brd1.create('segment',[[iSDfix.X(),11.0],[iSDfix.X(),0.0]],
+                                   {'strokeColor':'DodgerBlue','strokeWidth':'2',
+                                    'name':'LRAS','withLabel':true,
+                                    'label':{'offset':[-15,140]}});
+            
+            
+            ////////////
+            // BOARD 2
+            ////////////
+            bboxlimits2 = [-2.0, 12, 12, -1];
+            var brd2 = JXG.JSXGraph.initBoard('jxgbox2', {axis:false, 
+                                                    showCopyright: false,
+                                                    showNavigation: false,
+                                                    zoom: false,
+                                                    pan: false,
+                                                    boundingbox:bboxlimits2,
+                                                    grid: false,
+                                                    hasMouseUp: true, 
+            });
+            
+            xaxis2 = brd2.create('axis', [[0, 0], [11, 0]], {withLabel: false});
+            yaxis2 = brd2.create('axis', [[0, 0], [0, 11]], {withLabel: false});
+            
+            //Axes
+            xaxis2.removeAllTicks();
+            yaxis2.removeAllTicks();
+            var ylabel2 = brd2.create('text',[-1.8,10,"Inflation<br>Rate"],{fixed:true});
+            var xlabel2 = brd2.create('text',[9,-0.5,"UR"],{fixed:true});
+        
+            //////////
+            // Connect Boards and Movement
+            //////////
+            brd1.addChild(brd2);
+        
+            //SRPC - fixed
+            var SRPC = createDemand(brd2,'SRPC','DodgerBlue');
+            SRPC.setAttribute({'fixed':true,'highlight':false});
+        
+            ////////
+            // Invisible axis line - allows us to move points up and down the SRPC curve
+            // See the next intersection. DB2Y intersects with SRPC
+            ////////
+            var DB2YP1 = brd2.create('point',[0, iS2D.Y()],{withLabel:false,visible:false});
+            var DB2YP2 = brd2.create('point',[iS2D.X(), iS2D.Y()],{withLabel:false,visible:false});
+            var DB2Y = brd2.create('segment',[DB2YP1,DB2YP2],{visible:false,strokeColor:'gray',strokeWidth:'2',
+                                                                        dash:'1',fixed:true} );
+                        
+            ////////
+            //Intersection for SRPC
+            ////////
+            var iB2SRPC = brd2.create('intersection', [DB2Y, SRPC, 0], {name:'A2',fillColor:'Orange',
+                                                                        strokeColor:'Orange',
+                                                                        withLabel:true,visible:false});
+            var iB2fixed = brd2.create('point', [iB2SRPC.X(), iB2SRPC.Y()], {name:'A1',visible:true,
+                                                                             fixed:true,fillColor:'DodgerBlue',
+                                                                             strokeColor:'DogderBlue'});
+
+        
+            ////////////
+            // Fixed Dashed Lines for Point A1
+            ////////////
+            var dashesFixedB2 = createDashedLines2Axis(brd2,iB2fixed,
+                                                      {withLabel:true,
+                                                       xlabel:'5%',
+                                                       ylabel:'2%',
+                                                       color:'DodgerBlue'});
+            
+            ////////////
+            // Fixed Dashed Lines for Point A1
+            ////////////
+            var dashesDragB2 = createDashedLines2Axis(brd2,iB2SRPC,
+                                                      {fixed:false,
+                                                       withLabel:false,
+                                                       xlabel:'3%',
+                                                       ylabel:'4%',
+                                                       color:'Orange'});
+            var dashB2Xp1 = dashesDragB2[0];
+            var dashB2Xp2 = dashesDragB2[1];
+            var dashB2Yp1 = dashesDragB2[2];
+            var dashB2Yp2 = dashesDragB2[3];
+            
+        
+            //////////////////
+            // Interactivity
+            //////////////////
+            brd1.on('move', function() {      
+                //Moving Dashed Lines in Board 1
+                dashS2Yp1.moveTo([0, iS2D.Y()]);
+                dashS2Yp2.moveTo([iS2D.X(), iS2D.Y()]);
+
+                dashS2Xp1.moveTo([iS2D.X(), 0]);
+                dashS2Xp2.moveTo([iS2D.X(), iS2D.Y()]);
+                    
+                //Moving Point A2
+                DB2YP1.moveTo([0, iS2D.Y()]);
+                DB2YP2.moveTo([iB2SRPC.X(),iS2D.Y()]);    
+                    
+                //Moving Dashed Lines in Board 2
+                dashB2Yp1.moveTo([0, iB2SRPC.Y()]);
+                dashB2Yp2.moveTo([iB2SRPC.X(), iB2SRPC.Y()]);
+
+                dashB2Xp1.moveTo([iB2SRPC.X(), 0]);
+                dashB2Xp2.moveTo([iB2SRPC.X(), iB2SRPC.Y()]);
+            });
+            
+            brd1.on('mousedown', function() {      
+                AD2.setAttribute({withLabel:true});
+                dashS2Yp1.setAttribute({withLabel:true});
+                dashS2Xp1.setAttribute({withLabel:true});
+                brd1.update()
+                    
+                dashB2Yp1.setAttribute({withLabel:true});
+                dashB2Xp1.setAttribute({withLabel:true});
+                iB2SRPC.setAttribute({visible:true});
+                brd2.update()
+            });
+            
+            resetAnimation = function() {
+                //Initial line coords
+                var c1 = [1.0,10.0];
+                var c2 = [9.0,2.0];
+                
+                //Animated Curve
+                AD2.point1.moveTo(c1,10);
+                AD2.point2.moveTo(c2,10);
+                AD2.setAttribute({withLabel:false});
+                dashS2Yp1.setAttribute({withLabel:false});
+                dashS2Xp1.setAttribute({withLabel:false});
+                iB2SRPC.setAttribute({withLabel:false});
+                
+                brd1.update();
+
+                //Dashed Lines                
+                dashS2Yp1.moveTo([0, iS2D.Y()-1]);
+                dashS2Yp2.moveTo([iS2D.X()-1, iS2D.Y()-1]);
+
+                dashS2Xp1.moveTo([iS2D.X()-1, 0]);
+                dashS2Xp2.moveTo([iS2D.X()-1, iS2D.Y()-1]);
+                
+                brd1.update();
+            };
+            
+            
+            //Standard edX JSinput functions
+            getInput = function(){
+                state = {};
+                statestr = JSON.stringify(state);
+                console.log(statestr)
+                
+                //IPython Notebook Considerations
+                document.getElementById('spaceBelow').innerHTML += '<br>'+statestr;
+                var command = "state = '" + statestr + "'";
+                console.log(command);
+
+                //Kernel
+                var kernel = IPython.notebook.kernel;
+                kernel.execute(command);
+
+                return statestr;
+            }
+
+            getState = function(){
+                state = {'input': JSON.parse(getInput())};
+                statestr = JSON.stringify(state);
+                return statestr
+            }
+
+            setState = function(statestr){
+                $('#msg').html('setstate ' + statestr);
+                state = JSON.parse(statestr);
+                console.log(statestr);
+                console.debug('State updated successfully from saved.');
+            }
+            
+            
+        </script>
+    </body>
+</html>

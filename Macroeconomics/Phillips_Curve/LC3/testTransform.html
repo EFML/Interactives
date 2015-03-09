@@ -1,0 +1,85 @@
+
+
+<div style="width: 100%; overflow: hidden;">
+            <div id='jxgbox1' class='jxgbox' style='width:350px; height:300px; float:left; border: solid #1f628d 2px;'></div>        
+            <div id='jxgbox2' class='jxgbox' style='width:350px; height:300px; margin-left: 375px; border: solid #1f628d 2px;'></div>
+        </div>
+
+        <!-- TURNED OFF
+        <input class="btn" type="button" value="Shift in Aggregate Demand" onClick="startAnimation()">
+        <input class="btn" type="button" value="Reset" onClick="resetAnimation()">
+        -->
+        
+        
+        <!-- COMMENT: Where our Javascript begins. -->
+        <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jsxgraph/0.98/jsxgraphcore.js"></script>
+        
+        <!-- COMMENT: Specific Davidson Next calls built on JSXGraph. Must be loaded after JSXgraph. -->
+        <script type="text/javascript" src="../../../JS/Macro_JSXgraph.js"></script>
+        
+        <script type='text/javascript'>
+            
+            
+            ////////////
+            // BOARD 1
+            ////////////
+            bboxlimits = [-1.5, 12, 12, -1];
+            var brd1 = JXG.JSXGraph.initBoard('jxgbox1', {axis:false, 
+                                                    showCopyright: false,
+                                                    showNavigation: false,
+                                                    zoom: false,
+                                                    pan: false,
+                                                    boundingbox:bboxlimits,
+                                                    grid: true,
+                                                    hasMouseUp: true, 
+            });
+            
+            
+            ////////////
+            // BOARD 2
+            ////////////
+            bboxlimits2 = [-2.0, 12, 12, -1];
+            var brd2 = JXG.JSXGraph.initBoard('jxgbox2', {axis:false, 
+                                                    showCopyright: false,
+                                                    showNavigation: false,
+                                                    zoom: false,
+                                                    pan: false,
+                                                    boundingbox:bboxlimits2,
+                                                    grid: true,
+                                                    hasMouseUp: true, 
+            });
+
+            
+            
+            
+            //Points
+            //var pointB1a = brd1.create('point',[2,2])
+            
+            //Transform for shifting SRPC2
+            //var shift = brd1.create('transform', [function(){return pointB1a.X()},
+                                                  function(){return pointB1a.Y()}], {type:'translate'});
+            
+            //var pointB1b = brd1.create('point',[pointB1a,shift])
+            //brd1.update()
+        
+            var A = brd1.create('point', [1,1], {name:'A', style:5});
+            var shiftB1 = brd2.create('transform', [8,8], {type:'translate'});
+            //var B = brd1.create('point',[A,shiftB1],{name:'B'});
+    
+            //////////
+            // Connect Boards and Movement
+            //////////
+            brd1.addChild(brd2);
+    
+            var C = brd2.create('point', [1,9], {name:'C', style:5});
+            var shiftB2 = brd2.create('transform', [9,-8], {type:'translate'});
+            var D = brd2.create('point', [A,shiftB2], {name:'D',style:7});
+
+
+            brd2.update(); 
+            
+            
+            
+        </script>
+    </body>
+</html>

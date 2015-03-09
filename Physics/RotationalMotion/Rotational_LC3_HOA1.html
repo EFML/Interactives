@@ -1,0 +1,138 @@
+
+    <html>
+        <head>
+            <style type="text/css">
+            <!-- Table syling: http://www.textfixer.com/html/html-table-generator.php -->
+             
+    body {
+        margin: 10px;
+    }
+    
+    
+    input[type="text"] {
+        font-size: 18px;
+    }
+    
+    input[type="text"].placeholder {
+        color   : Gray;
+        border  : 1px;
+        padding : 0 10px;
+        margin  : 0;
+    }
+    
+    input[type="text"]:focus {
+        color:RoyalBlue;
+        this.value = '';
+    }
+    
+    .dataframe  {font-size:18px;color:#333333;width:100%;border-width: 1px;border-color: #729ea5;border-collapse: collapse;}
+    .dataframe  th {font-size:18px;background-color:#acc8cc;border-width: 1px;padding: 8px;border-style: solid;border-color: #729ea5;text-align:left;}
+    .dataframe  tr {background-color:#d4e3e5;}
+    .dataframe  td {font-size:18px;border-width: 1px;padding: 8px;border-style: solid;border-color: #729ea5;}
+    .dataframe  tr:hover {background-color:#ffffff;}
+    
+    
+
+            </style>
+
+        </head>
+        <body>
+            
+            <table id="myActiveTable" border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th>Mass of Falling Object<br>M(kg)</th>
+      <th>Distance Object Fall<br>D(m)</th>
+      <th>Times for Fall<br>t(s)</th>
+      <th>Calculated Average Acceleration of Falling Object<br>a(m/s^2)</th>
+      <th>Calculated Tension in String<br>T(N)</th>
+      <th>Calculated Torque Exerted on Post of Apparatus<br>T*D(m*N)</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td> 0.100</td>
+      <td> 0.500</td>
+      <td> 9.7, 10.0, 10.3</td>
+      <td> 0.010</td>
+      <td> <input type="text" id="0___CalculatedTensioninString<br>T(N)" class="Active" size="10px" placeholder ="input"></input></td>
+      <td> <input type="text" id="0___CalculatedTorqueExertedonPostofApparatus<br>T*D(m*N)" class="Active" size="10px" placeholder ="input"></input></td>
+    </tr>
+    <tr>
+      <td> 0.150</td>
+      <td> 0.500</td>
+      <td>   6.9, 7.1, 7.3</td>
+      <td> 0.020</td>
+      <td> <input type="text" id="1___CalculatedTensioninString<br>T(N)" class="Active" size="10px" placeholder ="input"></input></td>
+      <td> <input type="text" id="1___CalculatedTorqueExertedonPostofApparatus<br>T*D(m*N)" class="Active" size="10px" placeholder ="input"></input></td>
+    </tr>
+    <tr>
+      <td> 0.200</td>
+      <td> 0.500</td>
+      <td>   5.8, 5.7, 5.6</td>
+      <td> 0.031</td>
+      <td> <input type="text" id="2___CalculatedTensioninString<br>T(N)" class="Active" size="10px" placeholder ="input"></input></td>
+      <td> <input type="text" id="2___CalculatedTorqueExertedonPostofApparatus<br>T*D(m*N)" class="Active" size="10px" placeholder ="input"></input></td>
+    </tr>
+    <tr>
+      <td> 0.250</td>
+      <td> 0.500</td>
+      <td>   4.9, 4.9, 4.8</td>
+      <td> 0.042</td>
+      <td> <input type="text" id="3___CalculatedTensioninString<br>T(N)" class="Active" size="10px" placeholder ="input"></input></td>
+      <td> <input type="text" id="3___CalculatedTorqueExertedonPostofApparatus<br>T*D(m*N)" class="Active" size="10px" placeholder ="input"></input></td>
+    </tr>
+  </tbody>
+</table>
+            
+            <!-- COMMENT: Buttons below are used to add debugging features to an interactive. Console logging allows you to see
+            output within a browser's console. Try reading about Chrome's console. -->
+        
+            
+        
+            <script src="https://code.jquery.com/jquery-2.1.3.min.js"></script>
+            <script type='text/javascript'>
+            
+    //Standard edX JSinput functions
+    getState = function(){
+        state = getInput();
+        statestr = JSON.stringify(state);        
+        
+        
+        
+        return statestr;
+    }
+    
+    getInput = function() {
+        var data = {};
+        data['response'] = {};
+        
+        //Colors
+        data['colors'] = {};
+        
+        var cells = document.getElementsByClassName('Active');
+        for (i=0;i<cells.length;i++) {
+            data['response'][cells[i].id] = cells[i].value;
+            data['colors'][cells[i].id] = 'white';
+        }
+        //console.log(data);
+        return data;
+    }
+
+    setState = function(statestr){
+        state = JSON.parse(statestr);
+        
+        for (ID in state['response']) {
+            //console.log(state['response'][ID]);
+            console.log(statestr);
+            document.getElementById(ID).value = state['response'][ID];
+            document.getElementById(ID).style.backgroundColor = state['colors'][ID];
+        }
+    }
+
+
+
+            </script>
+            
+        </body>
+    </html>

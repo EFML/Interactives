@@ -1,0 +1,40 @@
+
+# coding: utf-8
+
+# ### Phillips Curve - LC1, Hands-On Activity 1
+# 
+# Useful links:
+# 
+# Pi Symbol:  http://www.intmath.com/cg3/jsxgraph-axes-ticks-grids.php
+
+# In[12]:
+
+get_ipython().run_cell_magic(u'HTML', u'', u'\n<!DOCTYPE html>\n<html>\n    <head>\n        <style> \n            body {\n                margin: 10px;\n                /*padding-top: 40px;*/\n            }\n        </style>\n    </head>\n\n    <body>\n        <!-- COMMENT: Define the jxgbox - aka, where all the interactive graphing will go. -->\n        <div style="width: 100%; overflow: hidden;">\n            <div id=\'jxgbox1\' class=\'jxgbox\' style=\'width:450px; height:350px; float:left; border: solid #1f628d 2px;\'></div>\n        </div>\n        \n        \n        <!--START-BUTTON FOR PASS STATE-->\n        <!-- COMMENT: Buttons below are used to add debugging features to an interactive. Conole logging allows you to see\n            output within a browser\'s console. Try reading about Chrome\'s console. -->\n        \n        <input class="btn" type="button" value="Pass State for Grading" onClick="passState()">\n        <div id="spaceBelow">State:</div>\n        <!--END-BUTTON FOR PASS STATE-->\n        \n        <input class="btn" type="button" value="Increase in Inflationary Expectations" onClick="increaseInfExpect()">\n        <input class="btn" type="button" value="Increase in Key Input Price" onClick="increaseKeyInputPrice()">\n        <input class="btn" type="button" value="Increase in Labor Productivity" onClick="increaseLaborProd()">\n        <input class="btn" type="button" value="Reset" onClick="resetAnimation()">\n        \n        <!-- COMMENT: Where our Javascript begins. -->\n        <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jsxgraph/0.98/jsxgraphcore.js"></script>\n        <script type=\'text/javascript\'>\n\n            bboxlimits = [-1.1, 12, 12, -1.1];\n            var board = JXG.JSXGraph.initBoard(\'jxgbox1\', {axis:false, \n                                                    showCopyright: false,\n                                                    showNavigation: false,\n                                                    zoom: false,\n                                                    pan: false,\n                                                    boundingbox:bboxlimits,\n                                                    grid: false,\n                                                    hasMouseUp: true, \n            });\n            \n            xaxis = board.create(\'axis\', [[0, 0], [12, 0]], {withLabel: true, name: "Real GDP", label: {offset: [320,-20]}});\n            yaxis = board.create(\'axis\', [[0, 0], [0, 12]], {withLabel: true, name: "Price Level", label: {offset: [-60,260]}});\n\n            //Axes\n            xaxis.removeAllTicks();\n            yaxis.removeAllTicks();\n            var xlabel = board.create(\'text\',[-0.65,10,"\\u03c0"],{fixed:true,fontsize:20});\n            var ylabel = board.create(\'text\',[9,-0.5,"UR"],{fixed:true,fontsize:18});\n            \n            //Define Segments\n            var xi1 = 2.0\n            var yi1 = 10.0\n            var xi2 = 10.0\n            var yi2 = 2.0\n            var f1 = board.create(\'point\',[xi1,yi1],{withLabel:false,visible:false});\n            var f2 = board.create(\'point\',[xi2,yi2],{withLabel:false,visible:false});\n            \n            //SRPC1\n            var SRPC1 = board.create(\'segment\',[f1,f2],{strokeColor:\'Gray\',strokeWidth:\'3\',\n                                                      name:\'SRPC1\',withLabel:true,dash:\'1\',\n                                                      fixed:true,highlight:false,\n                                                      label:{color:\'Gray\',highlight:false,offset:[125,-85]}});\n            \n            //SRPC2\n            var S1 = board.create(\'point\',[xi1,yi1],{withLabel:false,visible:false});\n            var S2 = board.create(\'point\',[xi2,yi2],{withLabel:false,visible:false});\n            var SRPC2 = board.create(\'segment\',[S1,S2],{strokeColor:\'Blue\',strokeWidth:\'3\',\n                                                      name:\'SRPC2\',withLabel:false});\n            \n            board.on(\'mousedown\', function() {      \n                SRPC2.setAttribute({withLabel:true});\n                board.update()\n            });\n            \n            //Animation for Unknown Condition\n            increaseLaborProd = function() {\n                S1.moveTo([1.0,9.0],1000);\n                S2.moveTo([9.0,1.0],1000);\n                SRPC2.setAttribute({withLabel:true});                \n                board.update();\n            }\n            \n            //Animation for Inflationary Expectations\n            increaseInfExpect = function() {\n                S1.moveTo([3.0,11.0],1000);\n                S2.moveTo([11.0,3.0],1000);\n                SRPC2.setAttribute({withLabel:true});\n                board.update();\n            }\n            \n            //Animation for Increase in Key Input Price (same as Inf. Expectations)\n            increaseKeyInputPrice = function() {\n                S1.moveTo([3.0,11.0],1000);\n                S2.moveTo([11.0,3.0],1000);\n                SRPC2.setAttribute({withLabel:true});\n                board.update();\n            }\n            \n            resetAnimation = function() {\n                S1.moveTo([2.0,10.0],10);\n                S2.moveTo([10.0,2.0],10);\n                board.update();\n                SRPC2.setAttribute({withLabel:false});\n            }\n            \n            //Grading Functions\n            \n            //START-PASS STATE TO IPYTHON KERNEL\n            passState = function(){\n                var state = {\'f1\':f1.getAttribute(\'strokeColor\'),\'f2\':f2.getAttribute(\'strokeColor\')};\n                statestr = JSON.stringify(state);\n                document.getElementById(\'spaceBelow\').innerHTML += \'<br>\'+statestr;\n                var command = "state = \'" + statestr + "\'";\n                console.log(command);\n\n                var kernel = IPython.notebook.kernel;\n                kernel.execute(command);\n\n                return statestr\n            }\n                \n            //END-PASS STATE TO IPYTHON KERNEL\n            \n            //Standard edX JSinput functions\n            getInput = function(){\n                var state = {\'f1\':f1.getAttribute(\'strokeColor\'),\'f2\':f2. getAttribute(\'strokeColor\')};\n                statestr = JSON.stringify(state);\n                //console.log(statestr);\n                return statestr;\n            }\n\n            getState = function(){\n                state = JSON.parse(getInput());\n                statestr = JSON.stringify(state);\n                // console.log(statestr);\n                return statestr;\n            }\n\n            setState = function(statestr){\n                state = JSON.parse(statestr);\n\n                if (state["f1"]) {\n                    f1.setAttribute({strokeColor: state["f1"],strokeWidth: 4});\n                    f2.setAttribute({strokeColor: state["f2"],strokeWidth: 4});\n                    board.update();\n                }\n                //alert(statestr);\n                console.debug(\'State updated successfully from saved.\');\n            }\n            \n        </script>\n    </body>\n</html>')
+
+
+# ###Ungraded
+
+# In[13]:
+
+import re
+
+#tmpfile = _i86
+index_htmlinput = [ i for i,x in enumerate(_ih) if "run_cell_magic(u'HTML'" in x and "re.sub('%%HTML','',tmpfile)" not in x]
+
+tmpfile = eval('_i%d' % int(index_htmlinput[-1]))
+tmpfile = re.sub('%%HTML','',tmpfile)
+tmpfile = re.sub(r'<!--START-BUTTON FOR PASS STATE(.*?)END-BUTTON FOR PASS STATE-->','',tmpfile,flags=re.DOTALL)
+tmpfile = re.sub(r'//START-PASS STATE TO IPYTHON KERNEL(.*?)//END-PASS STATE TO IPYTHON KERNEL','',tmpfile,flags=re.DOTALL)
+
+filename = 'Phillips_LC1_HOA1'
+html_filename = '%s.html' % filename
+
+with open(html_filename,'w') as hfile:
+    hfile.write(tmpfile)
+print tmpfile
+
+
+# In[ ]:
+
+
+
