@@ -91,3 +91,40 @@ brd1.on('mousedown', function() {
 });
 
 
+//Standard edX JSinput functions
+setState = function(statestr){
+    state = JSON.parse(statestr);
+    //console.log(state);
+    //console.log(state["dragLine"]);
+
+    if (state["dragLine"]) {
+        //brd1.removeObject('AD2');
+        var point1 = [state["dragLine"]["p1X"],state["dragLine"]["p1Y"]];
+        var point2 = [state["dragLine"]["p2X"],state["dragLine"]["p2Y"]]
+        AD2.point1.moveTo(point1,0);
+        AD2.point2.moveTo(point2,0);
+        brd1.update();
+    }
+    //alert(statestr);
+    console.debug('State updated successfully from saved.');
+}
+
+getState = function(){
+    var state = JSON.parse(getInput());
+    statestr = JSON.stringify(state);
+    // console.log(statestr);
+    return statestr;
+}
+
+getInput = function() {    
+    var state = {"dragLine":{'p1X':AD2.point1.X(),'p2X':AD2.point2.X(),
+                             'p1Y':AD2.point1.Y(),'p2Y':AD2.point2.Y()},
+                 "staticLine":{'p1X':AD1.point1.X(),'p2Y':AD1.point2.X(),
+                               'p1Y':AD1.point1.Y(),'p2Y':AD1.point2.Y()}
+             };
+    statestr = JSON.stringify(state);
+    //console.log(statestr);
+    return statestr;
+}
+
+
