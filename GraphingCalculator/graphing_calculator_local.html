@@ -1,0 +1,42 @@
+
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <title>Graphing Calculator</title>
+    <link href="smoothness/jquery-ui-1.10.4.custom.min.css" rel="stylesheet" type="text/css">
+    <link href="graphing_calculator.css" rel="stylesheet" type="text/css">
+    <script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=AM_HTMLorMML-full"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jsxgraph/0.98/jsxgraphcore.js"></script>
+    <script type="text/javascript" src="underscore-min.js"></script>
+    <script type="text/javascript" src="jquery.min.js"></script>
+    <script type="text/javascript" src="jquery-ui.min.js"></script>
+    <script type="text/javascript" src="graphing_calculator.js" defer></script>
+  </head>
+  <body>
+    <div id="gc-container">
+      <div class="control-panel">
+        <div class="line">
+          <input class="input-text" id="main-mathjax-input" type="text" placeholder="Type a function f(x)" value="x^3+x^2-6*x">
+        </div>
+        <div class="line">
+          <div class="mathjax-output" id="main-mathjax-output">`f(x) = x^3+x^2-6*x`</div>
+        </div>
+        <div class="line">
+          <button class="button" id="plot">Plot</button>
+          <button class="button" id="clear-all">Clear All</button>
+        </div>
+        <div class="line" id="functions"></div>
+        <!--
+        <div class="line">
+          <input class="input-text" type="text" id="inputZstart" placeholder="Start value for zero search" font-size: "6">
+        </div>
+        <div class="line">
+          <button class="button" id="find-zeroes">Find Zeroes</button>
+        </div>
+        -->
+      </div>
+      <div class="jxgbox" id="jxgbox"></div>
+    </div>
+  </body>
+</html>
