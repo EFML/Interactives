@@ -4,7 +4,7 @@
 # #### Momentum Hands-On Activity
 # https://docs.google.com/document/d/1NBBPpMUNzLL2BL-pZbwbB8rYaJxIzQGvDUIz_KDQi0I/edit
 
-# In[13]:
+# In[25]:
 
 import sys
 import pandas as pd
@@ -15,39 +15,36 @@ import ActiveTable
 HTML_FILENAME = 'Momentum_4.3.2a.html'
 
 
-# In[15]:
+# In[42]:
 
 reload(ActiveTable)
 
 ### Active Table
 Numeric = 'NUMERIC_RESPONSE'
 questionTable = [
-        ['Mass of Falling Object<br>M(kg)','Distance Object Fall<br>D(m)',
-         'Times for Fall<br>t(s)','Calculated Average Acceleration of Falling Object<br>a(m/s^2)',
-         'Calculated Tension in String<br>T(N)', 'Calculated Torque Exerted on Post of Apparatus<br>T*D(m*N)'],
-        ['0.100','0.500','9.7, 10.0, 10.3','0.010',Numeric,Numeric],
-        ['0.150','0.500','6.9, 7.1, 7.3','0.020',Numeric,Numeric],
-        ['0.200','0.500','5.8, 5.7, 5.6','0.031',Numeric,Numeric],
-        ['0.250','0.500','4.9, 4.9, 4.8','0.042',Numeric,Numeric],
+        ['Carts','$$v_initial$$','$$v_final$$','$$\Delta v$$'],
+        ['green','2.0','-1.2',Numeric],
+        ['red','-2.0','1.2',Numeric],
     ]
-
-responseTable = questionTable
 
 answerTable = [
-        ['Mass of Falling Object<br>M(kg)','Distance Object Fall<br>D(m)',
-         'Times for Fall<br>t(s)','Calculated Average Acceleration of Falling Object<br>a(m/s^2)',
-         'Calculated Tension in String<br>T(N)', 'Calculated Torque Exerted on Post of Apparatus<br>T*D(m*N)'],
-        ['0.100','0.500','9.7, 10.0, 10.3','0.010',0.96,0.0011],
-        ['0.150','0.500','6.9, 7.1, 7.3','0.020',1.47,0.0016],
-        ['0.200','0.500','5.8, 5.7, 5.6','0.031',1.95,0.0021],
-        ['0.250','0.500','4.9, 4.9, 4.8','0.042',2.44,0.0027],
+        ['Carts','$$v_initial$$','$$v_final$$','$$\Delta v$$'],
+        ['green','2.0','-1.2','-3.2'],
+        ['red','-2.0','1.2','0.8'],
     ]
+
+print questionTable[0][:]
 
 AT = ActiveTable.ActivteTable().create(questionTable[1::][:],questionTable[0][:])
 
 with open(HTML_FILENAME,'w') as hfile:
     hfile.write(AT)
 print AT
+
+
+# In[41]:
+
+get_ipython().run_cell_magic(u'HTML', u'', u'<!DOCTYPE html>\n<html>\n    <head>\n        <meta charset="UTF-8">\n        <title>Momentum Activity</title>\n        <link href="Momentum_4.3.2a.css" rel="stylesheet" type="text/css">\n        <script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=AM_HTMLorMML-full"></script>\n        <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jsxgraph/0.98/jsxgraphcore.js"></script>\n        <script type="text/javascript" src="https://code.jquery.com/jquery.min.js"></script>\n        \n        <script> \n        $(function(){\n          $("#ActiveTable").load("Momentum_4.3.2a.html"); \n        });\n        </script> \n        \n    </head>\n\n    <body>\n        <div id="ActiveTable"></div>\n    </body>\n</html>')
 
 
 # In[ ]:
