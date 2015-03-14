@@ -40,7 +40,7 @@ var GraphingCalculator = (function($, _, MathJax, JXG, undefined) {
     }
 
     function resizeBox(){
-        var boardWidth = 0.58*$('.gc-container').width();
+        var boardWidth = 0.58*$('#gc-container').width();
         board.needsFullUpdate = true;
         board.resizeContainer(boardWidth, board.canvasHeight);
         board.setBoundingBox(initBoundingBox);
@@ -51,56 +51,100 @@ var GraphingCalculator = (function($, _, MathJax, JXG, undefined) {
         MathJax.Hub.queue.Push(['Text', mainMathjaxOutput, 'f(x) = ' + $(this).val()]);
     }
 
-    function createAccordeon(funcNbr) {
-        var id = _.uniqueId('function-'), functionCb, derivativeCb, tangentCb, mathInput, mathOutput,
-            funcNbr = $('#functions').find('h3').length,
+    function createTab(funcNbr) {
+        var functionCb, derivativeCb, tangentCb, deleteBt, mathInput, mathOutput,
+            tabPanel = $("#function-tabs"),
+            tabList = $("#function-tabs ul"),
+            currentFunc = tabPanel.find('li').length,
             htmlFragment = [
-            '<h3 id="toggle-function-container-' + id + '">Function</h3>',
-            '<div class="gc-container" id="function-container-' + id + '">',
-                '<div class="gc-mathjax-output" id="mathjax-output-' + id + '">``</div>',
-                '<div class="line">',
-                    '<input type="checkbox" class="gc-toggle" id="show-function-' + id + '" checked>',
-                    '<label for="show-function-' + id + '">Show f(x)</label>',
-                    '<input type="checkbox" class="gc-toggle" id="show-derivative-' + id + '">',
-                    '<label for="show-derivative-' + id + '">Show derivative</label>',
-                    '<input type="checkbox" class="gc-toggle" id="show-tangent-' + id + '">',
-                    '<label for="show-tangent-' + id + '">Show tangent</label>',
+            '<div id="tab-' + currentFunc + '">',
+                //'<i class="fa fa-trash"></i>',
+                '<span class="gc-mathjax-output" id="mathjax-output-' + currentFunc + '">``</span>',
+                '<div class="half-line">',
+                    '<input type="checkbox" id="show-function-' + currentFunc + '" checked>',
+                    '<label for="show-function-' + currentFunc + '">',
+                        '<i class="fa fa-square-o"></i><i class="fa fa-check-square-o"></i>Show f(x)',
+                    '</label>',
+                '</div>',
+                '<div class="quarter-line">',
+                    '<input type="checkbox" id="show-derivative-' + currentFunc + '">',
+                    '<label for="show-derivative-' + currentFunc + '">',
+                        '<i class="fa fa-square-o"></i><i class="fa fa-check-square-o"></i>Show derivative',
+                    '</label>',
+                '</div>',
+                '<div class="quarter-line">',
+                    '<input type="checkbox" id="show-tangent-' + currentFunc + '">',
+                    '<label for="show-tangent-' + currentFunc + '">',
+                        '<i class="fa fa-square-o"></i><i class="fa fa-check-square-o"></i>Show tangent',
+                    '</label>',
+                '</div>',
+                '<div class="quarter-line">',
+                    '<button class="button" id="delete-function-' + currentFunc + '">' + '<i class="fa fa-trash"></i></button>',
                 '</div>',
             '</div>'
         ].join('');
 
-        if (funcNbr === 0) {
-            $('#functions').accordion({
-                active: false,
-                collapsible: true
-            });
+        // Append tab title
+        tabList.append(
+            '<li><a href="#tab-' + currentFunc + '">#' + (currentFunc+1).toString() + '</a></li>'
+        );
+        // Append tab content
+        tabPanel.append(htmlFragment);
+        // Initialize or refresh tab panel
+        if (currentFunc === 0) {
+            $( "#function-tabs" ).tabs();
         }
-        $('#functions').append(htmlFragment);
+        else {
+            tabPanel.tabs('refresh');
+        }
+        // Set active tab to last
+        tabPanel.tabs('option', 'active', currentFunc);
 
+        // Display specific mathjax output in tab
         mathInput = $('#main-mathjax-input');
-        mathOutput = $('#mathjax-output-' + id);
+        mathOutput = $('#mathjax-output-' + currentFunc);
         mathOutput.html('`f_' + (funcNbr+1).toString() + '(x) = ' + mathInput.val() + '`')
-        MathJax.Hub.Queue(["Typeset", MathJax.Hub, 'mathjax-output-' + id]);
+        MathJax.Hub.Queue(["Typeset", MathJax.Hub, 'mathjax-output-' + currentFunc]);
         mathOutput.css('color', curveColors[funcNbr]);
 
-        functionCb = $('#show-function-' + id);
+        // Add event listeners to checkboxes
+        functionCb = $('#show-function-' + currentFunc);
         functionCb.on('change', function() {
-            setVisibility($(this), fCurves[funcNbr]);
+            setVisibility($(this), fCurves[currentFunc]);
         });
 
-        derivativeCb = $('#show-derivative-' + id);
+        derivativeCb = $('#show-derivative-' + currentFunc);
         derivativeCb.on('change', function() {
-            setVisibility($(this), dfCurves[funcNbr]);
+            setVisibility($(this), dfCurves[currentFunc]);
         });
 
-        tangentCb = $('#show-tangent-' + id);
+        tangentCb = $('#show-tangent-' + currentFunc);
         tangentCb.on('change', function() {
-            setVisibility($(this), tangents[funcNbr].point);
-            setVisibility($(this), tangents[funcNbr].line);
+            setVisibility($(this), tangents[currentFunc].point);
+            setVisibility($(this), tangents[currentFunc].line);
         });
 
-        $('#functions').accordion('refresh');
-        $('#functions').accordion('option', 'active', funcNbr);
+        deleteBt = $('#delete-function-' + currentFunc);
+        deleteBt.on('click', function() {
+            if (tabPanel.find('.ui-tabs-nav li').length !== 1) {
+                tabPanel.find('.ui-tabs-nav li').eq(currentFunc).remove();
+                tabPanel.find('#tab-' + currentFunc).remove();
+                tabPanel.tabs("refresh");
+
+                board.removeObject(fCurves[currentFunc]);
+                fCurves.splice(currentFunc, 1);
+
+                board.removeObject(dfCurves[currentFunc]);
+                dfCurves.splice(currentFunc, 1);
+
+                board.removeObject(tangents[currentFunc].point);
+                board.removeObject(tangents[currentFunc].line);
+                tangents.splice(currentFunc, 1);
+            }
+            else {
+                clearAll();
+            }
+        });
     }
 
     function setVisibility(checkbox, element) {
@@ -154,19 +198,21 @@ var GraphingCalculator = (function($, _, MathJax, JXG, undefined) {
         fCurves[funcNbr].showElement();
         _.invoke([dfCurves[funcNbr], tangents[funcNbr].point, tangents[funcNbr].line], 'hideElement');
 
-        createAccordeon(funcNbr);
+        createTab(funcNbr);
     }
 
     function clearAll() {
+        var tabPanel = $("#function-tabs");
         JXG.JSXGraph.freeBoard(board);
         board = JXG.JSXGraph.initBoard('jxgbox', {boundingbox:initBoundingBox, axis:true, showCopyright:false});
         fCurves.length = 0;
         dfCurves.length = 0;
         tangents.length = 0;
-        $('#functions').accordion( "destroy" );
-        $('#functions').contents().each(function() {
+        tabPanel.tabs( "destroy" );
+        tabPanel.contents().each(function() {
             $(this).remove();
         });
+        tabPanel.append('<ul></ul>');
     }
 
     // Not in use for the moment
