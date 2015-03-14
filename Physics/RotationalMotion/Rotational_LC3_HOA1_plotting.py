@@ -57,9 +57,10 @@ active_table = active_table.replace('&lt;','<').replace('&gt;','>')
 print active_table
 
 
-# In[79]:
+# In[8]:
 
-## from IPython.display import HTML
+from IPython.display import HTML
+
 ### HTML
 html_doc = """
     <!DOCTYPE HTML>
@@ -230,14 +231,12 @@ jscript = """
             y = cells[i+YCol].getElementsByTagName('input')[0].value;
         
             if (x.length > 0 && y.length > 0) {
-                var p = brd1.create('point',[Number(x),Number(y)],{fixed:true});
+                var p = brd1.create('point',[Number(x),Number(y)],{fixed:true, label:{offset:[0,-15]}});
                 points.push(p);
             }
         }
         
         params = bestFitLine(points);
-        
-        
         return points;
     }
 
@@ -303,7 +302,7 @@ HTML(html_doc)
 
 # ## Grader
 
-# In[ ]:
+# In[10]:
 
 import json        
 def grader(e, ans):
