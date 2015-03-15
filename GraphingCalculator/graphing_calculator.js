@@ -2,12 +2,12 @@ var GraphingCalculator = (function($, _, MathJax, JXG, undefined) {
     'use strict';
     var initBoundingBox = [-11, 11, 11, -11];
     var board = JXG.JSXGraph.initBoard('jxgbox', {boundingbox: initBoundingBox, axis: true, showCopyright: false});
-    var fCurves = [], dfCurves = [], tangents = [], mainMathjaxOutput = null,
+    var fCurves = [], dfCurves = [], tangents = [], mainMathjaxOutput = null, plots = [],
     // http://www.w3schools.com/cssref/css_colornames.asp
-    curveColors = [
+    plotColors = [
         'Crimson', 'MediumSeaGreen', 'RoyalBlue', 'Orange', 'Turquoise'
     ],
-    MAX_NBR_FUNC = 5;
+    plotNames = ['1', '2', '3', '4', '5'];
 
     init();
 
@@ -51,100 +51,123 @@ var GraphingCalculator = (function($, _, MathJax, JXG, undefined) {
         MathJax.Hub.queue.Push(['Text', mainMathjaxOutput, 'f(x) = ' + $(this).val()]);
     }
 
-    function createTab(funcNbr) {
+    function createTab(plot) {
         var functionCb, derivativeCb, tangentCb, deleteBt, mathInput, mathOutput,
             tabPanel = $("#function-tabs"),
             tabList = $("#function-tabs ul"),
-            currentFunc = tabPanel.find('li').length,
+            currentTab = tabPanel.find('li').length,
             htmlFragment = [
-            '<div id="tab-' + currentFunc + '">',
+            '<div id="tab-' + plot.id + '">',
                 //'<i class="fa fa-trash"></i>',
-                '<span class="gc-mathjax-output" id="mathjax-output-' + currentFunc + '">``</span>',
+                '<span class="gc-mathjax-output" id="mathjax-output-' + plot.id + '">``</span>',
                 '<div class="half-line">',
-                    '<input type="checkbox" id="show-function-' + currentFunc + '" checked>',
-                    '<label for="show-function-' + currentFunc + '">',
+                    '<input type="checkbox" id="show-function-' + plot.id + '" checked>',
+                    '<label for="show-function-' + plot.id + '">',
                         '<i class="fa fa-square-o"></i><i class="fa fa-check-square-o"></i>Show f(x)',
                     '</label>',
                 '</div>',
                 '<div class="quarter-line">',
-                    '<input type="checkbox" id="show-derivative-' + currentFunc + '">',
-                    '<label for="show-derivative-' + currentFunc + '">',
+                    '<input type="checkbox" id="show-derivative-' + plot.id + '">',
+                    '<label for="show-derivative-' + plot.id + '">',
                         '<i class="fa fa-square-o"></i><i class="fa fa-check-square-o"></i>Show derivative',
                     '</label>',
                 '</div>',
                 '<div class="quarter-line">',
-                    '<input type="checkbox" id="show-tangent-' + currentFunc + '">',
-                    '<label for="show-tangent-' + currentFunc + '">',
+                    '<input type="checkbox" id="show-tangent-' + plot.id + '">',
+                    '<label for="show-tangent-' + plot.id + '">',
                         '<i class="fa fa-square-o"></i><i class="fa fa-check-square-o"></i>Show tangent',
                     '</label>',
                 '</div>',
                 '<div class="quarter-line">',
-                    '<button class="button" id="delete-function-' + currentFunc + '">' + '<i class="fa fa-trash"></i></button>',
+                    '<button class="button" id="delete-function-' + plot.id + '">' + '<i class="fa fa-trash"></i></button>',
                 '</div>',
             '</div>'
         ].join('');
 
         // Append tab title
         tabList.append(
-            '<li><a href="#tab-' + currentFunc + '">#' + (currentFunc+1).toString() + '</a></li>'
+            '<li><a href="#tab-' + plot.id + '">#' + plot.name + '</a></li>'
         );
         // Append tab content
         tabPanel.append(htmlFragment);
         // Initialize or refresh tab panel
-        if (currentFunc === 0) {
-            $( "#function-tabs" ).tabs();
+        if (currentTab === 0) {
+            tabPanel.tabs();
+            tabPanel.find('.ui-tabs-nav').sortable({
+                axis: 'x',
+                stop: function() {
+                    tabPanel.tabs('refresh');
+                }
+            });
         }
         else {
             tabPanel.tabs('refresh');
         }
         // Set active tab to last
-        tabPanel.tabs('option', 'active', currentFunc);
+        tabPanel.tabs('option', 'active', currentTab);
 
         // Display specific mathjax output in tab
         mathInput = $('#main-mathjax-input');
-        mathOutput = $('#mathjax-output-' + currentFunc);
-        mathOutput.html('`f_' + (funcNbr+1).toString() + '(x) = ' + mathInput.val() + '`')
-        MathJax.Hub.Queue(["Typeset", MathJax.Hub, 'mathjax-output-' + currentFunc]);
-        mathOutput.css('color', curveColors[funcNbr]);
+        mathOutput = $('#mathjax-output-' + plot.id);
+        mathOutput.html('`f_' + plot.name + '(x) = ' + mathInput.val() + '`')
+        MathJax.Hub.Queue(["Typeset", MathJax.Hub, 'mathjax-output-' + plot.id]);
+        mathOutput.css('color', plot.color);
 
         // Add event listeners to checkboxes
-        functionCb = $('#show-function-' + currentFunc);
+        functionCb = $('#show-function-' + plot.id);
         functionCb.on('change', function() {
-            setVisibility($(this), fCurves[currentFunc]);
+            setVisibility($(this), plot.fCurve);
         });
 
-        derivativeCb = $('#show-derivative-' + currentFunc);
+        derivativeCb = $('#show-derivative-' + plot.id);
         derivativeCb.on('change', function() {
-            setVisibility($(this), dfCurves[currentFunc]);
+            setVisibility($(this),  plot.dfCurve);
         });
 
-        tangentCb = $('#show-tangent-' + currentFunc);
+        tangentCb = $('#show-tangent-' + plot.id);
         tangentCb.on('change', function() {
-            setVisibility($(this), tangents[currentFunc].point);
-            setVisibility($(this), tangents[currentFunc].line);
+            setVisibility($(this), plot.tangentPoint);
+            setVisibility($(this), plot.tangentLine);
         });
 
-        deleteBt = $('#delete-function-' + currentFunc);
+        deleteBt = $('#delete-function-' + plot.id);
         deleteBt.on('click', function() {
+            var plotIndex;
             if (tabPanel.find('.ui-tabs-nav li').length !== 1) {
-                tabPanel.find('.ui-tabs-nav li').eq(currentFunc).remove();
-                tabPanel.find('#tab-' + currentFunc).remove();
+                tabPanel.find('.ui-tabs-nav li').children('a[href="#tab-' + plot.id + '"]').parent().remove();
+                tabPanel.find('#tab-' + plot.id).remove();
                 tabPanel.tabs("refresh");
 
-                board.removeObject(fCurves[currentFunc]);
-                fCurves.splice(currentFunc, 1);
+                // Remove all plot elements from board
+                board.removeObject(plot.fCurve);
+                board.removeObject(plot.dfCurve);
+                board.removeObject(plot.tangentPoint);
+                board.removeObject(plot.tangentLine);
 
-                board.removeObject(dfCurves[currentFunc]);
-                dfCurves.splice(currentFunc, 1);
-
-                board.removeObject(tangents[currentFunc].point);
-                board.removeObject(tangents[currentFunc].line);
-                tangents.splice(currentFunc, 1);
+                // Delete plot from plots array
+                plotIndex = _.indexOf(_.pluck(plots, 'id'), plot.id);
+                plots.splice(plotIndex, 1);
             }
             else {
                 clearAll();
             }
         });
+    }
+
+    function getUsedColors() {
+        var colors = [];
+        _.each(plots, function(plot) {
+            colors.push(plot.color);
+        });
+        return colors;
+    }
+
+    function getUsedNames() {
+        var names = [];
+        _.each(plots, function(plot) {
+            names.push(plot.name);
+        });
+        return names;
     }
 
     function setVisibility(checkbox, element) {
@@ -161,53 +184,60 @@ var GraphingCalculator = (function($, _, MathJax, JXG, undefined) {
     function plotter() {
         var inputText = $('#main-mathjax-input').val(),
             f = board.jc.snippet(inputText, true, 'x', true),
-            funcNbr = fCurves.length, point, line;
+            plot, fCurve, dfCurve, tangentPoint, tangentLine,
+            availableColors = _.difference(plotColors, getUsedColors()),
+            availableNames = _.difference(plotNames, getUsedNames());
 
-        if (JXG.isFunction(f) && funcNbr < MAX_NBR_FUNC) {
+        if (JXG.isFunction(f) && availableColors.length > 0) {
             // Add curve
-            fCurves.push(
-                board.create('functiongraph',
-                    [f],
-                    {strokeWidth: 3, strokeColor: curveColors[funcNbr]}
-                )
+            fCurve = board.create(
+                'functiongraph',
+                [f],
+                {strokeWidth: 3, strokeColor: availableColors[0]}
             );
-            // Add derivative
-            dfCurves.push(
-                board.create('functiongraph',
-                    [JXG.Math.Numerics.D(f)],
-                    {dash:2, strokeColor: curveColors[funcNbr]}
-                )
-            );
-            // Add point and tangent line at that point
-            point = board.create('glider',
-                [1.0, 0.0, fCurves[funcNbr]],
-                {name:'drag me', strokeColor: curveColors[funcNbr], fillColor: curveColors[funcNbr]}
-            );
-            line = board.create('tangent',
-                [point],
-                {name:'drag me', strokeColor: 'rgb(0, 0, 0)'}
-            );
-            tangents.push(
-                {
-                    'point': point,
-                    'line': line
-                }
-            );
-        }
-        // Set visibility of all elements
-        fCurves[funcNbr].showElement();
-        _.invoke([dfCurves[funcNbr], tangents[funcNbr].point, tangents[funcNbr].line], 'hideElement');
 
-        createTab(funcNbr);
+            // Add derivative
+            dfCurve = board.create(
+                'functiongraph',
+                [JXG.Math.Numerics.D(f)],
+                {dash:2, strokeColor: availableColors[0]}
+            );
+
+            // Add point and tangent line at that point
+            tangentPoint = board.create(
+                'glider',
+                [1.0, 0.0, fCurve],
+                {name: 'drag me', strokeColor: availableColors[0], fillColor: availableColors[0]}
+            );
+            tangentLine = board.create(
+                'tangent',
+                [tangentPoint],
+                {name: 'drag me', strokeColor: 'rgb(0, 0, 0)'}
+            );
+
+            plot = {
+                'id': _.uniqueId(),
+                'name': availableNames[0],
+                'color': availableColors[0],
+                'fCurve': fCurve,
+                'dfCurve': dfCurve,
+                'tangentPoint': tangentPoint,
+                'tangentLine': tangentLine
+            };
+            // Set visibility of all elements
+            plot.fCurve.showElement();
+            _.invoke([plot.dfCurve, plot.tangentPoint, plot.tangentLine], 'hideElement');
+            plots.push(plot);
+
+            createTab(plot);
+        }
     }
 
     function clearAll() {
         var tabPanel = $("#function-tabs");
         JXG.JSXGraph.freeBoard(board);
-        board = JXG.JSXGraph.initBoard('jxgbox', {boundingbox:initBoundingBox, axis:true, showCopyright:false});
-        fCurves.length = 0;
-        dfCurves.length = 0;
-        tangents.length = 0;
+        board = JXG.JSXGraph.initBoard('jxgbox', {boundingbox: initBoundingBox, axis: true, showCopyright: false});
+        plots.length = 0;
         tabPanel.tabs( "destroy" );
         tabPanel.contents().each(function() {
             $(this).remove();
@@ -224,8 +254,8 @@ var GraphingCalculator = (function($, _, MathJax, JXG, undefined) {
             var f_zero = f(zero);
             var p = board.create(
                 'point',
-                [zero,f_zero],
-                {name:'f(x='+zero.toFixed(2)+')=0.0', strokeColor:'gray', face:'<>', fixed:true}
+                [zero, f_zero],
+                {name: 'f(x='+zero.toFixed(2)+')=0.0', strokeColor: 'gray', face: '<>', fixed: true}
             );
             board.unsuspendUpdate();
         }
