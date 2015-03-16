@@ -4,8 +4,9 @@
   <head>
     <meta charset="UTF-8">
     <title>Graphing Calculator</title>
-    <link href="smoothness/jquery-ui-1.10.4.custom.min.css" rel="stylesheet" type="text/css">
-    <link href="graphing_calculator.css" rel="stylesheet" type="text/css">
+    <link rel="stylesheet" type="text/css" href="font-awesome-4.3.0/css/font-awesome.min.css">
+    <link rel="stylesheet" type="text/css" href="smoothness/jquery-ui-1.10.4.custom.min.css">
+    <link rel="stylesheet" type="text/css" href="graphing_calculator.css">
     <script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=AM_HTMLorMML-full"></script>
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jsxgraph/0.98/jsxgraphcore.js"></script>
     <script type="text/javascript" src="underscore-min.js"></script>
@@ -22,11 +23,13 @@
         <div class="line">
           <div class="mathjax-output" id="main-mathjax-output">`f(x) = x^3+x^2-6*x`</div>
         </div>
-        <div class="line">
+        <div class="half-line">
           <button class="button" id="plot">Plot</button>
           <button class="button" id="clear-all">Clear All</button>
         </div>
-        <div class="line" id="functions"></div>
+        <div id="function-tabs" class="half-line">
+          <ul></ul>
+        </div>
         <!--
         <div class="line">
           <input class="input-text" type="text" id="inputZstart" placeholder="Start value for zero search" font-size: "6">
