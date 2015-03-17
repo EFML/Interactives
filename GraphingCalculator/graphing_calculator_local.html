@@ -17,8 +17,8 @@
   <body>
     <div id="gc-container">
       <div class="control-panel">
-        <div class="line">
-          <input class="input-text" id="main-mathjax-input" type="text" placeholder="Type a function f(x)" value="x^3+x^2-6*x">
+        <div class="half-line">
+          <input class="input-text" id="main-mathjax-input" type="text" placeholder="Type a function f(x)" value="x^3+x^2-6*x"><span class="error-message">Please enter a valid function.</span>
         </div>
         <div class="line">
           <div class="mathjax-output" id="main-mathjax-output">`f(x) = x^3+x^2-6*x`</div>
@@ -30,14 +30,6 @@
         <div id="function-tabs" class="half-line">
           <ul></ul>
         </div>
-        <!--
-        <div class="line">
-          <input class="input-text" type="text" id="inputZstart" placeholder="Start value for zero search" font-size: "6">
-        </div>
-        <div class="line">
-          <button class="button" id="find-zeroes">Find Zeroes</button>
-        </div>
-        -->
       </div>
       <div class="jxgbox" id="jxgbox"></div>
     </div>
