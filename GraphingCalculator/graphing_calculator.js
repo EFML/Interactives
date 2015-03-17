@@ -14,19 +14,19 @@ var GraphingCalculator = (function($, _, MathJax, JXG, undefined) {
     function init() {
         // Check version of JQuery
         // Studio and LMS: 1.7.2
-        // Current: 2.1.3
-        console.log($.fn.jquery);
+        // Current: 2.1.3 
+        console.log('JQuery version:' + $.fn.jquery);
         // Check version of UnderscoreJS
         // Studio and LMS: 1.4.4
         // Current: 1.8.2
-        console.log(window.parent._.VERSION);
+        console.log('UnderscoreJS version: ' + window.parent._.VERSION);
         // Check version of jQuery UI
         // Studio and LMS: 1.10.0
         // Current: 1.11
-        console.log($.ui.version);
+        console.log('JQuery UI version: ' + $.ui.version);
         // Check version of MathJax
         // Studio and LMS use CDN and are up to date with current version 2.5.1
-        console.log(MathJax.cdnVersion);
+        console.log('MathJax CDN version: ' + MathJax.cdnVersion);
 
         // Set up MathJax
         MathJax.Hub.queue.Push(function () {
@@ -52,7 +52,8 @@ var GraphingCalculator = (function($, _, MathJax, JXG, undefined) {
     }
 
     function createTab(plot) {
-        var functionCb, derivativeCb, tangentCb, deleteBt, mathInput, mathOutput,
+        var functionCb, derivativeCb, tangentCb,
+            deleteBt, findZeroBtn, findDerivativeBtn, findIntegralBtn, mathInput, mathOutput,
             tabPanel = $("#function-tabs"),
             tabList = $("#function-tabs ul"),
             currentTab = tabPanel.find('li').length,
@@ -78,7 +79,19 @@ var GraphingCalculator = (function($, _, MathJax, JXG, undefined) {
                         '<i class="fa fa-square-o"></i><i class="fa fa-check-square-o"></i>Show tangent',
                     '</label>',
                 '</div>',
-                '<div class="quarter-line">',
+                '<div class="half-line">',
+                    '<span class="small-text"> x<sub>1</sub> = <input type="text" class="small-text" id="x-start-' + plot.id + '"></span>',
+                    '<span class="small-text"> x<sub>2</sub> = <input type="text" class="small-text" id="x-end-' + plot.id + '"></span>',
+                '</div>',
+                '<div class="half-line">',
+                    '<span class="gc-mathjax-output" id="mathjax-output-secondary-' + plot.id + '"></span>',
+                '</div>',
+                '<div class="line">',
+                    '<button class="button" id="find-zero-' + plot.id + '">Find zero</button>',
+                    '<button class="button" id="find-derivative-' + plot.id + '">Find derivative</button>',
+                '</div>',
+                '<div class="half-line">',
+                    '<button class="button" id="find-integral-' + plot.id + '">Find integral</button>',
                     '<button class="button" id="delete-function-' + plot.id + '">' + '<i class="fa fa-trash"></i></button>',
                 '</div>',
             '</div>'
@@ -152,6 +165,21 @@ var GraphingCalculator = (function($, _, MathJax, JXG, undefined) {
                 clearAll();
             }
         });
+
+        findZeroBtn = $('#find-zero-' + plot.id);
+        findZeroBtn.on('click', function() {
+            findZero(plot);
+        });
+
+        findDerivativeBtn = $('#find-derivative-' + plot.id);
+        findDerivativeBtn.on('click', function() {
+            findDerivative(plot);
+        });
+
+        findIntegralBtn = $('#find-integral-' + plot.id);
+        findIntegralBtn.on('click', function() {
+            findIntegral(plot);
+        });
     }
 
     function getUsedColors() {
@@ -182,91 +210,184 @@ var GraphingCalculator = (function($, _, MathJax, JXG, undefined) {
     }
 
     function plotter() {
-        var inputText = $('#main-mathjax-input').val(),
-            f = board.jc.snippet(inputText, true, 'x', true),
+        var inputText = $('#main-mathjax-input').val(), f,
             plot, fCurve, dfCurve, tangentPoint, tangentLine,
             availableColors = _.difference(plotColors, getUsedColors()),
             availableNames = _.difference(plotNames, getUsedNames());
 
-        if (JXG.isFunction(f) && availableColors.length > 0) {
-            // Add curve
-            fCurve = board.create(
-                'functiongraph',
-                [f],
-                {strokeWidth: 3, strokeColor: availableColors[0]}
-            );
+        $('.error-message').hide();
+        try {
+            f = board.jc.snippet(inputText, true, 'x', true);
 
-            // Add derivative
-            dfCurve = board.create(
-                'functiongraph',
-                [JXG.Math.Numerics.D(f)],
-                {dash:2, strokeColor: availableColors[0]}
-            );
+            if (availableColors.length > 0) {
+                // Add curve
+                fCurve = board.create(
+                    'functiongraph',
+                    [f],
+                    {strokeWidth: 3, strokeColor: availableColors[0]}
+                );
 
-            // Add point and tangent line at that point
-            tangentPoint = board.create(
-                'glider',
-                [1.0, 0.0, fCurve],
-                {name: 'drag me', strokeColor: availableColors[0], fillColor: availableColors[0]}
-            );
-            tangentLine = board.create(
-                'tangent',
-                [tangentPoint],
-                {name: 'drag me', strokeColor: 'rgb(0, 0, 0)'}
-            );
+                // Add derivative
+                dfCurve = board.create(
+                    'functiongraph',
+                    [JXG.Math.Numerics.D(f)],
+                    {dash:2, strokeColor: availableColors[0]}
+                );
 
-            plot = {
-                'id': _.uniqueId(),
-                'name': availableNames[0],
-                'color': availableColors[0],
-                'fCurve': fCurve,
-                'dfCurve': dfCurve,
-                'tangentPoint': tangentPoint,
-                'tangentLine': tangentLine
-            };
-            // Set visibility of all elements
-            plot.fCurve.showElement();
-            _.invoke([plot.dfCurve, plot.tangentPoint, plot.tangentLine], 'hideElement');
-            plots.push(plot);
+                // Add point and tangent line at that point.
+                // Extra check here as entering something like f(x) = x/0 throws an exception that is not caught.
 
-            createTab(plot);
+                if (_.isFinite(f(1.0))) {
+                    tangentPoint = board.create(
+                        'glider',
+                        [1.0, 0.0, fCurve],
+                        {name: 'drag me', strokeColor: availableColors[0], fillColor: availableColors[0]}
+                    );
+
+                    tangentLine = board.create(
+                        'tangent',
+                        [tangentPoint],
+                        {name: 'drag me', strokeColor: 'rgb(0, 0, 0)'}
+                    );
+                }
+                else {
+                    throw new UserException('Invalid function.');
+                }
+
+                plot = {
+                    'id': _.uniqueId(),
+                    'name': availableNames[0],
+                    'color': availableColors[0],
+                    'fCurve': fCurve,
+                    'dfCurve': dfCurve,
+                    'tangentPoint': tangentPoint,
+                    'tangentLine': tangentLine
+                };
+                // Set visibility of all elements
+                plot.fCurve.showElement();
+                _.invoke([plot.dfCurve, plot.tangentPoint, plot.tangentLine], 'hideElement');
+                plots.push(plot);
+
+                createTab(plot);
+            }
+        }
+        catch (e) {
+            $('.error-message').text('Invalid function.').show();
         }
     }
 
     function clearAll() {
         var tabPanel = $("#function-tabs");
-        JXG.JSXGraph.freeBoard(board);
-        board = JXG.JSXGraph.initBoard('jxgbox', {boundingbox: initBoundingBox, axis: true, showCopyright: false});
-        plots.length = 0;
-        tabPanel.tabs( "destroy" );
-        tabPanel.contents().each(function() {
-            $(this).remove();
-        });
-        tabPanel.append('<ul></ul>');
+        if (plots.length > 0) {
+            JXG.JSXGraph.freeBoard(board);
+            board = JXG.JSXGraph.initBoard('jxgbox', {boundingbox: initBoundingBox, axis: true, showCopyright: false});
+            plots.length = 0;
+            tabPanel.tabs( "destroy" );
+            tabPanel.contents().each(function() {
+                $(this).remove();
+            });
+            tabPanel.append('<ul></ul>');
+        }
     }
 
-    // Not in use for the moment
-    function findZeroes() {
-        var zeroraw = $('#inputZstart').val();
-        if (JXG.isFunction(f) && isNumeric(zeroraw)) {
+    function findZero(plot) {
+        /*
             board.suspendUpdate();
-            var zero = JXG.Math.Numerics.fzero(f,parseFloat(zeroraw));
+            var boundingBox = board.getBoundingBox();
+            var xMin = boundingBox[0], xMax = boundingBox[2];
             var f_zero = f(zero);
-            var p = board.create(
+            p = board.create(
                 'point',
                 [zero, f_zero],
                 {name: 'f(x='+zero.toFixed(2)+')=0.0', strokeColor: 'gray', face: '<>', fixed: true}
             );
             board.unsuspendUpdate();
+        */
+        var fStr = $('#main-mathjax-input').val(),
+            zeroStartStr = $('#x-start-' + plot.id).val(),
+            f, zeroStart, zero, mathOutput;
+        $('.error-message').hide();
+
+        try {
+            f = board.jc.snippet(fStr, true, 'x', true);
+            zeroStart = parseFloat(zeroStartStr);
+            if (_.isFinite(zeroStart)) {
+                zero = JXG.Math.Numerics.fzero(f, zeroStart);
+                mathOutput = $('#mathjax-output-secondary-' + plot.id);
+                mathOutput.html('`f_' + plot.name + '(' + zero.toFixed(2) + ') = 0`');
+                MathJax.Hub.Queue(["Typeset", MathJax.Hub, 'mathjax-output-secondary-' + plot.id]);
+                mathOutput.css('color', plot.color);
+            }
+            else {
+                throw new UserException('Invalid start point for zero search.');
+            }
+        }
+        catch (e) {
+            $('.error-message').text(e.message).show();
         }
     }
 
-    // Not in use for the moment
-    function isNumeric(num){
-        return !isNaN(num)
+    function findDerivative(plot) {
+        var fStr = $('#main-mathjax-input').val(),
+            x0Str = $('#x-start-' + plot.id).val(),
+            x0, f, df, dfx0, mathOutput;
+        $('.error-message').hide();
+
+        try {
+            f = board.jc.snippet(fStr, true, 'x', true);
+            df = JXG.Math.Numerics.D(f);
+            x0 = parseFloat(x0Str);
+            if (_.isFinite(x0)) {
+                dfx0 = df(x0);
+                mathOutput = $('#mathjax-output-secondary-' + plot.id);
+                mathOutput.html('`(df_' + plot.name + ')/dt (' + x0.toFixed(2) +' ) = ' + dfx0.toFixed(2) + '`');
+                MathJax.Hub.Queue(["Typeset", MathJax.Hub, 'mathjax-output-secondary-' + plot.id]);
+                mathOutput.css('color', plot.color);
+            }
+            else {
+                throw new UserException('Invalid point for derivative evaluation.');
+            }
+        }
+        catch (e) {
+            $('.error-message').text(e.message).show();
+        }
+    }
+
+    function findIntegral(plot) {
+        var fStr = $('#main-mathjax-input').val(),
+            x1Str = $('#x-start-' + plot.id).val(),
+            x2Str = $('#x-end-' + plot.id).val(),
+            x1, x2, f, intfx1x2, mathOutput;
+        $('.error-message').hide();
+
+        try {
+            f = board.jc.snippet(fStr, true, 'x', true);
+            x1 = parseFloat(x1Str);
+            x2 = parseFloat(x2Str);
+            if (_.isFinite(x1) && _.isFinite(x2)) {
+                intfx1x2 = JXG.Math.Numerics.I([x1, x2], f);
+                mathOutput = $('#mathjax-output-secondary-' + plot.id);
+                mathOutput.html(
+                    '`int_' + x1.toFixed(2) + '^' + x2.toFixed(2) + 'f_' + plot.name + '(x)dx = ' + intfx1x2.toFixed(2) + '`'
+                );
+                MathJax.Hub.Queue(["Typeset", MathJax.Hub, 'mathjax-output-secondary-' + plot.id]);
+                mathOutput.css('color', plot.color);
+            }
+            else {
+                throw new UserException('Invalid point for definite integral evaluation.');
+            }
+        }
+        catch (e) {
+            $('.error-message').text(e.message).show();
+        }
+    }
+
+    function UserException(message) {
+        this.message = message;
+        this.name = "UserException";
     }
 
     return {
-        // Any field/method that needs to be public
+        // Any field and/or method that needs to be public
     };
 })(window.parent.jQuery, window.parent._, MathJax, JXG);
