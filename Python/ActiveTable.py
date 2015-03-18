@@ -15,9 +15,6 @@ class ActivteTable:
     def __init__(self):
         return None
     
-    def test(self):
-        return True
-
     ### Pandas "to_html" does not have an "id" 
     def df_to_html_with_id(self,df, id, *args, **kwargs):
         '''

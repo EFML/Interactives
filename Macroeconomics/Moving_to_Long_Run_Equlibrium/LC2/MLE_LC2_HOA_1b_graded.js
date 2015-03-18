@@ -22,8 +22,12 @@ var xlabel1 = brd1.create('text',[-1.2,10,"PL"],{fixed:true});
 var ylabel1 = brd1.create('text',[9,-0.5,"RGDP"],{fixed:true});
 
 //Supply Line 1 - fixed
-var Supply = createSupply(brd1,{name:'SRAS',color:'DodgerBlue'});
-Supply.setAttribute({'name':'SRAS','fixed':false,'highlight':false});
+var SRAS1 = createSupply(brd1,{name:'SRAS1',color:'DodgerBlue'});
+SRAS1.setAttribute({'dash':1,'fixed':true,'highlight':false});
+
+//Supply Line 2 - moveable
+var SRAS2 = createSupply(brd1,{name:'SRAS2',color:'DodgerBlue'});
+SRAS2.setAttribute({withLabel:false});
 
 //Demand Line 1 - fixed
 var AD1 = createDemand(brd1,{name:'AD1',color:'Orange'});
@@ -37,8 +41,8 @@ AD2.setAttribute({withLabel:false});
 ////////////
 // Intersection Box 1
 ////////////
-var iSDfix = brd1.create('intersection', [AD1, Supply, 0], {visible:false}); 
-var iS2D = brd1.create('intersection', [AD2, Supply, 0], {visible:false});
+var iSDfix = brd1.create('intersection', [AD1, SRAS1, 0], {visible:false}); 
+var iS2D = brd1.create('intersection', [AD2, SRAS2, 0], {visible:false});
 
 ////////////
 // Draggable Dashed Lines for Board 1
@@ -63,8 +67,8 @@ var dashesFixedB1 = createDashedLines2Axis(brd1,iSDfix,
 //LRAS - straight line
 ////////////
 var LRAS = brd1.create('segment',[[7.0,11.0],[7.0,0.0]],
-                       {'strokeColor':'DodgerBlue','strokeWidth':'2',
-                        'name':'LRAS','withLabel':true,
+                       {'strokeColor':'DarkGray','strokeWidth':'2',
+                        'name':'LRAS','withLabel':true, 'fixed':true,
                         'label':{'offset':[-15,140]}});
 var labelLRAS = brd1.create('text',[6.7,-0.4,"rYF"],{fixed:true});
 
@@ -85,6 +89,7 @@ brd1.on('move', function() {
 
 brd1.on('mousedown', function() {      
     AD2.setAttribute({withLabel:true});
+    SRAS2.setAttribute({withLabel:true});
     dashS2.Y1.setAttribute({withLabel:true});
     dashS2.X1.setAttribute({withLabel:true});
     brd1.update()
@@ -97,15 +102,21 @@ setState = function(statestr){
     //console.log(state);
     //console.log(state["dragLine"]);
 
-    if (state["dragLine"]) {
+    if (state["AD2"] && state["SRAS2"]) {
         //brd1.removeObject('AD2');
-        var point1 = [state["dragLine"]["p1X"],state["dragLine"]["p1Y"]];
-        var point2 = [state["dragLine"]["p2X"],state["dragLine"]["p2Y"]]
+        var point1 = [state["AD2"]["p1X"],state["AD2"]["p1Y"]];
+        var point2 = [state["AD2"]["p2X"],state["AD2"]["p2Y"]]
         AD2.point1.moveTo(point1,0);
         AD2.point2.moveTo(point2,0);
+
+        var point1 = [state["SRAS2"]["p1X"],state["SRAS2"]["p1Y"]];
+        var point2 = [state["SRAS2"]["p2X"],state["SRAS2"]["p2Y"]]
+        SRAS2.point1.moveTo(point1,0);
+        SRAS2.point2.moveTo(point2,0);
+
         brd1.update();
     }
-    //alert(statestr);
+    
     console.debug('State updated successfully from saved.');
 }
 
@@ -117,13 +128,17 @@ getState = function(){
 }
 
 getInput = function() {    
-    var state = {"dragLine":{'p1X':AD2.point1.X(),'p2X':AD2.point2.X(),
-                             'p1Y':AD2.point1.Y(),'p2Y':AD2.point2.Y()},
-                 "staticLine":{'p1X':AD1.point1.X(),'p2Y':AD1.point2.X(),
-                               'p1Y':AD1.point1.Y(),'p2Y':AD1.point2.Y()}
-             };
+    var state = {"AD2":{'p1X':AD2.point1.X(),'p2X':AD2.point2.X(),
+                        'p1Y':AD2.point1.Y(),'p2Y':AD2.point2.Y()},
+                 "AD1":{'p1X':AD1.point1.X(),'p2X':AD1.point2.X(),
+                        'p1Y':AD1.point1.Y(),'p2Y':AD1.point2.Y()},
+                 "SRAS2":{'p1X':SRAS2.point1.X(),'p2X':SRAS2.point2.X(),
+                          'p1Y':SRAS2.point1.Y(),'p2Y':SRAS2.point2.Y()},
+                 "SRAS1":{'p1X':SRAS1.point1.X(),'p2X':SRAS1.point2.X(),
+                          'p1Y':SRAS1.point1.Y(),'p2Y':SRAS1.point2.Y()}
+                };
     statestr = JSON.stringify(state);
-    //console.log(statestr);
+    console.log('hello',statestr);
     return statestr;
 }
 
