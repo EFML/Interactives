@@ -9,7 +9,7 @@
 # 
 # Pandas is a data analysis tool for Python whose data are stored in dataframes - spreadsheet like data structures with references to rows and columns. The power of Pandas is the ability to export dataframes, one option which is "to_html". We use this feature to quickly create html tables with custom elements.
 
-# In[2]:
+# In[1]:
 
 import sys
 import pandas as pd
@@ -20,7 +20,7 @@ import ActiveTable
 ACTIVETABLE_HTML_FILENAME = 'ActiveTable_Momentum_4.3.2a.html'
 
 
-# In[14]:
+# In[2]:
 
 reload(ActiveTable)
 
@@ -50,12 +50,12 @@ print AT
 # ### HTML 
 # Below is the main HTML file. We piece together CSS, JS, and external resources from alternate files.
 
-# In[15]:
+# In[19]:
 
-get_ipython().run_cell_magic(u'HTML', u'', u'<!DOCTYPE html>\n<html>\n    <head>\n        <meta charset="UTF-8">\n        <title>Momentum Activity</title>\n        <link href="Momentum_4.3.2a.css" rel="stylesheet" type="text/css">\n        <script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=AM_HTMLorMML-full"></script>\n        <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jsxgraph/0.98/jsxgraphcore.js"></script>\n        <script type="text/javascript" src="https://code.jquery.com/jquery.min.js"></script>\n        <script type="text/javascript" src="Momentum_4.3.2a.js"></script>\n        \n        <script> \n        $(function(){\n          $("#ActiveTable").load("ActiveTable_Momentum_4.3.2a.html"); \n        });\n        </script> \n        \n    </head>\n\n    <body>\n        <div id="ActiveTable"></div>\n        \n        <!--START-BUTTON FOR PASS STATE-->\n        <input class="btn" type="button" value="Pass State for Grading" onClick="getState()">\n        <input class="btn" type="button" value="Set State" onClick="setState(getState())">\n        <div id="spaceBelow">State:</div>\n        <!--END-BUTTON FOR PASS STATE-->\n    </body>\n</html>')
+get_ipython().run_cell_magic(u'HTML', u'', u'<!DOCTYPE html>\n<html>\n    <head>\n        <meta charset="UTF-8">\n        <title>Momentum Activity</title>\n        <link href="Momentum_4.3.2a.css" rel="stylesheet" type="text/css">\n        <script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=AM_HTMLorMML-full"></script>\n        <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jsxgraph/0.98/jsxgraphcore.js"></script>\n        <script type="text/javascript" src="https://code.jquery.com/jquery.min.js"></script>\n        <script type="text/javascript" src="Momentum_4.3.2a.js"></script>\n        \n        <script> \n        $(function(){\n          $("#ActiveTable").load("ActiveTable_Momentum_4.3.2a.html"); \n        });\n        </script> \n        \n    </head>\n\n    <body>\n        <div id="ActiveTable"></div>\n    \n        <!--START-BUTTON FOR PASS STATE-->\n        <div id=\'StateGrab\' style=\'width:350px; float:left;\'>        \n            <input class="btn" type="button" value="Get State" onClick="getNotebookState()">\n            <div id="spaceBelow">State:</div>\n        </div>\n        <script type="text/javascript">\n            getNotebookState = function(){\n                state = getInput();\n                statestr = JSON.stringify(state);\n\n                document.getElementById(\'spaceBelow\').innerHTML += \'<br>\'+statestr;\n                var command = "state = " + statestr;\n                console.log(command);\n\n                //Kernel\n                var kernel = IPython.notebook.kernel;\n                kernel.execute(command);\n\n                return statestr;\n            }\n        </script>\n        <!--END-BUTTON FOR PASS STATE-->\n    </body>\n</html>')
 
 
-# In[22]:
+# In[10]:
 
 import re
 
@@ -68,16 +68,17 @@ html_filename = 'Momentum_4.3.2a.html'
 with open(html_filename,'w') as hfile:
     hfile.write(tmpfile)
 
-# print tmpfile
+print tmpfile
 
 
 # ### Python Grading within an IPython Notebook
 # IPython notebooks allow access to both HTML elements and Interactive Python. With a short command, we can pass HTML input to the IPython kernel. These commands are written in the JS code: src="Momentum_4.3.2a.js"
 
-# In[24]:
+# In[21]:
 
 import json        
 def grader(e, ans):
+    print type(ans)
     state = json.loads(ans)#['answer']
     response = state['response']
     colors = state['colors']
@@ -131,6 +132,7 @@ def grader(e, ans):
         percent_tolerance = kwargs.get('percent_tolerance',1.0)
         
         if testNumeric(R) and testNumeric(K):
+            #print 100.*abs(abs(float(R) - float(K))/float(K))
             return 100.*abs(float(R) - float(K))/float(K) <= percent_tolerance
         else:
             #print "Issue with grading rubric. Could not convert Response to float."
@@ -152,6 +154,7 @@ def grader(e, ans):
             return stringComparison(R,K)
                 
     
+    ### GRADING LOOP
     ### Loop through question Table and use indices to check answer table
     header = questionTable[0]
     numCorrects = 0
@@ -174,6 +177,21 @@ def grader(e, ans):
         return {'ok': False, 'msg': 'You have %s cells out of %s correct.' % (str(numCorrects),str(len(response.keys()))) }
 
 print grader('what is this?',state)
+
+
+# In[ ]:
+
+
+
+
+# In[ ]:
+
+
+
+
+# In[ ]:
+
+
 
 
 # In[ ]:

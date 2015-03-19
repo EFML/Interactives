@@ -4,14 +4,14 @@ getState = function(){
     state = getInput();
     statestr = JSON.stringify(state);        
     
-    // //START-PASS STATE TO IPYTHON KERNEL    
-    // document.getElementById('spaceBelow').innerHTML += '<br>'+statestr;
-    // var command = "state = '" + statestr + "'";
-    // //console.log(command);
+    //START-PASS STATE TO IPYTHON KERNEL    
+    document.getElementById('spaceBelow').innerHTML += '<br>'+statestr;
+    var command = "state = '" + statestr + "'";
+    //console.log(command);
     
-    // var kernel = IPython.notebook.kernel;
-    // kernel.execute(command);
-    // //END-PASS STATE TO IPYTHON KERNEL
+    var kernel = IPython.notebook.kernel;
+    kernel.execute(command);
+    //END-PASS STATE TO IPYTHON KERNEL
     
     return statestr;
 }
@@ -30,7 +30,7 @@ getInput = function() {
         data['colors'][cells[i].id] = 'white';
     }
     //console.log(data);
-    return data;
+    return JSON.stringify(data);
 }
 
 setState = function(statestr){
