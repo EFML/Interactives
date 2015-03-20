@@ -7,7 +7,7 @@
 # #### Create the HTML Table using Python's Pandas Library
 # Two cells below are only for initial generation of the Active Table. The table is saved to file, then referenced in the following cells.
 
-# In[16]:
+# In[1]:
 
 import sys
 import pandas as pd
@@ -15,10 +15,10 @@ pd.options.display.max_colwidth = 200
 sys.path.insert(0, '../../Python')
 import ActiveTable
 
-ACTIVETABLE_HTML_FILENAME = 'Rotational_LC3_HOA1_plotting.html'
+ACTIVETABLE_HTML_FILENAME = 'Rotational_LC3_HOA1_plotting_ActiveTable.html'
 
 
-# In[23]:
+# In[2]:
 
 ### Active Table
 Numeric = 'NUMERIC_RESPONSE'
@@ -56,14 +56,25 @@ with open(ACTIVETABLE_HTML_FILENAME,'w') as hfile:
 # ### HTML 
 # Below is the main HTML file. We piece together CSS, JS, and external resources from alternate files.
 
-# In[22]:
+# In[5]:
 
-get_ipython().run_cell_magic(u'HTML', u'', u'<!DOCTYPE html>\n<html>\n    <head>\n        <meta charset="UTF-8">\n        <title>Momentum Activity</title>\n        <link href="Rotational_LC3_HOA1_plotting.css" rel="stylesheet" type="text/css">\n        <script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=AM_HTMLorMML-full"></script>\n        <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jsxgraph/0.98/jsxgraphcore.js"></script>\n        <script type="text/javascript" src="https://code.jquery.com/jquery.min.js"></script>\n        <script type="text/javascript" src="Rotational_LC3_HOA1_plotting.js"></script>\n        \n        <script> \n        $(function(){\n          $("#ActiveTable").load("Rotational_LC3_HOA1_plotting.html"); \n        });\n        </script> \n        \n    </head>\n\n    <body>\n        <div id=\'jxgbox1\' class=\'jxgbox\' style=\'width:500px; height:400px; float:left; border: solid #1f628d 2px;\'></div>        \n        <div id="ActiveTable"></div>\n        \n        <!--START-BUTTON FOR PASS STATE-->\n        <input class="btn" type="button" value="Pass State for Grading" onClick="getState()">\n        <div id="spaceBelow">State:</div>\n        <!--END-BUTTON FOR PASS STATE-->\n        \n        <input class="btn" type="button" value="Plot Data" onClick="points = plotData()">\n        <input class="btn" type="button" value="Clear Board" onClick="brd1 = initBoard()">\n        <input class="btn" type="button" value="Best Fit Line" onClick="toggleFitLine">\n    </body>\n</html>')
-
-
-# In[19]:
+get_ipython().run_cell_magic(u'HTML', u'', u'<!DOCTYPE html>\n<html>\n    <head>\n        <meta charset="UTF-8">\n        <title>Momentum Activity</title>\n        <link href="Rotational_LC3_HOA1_plotting.css" rel="stylesheet" type="text/css">\n        <script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=AM_HTMLorMML-full"></script>\n        <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jsxgraph/0.98/jsxgraphcore.js"></script>\n        <script type="text/javascript" src="https://code.jquery.com/jquery.min.js"></script>\n        \n        <script> \n        $(function(){\n          $("#ActiveTable").load("Rotational_LC3_HOA1_plotting_ActiveTable.html"); \n        });\n        </script> \n        \n    </head>\n\n    <body>\n        <script type="text/javascript" src="Rotational_LC3_HOA1_plotting.js"></script>\n        <div id=\'jxgbox1\' class=\'jxgbox\' style=\'width:500px; height:400px; float:left; border: solid #1f628d 2px;\'></div>        \n        <div id="ActiveTable"></div>\n        \n        <!--START-BUTTON FOR PASS STATE-->\n        <input class="btn" type="button" value="Pass State for Grading" onClick="getState()">\n        <div id="spaceBelow">State:</div>\n        <!--END-BUTTON FOR PASS STATE-->\n        \n        <input class="btn" type="button" value="Plot Data" onClick="points = plotData()">\n        <input class="btn" type="button" value="Clear Board" onClick="brd1 = initBoard()">\n        <input class="btn" type="button" value="Best Fit Line" onClick="toggleFitLine">\n    </body>\n</html>')
 
 
+# In[6]:
+
+import re
+
+index_htmlinput = [ i for i,x in enumerate(_ih) if "run_cell_magic(u'HTML'" in x and "re.sub('%%HTML','',tmpfile)" not in x]
+tmpfile = eval('_i%d' % int(index_htmlinput[-1]))
+tmpfile = re.sub('%%HTML','',tmpfile)
+tmpfile = re.sub(r'<!--START-BUTTON FOR PASS STATE(.*?)END-BUTTON FOR PASS STATE-->','',tmpfile,flags=re.DOTALL)
+
+html_filename = 'Rotational_LC3_HOA1_plotting.html'
+with open(html_filename,'w') as hfile:
+    hfile.write(tmpfile)
+
+print tmpfile
 
 
 # In[ ]:
@@ -181,24 +192,6 @@ def grader(e, ans):
         return {'ok': False, 'msg': 'You have %s cells out of %s correct.' % (str(numCorrects),str(len(response.keys()))) }
 
 print grader('what',state)
-
-
-# ####HTML Generation
-
-# In[80]:
-
-import re
-
-tmpfile = html_doc
-# tmpfile = re.sub(r'<!--START-BUTTON FOR PASS STATE(.*?)END-BUTTON FOR PASS STATE-->','',tmpfile,flags=re.DOTALL)
-tmpfile = re.sub(r'//START-PASS STATE TO IPYTHON KERNEL(.*?)//END-PASS STATE TO IPYTHON KERNEL','',tmpfile,flags=re.DOTALL)
-
-filename = 'Rotational_LC3_HOA1_plotting'
-html_filename = '%s.html' % filename
-
-with open(html_filename,'w') as hfile:
-    hfile.write(tmpfile)
-print tmpfile
 
 
 # In[ ]:

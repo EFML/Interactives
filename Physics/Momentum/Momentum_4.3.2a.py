@@ -50,12 +50,12 @@ print AT
 # ### HTML 
 # Below is the main HTML file. We piece together CSS, JS, and external resources from alternate files.
 
-# In[19]:
+# In[3]:
 
 get_ipython().run_cell_magic(u'HTML', u'', u'<!DOCTYPE html>\n<html>\n    <head>\n        <meta charset="UTF-8">\n        <title>Momentum Activity</title>\n        <link href="Momentum_4.3.2a.css" rel="stylesheet" type="text/css">\n        <script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=AM_HTMLorMML-full"></script>\n        <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jsxgraph/0.98/jsxgraphcore.js"></script>\n        <script type="text/javascript" src="https://code.jquery.com/jquery.min.js"></script>\n        <script type="text/javascript" src="Momentum_4.3.2a.js"></script>\n        \n        <script> \n        $(function(){\n          $("#ActiveTable").load("ActiveTable_Momentum_4.3.2a.html"); \n        });\n        </script> \n        \n    </head>\n\n    <body>\n        <div id="ActiveTable"></div>\n    \n        <!--START-BUTTON FOR PASS STATE-->\n        <div id=\'StateGrab\' style=\'width:350px; float:left;\'>        \n            <input class="btn" type="button" value="Get State" onClick="getNotebookState()">\n            <div id="spaceBelow">State:</div>\n        </div>\n        <script type="text/javascript">\n            getNotebookState = function(){\n                state = getInput();\n                statestr = JSON.stringify(state);\n\n                document.getElementById(\'spaceBelow\').innerHTML += \'<br>\'+statestr;\n                var command = "state = " + statestr;\n                console.log(command);\n\n                //Kernel\n                var kernel = IPython.notebook.kernel;\n                kernel.execute(command);\n\n                return statestr;\n            }\n        </script>\n        <!--END-BUTTON FOR PASS STATE-->\n    </body>\n</html>')
 
 
-# In[10]:
+# In[4]:
 
 import re
 
@@ -74,11 +74,10 @@ print tmpfile
 # ### Python Grading within an IPython Notebook
 # IPython notebooks allow access to both HTML elements and Interactive Python. With a short command, we can pass HTML input to the IPython kernel. These commands are written in the JS code: src="Momentum_4.3.2a.js"
 
-# In[21]:
+# In[17]:
 
 import json        
 def grader(e, ans):
-    print type(ans)
     state = json.loads(ans)#['answer']
     response = state['response']
     colors = state['colors']
@@ -133,7 +132,7 @@ def grader(e, ans):
         
         if testNumeric(R) and testNumeric(K):
             #print 100.*abs(abs(float(R) - float(K))/float(K))
-            return 100.*abs(float(R) - float(K))/float(K) <= percent_tolerance
+            return 100.*abs(abs(float(R) - float(K))/float(K)) <= percent_tolerance
         else:
             #print "Issue with grading rubric. Could not convert Response to float."
             return False
@@ -148,7 +147,8 @@ def grader(e, ans):
         K: short-hand for answer Key Value
         '''
         if cellType == 'NUMERIC_RESPONSE':
-            return numericalComparison(R,K,percent_tolerance=5.0)
+            #print R,K
+            return numericalComparison(R,K,percent_tolerance=1.0)
             #return stringComparison(R,K)
         elif cellType == 'STRING_RESPONSE':
             return stringComparison(R,K)

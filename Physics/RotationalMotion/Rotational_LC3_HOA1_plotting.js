@@ -29,49 +29,6 @@ function initBoard() {
 var brd1 = initBoard();
 var fit = {};
 
-function plotData() {        
-    brd1 = initBoard();
-    var XCol = 0,
-        YCol = 5, //Input Field
-        table = document.getElementById("myActiveTable"),
-        cells = table.getElementsByTagName('td'),
-        x=0, y=0, i=0,points=[],params=[]; //
-
-    for (i = 0; i < cells.length; i += 6) {
-        x = cells[i+XCol].innerHTML;
-        y = cells[i+YCol].getElementsByTagName('input')[0].value;
-    
-        if (x.length > 0 && y.length > 0) {
-            var p = brd1.create('point',[Number(x),Number(y)],{fixed:true, label:{offset:[0,-15]}});
-            points.push(p);
-        }
-    }
-    
-    params = bestFitLine(points);
-    return points;
-}
-
-bestFitLine = function(points) {
-    if (points.length < 0) {
-        return alert("No data entered in table.");
-    }
-    
-    var ydata = [];
-    var xdata = [];
-    for (i=0;i<points.length;i++) {
-        ydata.push(points[i].Y());
-        xdata.push(points[i].X());
-    }
-        
-    fit = {};
-    fit = linearRegression(ydata,xdata);
-    console.log(fit);
-    brd1.create('functiongraph',
-                   [function(x){ return fit['slope']*x + fit['intercept'];}, bboxlimits[0], bboxlimits[2]],
-                   {name:'Best Fit<br>Parameters','strokeWidth':'3',withLabel: true,label:{offset:[0,-20]}}
-                );
-    return fit;
-}
 
 function linearRegression(y,x){
     //http://trentrichardson.com/2010/04/06/compute-linear-regressions-in-javascript/
@@ -98,15 +55,59 @@ function linearRegression(y,x){
     return lr;
 }
 
-// function toggleFitLine(E) {
-//     //E stands for element
-//     if (E.getAttribute('visible')) {
-//         E.setAttribute({visible:false});
-//     }
-//     else {
-//         E.setAttribute({visible:true});
-//     }
-// }
+bestFitLine = function(points) {
+    if (points.length < 0) {
+        return alert("No data entered in table.");
+    }
+    
+    var ydata = [];
+    var xdata = [];
+    for (i=0;i<points.length;i++) {
+        ydata.push(points[i].Y());
+        xdata.push(points[i].X());
+    }
+        
+    fit = {};
+    fit = linearRegression(ydata,xdata);
+    console.log(fit);
+    brd1.create('functiongraph',
+                   [function(x){ return fit['slope']*x + fit['intercept'];}, bboxlimits[0], bboxlimits[2]],
+                   {name:'Best Fit<br>Parameters','strokeWidth':'3',withLabel: true,label:{offset:[0,-20]}}
+                );
+    return fit;
+}
+
+function plotData() {        
+    brd1 = initBoard();
+    var XCol = 0,
+        YCol = 5, //Input Field
+        table = document.getElementById("myActiveTable"),
+        cells = table.getElementsByTagName('td'),
+        x=0, y=0, i=0,points=[],params=[]; //
+
+    for (i = 0; i < cells.length; i += 6) {
+        x = cells[i+XCol].innerHTML;
+        y = cells[i+YCol].getElementsByTagName('input')[0].value;
+    
+        if (x.length > 0 && y.length > 0) {
+            var p = brd1.create('point',[Number(x),Number(y)],{fixed:true, label:{offset:[0,-15]}});
+            points.push(p);
+        }
+    }
+    
+    params = bestFitLine(points);
+    return points;
+}
+
+function toggleFitLine(E) {
+    //E stands for element
+    if (E.getAttribute('visible')) {
+        E.setAttribute({visible:false});
+    }
+    else {
+        E.setAttribute({visible:true});
+    }
+}
 
 //Standard edX JSinput functions
 getState = function(){
