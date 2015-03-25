@@ -7,7 +7,8 @@ var GraphingCalculator = (function($, _, MathJax, JXG, undefined) {
     plotColors = [
         'Crimson', 'MediumSeaGreen', 'RoyalBlue', 'Orange', 'Turquoise'
     ],
-    plotNames = ['1', '2', '3', '4', '5'];
+    plotNames = ['1', '2', '3', '4', '5'],
+    precision = 3;
 
     init();
 
@@ -210,14 +211,14 @@ var GraphingCalculator = (function($, _, MathJax, JXG, undefined) {
     }
 
     function plotter() {
-        var inputText = $('#main-mathjax-input').val(), f,
+        var fStr = $('#main-mathjax-input').val(), f,
             plot, fCurve, dfCurve, tangentPoint, tangentLine,
             availableColors = _.difference(plotColors, getUsedColors()),
             availableNames = _.difference(plotNames, getUsedNames());
 
         $('.error-message').hide();
         try {
-            f = board.jc.snippet(inputText, true, 'x', true);
+            f = board.jc.snippet(fStr, true, 'x', true);
 
             if (availableColors.length > 0) {
                 // Add curve
@@ -256,6 +257,7 @@ var GraphingCalculator = (function($, _, MathJax, JXG, undefined) {
 
                 plot = {
                     'id': _.uniqueId(),
+                    'fStr': fStr,
                     'name': availableNames[0],
                     'color': availableColors[0],
                     'fCurve': fCurve,
@@ -291,18 +293,17 @@ var GraphingCalculator = (function($, _, MathJax, JXG, undefined) {
     }
 
     function findZero(plot) {
-        var fStr = $('#main-mathjax-input').val(),
-            zeroStartStr = $('#x-start-' + plot.id).val(),
+        var zeroStartStr = $('#x-start-' + plot.id).val(),
             f, zeroStart, zero, mathOutput;
         $('.error-message').hide();
 
         try {
-            f = board.jc.snippet(fStr, true, 'x', true);
+            f = board.jc.snippet(plot.fStr, true, 'x', true);
             zeroStart = parseFloat(zeroStartStr);
             if (_.isFinite(zeroStart)) {
                 zero = JXG.Math.Numerics.fzero(f, zeroStart);
                 mathOutput = $('#mathjax-output-secondary-' + plot.id);
-                mathOutput.html('`f_' + plot.name + '(' + zero.toFixed(2) + ') = 0`');
+                mathOutput.html('`f_' + plot.name + '(' + zero.toFixed(precision) + ') = 0`');
                 MathJax.Hub.Queue(["Typeset", MathJax.Hub, 'mathjax-output-secondary-' + plot.id]);
                 mathOutput.css('color', plot.color);
             }
@@ -316,20 +317,19 @@ var GraphingCalculator = (function($, _, MathJax, JXG, undefined) {
     }
 
     function findDerivative(plot) {
-        var fStr = $('#main-mathjax-input').val(),
-            x0Str = $('#x-start-' + plot.id).val(),
+        var x0Str = $('#x-start-' + plot.id).val(),
             x0, f, df, dfx0, mathOutput;
         $('.error-message').hide();
 
         try {
-            f = board.jc.snippet(fStr, true, 'x', true);
+            f = board.jc.snippet(plot.fStr, true, 'x', true);
             df = JXG.Math.Numerics.D(f);
             x0 = parseFloat(x0Str);
             if (_.isFinite(x0)) {
                 dfx0 = df(x0);
                 mathOutput = $('#mathjax-output-secondary-' + plot.id);
                 mathOutput.html(
-                    '`(df_' + plot.name + ')/dt (' + x0.toFixed(2) +' ) = ' + dfx0.toFixed(2) + '`'
+                    '`(df_' + plot.name + ')/dt (' + x0.toFixed(precision) +' ) = ' + dfx0.toFixed(precision) + '`'
                 );
                 MathJax.Hub.Queue(["Typeset", MathJax.Hub, 'mathjax-output-secondary-' + plot.id]);
                 mathOutput.css('color', plot.color);
@@ -344,22 +344,21 @@ var GraphingCalculator = (function($, _, MathJax, JXG, undefined) {
     }
 
     function findIntegral(plot) {
-        var fStr = $('#main-mathjax-input').val(),
-            x1Str = $('#x-start-' + plot.id).val(),
+        var x1Str = $('#x-start-' + plot.id).val(),
             x2Str = $('#x-end-' + plot.id).val(),
             x1, x2, f, intfx1x2, mathOutput;
         $('.error-message').hide();
 
         try {
-            f = board.jc.snippet(fStr, true, 'x', true);
+            f = board.jc.snippet(plot.fStr, true, 'x', true);
             x1 = parseFloat(x1Str);
             x2 = parseFloat(x2Str);
             if (_.isFinite(x1) && _.isFinite(x2)) {
                 intfx1x2 = JXG.Math.Numerics.I([x1, x2], f);
                 mathOutput = $('#mathjax-output-secondary-' + plot.id);
                 mathOutput.html(
-                    '`int_' + x1.toFixed(2) + '^' + x2.toFixed(2) + 'f_' + plot.name + '(x)dx = ' +
-                    intfx1x2.toFixed(2) + '`'
+                    '`int_' + x1.toFixed(precision) + '^' + x2.toFixed(precision) + 'f_' + plot.name + '(x)dx = ' +
+                    intfx1x2.toFixed(precision) + '`'
                 );
                 MathJax.Hub.Queue(["Typeset", MathJax.Hub, 'mathjax-output-secondary-' + plot.id]);
                 mathOutput.css('color', plot.color);
