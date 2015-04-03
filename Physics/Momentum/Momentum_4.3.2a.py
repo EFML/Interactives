@@ -49,13 +49,15 @@ print AT
 
 # ### HTML 
 # Below is the main HTML file. We piece together CSS, JS, and external resources from alternate files.
+# 
+# Note, all code between the "\<!--START-BUTTON FOR PASS STATE--\>" and "\<!--END-BUTTON FOR PASS STATE--\>" tags is specific to this IPython workflow. We use this feature to combine python grading and HTML/CSS/JS development. 
 
-# In[3]:
+# In[6]:
 
-get_ipython().run_cell_magic(u'HTML', u'', u'<!DOCTYPE html>\n<html>\n    <head>\n        <meta charset="UTF-8">\n        <title>Momentum Activity</title>\n        <link href="Momentum_4.3.2a.css" rel="stylesheet" type="text/css">\n        <script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=AM_HTMLorMML-full"></script>\n        <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jsxgraph/0.98/jsxgraphcore.js"></script>\n        <script type="text/javascript" src="https://code.jquery.com/jquery.min.js"></script>\n        <script type="text/javascript" src="Momentum_4.3.2a.js"></script>\n        \n        <script> \n        $(function(){\n          $("#ActiveTable").load("ActiveTable_Momentum_4.3.2a.html"); \n        });\n        </script> \n        \n    </head>\n\n    <body>\n        <div id="ActiveTable"></div>\n    \n        <!--START-BUTTON FOR PASS STATE-->\n        <div id=\'StateGrab\' style=\'width:350px; float:left;\'>        \n            <input class="btn" type="button" value="Get State" onClick="getNotebookState()">\n            <div id="spaceBelow">State:</div>\n        </div>\n        <script type="text/javascript">\n            getNotebookState = function(){\n                state = getInput();\n                statestr = JSON.stringify(state);\n\n                document.getElementById(\'spaceBelow\').innerHTML += \'<br>\'+statestr;\n                var command = "state = " + statestr;\n                console.log(command);\n\n                //Kernel\n                var kernel = IPython.notebook.kernel;\n                kernel.execute(command);\n\n                return statestr;\n            }\n        </script>\n        <!--END-BUTTON FOR PASS STATE-->\n    </body>\n</html>')
+get_ipython().run_cell_magic(u'HTML', u'', u'<!DOCTYPE html>\n<html>\n    <head>\n        <meta charset="UTF-8">\n        <title>Momentum Activity</title>\n        <link href="Momentum_4_3_2a.css" rel="stylesheet" type="text/css">\n        <script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=AM_HTMLorMML-full"></script>\n        <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jsxgraph/0.98/jsxgraphcore.js"></script>\n        <script type="text/javascript" src="https://code.jquery.com/jquery.min.js"></script>\n        <script type="text/javascript" src="Momentum_4_3_2a.js"></script>\n        \n        <script> \n        $(function(){\n          $("#ActiveTable").load("ActiveTable_Momentum_4.3.2a.html"); \n        });\n        </script> \n        \n    </head>\n\n    <body>\n        <div id="ActiveTable"></div>\n    \n        <!--START-BUTTON FOR PASS STATE-->\n        <div id=\'StateGrab\' style=\'width:350px; float:left;\'>        \n            <input class="btn" type="button" value="Get State" onClick="getNotebookState()">\n            <div id="spaceBelow">State:</div>\n        </div>\n        <script type="text/javascript">\n            getNotebookState = function(){\n                state = getInput();\n                statestr = JSON.stringify(state);\n\n                document.getElementById(\'spaceBelow\').innerHTML += \'<br>\'+statestr;\n                var command = "state = " + statestr;\n                console.log(command);\n\n                //Kernel\n                var kernel = IPython.notebook.kernel;\n                kernel.execute(command);\n\n                return statestr;\n            }\n        </script>\n        <!--END-BUTTON FOR PASS STATE-->\n    </body>\n</html>')
 
 
-# In[4]:
+# In[9]:
 
 import re
 
@@ -63,6 +65,8 @@ index_htmlinput = [ i for i,x in enumerate(_ih) if "run_cell_magic(u'HTML'" in x
 tmpfile = eval('_i%d' % int(index_htmlinput[-1]))
 tmpfile = re.sub('%%HTML','',tmpfile)
 tmpfile = re.sub(r'<!--START-BUTTON FOR PASS STATE(.*?)END-BUTTON FOR PASS STATE-->','',tmpfile,flags=re.DOTALL)
+tmpfile = re.sub(r'href="Momentum_4.3.2a.css"','href="/static/Momentum_4.3.2a.css"',tmpfile,flags=re.DOTALL)
+tmpfile = re.sub(r'src="Momentum_4.3.2a.js"','src="/static/Momentum_4.3.2a.js"',tmpfile,flags=re.DOTALL)
 
 html_filename = 'Momentum_4.3.2a.html'
 with open(html_filename,'w') as hfile:
@@ -74,7 +78,7 @@ print tmpfile
 # ### Python Grading within an IPython Notebook
 # IPython notebooks allow access to both HTML elements and Interactive Python. With a short command, we can pass HTML input to the IPython kernel. These commands are written in the JS code: src="Momentum_4.3.2a.js"
 
-# In[17]:
+# In[7]:
 
 import json        
 def grader(e, ans):
