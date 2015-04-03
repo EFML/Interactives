@@ -16,18 +16,17 @@
 # Related files:
 #     * ActiveTable.py
 
-# In[1]:
+# In[2]:
 
 import sys
 import pandas as pd
 pd.options.display.max_colwidth = 200
-sys.path.insert(0, '../../Python')
 import ActiveTable
 
 ACTIVETABLE_HTML_FILENAME = 'ActiveTable_Momentum_4.3.2a.html'
 
 
-# In[2]:
+# In[3]:
 
 reload(ActiveTable)
 
@@ -62,7 +61,7 @@ print AT
 # 
 # *Note, all code between the "\<!--START-BUTTON FOR PASS STATE--\>" and "\<!--END-BUTTON FOR PASS STATE--\>" tags is specific to this IPython workflow. We use this feature to combine python grading and HTML/CSS/JS development. 
 
-# In[1]:
+# In[4]:
 
 get_ipython().run_cell_magic(u'HTML', u'', u'<!DOCTYPE html>\n<html>\n    <head>\n        <meta charset="UTF-8">\n        <title>Momentum Activity</title>\n        <link href="Momentum_4_3_2a.css" rel="stylesheet" type="text/css">\n        <script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=AM_HTMLorMML-full"></script>\n        <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jsxgraph/0.98/jsxgraphcore.js"></script>\n        <script type="text/javascript" src="https://code.jquery.com/jquery.min.js"></script>\n        <script type="text/javascript" src="Momentum_4_3_2a.js"></script>\n        \n        <script> \n        $(function(){\n          $("#ActiveTable").load("ActiveTable_Momentum_4.3.2a.html"); \n        });\n        </script> \n        \n    </head>\n\n    <body>\n        <div id="ActiveTable"></div>\n    \n        <!--START-BUTTON FOR PASS STATE-->\n        <div id=\'StateGrab\' style=\'width:350px; float:left;\'>        \n            <input class="btn" type="button" value="Get State" onClick="getNotebookState()">\n            <div id="spaceBelow">State:</div>\n        </div>\n        <script type="text/javascript">\n            getNotebookState = function(){\n                state = getInput();\n                statestr = JSON.stringify(state);\n\n                document.getElementById(\'spaceBelow\').innerHTML += \'<br>\'+statestr;\n                var command = "state = " + statestr;\n                console.log(command);\n\n                //Kernel\n                var kernel = IPython.notebook.kernel;\n                kernel.execute(command);\n\n                return statestr;\n            }\n        </script>\n        <!--END-BUTTON FOR PASS STATE-->\n    </body>\n</html>')
 
@@ -79,7 +78,7 @@ get_ipython().run_cell_magic(u'HTML', u'', u'<!DOCTYPE html>\n<html>\n    <head>
 #     
 # *** Has the /static/ folder been depricated?
 
-# In[9]:
+# In[8]:
 
 import re
 
