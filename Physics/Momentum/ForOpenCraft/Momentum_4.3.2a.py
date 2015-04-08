@@ -26,7 +26,7 @@ import ActiveTable
 ACTIVETABLE_HTML_FILENAME = 'ActiveTable_Momentum_4.3.2a.html'
 
 
-# In[3]:
+# In[9]:
 
 reload(ActiveTable)
 
@@ -78,7 +78,7 @@ get_ipython().run_cell_magic(u'HTML', u'', u'<!DOCTYPE html>\n<html>\n    <head>
 #     
 # *** Has the /static/ folder been depricated?
 
-# In[8]:
+# In[10]:
 
 import re
 
