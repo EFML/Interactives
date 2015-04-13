@@ -3,7 +3,6 @@ JXG.Options.point.showInfobox = false;
 JXG.Options.segment.strokeColor = 'Pink';
 JXG.Options.segment.strokeWidth = '5';
 JXG.Options.text.fontSize = 16;
-JXG.Options.text.useMathJax = true;
 
 //Custom Parameters
 labelOffset = {'X':160,'Y':150};
