@@ -1,7 +1,7 @@
 ////////////
 // BOARD 1
 ////////////
-bboxlimits = [-2.4, 12, 12, -1.2];
+bboxlimits = [-2.5, 12, 12, -1.2];
 var brd1 = JXG.JSXGraph.initBoard('jxgbox1', {axis:false, 
                                         showCopyright: false,
                                         showNavigation: false,
@@ -19,7 +19,7 @@ yaxis1 = brd1.create('axis', [[0, 0], [0, 11]], {withLabel: false});
 xaxis1.removeAllTicks();
 yaxis1.removeAllTicks();
 var xlabel1 = brd1.create('text',[6,-0.5,"Quantity of Money"],{fixed:true});
-var ylabel1 = brd1.create('text',[-2.25,10,"Real<br>Interest<br>Rate"],{fixed:true});
+var ylabel1 = brd1.create('text',[-2.45,10,"Nominal<br>Interest<br>Rate"],{fixed:true});
 
 //Demand Line 1 - fixed
 var AD1 = brd1.create('segment',[[2.0,9.5],[9.5,2.0]],
@@ -103,10 +103,18 @@ var ylabel2 = brd2.create('text',[-2.25*cF,10*cF,"Price of<br>Bonds"],{fixed:tru
 //////////
 brd1.addChild(brd2);
 
+//DBoard2 - fixed
+//Demand Line 1 - Fixed
+var SB2 = brd2.create('segment',[[2.0*cF,2.0*cF],[9.5*cF,9.5*cF]],
+                       {'strokeColor':'DodgerBlue','strokeWidth':'4',
+                        'name':'S','withLabel':true,
+                        'fixed':true,
+                        'highlight':false,
+                        'label':{'offset':[100,100]}});  
 
 //DBoard2 - fixed
 //Supply Line 1 - Fixed
-var SB2fix = brd2.create('segment',[[2.0*cF,2.0*cF],[9.5*cF,9.5*cF]],
+var DB2fix = brd2.create('segment',[[9.5*cF,2.0*cF],[2.0*cF,9.5*cF]],
                        {'strokeColor':'Gray','strokeWidth':'3',
                         'name':'D','withLabel':false,
                         'fixed':true,'dash':1,
@@ -115,28 +123,18 @@ var SB2fix = brd2.create('segment',[[2.0*cF,2.0*cF],[9.5*cF,9.5*cF]],
 
 
 //COMPLICATED TRANSFORM USING REFLECTION
-var refLine = brd2.create('line',[[11*cF,0*cF],[11*cF,12*cF]],{dash:1,visible:false});
+var refLine = brd2.create('line',[[0*cF,11*cF],[12*cF,11*cF]],{dash:1,visible:false});
 var reflectBrd2 = brd2.create('transform',[refLine],{type:'reflect'});
-var shiftC = brd2.create('transform',[11.5*cF,4.75*cF],{type:'translate'});
+var shiftC = brd2.create('transform',[1.0*cF,7.75*cF],{type:'translate'});
 var C2 = brd2.create('point',[AD2.point1,[shiftC,reflectBrd2]],{name:'C2',visible:false});
 
-var shiftD = brd2.create('transform',[15.25*cF,1*cF],{type:'translate'});
+var shiftD = brd2.create('transform',[4.75*cF,19.0*cF],{type:'translate'});
 var D2 = brd2.create('point',[AD2.point2,[shiftD,reflectBrd2]],{name:'D2',visible:false});
-var SB2 = brd2.create('segment',[C2,D2],{name:'S',fixed:false,withLabel:true,
-                                         strokeWidth:4,strokeColor:'DodgerBlue',highlight:false,
-                                         label:{offset:[100,100]}});
+var DB2 = brd2.create('segment',[C2,D2],{name:'D',fixed:false,withLabel:true,
+                                         strokeWidth:4,strokeColor:'Crimson',highlight:false,
+                                         label:{offset:[100,-100]}});
 
 var gr2 = brd2.create('group',[C2,D2]);
-
-
-//DBoard2 - fixed
-//Demand Line 1 - Fixed
-var DB2 = brd2.create('segment',[[2.0*cF,9.5*cF],[9.5*cF,2.0*cF]],
-                       {'strokeColor':'Crimson','strokeWidth':'4',
-                        'name':'D','withLabel':true,
-                        'fixed':true,
-                        'highlight':false,
-                        'label':{'offset':[100,-100]}});  
             
 ////////
 //Intersection for Board 2

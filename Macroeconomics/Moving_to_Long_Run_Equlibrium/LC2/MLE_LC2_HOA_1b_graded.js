@@ -1,7 +1,7 @@
 ////////////
 // BOARD 1
 ////////////
-bboxlimits = [-1.5, 12, 12, -1];
+bboxlimits = [-1.5, 12, 12, -1.2];
 var brd1 = JXG.JSXGraph.initBoard('jxgbox1', {axis:false, 
                                         showCopyright: false,
                                         showNavigation: false,
@@ -18,23 +18,23 @@ yaxis1 = brd1.create('axis', [[0, 0], [0, 11]], {withLabel: false});
 //Axes
 xaxis1.removeAllTicks();
 yaxis1.removeAllTicks();
-var xlabel1 = brd1.create('text',[-1.2,10,"PL"],{fixed:true});
-var ylabel1 = brd1.create('text',[9,-0.5,"RGDP"],{fixed:true});
+var xlabel1 = brd1.create('text',[-1.2,10,"Price<br>Level"],{fixed:true});
+var ylabel1 = brd1.create('text',[9,-0.5,"Real GDP"],{fixed:true});
 
 //Supply Line 1 - fixed
-var SRAS1 = createSupply(brd1,{name:'SRAS1',color:'DodgerBlue'});
+var SRAS1 = createSupply(brd1,{name:'SRAS<sub>1</sub>',color:'DodgerBlue'});
 SRAS1.setAttribute({'dash':1,'fixed':true,'highlight':false});
 
 //Supply Line 2 - moveable
-var SRAS2 = createSupply(brd1,{name:'SRAS2',color:'DodgerBlue'});
+var SRAS2 = createSupply(brd1,{name:'SRAS<sub>2</sub>',color:'DodgerBlue'});
 SRAS2.setAttribute({withLabel:false});
 
 //Demand Line 1 - fixed
-var AD1 = createDemand(brd1,{name:'AD1',color:'Orange'});
+var AD1 = createDemand(brd1,{name:'AD<sub>1</sub>',color:'Orange'});
 AD1.setAttribute({'dash':1,'fixed':true,'highlight':false});
 
 //Demand Line 2 - moveable
-var AD2 = createDemand(brd1,{name:'AD2',color:'Orange'});
+var AD2 = createDemand(brd1,{name:'AD<sub>2</sub>',color:'Orange'});
 AD2.setAttribute({withLabel:false});
 
  
@@ -50,8 +50,8 @@ var iS2D = brd1.create('intersection', [AD2, SRAS2, 0], {visible:false});
 var dashS2 = createDashedLines2Axis(brd1,iS2D,
                                   {fixed:false,
                                    withLabel:false,
-                                   xlabel:'Y2',
-                                   ylabel:'PL2',
+                                   xlabel:'Y<sub>2</sub>',
+                                   ylabel:'PL<sub>2</sub>',
                                    color:'Orange'});
 
 ////////////
@@ -59,18 +59,18 @@ var dashS2 = createDashedLines2Axis(brd1,iS2D,
 ////////////
 var dashesFixedB1 = createDashedLines2Axis(brd1,iSDfix,
                                           {withLabel:true,
-                                           xlabel:'rY1',
-                                           ylabel:'PL1',
+                                           xlabel:'rY<sub>1</sub>',
+                                           ylabel:'PL<sub>1</sub>',
                                            color:'DodgerBlue'});
 
 ////////////
 //LRAS - straight line
 ////////////
 var LRAS = brd1.create('segment',[[7.0,11.0],[7.0,0.0]],
-                       {'strokeColor':'DarkGray','strokeWidth':'2',
+                       {'strokeColor':'DarkGray','strokeWidth':'3',
                         'name':'LRAS','withLabel':true, 'fixed':true,
-                        'label':{'offset':[-15,140]}});
-var labelLRAS = brd1.create('text',[6.7,-0.4,"rYF"],{fixed:true});
+                        'label':{'offset':[-15,200]}});
+var labelLRAS = brd1.create('text',[6.7,-0.4,"rY<sub>F</sub>"],{fixed:true});
 
 
 
@@ -102,7 +102,7 @@ setState = function(statestr){
     //console.log(state);
     //console.log(state["dragLine"]);
 
-    if (state["AD2"] && state["SRAS2"]) {
+    if (state["AD2"] && state["SRAS2"] && state['hello']) {
         //brd1.removeObject('AD2');
         var point1 = [state["AD2"]["p1X"],state["AD2"]["p1Y"]];
         var point2 = [state["AD2"]["p2X"],state["AD2"]["p2Y"]]

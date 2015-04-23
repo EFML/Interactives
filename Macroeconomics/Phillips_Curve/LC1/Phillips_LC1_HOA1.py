@@ -1,187 +1,16 @@
-# -*- coding: utf-8 -*-
-# <nbformat>3.0</nbformat>
 
-# <markdowncell>
+# coding: utf-8
 
 # ###Scenario 1, Question 1
 
-# <codecell>
+# In[2]:
 
-%%HTML
-<!DOCTYPE html>
-<html>
-    <head>
-        <style> 
-            body {
-                margin: 10px;
-                /*padding-top: 40px;*/
-            }
-        </style>
-    </head>
+get_ipython().run_cell_magic(u'HTML', u'', u'<!DOCTYPE html>\n<html>\n    <head>\n        <style> \n            body {\n                margin: 10px;\n                /*padding-top: 40px;*/\n            }\n        </style>\n    </head>\n\n    <body>\n        \n        <div style="width: 100%; overflow: hidden;">\n            <div id=\'jxgbox1\' class=\'jxgbox\' style=\'width:550px; height:500px; float:left; border: solid #1f628d 2px;\'></div>        \n        </div>\n\n        <input class="btn" type="button" value="Shift in Aggregate Demand" onClick="startAnimation()">\n        <input class="btn" type="button" value="Reset" onClick="resetAnimation()">\n        \n        \n        \n        <!-- COMMENT: Where our Javascript begins. -->\n        <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jsxgraph/0.98/jsxgraphcore.js"></script>\n        \n        <!-- COMMENT: Specific Davidson Next calls built on JSXGraph. Must be loaded after JSXgraph. -->\n        <script type="text/javascript" src="../../JS/Macro_t1.0.js"></script>\n        \n        <script type=\'text/javascript\'>\n            ////////////\n            // BOARD 1\n            ////////////\n            bboxlimits = [-1.5, 12, 12, -1];\n            var brd1 = JXG.JSXGraph.initBoard(\'jxgbox1\', {axis:false, \n                                                    showCopyright: false,\n                                                    showNavigation: false,\n                                                    zoom: false,\n                                                    pan: false,\n                                                    boundingbox:bboxlimits,\n                                                    grid: false,\n                                                    hasMouseUp: true, \n            });\n            \n            xaxis1 = brd1.create(\'axis\', [[0, 0], [11, 0]], {withLabel: false});\n            yaxis1 = brd1.create(\'axis\', [[0, 0], [0, 11]], {withLabel: false});\n\n            //Axes\n            xaxis1.removeAllTicks();\n            yaxis1.removeAllTicks();\n            var xlabel1 = brd1.create(\'text\',[-1.2,10,"PL"],{fixed:true});\n            var ylabel1 = brd1.create(\'text\',[9,-0.5,"RGDP"],{fixed:true});\n            \n            //Supply Line 1 - fixed\n            var Supply = createSupply(brd1,{name:\'SRAS\',color:\'Gray\'});\n            Supply.setAttribute({\'fixed\':true,\'highlight\':false});\n            \n            //Demand Line 1 - fixed\n            var AD1 = createDemand(brd1,{name:\'AD<sub>1</sub>\',color:\'Gray\'});\n            AD1.setAttribute({\'dash\':1,\'fixed\':true,\'highlight\':false});\n            \n            //Demand Line 2 - moveable\n            var AD2 = createDemand(brd1,{name:\'AD<sub>2</sub>\',color:\'Orange\'});\n            AD2.setAttribute({withLabel:false});\n                        \n            ////////////\n            // Intersection Box 1\n            ////////////\n            var iSDfix = brd1.create(\'intersection\', [AD1, Supply, 0], {visible:false}); \n            var iS2D = brd1.create(\'intersection\', [AD2, Supply, 0], {visible:false});\n            \n            ////////////\n            // Dashes for fixed Line\n            ////////////\n            var dashB1 = createDashedLines2Axis(brd1,iSDfix,\n                                          {fixed:true,\n                                           withLabel:true,\n                                           xlabel:\'\',\n                                           ylabel:\'PL<sub>1</sub>\',\n                                           color:\'Gray\'});\n        \n            ////////////\n            // Dashes for draggable Moveable Line\n            ////////////\n            var dashS2 = createDashedLines2Axis(brd1,iS2D,\n                                          {fixed:false,\n                                           withLabel:false,\n                                           xlabel:\'\',\n                                           ylabel:\'PL<sub>2</sub>\',\n                                           color:\'Orange\'});\n            \n\n            \n        \n            //////////////////\n            // Interactivity\n            //////////////////\n            brd1.on(\'move\', function() {      \n                dashS2.Y1.moveTo([0, iS2D.Y()]);\n                dashS2.Y2.moveTo([iS2D.X(), iS2D.Y()]);\n\n                dashS2.X1.moveTo([iS2D.X(), 0]);\n                dashS2.X2.moveTo([iS2D.X(), iS2D.Y()]);\n            });\n            \n            brd1.on(\'mousedown\', function() {      \n                AD2.setAttribute({withLabel:true});\n                dashS2.Y1.setAttribute({withLabel:true});\n                brd1.update()\n            });\n            \n            //Animation\n            startAnimation = function() {\n                //Initial line coords\n                c1 = [2.0,9.5];\n                c2 = [9.5,2.0];\n                \n                AD2.setAttribute({withLabel:true});\n                dashS2.Y1.setAttribute({withLabel:true});\n                \n                //Animated Curve\n                AD2.point1.moveTo([c1[0]+1,c1[1]+1],1000);\n                AD2.point2.moveTo([c2[0]+1,c2[1]+1],1000);\n                \n                //Dashed Lines\n                dashS2.Y1.moveTo([0, iS2D.Y()+1],1000);\n                dashS2.Y2.moveTo([iS2D.X()+1, iS2D.Y()+1],1000);\n\n                dashS2.X1.moveTo([iS2D.X()+1, 0],1000);\n                dashS2.X2.moveTo([iS2D.X()+1, iS2D.Y()+1],1000);\n                \n                brd1.update();                \n            };\n            \n            resetAnimation = function() {\n                //Initial line coords\n                var c1 = [2.0,9.5];\n                var c2 = [9.5,2.0];\n                \n                //Animated Curve\n                AD2.point1.moveTo(c1,10);\n                AD2.point2.moveTo(c2,10);\n                AD2.setAttribute({withLabel:false});\n                \n                \n                brd1.update();\n\n                //Dashed Lines                \n                dashS2.Y1.moveTo([0, iS2D.Y()-1]);\n                dashS2.Y2.moveTo([iS2D.X()-1, iS2D.Y()-1]);\n\n                dashS2.X1.moveTo([iS2D.X()-1, 0]);\n                dashS2.X2.moveTo([iS2D.X()-1, iS2D.Y()-1]);\n                dashS2.Y1.setAttribute({withLabel:false});\n                \n                brd1.update();\n            };\n            \n            \n            //Standard edX JSinput functions\n            getInput = function(){\n                state = {};\n                statestr = JSON.stringify(state);\n                console.log(statestr)\n                \n                //IPython Notebook Considerations\n                document.getElementById(\'spaceBelow\').innerHTML += \'<br>\'+statestr;\n                var command = "state = \'" + statestr + "\'";\n                console.log(command);\n\n                //Kernel\n                var kernel = IPython.notebook.kernel;\n                kernel.execute(command);\n\n                return statestr;\n            }\n\n            getState = function(){\n                state = {\'input\': JSON.parse(getInput())};\n                statestr = JSON.stringify(state);\n                return statestr\n            }\n\n            setState = function(statestr){\n                $(\'#msg\').html(\'setstate \' + statestr);\n                state = JSON.parse(statestr);\n                console.log(statestr);\n                console.debug(\'State updated successfully from saved.\');\n            }\n            \n            \n        </script>\n    </body>\n</html>')
 
-    <body>
-        
-        
-        <div style="width: 100%; overflow: hidden;">
-            <div id='jxgbox1' class='jxgbox' style='width:450px; height:350px; float:left; border: solid #1f628d 2px;'></div>        
-        </div>
-
-        <input class="btn" type="button" value="Shift in Aggregate Demand" onClick="startAnimation()">
-        <input class="btn" type="button" value="Reset" onClick="resetAnimation()">
-        
-        
-        
-        <!-- COMMENT: Where our Javascript begins. -->
-        <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jsxgraph/0.98/jsxgraphcore.js"></script>
-        
-        <!-- COMMENT: Specific Davidson Next calls built on JSXGraph. Must be loaded after JSXgraph. -->
-        <script type="text/javascript" src="../../../JS/Macro_JSXgraph.js"></script>
-        
-        <script type='text/javascript'>
-
-            ////////////
-            // BOX 1
-            ////////////
-            bboxlimits = [-1.5, 12, 12, -1];
-            var brd1 = JXG.JSXGraph.initBoard('jxgbox1', {axis:false, 
-                                                    showCopyright: false,
-                                                    showNavigation: false,
-                                                    zoom: false,
-                                                    pan: false,
-                                                    boundingbox:bboxlimits,
-                                                    grid: false,
-                                                    hasMouseUp: true, 
-            });
-            
-            xaxis = brd1.create('axis', [[0, 0], [11, 0]], {withLabel: false});
-            yaxis = brd1.create('axis', [[0, 0], [0, 11]], {withLabel: false});
-
-            //Axes
-            xaxis.removeAllTicks();
-            yaxis.removeAllTicks();
-            var xlabel = brd1.create('text',[-1.2,10,"PL"],{fixed:true});
-            var ylabel = brd1.create('text',[9,-0.5,"RGDP"],{fixed:true});
-            
-            //Supply Line 1 - fixed
-            var Supply = createSupply();
-            Supply.setAttribute({'name':'SRAS','fixed':true,'highlight':false});
-            
-            //Demand Line 1 - fixed
-            var AD1 = createDemand();
-            AD1.setAttribute({'name':'AD1','dash':1,'fixed':true,'highlight':false});
-            
-            //Demand Line 2 - moveable
-            var AD2 = createDemand();
-            AD2.setAttribute({'name':'AD2',strokeColor:'Orange',withLabel:false});
-            
-            ////////
-            // Intersection Box 1
-            ////////
-            var iSDfix = brd1.create('intersection', [AD1, Supply, 0], {visible:false}); 
-            var iS2D = brd1.create('intersection', [AD2, Supply, 0], {visible:false});
-            
-            ////////////
-            // Dashes for fixed Line
-            ////////////
-            var dashB1Yp1 = brd1.create('point',[0, iSDfix.Y()],{withLabel:false,visible:false});
-            var dashB1Yp2 = brd1.create('point',[iSDfix.X(), iSDfix.Y()],{withLabel:false,visible:false});
-            var dashB1Y1 = brd1.create('segment',[dashB1Yp1,dashB1Yp2],{strokeColor:'gray',strokeWidth:'2',
-                                                                        dash:'1',fixed:true} );
-
-            var dashB1Xp1 = brd1.create('point',[iSDfix.X(), 0],{withLabel:false,visible:false});
-            var dashB1Xp2 = brd1.create('point',[iSDfix.X(), iSDfix.Y()],{withLabel:false,visible:false});
-            var dashB1X1 = brd1.create('segment',[dashB1Xp1,dashB1Xp2],{strokeColor:'gray',strokeWidth:'2',
-                                                                          dash:'1',fixed:true} );
-        
-            ////////////
-            // Dashes for draggable Moveable Line
-            ////////////
-            var dashS2Yp1 = brd1.create('point',[0, iS2D.Y()],{withLabel:false,visible:false});
-            var dashS2Yp2 = brd1.create('point',[iS2D.X(), iS2D.Y()],{withLabel:false,visible:false});
-            var dashS2Y1 = brd1.create('segment',[dashS2Yp1,dashS2Yp2],{strokeColor:'gray',strokeWidth:'2',
-                                                                        dash:'1',fixed:true} );
-
-            var dashS2Xp1 = brd1.create('point',[iS2D.X(), 0],{withLabel:false,visible:false});
-            var dashS2Xp2 = brd1.create('point',[iS2D.X(), iS2D.Y()],{withLabel:false,visible:false});
-            var dashS2X1 = brd1.create('segment',[dashS2Xp1,dashS2Xp2],{strokeColor:'gray',strokeWidth:'2',
-                                                                          dash:'1',fixed:true} );
-        
-            
-            
-            brd1.on('move', function() {      
-                dashS2Yp1.moveTo([0, iS2D.Y()]);
-                dashS2Yp2.moveTo([iS2D.X(), iS2D.Y()]);
-
-                dashS2Xp1.moveTo([iS2D.X(), 0]);
-                dashS2Xp2.moveTo([iS2D.X(), iS2D.Y()]);
-            });
-            
-            brd1.on('mousedown', function() {      
-                AD2.setAttribute({withLabel:true});
-                brd1.update()
-            });
-            
-            //Animation
-            startAnimation = function() {
-                var c1 = [1.0,10.0];
-                var c2 = [9.0,2.0];
-                AD2.point1.moveTo([c1[0]+1,c1[1]+1],1000);
-                AD2.point2.moveTo([c2[0]+1,c2[1]+1],1000);
-                AD2.setAttribute({withLabel:true});
-                brd1.update();
-            };
-            
-            resetAnimation = function() {
-                var c1 = [1.0,10.0];
-                var c2 = [9.0,2.0];
-                AD2.point1.moveTo(c1,10);
-                AD2.point2.moveTo(c2,10);
-                AD2.setAttribute({withLabel:false});
-                brd1.update();
-            };
-            
-            
-            //Standard edX JSinput functions
-            getInput = function(){
-                state = {};
-                statestr = JSON.stringify(state);
-                console.log(statestr)
-                
-                //IPython Notebook Considerations
-                document.getElementById('spaceBelow').innerHTML += '<br>'+statestr;
-                var command = "state = '" + statestr + "'";
-                console.log(command);
-
-                //Kernel
-                var kernel = IPython.notebook.kernel;
-                kernel.execute(command);
-
-                return statestr;
-            }
-
-            getState = function(){
-                state = {'input': JSON.parse(getInput())};
-                statestr = JSON.stringify(state);
-                return statestr
-            }
-
-            setState = function(statestr){
-                $('#msg').html('setstate ' + statestr);
-                state = JSON.parse(statestr);
-                console.log(statestr);
-                console.debug('State updated successfully from saved.');
-            }
-            
-            
-        </script>
-    </body>
-</html>
-
-# <markdowncell>
 
 # ### Generate HTML File
 
-# <codecell>
+# In[40]:
 
 import re
 
@@ -200,6 +29,8 @@ with open(html_filename,'w') as hfile:
     hfile.write(tmpfile)
 print tmpfile
 
-# <codecell>
+
+# In[ ]:
+
 
 

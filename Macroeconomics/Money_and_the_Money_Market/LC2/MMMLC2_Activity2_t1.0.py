@@ -10,7 +10,7 @@ get_ipython().run_cell_magic(u'HTML', u'', u'<html>\n    <head>\n        <meta c
 
 # ### Generate HTML File
 
-# In[7]:
+# In[8]:
 
 import re
 
@@ -26,8 +26,11 @@ tmpfile = re.sub(r'//START-PASS STATE TO IPYTHON KERNEL(.*?)//END-PASS STATE TO 
 
 ### Replace relative links with the appropriate edX links
 tmpfile = re.sub(r'src="../../JS/Macro_t1.0.js"','src="/c4x/DavidsonCollege/DAP002/asset/Macro_t1.0.js"',tmpfile,flags=re.DOTALL)
+tmpfile = re.sub(r'src="MMMLC2_Activity2_t1.0.js"','src="/c4x/DavidsonCollege/DAP002/asset/MMMLC2_Activity2_t1.0.js"',tmpfile,flags=re.DOTALL)
+tmpfile = re.sub(r'href="MMMLC2_Activity2_t1.0.css"','src="/c4x/DavidsonCollege/DAP002/asset/MMMLC2_Activity2_t1.0.css"',tmpfile,flags=re.DOTALL)
+
 ### Would be cool if it just took the title of the notebook
-html_filename = 'MMMLC2_Activity2' + '.html'
+html_filename = 'MMMLC2_Activity2_t1.0' + '.html'
 
 with open(html_filename,'w') as hfile:
     hfile.write(tmpfile)

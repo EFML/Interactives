@@ -3,7 +3,7 @@
 
 # ###HTML Interactive Area
 
-# In[8]:
+# In[1]:
 
 get_ipython().run_cell_magic(u'HTML', u'', u'<html>\n    <head>\n        <meta charset="UTF-8">\n        <title>Money and the Money Market - Activity 2</title>\n        <link href="MMMLC2_Activity1_t1.0.css" rel="stylesheet" type="text/css">\n        <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jsxgraph/0.98/jsxgraphcore.js"></script>\n        <script type="text/javascript" src="../../JS/Macro_t1.0.js" defer></script>\n        \n        <script type="text/javascript" src="MMMLC2_Activity1_t1.0.js" defer></script>\n    </head>\n\n    <body> \n        <div style="width: 100%; overflow: hidden;">\n            <div id=\'jxgbox1\' class=\'jxgbox\' style=\'width:550px; height:450px; float:left; border: solid #1f628d 2px;\'></div>        \n        </div>\n        \n        <!--START-BUTTON FOR PASS STATE-->\n        <!-- ------------------------------------------------------------------------------- -->\n        <div id=\'StateGrab\' style=\'width:350px; float:left;\'>        \n            <input class="btn" type="button" value="Get State" onClick="getNotebookState()">\n            <div id="spaceBelow">State:</div>\n        </div>\n        <script type="text/javascript">\n            getNotebookState = function(){\n                state = getInput();\n                statestr = JSON.stringify(state);\n\n                document.getElementById(\'spaceBelow\').innerHTML += \'<br>\'+statestr;\n                var command = "state = " + statestr;\n                console.log(command);\n\n                //Kernel\n                var kernel = IPython.notebook.kernel;\n                kernel.execute(command);\n\n                return statestr;\n            }\n        </script>\n        <!-- ------------------------------------------------------------------------------- -->\n        <!--END-BUTTON FOR PASS STATE-->\n        \n    </body>\n</html>')
 
@@ -29,7 +29,7 @@ print grader('what is this?',state)
 
 # ### Generate HTML File
 
-# In[9]:
+# In[3]:
 
 import re
 
@@ -45,8 +45,11 @@ tmpfile = re.sub(r'//START-PASS STATE TO IPYTHON KERNEL(.*?)//END-PASS STATE TO 
 
 ### Replace relative links with the appropriate edX links
 tmpfile = re.sub(r'src="../../JS/Macro_t1.0.js"','src="/c4x/DavidsonCollege/DAP002/asset/Macro_t1.0.js"',tmpfile,flags=re.DOTALL)
+tmpfile = re.sub(r'src="MMMLC2_Activity1_t1.0.js"','src="/c4x/DavidsonCollege/DAP002/asset/MMM_Activity1_t1.0.js"',tmpfile,flags=re.DOTALL)
+tmpfile = re.sub(r'href="MMMLC2_Activity1_t1.0.css"','src="/c4x/DavidsonCollege/DAP002/asset/MMM_Activity1_t1.0.css"',tmpfile,flags=re.DOTALL)
+
 ### Would be cool if it just took the title of the notebook
-html_filename = 'MMMLC2_Activity1' + '_jsinput.html'
+html_filename = 'MMMLC2_Activity1_t1.0' + '.html'
 
 with open(html_filename,'w') as hfile:
     hfile.write(tmpfile)

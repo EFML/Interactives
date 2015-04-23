@@ -84,11 +84,11 @@
             Supply.setAttribute({'name':'SRAS','fixed':true,'highlight':false});
             
             //Demand Line 1 - fixed
-            var AD1 = createDemand(brd1,'AD1','Gray');
+            var AD1 = createDemand(brd1,'AD<sub>1</sub>','Gray');
             AD1.setAttribute({'dash':1,'fixed':true,'highlight':false});
             
             //Demand Line 2 - moveable
-            var AD2 = createDemand(brd1,'AD2','Orange');
+            var AD2 = createDemand(brd1,'AD<sub>2</sub>','Orange');
             AD2.setAttribute({withLabel:false});
                         
             ////////////
@@ -100,14 +100,14 @@
             ////////////
             // Dashes for fixed Line
             ////////////
-            var dashB1Yp1 = brd1.create('point',[0, iSDfix.Y()],{withLabel:true,name:'PL1',visible:true,
+            var dashB1Yp1 = brd1.create('point',[0, iSDfix.Y()],{withLabel:true,name:'PL<sub>1</sub>',visible:true,
                                                                  size:'0.5',strokeColor:'Gray',
                                                                  'label':{'offset':[-25,-2]}});
             var dashB1Yp2 = brd1.create('point',[iSDfix.X(), iSDfix.Y()],{withLabel:true,visible:false});
             var dashB1Y1 = brd1.create('segment',[dashB1Yp1,dashB1Yp2],{strokeColor:'gray',strokeWidth:'2',
                                                                         dash:'1',fixed:true});
 
-            var dashB1Xp1 = brd1.create('point',[iSDfix.X(), 0],{withLabel:true,name:'Y1',visible:true,
+            var dashB1Xp1 = brd1.create('point',[iSDfix.X(), 0],{withLabel:true,name:'Y<sub>1</sub>',visible:true,
                                                                  size:'0.5',strokeColor:'Gray',
                                                                  'label':{'offset':[-5,-8]}});
             var dashB1Xp2 = brd1.create('point',[iSDfix.X(), iSDfix.Y()],{withLabel:true,visible:false});
@@ -117,14 +117,14 @@
             ////////////
             // Dashes for draggable Moveable Line
             ////////////
-            var dashS2Yp1 = brd1.create('point',[0, iS2D.Y()],{withLabel:false,name:'PL2',visible:true,
+            var dashS2Yp1 = brd1.create('point',[0, iS2D.Y()],{withLabel:false,name:'PL<sub>2</sub>',visible:true,
                                                                size:'0.5',strokeColor:'Gray',
                                                                'label':{'offset':[-25,-2]}});
             var dashS2Yp2 = brd1.create('point',[iS2D.X(), iS2D.Y()],{withLabel:false,visible:false});
             var dashS2Y1 = brd1.create('segment',[dashS2Yp1,dashS2Yp2],{strokeColor:'gray',
                                                                         strokeWidth:'2',dash:'1',fixed:true});
 
-            var dashS2Xp1 = brd1.create('point',[iS2D.X(), 0],{withLabel:false,name:'Y2',visible:true,
+            var dashS2Xp1 = brd1.create('point',[iS2D.X(), 0],{withLabel:false,name:'Y<sub>2</sub>',visible:true,
                                                                size:'0.5',strokeColor:'Gray',
                                                                'label':{'offset':[-5,-8]}});
             var dashS2Xp2 = brd1.create('point',[iS2D.X(), iS2D.Y()],{withLabel:false,visible:false});
@@ -174,8 +174,8 @@
             ////////
             //Intersection for SRPC
             ////////
-            var iB2SRPC = brd2.create('intersection', [DB2Y, SRPC, 0], {name:'A2',withLabel:true,visible:false});
-            var iB2fixed = brd2.create('point', [iB2SRPC.X(), iB2SRPC.Y()], {name:'A1',visible:true,
+            var iB2SRPC = brd2.create('intersection', [DB2Y, SRPC, 0], {name:'A<sub>2</sub>',withLabel:true,visible:false});
+            var iB2fixed = brd2.create('point', [iB2SRPC.X(), iB2SRPC.Y()], {name:'A<sub>1</sub>',visible:true,
                                                                              fixed:true,fillColor:'Gray',
                                                                              strokeColor:'Gray'});
 
