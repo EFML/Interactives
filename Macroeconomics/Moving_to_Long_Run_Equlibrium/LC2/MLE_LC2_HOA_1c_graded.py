@@ -4,14 +4,14 @@
 # ###Moving to Long-Run Equilibrium
 # https://studio.edge.edx.org/container/i4x://DavidsonCollege/DAP002/vertical/ee567d7e52294aeaa8a32cd1c3f09cf3?action=new
 
-# In[7]:
+# In[11]:
 
 get_ipython().run_cell_magic(u'HTML', u'', u'<!DOCTYPE html>\n<html>\n    <head>\n        <meta charset="UTF-8">\n        <title>Moving Toward Long-Run Equilibrium</title>\n        <script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=AM_HTMLorMML-full"></script>\n        <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jsxgraph/0.98/jsxgraphcore.js"></script>\n        <script type="text/javascript" src="underscore-min.js"></script>\n        <script type="text/javascript" src="jquery.min.js"></script>\n        <script type="text/javascript" src="jquery-ui.min.js"></script>\n        \n    </head>\n\n    <body>\n        <div style="width: 100%; overflow: hidden;">\n            <div id=\'jxgbox1\' class=\'jxgbox\' style=\'width:500px; height:450px; float:left; border: solid #1f628d 2px;\'></div>        \n        </div>\n        \n        <!--START-BUTTON FOR PASS STATE-->\n        <div id=\'StateGrab\' style=\'width:350px; float:left;\'>        \n            <input class="btn" type="button" value="Get State" onClick="getNotebookState()">\n            <div id="spaceBelow">State:</div>\n        </div>\n        <script type="text/javascript">\n            getNotebookState = function(){\n                state = getInput();\n                statestr = JSON.stringify(state);\n\n                document.getElementById(\'spaceBelow\').innerHTML += \'<br>\'+statestr;\n                var command = "state = " + statestr;\n                console.log(command);\n\n                //Kernel\n                var kernel = IPython.notebook.kernel;\n                kernel.execute(command);\n\n                return statestr;\n            }\n        </script>\n        <!--END-BUTTON FOR PASS STATE-->\n        \n        <script type="text/javascript" src="../../JS/Macro_t1.0.js"></script>\n        <script type="text/javascript" src="MLE_LC2_HOA_1b_graded.js"></script>\n    </body>\n</html>')
 
 
 # ### Grading
 
-# In[8]:
+# In[14]:
 
 import json   
 
@@ -23,18 +23,21 @@ def grader(e, ans):
     answer = json.loads(ans)#['answer']
     #return {'ok': False, 'msg': '%s' % str(answer)}
     
-    deltaAD = dist1D(answer['AD2']['p1X'],answer['AD1']['p1X'])
+    deltaADX = dist1D(answer['AD2']['p1X'],answer['AD1']['p1X'])
+    deltaADY = dist1D(answer['AD2']['p1Y'],answer['AD1']['p1Y'])
     
-    deltaSRAS = dist1D(answer['SRAS2']['p1X'],answer['SRAS1']['p1X'])
-    if abs(deltaAD) > 0.1:
+    deltaSRASX = dist1D(answer['SRAS2']['p1X'],answer['SRAS1']['p1X'])
+    deltaSRASY = dist1D(answer['SRAS2']['p1Y'],answer['SRAS1']['p1Y'])
+    
+    if abs(deltaADX) > 0.1 or abs(deltaADY) > 0.1:
         return {'ok': False, 'msg': 'Incorrect. Please rethink your solution.'}
     
-    if deltaSRAS > 0:
-        if abs(deltaSRAS) > 0.5:
+    if deltaSRASX > 0 and deltaSRASY < 0:
+        if abs(deltaSRASX) > 0.5 or abs(deltaSRASY) > 0.5:
             return {'ok': True, 'msg': 'Good job.'}
-        elif abs(deltaSRAS) < 0.1:
+        elif abs(deltaSRASX) > 0.1 and abs(deltaSRASY) > 0.1:
             return {'ok': False, 'msg': 'Unable to discern size of shift. Try shifting frather from original position.'}
-    elif deltaSRAS < 0:
+    elif deltaSRASX < 0 or deltaSRASY > 0:
         return {'ok': False, 'msg': 'Incorrect. Please rethink your solution.'}
     else:
         return {'ok': False, 'msg': 'Something is wrong with you solution. Have you shifted any of the draggable curves?'}
