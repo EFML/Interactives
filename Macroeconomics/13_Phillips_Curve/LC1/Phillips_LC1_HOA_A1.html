@@ -1,0 +1,106 @@
+
+<!DOCTYPE html>
+<html>
+    <head>
+        <style> 
+            body {
+                margin: 10px;
+                /*padding-top: 40px;*/
+            }
+        </style>
+    </head>
+
+    <body>
+        <!-- COMMENT: Define the jxgbox - aka, where all the interactive graphing will go. -->
+        <div style="width: 100%; overflow: hidden;">
+            <div id='jxgbox1' class='jxgbox' style='width:450px; height:350px; float:left; border: solid #1f628d 2px;'></div>
+        </div>
+        
+        <!-- COMMENT: Buttons below are used to add debugging features to an interactive. Conole logging allows you to see
+            output within a browser's console. Try reading about Chrome's console. -->
+        
+        <!-- <input class="btn" type="button" value="Pass State for Grading" onClick="getInput()">
+        <div id="spaceBelow">State:</div> -->
+
+        
+        <!-- COMMENT: Where our Javascript begins. -->
+        <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jsxgraph/0.98/jsxgraphcore.js"></script>
+        <script type='text/javascript'>
+
+            bboxlimits = [-1.1, 12, 12, -1.1];
+            var board = JXG.JSXGraph.initBoard('jxgbox1', {axis:false, 
+                                                    showCopyright: false,
+                                                    showNavigation: false,
+                                                    zoom: false,
+                                                    pan: false,
+                                                    boundingbox:bboxlimits,
+                                                    grid: false,
+                                                    hasMouseUp: true, 
+            });
+            
+            xaxis = board.create('axis', [[0, 0], [11, 0]], {withLabel: false});
+            yaxis = board.create('axis', [[0, 0], [0, 11]], {withLabel: false});
+
+            //Axes
+            xaxis.removeAllTicks();
+            yaxis.removeAllTicks();
+            var xlabel = board.create('text',[-1,10,"Price<br>Level"],{fixed:true});
+            var ylabel = board.create('text',[9,-0.5,"Real GDP"],{fixed:true});
+            
+            //Define Objects
+            createDragLine = function(point1,point2){
+                return board.create('segment',[point1,point2],{strokeColor:'blue',strokeWidth:'3',name:'AD',
+                                            withLabel:true,label:{offset:[140,-120]}});
+            }
+
+            c1 = [1.0,10.0]
+            c2 = [9.0,2.0]
+            var p1 = board.create('point',c1,{withLabel:false,visible:false});
+            var p2 = board.create('point',c2,{withLabel:false,visible:false});
+            var dragLine = createDragLine(p1,p2);
+
+            var staticLine = board.create('segment',[c1,c2],{strokeColor:'gray',strokeWidth:'1',dash:'1',
+                                                             fixed:true,highlight:false});
+            
+            var f2 = board.create('functiongraph', [function(x){ return 1.0*x +1.0;},1.0,9.0], 
+                                  {strokeColor:'black',strokeWidth:'3',name:'SRAS',withLabel:true,highlight:false,
+                                   label:{offset:[220,200]}});
+            
+            //Standard edX JSinput functions
+            getInput = function(){
+                state = {"dragLine":{'p1X':dragLine.point1.X(),'p2X':dragLine.point2.X(),
+                                     'p1Y':dragLine.point1.Y(),'p2Y':dragLine.point2.Y()},
+                         "staticLine":{'p1X':staticLine.point1.X(),'p2X':staticLine.point2.X(),
+                                       'p1Y':staticLine.point1.Y(),'p2Y':staticLine.point2.Y()}};
+                statestr = JSON.stringify(state);
+                //console.log(statestr);
+
+                return statestr;
+            }
+
+            getState = function(){
+                state = JSON.parse(getInput());
+                statestr = JSON.stringify(state);
+                // console.log(statestr);
+                return statestr;
+            }
+
+            setState = function(statestr){
+                state = JSON.parse(statestr);
+                //console.log(state);
+                //console.log(state["dragLine"]);
+
+                if (state["dragLine"]) {
+                    board.removeObject('AD');
+                    var point1 = [state["dragLine"]["p1X"],state["dragLine"]["p1Y"]];
+                    var point2 = [state["dragLine"]["p2X"],state["dragLine"]["p2Y"]]
+                    dragLine = createDragLine(point1,point2);
+                    board.update();
+                }
+                //alert(statestr);
+                console.debug('State updated successfully from saved.');
+            }
+            
+        </script>
+    </body>
+</html>
