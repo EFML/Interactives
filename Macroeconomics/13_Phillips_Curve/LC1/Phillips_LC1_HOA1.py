@@ -1,33 +1,67 @@
 
 # coding: utf-8
 
-# ###Scenario 1, Question 1
+# ###Phillips Curve
+# https://studio.edge.edx.org/container/i4x://DavidsonCollege/DAP002/vertical/7d71dd2ceda9481ca74c36718c81aa59
 
-# In[2]:
+# In[17]:
 
-get_ipython().run_cell_magic(u'HTML', u'', u'<!DOCTYPE html>\n<html>\n    <head>\n        <style> \n            body {\n                margin: 10px;\n                /*padding-top: 40px;*/\n            }\n        </style>\n    </head>\n\n    <body>\n        \n        <div style="width: 100%; overflow: hidden;">\n            <div id=\'jxgbox1\' class=\'jxgbox\' style=\'width:550px; height:500px; float:left; border: solid #1f628d 2px;\'></div>        \n        </div>\n\n        <input class="btn" type="button" value="Shift in Aggregate Demand" onClick="startAnimation()">\n        <input class="btn" type="button" value="Reset" onClick="resetAnimation()">\n        \n        \n        \n        <!-- COMMENT: Where our Javascript begins. -->\n        <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jsxgraph/0.98/jsxgraphcore.js"></script>\n        \n        <!-- COMMENT: Specific Davidson Next calls built on JSXGraph. Must be loaded after JSXgraph. -->\n        <script type="text/javascript" src="../../JS/Macro_t1.0.js"></script>\n        \n        <script type=\'text/javascript\'>\n            ////////////\n            // BOARD 1\n            ////////////\n            bboxlimits = [-1.5, 12, 12, -1];\n            var brd1 = JXG.JSXGraph.initBoard(\'jxgbox1\', {axis:false, \n                                                    showCopyright: false,\n                                                    showNavigation: false,\n                                                    zoom: false,\n                                                    pan: false,\n                                                    boundingbox:bboxlimits,\n                                                    grid: false,\n                                                    hasMouseUp: true, \n            });\n            \n            xaxis1 = brd1.create(\'axis\', [[0, 0], [11, 0]], {withLabel: false});\n            yaxis1 = brd1.create(\'axis\', [[0, 0], [0, 11]], {withLabel: false});\n\n            //Axes\n            xaxis1.removeAllTicks();\n            yaxis1.removeAllTicks();\n            var xlabel1 = brd1.create(\'text\',[-1.2,10,"PL"],{fixed:true});\n            var ylabel1 = brd1.create(\'text\',[9,-0.5,"RGDP"],{fixed:true});\n            \n            //Supply Line 1 - fixed\n            var Supply = createSupply(brd1,{name:\'SRAS\',color:\'Gray\'});\n            Supply.setAttribute({\'fixed\':true,\'highlight\':false});\n            \n            //Demand Line 1 - fixed\n            var AD1 = createDemand(brd1,{name:\'AD<sub>1</sub>\',color:\'Gray\'});\n            AD1.setAttribute({\'dash\':1,\'fixed\':true,\'highlight\':false});\n            \n            //Demand Line 2 - moveable\n            var AD2 = createDemand(brd1,{name:\'AD<sub>2</sub>\',color:\'Orange\'});\n            AD2.setAttribute({withLabel:false});\n                        \n            ////////////\n            // Intersection Box 1\n            ////////////\n            var iSDfix = brd1.create(\'intersection\', [AD1, Supply, 0], {visible:false}); \n            var iS2D = brd1.create(\'intersection\', [AD2, Supply, 0], {visible:false});\n            \n            ////////////\n            // Dashes for fixed Line\n            ////////////\n            var dashB1 = createDashedLines2Axis(brd1,iSDfix,\n                                          {fixed:true,\n                                           withLabel:true,\n                                           xlabel:\'\',\n                                           ylabel:\'PL<sub>1</sub>\',\n                                           color:\'Gray\'});\n        \n            ////////////\n            // Dashes for draggable Moveable Line\n            ////////////\n            var dashS2 = createDashedLines2Axis(brd1,iS2D,\n                                          {fixed:false,\n                                           withLabel:false,\n                                           xlabel:\'\',\n                                           ylabel:\'PL<sub>2</sub>\',\n                                           color:\'Orange\'});\n            \n\n            \n        \n            //////////////////\n            // Interactivity\n            //////////////////\n            brd1.on(\'move\', function() {      \n                dashS2.Y1.moveTo([0, iS2D.Y()]);\n                dashS2.Y2.moveTo([iS2D.X(), iS2D.Y()]);\n\n                dashS2.X1.moveTo([iS2D.X(), 0]);\n                dashS2.X2.moveTo([iS2D.X(), iS2D.Y()]);\n            });\n            \n            brd1.on(\'mousedown\', function() {      \n                AD2.setAttribute({withLabel:true});\n                dashS2.Y1.setAttribute({withLabel:true});\n                brd1.update()\n            });\n            \n            //Animation\n            startAnimation = function() {\n                //Initial line coords\n                c1 = [2.0,9.5];\n                c2 = [9.5,2.0];\n                \n                AD2.setAttribute({withLabel:true});\n                dashS2.Y1.setAttribute({withLabel:true});\n                \n                //Animated Curve\n                AD2.point1.moveTo([c1[0]+1,c1[1]+1],1000);\n                AD2.point2.moveTo([c2[0]+1,c2[1]+1],1000);\n                \n                //Dashed Lines\n                dashS2.Y1.moveTo([0, iS2D.Y()+1],1000);\n                dashS2.Y2.moveTo([iS2D.X()+1, iS2D.Y()+1],1000);\n\n                dashS2.X1.moveTo([iS2D.X()+1, 0],1000);\n                dashS2.X2.moveTo([iS2D.X()+1, iS2D.Y()+1],1000);\n                \n                brd1.update();                \n            };\n            \n            resetAnimation = function() {\n                //Initial line coords\n                var c1 = [2.0,9.5];\n                var c2 = [9.5,2.0];\n                \n                //Animated Curve\n                AD2.point1.moveTo(c1,10);\n                AD2.point2.moveTo(c2,10);\n                AD2.setAttribute({withLabel:false});\n                \n                \n                brd1.update();\n\n                //Dashed Lines                \n                dashS2.Y1.moveTo([0, iS2D.Y()-1]);\n                dashS2.Y2.moveTo([iS2D.X()-1, iS2D.Y()-1]);\n\n                dashS2.X1.moveTo([iS2D.X()-1, 0]);\n                dashS2.X2.moveTo([iS2D.X()-1, iS2D.Y()-1]);\n                dashS2.Y1.setAttribute({withLabel:false});\n                \n                brd1.update();\n            };\n            \n            \n            //Standard edX JSinput functions\n            getInput = function(){\n                state = {};\n                statestr = JSON.stringify(state);\n                console.log(statestr)\n                \n                //IPython Notebook Considerations\n                document.getElementById(\'spaceBelow\').innerHTML += \'<br>\'+statestr;\n                var command = "state = \'" + statestr + "\'";\n                console.log(command);\n\n                //Kernel\n                var kernel = IPython.notebook.kernel;\n                kernel.execute(command);\n\n                return statestr;\n            }\n\n            getState = function(){\n                state = {\'input\': JSON.parse(getInput())};\n                statestr = JSON.stringify(state);\n                return statestr\n            }\n\n            setState = function(statestr){\n                $(\'#msg\').html(\'setstate \' + statestr);\n                state = JSON.parse(statestr);\n                console.log(statestr);\n                console.debug(\'State updated successfully from saved.\');\n            }\n            \n            \n        </script>\n    </body>\n</html>')
+import sys
+import re
+sys.path.append('../../Python')
+
+import templateGenerator
+reload(templateGenerator)
+tGen = templateGenerator.templateGenerator(course_id='DavidsonCollege/DAP002/3T2014',
+                                           Title='Phillips Curve: LC1 HOA #1',
+                                           MacroJS='../../JS/Macro_1Board.js',
+                                           JS='Phillips_LC1_HOA1.js',
+                                           OutputFile='Phillips_LC1_HOA1.html',
+                                           studioPaths=False 
+                                          )
+
+
+# ### HTML Interactive Cell
+
+# In[24]:
+
+get_ipython().run_cell_magic(u'HTML', u'', u'<!DOCTYPE html>\n<html>\n    <head>\n        <meta charset="UTF-8">\n        <title></title>\n        <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jsxgraph/0.98/jsxgraphcore.js"></script>\n        \n    </head>\n\n    <body>\n        <div style="width: 100%; overflow: hidden;">\n            <div id=\'jxgbox1\' class=\'jxgbox\' style=\'width:500px; height:450px; float:left; border: solid #1f628d 2px;\'></div>        \n        </div>\n        \n        <ul class="stack button-group">\n            <li><input class="btn" type="button" value="Reset" onClick="resetAnimation()"></li>\n        </ul>\n        \n        <!--START-BUTTON FOR PASS STATE-->\n        <div id=\'StateGrab\' style=\'width:350px; float:left;\'>        \n            <input class="btn" type="button" value="Get State" onClick="getNotebookState()">\n            <div id="spaceBelow">State:</div>\n        </div>\n        <script type="text/javascript">\n            getNotebookState = function(){\n                state = getGrade();\n                statestr = JSON.stringify(state);\n\n                document.getElementById(\'spaceBelow\').innerHTML += \'<br>\'+statestr;\n                var command = "state = " + statestr;\n                console.log(command);\n\n                //Kernel\n                var kernel = IPython.notebook.kernel;\n                kernel.execute(command);\n\n                return statestr;\n            }\n        </script>\n        <!--END-BUTTON FOR PASS STATE-->\n        \n        <script type="text/javascript" src="../../JS/jschannel.js"></script>\n        <script type="text/javascript" src="../../JS/edxintegration.js"></script>\n        <script type="text/javascript" src="../../JS/Macro_1Board.js"></script>\n        <script type="text/javascript" src="Phillips_LC1_HOA1.js"></script>\n    </body>\n</html>')
+
+
+# ### Python Grading
+
+# In[19]:
+
+import json
+
+def grader(e, ans):
+    answer = json.loads(ans)#['answer']
+    #return {'ok': False, 'msg': '%s' % str(answer)}
+
+    def dist1D(xf,xi):
+        #print xf,xi,xf-xi
+        return xf-xi
+
+    delta = dist1D(answer['dragLine']['p1Y'],answer['staticLine']['p1Y'])
+    if delta > 0:
+        if delta > 0.5:
+            return {'ok': True, 'msg': 'Good job.'}
+    elif delta < 0:
+        return {'ok': False, 'msg': 'Please rethink your solution.'}
+    else:
+        return {'ok': False, 'msg': 'Something wrong.'}
+    
+print grader("huh?",state)
 
 
 # ### Generate HTML File
 
-# In[40]:
+# In[20]:
 
-import re
-
-#tmpfile = _i86
-index_htmlinput = [ i for i,x in enumerate(_ih) if "run_cell_magic(u'HTML'" in x and "re.sub('%%HTML','',tmpfile)" not in x]
-
-tmpfile = eval('_i%d' % int(index_htmlinput[-1]))
-tmpfile = re.sub('%%HTML','',tmpfile)
-tmpfile = re.sub(r'<!--START-BUTTON FOR PASS STATE(.*?)END-BUTTON FOR PASS STATE-->','',tmpfile,flags=re.DOTALL)
-tmpfile = re.sub(r'//START-PASS STATE TO IPYTHON KERNEL(.*?)//END-PASS STATE TO IPYTHON KERNEL','',tmpfile,flags=re.DOTALL)
-
-filename = 'Phillips_LC1_HOA1'
-html_filename = '%s.html' % filename
-
-with open(html_filename,'w') as hfile:
-    hfile.write(tmpfile)
-print tmpfile
+# reload(templateGenerator)
+inputCell = eval('_i%d' % tGen.findIPythonHTMLCell(_ih))
+htmlFile = tGen.scrapeHTMLfromIPython(inputCell)
+tGen.writeOutputFile(htmlFile)
 
 
 # In[ ]:

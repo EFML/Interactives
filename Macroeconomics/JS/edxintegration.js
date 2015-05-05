@@ -22,7 +22,7 @@ function createChannel(getGrade, getState, setState) {
   else {
     console.log(msg);
   }
-  console.log('Hello',channel);
+  //console.log('Hello',channel);
 }
 
 /*

@@ -73,8 +73,6 @@ var LRAS = brd1.create('segment',[[7.0,11.0],[7.0,0.0]],
                         'label':{'offset':[-15,200]}});
 var labelLRAS = brd1.create('text',[6.7,-0.4,"rY<sub>F</sub>"],{fixed:true});
 
-
-
 //////////////////
 // Interactivity
 //////////////////
@@ -99,7 +97,7 @@ brd1.on('mousedown', function() {
 //Standard edX JSinput functions
 setState = function(transaction, statestr){
     state = JSON.parse(statestr);
-    // console.log(statestr);
+    console.log(statestr);
     //console.log(state["dragLine"]);
 
     if (state["AD2"] && state["SRAS2"]) {
@@ -123,7 +121,7 @@ setState = function(transaction, statestr){
 getState = function(){
     var state = JSON.parse(getGrade());
     statestr = JSON.stringify(state);
-    console.log(statestr);
+    // console.log(statestr);
     return statestr;
 }
 

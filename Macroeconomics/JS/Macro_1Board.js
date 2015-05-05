@@ -5,7 +5,7 @@ JXG.Options.segment.strokeWidth = '5';
 JXG.Options.text.fontSize = 16;
 
 //Custom Parameters
-labelOffset = {'X':160,'Y':150};
+labelOffset = {'X':150,'Y':140};
 
 createSupply = function(board,options) {
     var name = options.name || '';
