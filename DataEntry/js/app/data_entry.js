@@ -60,7 +60,7 @@ var DataEntry = (function($, _, JXG, undefined) {
     }
 
     function resizeBox(){
-        var boardWidth = 0.58*$('.container').width();
+        var boardWidth = $('.container').width();
         board.needsFullUpdate = true;
         board.resizeContainer(boardWidth, board.canvasHeight);
         board.setBoundingBox(boundingBox);
@@ -157,7 +157,7 @@ var DataEntry = (function($, _, JXG, undefined) {
         table.htmlTable = new Handsontable($('#table-' + table.id).get(0), {
             data: table.data,
             colHeaders: table.headers,
-            height: 349,
+            height: 280,
             readOnly: table.readOnly
         });
         // Bind button event listeners
