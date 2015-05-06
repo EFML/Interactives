@@ -1,0 +1,121 @@
+
+
+<!DOCTYPE html>
+<html>
+    <head>
+        <style> 
+            body {
+                margin: 10px;
+                /*padding-top: 40px;*/
+            }
+        </style>
+    </head>
+
+    <body>
+        
+        
+        <div style="width: 100%; overflow: hidden;">
+            <div id='jxgbox1' class='jxgbox' style='width:350px; height:300px; float:left; border: solid #1f628d 2px;'></div>        
+            <div id='jxgbox2' class='jxgbox' style='width:350px; height:300px; margin-left: 375px; border: solid #1f628d 2px;'></div> 
+        </div>
+        
+        <input class="btn" type="button" value="Pass State for Grading" onClick="getInput()">
+        <div id="spaceBelow">State:</div>
+
+        
+        <!-- COMMENT: Where our Javascript begins. -->
+        <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jsxgraph/0.98/jsxgraphcore.js"></script>
+        <script type='text/javascript'>
+
+            
+            
+            ////////////
+            // BOX 2
+            ////////////
+
+            var brd2 = JXG.JSXGraph.initBoard('jxgbox2', {axis:false, 
+                                                    showCopyright: false,
+                                                    showNavigation: false,
+                                                    zoom: false,
+                                                    pan: false,
+                                                    boundingbox:bboxlimits,
+                                                    grid: false,
+                                                    hasMouseUp: true, 
+            });
+            
+            xaxis = brd2.create('axis', [[0, 0], [11, 0]], {withLabel: false});
+            yaxis = brd2.create('axis', [[0, 0], [0, 11]], {withLabel: false});
+
+            //Axes
+            xaxis.removeAllTicks();
+            yaxis.removeAllTicks();
+            var xlabel = brd2.create('text',[-2,10,"Real Interest Rate"],{fixed:true});
+            var ylabel = brd2.create('text',[4,-0.5,"Quantity of Loanable Funds"],{fixed:true});
+            
+            //Define Objects
+            createDragLine = function(board,point1,point2,gname,color,[xo,yo]){
+                return board.create('segment',[point1,point2],{strokeColor:color,strokeWidth:'3',name:gname,
+                                            withLabel:true,label:{offset:[xo,yo]}});
+            }
+
+            //var c1 = [1.0,10.0];
+            //var c2 = [9.0,2.0];
+            //var D1 = brd1.create('point',c1,{withLabel:false,visible:false});
+            //var D2 = brd1.create('point',c2,{withLabel:false,visible:false});
+            //var Demand = createDragLine(brd1,D1,D2,'D','Blue',[-100,100]);
+            
+            //var c1 = [1.0,2.0];
+            //var c2 = [9.0,10.0];
+            //var S1 = brd1.create('point',c1,{withLabel:false,visible:false});
+            //var S2 = brd1.create('point',c2,{withLabel:false,visible:false});
+            //var Supply = createDragLine(brd1,S1,S2,'S',[-100,-100],'Orange');
+            
+            //var c1 = [1.0,10.0];
+            //var c2 = [9.0,2.0];
+            //var ID1 = brd2.create('point',c1,{withLabel:false,visible:false});
+            //var ID2 = brd2.create('point',c2,{withLabel:false,visible:false});
+            //var Invest = createDragLine(brd2,ID1,ID2,'Invest Demand',[-100,100],'Crimson');
+            
+            //var i23 = brd1.create('intersection', [Supply, Demand, 0], {visible:true});
+
+
+            
+            
+            
+            //Standard edX JSinput functions
+            getInput = function(){
+                state = {"dragLine":{'p1X':dragLine.point1.X(),'p2X':dragLine.point2.X(),
+                                     'p1Y':dragLine.point1.Y(),'p2Y':dragLine.point2.Y()},
+                         "staticLine":{'p1X':staticLine.point1.X(),'p2X':staticLine.point2.X(),
+                                       'p1Y':staticLine.point1.Y(),'p2Y':staticLine.point2.Y()}};
+                statestr = JSON.stringify(state);
+                console.log(statestr)
+                
+                //IPython Notebook Considerations
+                document.getElementById('spaceBelow').innerHTML += '<br>'+statestr;
+                var command = "state = '" + statestr + "'";
+                console.log(command);
+
+                //Kernel
+                var kernel = IPython.notebook.kernel;
+                kernel.execute(command);
+
+                return statestr;
+            }
+
+            getState = function(){
+                state = {'input': JSON.parse(getInput())};
+                statestr = JSON.stringify(state);
+                return statestr
+            }
+
+            setState = function(statestr){
+                $('#msg').html('setstate ' + statestr);
+                state = JSON.parse(statestr);
+                console.log(statestr);
+                console.debug('State updated successfully from saved.');
+            }
+            
+        </script>
+    </body>
+</html>
