@@ -2,23 +2,23 @@
 JXG.Options.point.showInfobox = false;
 JXG.Options.segment.strokeColor = 'Pink';
 JXG.Options.segment.strokeWidth = '5';
-JXG.Options.text.fontSize = 16;
+JXG.Options.text.fontSize = 15;
 JXG.Options.text.highlight = false;
 
 //Bounding Box Limits
-var OneBoardDefaultBBox = [-1.5, 12, 12, -1.0];
+var ThreeBoardDefaultBBox = [-1.75, 12, 12, -2.0];
 
 //Custom Parameters
-labelOffset = {'X':150,'Y':140};
+labelOffset = {'X':70,'Y':70};
 
 createBoard = function(brdName,options) {
     var xname = options.xname || 'x-label';
-    var xpos = options.xpos || [9,-0.5];
+    var xpos = options.xpos || [8,-1];
 
     var yname = options.yname || 'y-label';
-    var ypos = options.ypos || [-1.2,10];
+    var ypos = options.ypos || [-1.5,10];
 
-    var bboxlimits = options.bboxlimits || OneBoardDefaultBBox;
+    var bboxlimits = options.bboxlimits || ThreeBoardDefaultBBox;
     var grid = options.grid || false;
 
     var board = JXG.JSXGraph.initBoard(brdName, {axis:false, 
@@ -37,42 +37,81 @@ createBoard = function(brdName,options) {
     //Axes
     xaxis.removeAllTicks();
     yaxis.removeAllTicks();
-    var xlabel = board.create('text',[xpos[0],xpos[1],xname],{fixed:true,highlight:false});
-    var ylabel = board.create('text',[ypos[0],ypos[1],yname],{fixed:true,highlight:false});
+    var xlabel = board.create('text',[xpos[0],xpos[1],xname],{fixed:true});
+    var ylabel = board.create('text',[ypos[0],ypos[1],yname],{fixed:true});
 
     return board;
 }
 
-createSupply = function(board,options) {
-    var name = options.name || '';
-    var color = options.color || JXG.Options.segment.strokeColor;
-    var c1,c2,S1,S2,N;
 
-    c1 = [2.0,2.0];
-    c2 = [9.5,9.5];
-    S1 = board.create('point',c1,{withLabel:false,visible:false});
-    S2 = board.create('point',c2,{withLabel:false,visible:false});
-    //N = board.create('text',[S2.X(),S2.Y(),name]);
-    return board.create('segment',[S1,S2],{'strokeColor':color,
-                                           'name':name,'withLabel':true,
-                                           'label':{'offset':[labelOffset.X,labelOffset.Y]}
-                                          });
+lineCoords = function(ltype) {
+    var ltype = ltype || 'Supply';
+    var c1,c2,offset;
+    if (ltype == 'Demand') {
+        c1 = [2.0,9.5];
+        c2 = [9.5,2.0];
+        offset = [labelOffset.X,-labelOffset.Y];
+    }
+    else if (ltype =='Supply') {
+        c1 = [2.0,2.0];
+        c2 = [9.5,9.5];
+        offset = [labelOffset.X,labelOffset.Y];
+    }
+    else if (ltype =='Vertical') {
+        c1 = [5.75,1.0];
+        c2 = [5.75,11.0];
+        offset = [0,labelOffset.Y+25]
+    }
+
+    return [c1,c2,offset];
 }
 
-createDemand = function(board,options) {
+
+createLine = function(board,options) {
     var name = options.name || '';
     var color = options.color || JXG.Options.segment.strokeColor;
-    var c1,c2,D1,D2;
+    var ltype = options.ltype || 'Supply';
+    var fixed = options.type || true;
+    var c1,c2,D1,D2,offset;
 
-    c1 = [2.0,9.5];
-    c2 = [9.5,2.0];
+    var tmp = lineCoords(ltype);
+    c1 = tmp[0];
+    c2 = tmp[1];
+    offset = tmp[2];
+
     D1 = board.create('point',c1,{withLabel:false,visible:false});
     D2 = board.create('point',c2,{withLabel:false,visible:false});
     return board.create('segment',[D1,D2],{'strokeColor':color,
                                            'name':name,'withLabel':true,
-                                           'label':{'offset':[labelOffset.X,-labelOffset.Y]}
+                                           'label':{'offset':offset}
                                           });
 }
+
+
+createTransformLine = function(board,options) {
+    var name = options.name || '';
+    var color = options.color || JXG.Options.segment.strokeColor;
+    var ltype = options.ltype || 'Supply';
+    var fixed = options.type || true;
+    var transformList = options.transformList || [undefined];
+    var c1,c2,D1,D2,offset;
+
+    var tmp = lineCoords(ltype);
+    c1 = tmp[0];
+    c2 = tmp[1];
+    offset = tmp[2];
+
+    //Supply Board 1 - with slider transformation
+    var s1B1 = board.create('point',c1,{visible:false});
+    var s2B1 = board.create('point',c2,{visible:false});
+    var pS1 = board.create('point',[s1B1,transformList],{visible:false});
+    var pS2 = board.create('point',[s2B1,transformList],{visible:false});
+    return board.create('segment',[pS1,pS2],{withLabel:true,highlight:false,'name':name,
+                                             color:color,'label':{'offset':offset}
+                                            });
+}
+
+
 
 
 /////////////////////////////////////////////////////////////
@@ -88,7 +127,7 @@ createDashedLines2Axis = function(board,intersection,options) {
     var Y1,Y2,YLine,X1,X2,XLine,obj={};
     var Y1 = board.create('point',[0, intersection.Y()],
                      {'withLabel':withLabel,'name':ylabel,'visible':true,'size':'0.5',
-                     'strokeColor':'Gray','label':{'offset':[-35,-2]}});
+                     'strokeColor':'Gray','label':{'offset':[4,-10]}});
 
     var Y2 = board.create('point',[intersection.X(), intersection.Y()],
                      {'withLabel':false,'visible':false,'size':'0.0','strokeColor':''});
@@ -98,7 +137,7 @@ createDashedLines2Axis = function(board,intersection,options) {
 
     var X1 = board.create('point',[intersection.X(), 0],
                      {'withLabel':withLabel,'name':xlabel,'visible':true,'size':'0.5',
-                     'strokeColor':'Gray','label':{'offset':[-5,-15]}});
+                     'strokeColor':'Gray','label':{'offset':[2,10]}});
 
     var X2 = board.create('point',[intersection.X(), intersection.Y()],
                      {'withLabel':false,'visible':false,'size':'0.0','strokeColor':''});
