@@ -242,7 +242,7 @@ var DataEntry = (function($, _, JXG, undefined) {
 
         for (i = 0; i < table.data.length; i++) {
             row = table.data[i];
-            board.create('point', row, {
+            board.create('point', [row[0], row[1]], {
                 fixed: true,
                 name: '',
                 strokeColor: table.dataPoints.color,
