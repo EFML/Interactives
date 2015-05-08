@@ -20,7 +20,7 @@ var DataEntry = (function($, _, JXG, undefined) {
         render: true
     };
 
-    var tables = config.tables,
+    var tables = [],
         boundingBox = [-11.0, 11.0, 11.0, -11.0],
         board, dialog,
         precision = 3;
@@ -46,6 +46,9 @@ var DataEntry = (function($, _, JXG, undefined) {
         // Check version of JSXGraph:
         // Current: 0.99.3
         console.log('JSXGraph version: ' + JXG.version);
+
+        // Deep clone config.tables
+        $.extend(true, tables, config.tables);
 
         $(window).on('resize', resizeBox);
 
@@ -137,7 +140,7 @@ var DataEntry = (function($, _, JXG, undefined) {
     }
 
     function createTabContent(container, table) {
-        var plotTableBt, fitLineBtn, clearAllBtn, htmlFragment;
+        var plotTableBt, fitLineBtn, resetBtn, htmlFragment;
 
         htmlFragment = [
             '<div class="half-line">',
@@ -147,7 +150,7 @@ var DataEntry = (function($, _, JXG, undefined) {
             '<div class="full-line">',
                 '<button class="button" id="plot-table-' + table.id + '">Plot Table</button>',
                 '<button class="button" id="fit-line-' + table.id + '" disabled>Fit Line</button>',
-                '<button class="button" id="clear-all-' + table.id + '">Clear All</button>',
+                '<button class="button" id="reset-' + table.id + '">Reset</button>',
             '</div>',
             '<div class="half-line" />'
             ].join('');
@@ -171,21 +174,21 @@ var DataEntry = (function($, _, JXG, undefined) {
             fitLine(table);
         });
 
-        clearAllBtn = $('#clear-all-' + table.id);
-        clearAllBtn.on('click', function() {
+        resetBtn = $('#reset-' + table.id);
+        resetBtn.on('click', function() {
             openDialog();
         });
     }
 
     function createDialog() {
         dialog = $('#dialog-form')
-            .append('<p>These items will be permanently deleted and cannot be recovered. Are you sure?</p>')
+            .append('<p>The items you entered will be permanently deleted and cannot be recovered. Are you sure?</p>')
             .dialog({
                 autoOpen: false,
                 title: 'Warning',
                 modal: true,
                 buttons: {
-                    'OK': dialogClearAll,
+                    'OK': dialogReset,
                     'Cancel': dialogCancel
                 }
             });
@@ -199,8 +202,8 @@ var DataEntry = (function($, _, JXG, undefined) {
         dialog.dialog('close');
     }
 
-    function dialogClearAll() {
-        clearAll();
+    function dialogReset() {
+        reset();
         dialog.dialog('close');
     }
 
@@ -317,40 +320,28 @@ var DataEntry = (function($, _, JXG, undefined) {
         createBoard();
     }
 
-    function clearCells() {
-        var i, j, row, data, tableIndex;
+    function getActiveTable() {
+        return tables.length > 1 ? $("#table-tabs").tabs('option', 'active') : 0;
+    }
 
-        if (tables.length > 1) {
-            // Get active tab index
-            tableIndex = $("#table-tabs").tabs('option', 'active');
-        }
-        else {
-            tableIndex = 0;
-        }
+    function resetCellsBoard() {
+        var data, tableIndex = getActiveTable();
+
+        // Deep clone relevant table
+        $.extend(true, tables[tableIndex], config.tables[tableIndex]);
 
         data = tables[tableIndex].data;
-        
 
-        for (i = 0; i < data.length; i++) {
-            row = data[i]
-            for (j = 0; j < row.length; j++) {
-                row[j] = '';
-            }
-        }
         // Update table display
         tables[tableIndex].htmlTable.loadData(data);
+
+        if (config.render) {
+            plotTable(tables[tableIndex]);
+        }
     }
 
     function clearRegLineEq() {
-        var table, tableIndex;
-        
-        if (tables.length > 1) {
-            // Get active tab index
-            tableIndex = $("#table-tabs").tabs('option', 'active');
-        }
-        else {
-            tableIndex = 0;
-        }
+        var table, tableIndex = getActiveTable();
 
         table = tables[tableIndex];
 
@@ -358,10 +349,10 @@ var DataEntry = (function($, _, JXG, undefined) {
         $('#reg-line-eq-' + table.id).html('');
     }
 
-    function clearAll() {
+    function reset() {
     	clearBoard();
-        clearCells();
         clearRegLineEq();
+        resetCellsBoard();
     }
 
     return {
