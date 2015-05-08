@@ -109,7 +109,14 @@ var DataEntry = (function($, _, JXG, undefined) {
     function setTableIds() {
         _.each(tables, function(table) {
              table.id = _.uniqueId();
-        });   
+             // Temporary, remove when HTML will have been changed
+            if (_.isUndefined(table.xColumn)) {
+                table.xColumn = 0;
+            }
+            if (_.isUndefined(table.yColumn)) {
+                table.yColumn = 1;
+            }
+        });
     }
 
     function createTabPanel() {
@@ -297,6 +304,11 @@ var DataEntry = (function($, _, JXG, undefined) {
     function fitLine(table) {
         var f, m, b, vals, xVals, yVals, regLineEq;
 
+        clearBoard();
+        setBoundingBox(table);
+        createBoard(table);
+        plotData(table);
+
         regLineEq = $('#reg-line-eq-' + table.id);
         vals = getXYVals(table);
         xVals = vals.xVals;
@@ -428,9 +440,10 @@ var DataEntry = (function($, _, JXG, undefined) {
     }
 
     function reset() {
-    	clearBoard();
+    	// clearBoard();
         clearRegLineEq();
         resetCellsBoard();
+        plotTable(tables[getActiveTable()]);
     }
 
     return {
