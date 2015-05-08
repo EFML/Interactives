@@ -26,6 +26,8 @@
               [16.0, 7.4], [17.0, 12.0], [18.0, 6.7], [19.0, 3.4], [20.0, 12.4]
             ],
             headers: ['Elapsed time (s)', 'Distance traveled (m)'],
+            xColumn: 0,
+            yColumn: 1,
             dataPoints: {
             	color: 'Crimson',
             },
@@ -43,7 +45,8 @@
     <div class="container">
       <div class="control-panel"></div>
       <div class="jxgbox" id="jxgbox"></div>
-      <div id="dialog-form"></div>
+      <div id="choose-columns-dialog-form"></div>
+      <div id="reset-dialog-form"></div>
     </div>
   </body>
 </html>

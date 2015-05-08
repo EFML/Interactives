@@ -8,6 +8,8 @@ var DataEntry = (function($, _, JXG, undefined) {
               		[0.0, 0.0], [1.0, 1.0], [2.0, 3.0], [3.0, 5.0], [4.0, 7.0], [5.0, 10.0]
             	],
             	headers: ['x', 'y'],
+                xColumn: 0,
+                yColumn: 1,
             	dataPoints: {
             		color: 'Crimson',
             	},
@@ -22,7 +24,7 @@ var DataEntry = (function($, _, JXG, undefined) {
 
     var tables = [],
         boundingBox = [-11.0, 11.0, 11.0, -11.0],
-        board, dialog,
+        board, chooseColumnsDialog, resetDialog,
         precision = 3;
 
     init();
@@ -54,8 +56,8 @@ var DataEntry = (function($, _, JXG, undefined) {
 
         setTableIds();
         createTabPanel();
-        createBoard();
-        createDialog();
+        createBoard(tables[0]);
+        createResetDialog();
 
         if (config.render) {
             plotTable(tables[0]);
@@ -70,7 +72,7 @@ var DataEntry = (function($, _, JXG, undefined) {
         board.update();
     }
 
-    function createBoard() {
+    function createBoard(table) {
         var xAxis, yAxis, xAxisLabel, yAxisLabel, xOffset1, yOffset1, xOffset2, yOffset2;
         board = JXG.JSXGraph.initBoard('jxgbox', {
             boundingbox: boundingBox,
@@ -94,11 +96,11 @@ var DataEntry = (function($, _, JXG, undefined) {
         xOffset2 = Math.abs(boundingBox[2] - boundingBox[0]) / 50.0;
         yOffset2 = Math.abs(boundingBox[3] - boundingBox[1]) / 50.0;
 
-        xAxisLabel = board.create('text', [boundingBox[2] - xOffset1, yOffset1, tables[0].headers[0]], {
+        xAxisLabel = board.create('text', [boundingBox[2] - xOffset1, yOffset1, table.headers[table.xColumn]], {
             anchorX: 'right',
             fixed:true
         });
-        yAxisLabel = board.create('text', [xOffset2, boundingBox[1] - yOffset2, tables[0].headers[1]], {
+        yAxisLabel = board.create('text', [xOffset2, boundingBox[1] - yOffset2, table.headers[table.yColumn]], {
             anchorX: 'left',
             fixed:true
         });
@@ -140,7 +142,7 @@ var DataEntry = (function($, _, JXG, undefined) {
     }
 
     function createTabContent(container, table) {
-        var plotTableBt, fitLineBtn, resetBtn, htmlFragment;
+        var chooseColumnsBt, plotTableBt, fitLineBtn, resetBtn, htmlFragment;
 
         htmlFragment = [
             '<div class="half-line">',
@@ -148,6 +150,7 @@ var DataEntry = (function($, _, JXG, undefined) {
             '</div>',
             '<div class="half-line" id="reg-line-eq-' + table.id + '" />',
             '<div class="full-line">',
+                '<button class="button" id="choose-columns-' + table.id + '">Choose Columns</button>',
                 '<button class="button" id="plot-table-' + table.id + '">Plot Table</button>',
                 '<button class="button" id="fit-line-' + table.id + '" disabled>Fit Line</button>',
                 '<button class="button" id="reset-' + table.id + '">Reset</button>',
@@ -164,6 +167,11 @@ var DataEntry = (function($, _, JXG, undefined) {
             readOnly: table.readOnly
         });
         // Bind button event listeners
+        chooseColumnsBt = $('#choose-columns-' + table.id);
+        chooseColumnsBt.on('click', function() {
+            openChooseColumnsDialog();
+        });
+
         plotTableBt = $('#plot-table-' + table.id);
         plotTableBt.on('click', function() {
             plotTable(table);
@@ -176,42 +184,112 @@ var DataEntry = (function($, _, JXG, undefined) {
 
         resetBtn = $('#reset-' + table.id);
         resetBtn.on('click', function() {
-            openDialog();
+            openResetDialog();
         });
     }
 
-    function createDialog() {
-        dialog = $('#dialog-form')
+    function createChooseColumnsDialog() {
+        var index = getActiveTable(),
+            optionsHtmlFragment = '', htmlFragment;
+
+        _.each(tables[index].headers, function(header) {
+            optionsHtmlFragment += '<option>' + header + '</option>';
+        });
+
+        htmlFragment = [
+            '<label class="quarter-line" for="x-column">Select a column for x</label>',
+            '<select class="full-line" name="x-column" id="x-column">',
+                optionsHtmlFragment,
+            '</select>',
+            '<p></p>',
+            '<label for="y-column">Select a column for y</label>',
+            '<select name="y-column" id="y-column">',
+                optionsHtmlFragment,
+            '</select>'
+        ].join('');
+
+        chooseColumnsDialog = $('#choose-columns-dialog-form').empty();
+
+        chooseColumnsDialog
+            .append(htmlFragment)
+            .dialog({
+                autoOpen: false,
+                title: 'Warning',
+                modal: true,
+                width: 350,
+                resizable: false,
+                buttons: {
+                    'OK': okChooseColumnsDialog,
+                    'Cancel': cancelChooseColumnsDialog
+                }
+            });
+
+        $("#x-column").selectmenu({
+            width: 300,
+        });
+
+        $("#y-column").selectmenu({
+            width: 300,
+        });
+
+        $("#x-column").val(tables[index].headers[tables[index].xColumn]);
+        $("#x-column").selectmenu("refresh");
+
+        $("#y-column").val(tables[index].headers[tables[index].yColumn]);
+        $("#y-column").selectmenu("refresh");
+    }
+
+    function createResetDialog() {
+        resetDialog = $('#reset-dialog-form')
             .append('<p>The items you entered will be permanently deleted and cannot be recovered. Are you sure?</p>')
             .dialog({
                 autoOpen: false,
                 title: 'Warning',
                 modal: true,
                 buttons: {
-                    'OK': dialogReset,
-                    'Cancel': dialogCancel
+                    'OK': okResetDialog,
+                    'Cancel': cancelResetDialog
                 }
             });
     }
 
-    function openDialog() {
-        dialog.dialog('open');
+    function openChooseColumnsDialog() {
+        createChooseColumnsDialog();
+        chooseColumnsDialog.dialog('open');
     }
 
-    function dialogCancel() {
-        dialog.dialog('close');
+    function okChooseColumnsDialog() {
+        var xColumnSelectedItem = $("#x-column").val(),
+            yColumnSelectedItem = $("#y-column").val(),
+            index = getActiveTable();
+
+        tables[index].xColumn = tables[index].headers.indexOf(xColumnSelectedItem);
+        tables[index].yColumn = tables[index].headers.indexOf(yColumnSelectedItem);
+        chooseColumnsDialog.dialog('close');
     }
 
-    function dialogReset() {
+    function cancelChooseColumnsDialog() {
+        chooseColumnsDialog.dialog('close');
+    }
+
+    function openResetDialog() {
+        resetDialog.dialog('open');
+    }
+
+    function okResetDialog() {
         reset();
-        dialog.dialog('close');
+        resetDialog.dialog('close');
+    }
+
+    function cancelResetDialog() {
+        resetDialog.dialog('close');
     }
 
     function plotTable(table) {
         var fitLineBtn = $('#fit-line-' + table.id);
         clearBoard();
-        setBoundingBox(table.data);
-        createBoard();
+        setBoundingBox(table);
+        createBoard(table);
         plotData(table);
         fitLineBtn.attr('disabled', false);
     }
@@ -220,7 +298,7 @@ var DataEntry = (function($, _, JXG, undefined) {
         var f, m, b, vals, xVals, yVals, regLineEq;
 
         regLineEq = $('#reg-line-eq-' + table.id);
-        vals = getXYVals(table.data);
+        vals = getXYVals(table);
         xVals = vals.xVals;
         yVals = vals.yVals;
 
@@ -245,7 +323,7 @@ var DataEntry = (function($, _, JXG, undefined) {
 
         for (i = 0; i < table.data.length; i++) {
             row = table.data[i];
-            board.create('point', [row[0], row[1]], {
+            board.create('point', [row[table.xColumn], row[table.yColumn]], {
                 fixed: true,
                 name: '',
                 strokeColor: table.dataPoints.color,
@@ -254,16 +332,16 @@ var DataEntry = (function($, _, JXG, undefined) {
         }
     }
 
-    function getXYVals(data) {
+    function getXYVals(table) {
         var i, j, xVals = [], yVals = [];
 
-        for (i = 0; i < data.length; i++) {
-            xVals.push(data[i][0]);
-            yVals.push(data[i][1]);
+        for (i = 0; i < table.data.length; i++) {
+            xVals.push(table.data[i][table.xColumn]);
+            yVals.push(table.data[i][table.yColumn]);
         }
 
-        xVals = _.compact(xVals);
-        yVals = _.compact(yVals);
+        // xVals = _.compact(xVals);
+        // yVals = _.compact(yVals);
 
         return {
             'xVals': xVals,
@@ -271,10 +349,10 @@ var DataEntry = (function($, _, JXG, undefined) {
         }
     }
 
-    function getXYBounds(data) {
+    function getXYBounds(table) {
         var i, j, vals, xVals = [], yVals = [];
 
-        vals = getXYVals(data);
+        vals = getXYVals(table);
         xVals = vals.xVals;
         yVals = vals.yVals;
 
@@ -291,10 +369,10 @@ var DataEntry = (function($, _, JXG, undefined) {
         }
     }
 
-    function setBoundingBox(data) {
+    function setBoundingBox(table) {
         var bounds, xMin, yMin, xSpan, ySpan, xOffset, yOffset;
 
-        bounds = getXYBounds(data);
+        bounds = getXYBounds(table);
 
         if (bounds != null) {
             xSpan = Math.abs(bounds.xMax - bounds.xMin);
@@ -317,7 +395,7 @@ var DataEntry = (function($, _, JXG, undefined) {
 
     function clearBoard() {
         JXG.JSXGraph.freeBoard(board);
-        createBoard();
+        // createBoard();
     }
 
     function getActiveTable() {
