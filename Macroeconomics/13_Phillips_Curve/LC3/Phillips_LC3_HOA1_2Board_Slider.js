@@ -289,36 +289,6 @@ brd1.on('mousedown', function() {
     brd2.update();
 });
 
-// resetAnimation = function() {
-//     //Initial line coords
-//     var c1 = [2.0,9.5];
-//     var c2 = [9.5,2.0];
-    
-//     //Animated Curve
-//     AD2.point1.moveTo(c1,0);
-//     AD2.point2.moveTo(c2,0);
-//     AD2.setAttribute({withLabel:false});
-
-//     iB2SRPC.setAttribute({visible:false});
-
-//     //Hide Dashes
-//     dashesB1.Y1.setAttribute({visible:false});
-//     dashesB1.X1.setAttribute({visible:false});
-
-//     dashesB1.XLine.setAttribute({visible:false});
-//     dashesB1.YLine.setAttribute({visible:false});
-
-//     //Dashed Lines                
-//     dashesB1.Y1.moveTo([0, iS2D.Y()],0);
-//     dashesB1.Y2.moveTo([iS2D.X(), iS2D.Y()],0);
-
-//     dashesB1.X1.moveTo([iS2D.X(), 0],0);
-//     dashesB1.X2.moveTo([iS2D.X(), iS2D.Y()],0);
-    
-//     brd1.update();
-//     brd2.update();
-// };
-
 
 setState = function(transaction,statestr){
     state = JSON.parse(statestr);

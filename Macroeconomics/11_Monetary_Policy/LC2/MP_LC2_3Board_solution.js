@@ -37,6 +37,7 @@ sliderNegative = brd1.create('transform',[
 ////////////
 //Demand Board 1
 var D1 = createLine(brd1,{'ltype':'Demand','name':'D<sub>M</sub>',color:'Gray'});
+D1.setAttribute({fixed:true});
 //Supply Board 1
 var S1 = createLine(brd1,{'ltype':'Vertical','name':'S<sub>M1</sub>',color:'Gray'});
 S1.setAttribute({dash:2,strokeWidth:3,'fixed':true});
