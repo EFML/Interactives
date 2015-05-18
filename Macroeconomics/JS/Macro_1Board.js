@@ -43,6 +43,76 @@ createBoard = function(brdName,options) {
     return board;
 }
 
+lineCoords = function(ltype) {
+    var ltype = ltype || 'Supply';
+    var c1,c2,offset;
+    if (ltype == 'Demand') {
+        c1 = [2.0,9.5];
+        c2 = [9.5,2.0];
+        offset = [labelOffset.X,-labelOffset.Y];
+    }
+    else if (ltype =='Supply') {
+        c1 = [2.0,2.0];
+        c2 = [9.5,9.5];
+        offset = [labelOffset.X,labelOffset.Y];
+    }
+    else if (ltype =='Vertical') {
+        c1 = [5.75,0.5];
+        c2 = [5.75,11.0];
+        offset = [0,labelOffset.Y+30]
+    }
+
+    return [c1,c2,offset];
+}
+
+
+createLine = function(board,options) {
+    var name = options.name || '';
+    var color = options.color || JXG.Options.segment.strokeColor;
+    var ltype = options.ltype || 'Supply';
+    var fixed = options.type || true;
+    var c1,c2,D1,D2,offset;
+
+    var tmp = lineCoords(ltype);
+    c1 = tmp[0];
+    c2 = tmp[1];
+    offset = tmp[2];
+
+    D1 = board.create('point',c1,{withLabel:false,visible:false});
+    D2 = board.create('point',c2,{withLabel:false,visible:false});
+    return board.create('segment',[D1,D2],{'strokeColor':color,
+                                           'name':name,'withLabel':true,
+                                           'label':{'offset':offset}
+                                          });
+}
+
+
+createTransformLine = function(board,options) {
+    var name = options.name || '';
+    var color = options.color || JXG.Options.segment.strokeColor;
+    var ltype = options.ltype || 'Supply';
+    var fixed = options.type || true;
+    var transformList = options.transformList || [undefined];
+    var c1,c2,D1,D2,offset;
+
+    var tmp = lineCoords(ltype);
+    c1 = tmp[0];
+    c2 = tmp[1];
+    offset = tmp[2];
+
+    //Supply Board 1 - with slider transformation
+    var s1B1 = board.create('point',c1,{visible:false});
+    var s2B1 = board.create('point',c2,{visible:false});
+    var pS1 = board.create('point',[s1B1,transformList],{visible:false});
+    var pS2 = board.create('point',[s2B1,transformList],{visible:false});
+
+    return board.create('segment',[pS1,pS2],{withLabel:true,highlight:false,'name':name,
+                                             color:color,'label':{'offset':offset}
+                                            });
+}
+
+
+//DO NOT DELETE - Used in older interactives
 createSupply = function(board,options) {
     var name = options.name || '';
     var color = options.color || JXG.Options.segment.strokeColor;
@@ -59,6 +129,8 @@ createSupply = function(board,options) {
                                           });
 }
 
+
+//DO NOT DELETE - Used in older interactives
 createDemand = function(board,options) {
     var name = options.name || '';
     var color = options.color || JXG.Options.segment.strokeColor;

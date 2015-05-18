@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <title>Data Entry</title>
+    <link rel="stylesheet" type="text/css" href="https://dnexttools.s3.amazonaws.com/DataEntry/css/smoothness/jquery-ui.min.css">
+    <link rel="stylesheet" type="text/css" href="https://dnexttools.s3.amazonaws.com/DataEntry/css/handsontable.full.min.css">
+    <link rel="stylesheet" type="text/css" href="https://dnexttools.s3.amazonaws.com/DataEntry/css/data-entry.css">
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jsxgraph/0.99.3/jsxgraphcore.js"></script>
+    <script type="text/javascript" src="https://dnexttools.s3.amazonaws.com/DataEntry/js/vendor/underscore-min.js"></script>
+    <script type="text/javascript" src="https://dnexttools.s3.amazonaws.com/DataEntry/js/vendor/jquery.min.js"></script>
+    <script type="text/javascript" src="https://dnexttools.s3.amazonaws.com/DataEntry/js/vendor/jquery-ui.min.js"></script>
+    <script type="text/javascript" src="https://dnexttools.s3.amazonaws.com/DataEntry/js/vendor/handsontable.full.min.js"></script>
+    <script type="text/javascript">
+      <!--
+      // http://www.w3schools.com/cssref/css_colornames.asp
+      // Graphing calculator colors: 'Crimson', 'MediumSeaGreen', 'RoyalBlue', 'Orange', 'Turquoise'
+      -->
+      var DataEntrySettings = {
+        tables: [
+          {
+            name: 'Experiment 1',
+            data: [
+              [0.100.toPrecision(3), 0.500.toPrecision(3), 10.0.toPrecision(2), 0.010.toPrecision(2), 0.96.toPrecision(2), 0.0011.toPrecision(2)], 
+              [0.150.toPrecision(3), 0.500.toPrecision(3), 7.1.toPrecision(2), 0.020.toPrecision(2), 1.47.toPrecision(2), 0.0016.toPrecision(2)],
+              [0.200.toPrecision(3), 0.500.toPrecision(3), 5.7.toPrecision(2), 0.031.toPrecision(2), 1.95.toPrecision(2), 0.0021.toPrecision(2)],
+              [0.250.toPrecision(3), 0.500.toPrecision(3), 4.9.toPrecision(2), 0.042.toPrecision(2), 2.44.toPrecision(2), 0.0027.toPrecision(2)],
+              ['','','','','',''],
+              ['','','','','',''],
+              ['','','','','',''],
+              ['','','','','',''],
+              ['','','','','',''],
+              ['','','','','','']
+            ],
+            headers: ['Mass (kg)', 'Time (s)', 'Acceleration (m/s<sup>2</sup>)', 'Tension (N)','Distance (m)', 'Torque (Nm)'],
+            xColumn: 0,
+            yColumn: 5,
+            dataPoints: {
+              color: 'Crimson',
+            },
+            fitLine: {
+              color: 'MediumSeaGreen'
+            },
+          }
+        ],
+        render: true
+      };
+    </script>
+    <script type="text/javascript" src="https://dnexttools.s3.amazonaws.com/DataEntry/js/app/data_entry.js" defer></script>
+  </head>
+  <body>
+    <div class="container">
+      <div class="control-panel"></div>
+      <div class="jxgbox" id="jxgbox"></div>
+      <div id="choose-columns-dialog-form"></div>
+      <div id="reset-dialog-form"></div>
+    </div>
+  </body>
+</html>

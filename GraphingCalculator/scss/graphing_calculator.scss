@@ -1,0 +1,182 @@
+@import 'application';
+
+$light-gray: #E0E0E0;
+$medium-gray: #C8C8C8;
+$dark-gray: #505050;
+$light-blue: #4479BA;
+$medium-blue: #356AA0;
+$dark-blue: #356094;
+
+@mixin border-radius($radius) {
+  -webkit-border-radius: $radius;
+     -moz-border-radius: $radius;
+      -ms-border-radius: $radius;
+          border-radius: $radius;
+}
+
+.container {
+  @include clearfix;
+  background: $medium-gray;
+  min-width: 900px;
+  max-width: 1090px;
+  height: 600px;
+  margin: 0 auto;
+  padding: 20px;
+  overflow: hidden;
+  box-sizing: border-box;
+  border: solid $dark-gray 1px;
+  @include border-radius(10px);
+
+  .control-panel {
+    background: $light-gray;
+    width: 40%;
+    height: 560px;
+    float: left;
+    padding: 20px;
+    overflow: hidden;
+    box-sizing: border-box;
+    border: solid $medium-blue 1px;
+    @include border-radius(10px);
+  }
+
+  .jxgbox {
+    background: white;
+    width: 58%;
+    height: 560px;
+    float: right;
+    overflow: hidden;
+    vertical-align: top;
+    box-sizing: border-box;
+    border: solid $medium-blue 1px;
+    @include border-radius(10px);
+  }
+
+  input, label, button, .error-message, .regular-text, .mathjax-output, .ui-tabs .ui-tabs-nav li a {
+    font: {
+      family: 'Open Sans', Verdana, sans-serif;
+      size: 14px;
+    }
+  }
+
+  .error-message {
+    color: red;
+    display: none;
+  }
+
+  #function-tabs {
+    height: 375px;
+    overflow: hidden;
+  }
+
+  span.regular-text {
+    margin-right: 10px;
+  }
+
+  input {
+    box-sizing: border-box;
+    padding: 2px;
+  }
+
+  input.regular-text {
+    width: 60px;
+  }
+
+  input.wide-text {
+    width: 100%;
+  }
+
+  .mathjax-output {
+    padding-left: 2px;
+  }
+
+  .line {
+    width: 100%;
+    float: left;
+    display: inline-block;
+    box-sizing: border-box;
+  }
+
+  .full-line {
+    @extend .line;
+    margin-top: 20px;
+  }
+
+  .half-line {
+    @extend .line;
+    margin-top: 10px;
+  }
+
+  .quarter-line {
+    @extend .line;
+    margin-top: 5px;
+  }
+
+  .button {
+    color: white;
+    background: $light-blue;
+    @include border-radius(4px);
+    border: solid 1px #20538D;
+    text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.4);
+    box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.4), 0 1px;
+    padding: 5px 10px;
+    margin-right: 2px;
+    @include transition-duration(0.2s);
+  }
+
+  .button:hover, #gc-container .gr-calc:focus {
+    background: $dark-blue;
+    border: solid 1px #2A4E77;
+    text-decoration: none;
+  }
+
+  .button:active {
+    box-shadow: inset 0 1px 4px rgba(0, 0, 0, 0.6);
+    background: #2E5481;
+    border: solid 1px #203E5F;
+  }
+
+  input[type=checkbox] {
+    width: 2em;
+    margin: 0;
+    padding: 0;
+    font-size: 1em;
+    opacity: 0;
+  }
+
+  input[type=checkbox] + label {
+    display: inline-block;
+    margin-left: -2.5em;
+    line-height: 1.5em;
+    @include user-select(none);
+  }
+
+  input[type=checkbox]:focus + label {
+    color: $light-blue;
+  }
+
+  input[type=checkbox]:hover + label {
+    color: $light-blue;
+  }
+
+  input[type=checkbox] + label:hover {
+    color: $light-blue;
+  }
+
+  input[type=checkbox]:checked + label > i.fa-square-o {
+    display: none;
+  }
+
+  input[type=checkbox]:checked + label > i.fa-check-square-o {
+    display: inline-block;
+    letter-spacing: 0.5em;
+  }
+
+  input[type=checkbox] + label > i.fa-square-o {
+    display: inline-block;
+    letter-spacing: 0.65em;
+  }
+
+  input[type=checkbox] + label > i.fa-check-square-o {
+    display: none;
+  }
+}
