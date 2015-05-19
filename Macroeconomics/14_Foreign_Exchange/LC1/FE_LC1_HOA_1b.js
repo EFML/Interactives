@@ -30,7 +30,7 @@ SRAS1.setAttribute({fixed:true,'dash':1,'fixed':true,'highlight':false});
 
 //Supply Line 2 - moveable
 var SRAS2 = createLine(brd1,{ltype:'Supply',name:'$S<sub>2</sub>',color:'DodgerBlue'});
-SRAS2.setAttribute({fixed:true,'highlight':false,withLabel:true});
+SRAS2.setAttribute({fixed:true,'highlight':false,withLabel:false});
 
 //Demand Line 1 - fixed
 var AD1 = createLine(brd1,{ltype:'Demand',name:'$D<sub>1</sub>',color:'Orange'});
@@ -38,7 +38,7 @@ AD1.setAttribute({fixed:true,'dash':1,'fixed':true,'highlight':false});
 
 //Demand Line 2 - moveable
 var AD2 = createLine(brd1,{ltype:'Demand',name:'$D<sub>2</sub>',color:'Orange'});
-AD2.setAttribute({fixed:true,'highlight':false,withLabel:true});
+AD2.setAttribute({fixed:true,'highlight':false,withLabel:false});
 
  
 ////////////
@@ -64,8 +64,8 @@ var dashS2 = createDashedLines2Axis(brd1,iS2D,
                                   {fixed:false,
                                    withLabel:true,
                                    xlabel:'Q<sup>*</sup>',
-                                   ylabel:'&pound;0.5/$1',
-                                   yoffsets:[5,10],
+                                   ylabel:'$2/&pound;1',
+                                   yoffsets:[-45,0],
                                    color:'Orange'});
 
 //////////////////
