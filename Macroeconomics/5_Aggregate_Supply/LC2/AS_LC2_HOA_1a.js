@@ -1,25 +1,51 @@
 ////////////
 // BOARD 1
 ////////////
-bboxlimits = [-1.5, 12, 12, -1];
-var brd1 = JXG.JSXGraph.initBoard('jxgbox1', {axis:false, 
-                                        showCopyright: false,
-                                        showNavigation: false,
-                                        zoom: false,
-                                        pan: false,
-                                        boundingbox:bboxlimits,
-                                        grid: false,
-                                        hasMouseUp: true, 
-});
+// bboxlimits = [-1.5, 12, 12, -1];
+// var brd1 = JXG.JSXGraph.initBoard('jxgbox1', {axis:false, 
+//                                         showCopyright: false,
+//                                         showNavigation: false,
+//                                         zoom: false,
+//                                         pan: false,
+//                                         boundingbox:bboxlimits,
+//                                         grid: false,
+//                                         hasMouseUp: true, 
+// });
 
-xaxis1 = brd1.create('axis', [[0, 0], [11, 0]], {withLabel: false});
-yaxis1 = brd1.create('axis', [[0, 0], [0, 11]], {withLabel: false});
+// xaxis1 = brd1.create('axis', [[0, 0], [11, 0]], {withLabel: false});
+// yaxis1 = brd1.create('axis', [[0, 0], [0, 11]], {withLabel: false});
 
-//Axes
-xaxis1.removeAllTicks();
-yaxis1.removeAllTicks();
-var xlabel1 = brd1.create('text',[-1.2,10,"Price<br>Level"],{fixed:true});
-var ylabel1 = brd1.create('text',[9,-0.5,"Real GDP"],{fixed:true});
+// //Axes
+// xaxis1.removeAllTicks();
+// yaxis1.removeAllTicks();
+// var xlabel1 = brd1.create('text',[-1.2,10,"Price<br>Level"],{fixed:true});
+// var ylabel1 = brd1.create('text',[9,-0.5,"Real GDP"],{fixed:true});
+
+var newBBox = [-1.5, 12, 12, -1.75];
+
+var brd1 = createBoard('jxgbox1',{xname:"Real GDP", yname:"Price<br>Level",
+                                  grid:false,'xpos':[8,-0.5],bboxlimits:newBBox});
+
+//Sliders
+var sliderx = brd1.create('slider',[[3.5,-1.2],[8.5,-1.2],[-2.0,0,2.0]],{withLabel:false,snapWidth:0.05,
+                                                                       color:'DodgerBlue'});
+
+//Postivit Slider Transformation
+sliderXPositive = brd1.create('transform',[
+    function(){return sliderx.Value()},
+    function(){return 0.0}],
+    {type:'translate'}
+    );
+
+//LRAS 1 - fixed
+var LRAS1 = createLine(brd1,{ltype:'Vertical',name:'LRAS<sub>1</sub>',color:'DodgerBlue'});
+LRAS1.setAttribute({fixed:true,'dash':1,'fixed':true,'highlight':true});
+
+//LRAS 2 - moveable
+var LRAS2 = createTransformLine(brd1,{'transformList':[sliderXPositive],ltype:'Vertical',name:'LRAS<sub>2</sub>',color:'DodgerBlue'});
+LRAS2.setAttribute({fixed:false,'highlight':false,withLabel:false});
+
+
 
 // //Supply Line 1 - fixed
 // var SRAS1 = createSupply(brd1,{name:'SRAS<sub>1</sub>',color:'DodgerBlue'});

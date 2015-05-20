@@ -1,7 +1,7 @@
 //General Parameters for Macro
 JXG.Options.point.showInfobox = false;
 JXG.Options.segment.strokeColor = 'Pink';
-JXG.Options.segment.strokeWidth = '5';
+JXG.Options.segment.strokeWidth = '6';
 JXG.Options.text.fontSize = 16;
 JXG.Options.text.highlight = false;
 
