@@ -49,12 +49,12 @@ lineCoords = function(ltype) {
     else if (ltype =='Vertical') {
         c1 = [5.75,0.5];
         c2 = [5.75,11.0];
-        offset = [0,labelOffset.Y+30]
+        offset = [0,labelOffset.Y+45]
     }
     else if (ltype =='Horizontal') {
         c1 = [0.5,5.75];
         c2 = [11.0,5.75];
-        offset = [0,labelOffset.Y+30]
+        offset = [0,labelOffset.Y+45]
     }
 
     return [c1,c2,offset];
