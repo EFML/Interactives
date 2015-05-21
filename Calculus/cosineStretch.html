@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <title>Cosine Stretch</title>
+    <link rel="stylesheet" type="text/css" href="css/smoothness/jquery-ui.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.2.0/katex.min.css">
+    <link rel="stylesheet" type="text/css" href="css/cosine-stretch.css">
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jsxgraph/0.99.3/jsxgraphcore.js"></script>
+    <script type="text/javascript" src="js/vendor/underscore-min.js"></script>
+    <script type="text/javascript" src="js/vendor/jquery.min.js"></script>
+    <script type="text/javascript" src="js/vendor/jquery-ui.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.2.0/katex.min.js"></script>
+    <script type="text/javascript" src="js/app/cosineStretch.js" defer></script>
+  </head>
+  <body>
+  	<div class="dnext-tool-header">
+    	<div class="dnext-title">COSINE STRETCH</div>
+    	<div class="dnext-help-link">
+    		<a id="dnext-help-link" href="#">+ help</a>
+    	</div>
+    	<div id="dnext-help-text" class="dnext-help-text">
+      	<p>
+        	Help text and credentials go here.
+      	</p>
+    	</div>
+  	</div>
+  	<div class="dnext-tool-container">
+    	<div class="jxgbox" id="jxgbox"></div>
+      <div class="full-line"><span class='regular-text amplitude'>A</span><div id="amplitude-slider"></div><span class='regular-text amplitude' id="amplitude-slider-value">1</span></div>
+      <div class="full-line"><div class='math-text f-function' id="math-line1"></div></div>
+      <div class="full-line"><div class='math-text g-function' id="math-line2"></div></div>
+  	</div>
+  </body>
+</html>
