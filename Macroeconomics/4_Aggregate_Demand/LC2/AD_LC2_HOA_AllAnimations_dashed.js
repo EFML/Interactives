@@ -1,29 +1,10 @@
-JXG.Options.point.showInfobox = false;
-
-var animation_speed = 1000;
-
+var animationSpeed = 1000;
+var curveShift = 1.5
 ////////////
 // BOARD 1
 ////////////
-bboxlimits = [-1.5, 12, 12, -1.2];
-var brd1 = JXG.JSXGraph.initBoard('jxgbox1', {axis:false, 
-                                        showCopyright: false,
-                                        showNavigation: false,
-                                        zoom: false,
-                                        pan: false,
-                                        boundingbox:bboxlimits,
-                                        grid: false,
-                                        hasMouseUp: true, 
-});
-
-xaxis1 = brd1.create('axis', [[0, 0], [11, 0]], {withLabel: false});
-yaxis1 = brd1.create('axis', [[0, 0], [0, 11]], {withLabel: false});
-
-//Axes
-xaxis1.removeAllTicks();
-yaxis1.removeAllTicks();
-var xlabel1 = brd1.create('text',[9,-0.5,"Real GDP"],{fixed:true});
-var ylabel1 = brd1.create('text',[-1.2,10,"Price<br>Level"],{fixed:true});
+var brd1 = createBoard('jxgbox1',{xname:"Real GDP", yname:"Price<br>Level",
+                                  grid:false,'xpos':[8,-0.5]});
 
 //Demand Line 1 - fixed
 var AD1 = createLine(brd1,{ltype:'Demand',name:'AD<sub>1</sub>',color:'Gray'});
@@ -33,82 +14,137 @@ AD1.setAttribute({'dash':1,'fixed':true,'highlight':false});
 var AD2 = createLine(brd1,{ltype:'Demand',name:'AD<sub>2</sub>',color:'DodgerBlue'});
 AD2.setAttribute({withLabel:false});
 
-var fakeSupply = createLine(brd1,{ltype:'Supply',name:'I'});
-fakeSupply.setAttribute({visible:true});
+var Gfix = brd1.create('glider',[6.0,6.0,AD1],{fixed:true,visible:false});
+var G = brd1.create('glider',[6.0,6.0,AD2],{name:'A'});
 
-G = brd1.create('glider',[6.0,6.0,AD2],{name:'A'});
+////////////
+// Fixed Dashed Lines for Board 1
+////////////
+var dashD1 = createDashedLines2Axis(brd1,Gfix,
+                                  {fixed:true,
+                                   withLabel:true,
+                                   xlabel:'R<sub>1</sub>',
+                                   ylabel:'P<sub>1</sub>',
+                                   color:'Gray'});
 
-var iSD = brd1.create('intersection', [AD2, fakeSupply, 0], {visible:true});
-
-brd1.on('mousedown', function() {      
-    AD2.setAttribute({withLabel:true,offset:[125,-85]});
-    brd1.update()
-});
 
 ////////////
 // Draggable Dashed Lines for Board 1
 ////////////
-var dashS2 = createDashedLines2Axis(brd1,iSD,
+var dashD2 = createDashedLines2Axis(brd1,G,
                                   {fixed:false,
                                    withLabel:false,
-                                   xlabel:'Y<sub>2</sub>',
-                                   ylabel:'PL<sub>2</sub>',
+                                   xlabel:'R<sub>2</sub>',
+                                   ylabel:'P<sub>2</sub>',
                                    color:'DarkGray'});
+
+toggleLabels = function(toggle) {
+    dashD2.X1.setAttribute({withLabel:toggle});
+    dashD2.Y1.setAttribute({withLabel:toggle});
+    AD2.setAttribute({withLabel:toggle});
+};
+
+//////////////////
+// Interactivity
+//////////////////
+brd1.on('move', function() {      
+    //Moving Dashed Lines in Board 1
+    dashD2.Y1.moveTo([0, G.Y()]);
+    dashD2.Y2.moveTo([G.X(), G.Y()]);
+
+    dashD2.X1.moveTo([G.X(), 0]);
+    dashD2.X2.moveTo([G.X(), G.Y()]);
+    brd1.update()
+});
+
+brd1.on('mousedown', function() {      
+    toggleLabels(true);
+    brd1.update()
+});
 
 //Animation for shifting curve SouthWest
 decreaseXY = function() {
-    resetAnimation();
+    resetAnimation(0);
     brd1.update();
-    AD2.point1.moveTo([1.0,9.0],animation_speed);
-    AD2.point2.moveTo([9.0,1.0],animation_speed);
-    AD2.setAttribute({withLabel:true,offset:[125,-85]});    
 
+    toggleLabels(true);
+    
+    D2.point1.moveTo([D2.point1.X()-curveShift,D2.point1.Y()-curveShift],animationSpeed);
+    D2.point2.moveTo([D2.point2.X()-curveShift,D2.point2.Y()-curveShift],spanimationSpeedeed);
+    
+    dashD2.Y1.moveTo([0, G.Y()-curveShift],animationSpeed);
+    dashD2.Y2.moveTo([G.X()-curveShift, G.Y()-curveShift],animationSpeed);
+
+    dashD2.X1.moveTo([G.X()-curveShift, 0],speed);
+    dashD2.X2.moveTo([G.X()-curveShift, G.Y()-curveShift],speed);
+    
     brd1.update();
 }
 
 //Animation for shifting curve NorthEast
 increaseXY = function() {
-    resetAnimation();
+    resetAnimation(0);
+    toggleLabels(true);
     brd1.update();
-    AD2.point1.moveTo([3.0,11.0],1000);
-    AD2.point2.moveTo([11.0,3.0],1000);
-    AD2.setAttribute({withLabel:true,offset:[125,-85]});
+    
+    AD2.point1.moveTo([AD2.point1.X()+curveShift,AD2.point1.Y()+curveShift],animationSpeed);
+    AD2.point2.moveTo([AD2.point2.X()+curveShift,AD2.point2.Y()+curveShift],animationSpeed);
+    
+    dashD2.Y1.moveTo([0, G.Y()+curveShift],animationSpeed);
+    dashD2.Y2.moveTo([G.X()+curveShift, G.Y()+curveShift],animationSpeed);
+
+    dashD2.X1.moveTo([G.X()+curveShift, 0],animationSpeed);
+    dashD2.X2.moveTo([G.X()+curveShift, G.Y()+curveShift],animationSpeed);
+    
+    brd1.update();
+}
+
+resetAnimation = function(speed) {
+    toggleLabels(false);                
+    AD2.point1.moveTo([2.0,9.5],speed);
+    AD2.point2.moveTo([9.5,2.0],speed);
+    
+    G.moveTo([Gfix.X(),Gfix.X()],speed);
+
+    dashD2.Y1.moveTo([0, 5.75],speed);
+    dashD2.Y2.moveTo([5.75, 5.75],speed);
+
+    dashD2.X1.moveTo([5.75, 0],speed);
+    dashD2.X2.moveTo([5.75, 5.75],speed);
+    
     brd1.update();
 }
 
 increaseA = function() {
     resetAnimation();
     brd1.update();
-    // G.moveTo([4.0,8.0],animation_speed);
-    // c1 = [2.0,2.0];
-    // c2 = [9.5,9.5];
+    
+    toggleLabels(true);
+    G.moveTo([G.X()-curveShift,G.X()+curveShift],1000);
 
-    fakeSupply.point1.moveTo([1.0,3.0],animation_speed);
-    fakeSupply.point2.moveTo([8.5,10.5],animation_speed);
+    dashD2.Y1.moveTo([0, G.Y()+curveShift],animationSpeed);
+    dashD2.Y2.moveTo([G.X()-curveShift, G.Y()+curveShift],animationSpeed);
 
-    //Moving Dashed Lines in Board 1
-    //Moving Dashed Lines in Board 1
-    dashS2.Y1.moveTo([0, iSD.Y()]);
-    dashS2.Y2.moveTo([iSD.X(), iSD.Y()]);
+    dashD2.X1.moveTo([G.X()-curveShift, 0],animationSpeed);
+    dashD2.X2.moveTo([G.X()-curveShift, G.Y()+curveShift],animationSpeed);
 
-    dashS2.X1.moveTo([iSD.X(), 0]);
-    dashS2.X2.moveTo([iSD.X(), iSD.Y()]);
     brd1.update();
 }
 
 decreaseA = function() {
     resetAnimation();
     brd1.update();
-    G.moveTo([8.0,4.0],1000);
-    brd1.update();
-}
+    
+    toggleLabels(true);
+    G.moveTo([G.X()+curveShift,G.X()-curveShift],1000);
 
-resetAnimation = function() {
-    AD2.point1.moveTo([2.0,9.5],10);
-    AD2.point2.moveTo([9.5,2.0],10);
-    G.moveTo([6.0,6.0],10);
+    dashD2.Y1.moveTo([0, G.Y()-curveShift],animationSpeed);
+    dashD2.Y2.moveTo([G.X()+curveShift, G.Y()-curveShift],animationSpeed);
+
+    dashD2.X1.moveTo([G.X()+curveShift, 0],animationSpeed);
+    dashD2.X2.moveTo([G.X()+curveShift, G.Y()-curveShift],animationSpeed);
+
     brd1.update();
-    AD2.setAttribute({withLabel:false,offset:[125,-85]});
 }
 
 //Standard edX JSinput functions
