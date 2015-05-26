@@ -1,29 +1,10 @@
-////////////
-// BOARD 1
-////////////
-bboxlimits = [-1.5, 12, 12, -1.2];
-var brd1 = JXG.JSXGraph.initBoard('jxgbox1', {axis:false, 
-                                        showCopyright: false,
-                                        showNavigation: false,
-                                        zoom: false,
-                                        pan: false,
-                                        boundingbox:bboxlimits,
-                                        grid: false,
-                                        hasMouseUp: true, 
-});
 
-xaxis1 = brd1.create('axis', [[0, 0], [11, 0]], {withLabel: false});
-yaxis1 = brd1.create('axis', [[0, 0], [0, 11]], {withLabel: false});
-
-//Axes
-xaxis1.removeAllTicks();
-yaxis1.removeAllTicks();
-
-var xlabel1 = brd1.create('text',[9,-0.5,"Real GDP"],{fixed:true});
-var ylabel1 = brd1.create('text',[-1.2,10,"Price<br>Level"],{fixed:true});
+bbox = [-1.5, 12, 12, -1.2];
+var brd1 = createBoard('jxgbox1',{bboxlimits:bbox,xname:"Real GDP", 'xpos':[9,-0.5],
+                                  yname:"Price<br>Level",grid:false,'ypos':[-1.25,10.0]});
 
 //Sliders
-var slidery = brd1.create('slider',[[-1.0,2.75],[-1.0,8.75],[-2.0,0.0,2.0]],{withLabel:false,snapWidth:0.05,
+var slidery = brd1.create('slider',[[-1.0,2.75],[-1.0,8.75],[0.0,0.0,1.5]],{withLabel:false,snapWidth:0.05,
                                                                        color:'Black'});
 
 //Postivit Slider Transformation
