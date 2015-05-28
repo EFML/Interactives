@@ -23,7 +23,7 @@ var xlabel1 = brd1.create('text',[9,-0.5,"Real GDP"],{fixed:true});
 var ylabel1 = brd1.create('text',[-1.2,10,"Price<br>Level"],{fixed:true});
 
 //Sliders
-var slidery = brd1.create('slider',[[-1.0,2.75],[-1.0,8.75],[-3.0,0.0,3.0]],{withLabel:false,snapWidth:0.05,
+var slidery = brd1.create('slider',[[-1.0,2.75],[-1.0,8.75],[0.0,3.0,3.0]],{withLabel:false,snapWidth:0.05,
                                                                        color:'Black'});
 
 //Postivit Slider Transformation
@@ -70,7 +70,7 @@ var dashesFixedB1 = createDashedLines2Axis(brd1,iSDfix,
 // Dashes for Supply Only
 ////////////
 var dashesSonly = createDashedLines2Axis(brd1,iSonly,
-                                           {withLabel:false,
+                                           {withLabel:true,
                                            xlabel:'AS<sup>*</sup>',
                                            xoffsets:[5,15],
                                            ylabel:'PL<sup>*</sup>',
@@ -84,7 +84,7 @@ dashesSonly.X1.setAttribute({label:{offset:[5,15],strokeColor:'blue'}});
 // Dashes for Demand Only
 ////////////
 var dashesDonly = createDashedLines2Axis(brd1,iDonly,
-                                           {withLabel:false,
+                                           {withLabel:true,
                                            xlabel:'AD<sup>*</sup>',
                                            xoffsets:[5,15],
                                            ylabel:'',

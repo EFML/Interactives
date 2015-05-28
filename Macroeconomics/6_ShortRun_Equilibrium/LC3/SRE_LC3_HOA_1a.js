@@ -61,7 +61,7 @@ var iSonly = brd1.create('intersection', [H1, SRAS2, 0], {"visible":true,withLab
 var dashesFixedB1 = createDashedLines2Axis(brd1,iSDfix,
                                           {withLabel:true,
                                            xlabel:'RGDP<sub>1924</sub>',
-                                           ylabel:'100',
+                                           ylabel:'102',
                                            yoffsets:[5,10],
                                            color:'DarkGray'});
 
