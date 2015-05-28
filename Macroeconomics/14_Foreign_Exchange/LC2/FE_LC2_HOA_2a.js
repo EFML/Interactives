@@ -50,7 +50,7 @@ var dashesFixedB1 = createDashedLines2Axis(brd1,iSDfix,
                                           {withLabel:true,
                                            xlabel:'Q<sub>1</sub>',
                                            ylabel:'(&euro;/$)<sub>1</sub>',
-                                           yoffsets:[5,10],
+                                           yoffsets:[-45,0],
                                            color:'DodgerBlue'});
 
 ////////////
@@ -61,7 +61,7 @@ var dashS2 = createDashedLines2Axis(brd1,iS2D,
                                    withLabel:false,
                                    xlabel:'Q<sub>2</sub>',
                                    ylabel:'(&euro;/$)<sub>2</sub>',
-                                   yoffsets:[5,10],
+                                   yoffsets:[-45,0],
                                    color:'Orange'});
 
 //////////////////

@@ -1,25 +1,6 @@
 ////////////
 // BOARD 1
 ////////////
-// bboxlimits = [-1.5, 12, 12, -1];
-// var brd1 = JXG.JSXGraph.initBoard('jxgbox1', {axis:false, 
-//                                         showCopyright: false,
-//                                         showNavigation: false,
-//                                         zoom: false,
-//                                         pan: false,
-//                                         boundingbox:bboxlimits,
-//                                         grid: false,
-//                                         hasMouseUp: true, 
-// });
-
-// xaxis1 = brd1.create('axis', [[0, 0], [11, 0]], {withLabel: false});
-// yaxis1 = brd1.create('axis', [[0, 0], [0, 11]], {withLabel: false});
-
-// //Axes
-// xaxis1.removeAllTicks();
-// yaxis1.removeAllTicks();
-// var xlabel1 = brd1.create('text',[-1.2,10,"Price<br>Level"],{fixed:true});
-// var ylabel1 = brd1.create('text',[9,-0.5,"Real GDP"],{fixed:true});
 
 var brd1 = createBoard('jxgbox1',{xname:"Q of US Dollars", 
                                   yname:"&pound;/$",grid:false,'xpos':[8,-0.5]});
@@ -30,7 +11,7 @@ SRAS1.setAttribute({fixed:true,'dash':1,'fixed':true,'highlight':false});
 
 //Supply Line 2 - moveable
 var SRAS2 = createLine(brd1,{ltype:'Supply',name:'$S<sub>2</sub>',color:'DodgerBlue'});
-SRAS2.setAttribute({fixed:true,'highlight':false,withLabel:true});
+SRAS2.setAttribute({fixed:true,'highlight':false,withLabel:false});
 
 //Demand Line 1 - fixed
 var AD1 = createLine(brd1,{ltype:'Demand',name:'$D<sub>1</sub>',color:'Orange'});
@@ -38,7 +19,7 @@ AD1.setAttribute({fixed:true,'dash':1,'fixed':true,'highlight':false});
 
 //Demand Line 2 - moveable
 var AD2 = createLine(brd1,{ltype:'Demand',name:'$D<sub>2</sub>',color:'Orange'});
-AD2.setAttribute({fixed:true,'highlight':false,withLabel:true});
+AD2.setAttribute({fixed:true,'highlight':false,withLabel:false});
 
  
 ////////////
