@@ -1,10 +1,30 @@
 var DataEntry = (function($, _, JXG, undefined) {
     'use strict';
 
-    var xMin = -11.0, xMax = 11.0, yMin = -8.0, yMax = 8.0, zoom = 1.0, precision = 5,
+    var xMin = -11.0, xMax = 11.0, yMin = -8.0, yMax = 8.0, zoom = 4.0/11.0, xPos = 1.3,xCenter = 0.0, boundsPrecision = 3, precision = 6,
         boundingBox = [zoom*xMin, zoom*yMax, zoom*xMax, zoom*yMin],
-        board, xPos = 1.3,
-        fCurve, gCurve, xAxis, yAxis, xAxisGlider, fPoint, gPoint, fgLine;
+        board, fCurve, gCurve, xAxis, yAxis, xAxisGlider, fPoint, gPoint, fgLine,
+
+        fFn = [f0, f1, f2, f3, f4],
+        dfFn = [df0, df1, df2, df3, df4],
+        gFn = [g0, g1, g2, g3, g4],
+        dgFn = [dg0, dg1, dg2, dg3, dg4],
+        fFnStr  = ['\\sqrt{e^{x}} - 1',        '\\sqrt{e^{x}} - 1',        'sin(2x)',  'log(x)',       'e^{3x} - 1'],
+        dfFnStr = ['\\frac{\\sqrt{e^{x}}}{2}', '\\frac{\\sqrt{e^{x}}}{2}', '2cos(2x)', '\\frac{1}{x}', '3e^{3x}'],
+        gFnStr  = ['sin(-x)',                  'x',                        'sin(x)',   'x-1',          'e^{x}'],
+        dgFnStr = ['-cos(-x)',                 '1',                        'cos(x)',   '1',            'e^{x}'],
+
+        config = window.LHospitalZoomSettings || {fnNbr: 0},
+        fnNbr = config.fnNbr,
+
+        f = fFn[fnNbr],
+        fStr = fFnStr[fnNbr],
+        df = dfFn[fnNbr],
+        dfStr = dfFnStr[fnNbr],
+        g = gFn[fnNbr],
+        gStr = gFnStr[fnNbr],
+        dg = dgFn[fnNbr],
+        dgStr = dgFnStr[fnNbr];
 
     init();
 
@@ -31,6 +51,7 @@ var DataEntry = (function($, _, JXG, undefined) {
         $(window).on('resize', resizeBox);
         $('#dnext-help-link').on('click', toggle);
 
+        setBoardInitValues();
         createBoard();
         createSlider();
         outputStaticMath();
@@ -78,12 +99,16 @@ var DataEntry = (function($, _, JXG, undefined) {
     }
 
     function outputStaticMath() {
-        katex.render("f(x) = \\sqrt{e^{x}} - 1 \\quad\\quad f'(x) = \\frac{\\sqrt{e^{x}}}{2}", $('#math-line1').get(0));
-        katex.render("g(x) = sin(-x) \\quad\\quad g'(x) = -cos(-x)", $('#math-line2').get(0));
+        katex.render("f(x) = " +  fStr, $('#math-line1-col1').get(0));
+        katex.render("f'(x) = " + dfStr, $('#math-line1-col2').get(0));
+        katex.render("g(x) = " +  gStr, $('#math-line2-col1').get(0));
+        katex.render("g'(x) = " + dgStr, $('#math-line2-col2').get(0));
     }
 
     function outputDynamicMath() {
-        katex.render("x = " + xStr() + "\\quad\\quad \\frac{f(x)}{g(x)} = " + fgFracStr() + "\\quad\\quad \\frac{f'(x)}{g'(x)} = " + dfdgFracStr(), $('#math-line3').get(0));
+        katex.render("a = " + xStr() +
+                     "\\quad\\quad \\frac{f(a)}{g(a)} = " + fgFracStr() +
+                     "\\quad\\quad \\frac{f'(a)}{g'(a)} = " + dfdgFracStr(), $('#math-line3').get(0));
         katex.render('\\text{Window: }' + boundingBoxString(), $('#math-line4').get(0));
     }
 
@@ -99,30 +124,104 @@ var DataEntry = (function($, _, JXG, undefined) {
         return (df(xPos)/dg(xPos)).toFixed(precision);
     }
 
+    function setBoardInitValues() {
+        if (fnNbr === 3) {
+            xMin = -10.0;
+            xMax = 12.0;
+            xPos = 2.3;
+            xCenter = 1.0;
+        }
+        boundingBox = [xCenter + zoom*xMin, zoom*yMax, xCenter + zoom*xMax, zoom*yMin];
+    }
 
     function boundingBoxString() {
        return '[' +
-              boundingBox[0].toFixed(precision) + ', ' +
-              boundingBox[2].toFixed(precision) + '] \\times [' +
-              boundingBox[3].toFixed(precision) + ', ' +
-              boundingBox[1].toFixed(precision) +
+              boundingBox[0].toFixed(boundsPrecision) + ', ' +
+              boundingBox[2].toFixed(boundsPrecision) + '] \\times [' +
+              boundingBox[3].toFixed(boundsPrecision) + ', ' +
+              boundingBox[1].toFixed(boundsPrecision) +
               ']';
     }
 
-    function f(x) {
+    // Functions
+    function f0(x) {
         return Math.sqrt(Math.exp(x)) - 1.0;
     }
 
-    function df(x) {
+    function df0(x) {
         return 0.5*Math.sqrt(Math.exp(x));
     }
 
-    function g(x) {
+    function g0(x) {
         return -Math.sin(x);
     }
 
-    function dg(x) {
+    function dg0(x) {
         return -Math.cos(x);
+    }
+
+    function f1(x) {
+        return Math.sqrt(Math.exp(x)) - 1.0;
+    }
+
+    function df1(x) {
+        return 0.5*Math.sqrt(Math.exp(x));
+    }
+
+    function g1(x) {
+        return x;
+    }
+
+    function dg1(x) {
+        return 1.0;
+    }
+
+    function f2(x) {
+        return Math.sin(2.0*x);
+    }
+
+    function df2(x) {
+        return 2.0*Math.cos(2.0*x);
+    }
+
+    function g2(x) {
+        return Math.sin(x);
+    }
+
+    function dg2(x) {
+        return Math.cos(x);
+    }
+
+    function f3(x) {
+        return Math.log(x);
+    }
+
+    function df3(x) {
+        return 1/x;
+    }
+
+    function g3(x) {
+        return x - 1;
+    }
+
+    function dg3(x) {
+        return 1.0;
+    }
+
+    function f4(x) {
+        return Math.exp(3.0*x) - 1.0;
+    }
+
+    function df4(x) {
+        return 3.0*Math.exp(3.0*x);
+    }
+
+    function g4(x) {
+        return Math.exp(x);
+    }
+
+    function dg4(x) {
+        return Math.exp(x);
     }
 
     function createBoard() {
@@ -169,9 +268,10 @@ var DataEntry = (function($, _, JXG, undefined) {
         var fxPos, gxPos, yMin, yMax;
 
         xPos = xAxisGlider.X();
-        if (Math.abs(xPos) < 0.00005) {
-            xPos = 0.0;
+        if (Math.abs(xPos - xCenter) < 0.00005) {
+            xPos = fnNbr !== 3 ? 0.0 : 1.0;
         }
+
         fxPos = f(xPos);
         gxPos = g(xPos);
         yMin = Math.min(fxPos, gxPos, 0.0);
@@ -206,7 +306,7 @@ var DataEntry = (function($, _, JXG, undefined) {
             {strokeWidth: 3, strokeColor: 'red', highlight: false}
         );
 
-        xAxisGlider = board.create('glider', [1.3, 0.0, xAxis], {
+        xAxisGlider = board.create('glider', [xPos, 0.0, xAxis], {
             strokeColor: 'black',
             fillColor: 'white',
             size: 5,
@@ -232,12 +332,12 @@ var DataEntry = (function($, _, JXG, undefined) {
             fillColor: 'red'
         });
 
-        fgLine = board.create('line', [[xPos, f(xPos)], [xPos, g(xPos)]], {
+        fgLine = board.create('line', [[xPos, Math.min(f(xPos), g(xPos), 0.0)], [xPos,  Math.max(f(xPos), g(xPos), 0.0)]], {
             fixed: true,
             straightFirst:false,
             straightLast:false,
             strokeWidth: 2,
-            strokeColor: 'red',
+            strokeColor: 'black',
             dash: 1,
             highlight: false
         });
@@ -246,7 +346,7 @@ var DataEntry = (function($, _, JXG, undefined) {
     function updateGraph() {
         var xMinPadded, xMaxPadded, xSpan;
 
-        boundingBox = [zoom*xMin, zoom*yMax, zoom*xMax, zoom*yMin];
+        boundingBox = [xCenter + zoom*xMin, zoom*yMax, xCenter + zoom*xMax, zoom*yMin];
         board.setBoundingBox(boundingBox);
 
         xSpan = boundingBox[2] - boundingBox[0];
