@@ -1,57 +1,44 @@
-//Custom Parameters
-labelOffset = {'X':130,'Y':140};
 
-bbox = [-1.5, 12, 12, -1.5];
+bbox = [-1.5, 12, 12, -1.2];
 var brd1 = createBoard('jxgbox1',{bboxlimits:bbox,xname:"Real GDP", 'xpos':[9,-0.5],
                                   yname:"Price<br>Level",grid:false,'ypos':[-1.25,10.0]});
 
 //Sliders
-var sliderx = brd1.create('slider',[[3.0,-1.0],[8,-1.0],[-1.4,0,0]],{withLabel:false,snapWidth:0.05,
-                                                                       color:'Crimson'});
-// var slidery = brd1.create('slider',[[-1.0,2.75],[-1.0,8.75],[-1.4,0,0]],{withLabel:false,snapWidth:0.05,
-//                                                                        color:'Black'});
+var slidery = brd1.create('slider',[[-1.0,2.75],[-1.0,8.75],[0.0,0.0,1.5]],{withLabel:false,snapWidth:0.05,
+                                                                       color:'Black'});
 
 //Postivit Slider Transformation
-sliderXPositive = brd1.create('transform',[
-    function(){return sliderx.Value()},
-    function(){return sliderx.Value()}],
+sliderYPositive = brd1.create('transform',[
+    function(){return slidery.Value()},
+    function(){return slidery.Value()}],
     {type:'translate'}
     );
 
-// sliderYPositive = brd1.create('transform',[
-//     function(){return slidery.Value()},
-//     function(){return slidery.Value()}],
-//     {type:'translate'}
-//     );
-
 //Supply Line 1 - fixed
-var SRAS1 = createLine(brd1,{'ltype':'Supply','name':'AS<sub>1929</sub>',color:'DodgerBlue'});
+var SRAS1 = createLine(brd1,{'ltype':'Supply','name':'S<sub>1</sub>',color:'DodgerBlue'});
 SRAS1.setAttribute({'fixed':true,'highlight':false});
 
 //Demand Line 1 - fixed
-var AD1 = createLine(brd1,{'ltype':'Demand','name':'AD<sub>1929</sub>','color':'Crimson'});
+var AD1 = createLine(brd1,{'ltype':'Demand','name':'AD<sub>1</sub>','color':'Crimson'})
 AD1.setAttribute({'dash':1,'fixed':true,'highlight':false});
 
 //Demand Line 2 - moveable
-var AD2 = createTransformLine(brd1,{'transformList':[sliderXPositive],'ltype':'Demand','name':'AD<sub>1933</sub>','color':'Crimson'});
+var AD2 = createTransformLine(brd1,{'transformList':[sliderYPositive],'ltype':'Demand','name':'AD<sub>1</sub>','color':'Crimson'})
 AD2.setAttribute({'withLabel':false,'highlight':true,"visible":true});
 
 //Fake line for intersection at equilibrium
-var H1 = createLine(brd1,{'ltype':'Horizontal','name':'H','color':'Orange'});
-H1.setAttribute({'fixed':true,'withLabel':false,'highlight':true,"visible":false});
-
-// var H2 = createTransformLine(brd1,{'transformList':[sliderYPositive],'ltype':'Horizontal','name':'H','color':'Orange'});
-// H2.setAttribute({'fixed':true,'withLabel':false,'highlight':true,"visible":false});
+var H = createLine(brd1,{'ltype':'Horizontal','name':'H','color':'Orange'})
+H.setAttribute({'fixed':true,'withLabel':false,'highlight':true,"visible":false});
 
 
 ////////////
 // Intersection Box 1
 ////////////
 var iSDfix = brd1.create('intersection', [AD1, SRAS1, 0], {'visible':false}); 
-var iSD = brd1.create('intersection', [H1, AD2, 0], {'visible':false});
+var iSD = brd1.create('intersection', [AD2, SRAS1, 0], {'visible':false});
 
-var iDonly = brd1.create('intersection', [H1, AD2, 0], {"visible":true,withLabel:false,color:"Red"}); 
-var iSonly = brd1.create('intersection', [H1, SRAS1, 0], {"visible":true,withLabel:false,color:"Blue"});
+var iDonly = brd1.create('intersection', [H, AD2, 0], {"visible":true,withLabel:false,color:"Red"}); 
+var iSonly = brd1.create('intersection', [H, SRAS1, 0], {"visible":true,withLabel:false,color:"Blue"});
 
 
 ////////////
@@ -59,30 +46,19 @@ var iSonly = brd1.create('intersection', [H1, SRAS1, 0], {"visible":true,withLab
 ////////////
 var dashesFixedB1 = createDashedLines2Axis(brd1,iSDfix,
                                           {withLabel:true,
-                                           xlabel:'RGDP<sub>1929</sub>',
-                                           ylabel:'100',
+                                           xlabel:'RGDP<sub>0</sub>',
+                                           ylabel:'PL<sub>0</sub>',
                                            yoffsets:[5,10],
                                            color:'DarkGray'});
 
-////////////
-// Dashes for Demand and Supply 
-////////////
-var dashesSD = createDashedLines2Axis(brd1,iSD,
-                                           {withLabel:false,
-                                           xlabel:'RGDP<sub>1933</sub>',
-                                           xoffsets:[5,15],
-                                           ylabel:'',
-                                           yoffsets:[5,10],
-                                           color:'Crimson'
-                                           });
 
 ////////////
 // Dashes for Supply Only
 ////////////
 var dashesSonly = createDashedLines2Axis(brd1,iSonly,
                                            {withLabel:false,
-                                           xlabel:'AS<sup>*</sup>',
-                                           xoffsets:[5,35],
+                                           xlabel:'S<sup>*</sup>',
+                                           xoffsets:[5,15],
                                            ylabel:'',
                                            yoffsets:[5,10],
                                            color:'DodgerBlue'
@@ -94,17 +70,23 @@ var dashesSonly = createDashedLines2Axis(brd1,iSonly,
 var dashesDonly = createDashedLines2Axis(brd1,iDonly,
                                            {withLabel:false,
                                            xlabel:'AD<sup>*</sup>',
-                                           xoffsets:[5,35],
+                                           xoffsets:[5,15],
                                            ylabel:'',
                                            yoffsets:[5,10],
                                            color:'Lime'
                                            });
 
-// var sliderLabel128 = brd1.create('text',
-//                                  [0.15,
-//                                   function(y) {return (H2.point1.Y() + 0.3)},
-//                                   function() {return (100.0 - 22.0*slidery.Value()/slidery._smin ).toFixed(0);}
-//                                   ], {visible:false});
+////////////
+// Dashes for Demand and Supply 
+////////////
+var dashesSD = createDashedLines2Axis(brd1,iSD,
+                                           {withLabel:false,
+                                           xlabel:'RGDP<sub>1</sub>',
+                                           xoffsets:[5,15],
+                                           ylabel:'PL<sub>1</sub>',
+                                           yoffsets:[5,10],
+                                           color:'Crimson'
+                                           });
 
 
 //////////////////
@@ -136,16 +118,14 @@ brd1.on('move', function() {
 
 brd1.on('mousedown', function() {      
     AD2.setAttribute({withLabel:true});
-    // dashesSD.Y1.setAttribute({withLabel:true});
-    // dashesSD.X1.setAttribute({withLabel:true});
+    dashesSD.Y1.setAttribute({withLabel:true});
+    dashesSD.X1.setAttribute({withLabel:true});
     dashesSonly.Y1.setAttribute({withLabel:true});
     dashesSonly.X1.setAttribute({withLabel:true});
     dashesDonly.Y1.setAttribute({withLabel:true});
     dashesDonly.X1.setAttribute({withLabel:true});
-    sliderLabel128.setAttribute({visible:true});
     brd1.update()
 });
-
 
 //Standard edX JSinput functions
 setState = function(transaction, statestr){

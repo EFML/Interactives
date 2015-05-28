@@ -6,10 +6,10 @@ var brd1 = createBoard('jxgbox1',{bboxlimits:bbox,xname:"Real GDP", 'xpos':[9,-0
                                   yname:"Price<br>Level",grid:false,'ypos':[-1.25,10.0]});
 
 //Sliders
-var sliderx = brd1.create('slider',[[3.0,-1.0],[8,-1.0],[-1.4,0,0]],{withLabel:false,snapWidth:0.05,
+var sliderx = brd1.create('slider',[[8.0,-1.0],[8,-1.0],[-1.4,-1.39,-1.39]],{withLabel:false,snapWidth:0.05,
+                                                                       color:'White'});
+var slidery = brd1.create('slider',[[-1.0,2.75],[-1.0,8.75],[-1.4,0,0]],{withLabel:false,snapWidth:0.05,
                                                                        color:'Crimson'});
-// var slidery = brd1.create('slider',[[-1.0,2.75],[-1.0,8.75],[-1.4,0,0]],{withLabel:false,snapWidth:0.05,
-//                                                                        color:'Black'});
 
 //Postivit Slider Transformation
 sliderXPositive = brd1.create('transform',[
@@ -18,11 +18,11 @@ sliderXPositive = brd1.create('transform',[
     {type:'translate'}
     );
 
-// sliderYPositive = brd1.create('transform',[
-//     function(){return slidery.Value()},
-//     function(){return slidery.Value()}],
-//     {type:'translate'}
-//     );
+sliderYPositive = brd1.create('transform',[
+    function(){return slidery.Value()},
+    function(){return slidery.Value()}],
+    {type:'translate'}
+    );
 
 //Supply Line 1 - fixed
 var SRAS1 = createLine(brd1,{'ltype':'Supply','name':'AS<sub>1929</sub>',color:'DodgerBlue'});
@@ -37,18 +37,19 @@ var AD2 = createTransformLine(brd1,{'transformList':[sliderXPositive],'ltype':'D
 AD2.setAttribute({'withLabel':false,'highlight':true,"visible":true});
 
 //Fake line for intersection at equilibrium
+//Fake line for intersection at equilibrium
 var H1 = createLine(brd1,{'ltype':'Horizontal','name':'H','color':'Orange'});
 H1.setAttribute({'fixed':true,'withLabel':false,'highlight':true,"visible":false});
 
-// var H2 = createTransformLine(brd1,{'transformList':[sliderYPositive],'ltype':'Horizontal','name':'H','color':'Orange'});
-// H2.setAttribute({'fixed':true,'withLabel':false,'highlight':true,"visible":false});
+var H2 = createTransformLine(brd1,{'transformList':[sliderYPositive],'ltype':'Horizontal','name':'H','color':'Orange'});
+H2.setAttribute({'fixed':true,'withLabel':false,'highlight':true,"visible":false});
 
 
 ////////////
 // Intersection Box 1
 ////////////
 var iSDfix = brd1.create('intersection', [AD1, SRAS1, 0], {'visible':false}); 
-var iSD = brd1.create('intersection', [H1, AD2, 0], {'visible':false});
+var iSD = brd1.create('intersection', [H2, AD2, 0], {'visible':false});
 
 var iDonly = brd1.create('intersection', [H1, AD2, 0], {"visible":true,withLabel:false,color:"Red"}); 
 var iSonly = brd1.create('intersection', [H1, SRAS1, 0], {"visible":true,withLabel:false,color:"Blue"});
@@ -100,11 +101,11 @@ var dashesDonly = createDashedLines2Axis(brd1,iDonly,
                                            color:'Lime'
                                            });
 
-// var sliderLabel128 = brd1.create('text',
-//                                  [0.15,
-//                                   function(y) {return (H2.point1.Y() + 0.3)},
-//                                   function() {return (100.0 - 22.0*slidery.Value()/slidery._smin ).toFixed(0);}
-//                                   ], {visible:false});
+var sliderLabel128 = brd1.create('text',
+                                 [0.15,
+                                  function(y) {return (H2.point1.Y() + 0.3)},
+                                  function() {return (100.0 - 22.0*slidery.Value()/slidery._smin ).toFixed(0);}
+                                  ], {visible:false});
 
 
 //////////////////
@@ -136,8 +137,8 @@ brd1.on('move', function() {
 
 brd1.on('mousedown', function() {      
     AD2.setAttribute({withLabel:true});
-    // dashesSD.Y1.setAttribute({withLabel:true});
-    // dashesSD.X1.setAttribute({withLabel:true});
+    dashesSD.Y1.setAttribute({withLabel:true});
+    dashesSD.X1.setAttribute({withLabel:true});
     dashesSonly.Y1.setAttribute({withLabel:true});
     dashesSonly.X1.setAttribute({withLabel:true});
     dashesDonly.Y1.setAttribute({withLabel:true});
