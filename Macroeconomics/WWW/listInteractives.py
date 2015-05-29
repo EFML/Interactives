@@ -8,9 +8,9 @@ import os
 from jinja2 import Environment, FileSystemLoader
 
 
-# In[ ]:
+# In[14]:
 
-PATH = os.path.dirname(os.path.abspath(__file__))
+PATH = os.path.dirname(os.path.abspath("__file__"))
 TEMPLATE_ENVIRONMENT = Environment(
     autoescape=False,
     loader=FileSystemLoader(os.path.join(PATH, 'templates')),
@@ -20,12 +20,25 @@ TEMPLATE_ENVIRONMENT = Environment(
 def render_template(template_filename, context):
     return TEMPLATE_ENVIRONMENT.get_template(template_filename).render(context)
  
- 
+def crawl_directory_for_html(directory):
+    iList=[]
+    for dirpath, subdirs, files in os.walk(directory):
+        for file in files:
+            if file.endswith('.html'):
+                relURL = os.path.join(dirpath, file)
+                baseURL = 'https://dnextinteractives.s3.amazonaws.com/Macroeconomics/'
+                URL = baseURL + relURL.lstrip('../')
+                if "OldStructure" in URL or "WWW" in URL: 
+                    print "Ignore folder: %s" % dirpath
+                else:
+                    iList.append(URL)
+    return iList
+
 def create_index_html():
-    fname = "output.html"
-    urls = ['http://example.com/1', 'http://example.com/2', 'http://example.com/3']
+    fname = "MacroInteractives.html"
+    iList = crawl_directory_for_html('../')
     context = {
-        'urls': urls
+        'urls': iList
     }
     #
     with open(fname, 'w') as f:
@@ -49,43 +62,7 @@ if __name__ == "__main__":
 
 # In[12]:
 
-iList = []
-for root, dirs, files in os.walk('../'):
-    for file in files:
-        if file.endswith('.html'):
-            iList.append(file)
 
-numInteractives = len(iList)
-            
-page = jinja.Template('''
-<!DOCTYPE html>
-<html>
-  <head>
-    <title>Flask Template Example</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link href="http://netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css" rel="stylesheet" media="screen">
-    <style type="text/css">
-      .container {
-        max-width: 500px;
-        padding-top: 100px;
-      }
-    </style>
-  </head>
-  <body>
-    <div class="container">
-      <p>Number of Macro Interactives: {{numInteractives}}</p>
-      <p>Loop through the list:</p>
-      <ul>
-        {% for f in iList %}
-        <li>{{f}}</li>
-        {% endfor %}
-      </ul>
-    </div>
-    <script src="http://code.jquery.com/jquery-1.10.2.min.js"></script>
-    <script src="http://netdna.bootstrapcdn.com/bootstrap/3.0.0/js/bootstrap.min.js"></script>
-  </body>
-</html>
-''')
 
 
 # In[14]:
