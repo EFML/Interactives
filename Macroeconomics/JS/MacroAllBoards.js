@@ -20,8 +20,8 @@ createBoard = function(brdName,options) {
                                       hasMouseUp: true, 
     });         
 
-    xaxis = board.create('axis', [[0, 0], [11, 0]], {withLabel: false});
-    yaxis = board.create('axis', [[0, 0], [0, 11]], {withLabel: false});
+    xaxis = board.create('axis', [[0, 0], [11, 0]], {withLabel: false, highlight: false});
+    yaxis = board.create('axis', [[0, 0], [0, 11]], {withLabel: false, highlight: false});
 
     //Axes
     xaxis.removeAllTicks();
@@ -123,8 +123,8 @@ createDashedLines2Axis = function(board,intersection,options) {
     
     var Y1,Y2,YLine,X1,X2,XLine,obj={};
     var Y1 = board.create('point',[0, intersection.Y()],
-                     {'withLabel':withLabel,'name':ylabel,'visible':true,'size':'0.5',
-                     'strokeColor':'Gray','label':{'offset':yoffsets}});
+                     {'withLabel':withLabel,'name':ylabel,'visible':true,'size':'0.5','fixed':fixed,
+                     'highlight':false,'strokeColor':'Gray','label':{'offset':yoffsets}});
 
     var Y2 = board.create('point',[intersection.X(), intersection.Y()],
                      {'withLabel':false,'visible':false,'size':'0.0','strokeColor':''});
@@ -133,8 +133,8 @@ createDashedLines2Axis = function(board,intersection,options) {
                         {'strokeColor':color,'strokeWidth':'2','dash':'1','fixed':fixed,'visible':visible});
 
     var X1 = board.create('point',[intersection.X(), 0],
-                     {'withLabel':withLabel,'name':xlabel,'visible':true,'size':'0.5',
-                     'strokeColor':'Gray','label':{'offset':xoffsets}});
+                     {'withLabel':withLabel,'name':xlabel,'visible':true,'size':'0.5','fixed':fixed,
+                     'highlight':false,'strokeColor':'Gray','label':{'offset':xoffsets}});
 
     var X2 = board.create('point',[intersection.X(), intersection.Y()],
                      {'withLabel':false,'visible':false,'size':'0.0','strokeColor':''});

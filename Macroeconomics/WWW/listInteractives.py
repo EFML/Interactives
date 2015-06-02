@@ -1,14 +1,14 @@
 
 # coding: utf-8
 
-# In[2]:
+# In[1]:
 
 #!/usr/bin/env python
 import os
 from jinja2 import Environment, FileSystemLoader
 
 
-# In[14]:
+# In[2]:
 
 PATH = os.path.dirname(os.path.abspath("__file__"))
 TEMPLATE_ENVIRONMENT = Environment(
@@ -65,9 +65,9 @@ if __name__ == "__main__":
 
 
 
-# In[14]:
+# In[2]:
 
-print page.render()
+
 
 
 # In[ ]:

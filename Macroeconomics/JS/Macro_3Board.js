@@ -31,8 +31,8 @@ createBoard = function(brdName,options) {
                                       hasMouseUp: true, 
     });         
 
-    xaxis = board.create('axis', [[0, 0], [11, 0]], {withLabel: false});
-    yaxis = board.create('axis', [[0, 0], [0, 11]], {withLabel: false});
+    xaxis = board.create('axis', [[0, 0], [11, 0]], {withLabel: false, highlight: false});
+    yaxis = board.create('axis', [[0, 0], [0, 11]], {withLabel: false, highlight: false});
 
     //Axes
     xaxis.removeAllTicks();
@@ -126,21 +126,21 @@ createDashedLines2Axis = function(board,intersection,options) {
     
     var Y1,Y2,YLine,X1,X2,XLine,obj={};
     var Y1 = board.create('point',[0, intersection.Y()],
-                     {'withLabel':withLabel,'name':ylabel,'visible':true,'size':'0.5',
-                     'strokeColor':'Gray','label':{'offset':[4,-10]}});
+                     {'withLabel':withLabel,'name':ylabel,'visible':true,'size':'0.5','highlight':false,
+                     'fixed':fixed,'strokeColor':'Gray','label':{'offset':[4,-10]}});
 
     var Y2 = board.create('point',[intersection.X(), intersection.Y()],
-                     {'withLabel':false,'visible':false,'size':'0.0','strokeColor':''});
+                     {'withLabel':false,'visible':false,'fixed':fixed,'size':'0.0','strokeColor':''});
 
     var YLine = board.create('segment',[Y1,Y2],
                         {'strokeColor':color,'strokeWidth':'2','dash':'1','fixed':fixed,'visible':visible});
 
     var X1 = board.create('point',[intersection.X(), 0],
-                     {'withLabel':withLabel,'name':xlabel,'visible':true,'size':'0.5',
-                     'strokeColor':'Gray','label':{'offset':[2,10]}});
+                     {'withLabel':withLabel,'name':xlabel,'visible':true,'size':'0.5','fixed':fixed,
+                     'highlight':false,'strokeColor':'Gray','label':{'offset':[2,10]}});
 
     var X2 = board.create('point',[intersection.X(), intersection.Y()],
-                     {'withLabel':false,'visible':false,'size':'0.0','strokeColor':''});
+                     {'withLabel':false,'visible':false,'fixed':fixed,'size':'0.0','strokeColor':''});
 
     var XLine = board.create('segment',[X1,X2],
                         {'strokeColor':color,'strokeWidth':'2','dash':'1','fixed':fixed,'visible':visible});
