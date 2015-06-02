@@ -30,12 +30,12 @@ get_ipython().run_cell_magic(u'HTML', u'', u'<!DOCTYPE html>\n<html>\n    <head>
 
 # ### Python Grading
 
-# In[8]:
+# In[14]:
 
 import json
 def grader(e, ans):
     '''
-    Grading shift of macro curve. The M_D curve should shift left.
+    Grading shift of macro curve. The M_S curve should shift left.
     '''
 #     state = json.loads(json.loads(ans)['answer'])
     state = json.loads(ans)#['answer']
@@ -50,7 +50,7 @@ def grader(e, ans):
     
         ### Now Check X Direction - should shift to the left
         if dist1D(state['MS2']['X1'],state['MS1']['X1']) < 20.0:
-            return {'ok': False, 'msg': 'Have you tried moving the orange line? If so, please shift by a larger amount.'}
+            return {'ok': False, 'msg': 'Have you tried moving the blue line? If so, please shift by a larger amount.'}
         elif state['MS2']['X1'] > state['MS1']['X1']:
             return {'ok': True, 'msg': 'Good job.'}
         else:

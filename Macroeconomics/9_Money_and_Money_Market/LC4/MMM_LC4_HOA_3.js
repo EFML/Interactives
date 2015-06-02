@@ -111,7 +111,7 @@ brd1.on('mousedown', function() {
 
 
 //Standard edX JSinput functions
-getInput = function(){
+getGrade = function(){
     var state = {'MS1':{'X1':MS1.point1.X(),'X2':MS1.point2.X(),'Y1':MS1.point1.Y(),'Y2':MS1.point2.Y()},
                  'MS2':{'X1':MS2.point1.X(),'X2':MS2.point2.X(),'Y1':MS2.point1.Y(),'Y2':MS2.point2.Y()}
                 };
@@ -122,21 +122,20 @@ getInput = function(){
 }
 
 getState = function(){
-    state = {'input': JSON.parse(getInput())};
+    state = JSON.parse(getGrade());
     statestr = JSON.stringify(state);
     return statestr
 }
 
-setState = function(statestr){
+setState = function(transaction, statestr){
     state = JSON.parse(statestr);
-    state = state['input'];
     //console.log(state['input']);
     if (state["MS1"] && state["MS2"]) {
-        MD1.point1.moveTo([state['MS1']['X1'],state['MS1']['Y1']],0);
-        MD1.point2.moveTo([state['MS1']['X2'],state['MS1']['Y2']],0);
+        MS1.point1.moveTo([state['MS1']['X1'],state['MS1']['Y1']],0);
+        MS1.point2.moveTo([state['MS1']['X2'],state['MS1']['Y2']],0);
 
-        MD2.point1.moveTo([state['MS2']['X1'],state['MS2']['Y1']],0);
-        MD2.point2.moveTo([state['MS2']['X2'],state['MS2']['Y2']],0);
+        MS2.point1.moveTo([state['MS2']['X1'],state['MS2']['Y1']],0);
+        MS2.point2.moveTo([state['MS2']['X2'],state['MS2']['Y2']],0);
         
         dashS2.Y1.moveTo([0, iB1SD.Y()]);
         dashS2.Y2.moveTo([iB1SD.X(), iB1SD.Y()]);
@@ -150,5 +149,9 @@ setState = function(statestr){
     //console.log(statestr);
     console.debug('State updated successfully from saved.');
 }
+
+createChannel(getGrade, getState, setState);
+
+
             
         

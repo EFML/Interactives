@@ -98,9 +98,8 @@ brd1.on('move', function() {
 });
 
 
-
 //Standard edX JSinput functions
-getInput = function(){
+getGrade = function(){
     var state = {'MD1':{'X1':MD1.point1.X(),'X2':MD1.point2.X(),'Y1':MD1.point1.Y(),'Y2':MD1.point2.Y()},
                  'MD2':{'X1':MD2.point1.X(),'X2':MD2.point2.X(),'Y1':MD2.point1.Y(),'Y2':MD2.point2.Y()}
                 };
@@ -111,14 +110,14 @@ getInput = function(){
 }
 
 getState = function(){
-    state = {'input': JSON.parse(getInput())};
+    var state = JSON.parse(getGrade());
     statestr = JSON.stringify(state);
-    return statestr
+    // console.log(statestr);
+    return statestr;
 }
 
-setState = function(statestr){
+setState = function(transaction, statestr){
     state = JSON.parse(statestr);
-    state = state['input'];
     //console.log(state['input']);
     if (state["MD1"] && state["MD2"]) {
         MD1.point1.moveTo([state['MD1']['X1'],state['MD1']['Y1']],0);
@@ -139,5 +138,6 @@ setState = function(statestr){
     //console.log(statestr);
     console.debug('State updated successfully from saved.');
 }
-            
-        
+
+createChannel(getGrade, getState, setState);
+
