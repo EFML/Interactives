@@ -3,26 +3,20 @@
 ////////////
 var cfx = 800.0/12.0;
 var cfy = 27.0/12.0;
-bboxlimits = [-120, 27, 800, -4];
-var brd1 = JXG.JSXGraph.initBoard('jxgbox1', {axis:false, 
-                                        showCopyright: false,
-                                        showNavigation: false,
-                                        zoom: false,
-                                        pan: false,
-                                        boundingbox:bboxlimits,
-                                        grid: false,
-                                        hasMouseUp: true, 
-                                        axis:false,
-});
+newbbox = [-120, 27, 800, -4];
+
+var brd1 = createBoard('jxgbox1',{xname:" ", 
+                                  yname:" ",
+                                  grid:false,bboxlimits:newbbox});
 
 // xaxis1 = brd1.create('axis', [[0, 0], [11, 0]], {withLabel: false});
 // yaxis1 = brd1.create('axis', [[0, 0], [0, 11]], {withLabel: false});
 
-//Axes
+// //Axes
 // xaxis1.removeAllTicks();
 // yaxis1.removeAllTicks();
-// 
-// 
+
+
 xaxis = brd1.create('axis', [[0, 0], [1,0]], 
       {name:'Quantity of Money ($billions)', 
       withLabel: false, 
@@ -48,31 +42,37 @@ brd1.create('ticks', [yaxis, [0,5,10,15,20,25,30]], {strokeColor: 'Black', major
 var ylabel1 = brd1.create('text',[-110,22,"Nominal<br>Interest<br>Rate"],{fixed:true, highlight:false});
 
 
-
 //Demand Line 1 - fixed
 var MD1 = brd1.create('segment',[[cfx*1.45,cfy*9.0],[cfx*9.0,cfy*1.45]],
-                       {'strokeColor':'Gray','strokeWidth':'3',
+                       {'strokeColor':'Orange','strokeWidth':'7',
                         'name':'D','withLabel':false,
-                        'fixed':true,'dash':1,
+                        'fixed':true,'dash':0,
                         'highlight':false,
                         'label':{'offset':[140,-145]}});  
 
 
-//Demand Line 2 - moveable
-var MD2 = brd1.create('segment',[[cfx*1.45,cfy*9.0],[cfx*9.0,cfy*1.45]],
-                       {'strokeColor':'Orange','strokeWidth':'5',
-                        'name':'M<sub>D</sub>','withLabel':true,
-                        'fixed':false,
-                        'highlight':true,
-                        'label':{'offset':[150,-140]}});  
+// //Demand Line 2 - moveable
+// var MD2 = brd1.create('segment',[[cfx*1.45,cfy*9.0],[cfx*9.0,cfy*1.45]],
+//                        {'strokeColor':'Orange','strokeWidth':'5',
+//                         'name':'M<sub>D</sub>','withLabel':true,
+//                         'fixed':false,
+//                         'highlight':true,
+//                         'label':{'offset':[150,-140]}});  
 
 ////////////
 //LRAS - straight line
 ////////////
-var S = brd1.create('segment',[[cfx*6.0,cfy*11.0],[cfx*6.0,cfy*1.0]],
-                       {'strokeColor':'DodgerBlue','strokeWidth':'5',
-                        'name':'M<sub>S</sub>','withLabel':true,
+var MS1 = brd1.create('segment',[[cfx*6.0,cfy*11.0],[cfx*6.0,cfy*1.0]],
+                       {'strokeColor':'Gray','strokeWidth':'5','dash':1,
+                        'name':'M<sub>S1</sub>','withLabel':true,
                         'fixed':true,
+                        'highlight':false,
+                        'label':{'offset':[0,185]}});  
+
+var MS2 = brd1.create('segment',[[cfx*6.0,cfy*11.0],[cfx*6.0,cfy*1.0]],
+                       {'strokeColor':'DodgerBlue','strokeWidth':'7',
+                        'name':'M<sub>S2</sub>','withLabel':false,
+                        'fixed':false,
                         'highlight':false,
                         'label':{'offset':[0,185]}});  
 
@@ -80,7 +80,7 @@ var S = brd1.create('segment',[[cfx*6.0,cfy*11.0],[cfx*6.0,cfy*1.0]],
 // Intersection Box 1
 ////////////
 //S Intersection
-var iB1SD = brd1.create('intersection', [S, MD2, 0], {size:4,visible:true,color:'DarkBlue',strokeColor:'DarkBlue'});
+var iB1SD = brd1.create('intersection', [MS2, MD1, 0], {size:4,visible:true,color:'DarkBlue',strokeColor:'DarkBlue'});
 
 ////////////
 // Draggable Dashed Lines for Board 1
@@ -104,12 +104,16 @@ brd1.on('move', function() {
     dashS2.X2.moveTo([iB1SD.X(), iB1SD.Y()]);
 });
 
+brd1.on('mousedown', function() {      
+    MS2.setAttribute({withLabel:true});
+    brd1.update()
+});
 
 
 //Standard edX JSinput functions
 getInput = function(){
-    var state = {'MD1':{'X1':MD1.point1.X(),'X2':MD1.point2.X(),'Y1':MD1.point1.Y(),'Y2':MD1.point2.Y()},
-                 'MD2':{'X1':MD2.point1.X(),'X2':MD2.point2.X(),'Y1':MD2.point1.Y(),'Y2':MD2.point2.Y()}
+    var state = {'MS1':{'X1':MS1.point1.X(),'X2':MS1.point2.X(),'Y1':MS1.point1.Y(),'Y2':MS1.point2.Y()},
+                 'MS2':{'X1':MS2.point1.X(),'X2':MS2.point2.X(),'Y1':MS2.point1.Y(),'Y2':MS2.point2.Y()}
                 };
     statestr = JSON.stringify(state);
     //console.log(statestr)
@@ -127,12 +131,12 @@ setState = function(statestr){
     state = JSON.parse(statestr);
     state = state['input'];
     //console.log(state['input']);
-    if (state["MD1"] && state["MD2"]) {
-        MD1.point1.moveTo([state['MD1']['X1'],state['MD1']['Y1']],0);
-        MD1.point2.moveTo([state['MD1']['X2'],state['MD1']['Y2']],0);
+    if (state["MS1"] && state["MS2"]) {
+        MD1.point1.moveTo([state['MS1']['X1'],state['MS1']['Y1']],0);
+        MD1.point2.moveTo([state['MS1']['X2'],state['MS1']['Y2']],0);
 
-        MD2.point1.moveTo([state['MD2']['X1'],state['MD2']['Y1']],0);
-        MD2.point2.moveTo([state['MD2']['X2'],state['MD2']['Y2']],0);
+        MD2.point1.moveTo([state['MS2']['X1'],state['MS2']['Y1']],0);
+        MD2.point2.moveTo([state['MS2']['X2'],state['MS2']['Y2']],0);
         
         dashS2.Y1.moveTo([0, iB1SD.Y()]);
         dashS2.Y2.moveTo([iB1SD.X(), iB1SD.Y()]);

@@ -3,17 +3,10 @@
 ////////////
 var cfx = 800.0/12.0;
 var cfy = 27.0/12.0;
-bboxlimits = [-120, 27, 800, -4];
-var brd1 = JXG.JSXGraph.initBoard('jxgbox1', {axis:false, 
-                                        showCopyright: false,
-                                        showNavigation: false,
-                                        zoom: false,
-                                        pan: false,
-                                        boundingbox:bboxlimits,
-                                        grid: false,
-                                        hasMouseUp: true, 
-                                        axis:false,
-});
+newbbox = [-120, 27, 800, -4];
+var brd1 = createBoard('jxgbox1',{xname:" ", 
+                                  yname:" ",
+                                  grid:false,bboxlimits:newbbox});
 
 // xaxis1 = brd1.create('axis', [[0, 0], [11, 0]], {withLabel: false});
 // yaxis1 = brd1.create('axis', [[0, 0], [0, 11]], {withLabel: false});

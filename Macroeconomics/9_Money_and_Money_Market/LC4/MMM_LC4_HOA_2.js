@@ -19,7 +19,7 @@ var ylabel = brd1.create('text',[-1.5,10,"Interest<br>Rate"],{fixed:true});
 var xlabel = brd1.create('text',[8.5,-0.5,"Quantity of Money"],{fixed:true});
 
 //Demand 1
-var D1 = createDemand(brd1,{name:'D<sub>1</sub>',color:'DodgerBlue'});
+var D1 = createLine(brd1,{ltype:'Demand',name:'D<sub>1</sub>',color:'DodgerBlue'});
 D1.setAttribute({fixed:true});
 
 ////////////
@@ -63,22 +63,6 @@ var dashSfix = createDashedLines2Axis(brd1,iSD,
                                    ylabel:'R<sub>1</sub>',
                                    color:'Gray'}); 
 
-// //Demand 2
-// var D2 = createDemand(brd1,{name:'D<sub>2</sub>',color:'DodgerBlue'});
-// D2.setAttribute({withLabel:false,offset:[125,-85]});
-
-// //Glider along demand curve
-// var G = brd1.create('glider',[6.0,6.0,D2],{name:'A',withLabel:false,fixed:true});
-
-// ////////////
-// // Draggable Dashed Lines for Board 1
-// ////////////
-// var dashS1 = createDashedLines2Axis(brd1,iSD,
-//                                   {fixed:false,
-//                                    withLabel:false,
-//                                    xlabel:'Y<sub>2</sub>',
-//                                    ylabel:'',
-//                                    color:'DodgerBlue'});
 
 toggleLabels = function(toggle) {
     dashS1.X1.setAttribute({withLabel:toggle});
