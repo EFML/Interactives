@@ -1,9 +1,10 @@
 var DataEntry = (function($, _, JXG, undefined) {
     'use strict';
 
-    var fGraphBoundingBox = [-10.0, 10, 10.0, -10.0], gGraphBoundingBox = [-10.0, 10, 10.0, -10.0],
-        x0 = 1.0, x0Min = 0.0, x0Max = 6.0, x0Step = 0.01, fGraphxAxisTicks = [], fGraphyAxisTicks = [], gGraphxAxis, gGraphyAxis, halfSpan = 10.0, precision = 6,
-        fGraphBoard, gGraphBoard, x0Slider, x0SliderValue, fGraphBoundingBoxValue, gGraphBoundingBoxValue, jm,
+    var fGraphBoundingBox = [], gGraphBoundingBox = [], x0 = 1.0, x0Min = 0.0, x0Max = 6.0, x0Step = 0.01, fGraphxAxisTicks = [], fGraphxAxisLabels = [], fGraphyAxisTicks = [], fGraphyAxisLabels = [],
+        gGraphxAxisTicks = [], gGraphxAxisLabels = [], gGraphyAxisTicks = [], gGraphyAxisLabels = [],
+        fGraphBoard, gGraphBoard, x0Slider, x0SliderValue, fGraphBoundingBoxValue, gGraphBoundingBoxValue,
+        halfSpan = 10.0, x0Precision = 2, precision = 6,
 
         fFn = [f0],
         dfFn = [df0],
@@ -49,16 +50,13 @@ var DataEntry = (function($, _, JXG, undefined) {
 
         $('#dnext-help-link').on('click', toggle);
 
-        fGraphBoundingBoxValue = $('#math-line3');
-        gGraphBoundingBoxValue = $('#math-line6');
-
+        calculateGraphsBounds();
         createfGraphBoard();
         creategGraphBoard();
-        setGraphsBounds();
+        updateGraphs();
         createSlider();
         outputStaticMath();
         outputDynamicMath();
-        updateGraphs();
     }
 
     function toggle() {
@@ -86,8 +84,15 @@ var DataEntry = (function($, _, JXG, undefined) {
             value: 0,
             slide: function(event, ui) {
                 x0 = Math.pow(10.0, ui.value);
-                x0SliderValue.html(x0.toFixed(2));
-                setGraphsBounds();
+                if (x0 <= 50.0) {
+                    x0Precision = 2;
+                }
+                else {
+                    x0Precision = 0;
+                }
+                x0SliderValue.html(x0.toFixed(x0Precision));
+                calculateGraphsBounds();
+                updateGraphs();
                 outputDynamicMath();
             }
         });
@@ -96,102 +101,87 @@ var DataEntry = (function($, _, JXG, undefined) {
     function outputStaticMath() {
         katex.render("f(x) = " +  fStr, $('#math-line1').get(0));
         katex.render("f'(x) = " + dfStr, $('#math-line2').get(0));
-        katex.render("g(x) = " +  gStr, $('#math-line4').get(0));
-        katex.render("g'(x) = " + dgStr, $('#math-line5').get(0));
+        katex.render("g(x) = " +  gStr, $('#math-line3').get(0));
+        katex.render("g'(x) = " + dgStr, $('#math-line4').get(0));
     }
 
     function outputDynamicMath() {
-        fGraphBoundingBoxValue.html(fGraphBoundingBoxString());
-        gGraphBoundingBoxValue.html(gGraphBoundingBoxString())
-        katex.render("x = " + x0Str() +
-                     "\\quad\\quad \\frac{f(x)}{g(x)} = " + fgFracStr() +
-                     "\\quad\\quad \\frac{f'(x)}{g'(x)} = " + dfdgFracStr(), $('#math-line7').get(0));
+        katex.render("x = " + x0Str(), $('#math-line5').get(0));
+        katex.render("\\frac{f(x)}{g(x)} = " + fgFracStr(), $('#math-line6').get(0));
+        katex.render("\\frac{f'(x)}{g'(x)} = " + dfdgFracStr(), $('#math-line7').get(0));
     }
 
-    function fGraphBoundingBoxString() { // For scientific notation, use NUmber.toExponential()
-       return 'Window: [' +
-              fGraphBoundingBox[0].toFixed() + ', ' +
-              fGraphBoundingBox[2].toFixed() + '] x [' +
-              fGraphBoundingBox[3].toFixed() + ', ' +
-              fGraphBoundingBox[1].toFixed() +
-              ']';
-    }
+    function calculateGraphsBounds() {
+        var y0, xMin, xMax, yMin, yMax;
 
-    function gGraphBoundingBoxString() {
-       return 'Window: [' +
-              gGraphBoundingBox[0].toFixed() + ', ' +
-              gGraphBoundingBox[2].toFixed() + '] x [' +
-              gGraphBoundingBox[3].toFixed() + ', ' +
-              gGraphBoundingBox[1].toFixed() +
-              ']';
-    }
-
-    function setGraphsBounds() {
-        var x0Round, y0Round, y0, xMin, xMax, yMin, yMax;
-
-        y0 = f(x0);
         xMin = x0 - halfSpan;
         xMax = x0 + halfSpan;
+
+        // f graph
+        y0 = f(x0);
         yMin = y0 - halfSpan;
         yMax = y0 + halfSpan;
-
         fGraphBoundingBox = [xMin, yMax, xMax, yMin];
+
+        // g graph
+        y0 = g(x0);
+        yMin = y0 - halfSpan;
+        yMax = y0 + halfSpan;
+        gGraphBoundingBox = [xMin, yMax, xMax, yMin];
+    }
+
+    function updateGraphs() {
+        var xTickValues, yTickValues;
+
+        // f graph
         fGraphBoard.setBoundingBox(fGraphBoundingBox);
 
         // x-axis
-        var xTickMax = xMax - xMax%5.0;
-        var xTick2 = xTickMax - 5.0;
-        var xTick1 = xTickMax - 10.0;
-        var xTickMin = xTickMax - 15.0;
+        xTickValues = getTickValues(fGraphBoundingBox[0], fGraphBoundingBox[2], 5.0);
 
-
-        fGraphxAxisTicks[0].point1.moveTo([xTickMax, yMin]);
-        fGraphxAxisTicks[0].point2.moveTo([xTickMax, yMax]);
-
-        fGraphxAxisTicks[1].point1.moveTo([xTick2, yMin]);
-        fGraphxAxisTicks[1].point2.moveTo([xTick2, yMax]);
-
-        fGraphxAxisTicks[2].point1.moveTo([xTick1, yMin]);
-        fGraphxAxisTicks[2].point2.moveTo([xTick1, yMax]);
-
-        fGraphxAxisTicks[3].point1.moveTo([xTickMin, yMin]);
-        fGraphxAxisTicks[3].point2.moveTo([xTickMin, yMax]);
+        _.each(xTickValues, function(x, index)  {
+            fGraphxAxisTicks[index].point1.moveTo([x, fGraphBoundingBox[3]]);
+            fGraphxAxisTicks[index].point2.moveTo([x, fGraphBoundingBox[1]]);
+        });
 
         // y-axis
-        var yTickMax = yMax - yMax%5.0;
-        var yTick2 = yTickMax - 5.0;
-        var yTick1 = yTickMax - 10.0;
-        var yTickMin = yTickMax - 15.0;
+        yTickValues = getTickValues(fGraphBoundingBox[3], fGraphBoundingBox[1], 5.0);
+        // Remove first element
+        yTickValues.shift();
 
-        fGraphyAxisTicks[0].point1.moveTo([xMin, yTickMax]);
-        fGraphyAxisTicks[0].point2.moveTo([xMax, yTickMax]);
+        _.each(yTickValues, function(y, index)  {
+            fGraphyAxisTicks[index].point1.moveTo([fGraphBoundingBox[0], y]);
+            fGraphyAxisTicks[index].point2.moveTo([fGraphBoundingBox[2], y]);
+        });
 
-        fGraphyAxisTicks[1].point1.moveTo([xMin, yTick2]);
-        fGraphyAxisTicks[1].point2.moveTo([xMax, yTick2]);
+        fGraphBoard.fullUpdate();
 
-        fGraphyAxisTicks[2].point1.moveTo([xMin, yTick1]);
-        fGraphyAxisTicks[2].point2.moveTo([xMax, yTick1]);
-
-        fGraphyAxisTicks[3].point1.moveTo([xMin, yTickMin]);
-        fGraphyAxisTicks[3].point2.moveTo([xMax, yTickMin]);
-
-        //fGraphyAxis.point1.moveTo([xMin - 1, yMin]);
-        //fGraphyAxis.point2.moveTo([xMin - 1, yMax]);
-        //fGraphBoard.fullUpdate();
-
-        gGraphBoundingBox = [x0 - halfSpan, g(x0) + halfSpan, x0 + halfSpan, g(x0) - halfSpan];
+        // g graph
         gGraphBoard.setBoundingBox(gGraphBoundingBox);
-        /*
-        gGraphxAxis.point1.moveTo([x0 - halfSpan + 5, g(x0) - halfSpan + 1]);
-        gGraphxAxis.point2.moveTo([x0 + halfSpan, g(x0) - halfSpan + 1]);
-        gGraphyAxis.point1.moveTo([x0 - halfSpan, g(x0) - halfSpan]);
-        gGraphyAxis.point2.moveTo([x0 - halfSpan, g(x0) + halfSpan]);
-        */
+
+        // x-axis
+        xTickValues = getTickValues(gGraphBoundingBox[0], gGraphBoundingBox[2], 5.0);
+
+        _.each(xTickValues, function(x, index)  {
+            gGraphxAxisTicks[index].point1.moveTo([x, gGraphBoundingBox[3]]);
+            gGraphxAxisTicks[index].point2.moveTo([x, gGraphBoundingBox[1]]);
+        });
+
+        // y-axis
+        yTickValues = getTickValues(gGraphBoundingBox[3], gGraphBoundingBox[1], 5.0);
+        // Remove first element
+        yTickValues.shift();
+
+        _.each(yTickValues, function(y, index)  {
+            gGraphyAxisTicks[index].point1.moveTo([gGraphBoundingBox[0], y]);
+            gGraphyAxisTicks[index].point2.moveTo([gGraphBoundingBox[2], y]);
+        });
+
         gGraphBoard.fullUpdate();
     }
 
     function x0Str() {
-        return x0.toFixed();
+        return x0.toFixed(x0Precision);
     }
 
     function fgFracStr() {
@@ -219,9 +209,141 @@ var DataEntry = (function($, _, JXG, undefined) {
         return 4.0/x + 4.0;
     }
 
+    function getTickValues(min, max, step) {
+        var tickMin, tickMax, nTicks, t, i, result = [];
+
+        // Take in account the JS modulo operator bug:
+        // http://javascript.about.com/od/problemsolving/a/modulobug.htm
+
+        tickMin = min <= 0.0 ? min + Math.abs(min % step)
+                             : min - Math.abs(min % step) + step;
+
+        tickMax = max <= 0.0 ? max - Math.abs(max % step)
+                             : max - Math.abs(max % step);
+
+        nTicks = Math.round((tickMax - tickMin)/step);
+
+        t = tickMin;
+
+        for (t = tickMin, i = 0; i <= nTicks; i++, t += step) {
+            result.push(t);
+        }
+
+        return result
+    }
+
+    function createTicksLabels(graph, tickStep) {
+        var board, boundingBox, xTickValues, xAxisTicks, xAxisLabels, yTickValues, yAxisTicks, yAxisLabels,
+            xLabelxPos, xLabelyPos, xLabelText, yLabelxPos, yLabelyPos, yLabelText;
+
+        if (graph === 'fGraph') {
+            board = fGraphBoard;
+            boundingBox = fGraphBoundingBox;
+            xAxisTicks =fGraphxAxisTicks;
+            xAxisLabels = fGraphxAxisLabels;
+            yAxisTicks = fGraphyAxisTicks;
+            yAxisLabels = fGraphyAxisLabels;
+        }
+        else {
+            board = gGraphBoard;
+            boundingBox = gGraphBoundingBox;
+            xAxisTicks =gGraphxAxisTicks;
+            xAxisLabels = gGraphxAxisLabels;
+            yAxisTicks = gGraphyAxisTicks;
+            yAxisLabels = gGraphyAxisLabels;
+        }
+
+
+        xTickValues = getTickValues(boundingBox[0], boundingBox[2], tickStep),
+        yTickValues = getTickValues(boundingBox[3], boundingBox[1], tickStep),
+
+        // x-axis
+        xLabelxPos = function(index) {
+            return xAxisTicks[index].point1.X() + 0.25;
+        };
+
+        xLabelyPos = function(index) {
+            return xAxisTicks[index].point1.Y() + 1.0;
+        };
+
+        xLabelText = function(index) {
+            return xAxisTicks[index].point1.X().toFixed();
+        };
+
+        yLabelxPos = function(index) {
+            return yAxisTicks[index].point1.X() + 0.5;
+        };
+
+        yLabelyPos = function(index) {
+            return yAxisTicks[index].point1.Y() - 1.0;
+        };
+
+        yLabelText = function(index) {
+            return yAxisTicks[index].point1.Y().toFixed();
+        };
+
+        // x-axis
+        _.each(xTickValues, function(x, index)  {
+            xAxisTicks.push(board.create(
+                'line',
+                [[x, boundingBox[1]], [x, boundingBox[3]]],
+                {
+                    strokeColor:'#000',
+                    strokeOpacity: 0.2,
+                    dash: 1,
+                    fixed: true,
+                    highlight: false
+                }
+            ));
+
+            xAxisLabels.push(board.create(
+                'text',
+                [
+                    _.partial(xLabelxPos, index),
+                    _.partial(xLabelyPos, index),
+                    _.partial(xLabelText, index)
+                ],
+                {
+                    anchorX: 'left',
+                    fixed: true
+                }
+            ));
+        });
+
+        // y-axis
+        // Remove first element to avoid clashing with first element of x-axis
+        yTickValues.shift();
+        _.each(yTickValues, function(y, index)  {
+            yAxisTicks.push(board.create(
+                'line',
+                [[boundingBox[0], y], [boundingBox[2], y]],
+                {
+                    strokeColor:'#000',
+                    strokeOpacity: 0.2,
+                    dash: 1,
+                    fixed: true,
+                    highlight: false
+                }
+            ));
+
+            yAxisLabels.push(board.create(
+                'text',
+                [
+                    _.partial(yLabelxPos, index),
+                    _.partial(yLabelyPos, index),
+                    _.partial(yLabelText, index)
+                ],
+                {
+                    anchorX: 'left',
+                    fixed: true
+                }
+            ));
+        });
+    }
+
     function createfGraphBoard() {
         JXG.Options.axis.ticks.insertTicks = false;
-        JXG.Options.axis.ticks.majorHeight = 100; // -1
+        JXG.Options.axis.ticks.majorHeight = 100;
         JXG.Options.axis.ticks.ticksDistance = 5;
 
         fGraphBoard = JXG.JSXGraph.initBoard('height-graph-board', {
@@ -234,247 +356,7 @@ var DataEntry = (function($, _, JXG, undefined) {
             grid: false
         });
 
-        var xMin = fGraphBoundingBox[0], xMax = fGraphBoundingBox[2],
-            yMin = fGraphBoundingBox[3], yMax = fGraphBoundingBox[1];
-
-        // x-axis
-        var xTickMax = xMax - xMax%5.0;
-        var xTick2 = xTickMax - 5.0;
-        var xTick1 = xTickMax - 10.0;
-        var xTickMin = xTickMax - 15.0;
-
-        fGraphxAxisTicks.push(fGraphBoard.create(
-            'line',
-            [[xTickMax, yMin], [xTickMax, yMax]],
-            {
-                strokeColor:'#ccc',
-                dash: 1,
-                fixed: true,
-                highlight: false
-            }
-        ));
-
-        fGraphxAxisTicks.push(fGraphBoard.create(
-            'line',
-            [[xTick2, yMin], [xTick2, yMax]],
-            {
-                strokeColor:'#ccc',
-                dash: 1,
-                fixed: true,
-                highlight: false
-            }
-        ));
-
-        fGraphxAxisTicks.push(fGraphBoard.create(
-            'line',
-            [[xTick1, yMin], [xTick1, yMax]],
-            {
-                strokeColor:'#ccc',
-                dash: 1,
-                fixed: true,
-                highlight: false
-            }
-        ));
-
-        fGraphxAxisTicks.push(fGraphBoard.create(
-            'line',
-            [[xTickMin, yMin], [xTickMin, yMax]],
-            {
-                strokeColor:'#ccc',
-                dash: 1,
-                fixed: true,
-                highlight: false
-            }
-        ));
-
-        fGraphxAxisTicks.push(fGraphBoard.create(
-            'text',
-            [
-                function() {return fGraphxAxisTicks[0].point1.X() + 0.25;},
-                function() {return fGraphxAxisTicks[0].point1.Y() + 1.0;},
-                function() {return fGraphxAxisTicks[0].point1.X()}
-            ],
-            {
-                anchorX: 'left',
-                fixed:true
-            }
-        ));
-
-        fGraphxAxisTicks.push(fGraphBoard.create(
-            'text',
-            [
-                function() {return fGraphxAxisTicks[1].point1.X() + 0.25;},
-                function() {return fGraphxAxisTicks[1].point1.Y() + 1.0;},
-                function() {return fGraphxAxisTicks[1].point1.X()}
-            ],
-            {
-                anchorX: 'left',
-                fixed:true
-            }
-        ));
-
-        fGraphxAxisTicks.push(fGraphBoard.create(
-            'text',
-            [
-                function() {return fGraphxAxisTicks[2].point1.X() + 0.25;},
-                function() {return fGraphxAxisTicks[2].point1.Y() + 1.0;},
-                function() {return fGraphxAxisTicks[2].point1.X()}
-            ],
-            {
-                anchorX: 'left',
-                fixed:true
-            }
-        ));
-
-        fGraphxAxisTicks.push(fGraphBoard.create(
-            'text',
-            [
-                function() {return fGraphxAxisTicks[3].point1.X() + 0.25;},
-                function() {return fGraphxAxisTicks[3].point1.Y() + 1.0;},
-                function() {return fGraphxAxisTicks[3].point1.X()}
-            ],
-            {
-                anchorX: 'left',
-                fixed:true
-            }
-        ));
-
-        // y-axis
-        var yTickMax = yMax - yMax%5.0;
-        var yTick2 = yTickMax - 5.0;
-        var yTick1 = yTickMax - 10.0;
-        var yTickMin = yTickMax - 15.0;
-
-        fGraphyAxisTicks.push(fGraphBoard.create(
-            'line',
-            [[xMin, yTickMax], [xMax, yTickMax]],
-            {
-                strokeColor:'#ccc',
-                dash: 1,
-                fixed: true,
-                highlight: false
-            }
-        ));
-
-        fGraphyAxisTicks.push(fGraphBoard.create(
-            'line',
-            [[xMin, yTick2], [xMax, yTick2]],
-            {
-                strokeColor:'#ccc',
-                dash: 1,
-                fixed: true,
-                highlight: false
-            }
-        ));
-
-        fGraphyAxisTicks.push(fGraphBoard.create(
-            'line',
-            [[xMin, yTick1], [xMax, yTick1]],
-            {
-                strokeColor:'#ccc',
-                dash: 1,
-                fixed: true,
-                highlight: false
-            }
-        ));
-
-        fGraphyAxisTicks.push(fGraphBoard.create(
-            'line',
-            [[xMin, yTickMin], [xMax, yTickMin]],
-            {
-                strokeColor:'#ccc',
-                dash: 1,
-                fixed: true,
-                highlight: false
-            }
-        ));
-
-        fGraphyAxisTicks.push(fGraphBoard.create(
-            'text',
-            [
-                function() {return fGraphyAxisTicks[0].point1.X() + 0.5;},
-                function() {return fGraphyAxisTicks[0].point1.Y() - 1.0;},
-                function() {return fGraphyAxisTicks[0].point1.Y()}
-            ],
-            {
-                anchorX: 'left',
-                fixed:true
-            }
-        ));
-
-        fGraphyAxisTicks.push(fGraphBoard.create(
-            'text',
-            [
-                function() {return fGraphyAxisTicks[1].point1.X() + 0.5;},
-                function() {return fGraphyAxisTicks[1].point1.Y() - 1.0;},
-                function() {return fGraphyAxisTicks[1].point1.Y()}
-            ],
-            {
-                anchorX: 'left',
-                fixed:true
-            }
-        ));
-
-        fGraphyAxisTicks.push(fGraphBoard.create(
-            'text',
-            [
-                function() {return fGraphyAxisTicks[2].point1.X() + 0.5;},
-                function() {return fGraphyAxisTicks[2].point1.Y() - 1.0;},
-                function() {return fGraphyAxisTicks[2].point1.Y()}
-            ],
-            {
-                anchorX: 'left',
-                fixed:true
-            }
-        ));
-
-        /*
-        fGraphyAxisTicks.push(fGraphBoard.create(
-            'text',
-            [
-                function() {return fGraphyAxisTicks[3].point1.X() + 0.5;},
-                function() {return fGraphyAxisTicks[3].point1.Y() - 1.0;},
-                function() {return fGraphyAxisTicks[3].point1.Y()}
-            ],
-            {
-                anchorX: 'left',
-                fixed:true
-            }
-        ));
-        */
-
-        /*fGraphxAxis = fGraphBoard.create('axis', [[0.0, 0.0], [1.0, 0.0]], {
-            //withLabel: false,
-            //drawZero: true
-        });*/
-        //fGraphxAxis.removeAllTicks();
-        /*fGraphBoard.create('ticks', [fGraphxAxis, 10], { // The number here is the distance between Major ticks
-            strokeColor:'#ccc',
-            majorHeight: -1, // -1 Need this because the JXG.Options one doesn't apply
-            drawLabels: true, // Needed, and only works for equidistant ticks
-            label: {offset: [20, 25]},
-            minorTicks: 5, // The NUMBER of small ticks between each Major tick
-            drawZero: true,
-            precision: 10
-        }
-        );*/
-
-
-        /*fGraphyAxis = fGraphBoard.create('axis', [[0.0, 0.0], [0.0, 1.0]], {
-            //withLabel: false,
-            //grid: false
-        });
-        fGraphyAxis.removeAllTicks();
-        fGraphBoard.create('ticks', [fGraphyAxis, 10], { // The number here is the distance between Major ticks
-            strokeColor:'#ccc',
-            majorHeight: -1, // -1 Need this because the JXG.Options one doesn't apply
-            drawLabels: true, // Needed, and only works for equidistant ticks
-            label: {offset: [25, 10]},
-            // minorTicks: 5, // The NUMBER of small ticks between each Major tick
-            drawZero: true,
-            precision: 10
-        }
-        );*/
+        createTicksLabels('fGraph', 5.0);
 
         fGraphBoard.create(
             'functiongraph',
@@ -494,26 +376,13 @@ var DataEntry = (function($, _, JXG, undefined) {
             grid: false
         });
 
-        /*
-        gGraphxAxis = gGraphBoard.create('axis', [[0.0, 0.0], [1.0, 0.0]], {
-            withLabel: false
-        });
-        gGraphxAxis.removeAllTicks();
-
-        gGraphyAxis = gGraphBoard.create('axis', [[0.0, 0.0], [0.0, 1.0]], {
-            withLabel: false
-        });
-        gGraphyAxis.removeAllTicks();
-        */
+        createTicksLabels('gGraph', 5.0);
 
         gGraphBoard.create(
             'functiongraph',
             [g],
             {strokeWidth: 2, strokeColor: 'red', highlight: false}
         );
-    }
-
-    function updateGraphs() {
     }
 
     return {
