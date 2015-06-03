@@ -8,7 +8,7 @@ import os
 from jinja2 import Environment, FileSystemLoader
 
 
-# In[2]:
+# In[20]:
 
 PATH = os.path.dirname(os.path.abspath("__file__"))
 TEMPLATE_ENVIRONMENT = Environment(
@@ -22,23 +22,31 @@ def render_template(template_filename, context):
  
 def crawl_directory_for_html(directory):
     iList=[]
+    actList=[]
     for dirpath, subdirs, files in os.walk(directory):
         for file in files:
+            relURL = os.path.join(dirpath, file)
+            baseURL = 'https://dnextinteractives.s3.amazonaws.com/Macroeconomics/'
+            URL = baseURL + relURL.lstrip('../')
             if file.endswith('.html'):
-                relURL = os.path.join(dirpath, file)
-                baseURL = 'https://dnextinteractives.s3.amazonaws.com/Macroeconomics/'
-                URL = baseURL + relURL.lstrip('../')
                 if "OldStructure" in URL or "WWW" in URL: 
                     print "Ignore folder: %s" % dirpath
                 else:
                     iList.append(URL)
-    return iList
+    
+            if "ActTable" in file:
+                print URL
+                actList.append(URL)
+    
+    return iList, actList
 
 def create_index_html():
     fname = "MacroInteractives.html"
-    iList = crawl_directory_for_html('../')
+    iList, actList = crawl_directory_for_html('../')
     context = {
-        'urls': iList
+        'TotalInteractives': len(iList) + len(actList),
+        'JSXlist': iList,
+        'actList': actList
     }
     #
     with open(fname, 'w') as f:

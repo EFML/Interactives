@@ -14,12 +14,23 @@
   <body>
     <center>
       <h1>Davidson Next: Macroeconomics Interactive Content</h1>
-      <p>Total Number of Interactives: {{ urls|length }} links</p>
+      <p>Total Number of JSXgraph Interactives: {{ JSXlist|length }} links</p>
+      <p>Total Number of Active Table Problems: {{ actList|length }} links</p>
       <p>Roughly 20% of these files are either out of date, or lack context outside the edX platform.</p>
     </center>
+    <h2>JSXgraph Interactives</h2>
     <ol align="left">
       {% set counter = 0 -%}
-      {% for url in urls -%}
+      {% for url in JSXlist -%}
+      <li><a href="{{ url }}">{{ url }}</a></li>
+      {% set counter = counter + 1 -%}
+      {% endfor -%}
+    </ol>
+
+    <h2>Active Table Problems (no render available)</h2>
+    <ol align="left">
+      {% set counter = 0 -%}
+      {% for url in actList -%}
       <li><a href="{{ url }}">{{ url }}</a></li>
       {% set counter = counter + 1 -%}
       {% endfor -%}
