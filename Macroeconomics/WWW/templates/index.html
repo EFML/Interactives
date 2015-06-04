@@ -1,14 +1,49 @@
-{% extends "myapp/base.html" %}
-{% block title %}Index{% endblock %}
-{% block head %}
-    {{ super() }}
-    <style type="text/css">
-        .important { color: #336699; }
-    </style>
-{% endblock %}
-{% block content %}
-    <h1>Index</h1>
-    <p class="important">
-      Welcome on my awesome homepage.
-    </p>
-{% endblock %}
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Davidson Next: Macroeconomics Interactive Content</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link href="styles/bootstrap.min.css" rel="stylesheet" />
+    </head>
+    <body>
+        <div class="container">
+            <div class="jumbotron">
+                <div class="container">
+                    <h1>Davidson Next: Macroeconomics Enhancements</h1>
+                    <p>Interactive Educational Content</p>
+                </div>
+            </div>
+        </div>
+        <center>
+            <p>Total Number of JSXgraph Interactives: {{ JSXlist|length }} links</p>
+            <p>Total Number of Active Table Problems: {{ actList|length }} links</p>
+            <p>Roughly 10% of these files are either out of date, or lack context outside the edX platform.</p>
+        </center>
+        <!-- <ol align="left">
+        {% set counter = 0 -%}
+        {% for url in urls -%}
+        <li><a href="{{ url }}">{{ url }}</a></li>
+        {% set counter = counter + 1 -%}
+        {% endfor -%}
+        </ol> -->
+
+        <h2>JSXgraph Interactives</h2>
+        <ol align="left">
+            {% set counter = 0 -%}
+            {% for url in JSXlist -%}
+            <li><a href="{{ url }}">{{ url }}</a></li>
+            {% set counter = counter + 1 -%}
+            {% endfor -%}
+        </ol>
+
+        <h2>Active Table Problems (no render available)</h2>
+        <ol align="left">
+            {% set counter = 0 -%}
+            {% for url in actList -%}
+            <li><a href="{{ url }}">{{ url }}</a></li>
+            {% set counter = counter + 1 -%}
+            {% endfor -%}
+        </ol>
+        
+    </body>
+</html>

@@ -3,6 +3,8 @@
 <![CDATA[
 ### Custom Checks ###
 
+custom_checks = {}
+
 success_message = 'Good job!'
 
 

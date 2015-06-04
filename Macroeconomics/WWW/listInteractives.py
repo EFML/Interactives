@@ -1,14 +1,14 @@
 
 # coding: utf-8
 
-# In[23]:
+# In[5]:
 
 #!/usr/bin/env python
 import os
 from jinja2 import Environment, FileSystemLoader
 
 
-# In[24]:
+# In[13]:
 
 PATH = os.path.dirname(os.path.abspath("__file__"))
 TEMPLATE_ENVIRONMENT = Environment(
@@ -41,21 +41,22 @@ def crawl_directory_for_html(directory):
 #                 print link
                 actList.append(link)
             
-    return iList, actList
+    return iList, actList 
 
 def create_index_html():
-    fname = "helloworld.html"
+    fname = "MacroInteractives.html"
     iList, actList = crawl_directory_for_html('../')
     context = {
         'TotalInteractives': len(iList) + len(actList),
         'JSXlist': iList,
         'actList': actList
     }
-    #
+    
     with open(fname, 'w') as f:
-        html = render_template('base.html', context)
+        html = render_template('index.html', context)
         f.write(html)
-
+ 
+ 
 def main():
     create_index_html()
  
