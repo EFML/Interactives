@@ -1,21 +1,34 @@
 var DataEntry = (function($, _, JXG, undefined) {
     'use strict';
 
-    var fGraphBoundingBox = [], gGraphBoundingBox = [], x0 = 1.0, x0Min = 0.0, x0Max = 6.0, x0Step = 0.01, fGraphxAxisTicks = [], fGraphxAxisLabels = [], fGraphyAxisTicks = [], fGraphyAxisLabels = [],
+    var fGraphBoundingBox = [], gGraphBoundingBox = [], x0, x0Min, x0Max, x0Step, fGraphxAxisTicks = [], fGraphxAxisLabels = [], fGraphyAxisTicks = [], fGraphyAxisLabels = [],
         gGraphxAxisTicks = [], gGraphxAxisLabels = [], gGraphyAxisTicks = [], gGraphyAxisLabels = [],
         fGraphBoard, gGraphBoard, x0Slider, x0SliderValue, fGraphBoundingBoxValue, gGraphBoundingBoxValue,
         halfSpan = 10.0, x0Precision = 2, precision = 6,
 
-        fFn = [f0],
-        dfFn = [df0],
-        gFn = [g0],
-        dgFn = [dg0],
-        fFnStr  = ['log(x^2) + 3x'],
-        dfFnStr = ['\\frac{2}{x} + 3'],
-        gFnStr  = ['2log(5x^2) + 4x'],
-        dgFnStr = ['\\frac{4}{x} + 4'],
+        fFn = [f0, f1, f2, f3, f4, f5],
+        dfFn = [df0, df1, df2, df3, df4, df5],
+        gFn = [g0, g1, g2, g3, g4, g5],
+        dgFn = [dg0, dg1, dg2, dg3, dg4, dg5],
+        fFnStr  = ['log(x^2) + 3x', '\\sqrt{e^x}-1', '3x', '', '3x + 2e^{-x}', '\\sqrt{x}'],
+        dfFnStr = ['\\frac{2}{x} + 3', '\\frac{\\sqrt{e^x}}{2}', '3', '', '3 - 2e^{-x}', '\\frac{1}{2\\sqrt{x}}'],
+        gFnStr  = ['2log(5x^2) + 4x', 'x', 'x + e^{-x}', '', '4x + e^{-x}', 'log(x+1)'],
+        dgFnStr = ['\\frac{4}{x} + 4', '1', '1 - e^{-x}', '', '4 - e^{-x}', '\\frac{1}{x+1}'],
 
-        fnNbr = 0,
+        config = window.infOverInfSettings || {
+            fnNbr: 0,
+            x0: 1.0,
+            x0Min: 0.0,
+            x0Max: 6.0,
+            x0Step: 0.01,
+            logSlider: true
+        },
+        fnNbr = config.fnNbr,
+        logSlider = config.logSlider,
+        x0 = config.x0,
+        x0Min = logSlider ? JXG.Math.log10(config.x0Min) : config.x0Min,
+        x0Max = logSlider ? JXG.Math.log10(config.x0Max) : config.x0Max,
+        x0Step = config.x0Step,
 
         f = fFn[fnNbr],
         fStr = fFnStr[fnNbr],
@@ -24,7 +37,7 @@ var DataEntry = (function($, _, JXG, undefined) {
         g = gFn[fnNbr],
         gStr = gFnStr[fnNbr],
         dg = dgFn[fnNbr],
-        dgStr = dgFnStr[fnNbr];
+        dgStr = dgFnStr[fnNbr];console.log(JXG.Math.log10(config.x0))
 
     init();
 
@@ -81,9 +94,14 @@ var DataEntry = (function($, _, JXG, undefined) {
             min: x0Min,
             max: x0Max,
             step: x0Step,
-            value: 0,
+            value: logSlider ? 0.0 : 1.0,
             slide: function(event, ui) {
-                x0 = Math.pow(10.0, ui.value);
+                if (logSlider) {
+                    x0 = Math.pow(10.0, ui.value);
+                }
+                else {
+                    x0 = ui.value;
+                }
                 if (x0 <= 50.0) {
                     x0Precision = 2;
                 }
@@ -107,8 +125,10 @@ var DataEntry = (function($, _, JXG, undefined) {
 
     function outputDynamicMath() {
         katex.render("x = " + x0Str(), $('#math-line5').get(0));
-        katex.render("\\frac{f(x)}{g(x)} = " + fgFracStr(), $('#math-line6').get(0));
-        katex.render("\\frac{f'(x)}{g'(x)} = " + dfdgFracStr(), $('#math-line7').get(0));
+        katex.render("f(x) = " + fx0Str(), $('#math-line6').get(0));
+        katex.render("g(x) = " + gx0Str(), $('#math-line7').get(0));
+        katex.render("\\frac{f(x)}{g(x)} = " + fgFracStr(), $('#math-line8').get(0));
+        katex.render("\\frac{f'(x)}{g'(x)} = " + dfdgFracStr(), $('#math-line9').get(0));
     }
 
     function calculateGraphsBounds() {
@@ -130,6 +150,14 @@ var DataEntry = (function($, _, JXG, undefined) {
         gGraphBoundingBox = [xMin, yMax, xMax, yMin];
     }
 
+    function stripExtraValue(values, ticks) {
+        // Happens when ticks are created with a range not multiple of 5 and when we reach a range that is
+        if (values.length > ticks.length) {
+            // Remove last element
+            values.pop();
+        }
+    }
+
     function updateGraphs() {
         var xTickValues, yTickValues;
 
@@ -138,6 +166,7 @@ var DataEntry = (function($, _, JXG, undefined) {
 
         // x-axis
         xTickValues = getTickValues(fGraphBoundingBox[0], fGraphBoundingBox[2], 5.0);
+        stripExtraValue(xTickValues, fGraphxAxisTicks);
 
         _.each(xTickValues, function(x, index)  {
             fGraphxAxisTicks[index].point1.moveTo([x, fGraphBoundingBox[3]]);
@@ -148,6 +177,7 @@ var DataEntry = (function($, _, JXG, undefined) {
         yTickValues = getTickValues(fGraphBoundingBox[3], fGraphBoundingBox[1], 5.0);
         // Remove first element
         yTickValues.shift();
+        stripExtraValue(yTickValues, fGraphyAxisTicks);
 
         _.each(yTickValues, function(y, index)  {
             fGraphyAxisTicks[index].point1.moveTo([fGraphBoundingBox[0], y]);
@@ -161,6 +191,7 @@ var DataEntry = (function($, _, JXG, undefined) {
 
         // x-axis
         xTickValues = getTickValues(gGraphBoundingBox[0], gGraphBoundingBox[2], 5.0);
+        stripExtraValue(xTickValues, gGraphxAxisTicks);
 
         _.each(xTickValues, function(x, index)  {
             gGraphxAxisTicks[index].point1.moveTo([x, gGraphBoundingBox[3]]);
@@ -171,6 +202,7 @@ var DataEntry = (function($, _, JXG, undefined) {
         yTickValues = getTickValues(gGraphBoundingBox[3], gGraphBoundingBox[1], 5.0);
         // Remove first element
         yTickValues.shift();
+        stripExtraValue(yTickValues, gGraphyAxisTicks);
 
         _.each(yTickValues, function(y, index)  {
             gGraphyAxisTicks[index].point1.moveTo([gGraphBoundingBox[0], y]);
@@ -184,12 +216,20 @@ var DataEntry = (function($, _, JXG, undefined) {
         return x0.toFixed(x0Precision);
     }
 
+    function fx0Str() {
+        return numberToString(f(x0));
+    }
+
+    function gx0Str() {
+        return numberToString(g(x0));
+    }
+
     function fgFracStr() {
-        return (f(x0)/g(x0)).toFixed(precision);
+        return numberToString(f(x0)/g(x0));
     }
 
     function dfdgFracStr() {
-        return (df(x0)/dg(x0)).toFixed(precision);
+        return numberToString(df(x0)/dg(x0));
     }
 
     // Functions
@@ -197,16 +237,96 @@ var DataEntry = (function($, _, JXG, undefined) {
         return Math.log(x*x) + 3.0*x;
     }
 
+    function f1(x) {
+        return Math.sqrt(Math.exp(x)) - 1.0;
+    }
+
+    function f2(x) {
+        return 3.0*x;
+    }
+
+    function f3(x) {
+        // Not in use
+    }
+
+    function f4(x) {
+        return 3.0*x + 2.0*Math.exp(-x);
+    }
+
+    function f5(x) {
+        return Math.sqrt(x);
+    }
+
     function df0(x) {
         return 2.0/x + 3.0;
+    }
+
+    function df1(x) {
+        return Math.sqrt(Math.exp(x)) / 2.0;
+    }
+
+    function df2(x) {
+        return 3.0;
+    }
+
+    function df3(x) {
+        // Not in use
+    }
+
+    function df4(x) {
+        return 3.0 - 2.0*Math.exp(-x);
+    }
+
+    function df5(x) {
+        return 1.0/(2.0*Math.sqrt(x));
     }
 
     function g0(x) {
         return 2.0*Math.log(5.0*x*x) + 4.0*x;
     }
 
+    function g1(x) {
+        return x;
+    }
+
+    function g2(x) {
+        return x + Math.exp(-x);
+    }
+
+    function g3(x) {
+        // Not in use
+    }
+
+    function g4(x) {
+        return 4.0*x + Math.exp(-x);
+    }
+
+    function g5(x) {
+        return Math.log(x+1.0)
+    }
+
     function dg0(x) {
         return 4.0/x + 4.0;
+    }
+
+    function dg1(x) {
+        return 1.0;
+    }
+
+    function dg2(x) {
+        return 1.0 - Math.exp(-x);
+    }
+
+    function dg3(x) {
+        // Not in use
+    }
+
+    function dg4(x) {
+        return 4.0 - Math.exp(-x);
+    }
+
+    function dg5(x) {
+        return 1.0 / (x+1.0);
     }
 
     function getTickValues(min, max, step) {
@@ -230,6 +350,33 @@ var DataEntry = (function($, _, JXG, undefined) {
         }
 
         return result
+    }
+
+    function numberToString(nbr) {
+        // Do not use scientific notation when numbers strictly inferior to a million
+        // Limit total display to 6 digits
+        var precision, str, mantissa, exponent;
+
+        if (nbr < 1000000) {
+            precision = 5 - Math.floor(JXG.Math.log10(Math.abs(nbr)));
+            return nbr.toFixed(precision);
+        }
+        else {
+            str = nbr.toExponential(5);
+            mantissa = str.slice(0, str.indexOf('e'));
+            exponent = str.charAt(str.length - 1); // Exponent always has only one digit
+            return mantissa + '\\times' + '10^' + exponent;
+        }
+    }
+
+    function numberToStringLabel(nbr, regularPrecision, scientificPrecision) {
+        // Do not use scientific notation when numbers strictly inferior to a million
+        if (nbr < 1000000) {
+            return nbr.toFixed(regularPrecision);
+        }
+        else {
+            return nbr.toExponential(scientificPrecision);
+        }
     }
 
     function createTicksLabels(graph, tickStep) {
@@ -267,7 +414,7 @@ var DataEntry = (function($, _, JXG, undefined) {
         };
 
         xLabelText = function(index) {
-            return xAxisTicks[index].point1.X().toFixed();
+            return numberToStringLabel(xAxisTicks[index].point1.X(), 0, 5);
         };
 
         yLabelxPos = function(index) {
@@ -279,7 +426,7 @@ var DataEntry = (function($, _, JXG, undefined) {
         };
 
         yLabelText = function(index) {
-            return yAxisTicks[index].point1.Y().toFixed();
+            return numberToStringLabel(yAxisTicks[index].point1.Y(), 0, 5);
         };
 
         // x-axis

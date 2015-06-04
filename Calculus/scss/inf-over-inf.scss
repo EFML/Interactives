@@ -150,6 +150,23 @@ $dark-blue: #356094;
     margin-right: 10px;
   }
 
+  .line-col1 {
+    margin-top: 20px;
+    width: 40%;
+    float: left;
+    display: inline-block;
+    box-sizing: border-box;
+  }
+
+  .line-col2 {
+    margin-top: 20px;
+    width: 40%;
+    padding-left: 10px;
+    float: right;
+    display: inline-block;
+    box-sizing: border-box;
+  }
+
   .line {
     width: 100%;
     float: left;

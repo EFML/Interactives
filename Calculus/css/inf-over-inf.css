@@ -1858,6 +1858,19 @@
   display: inline-block;
   margin-left: 10px;
   margin-right: 10px; }
+.dnext-tool-container .line-col1 {
+  margin-top: 20px;
+  width: 40%;
+  float: left;
+  display: inline-block;
+  box-sizing: border-box; }
+.dnext-tool-container .line-col2 {
+  margin-top: 20px;
+  width: 40%;
+  padding-left: 10px;
+  float: right;
+  display: inline-block;
+  box-sizing: border-box; }
 .dnext-tool-container .line, .dnext-tool-container .full-line, .dnext-tool-container .half-line, .dnext-tool-container .quarter-line {
   width: 100%;
   float: left;
