@@ -1,20 +1,23 @@
 var DataEntry = (function($, _, JXG, undefined) {
     'use strict';
 
-    var board, initialPoint, slopeField = [], solCurveForward, solCurveBackward, asymptoteLine1, asymptoteLine2,
+    var board, initialPoint, slopeField = [], solutionCurve, asymptoteLine1, asymptoteLine2,
 
         dfFn = [df0, df1, df2, df3, df4, df5, df6],
+        solFn = [sol0, sol1, sol2, sol3, sol4, sol5, sol6],
 
         config = window.slopeFieldSettings || {
             dfnNbr: 0,
             boundingBox: [-5.0, 3.0, 5.0, -3.0],
             initialPoint: {x: 0.0, y: 1.0},
-            slopeField: {xDiv: 10, yDiv: 10, lineLength: 0.3}
+            slopeField: {color: 'blue', xDiv: 10, yDiv: 10, lineLength: 0.3},
+            solution: {color: 'red'}
         },
         dfnNbr = config.dfnNbr,
         boundingBox = config.boundingBox,
 
-        df = dfFn[dfnNbr];
+        df = dfFn[dfnNbr],
+        sol = solFn[dfnNbr];
 
     init();
 
@@ -96,8 +99,61 @@ var DataEntry = (function($, _, JXG, undefined) {
         return 2.0*y*(1.0-y);
     }
 
-    function fOne() {
-        return 1.0;
+    // Solutions to the first order ODEs
+    function c0(x, y) {
+        return y - x*(0.5*x+1);
+    }
+
+    function sol0(x) {
+        return x*(0.5*x+1.0) + c0(initialPoint.X(), initialPoint.Y());
+    }
+
+    function c1(x, y) {
+        return y/Math.exp(x);
+    }
+
+    function sol1(x) {
+        return c1(initialPoint.X(), initialPoint.Y())*Math.exp(x);
+    }
+
+    function c2(x, y) {
+        return (y-x+1.0)/Math.exp(-x);
+    }
+
+    function sol2(x) {
+        return c2(initialPoint.X(), initialPoint.Y())*Math.exp(-x) + x - 1.0;
+    }
+
+    function c3(x, y) {
+        return (y-3)/(Math.exp(-0.5*x*x));
+    }
+
+    function sol3(x) {
+        return c3(initialPoint.X(), initialPoint.Y())*Math.exp(-0.5*x*x) + 3.0;
+    }
+
+    function c4(x, y) {
+        return ((3.0-y)/y)*Math.exp(0.5*x*x*x);
+    }
+
+    function sol4(x) {
+        return (3.0*Math.exp(0.5*x*x*x)) / (c4(initialPoint.X(), initialPoint.Y()) + Math.exp(0.5*x*x*x));
+    }
+
+    function c5(x, y) {
+        return (-2.0-x*x*y)/y;
+    }
+
+    function sol5(x) {
+        return -2.0/(c5(initialPoint.X(), initialPoint.Y()) + x*x);
+    }
+
+    function c6(x, y) {
+        return (1.0-y)*Math.exp(2.0*x)/y;
+    }
+
+    function sol6(x) {
+        return Math.exp(2.0*x)/(c6(initialPoint.X(), initialPoint.Y()) + Math.exp(2.0*x));
     }
 
     function initialPointDown() {
@@ -106,79 +162,13 @@ var DataEntry = (function($, _, JXG, undefined) {
     }
 
     function initialPointDrag() {
-        var pt0 = {
-                x: initialPoint.X(),
-                y: initialPoint.Y()
-            },
-            points = solution(pt0, 0.05);
-
-        solCurveForward.dataX = points.dataX;
-        solCurveForward.dataY = points.dataY;
-        solCurveForward.updateCurve();
-
-        // Clear array
-        points.length = 0;
-
-        points = solution(pt0, -0.05);
-        solCurveBackward.dataX = points.dataX;
-        solCurveBackward.dataY = points.dataY;
-        solCurveBackward.updateCurve();
-
+        solutionCurve.updateCurve();
         board.update();
     }
 
     function boardUp() {
         board.off('move', initialPointDrag);
         board.off('up', boardUp);
-    }
-
-    //4th Order Runge-Kutta method
-    //http://www.jbmballistics.com/ballistics/topics/rk.shtml
-    function rk4(pt, h, dx, dy) {
-        var j1, j2, j3, j4;
-        var k1, k2, k3, k4;
-        var xNew, yNew;
-
-        j1 = h*dx(pt.x, pt.y);
-        k1 = h*dy(pt.x, pt.y);
-
-        j2 = h*dx(pt.x + 0.5*j1, pt.y + 0.5*k1);
-        k2 = h*dy(pt.x + 0.5*j1, pt.y + 0.5*k1);
-
-        j3 = h*dx(pt.x + 0.5*j2, pt.y + 0.5*k2);
-        k3 = h*dy(pt.x + 0.5*j2, pt.y + 0.5*k2);
-
-        j4 = h*dx(pt.x + j3, pt.y + k3);
-        k4 = h*dy(pt.x + j3, pt.y + k3);
-
-        xNew = pt.x + (1.0/6.0)*(j1 + 2.0*j2 + 2.0*j3 + j4);
-        yNew = pt.y + (1.0/6.0)*(k1 + 2.0*k2 + 2.0*k3 + k4);
-
-        return {
-            x: xNew,
-            y: yNew
-        };
-    }
-
-    function solution(pt0, inc) {
-        var pt1, pt2, dataX = [], dataY = [], nbrInc;
-
-        nbrInc = 0;
-
-        //Go forward or backward depending on sign of inc
-        pt1 = pt0;
-        while (nbrInc < 500) {
-            pt2 = rk4(pt1, inc, fOne, df);
-            dataX.push(pt1.x);
-            dataY.push(pt1.y);
-            pt1 = pt2;
-            nbrInc++;
-        }
-
-        return {
-            dataX: dataX,
-            dataY: dataY
-        }
     }
 
     function createBoard() {
@@ -217,9 +207,9 @@ var DataEntry = (function($, _, JXG, undefined) {
         });
     }
 
-    function drawSlopeField(xMin, xMax, xDiv, yMin, yMax, yDiv, lineLength) {
+    function drawSlopeField(xMin, xMax, xDiv, yMin, yMax, yDiv, color, lineLength) {
         var slope, len = lineLength/2.0, theta,
-            xMid, yMid, xStart, xEnd, yStart, yEnd, x, y, i, j,
+            xMid, yMid, xStart, xEnd, yStart, yEnd, dx, dy, i, j,
             xInc = (xMax - xMin)/xDiv,
             yInc = (yMax - yMin)/yDiv;
 
@@ -228,14 +218,14 @@ var DataEntry = (function($, _, JXG, undefined) {
                 slope = df(xMid, yMid);
                 theta = Math.atan(slope);
 
-                x = len*Math.cos(theta);
-                y = len*Math.sin(theta);
+                dx = len*Math.cos(theta);
+                dy = len*Math.sin(theta);
 
-                xStart = xMid - x;
-                yStart = yMid - y;
+                xStart = xMid - dx;
+                yStart = yMid - dy;
 
-                xEnd = xMid + x;
-                yEnd = yMid + y;
+                xEnd = xMid + dx;
+                yEnd = yMid + dy;
 
                 slopeField.push(board.create(
                     'line',
@@ -245,7 +235,7 @@ var DataEntry = (function($, _, JXG, undefined) {
                         straightFirst:false,
                         straightLast:false,
                         strokeWidth: 1,
-                        strokeColor: 'blue', // #777777
+                        strokeColor: color,
                         highlight: false
                     }
                 ));
@@ -264,6 +254,7 @@ var DataEntry = (function($, _, JXG, undefined) {
             yMin + yPadding,
             yMax - yPadding,
             config.slopeField.yDiv,
+            config.slopeField.color,
             config.slopeField.lineLength
         );
 
@@ -276,24 +267,10 @@ var DataEntry = (function($, _, JXG, undefined) {
 
         initialPoint.on('down', initialPointDown);
 
-        solCurveForward = board.create(
-            'curve',
-            [[], []],
-            {
-                strokeWidth: 2,
-                strokeColor: 'red',
-                highlight: false
-            }
-        );
-
-        solCurveBackward = board.create(
-            'curve',
-            [[], []],
-            {
-                strokeWidth: 2,
-                strokeColor: 'red',
-                highlight: false
-            }
+        solutionCurve = board.create(
+            'functiongraph',
+            [sol],
+            {strokeWidth: 3, strokeColor: config.solution.color, highlight: false}
         );
 
         initialPointDrag();
