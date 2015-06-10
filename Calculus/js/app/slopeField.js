@@ -3,7 +3,7 @@ var DataEntry = (function($, _, JXG, undefined) {
 
     var board, initialPoint, slopeField = [], solCurveForward, solCurveBackward, asymptoteLine1, asymptoteLine2,
 
-        dfFn = [df0, df1, df2, df3],
+        dfFn = [df0, df1, df2, df3, df4, df5, df6],
 
         config = window.slopeFieldSettings || {
             dfnNbr: 0,
@@ -69,7 +69,7 @@ var DataEntry = (function($, _, JXG, undefined) {
     }
 
     function df0(x, y) {
-        return x + 1.0;
+        return x+1.0;
     }
 
     function df1(x, y) {
@@ -77,11 +77,23 @@ var DataEntry = (function($, _, JXG, undefined) {
     }
 
     function df2(x, y) {
-        return x - y;
+        return x-y;
     }
 
     function df3(x, y) {
         return -x*(y-3.0);
+    }
+
+    function df4(x, y) {
+        return 0.5*x*x*y*(3.0-y);
+    }
+
+    function df5(x, y) {
+        return x*y*y;
+    }
+
+    function df6(x, y) {
+        return 2.0*y*(1.0-y);
     }
 
     function fOne() {
