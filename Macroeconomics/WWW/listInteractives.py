@@ -1,14 +1,14 @@
 
 # coding: utf-8
 
-# In[5]:
+# In[15]:
 
 #!/usr/bin/env python
 import os
 from jinja2 import Environment, FileSystemLoader
 
 
-# In[13]:
+# In[20]:
 
 PATH = os.path.dirname(os.path.abspath("__file__"))
 TEMPLATE_ENVIRONMENT = Environment(
@@ -53,7 +53,7 @@ def create_index_html():
     }
     
     with open(fname, 'w') as f:
-        html = render_template('index.html', context)
+        html = render_template('interactives.html', context)
         f.write(html)
  
  

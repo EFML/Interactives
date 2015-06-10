@@ -11,7 +11,7 @@ SRAS1.setAttribute({fixed:true,'dash':1,'fixed':true,'highlight':false});
 
 //Supply Line 2 - moveable
 var SRAS2 = createLine(brd1,{ltype:'Supply',name:'$S<sub>2</sub>',color:'DodgerBlue'});
-SRAS2.setAttribute({fixed:true,'highlight':false,withLabel:false});
+SRAS2.setAttribute({fixed:false,'highlight':false,withLabel:false});
 
 //Demand Line 1 - fixed
 var AD1 = createLine(brd1,{ltype:'Demand',name:'$D<sub>1</sub>',color:'Orange'});
@@ -19,9 +19,8 @@ AD1.setAttribute({fixed:true,'dash':1,'fixed':true,'highlight':false});
 
 //Demand Line 2 - moveable
 var AD2 = createLine(brd1,{ltype:'Demand',name:'$D<sub>2</sub>',color:'Orange'});
-AD2.setAttribute({fixed:true,'highlight':false,withLabel:false});
+AD2.setAttribute({fixed:false,'highlight':false,withLabel:false});
 
- 
 ////////////
 // Intersection Box 1
 ////////////
@@ -62,13 +61,13 @@ brd1.on('move', function() {
 
 });
 
-// brd1.on('mousedown', function() {      
-//     AD2.setAttribute({withLabel:true});
-//     SRAS2.setAttribute({withLabel:true});
-//     dashS2.Y1.setAttribute({withLabel:true});
-//     dashS2.X1.setAttribute({withLabel:true});
-//     brd1.update()
-// });
+brd1.on('mousedown', function() {      
+    AD2.setAttribute({withLabel:true});
+    SRAS2.setAttribute({withLabel:true});
+    dashS2.Y1.setAttribute({withLabel:true});
+    dashS2.X1.setAttribute({withLabel:true});
+    brd1.update()
+});
 
 
 //Standard edX JSinput functions
