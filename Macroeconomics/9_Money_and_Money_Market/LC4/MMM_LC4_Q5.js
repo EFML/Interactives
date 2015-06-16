@@ -1,4 +1,4 @@
-bboxlimits = [-1.6, 12, 12, -1.1];
+bboxlimits = [-1.75, 12, 12, -1.25];
 var brd1 = JXG.JSXGraph.initBoard('jxgbox1', {axis:false, 
                                         showCopyright: false,
                                         showNavigation: false,
@@ -15,8 +15,8 @@ yaxis = brd1.create('axis', [[0, 0], [0, 12]], {withLabel: true, label: {offset:
 //Axes
 xaxis.removeAllTicks();
 yaxis.removeAllTicks();
-var ylabel = brd1.create('text',[-1.5,10,"Interest<br>Rate"],{fixed:true});
-var xlabel = brd1.create('text',[8.5,-0.5,"Quantity of Money"],{fixed:true});
+var ylabel = brd1.create('text',[-1.65,10,"Nominal<br>Interest<br>Rate"],{fixed:true});
+var xlabel = brd1.create('text',[8.5,-0.55,"Quantity of Money"],{fixed:true});
 
 //Demand 1
 var D1 = createLine(brd1,{ltype:'Demand',name:'D<sub>1</sub>',color:'DodgerBlue'});
@@ -37,9 +37,9 @@ var Sfix = brd1.create('segment',[[5.75,10.5],[5.75,0.5]],
                         'highlight':false,
                         'label':{'offset':[0,185]}});
 
-var S = brd1.create('segment',[[5.75,10.5],[5.75,0.5]],
+var S = brd1.create('segment',[[3.75,10.5],[3.75,0.5]],
                        {'strokeColor':'Lime','strokeWidth':'5',
-                        'name':'S<sub>2</sub>','withLabel':false,
+                        'name':'S<sub>2</sub>','withLabel':true,
                         'fixed':false,
                         'highlight':true,
                         'label':{'offset':[0,185]}}); 
@@ -53,16 +53,16 @@ var iSD = brd1.create('intersection', [S, D1, 0], {visible:false});
 ////////////
 var dashS1 = createDashedLines2Axis(brd1,iSD,
                                   {fixed:false,
-                                   withLabel:false,
-                                   xlabel:'Y<sub>2</sub>',
-                                   ylabel:'R<sub>2</sub>',
+                                   withLabel:true,
+                                   xlabel:'Q<sub>2</sub>',
+                                   ylabel:'NIR<sub>2</sub>',
                                    color:'Gray'});
 
 var dashSfix = createDashedLines2Axis(brd1,iSDfix,
                                   {fixed:true,
                                    withLabel:true,
-                                   xlabel:'Y<sub>1</sub>',
-                                   ylabel:'R<sub>1</sub>',
+                                   xlabel:'Q<sub>1</sub>',
+                                   ylabel:'NIR<sub>1</sub>',
                                    color:'Gray'}); 
 
 

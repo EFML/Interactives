@@ -1,8 +1,8 @@
 ////////////
 // BOX 1
 ////////////
-bbox1 = [-2.3, 12, 12, -1.3];
-var brd1 = createBoard('jxgbox1',{bboxlimits:bbox1,xname:"Quantity of Loanable Funds", 'xpos':[3,-0.5],
+bbox1 = [-2.3, 12, 13, -2.3];
+var brd1 = createBoard('jxgbox1',{bboxlimits:bbox1,xname:"Quantity Loanable Funds (Public and Private)", 'xpos':[4,-1.1],
                                   yname:"Real<br>Interest<br>Rate",grid:false,'ypos':[-2.2,10.0]});
 
 
@@ -25,8 +25,8 @@ DB1.setAttribute({'withLabel':true,'highlight':false});
 ////////////
 // BOX 2
 ////////////
-bbox2 = [-2.3, 12, 12, -1.3];
-var brd2 = createBoard('jxgbox2',{bboxlimits:bbox2,xname:"Investment $", 'xpos':[7.5,-0.5],
+bbox2 = [-2.3, 12, 13, -2.3];
+var brd2 = createBoard('jxgbox2',{bboxlimits:bbox2,xname:"Private Investment $", 'xpos':[6.0,-1.5],
                                   yname:"Real<br>Interest<br>Rate",grid:false,'ypos':[-2.2,10.0]});
 
 //Demand Line 2 - moveable
