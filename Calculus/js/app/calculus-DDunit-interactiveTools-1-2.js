@@ -2,13 +2,17 @@ var DataEntry = (function($, _, JXG, undefined) {
     'use strict';
 
     var boundingBox = [-6.0, 6.0, 6.0, -6.0],
-        fFn = [constant, linear], intfFn = [intConstant, intLinear],
-        fnNbr = 1, f = fFn[fnNbr], intf = intfFn[fnNbr],
-        aVal = -1.0, xVal = 0.0, xMin = -5.0, xMax = 5.0, xStep = 0.1, precision = 6,
+        fFn = [constant, linearUp, linearDown], intfFn = [intConstant, intLinearUp, intLinearDown],
+        aVal = -1.0, xMin = -5.0, xMax = 5.0, xStep = 0.1, precision = 6,
         graphBoard, xSlider, xSliderValue,
         animateButton, backwardButton, forwardButton, animateIcon, isAnimating = false, anim,
-        curve, aLine, xLine, areas = [], zonesAll = [[-5.0, -1.0, 5.0], [-5.0, -3.0, -1.0, 5.0]],
-        zones = zonesAll[fnNbr];
+        curve, aLine, xLine, areas = [], zonesAll = [[-5.0, -1.0, 5.0], [-5.0, -3.0, -1.0, 5.0], [-5.0, 5.0]],
+        config = window.ToolsSettings || {
+            toolNbr: 1,
+            fnInit: 1,
+            xInit: 0.0
+        },
+        fnNbr = config.fnInit, f = fFn[fnNbr], intf = intfFn[fnNbr], xVal = config.xInit, zones = zonesAll[fnNbr];
 
     init();
 
@@ -35,12 +39,26 @@ var DataEntry = (function($, _, JXG, undefined) {
         $(window).on('resize', resizeBox);
         $(document).on('click', stopAnimation)
         $('#dnext-help-link').on('click', toggle);
-        $('#constant-radio-button').on('change', function() {
-            radioButtonHandler(0);
-        });
-        $('#linear-radio-button').on('change', function() {
-            radioButtonHandler(1);
-        });
+
+        if (config.toolNbr === 1) {
+            $('#constant-radio-button').on('change', function() {
+                radioButtonHandler(0);
+            });
+            $('#linear-radio-button').on('change', function() {
+                radioButtonHandler(1);
+            });
+        }
+        else if (config.toolNbr === 2) {
+            $('#constant-radio-button').on('change', function() {
+                radioButtonHandler(0);
+            });
+            $('#linear-up-radio-button').on('change', function() {
+                radioButtonHandler(1);
+            });
+            $('#linear-down-radio-button').on('change', function() {
+                radioButtonHandler(2);
+            });
+        }
 
         createGraphBoard();
         createAreas();
@@ -151,8 +169,12 @@ var DataEntry = (function($, _, JXG, undefined) {
         return 3.0;
     }
 
-    function linear(x) {
+    function linearUp(x) {
         return x/3.0 + 1.0;
+    }
+
+    function linearDown(x) {
+        return -0.5*(x+1.0);
     }
 
     // Indefinite integral: y = 3x
@@ -160,9 +182,14 @@ var DataEntry = (function($, _, JXG, undefined) {
         return 3.0*(b-a);
     }
 
-    // Indefinite integral: x^2/6 + x = x(x+6)/6
-    function intLinear(a, b) {
+    // Indefinite integral: y = x^2/6 + x = x(x+6)/6
+    function intLinearUp(a, b) {
         return (b*(b+6) - a*(a+6))/6.0;
+    }
+
+    // Indefinite integral: y = 0.5x(0.5x+1)
+    function intLinearDown(a, b) {
+        return -0.5*(b*(0.5*b+1.0) - a*(0.5*a+1.0));
     }
 
     function startAnimation() {
