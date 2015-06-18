@@ -2,11 +2,19 @@ var DataEntry = (function($, _, JXG, undefined) {
     'use strict';
 
     var boundingBox = [-6.0, 6.0, 6.0, -6.0],
-        fFn = [constant, linearUp, linearDown], intfFn = [intConstant, intLinearUp, intLinearDown],
-        aVal = -1.0, xMin = -5.0, xMax = 5.0, xStep = 0.1, precision = 6,
+        fFn = [constant, linearUp, linearDown, piecewise, curve],
+        intfFn = [intConstant, intLinearUp, intLinearDown, intPiecewise, intCurve],
+        aVal = -1.0, xMin = -5.0, xMax = 5.0, xStep = 0.1, precision = 6, k = 1.35, // for parabola curve
         graphBoard, xSlider, xSliderValue,
         animateButton, backwardButton, forwardButton, animateIcon, isAnimating = false, anim,
-        curve, aLine, xLine, areas = [], zonesAll = [[-5.0, -1.0, 5.0], [-5.0, -3.0, -1.0, 5.0], [-5.0, 5.0]],
+        fCurve, aLine, xLine, areas = [],
+        zonesAll = [
+            [-5.0, -1.0, 5.0],
+            [-5.0, -3.0, -1.0, 5.0],
+            [-5.0, 5.0],
+            [-5.0, -2.0, -1.0, 1.0, 4.0, 5.0],
+            [-5.0, -3.0, -1.0, 3.0, 5.0]
+        ],
         config = window.ToolsSettings || {
             toolNbr: 1,
             fnInit: 1,
@@ -57,6 +65,14 @@ var DataEntry = (function($, _, JXG, undefined) {
             });
             $('#linear-down-radio-button').on('change', function() {
                 radioButtonHandler(2);
+            });
+        }
+        else if (config.toolNbr === 3) {
+            $('#piecewise-radio-button').on('change', function() {
+                radioButtonHandler(3);
+            });
+            $('#curve-radio-button').on('change', function() {
+                radioButtonHandler(4);
             });
         }
 
@@ -177,6 +193,25 @@ var DataEntry = (function($, _, JXG, undefined) {
         return -0.5*(x+1.0);
     }
 
+    function piecewise(x) {
+        if (x <= -3.0) {
+            return -1.0;
+        }
+        else if (x <= 0.0) {
+            return x + 2.0;
+        }
+        else if (x <= 2.0) {
+            return -2.0*(x-1);
+        }
+        else {
+            return x - 4.0;
+        }
+    }
+
+    function curve(x) {
+        return k*(1.0 - x*x/9.0);
+    }
+
     // Indefinite integral: y = 3x
     function intConstant(a, b) {
         return 3.0*(b-a);
@@ -190,6 +225,56 @@ var DataEntry = (function($, _, JXG, undefined) {
     // Indefinite integral: y = 0.5x(0.5x+1)
     function intLinearDown(a, b) {
         return -0.5*(b*(0.5*b+1.0) - a*(0.5*a+1.0));
+    }
+
+    function intPiecewise(a, b) {
+        return intPiecewiseFromMin(b) - intPiecewiseFromMin(a);
+    }
+
+    // Definite integral from xMin to x
+    function intPiecewiseFromMin(x) {
+        if (x <= -3.0) {
+            return intPiecewise1(xMin, x);
+        }
+        else if (x <= 0.0) {
+            return intPiecewise1(xMin, -3.0) + intPiecewise2(-3.0, x);
+        }
+        else if (x <= 2.0) {
+            return intPiecewise1(xMin, -3.0) + intPiecewise2(-3.0, 0.0) +
+                   intPiecewise3(0.0, x);
+        }
+        else {
+            return intPiecewise1(xMin, -3.0) + intPiecewise2(-3.0, 0.0) +
+                   intPiecewise3(0.0, 2.0) + intPiecewise4(2.0, x);
+        }
+
+    }
+
+    // Definite integrals of various pieces to their upper bounds
+    // Indefinite integral of the pieces:
+    // Piece 1: -x
+    // Piece 2: x(0.5x+2)
+    // Piece 3: x(2-x)
+    // Piece 4: x(0.5x-4)
+    function intPiecewise1(a, b) {
+        return a - b;
+    }
+
+    function intPiecewise2(a, b) {
+        return b*(0.5*b+2.0) - a*(0.5*a+2.0);
+    }
+
+    function intPiecewise3(a, b) {
+        return b*(2.0-b) - a*(2.0-a);
+    }
+
+    function intPiecewise4(a, b) {
+        return b*(0.5*b-4.0) - a*(0.5*a-4.0);
+    }
+
+    // Indefinite integral: y = kx(1-x^3/27)
+    function intCurve(a, b) {
+        return k*b*(1.0-b*b/27.0) - k*a*(1.0-a*a/27.0);
     }
 
     function startAnimation() {
@@ -273,7 +358,7 @@ var DataEntry = (function($, _, JXG, undefined) {
             fixed:true
         });
 
-        curve = graphBoard.create(
+        fCurve = graphBoard.create(
             'curve',
             [[], []],
             {strokeWidth: 2, strokeColor: 'blue', highlight: false}
@@ -340,9 +425,9 @@ var DataEntry = (function($, _, JXG, undefined) {
             dataY.push(y);
         }
 
-        curve.dataX = dataX;
-        curve.dataY = dataY;
-        curve.updateCurve();
+        fCurve.dataX = dataX;
+        fCurve.dataY = dataY;
+        fCurve.updateCurve();
 
         aLine.point1.moveTo([aVal, 0.0], 0);
         aLine.point2.moveTo([aVal, f(aVal)], 0);
