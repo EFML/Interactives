@@ -1,0 +1,61 @@
+<problem>
+<img src="/static/Davidson_EdX-49.png" width="901" height="112"/>
+
+
+    <customresponse>
+        <text>
+            <p>Fill in the blanks in the table with what you think are the most appropriate values by clicking and dragging selections from the number bank below into the empty spots in the table. Note that you will not use all the values.</p>
+        </text>
+        <drag_and_drop_input img="/static/IMG_4.1.2_2_0.jpg" target_outline="true" one_per_target="true" no_labels="true" label_bg_color="rgb(222, 139, 238)">
+            <draggable id="1" can_reuse="true" label="10.0N" />
+            <draggable id="2" can_reuse="true" label="8.0N" />
+          <draggable id="3" can_reuse="true" label="6.0N" />
+          <draggable id="4" can_reuse="true" label="4.0N" />
+          <draggable id="5" can_reuse="true" label="2.0N" />
+          <draggable id="6" can_reuse="true" label="36°" />
+          <draggable id="7" can_reuse="true" label="53°" />
+          <draggable id="8" can_reuse="true" label="90°" />
+          <draggable id ="9" can_reuse="true" label="144°" />
+          <draggable id ="10" can_reuse="true" label="233°" />
+
+            <target id="t1" x="400" y="109" w="120" h="25"/>
+            <target id="t2" x="530" y="109" w="170" h="25"/>
+            <target id="t3" x="400" y="138" w="120" h="25"/>
+            <target id="t4" x="530" y="138" w="170" h="25"/>
+     
+        </drag_and_drop_input>
+        <answer type="loncapa/python">
+correct_answer = [{
+    'draggables': ['2'],
+    'targets': ['t1'],
+    'rule':'exact'
+          },
+          {
+          'draggables': ['9'],
+          'targets': ['t2'],
+          'rule':'exact'
+          },
+          {
+          'draggables': ['3'],
+          'targets': ['t3'],
+          'rule':'exact'
+          },
+          {
+          'draggables': ['10'],
+          'targets': ['t4'],
+          'rule':'exact'    
+}]
+if draganddrop.grade(submission[0], correct_answer):
+    correct = ['correct']
+else:
+    correct = ['incorrect']
+        </answer>
+    </customresponse>
+ 
+  <solution>
+    <div class="detailed-solution">
+<p>[explanation]</p>
+      <p>It should be clear from the vector lengths that Spring 1 is pulling with the greatest force, that Spring 2 is second, and that Spring 3 is third. The correct entries into the middle column in the table will therefore assign 8.0 N to Spring 2 and 6.0 N to Spring 3. Reading the protractor to obtain the angle may prove more challenging. The angle of the force vector for Spring 2 is an obtuse angle between 90° and 180°. Only one measurement falls in this range, 144°. Some students may think that the third angle measurement is roughly 90°, because they are considering the angle measurement between the vectors for Spring 2 and Spring 3. However, all vectors must be measured relative to the same reference angle, in this case, 0°. Reading counterclockwise from this reference point, you rotate past 180°, but not as far as 270°. Only one angle fits into this range. An equally correct answer would be to rotate clockwise from 0° (in the negative direction). Thus the direction of the force vector for Spring 3 can be read as 233° or as -127°; both are equally correct.</p>
+    </div>
+  </solution>
+</problem>
