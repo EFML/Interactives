@@ -4,7 +4,7 @@
 # ###Monetary Policy LC2 - 3 Board (suggestion from Sally and Brian Held)
 # https://studio.edge.edx.org/container/i4x://DavidsonCollege/DAP002/vertical/5e27cf18f81d49af84d152950b919eff
 
-# In[5]:
+# In[1]:
 
 import sys
 import re
@@ -21,7 +21,7 @@ tGen = templateGenerator.templateGenerator(course_id='DavidsonCollege/DAP002/3T2
                                           )
 
 
-# In[16]:
+# In[5]:
 
 get_ipython().run_cell_magic(u'HTML', u'', u'<!DOCTYPE html>\n<html>\n    <head>\n        <meta charset="UTF-8">\n        <title></title>\n        <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jsxgraph/0.98/jsxgraphcore.js"></script>\n        \n    </head>\n\n    <body>\n        <div style="width: 750;">\n            <div id=\'jxgbox1\' class=\'jxgbox\' style=\'width:250px; height:240px; float:left; border: solid #1f628d 2px;\'></div>        \n            <div id=\'jxgbox2\' class=\'jxgbox\' style=\'width:250px; height:240px; float:left; margin-left: 10px; border: solid #1f628d 2px;\'></div>\n            <div id=\'jxgbox3\' class=\'jxgbox\' style=\'width:250px; height:240px; float:left; margin-left: 10px; border: solid #1f628d 2px;\'></div>\n        </div>\n        \n        <!--START-BUTTON FOR PASS STATE-->\n        <div id=\'StateGrab\' style=\'width:350px; float:left;\'>        \n            <input class="btn" type="button" value="Get State" onClick="getNotebookState()">\n            <div id="spaceBelow">State:</div>\n        </div>\n        <script type="text/javascript">\n            getNotebookState = function(){\n                state = getGrade();\n                statestr = JSON.stringify(state);\n\n                document.getElementById(\'spaceBelow\').innerHTML += \'<br>\'+statestr;\n                var command = "state = " + statestr;\n                console.log(command);\n\n                //Kernel\n                var kernel = IPython.notebook.kernel;\n                kernel.execute(command);\n\n                return statestr;\n            }\n        </script>\n        <!--END-BUTTON FOR PASS STATE-->\n        \n        <script type="text/javascript" src="../../JS/jschannel.js"></script>\n        <script type="text/javascript" src="../../JS/edxintegration.js"></script>\n        <script type="text/javascript" src="../../JS/Macro_3Board.js"></script>\n        <script type="text/javascript" src="MP_LC2_3Board_graded.js"></script>\n    </body>\n</html>')
 

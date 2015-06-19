@@ -1,0 +1,35 @@
+
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <title>Aggregate Demand: LC2 HOA #1a</title>
+        <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jsxgraph/0.98/jsxgraphcore.js"></script>
+        
+    </head>
+
+    <body>
+        <div style="width: 100%; overflow: hidden;">
+            <div id='jxgbox1' class='jxgbox' style='width:500px; height:450px; float:left; border: solid #1f628d 2px;'></div>        
+        </div>
+        
+        <ul class="stack button-group">
+        <li><input class="btn" type="button" value="Increase in Interest Rate" onClick="decreaseXY()"></li>
+        <li><input class="btn" type="button" value="Higher Price Level" onClick="increaseA()"></li>
+        <li><input class="btn" type="button" value="Decrease in Government Spending" onClick="decreaseXY()"></li>
+        <li><input class="btn" type="button" value="Increase in Real Balances due to Decrease in Price Levels" onClick="decreaseA()"></li>
+        <li><input class="btn" type="button" value="Increase in Exports due to Decrease in Dollar Value (Foreign Exchange)" onClick="increaseXY()"></li>
+        <li><input class="btn" type="button" value="Increase in Personal Income Taxes" onClick="decreaseXY()"></li>
+        <li><input class="btn" type="button" value="Increase in Consumer Confidence" onClick="increaseXY()"></li>
+        
+        <li><input class="btn" type="button" value="Reset" onClick="resetAnimation()"></li>
+        </ul>
+        
+        
+        
+        <script type="text/javascript" src="../../JS/jschannel.js"></script>
+        <script type="text/javascript" src="../../JS/edxintegration.js"></script>
+        <script type="text/javascript" src="../../JS/Macro_1Board.js"></script>
+        <script type="text/javascript" src="AD_LC2_HOA_AllAnimations.js"></script>
+    </body>
+</html>

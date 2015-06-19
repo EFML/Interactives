@@ -1,0 +1,48 @@
+<problem>
+  <p>The diagram below shows in cross section two plates carrying charges that are identical in magnitude but opposite in sign. There is a uniform electric field of 110 N/C between the plates (ignore edge effects).</p>
+  <img src="/static/gravelec4.2.2.1.q.png"/>
+    <customresponse>
+        <text>
+            <p>Rank the magnitude of the force on a proton \(\big|{\mathop{F}^{\rightarrow}}_E\big|\) placed at the indicated points from 1 to 5, with 5 representing the greatest magnitude of electric force. If the magnitude of the force would be the same at two points, give them the same rank. If the magnitude of the force on the proton would be the same, but not zero at all of the points, rank them all as 5. If the force on the proton would be zero at all of the points, rank them all as 1. 
+          </p>
+            <p> 
+</p>
+        </text>
+        <drag_and_drop_input img="/static/gravelec4.2.2.2a.png" target_outline="true" one_per_target="true" no_labels="true" label_bg_color="rgb(222, 139, 238)">
+            <draggable can_reuse="true" id="1" label="1" />
+            <draggable can_reuse="true" id="2" label="2" />
+          <draggable can_reuse="true" id="3" label="3" />
+          <draggable can_reuse="true" id="4" label="4" />
+          <draggable can_reuse="true" id="5" label="5" />
+
+            <target id="t1" x="11" y="42" w="310" h="33"/>
+            <target id="t2" x="11" y="75" w="310" h="33"/>
+            <target id="t3" x="11" y="108" w="310" h="33"/>
+            <target id="t4" x="11" y="141" w="310" h="33"/>
+            <target id="t5" x="11" y="174" w="310" h="33"/>
+            
+        </drag_and_drop_input>
+        <answer type="loncapa/python">
+correct_answer = [{
+    'draggables': ['5'],
+    'targets': ['t2', 't1', 't3', 't4', 't5'],
+    'rule':'anyof'
+}]
+if draganddrop.grade(submission[0], correct_answer):
+    correct = ['correct']
+else:
+    correct = ['incorrect']
+        </answer>
+    </customresponse>
+  <solution>
+<div class="detailed-solution">
+<p>Explanation</p>
+
+<p> The field is uniform, meaning that it has the same strength and direction everywhere between the plates. A uniform field indicates a constant force on the proton. Since \({\mathop{E}^{\rightarrow}}=\frac{{\mathop{F}^{\rightarrow}}_E}{q}\) , then \({\mathop{F}^{\rightarrow}}_E=q\cdot{\mathop{E}^{\rightarrow}}\) and the field is uniform, or constant, the force on the proton at any of the points is calculated by multiplying the same charge value by the same constant value of the electric field, giving the same force for all the labeled points (or, everywhere between the plates, when the edge effects can be ignored).
+
+</p>
+
+</div>
+</solution>
+</problem>
+

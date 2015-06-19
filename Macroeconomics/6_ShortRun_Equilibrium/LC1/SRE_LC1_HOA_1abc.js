@@ -34,11 +34,11 @@ sliderYPositive = brd1.create('transform',[
     );
 
 //Supply Line 1 - fixed
-var SRAS1 = createLine(brd1,{'ltype':'Supply','name':'S<sub>1</sub>',color:'DodgerBlue'});
+var SRAS1 = createLine(brd1,{'ltype':'Supply','name':'AS<sub>0</sub>',color:'DodgerBlue'});
 SRAS1.setAttribute({'fixed':true,'highlight':false});
 
 //Demand Line 1 - fixed
-var AD1 = createLine(brd1,{'ltype':'Demand','name':'AD<sub>1</sub>','color':'Crimson'})
+var AD1 = createLine(brd1,{'ltype':'Demand','name':'AD<sub>0</sub>','color':'Crimson'})
 AD1.setAttribute({'fixed':true,'highlight':false});
 
 //Demand Line 2 - moveable
@@ -71,12 +71,14 @@ var dashesFixedB1 = createDashedLines2Axis(brd1,iSDfix,
 ////////////
 var dashesSonly = createDashedLines2Axis(brd1,iSonly,
                                            {withLabel:false,
-                                           xlabel:'S<sup>*</sup>',
+                                           xlabel:'AS<sup>*</sup>',
                                            xoffsets:[5,15],
                                            ylabel:'PL<sup>*</sup>',
                                            yoffsets:[5,10],
                                            color:'DodgerBlue'
                                            });
+
+dashesSonly.X1.setAttribute({label:{offset:[5,15],strokeColor:'blue'}});
 
 ////////////
 // Dashes for Demand Only
@@ -90,6 +92,7 @@ var dashesDonly = createDashedLines2Axis(brd1,iDonly,
                                            color:'Crimson'
                                            });
 
+dashesDonly.X1.setAttribute({label:{offset:[5,15],strokeColor:'red'}});
 
 
 //////////////////
@@ -121,26 +124,15 @@ brd1.on('mousedown', function() {
 });
 
 //Standard edX JSinput functions
-setState = function(transaction, statestr){
+setState = function(transaction,statestr){
     state = JSON.parse(statestr);
-    console.log(statestr);
+    //console.log(state);
     //console.log(state["dragLine"]);
 
-    if (state["AD2"] && state["SRAS2"]) {
-        //brd1.removeObject('AD2');
-        var point1 = [state["AD2"]["p1X"],state["AD2"]["p1Y"]];
-        var point2 = [state["AD2"]["p2X"],state["AD2"]["p2Y"]]
-        AD2.point1.moveTo(point1,0);
-        AD2.point2.moveTo(point2,0);
-
-        var point1 = [state["SRAS2"]["p1X"],state["SRAS2"]["p1Y"]];
-        var point2 = [state["SRAS2"]["p2X"],state["SRAS2"]["p2Y"]]
-        SRAS2.point1.moveTo(point1,0);
-        SRAS2.point2.moveTo(point2,0);
-
+    if (state["sliderB1"]) {
         brd1.update();
     }
-    
+
     console.debug('State updated successfully from saved.');
 }
 
@@ -152,16 +144,9 @@ getState = function(){
 }
 
 getGrade = function() {    
-    var state = {"AD2":{'p1X':AD2.point1.X(),'p2X':AD2.point2.X(),
-                        'p1Y':AD2.point1.Y(),'p2Y':AD2.point2.Y()},
-                 "AD1":{'p1X':AD1.point1.X(),'p2X':AD1.point2.X(),
-                        'p1Y':AD1.point1.Y(),'p2Y':AD1.point2.Y()},
-                 "SRAS2":{'p1X':SRAS2.point1.X(),'p2X':SRAS2.point2.X(),
-                          'p1Y':SRAS2.point1.Y(),'p2Y':SRAS2.point2.Y()},
-                 "SRAS1":{'p1X':SRAS1.point1.X(),'p2X':SRAS1.point2.X(),
-                          'p1Y':SRAS1.point1.Y(),'p2Y':SRAS1.point2.Y()}
-                };
+    var state = {"sliderB1":slidery.Value()};
     statestr = JSON.stringify(state);
+    // console.log('hello',statestr);
     return statestr;
 }
 
