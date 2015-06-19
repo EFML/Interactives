@@ -1848,11 +1848,15 @@
   font-size: 110%; }
 .dnext-tool-container .velocity-speed-function {
   color: black; }
-.dnext-tool-container #x-slider {
+.dnext-tool-container #x-slider, .dnext-tool-container #a-slider {
   width: 200px;
   display: inline-block;
   margin-left: 10px;
   margin-right: 10px; }
+.dnext-tool-container .intf-curve {
+  color: #CC6600; }
+.dnext-tool-container .f-curve {
+  color: blue; }
 .dnext-tool-container .line, .dnext-tool-container .double-line, .dnext-tool-container .full-line, .dnext-tool-container .half-line, .dnext-tool-container .quarter-line {
   width: 100%;
   float: left;
@@ -1897,4 +1901,4 @@
 .dnext-tool-container input[type=radio] + label > i.fa-dot-circle-o {
   display: none; }
 
-/*# sourceMappingURL=calculus-DDunit-interactive-Tools-1-2.css.map */
+/*# sourceMappingURL=calculus-DDunit-interactive-Tools-1-5.css.map */

@@ -4,10 +4,13 @@ var DataEntry = (function($, _, JXG, undefined) {
     var boundingBox = [-6.0, 6.0, 6.0, -6.0],
         fFn = [constant, linearUp, linearDown, piecewise, curve],
         intfFn = [intConstant, intLinearUp, intLinearDown, intPiecewise, intCurve],
-        aVal = -1.0, xMin = -5.0, xMax = 5.0, xStep = 0.1, precision = 6, k = 1.35, // for parabola curve
-        graphBoard, xSlider, xSliderValue,
+        tMin = boundingBox[0], tMax = boundingBox[2],
+        aMin = -5.0, aMax = 5.0, aStep = 0.1,
+        xMin = -5.0, xMax = 5.0, xStep = 0.1,
+        precision = 6, k = 1.35, // for parabola curve
+        graphBoard, aSlider, aSliderValue, xSlider, xSliderValue,
         animateButton, backwardButton, forwardButton, animateIcon, isAnimating = false, anim,
-        fCurve, aLine, xLine, areas = [],
+        fCurve, intfCurve, xPoint, xDottedLine, aLine, xLine, areas = [],
         zonesAll = [
             [-5.0, -1.0, 5.0],
             [-5.0, -3.0, -1.0, 5.0],
@@ -18,9 +21,12 @@ var DataEntry = (function($, _, JXG, undefined) {
         config = window.ToolsSettings || {
             toolNbr: 1,
             fnInit: 1,
+            aInit: -1.0,
             xInit: 0.0
         },
-        fnNbr = config.fnInit, f = fFn[fnNbr], intf = intfFn[fnNbr], xVal = config.xInit, zones = zonesAll[fnNbr];
+        fnNbr = config.fnInit, f = fFn[fnNbr], intf = intfFn[fnNbr],
+        aVal = config.aInit, xVal = config.xInit, zones = zonesAll[fnNbr],
+        showIntCurve = config.toolNbr === 4 || config.toolNbr === 5;
 
     init();
 
@@ -67,12 +73,30 @@ var DataEntry = (function($, _, JXG, undefined) {
                 radioButtonHandler(2);
             });
         }
-        else if (config.toolNbr === 3) {
+        else if (config.toolNbr === 3 || config.toolNbr === 4 || config.toolNbr === 5) {
             $('#piecewise-radio-button').on('change', function() {
                 radioButtonHandler(3);
             });
             $('#curve-radio-button').on('change', function() {
                 radioButtonHandler(4);
+            });
+        }
+
+        if (config.toolNbr === 5) {console.log(aMin)
+            aSliderValue = $('#a-slider-value');
+            aSlider = $('#a-slider');
+            aSlider.slider({
+                min: aMin,
+                max: aMax,
+                step: aStep,
+                value: aVal,
+                slide: function(event, ui) {
+                    aSliderValue.html(ui.value);
+                    aVal = ui.value;
+                    updateFixedShapes();
+                    updateMovingShapes();
+                    outputDynamicMath();
+                }
             });
         }
 
@@ -126,7 +150,7 @@ var DataEntry = (function($, _, JXG, undefined) {
             max: xMax,
             step: xStep,
             value: xVal,
-            slide: function(event, ui ) {
+            slide: function(event, ui) {
                 xSliderValue.html(ui.value);
                 xVal = ui.value;
                 updateMovingShapes();
@@ -181,48 +205,48 @@ var DataEntry = (function($, _, JXG, undefined) {
         return parseFloat(nbrStr).toString(); // Removes insignificant trailing zeroes
     }
 
-    function constant(x) {
+    function constant(t) {
         return 3.0;
     }
 
-    function linearUp(x) {
-        return x/3.0 + 1.0;
+    function linearUp(t) {
+        return t/3.0 + 1.0;
     }
 
-    function linearDown(x) {
-        return -0.5*(x+1.0);
+    function linearDown(t) {
+        return -0.5*(t+1.0);
     }
 
-    function piecewise(x) {
-        if (x <= -3.0) {
+    function piecewise(t) {
+        if (t <= -3.0) {
             return -1.0;
         }
-        else if (x <= 0.0) {
-            return x + 2.0;
+        else if (t <= 0.0) {
+            return t + 2.0;
         }
-        else if (x <= 2.0) {
-            return -2.0*(x-1);
+        else if (t <= 2.0) {
+            return -2.0*(t-1);
         }
         else {
-            return x - 4.0;
+            return t - 4.0;
         }
     }
 
-    function curve(x) {
-        return k*(1.0 - x*x/9.0);
+    function curve(t) {
+        return k*(1.0 - t*t/9.0);
     }
 
-    // Indefinite integral: y = 3x
+    // Indefinite integral: y = 3t
     function intConstant(a, b) {
         return 3.0*(b-a);
     }
 
-    // Indefinite integral: y = x^2/6 + x = x(x+6)/6
+    // Indefinite integral: y = t^2/6 + t = t(t+6)/6
     function intLinearUp(a, b) {
         return (b*(b+6) - a*(a+6))/6.0;
     }
 
-    // Indefinite integral: y = 0.5x(0.5x+1)
+    // Indefinite integral: y = 0.5t(0.5t+1)
     function intLinearDown(a, b) {
         return -0.5*(b*(0.5*b+1.0) - a*(0.5*a+1.0));
     }
@@ -231,31 +255,31 @@ var DataEntry = (function($, _, JXG, undefined) {
         return intPiecewiseFromMin(b) - intPiecewiseFromMin(a);
     }
 
-    // Definite integral from xMin to x
-    function intPiecewiseFromMin(x) {
-        if (x <= -3.0) {
-            return intPiecewise1(xMin, x);
+    // Definite integral from tMin to t
+    function intPiecewiseFromMin(t) {
+        if (t <= -3.0) {
+            return intPiecewise1(tMin, t);
         }
-        else if (x <= 0.0) {
-            return intPiecewise1(xMin, -3.0) + intPiecewise2(-3.0, x);
+        else if (t <= 0.0) {
+            return intPiecewise1(tMin, -3.0) + intPiecewise2(-3.0, t);
         }
-        else if (x <= 2.0) {
-            return intPiecewise1(xMin, -3.0) + intPiecewise2(-3.0, 0.0) +
-                   intPiecewise3(0.0, x);
+        else if (t <= 2.0) {
+            return intPiecewise1(tMin, -3.0) + intPiecewise2(-3.0, 0.0) +
+                   intPiecewise3(0.0, t);
         }
         else {
-            return intPiecewise1(xMin, -3.0) + intPiecewise2(-3.0, 0.0) +
-                   intPiecewise3(0.0, 2.0) + intPiecewise4(2.0, x);
+            return intPiecewise1(tMin, -3.0) + intPiecewise2(-3.0, 0.0) +
+                   intPiecewise3(0.0, 2.0) + intPiecewise4(2.0, t);
         }
 
     }
 
     // Definite integrals of various pieces to their upper bounds
     // Indefinite integral of the pieces:
-    // Piece 1: -x
-    // Piece 2: x(0.5x+2)
-    // Piece 3: x(2-x)
-    // Piece 4: x(0.5x-4)
+    // Piece 1: -t
+    // Piece 2: t(0.5t+2)
+    // Piece 3: t(2-t)
+    // Piece 4: t(0.5t-4)
     function intPiecewise1(a, b) {
         return a - b;
     }
@@ -272,7 +296,7 @@ var DataEntry = (function($, _, JXG, undefined) {
         return b*(0.5*b-4.0) - a*(0.5*a-4.0);
     }
 
-    // Indefinite integral: y = kx(1-x^3/27)
+    // Indefinite integral: y = kt(1-t^3/27)
     function intCurve(a, b) {
         return k*b*(1.0-b*b/27.0) - k*a*(1.0-a*a/27.0);
     }
@@ -349,7 +373,7 @@ var DataEntry = (function($, _, JXG, undefined) {
         xOffset2 = Math.abs(boundingBox[2] - boundingBox[0]) / 50.0;
         yOffset2 = Math.abs(boundingBox[3] - boundingBox[1]) / 25.0; // Different than in other applications
 
-        xAxisLabel = graphBoard.create('text', [boundingBox[2] - xOffset1, yOffset1, 'x'], {
+        xAxisLabel = graphBoard.create('text', [boundingBox[2] - xOffset1, yOffset1, 't'], {
             anchorX: 'right',
             fixed:true
         });
@@ -357,6 +381,32 @@ var DataEntry = (function($, _, JXG, undefined) {
             anchorX: 'left',
             fixed:true
         });
+
+        if (showIntCurve) {
+            intfCurve = graphBoard.create(
+                'curve',
+                [[], []],
+                {strokeWidth: 2, strokeColor: '#f9966b', highlight: false}
+            );
+
+            xDottedLine = graphBoard.create('line', [[xVal, 0.0], [xVal, intf(aVal, xVal)]], {
+                fixed: true,
+                straightFirst:false,
+                straightLast:false,
+                strokeWidth: 1,
+                strokeColor: 'black',
+                dash: 1,
+                highlight: false
+            });
+
+            xPoint = graphBoard.create('point', [xVal, intf(aVal, xVal)], {
+                fixed: true,
+                name: '',
+                size: 2,
+                strokeColor: 'black',
+                fillColor: 'black'
+            });
+        }
 
         fCurve = graphBoard.create(
             'curve',
@@ -383,10 +433,10 @@ var DataEntry = (function($, _, JXG, undefined) {
         });
     }
 
-    function getAreaColor(x1, x2) {
-        var area = intf(x1, x2);
+    function getAreaColor(t1, t2) {
+        var area = intf(t1, t2);
 
-        area = (x2 <= aVal) ? -area : area;
+        area = (t2 <= aVal) ? -area : area;
 
         return area < 0.0 ? 'red' : 'green';
     }
@@ -414,36 +464,41 @@ var DataEntry = (function($, _, JXG, undefined) {
     }
 
     function updateFixedShapes() {
-        var x, y, xMin, xMax, xInc = 0.01, dataX = [], dataY = [];
+        var t, tInc = 0.01, fDataX = [], fDataY = [], intfDataY = [];
 
-        xMin = boundingBox[0];
-        xMax = boundingBox[2];
+        for (t = tMin; t <= tMax; t += tInc) {
+            fDataX.push(t);
+            fDataY.push(f(t));
 
-        for (x = xMin; x <= xMax; x += xInc) {
-            y = f(x);
-            dataX.push(x);
-            dataY.push(y);
+            if (showIntCurve) {
+                intfDataY.push(intf(aVal, t));
+            }
         }
 
-        fCurve.dataX = dataX;
-        fCurve.dataY = dataY;
+        fCurve.dataX = fDataX;
+        fCurve.dataY = fDataY;
         fCurve.updateCurve();
+
+        if (showIntCurve) {
+            intfCurve.dataX = fDataX;
+            intfCurve.dataY = intfDataY;
+            intfCurve.updateCurve();
+        }
 
         aLine.point1.moveTo([aVal, 0.0], 0);
         aLine.point2.moveTo([aVal, f(aVal)], 0);
     }
 
     function updateMovingShapes() {
-        var x, y, xMin, xMax, xInc = 0.01, i,
+        var t, tLocalMin, tLocalMax, tInc = 0.01, i,
             dataX = [], dataY = [], xZone = [], yZone = [];
 
-        xMin = Math.min(aVal, xVal);
-        xMax = Math.max(aVal, xVal);
+        tLocalMin = Math.min(aVal, xVal);
+        tLocalMax = Math.max(aVal, xVal);
 
-        for (x = xMin; x <= xMax; x += xInc) {
-            y = f(x);
-            dataX.push(x);
-            dataY.push(y);
+        for (t = tLocalMin; t <= tLocalMax; t += tInc) {
+            dataX.push(t);
+            dataY.push(f(t));
         }
 
         _.each(areas, function(area) {
@@ -475,6 +530,12 @@ var DataEntry = (function($, _, JXG, undefined) {
 
         xLine.point1.moveTo([xVal, 0.0], 0);
         xLine.point2.moveTo([xVal, f(xVal)], 0);
+
+        if (showIntCurve) {
+            xDottedLine.point1.moveTo([xVal, 0.0], 0);
+            xDottedLine.point2.moveTo([xVal, intf(aVal, xVal)], 0);
+            xPoint.setPosition(JXG.COORDS_BY_USER, [xVal, intf(aVal, xVal)]);
+        }
 
         graphBoard.update();
     }

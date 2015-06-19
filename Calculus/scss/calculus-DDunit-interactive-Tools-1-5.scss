@@ -6,6 +6,7 @@ $dark-gray: #505050;
 $light-blue: #4479BA;
 $medium-blue: #356AA0;
 $dark-blue: #356094;
+$sedona: #CC6600;
 
 @mixin border-radius($radius) {
   -webkit-border-radius: $radius;
@@ -135,11 +136,19 @@ $dark-blue: #356094;
     color: black;
   }
 
-  #x-slider {
+  #x-slider, #a-slider {
     width: 200px;
     display: inline-block;
     margin-left: 10px;
     margin-right: 10px;
+  }
+
+  .intf-curve {
+    color: $sedona;
+  }
+
+  .f-curve {
+    color: blue;
   }
 
   .line {
