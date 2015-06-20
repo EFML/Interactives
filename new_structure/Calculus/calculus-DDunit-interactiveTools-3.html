@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <title>Calculus DDUnit Interactive Tools 3</title>
+    <link rel="stylesheet" type="text/css" href="css/smoothness/jquery-ui.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.2.0/katex.min.css">
+    <link rel="stylesheet" type="text/css" href="css/calculus-DDunit-interactive-Tools-1-5.css">
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jsxgraph/0.99.3/jsxgraphcore.js"></script>
+    <script type="text/javascript" src="js/vendor/underscore-min.js"></script>
+    <script type="text/javascript" src="js/vendor/jquery.min.js"></script>
+    <script type="text/javascript" src="js/vendor/jquery-ui.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.2.0/katex.min.js"></script>
+    <script type="text/javascript">
+      var ToolsSettings = {
+        toolNbr: 3,
+        fnInit: 3,
+        aInit: -1.0,
+        xInit: -2.0
+      };
+    </script>
+    <script type="text/javascript" src="js/app/calculus-DDunit-interactiveTools-1-5.js" defer></script>
+  </head>
+  <body>
+  	<div class="dnext-tool-header">
+    	<div class="dnext-title">CALCULUS DDUNIT INTERACTIVE TOOLS 3</div>
+    	<div class="dnext-help-link">
+    		<a id="dnext-help-link" href="#">+ help</a>
+    	</div>
+    	<div id="dnext-help-text" class="dnext-help-text">
+      	<p>
+        	Help text and credentials go here.
+      	</p>
+    	</div>
+  	</div>
+  	<div class="dnext-tool-container">
+      <div class="control-panel">
+        <div class="full-line"><span class='regular-text'>x</span><div id="x-slider"></div><span class='regular-text' id="x-slider-value">-2</span></div>
+        <div class="quarter-line">
+        <button class="button" id="animate"><i class="fa fa-play"></i></button><button class="button" id="backward"><i class="fa fa-step-backward"></i></button><button class="button" id="forward"><i class="fa fa-step-forward"></i></button>
+        </div>
+        <div class="double-line"><span class='math-text' id="math-line1"></span></div>
+        <div class="double-line">
+          <span>Function:</span>
+          <input type="radio" name="function" id="piecewise-radio-button"  checked>
+          <label for="piecewise-radio-button">
+            <i class="fa fa-circle-o"></i><i class="fa fa-dot-circle-o"></i>Piecewise
+          </label>
+          <input type="radio" name="function" id="curve-radio-button">
+          <label for="curve-radio-button">
+            <i class="fa fa-circle-o"></i><i class="fa fa-dot-circle-o"></i>Curve
+          </label>
+        </div>
+      </div>
+      <div class="jxgbox" id="graph-board"></div>
+  	</div>
+  </body>
+</html>
