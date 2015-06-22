@@ -142,13 +142,12 @@ default_tolerance = 1.0
 #     String(answer='<correct answer>')
 
 table = [
-    ['Rank','From','To'],
-    [String(answer='1'),'A','B'],
-    [String(answer='1'),'B','C'],
-    [String(answer='3'),'C','D'],
-    [String(answer='2'),'D','E'],
-    [String(answer='4'),'E','D'],
-    [String(answer='5'),'C','B']
+    ['First Column','Second Column','Third Column'],
+    ['*','*','*'],
+    ['*','*','*'],
+    ['*','*',String(answer='1/1')],
+    ['*','*',String(answer='1/2')],
+    ['*','*',String(answer='1/20')]
 ]
 
 # Set the text that gets displayed when clicking the "+help" button.  Use "None" to disable the
@@ -157,7 +156,7 @@ table = [
 help_text = "Fill in the yellow fields with the right values."
 # Set the width of the columns in pixels.  The total width of the table shouldn't be more than 800.
 # You can use "column_width = None" for equal-width columns with a total width of 800 pixels.
-column_widths = None
+column_widths = [225, 225, 225]
 #column_widths = [200, 200, 200]
 # The heights of the table rows in pixels.  Rows may grow higher than the specified value if the text
 # in some cells in the row is long enough to get wrapped in more than one line.  If this happens,
@@ -168,11 +167,14 @@ row_heights = [30,30,30,30,30,30]
 initial_state, width, height = init(table, help_text, column_widths, row_heights)
 ]]>
 </script>
-  <p>The diagram below shows in cross section two plates carrying charges that are identical in magnitude but opposite in sign. There is a uniform electric field of 110 N/C between the plates (ignore edge effects).</p>
-  <img src="/static/gravelec4.2.2.1.q.png"/>
- <p></p>
-<p>Rank the electric potential difference between the following pairs of points from 1 to 5, with 5 representing the greatest electric potential difference. If two pairs of points tie, give them the same rank. If all of the pairs of points have the same potential difference rank them all as 5. If all of the pairs of points have zero potential difference, rank them all as 1. Negative values of potential difference are less than zero.</p>
-            <p></p>
+<p>Object 1 has an arbitrary mass, M<sub>1</sub>. It is placed at the surface of the isolated planet in Part I. The system of the object and the planet has a gravitational potential energy of</p>
+<p>\(U_g=V_g*M_1\)</p>
+<p>By completing the table, compare the gravitational potential energy of two systems, one consisting of the planet and the Object 1 with mass M<sub>1</sub>, and the second consisting of the planet and Object 2 of mass 5M<sub>1</sub> at the following distances. The radii of the two objects are negligible, compared to the radius of the planet.</p>
+
+<p><img src="/static/gravelec4.3.1.hoa2.1.png" width="75%" /></p>
+
+<p>Fill in the yellow cells in the table below with the fraction that you would substitute for the question mark in the table above. For example, one-half (0.5) would be written as 1/2, and one (1.0) would be written as 1/1. <i>Please make sure there are no spaces in your response.</i></p>
+
 <customresponse cfn="check_table">
   <jsinput gradefn="ActiveTable.grade"
     get_statefn="ActiveTable.getState"

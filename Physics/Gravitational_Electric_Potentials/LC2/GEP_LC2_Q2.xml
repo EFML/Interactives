@@ -142,13 +142,12 @@ default_tolerance = 1.0
 #     String(answer='<correct answer>')
 
 table = [
-    ['Rank','From','To'],
-    [String(answer='1'),'A','B'],
-    [String(answer='1'),'B','C'],
-    [String(answer='3'),'C','D'],
-    [String(answer='2'),'D','E'],
-    [String(answer='4'),'E','D'],
-    [String(answer='5'),'C','B']
+    ['Rank','Point'],
+    [String(answer='5'),'A'],
+    [String(answer='5'),'B'],
+    [String(answer='5'),'C'],
+    [String(answer='5'),'D'],
+    [String(answer='5'),'E'],
 ]
 
 # Set the text that gets displayed when clicking the "+help" button.  Use "None" to disable the
@@ -163,16 +162,17 @@ column_widths = None
 # in some cells in the row is long enough to get wrapped in more than one line.  If this happens,
 # you might need to replace "$height" close to the end of this file by a big enough value to
 # prevent a vertical scrollbar for the iframe from appearing.
-row_heights = [30,30,30,30,30,30]
+row_heights = [30,30,30,30,30]
 # Initialisation -- don't remove!
 initial_state, width, height = init(table, help_text, column_widths, row_heights)
 ]]>
 </script>
-  <p>The diagram below shows in cross section two plates carrying charges that are identical in magnitude but opposite in sign. There is a uniform electric field of 110 N/C between the plates (ignore edge effects).</p>
-  <img src="/static/gravelec4.2.2.1.q.png"/>
- <p></p>
-<p>Rank the electric potential difference between the following pairs of points from 1 to 5, with 5 representing the greatest electric potential difference. If two pairs of points tie, give them the same rank. If all of the pairs of points have the same potential difference rank them all as 5. If all of the pairs of points have zero potential difference, rank them all as 1. Negative values of potential difference are less than zero.</p>
-            <p></p>
+    <p>The diagram below shows in cross section two plates carrying charges that are identical in magnitude but opposite in sign. There is a uniform electric field of 110 N/C between the plates (ignore edge effects).</p>
+  <img src="/static/capacitorField.png" width="550"/>
+            <p>Rank the magnitude of the force on a proton \(\big|{\mathop{F}^{\rightarrow}}_E\big|\) placed at the indicated points from 1 to 5, with 5 representing the greatest magnitude of electric force. If the magnitude of the force would be the same at two points, give them the same rank. If the magnitude of the force on the proton would be the same, but not zero at all of the points, rank them all as 5. If the force on the proton would be zero at all of the points, rank them all as 1. 
+          </p>
+<p> 
+</p>
 <customresponse cfn="check_table">
   <jsinput gradefn="ActiveTable.grade"
     get_statefn="ActiveTable.getState"
@@ -183,4 +183,16 @@ initial_state, width, height = init(table, help_text, column_widths, row_heights
     html_file="/static/activetable.html"
     sop="true"/>
 </customresponse>
+  
+    <solution>
+<div class="detailed-solution">
+<p>Explanation</p>
+
+<p> The field is uniform, meaning that it has the same strength and direction everywhere between the plates. A uniform field indicates a constant force on the proton. Since \({\mathop{E}^{\rightarrow}}=\frac{{\mathop{F}^{\rightarrow}}_E}{q}\) , then \({\mathop{F}^{\rightarrow}}_E=q\cdot{\mathop{E}^{\rightarrow}}\) and the field is uniform, or constant, the force on the proton at any of the points is calculated by multiplying the same charge value by the same constant value of the electric field, giving the same force for all the labeled points (or, everywhere between the plates, when the edge effects can be ignored).
+
+</p>
+
+</div>
+</solution>
+  
 </problem>
