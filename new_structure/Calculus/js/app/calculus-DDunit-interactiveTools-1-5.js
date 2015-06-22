@@ -2,8 +2,8 @@ var DataEntry = (function($, _, JXG, undefined) {
     'use strict';
 
     var boundingBox = [-6.0, 6.0, 6.0, -6.0],
-        fFn = [constant, linearUp, linearDown, piecewise, curve],
-        intfFn = [intConstant, intLinearUp, intLinearDown, intPiecewise, intCurve],
+        fFn = [constant, linearUp, linearDown, piecewise, curve, constant1, linear1, secondPiecewise, constant2, linear2, linear3],
+        intfFn = [intConstant, intLinearUp, intLinearDown, intPiecewise, intCurve, intConstant1, intLinear1, intSecondPiecewise, intConstant2, intLinear2, intLinear3],
         tMin = boundingBox[0], tMax = boundingBox[2],
         aMin = -5.0, aMax = 5.0, aStep = 0.1,
         xMin = -5.0, xMax = 5.0, xStep = 0.1,
@@ -15,8 +15,14 @@ var DataEntry = (function($, _, JXG, undefined) {
             [-5.0, -1.0, 5.0],
             [-5.0, -3.0, -1.0, 5.0],
             [-5.0, 5.0],
-            [-5.0, -2.0, -1.0, 1.0, 4.0, 5.0],
-            [-5.0, -3.0, -1.0, 3.0, 5.0]
+            [-5.0, -2.0, 1.0, 4.0, 5.0], // the a value will be inserted afterwards
+            [-5.0, -3.0, 3.0, 5.0], // the a value will be inserted afterwards
+            [-5.0, 0.0, 5.0],
+            [-5.0, 0.0, 4.0, 5.0],
+            [-5.0, -2.0, 0.0, 2.0, 5.0],
+            [-5.0, 3.0, 5.0],
+            [-5.0, 0.0, 3.0, 5.0],
+            [-5.0, -2.0, 0.0, 5.0], // the a value will be inserted afterwards
         ],
         config = window.ToolsSettings || {
             toolNbr: 1,
@@ -26,7 +32,11 @@ var DataEntry = (function($, _, JXG, undefined) {
         },
         fnNbr = config.fnInit, f = fFn[fnNbr], intf = intfFn[fnNbr],
         aVal = config.aInit, xVal = config.xInit, zones = zonesAll[fnNbr],
-        showIntCurve = config.toolNbr === 4 || config.toolNbr === 5;
+        aStr = 'a = ' + nbrToString(config.aInit),
+        showIntCurve = config.toolNbr === 4 || config.toolNbr === 5 ||
+                       config.toolNbr === 6 || config.toolNbr === 7 ||
+                       config.toolNbr === 8 || config.toolNbr === 9 ||
+                       config.toolNbr === 10 || config.toolNbr === 11;
 
     init();
 
@@ -81,8 +91,21 @@ var DataEntry = (function($, _, JXG, undefined) {
                 radioButtonHandler(4);
             });
         }
+        else if (config.toolNbr === 11) {
+            $('#linear-radio-button').on('change', function() {
+                radioButtonHandler(10);
+            });
+            $('#piecewise-radio-button').on('change', function() {
+                radioButtonHandler(3);
+            });
+            $('#curve-radio-button').on('change', function() {
+                radioButtonHandler(4);
+            });
+        }
 
-        if (config.toolNbr === 5) {console.log(aMin)
+        if (config.toolNbr === 5 || config.toolNbr === 11) {
+            aStr = 'a = ' + aVal.toFixed(1);
+            updateZones();
             aSliderValue = $('#a-slider-value');
             aSlider = $('#a-slider');
             aSlider.slider({
@@ -93,6 +116,9 @@ var DataEntry = (function($, _, JXG, undefined) {
                 slide: function(event, ui) {
                     aSliderValue.html(ui.value);
                     aVal = ui.value;
+                    aStr = 'a = ' + aVal.toFixed(1);
+                    updateZones();
+                    createAreas();
                     updateFixedShapes();
                     updateMovingShapes();
                     outputDynamicMath();
@@ -103,9 +129,9 @@ var DataEntry = (function($, _, JXG, undefined) {
         createGraphBoard();
         createAreas();
         createSlider();
-        outputDynamicMath();
         updateFixedShapes();
         updateMovingShapes();
+        outputDynamicMath();
 
         animateButton = $('#animate');
         animateButton.on('click', animateButtonHandler);
@@ -196,7 +222,7 @@ var DataEntry = (function($, _, JXG, undefined) {
 
     function areaStr() {
         var area = intf(aVal, xVal);
-        return 'a = -1 \\quad \\int_{a}^{x}f(t)dt = ' + nbrToString(area);
+        return aStr + '\\quad \\int_{a}^{x}f(t)dt = ' + nbrToString(area);
     }
 
     function nbrToString(nbr) {
@@ -236,6 +262,38 @@ var DataEntry = (function($, _, JXG, undefined) {
         return k*(1.0 - t*t/9.0);
     }
 
+    function constant1(t) {
+        return -2.0;
+    }
+
+    function linear1(t) {
+        return -0.5*t + 2.0;
+    }
+
+    function secondPiecewise(t) {
+        if (t <= 0.0) {
+            return -t - 2.0;
+        }
+        else if (t <= 2.0) {
+            return -Math.sqrt(4.0-t*t);
+        }
+        else {
+            return t - 2.0;
+        }
+    }
+
+    function constant2(t) {
+        return 2.0;
+    }
+
+    function linear2(t) {
+        return 2.0*t;
+    }
+
+    function linear3(t) {
+        return 0.5*t + 1.0;
+    }
+
     // Indefinite integral: y = 3t
     function intConstant(a, b) {
         return 3.0*(b-a);
@@ -255,6 +313,20 @@ var DataEntry = (function($, _, JXG, undefined) {
         return intPiecewiseFromMin(b) - intPiecewiseFromMin(a);
     }
 
+    // Indefinite integral: y = -2t
+    function intConstant1(a, b) {
+        return -2.0*(b-a);
+    }
+
+    // Indefinite integral: y = t(2-0.25t)
+    function intLinear1(a, b) {
+        return b*(2.0-0.25*b) - a*(2.0-0.25*a);
+    }
+
+    function intSecondPiecewise(a, b) {
+        return intSecondPiecewiseFromMin(b) - intSecondPiecewiseFromMin(a);
+    }
+
     // Definite integral from tMin to t
     function intPiecewiseFromMin(t) {
         if (t <= -3.0) {
@@ -270,6 +342,21 @@ var DataEntry = (function($, _, JXG, undefined) {
         else {
             return intPiecewise1(tMin, -3.0) + intPiecewise2(-3.0, 0.0) +
                    intPiecewise3(0.0, 2.0) + intPiecewise4(2.0, t);
+        }
+
+    }
+
+    // Definite integral from tMin to t
+    function intSecondPiecewiseFromMin(t) {
+        if (t <= 0.0) {
+            return intSecondPiecewise1(tMin, t);
+        }
+        else if (t <= 2.0) {
+            return intSecondPiecewise1(tMin, 0.0) + intSecondPiecewise2(0.0, t);
+        }
+        else {
+            return intSecondPiecewise1(tMin, 0.0) + intSecondPiecewise2(0.0, 2.0) +
+                   intSecondPiecewise3(2.0, t);
         }
 
     }
@@ -296,9 +383,41 @@ var DataEntry = (function($, _, JXG, undefined) {
         return b*(0.5*b-4.0) - a*(0.5*a-4.0);
     }
 
+    // Definite integrals of various pieces to their upper bounds
+    // Indefinite integral of the pieces:
+    // Piece 1: -t(0.5t+2)
+    // Piece 2: -0.5xsqrt(4-t^2) - 2arcsin(0.5t)
+    // Piece 3: t(0.5t-2)
+    function intSecondPiecewise1(a, b) {
+        return a*(0.5*a+2.0) - b*(0.5*b+2.0);
+    }
+
+    function intSecondPiecewise2(a, b) {
+        return 0.5*a*Math.sqrt(4.0-a*a) + 2.0*Math.asin(0.5*a) - 0.5*b*Math.sqrt(4.0-b*b) - 2.0*Math.asin(0.5*b)
+    }
+
+    function intSecondPiecewise3(a, b) {
+        return b*(0.5*b-2.0) - a*(0.5*a-2.0);
+    }
+
     // Indefinite integral: y = kt(1-t^3/27)
     function intCurve(a, b) {
         return k*b*(1.0-b*b/27.0) - k*a*(1.0-a*a/27.0);
+    }
+
+    // Indefinite integral: y = 2t
+    function intConstant2(a, b) {
+        return 2.0*(b-a);
+    }
+
+    // Indefinite integral: y = t^2
+    function intLinear2(a, b) {
+        return b*b - a*a;
+    }
+
+    // Indefinite integral: y = t(0.25t+1)
+    function intLinear3(a, b) {
+        return b*(0.25*b+1.0) - a*(0.25*a+1.0);
     }
 
     function startAnimation() {
@@ -430,6 +549,14 @@ var DataEntry = (function($, _, JXG, undefined) {
             strokeWidth: 2,
             strokeColor: '#444444',
             highlight: false
+        });
+    }
+
+    function updateZones() {
+        zones = _.clone(zonesAll[fnNbr]);
+        zones.push(aVal);
+        zones = _.sortBy(zones, function(num){
+            return num;
         });
     }
 
