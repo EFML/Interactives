@@ -1,15 +1,35 @@
 var DataEntry = (function($, _, JXG, undefined) {
     'use strict';
 
-    var boundingBox = [-1.0, 8.0, 11.0, -1.0],
-        board,
+    var fFn = [f0, f1, f2],
+        fStrings = ['y = 2\\sqrt x', 'y = \\frac{x}{x+1}', 'y = x^2'],
+        dfFn = [df0, df1, df2],
+        config = window.secantLinesSettings || {
+            fnNbr: 0,
+            boundingBox: [-1.0, 8.0, 11.0, -1.0],
+            a: {
+                init: 0.5,
+                min: 0.0,
+                max: 10.0,
+                step: 0.1
+            },
+            b: 4.0
+        },
+        fnNbr = config.fnNbr,
+        f = fFn[fnNbr],
+        fStr = fStrings[fnNbr],
+        df = dfFn[fnNbr],
+        boundingBox = config.boundingBox,
+        a = config.a.init, aMin = config.a.min, aMax = config.a.max, aStep = config.a.step,
+        b = config.b,
         precision = 6,
-        a = 0.5, b = 4.0,
+        fixedSecantStr = fixedSecantString(),
+        board,
         slope; // slope of secant line
 
     var fCurve, secantLine, aPointAxis, aPointCurve, bPointAxis, bPointCurve, aLine, bLine;
 
-    init();
+    init();console.log(fStr)
 
     function init() {
         // Check version of JQuery
@@ -67,9 +87,9 @@ var DataEntry = (function($, _, JXG, undefined) {
 
     function createSlider() {
         $('#a-slider').slider({
-            min: 0.0,
-            max: 10.0,
-            step: 0.1,
+            min: aMin,
+            max: aMax,
+            step: aStep,
             value: a,
             slide: function(event, ui ) {
                 $("#a-slider-value" ).html(ui.value);
@@ -83,7 +103,7 @@ var DataEntry = (function($, _, JXG, undefined) {
     }
 
     function outputStaticMath() {
-        katex.render('\\text{Curve: } y = 2\\sqrt x', $('#math-line1').get(0));
+        katex.render('\\text{Curve: }' + fStr, $('#math-line1').get(0));
     }
 
     function outputDynamicMath() {
@@ -91,11 +111,69 @@ var DataEntry = (function($, _, JXG, undefined) {
     }
 
     function secantString() {
-       return 'y = ' + slope.toFixed(precision) + '(x - 4) + 4';
+        return 'y = ' + slope.toFixed(precision) + fixedSecantStr;
     }
 
-    function f(x) {
+    function fixedSecantString() {
+        var bStr = nbrToString(Math.abs(b)), bOp = '',
+            yb = f(b), ybStr = nbrToString(Math.abs(yb)), ybOp = '';
+
+        if (b > 0) {
+            bOp = '-';
+        }
+        else if (b === 0.0) {
+            bStr = '';
+        }
+        else if (b < 0.0) {
+            bOp = '+';
+        }
+
+        if (yb > 0) {
+            ybOp = '+';
+        }
+        else if (yb === 0.0) {
+            ybStr = '';
+        }
+        else if (b < 0.0) {
+            ybOp = '-';
+        }
+
+        return '(x' + bOp + bStr + ')' + ybOp + ybStr;
+    }
+
+    function nbrToString(nbr) {
+        var nbrStr = nbr.toFixed(precision);
+
+        return parseFloat(nbrStr).toString(); // Removes insignificant trailing zeroes
+    }
+
+    function calculateSlope() {
+        // Equation of line is y = mx + n. When a = b, use derivative for the slope
+        slope = a !== b ? Math.abs((f(b)-f(a)) / (b-a)) : df(a);
+    }
+
+    function f0(x) {
         return 2.0*Math.sqrt(x);
+    }
+
+    function f1(x) {
+        return x/(x+1.0);
+    }
+
+    function f2(x) {
+        return x*x;
+    }
+
+    function df0(x) {
+        return 1.0/Math.sqrt(x);
+    }
+
+    function df1(x) {
+        return 1.0/((x+1)*(x+1));
+    }
+
+    function df2(x) {
+        return 2.0*x;
     }
 
     function createBoard() {
@@ -169,12 +247,14 @@ var DataEntry = (function($, _, JXG, undefined) {
         });
 
         secantLine = board.create('line', [[a, f(a)], [b, f(b)]], {
+            fixed: true,
             strokeWidth: 2,
             strokeColor: 'blue',
             highlight: false
         });
 
         aLine = board.create('line', [[a, 0.0], [a, f(a)]], {
+            fixed: true,
             straightFirst:false,
             straightLast:false,
             strokeWidth: 2,
@@ -184,6 +264,7 @@ var DataEntry = (function($, _, JXG, undefined) {
         });
 
         bLine = board.create('line', [[b, 0.0], [b, f(b)]], {
+            fixed: true,
             straightFirst:false,
             straightLast:false,
             strokeWidth: 2,
@@ -204,15 +285,10 @@ var DataEntry = (function($, _, JXG, undefined) {
             secantLine.point1.moveTo([a, fa], 0);
         }
         else {
-            // Use x = 5 and derivative for the slope
-            secantLine.point1.moveTo([5, slope + 4.0], 0);
+            // Use x = b + 1 and derivative for the slope
+            secantLine.point1.moveTo([b + 1.0, slope + fb], 0);
         }
         secantLine.point2.moveTo([b, fb], 0);
-    }
-
-    function calculateSlope() {
-        // Equation of line is y = mx + n. When a = b, use derivative for the slope
-        slope = a !== b ? Math.abs((f(b)-f(a)) / (b-a)) : 1.0/Math.sqrt(a);
     }
 
     return {
