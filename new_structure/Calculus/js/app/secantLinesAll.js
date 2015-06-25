@@ -1,35 +1,55 @@
 var DataEntry = (function($, _, JXG, undefined) {
     'use strict';
 
-    var fFn = [f0, f1, f2],
-        fStrings = ['y = 2\\sqrt x', 'y = \\frac{x}{x+1}', 'y = x^2'],
-        dfFn = [df0, df1, df2],
-        config = window.secantLinesSettings || {
-            fnNbr: 0,
-            boundingBox: [-1.0, 8.0, 11.0, -1.0],
-            a: {
-                init: 0.5,
-                min: 0.0,
-                max: 10.0,
-                step: 0.1
+    var configs = [
+            {
+                f: f0,
+                fStr: 'y = 2\\sqrt x',
+                df: df0,
+                boundingBox: [-1.0, 8.0, 11.0, -1.0],
+                a: {
+                    init: 0.5,
+                    min: 0.0,
+                    max: 10.0,
+                    step: 0.1
+                },
+                b: 4.0
             },
-            b: 4.0
-        },
-        fnNbr = config.fnNbr,
-        f = fFn[fnNbr],
-        fStr = fStrings[fnNbr],
-        df = dfFn[fnNbr],
-        boundingBox = config.boundingBox,
-        a = config.a.init, aMin = config.a.min, aMax = config.a.max, aStep = config.a.step,
-        b = config.b,
-        precision = 6,
-        fixedSecantStr = fixedSecantString(),
-        board,
-        slope; // slope of secant line
+            {
+                f: f1,
+                fStr: 'y = \\frac{x}{x+1}',
+                df: df1,
+                boundingBox: [-1.0, 1.5, 4.5, -1.5],
+                a: {
+                    init: 0.5,
+                    min: -0.5,
+                    max: 4.0,
+                    step: 0.1
+                },
+                b: 3.0
+            },
+            {
+                f: f2,
+                fStr: 'y = x^2',
+                df: df2,
+                boundingBox: [-6.0, 10.5, 6.0, -3.0],
+                a: {
+                    init: -3.0,
+                    min: -5.0,
+                    max: 5.0,
+                    step: 0.1
+                },
+                b: 2.0
+            }
+        ],
+        toolNbr = window.toolNbr || 0,
+        config, f, fStr, df, boundingBox,
+        a, aMin, aMax, aStep, b,
+        fixedSecantStr, slope, precision = 6, board, aSlider, aSliderValue;
 
     var fCurve, secantLine, aPointAxis, aPointCurve, bPointAxis, bPointCurve, aLine, bLine;
 
-    init();console.log(fStr)
+    init();
 
     function init() {
         // Check version of JQuery
@@ -53,9 +73,12 @@ var DataEntry = (function($, _, JXG, undefined) {
 
         $(window).on('resize', resizeBox);
         $('#dnext-help-link').on('click', toggle);
+        aSliderValue = $('#a-slider-value');
 
-        createBoard();
+        initializeApp();
         createSlider();
+        createDropdown();
+        createBoard();
         calculateSlope();
         outputStaticMath();
         outputDynamicMath();
@@ -86,15 +109,15 @@ var DataEntry = (function($, _, JXG, undefined) {
     }
 
     function createSlider() {
-        $('#a-slider').slider({
+        aSlider = $('#a-slider').slider({
             min: aMin,
             max: aMax,
             step: aStep,
             value: a,
-            slide: function(event, ui ) {
-                $("#a-slider-value" ).html(ui.value);
+            slide: function(event, ui) {
+                aSliderValue.html(ui.value);
                 a = ui.value;
-                updateGraph();
+                updateMovingShapes();
                 board.update();
                 calculateSlope();
                 outputDynamicMath();
@@ -102,8 +125,48 @@ var DataEntry = (function($, _, JXG, undefined) {
         });
     }
 
+    function createDropdown() {
+        $('#curve-select-menu').selectmenu({
+            change: function(event, ui) {
+                toolNbr = ui.item.value;
+                initializeApp();
+                updateApp();
+            }
+        });
+    }
+
+    function initializeApp() {
+        config = configs[toolNbr];
+        f = config.f;
+        fStr = config.fStr;
+        df = config.df;
+        boundingBox = config.boundingBox;
+        a = config.a.init;
+        aMin = config.a.min;
+        aMax = config.a.max;
+        aStep = config.a.step;
+        b = config.b;
+        fixedSecantStr = fixedSecantString();
+    }
+
+    function updateApp() {
+        aSlider.slider('option', {
+            'min': aMin,
+            'max': aMax,
+            'step': aStep,
+            'value': a
+        });
+        aSliderValue.html(a);
+
+        board.setBoundingBox(boundingBox);
+        calculateSlope();
+        outputStaticMath();
+        outputDynamicMath();
+        updateShapes();
+    }
+
     function outputStaticMath() {
-        katex.render('\\text{Curve: }' + fStr, $('#math-line1').get(0));
+        katex.render(fStr, $('#math-line1').get(0));
     }
 
     function outputDynamicMath() {
@@ -274,7 +337,28 @@ var DataEntry = (function($, _, JXG, undefined) {
         });
     }
 
-    function updateGraph() {
+    function updateShapes() {
+        var fa = f(a),
+            fb = f(b);
+        board.removeObject(fCurve);
+        fCurve = board.create(
+            'functiongraph',
+            [f],
+            {strokeWidth: 3, strokeColor: '#444444', highlight: false}
+        );
+        aPointAxis.setPosition(JXG.COORDS_BY_USER, [a, 0.0]);
+        aPointCurve.setPosition(JXG.COORDS_BY_USER, [a, fa]);
+        bPointAxis.setPosition(JXG.COORDS_BY_USER, [b, 0.0]);
+        bPointCurve.setPosition(JXG.COORDS_BY_USER, [b, fb]);
+        aLine.point1.moveTo([a, 0.0], 0);
+        aLine.point2.moveTo([a, fa], 0);
+        bLine.point1.moveTo([b, 0.0], 0);
+        bLine.point2.moveTo([b, fb], 0);
+        secantLine.point1.moveTo([a, fa], 0);
+        secantLine.point2.moveTo([b, fb], 0);
+    }
+
+    function updateMovingShapes() {
         var fa = f(a),
             fb = f(b);
         aPointAxis.setPosition(JXG.COORDS_BY_USER, [a, 0.0]);
