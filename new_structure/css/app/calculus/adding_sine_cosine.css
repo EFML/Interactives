@@ -1833,11 +1833,13 @@
   font-size: 1.21em; }
 .dnext-tool-container .math-text {
   font-size: 110%; }
-.dnext-tool-container #zoom-slider {
+.dnext-tool-container #a-slider, .dnext-tool-container #b-slider {
   width: 200px;
   display: inline-block;
   margin-left: 10px;
   margin-right: 10px; }
+.dnext-tool-container .curve {
+  color: blue; }
 .dnext-tool-container .line, .dnext-tool-container .full-line, .dnext-tool-container .half-line, .dnext-tool-container .quarter-line {
   width: 100%;
   float: left;
@@ -1850,4 +1852,4 @@
 .dnext-tool-container .quarter-line {
   margin-top: 5px; }
 
-/*# sourceMappingURL=zoom-on-sin-x-over-x.css.map */
+/*# sourceMappingURL=adding_sine_cosine.css.map */
