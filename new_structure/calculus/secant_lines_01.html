@@ -2,23 +2,33 @@
 <html>
   <head>
     <meta charset="UTF-8">
-    <title>Secant Lines</title>
+    <title>Secant Lines 1</title>
     <link rel="stylesheet" type="text/css" href="../css/vendor/jquery_ui/smoothness/jquery-ui.min.css">
     <link rel="stylesheet" type="text/css" href="../css/vendor/katex/katex.min.css">
-    <link rel="stylesheet" type="text/css" href="../css/app/calculus/secant-lines-all.css">
+    <link rel="stylesheet" type="text/css" href="../css/app/calculus/secant-lines.css">
     <script type="text/javascript" src="../js/vendor/jsxgraphcore.js"></script>
     <script type="text/javascript" src="../js/vendor/underscore-min.js"></script>
     <script type="text/javascript" src="../js/vendor/jquery.min.js"></script>
     <script type="text/javascript" src="../js/vendor/jquery-ui.min.js"></script>
     <script type="text/javascript" src="../js/vendor/katex.min.js"></script>
     <script type="text/javascript">
-      var toolNbr = 0;
+      var secantLinesSettings = {
+        fnNbr: 0,
+        boundingBox: [-1.0, 8.0, 11.0, -1.0],
+        a: {
+          init: 0.5,
+          min: 0.0,
+          max: 10.0,
+          step: 0.1
+        },
+        b: 4.0
+      };
     </script>
-    <script type="text/javascript" src="../js/app/calculus/secantLinesAll.js" defer></script>
+    <script type="text/javascript" src="../js/app/calculus/secant_lines.js" defer></script>
   </head>
   <body>
   	<div class="dnext-tool-header">
-    	<div class="dnext-title">SECANT LINES</div>
+    	<div class="dnext-title">SECANT LINES 1</div>
     	<div class="dnext-help-link">
     		<a id="dnext-help-link" href="#">+ help</a>
     	</div>
@@ -31,13 +41,6 @@
   	<div class="dnext-tool-container">
     	<div class="jxgbox" id="jxgbox"></div>
       <div class="full-line"><span class='regular-text a-point'>a</span><div id="a-slider"></div><span class='regular-text a-point' id="a-slider-value">0.5</span></div>
-      <div class="full-line">
-        <select id="curve-select-menu">
-          <option value="0" selected>Curve 1:</option>
-          <option value="1">Curve 2:</option>
-          <option value="2">Curve 3:</option>
-        </select>
-      </div>
       <div class="full-line"><div class='math-text function' id="math-line1"></div></div>
       <div class="full-line"><div class='math-text secant-line' id="math-line2"></div></div>
   	</div>
