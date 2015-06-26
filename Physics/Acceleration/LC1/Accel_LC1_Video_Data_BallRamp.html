@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <title>Data Entry</title>
+    <link rel="stylesheet" type="text/css" href="https://dnexttools.s3.amazonaws.com/DataEntry/css/smoothness/jquery-ui.min.css">
+    <link rel="stylesheet" type="text/css" href="https://dnexttools.s3.amazonaws.com/DataEntry/css/handsontable.full.min.css">
+    <link rel="stylesheet" type="text/css" href="https://dnexttools.s3.amazonaws.com/DataEntry/css/data-entry.css">
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jsxgraph/0.99.3/jsxgraphcore.js"></script>
+    <script type="text/javascript" src="https://dnexttools.s3.amazonaws.com/DataEntry/js/vendor/underscore-min.js"></script>
+    <script type="text/javascript" src="https://dnexttools.s3.amazonaws.com/DataEntry/js/vendor/jquery.min.js"></script>
+    <script type="text/javascript" src="https://dnexttools.s3.amazonaws.com/DataEntry/js/vendor/jquery-ui.min.js"></script>
+    <script type="text/javascript" src="https://dnexttools.s3.amazonaws.com/DataEntry/js/vendor/handsontable.full.min.js"></script>
+    <script type="text/javascript">
+      <!--
+      // http://www.w3schools.com/cssref/css_colornames.asp
+      // Graphing calculator colors: 'Crimson', 'MediumSeaGreen', 'RoyalBlue', 'Orange', 'Turquoise'
+      -->
+      var DataEntrySettings = {
+        tables: [
+          {
+            name: 'Experiment 1',
+            data: [
+              [0.0.toPrecision(1), '', ''], 
+              [0.10.toPrecision(2), '', ''], 
+              [0.20.toPrecision(2), '', ''],
+              [0.30.toPrecision(2), '', ''],
+              [0.40.toPrecision(2), '', ''],
+              [0.50.toPrecision(2), '', ''],
+              [0.60.toPrecision(2), '', ''],
+              [0.70.toPrecision(2), '', ''],
+              [0.80.toPrecision(2), '', ''],
+              [0.90.toPrecision(2), '', ''],
+              [1.00.toPrecision(2), '', ''],
+            ],
+            headers: ['Position (m)', '# Frames', 'Time (s)'],
+            xColumn: 0,
+            yColumn: 1,
+            dataPoints: {
+              color: 'DarkGray',
+            },
+            fitLine: {
+              color: 'DodgerBlue'
+            },
+          }
+        ],
+        render: true
+      };
+    </script>
+    <script type="text/javascript" src="https://dnexttools.s3.amazonaws.com/DataEntry/js/app/data_entry.js" defer></script>
+  </head>
+  <body>
+    <div class="container">
+      <div class="control-panel"></div>
+      <div class="jxgbox" id="jxgbox"></div>
+      <div id="choose-columns-dialog-form"></div>
+      <div id="reset-dialog-form"></div>
+    </div>
+  </body>
+</html>
