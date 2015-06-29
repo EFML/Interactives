@@ -8,7 +8,7 @@ var GraphingCalculator = (function($, _, MathJax, JXG, undefined) {
         'Crimson', 'MediumSeaGreen', 'RoyalBlue', 'Orange', 'Turquoise'
     ],
     plotNames = ['1', '2', '3', '4', '5'],
-    precision = 3;
+    precision = 3, epsilon = Math.pow(10.0, -precision);
 
     init();
 
@@ -31,6 +31,12 @@ var GraphingCalculator = (function($, _, MathJax, JXG, undefined) {
         // Check version of JSXGraph:
         // Current: 0.99.3
         console.log('JSXGraph version: ' + JXG.version);
+
+        // Redefine some constants in board.jc
+        delete board.jc.builtIn.EULER;
+        delete board.jc.builtIn.PI;
+        board.jc.builtIn.pi = Math.PI;
+        board.jc.builtIn.e = Math.E;
 
         // Set up MathJax
         MathJax.Hub.queue.Push(function () {
@@ -200,9 +206,7 @@ var GraphingCalculator = (function($, _, MathJax, JXG, undefined) {
     }
 
     function setVisibility(checkbox, element) {
-        var checked = !_.isUndefined(checkbox.attr('checked'));
-
-        if (checked) {
+        if (checkbox.prop('checked')) {
             element.showElement();
         }
         else {
@@ -293,22 +297,29 @@ var GraphingCalculator = (function($, _, MathJax, JXG, undefined) {
     }
 
     function findZero(plot) {
-        var zeroStartStr = $('#x-start-' + plot.id).val(),
-            f, zeroStart, zero, mathOutput;
+        var x1Str = $('#x-start-' + plot.id).val(),
+            x2Str = $('#x-end-' + plot.id).val(),
+            f, x1, x2, zero, mathOutput;
         $('.error-message').hide();
 
         try {
             f = board.jc.snippet(plot.fStr, true, 'x', true);
-            zeroStart = parseFloat(zeroStartStr);
-            if (_.isFinite(zeroStart)) {
-                zero = JXG.Math.Numerics.fzero(f, zeroStart);
+            x1 = parseFloat(x1Str);
+            x2 = parseFloat(x2Str);
+            if (_.isFinite(x1) && _.isFinite(x2)) {
                 mathOutput = $('#mathjax-output-secondary-' + plot.id);
-                mathOutput.html('`f_' + plot.name + '(' + zero.toFixed(precision) + ') = 0`');
-                MathJax.Hub.Queue(["Typeset", MathJax.Hub, 'mathjax-output-secondary-' + plot.id]);
+                zero = JXG.Math.Numerics.fzero(f, [x1, x2]);
+                if(Math.abs(f(zero)) > epsilon) {
+                    mathOutput.html('Could not find a zero.');
+                }
+                else {
+                    mathOutput.html('`f_' + plot.name + '(' + numberToString(zero) + ') = 0`');
+                    MathJax.Hub.Queue(["Typeset", MathJax.Hub, 'mathjax-output-secondary-' + plot.id]);
+                }
                 mathOutput.css('color', plot.color);
             }
             else {
-                throw new UserException('Invalid start point for zero search.');
+                throw new UserException('Invalid bracket point for zero search.');
             }
         }
         catch (e) {
@@ -329,7 +340,7 @@ var GraphingCalculator = (function($, _, MathJax, JXG, undefined) {
                 dfx0 = df(x0);
                 mathOutput = $('#mathjax-output-secondary-' + plot.id);
                 mathOutput.html(
-                    '`(df_' + plot.name + ')/dt (' + x0.toFixed(precision) +' ) = ' + dfx0.toFixed(precision) + '`'
+                    '`(df_' + plot.name + ')/dt (' + numberToString(x0) +' ) = ' + numberToString(dfx0) + '`'
                 );
                 MathJax.Hub.Queue(["Typeset", MathJax.Hub, 'mathjax-output-secondary-' + plot.id]);
                 mathOutput.css('color', plot.color);
@@ -357,8 +368,8 @@ var GraphingCalculator = (function($, _, MathJax, JXG, undefined) {
                 intfx1x2 = JXG.Math.Numerics.I([x1, x2], f);
                 mathOutput = $('#mathjax-output-secondary-' + plot.id);
                 mathOutput.html(
-                    '`int_' + x1.toFixed(precision) + '^' + x2.toFixed(precision) + 'f_' + plot.name + '(x)dx = ' +
-                    intfx1x2.toFixed(precision) + '`'
+                    '`int_' + numberToString(x1) + '^' + numberToString(x2) + 'f_' + plot.name + '(x)dx = ' +
+                    numberToString(intfx1x2) + '`'
                 );
                 MathJax.Hub.Queue(["Typeset", MathJax.Hub, 'mathjax-output-secondary-' + plot.id]);
                 mathOutput.css('color', plot.color);
@@ -370,6 +381,13 @@ var GraphingCalculator = (function($, _, MathJax, JXG, undefined) {
         catch (e) {
             $('.error-message').text(e.message).show();
         }
+    }
+
+    function numberToString(nbr) {
+        // All number smaller than display precision are rounded to zero to avoid strings like '-0.000'
+        nbr = Math.abs(nbr) < epsilon ? 0.0 : nbr;
+
+        return nbr.toFixed(precision);
     }
 
     function UserException(message) {
