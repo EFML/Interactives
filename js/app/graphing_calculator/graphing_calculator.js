@@ -32,6 +32,12 @@ var GraphingCalculator = (function($, _, MathJax, JXG, undefined) {
         // Current: 0.99.3
         console.log('JSXGraph version: ' + JXG.version);
 
+        // Redefine some constants in board.jc
+        delete board.jc.builtIn.EULER;
+        delete board.jc.builtIn.PI;
+        board.jc.builtIn.pi = Math.PI;
+        board.jc.builtIn.e = Math.E;
+
         // Set up MathJax
         MathJax.Hub.queue.Push(function () {
             mainMathjaxOutput = MathJax.Hub.getAllJax("#main-mathjax-output")[0];
