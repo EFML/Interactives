@@ -304,8 +304,8 @@ var GraphingCalculator = (function($, _, MathJax, JXG, undefined) {
 
         try {
             f = board.jc.snippet(plot.fStr, true, 'x', true);
-            x1 = parseFloat(x1Str);
-            x2 = parseFloat(x2Str);
+            x1 = parseNumber(x1Str);
+            x2 = parseNumber(x2Str);
             if (_.isFinite(x1) && _.isFinite(x2)) {
                 mathOutput = $('#mathjax-output-secondary-' + plot.id);
                 zero = JXG.Math.Numerics.fzero(f, [x1, x2]);
@@ -335,7 +335,7 @@ var GraphingCalculator = (function($, _, MathJax, JXG, undefined) {
         try {
             f = board.jc.snippet(plot.fStr, true, 'x', true);
             df = JXG.Math.Numerics.D(f);
-            x0 = parseFloat(x0Str);
+            x0 = parseNumber(x0Str);
             if (_.isFinite(x0)) {
                 dfx0 = df(x0);
                 mathOutput = $('#mathjax-output-secondary-' + plot.id);
@@ -362,8 +362,8 @@ var GraphingCalculator = (function($, _, MathJax, JXG, undefined) {
 
         try {
             f = board.jc.snippet(plot.fStr, true, 'x', true);
-            x1 = parseFloat(x1Str);
-            x2 = parseFloat(x2Str);
+            x1 = parseNumber(x1Str);
+            x2 = parseNumber(x2Str);
             if (_.isFinite(x1) && _.isFinite(x2)) {
                 intfx1x2 = JXG.Math.Numerics.I([x1, x2], f);
                 mathOutput = $('#mathjax-output-secondary-' + plot.id);
@@ -381,6 +381,12 @@ var GraphingCalculator = (function($, _, MathJax, JXG, undefined) {
         catch (e) {
             $('.error-message').text(e.message).show();
         }
+    }
+
+    // To evaluate expression in x_1 and x_2 that contain pi and e
+    function parseNumber(nbrStr) {
+        var fNbr = board.jc.snippet(nbrStr, true, '', true);
+        return fNbr();
     }
 
     function numberToString(nbr) {
