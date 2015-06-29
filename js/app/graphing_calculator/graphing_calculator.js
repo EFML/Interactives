@@ -200,9 +200,7 @@ var GraphingCalculator = (function($, _, MathJax, JXG, undefined) {
     }
 
     function setVisibility(checkbox, element) {
-        var checked = !_.isUndefined(checkbox.attr('checked'));
-
-        if (checked) {
+        if (checkbox.prop('checked')) {
             element.showElement();
         }
         else {
