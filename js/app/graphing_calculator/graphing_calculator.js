@@ -229,14 +229,14 @@ var GraphingCalculator = (function($, _, MathJax, JXG, undefined) {
                 fCurve = board.create(
                     'functiongraph',
                     [f],
-                    {strokeWidth: 3, strokeColor: availableColors[0]}
+                    {highlight: false, strokeWidth: 3, strokeColor: availableColors[0]}
                 );
 
                 // Add derivative
                 dfCurve = board.create(
                     'functiongraph',
                     [JXG.Math.Numerics.D(f)],
-                    {dash:2, strokeColor: availableColors[0]}
+                    {highlight: false, dash:2, strokeColor: availableColors[0]}
                 );
 
                 // Add point and tangent line at that point.
@@ -252,7 +252,7 @@ var GraphingCalculator = (function($, _, MathJax, JXG, undefined) {
                     tangentLine = board.create(
                         'tangent',
                         [tangentPoint],
-                        {name: 'drag me', strokeColor: 'rgb(0, 0, 0)'}
+                        {highlight: false, name: 'drag me', strokeColor: 'rgb(0, 0, 0)'}
                     );
                 }
                 else {
