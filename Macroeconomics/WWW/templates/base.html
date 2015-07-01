@@ -6,6 +6,10 @@
         <link href="styles/bootstrap.min.css" rel="stylesheet" />
     </head>
     <body>
+        <!-- Navigation -->
+        {% extends "navbar.html" %}
+        {% block navbar %}{% endblock %}
+
         <div class="container">
             {% block jsxgraph %}{% endblock %}
         </div>
