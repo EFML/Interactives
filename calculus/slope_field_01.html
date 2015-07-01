@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <title>Slope Field 1</title>
+    <link rel="stylesheet" type="text/css" href="../css/vendor/jquery_ui/smoothness/jquery-ui.min.css">
+    <link rel="stylesheet" type="text/css" href="../css/vendor/katex/katex.min.css">
+    <link rel="stylesheet" type="text/css" href="../css/app/calculus/slope-field.css">
+    <script type="text/javascript" src="../js/vendor/jsxgraphcore.js"></script>
+    <script type="text/javascript" src="../js/vendor/underscore-min.js"></script>
+    <script type="text/javascript" src="../js/vendor/jquery.min.js"></script>
+    <script type="text/javascript" src="../js/vendor/jquery-ui.min.js"></script>
+    <script type="text/javascript" src="../js/vendor/katex.min.js"></script>
+    <script type="text/javascript">
+      var slopeFieldSettings = {
+        dfnNbr: 0,
+        boundingBox: [-6.0, 4.0, 6.0, -4.0],
+        initialPoint: {x: 0.0, y: 1.0},
+        slopeField: {xDiv: 15, yDiv: 15, color: "blue", lineLength: 0.25},
+        solution: {color: "red"}
+      };
+    </script>
+    <script type="text/javascript" src="../js/app/calculus/slope_field.js" defer></script>
+  </head>
+  <body>
+  	<div class="dnext-tool-header">
+    	<div class="dnext-title">SLOPE FIELD 1</div>
+    	<div class="dnext-help-link">
+    		<a id="dnext-help-link" href="#">+ help</a>
+    	</div>
+    	<div id="dnext-help-text" class="dnext-help-text">
+      	<p>
+        	Help text and credentials go here.
+      	</p>
+    	</div>
+  	</div>
+  	<div class="dnext-tool-container">
+    	<div class="jxgbox" id="jxgbox"></div>
+  	</div>
+  </body>
+</html>

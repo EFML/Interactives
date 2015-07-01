@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <title>L'Hospital's Rule Zoom</title>
+    <link rel="stylesheet" type="text/css" href="../css/vendor/jquery_ui/smoothness/jquery-ui.min.css">
+    <link rel="stylesheet" type="text/css" href="../css/vendor/katex/katex.min.css">
+    <link rel="stylesheet" type="text/css" href="../css/app/calculus/lhospitals-rule-zoom.css">
+    <script type="text/javascript" src="../js/vendor/jsxgraphcore.js"></script>
+    <script type="text/javascript" src="../js/vendor/underscore-min.js"></script>
+    <script type="text/javascript" src="../js/vendor/jquery.min.js"></script>
+    <script type="text/javascript" src="../js/vendor/jquery-ui.min.js"></script>
+    <script type="text/javascript" src="../js/vendor/katex.min.js"></script>
+    <script type="text/javascript">
+      var LHospitalZoomSettings = {
+        fnNbr: 2
+      };
+    </script>
+    <script type="text/javascript" src="../js/app/calculus/lhospitals_rule_zoom.js" defer></script>
+  </head>
+  <body>
+  	<div class="dnext-tool-header">
+    	<div class="dnext-title">L'HOSPITAL'S RULE ZOOM</div>
+    	<div class="dnext-help-link">
+    		<a id="dnext-help-link" href="#">+ help</a>
+    	</div>
+    	<div id="dnext-help-text" class="dnext-help-text">
+      	<p>
+        	Help text and credentials go here.
+      	</p>
+    	</div>
+  	</div>
+  	<div class="dnext-tool-container">
+    	<div class="jxgbox" id="jxgbox"></div>
+      <div class="full-line"><span class='regular-text zoom'>Zoom</span><div id="zoom-slider"></div></div>
+      <div class="full-line">
+        <span class='math-text f-function' id="math-line1-col1"></span>
+        <span class='math-text f-function column-2' id="math-line1-col2"></span>
+      </div>
+      <div class="full-line">
+        <span class='math-text g-function' id="math-line2-col1"></span>
+        <span class='math-text g-function column-2' id="math-line2-col2"></span>
+      </div>
+      <div class="full-line"><div class='math-text' id="math-line3"></div></div>
+      <div class="full-line"><div class='math-text' id="math-line4"></div></div>
+  	</div>
+  </body>
+</html>
