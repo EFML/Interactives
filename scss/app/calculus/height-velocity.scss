@@ -1,5 +1,4 @@
-@import '../../base/fonts';
-@import '../../base/variables';
+@import 'calculus';
 
 @mixin border-radius($radius) {
   -webkit-border-radius: $radius;
