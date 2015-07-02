@@ -1,12 +1,5 @@
-@import 'application';
-
-$light-gray: #E0E0E0;
-$medium-gray: #C8C8C8;
-$dark-gray: #505050;
-$light-blue: #4479BA;
-$medium-blue: #356AA0;
-$dark-blue: #356094;
-$sedona: #CC6600;
+@import '../../base/fonts';
+@import '../../base/variables';
 
 @mixin border-radius($radius) {
   -webkit-border-radius: $radius;
