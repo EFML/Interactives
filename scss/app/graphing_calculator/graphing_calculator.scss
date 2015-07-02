@@ -1,4 +1,4 @@
-@import '../../base/fonts';
+@import '../../vendor/bourbon/bourbon';
 @import '../../base/variables';
 
 @mixin border-radius($radius) {
@@ -34,7 +34,7 @@
   }
 
   .jxgbox {
-    background: white;
+    background: $white;
     width: 58%;
     height: 560px;
     float: right;
@@ -47,7 +47,8 @@
 
   input, label, button, .error-message, .regular-text, .mathjax-output, .ui-tabs .ui-tabs-nav li a {
     font: {
-      family: 'Open Sans', Verdana, sans-serif;
+      family: $sans-serif;
+      weight: $font-regular;
       size: 14px;
     }
   }

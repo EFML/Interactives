@@ -1,2 +1,178 @@
 @import '../../vendor/bourbon/bourbon';
 @import '../../base/variables';
+
+@mixin border-radius($radius) {
+  -webkit-border-radius: $radius;
+     -moz-border-radius: $radius;
+      -ms-border-radius: $radius;
+          border-radius: $radius;
+}
+
+.dnext-tool-header {
+  min-width: 667px;
+  max-width: 820px;
+  background-color: $light-gray;
+  box-sizing: border-box;
+  overflow: hidden;
+  margin: 0 auto;
+  overflow: auto;
+
+  border: solid $dark-gray 1px;
+  @include border-top-radius(10px);
+  border-bottom: none;
+
+  .dnext-title {
+    float: left;
+    width: 75%;
+    padding: 5px;
+    color: $gray-1;
+    font: {
+      family: $sans-serif;
+      weight: $font-bold;
+      size: 18px;
+    }
+    clear: both;
+  }
+
+  .dnext-help-link {
+    float: right;
+    width: 20%;
+    padding: 5px;
+    a {
+      float: right;
+      color: $cyan;
+      text-decoration: none;
+      font: {
+        family: $sans-serif;
+        weight: $font-bold;
+        size: 18px;
+        style: normal;
+      }
+      clear: both;
+    }
+    a:hover {
+      color: $light-cyan;
+    }
+  }
+
+  .dnext-help-text {
+    clear: both;
+    padding: 5px;
+    display: none;
+    p,li {
+      color: $gray-2;
+      font: {
+        family: $sans-serif;
+        weight: $font-regular;
+        size: 16px;
+      }
+    }
+  }
+}
+
+.regular-text {
+  font: {
+    family: $sans-serif;
+    weight: $font-regular;
+    size: 1.21em;
+  }
+}
+
+.math-text {
+  font-size: 110%;
+}
+
+.dnext-tool-container {
+  @include clearfix;
+  background: $medium-gray;
+  min-width: 667px;
+  max-width: 820px;
+  margin: 0 auto;
+  padding: 20px;
+  overflow: hidden;
+  box-sizing: border-box;
+  border: solid $dark-gray 1px;
+  @include border-bottom-radius(10px);
+
+  .jsxgraph-box {
+    background: $white;
+    overflow: hidden;
+    box-sizing: border-box;
+    border: solid $medium-blue 1px;
+    vertical-align: top;
+    margin-bottom: 20px;
+    @include border-radius(10px);
+  }
+
+  .line {
+    width: 100%;
+    float: left;
+    display: inline-block;
+    box-sizing: border-box;
+  }
+
+  .double-line {
+    @extend .line;
+    margin-top: 40px;
+  }
+
+  .full-line {
+    @extend .line;
+    margin-top: 20px;
+  }
+
+  .half-line {
+    @extend .line;
+    margin-top: 10px;
+  }
+
+  .quarter-line {
+    @extend .line;
+    margin-top: 5px;
+  }
+
+  input[type=radio] {
+    width: 2em;
+    margin: 0;
+    padding: 0;
+    font-size: 1em;
+    opacity: 0;
+  }
+
+  input[type=radio] + label {
+    display: inline-block;
+    margin-left: -2.0em;
+    line-height: 1.5em;
+    @include user-select(none);
+  }
+
+  input[type=radio]:focus + label {
+    color: $light-blue;
+  }
+
+  input[type=radio]:hover + label {
+    color: $light-blue;
+  }
+
+  input[type=radio] + label:hover {
+    color: $light-blue;
+  }
+
+  input[type=radio]:checked + label > i.fa-circle-o {
+    display: none;
+  }
+
+  input[type=radio]:checked + label > i.fa-dot-circle-o {
+    display: inline-block;
+    letter-spacing: 0.5em;
+  }
+
+  input[type=radio] + label > i.fa-circle-o {
+    display: inline-block;
+    letter-spacing: 0.5em;
+  }
+
+  input[type=radio] + label > i.fa-dot-circle-o {
+    display: none;
+  }
+}

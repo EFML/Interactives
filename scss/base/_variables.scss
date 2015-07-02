@@ -1,8 +1,22 @@
+// Font families
+$sans-serif: 'Open Sans', $verdana;
+
+// Font weights
+$font-light: 300;
+$font-regular: 400;
+$font-semibold: 600;
+$font-bold: 700;
+
 // Colors
-$light-gray: #e0e0e0;
-$medium-gray: #c8c8c8;
-$dark-gray: #505050;
-$light-blue: #4479ba;
-$medium-blue: #356aa0;
-$dark-blue: #356094;
-$sedona: #cc6600;
+$white: rgb(255, 255, 255); // #ffffff
+$light-gray: rgb(224, 224, 224); // #e0e0e0;
+$medium-gray: rgb(200, 200, 200); // #c8c8c8;
+$dark-gray: rgb(80, 80, 80); // #505050;
+$gray-1: rgb(85, 85, 85); // #555555
+$gray-2: rgb(100, 100, 100); // #646464;
+$light-blue: rgb(68, 121, 186); // #4479ba;
+$medium-blue: rgb(53, 106, 160); // #356aa0;
+$dark-blue: rgb(53, 96, 148); // #356094;
+$sedona: rgb(204, 102, 0); // #cc6600;
+$cyan: rgb(29, 157, 217); // #1d9dd9
+$light-cyan: lighten($cyan, 20%);
