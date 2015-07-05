@@ -20,9 +20,9 @@
               
               //length factor is 13.0/3.0
               vectors: [
-                  {name: 'Tangent', description: 'Tangent Line', length_factor: 4.333, length: 3.0, angle: 57.5, tail: [0.0,0.4], render: true,
-                           style:{color:"Crimson", width:"7"}},
-                  {name: 'Delete Me', description: 'Delete Me', length_factor: 3.333, length: 5.42, angle: 12.3, tail: [0.0,0.4], render: true,
+                  {name: 'Tangent', type:"segment", description: 'Tangent Line', length_factor: 4.333, length: 3.0, angle: 57.5, tail: [0.0,0.4], render: true,
+                           style:{color:"DodgerBlue", width:"7"}},
+                  {name: 'Delete Me', type:"segment", description: 'Delete Me', length_factor: 3.333, length: 5.42, angle: 12.3, tail: [0.0,0.4], render: true,
                            style:{color:"Crimson", width:"10"}},
               ],
               // points: [{name: 'TopLeft', coords: [-4.75, 6.25], style:{color:'DodgerBlue'}},
@@ -35,8 +35,8 @@
               //          {name: 'tail', coords: [1.6, 3.0], style:{color:'DodgerBlue'}}
               // ],
               expected_result: {
-                  'Tangent': {tail: [0.0,0.4], tail_tolerance: 0.25, length: 3.0, length_tolerance:  0.4, length_errmsg: "Recheck the length of F<sub>1</sub>.", angle: 57.51, angle_tolerance: 1.0, angle_errmsg: "Are you sure that is the correct angle for the tangent line?"},
-                  'Delete Me': {tail: [1.6, 3.0], tail_tolerance: 0.25, length: 5.42, length_tolerance:  0.4, length_errmsg: "Recheck the length of F<sub>2</sub>.", angle: 12.31, angle_tolerance: 1.0},               
+                  'Tangent': {segment_coords: [[0.0,0.4],[0.0,0.4]], segment_coords_tolerance: 0.25, length: 3.0, length_tolerance:  0.4, length_errmsg: "Recheck the length of F<sub>1</sub>.", angle: 57.51, angle_tolerance: 1.0, angle_errmsg: "Are you sure that is the correct angle for the tangent line?"},
+                  'Delete Me': {segment_coords: [[0.0,0.4],[0.0,0.4]], segment_coords_tolerance: 0.25, length: 5.42, length_tolerance:  0.4, length_errmsg: "Recheck the length of F<sub>2</sub>.", angle: 12.31, angle_tolerance: 1.0},               
               },
               // custom_checks: [ //****Consider adding custom check that looks at sum of forces and angle change.
               // ]
