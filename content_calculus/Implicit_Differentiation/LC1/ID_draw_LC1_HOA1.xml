@@ -3,10 +3,20 @@
 <![CDATA[
 ### Custom Checks ###
 
-custom_checks = {}
-
+def check_y_intercept(check, vectors):
+    vec = vectors[check['vector']]
+    tolerance = check.get('tolerance', 1.0)
+    expected = check['expected']
+    slope = (vec.tip.y-vec.tail.y)/(vec.tip.x-vec.tail.x)
+    y_intercept = vec.tail.y - slope*vec.tail.x
+    dist = abs(expected - y_intercept)
+    if dist > tolerance:
+        return "Hmm, is your tangent line touching the curve?"
+	
+custom_checks = {
+	'y_intercept': check_y_intercept,
+}
 success_message = 'Good job!'
-
 
 #################################################
 ### Python API - Do not edit after this line ####
@@ -21,7 +31,7 @@ def vglcfn(e, ans):
     answer = json.loads(json.loads(ans)['answer'])
     grader = Grader(answer, custom_checks, success_message)
     return grader.grade()
-
+    # return {"ok":False,'msg':str(answer)}
 
 ## Built-in check functions
 
@@ -176,6 +186,7 @@ class Grader(object):
         'coords': check_coords,
         'length': check_length,
         'angle': check_angle,
+		'yint': check_y_intercept,
         'segment_angle': check_segment_angle,
         'segment_coords': check_segment_coords,
     }
@@ -204,16 +215,9 @@ class Grader(object):
 ]]>
 </script>
 
-<p>
-Confirm by drawing the tangent line on the graph of the curve. 
-</p>
-<p>
-This is a vector drawing problem. You can add vectors by simply clicking or touching the screen. You can then manipulate magnitude and direction by clicking/dragging the tip of each vector.
-</p>
-  
-<p>
-<b>You can use the vector properties information to line up your vectors. Note, you only need to get close to the exact values given for each vector.</b>
-  </p>
+<p>Using the slope and intercept that you found above, draw the line tangent to the curve in the first quadrant at \(x=1\). Does your answer make sense?</p>
+
+<p><em>Stretch and orient your tangent line by dragging its ends; shift your tangent line by dragging the line's center. em</em></p>
 
 
 <customresponse cfn="vglcfn">
@@ -227,3 +231,4 @@ This is a vector drawing problem. You can add vectors by simply clicking or touc
     />
 </customresponse>
 </problem>
+

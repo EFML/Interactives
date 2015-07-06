@@ -13,6 +13,8 @@
               width: 550,
               height: 450,
               bounding_box_size: 8,
+			  add_vector_label: "Add Line",
+			  vector_properties_label: "Line Properties",
               background: {
                   src: "https://dnextinteractives.s3.amazonaws.com/content_calculus/Implicit_Differentiation/LC1/imdif4.1.1.1.png",
                   width: 20
@@ -20,26 +22,23 @@
               
               //length factor is 13.0/3.0
               vectors: [
-                  {name: 'Tangent', description: 'Tangent Line', length_factor: 4.333, length: 3.0, angle: 57.5, tail: [0.0,0.4], render: true,
-                           style:{color:"Crimson", width:"7"}},
-                  {name: 'Delete Me', description: 'Delete Me', length_factor: 3.333, length: 5.42, angle: 12.3, tail: [0.0,0.4], render: true,
-                           style:{color:"Crimson", width:"10"}},
+                  {name: 'Tangent', type:"segment", description: 'Tangent Line', length_factor: 4.333, length: 3.0, angle: 57.5, tail: [0.0,0.4], render: true,
+                           style:{color:"DodgerBlue", width:"5"}},
               ],
-              // points: [{name: 'TopLeft', coords: [-4.75, 6.25], style:{color:'DodgerBlue'}},
-              //          {name: 'BotLeft', coords: [-4.75, -4.25], style:{color:'DodgerBlue'}},
-              //          {name: 'TopRight', coords: [7.0, 6.25], style:{color:'DodgerBlue'}},
-              //          {name: 'BotRight', coords: [7.0, -4.25], style:{color:'Crimson'}},
-              //          {name: 'Center', coords: [0.0,0.5], style:{color:'DodgerBlue'}},
-              //          {name: 'MidLeft', coords: [-4.75,1], style:{color:'DodgerBlue'}},
-              //          {name: 'MidRight', coords: [7.0,1], style:{color:'DodgerBlue'}},
-              //          {name: 'tail', coords: [1.6, 3.0], style:{color:'DodgerBlue'}}
-              // ],
+              // points: [{name: 'TopLeft', coords: [-4, 4], style:{color:'DodgerBlue'}},
+//                        {name: 'BotLeft', coords: [-4, -4], style:{color:'DodgerBlue'}},
+//                        {name: 'TopRight', coords: [4, 4], style:{color:'DodgerBlue'}},
+//                        {name: 'BotRight', coords: [4, -4], style:{color:'Crimson'}},
+//                        {name: 'Center', coords: [0.0,0], style:{color:'DodgerBlue'}},
+//                        {name: 'MidLeft', coords: [-4,0], style:{color:'DodgerBlue'}},
+// 			  		   {name: 'MidRight', coords: [4.0,0], style:{color:'DodgerBlue'}}
+//               ],
               expected_result: {
-                  'Tangent': {tail: [0.0,0.4], tail_tolerance: 0.25, length: 3.0, length_tolerance:  0.4, length_errmsg: "Recheck the length of F<sub>1</sub>.", angle: 57.51, angle_tolerance: 1.0, angle_errmsg: "Are you sure that is the correct angle for the tangent line?"},
-                  'Delete Me': {tail: [1.6, 3.0], tail_tolerance: 0.25, length: 5.42, length_tolerance:  0.4, length_errmsg: "Recheck the length of F<sub>2</sub>.", angle: 12.31, angle_tolerance: 1.0},               
+                  'Tangent': {angle: 11.3099, angle_tolerance: 1.5, angle_errmsg: "Are you sure that your tangent line has the correct slope?"},         
               },
-              // custom_checks: [ //****Consider adding custom check that looks at sum of forces and angle change.
-              // ]
+              custom_checks: [
+                  {vector:'Tangent',check: 'y_intercept', expected: 1.5, tolerance: 0.2},
+              ]
           };
         </script>
 
