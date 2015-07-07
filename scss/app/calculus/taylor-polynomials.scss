@@ -7,7 +7,19 @@
     height: 500px;
   }
 
-  #zoom-slider {
+  .center-series {
+    color: blue;
+  }
+
+  .function {
+    color: red;
+  }
+
+  .taylor-polynomial {
+    color: green;
+  }
+
+  #center-slider, #degree-slider, #radius-slider {
     width: 200px;
     display: inline-block;
     margin-left: 10px;

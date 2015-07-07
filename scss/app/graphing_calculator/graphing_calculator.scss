@@ -1,11 +1,5 @@
-@import 'application';
-
-$light-gray: #E0E0E0;
-$medium-gray: #C8C8C8;
-$dark-gray: #505050;
-$light-blue: #4479BA;
-$medium-blue: #356AA0;
-$dark-blue: #356094;
+@import '../../vendor/bourbon/bourbon';
+@import '../../base/variables';
 
 @mixin border-radius($radius) {
   -webkit-border-radius: $radius;
@@ -40,7 +34,7 @@ $dark-blue: #356094;
   }
 
   .jxgbox {
-    background: white;
+    background: $white;
     width: 58%;
     height: 560px;
     float: right;
@@ -53,7 +47,8 @@ $dark-blue: #356094;
 
   input, label, button, .error-message, .regular-text, .mathjax-output, .ui-tabs .ui-tabs-nav li a {
     font: {
-      family: 'Open Sans', Verdana, sans-serif;
+      family: $sans-serif;
+      weight: $font-regular;
       size: 14px;
     }
   }
