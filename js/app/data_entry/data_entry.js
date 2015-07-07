@@ -164,7 +164,7 @@ var DataEntry = (function($, _, JXG, undefined) {
             '</div>',
             '<div class="half-line" />'
             ].join('');
-        // Append tab content to container 
+        // Append tab content to container
         container.append(htmlFragment);
         // Generate handsontable
         table.htmlTable = new Handsontable($('#table-' + table.id).get(0), {
@@ -230,6 +230,10 @@ var DataEntry = (function($, _, JXG, undefined) {
                     'Cancel': cancelChooseColumnsDialog
                 }
             });
+
+        $('.ui-dialog').css({
+            overflow: 'visible'
+        });
 
         $("#x-column").selectmenu({
             width: 300,
@@ -398,10 +402,10 @@ var DataEntry = (function($, _, JXG, undefined) {
             xMin = Math.min(0.0, bounds.xMin); // Get the y-axis in the plotting range
             yMin = Math.min(0.0, bounds.yMin); // Get the x-axis in the plotting range
 
-            boundingBox = [xMin - xOffset, bounds.yMax + yOffset, bounds.xMax + xOffset, yMin - yOffset];   
+            boundingBox = [xMin - xOffset, bounds.yMax + yOffset, bounds.xMax + xOffset, yMin - yOffset];
         }
         else {
-            boundingBox = [-11.0, 11.0, 11.0, -11.0];   
+            boundingBox = [-11.0, 11.0, 11.0, -11.0];
         }
     }
 
