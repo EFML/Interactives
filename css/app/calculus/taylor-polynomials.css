@@ -67,7 +67,7 @@
   clear: both;
   content: "";
   display: table; }
-.dnext-tool-container .jsxgraph-box {
+.dnext-tool-container .jsxgraph-box, .dnext-tool-container .jxgbox {
   background: white;
   overflow: hidden;
   box-sizing: border-box;
@@ -122,39 +122,19 @@
 .dnext-tool-container input[type=radio] + label > i.fa-dot-circle-o {
   display: none; }
 
-.dnext-tool-container .controls {
+.dnext-tool-container .jxgbox {
   width: 100%;
-  background: #e0e0e0;
-  height: 520px;
-  float: left;
-  padding: 20px;
-  -webkit-border-radius: 10px;
-  -moz-border-radius: 10px;
-  -ms-border-radius: 10px;
-  border-radius: 10px; }
-.dnext-tool-container .f-function {
+  height: 500px; }
+.dnext-tool-container .center-series {
   color: blue; }
-.dnext-tool-container .g-function {
+.dnext-tool-container .function {
   color: red; }
-.dnext-tool-container .fpowg-function {
-  color: purple; }
-.dnext-tool-container .line-col1 {
-  margin-top: 20px;
-  width: 30%;
-  float: left;
-  display: inline-block;
-  box-sizing: border-box; }
-.dnext-tool-container .line-col2 {
-  margin-top: 20px;
-  width: 60%;
-  padding-left: 10px;
-  float: right;
-  display: inline-block;
-  box-sizing: border-box; }
-.dnext-tool-container #x0-slider {
-  width: 400px;
+.dnext-tool-container .taylor-polynomial {
+  color: green; }
+.dnext-tool-container #center-slider, .dnext-tool-container #degree-slider, .dnext-tool-container #radius-slider {
+  width: 200px;
   display: inline-block;
   margin-left: 10px;
   margin-right: 10px; }
 
-/*# sourceMappingURL=inf-to-zero.css.map */
+/*# sourceMappingURL=taylor-polynomials.css.map */

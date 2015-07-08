@@ -1,10 +1,10 @@
 var DataEntry = (function($, _, JXG, undefined) {
     'use strict';
 
-    var posBoundingBox = [-0.5, 2.5, 11.0, -2.5],
-        velBoundingBox = [-0.5, 24.0, 11.0, -24.0],
-        accBoundingBox = [-0.5, 550, 11.0, -550.0],
-        t = 0.0, tMin = 0.0, tMax = 10.0, tStep = 0.1, precision = 2,
+    var posBoundingBox = [-0.5, 1.5, 3.2, -1.5],
+        velBoundingBox = [-0.5, 14.0, 3.2, -14.0],
+        accBoundingBox = [-0.5, 140, 3.2, -140.0],
+        t = 0.0, tMin = 0.0, tMax = 3.0, tStep = 0.05, precision = 2,
         posBoard, velBoard, accBoard,
         posPoint, posLine, velPoint, velLine, accPoint, accLine,
         tSlider, tSliderValue, animateButton, backwardButton, forwardButton, animateIcon,
@@ -125,7 +125,7 @@ var DataEntry = (function($, _, JXG, undefined) {
     function outputDynamicMath() {
         katex.render('x = ' + position(t).toFixed(precision), $('#math-line1').get(0));
         katex.render('v = \\frac{dx}{dt} = ' + velocity(t).toFixed(precision), $('#math-line2').get(0));
-        katex.render('a = \\frac{dx^2}{dt^2} = ' + acceleration(t).toFixed(precision), $('#math-line3').get(0));
+        katex.render('a = \\frac{d^2x}{dt^2} = ' + acceleration(t).toFixed(precision), $('#math-line3').get(0));
     }
 
     function position(t) {
@@ -211,7 +211,7 @@ var DataEntry = (function($, _, JXG, undefined) {
         });
 
         xOffset1 = Math.abs(posBoundingBox[2] - posBoundingBox[0]) / 100.0;
-        yOffset1 = Math.abs(posBoundingBox[3] - posBoundingBox[1]) / 25.0;
+        yOffset1 = Math.abs(posBoundingBox[3] - posBoundingBox[1]) / 10.0; // Different than in other
         xOffset2 = Math.abs(posBoundingBox[2] - posBoundingBox[0]) / 25.0; // Different than in other applications
         yOffset2 = Math.abs(posBoundingBox[3] - posBoundingBox[1]) / 25.0; // Different than in other applications
 
@@ -270,7 +270,7 @@ var DataEntry = (function($, _, JXG, undefined) {
         });
 
         xOffset1 = Math.abs(velBoundingBox[2] - velBoundingBox[0]) / 100.0;
-        yOffset1 = Math.abs(velBoundingBox[3] - velBoundingBox[1]) / 25.0;
+        yOffset1 = Math.abs(velBoundingBox[3] - velBoundingBox[1]) / 10.0; // Different than in other
         xOffset2 = Math.abs(velBoundingBox[2] - velBoundingBox[0]) / 25.0; // Different than in other applications
         yOffset2 = Math.abs(velBoundingBox[3] - velBoundingBox[1]) / 25.0; // Different than in other applications
 
@@ -329,7 +329,7 @@ var DataEntry = (function($, _, JXG, undefined) {
         });
 
         xOffset1 = Math.abs(accBoundingBox[2] - accBoundingBox[0]) / 100.0;
-        yOffset1 = Math.abs(accBoundingBox[3] - accBoundingBox[1]) / 25.0;
+        yOffset1 = Math.abs(accBoundingBox[3] - accBoundingBox[1]) / 10.0; // Different than in other
         xOffset2 = Math.abs(accBoundingBox[2] - accBoundingBox[0]) / 25.0; // Different than in other applications
         yOffset2 = Math.abs(accBoundingBox[3] - accBoundingBox[1]) / 25.0; // Different than in other applications
 
