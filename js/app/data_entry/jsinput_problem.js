@@ -49,19 +49,12 @@ var DataEntry = (function($, _, JXG, undefined) {
         // Current: 0.99.3
         console.log('JSXGraph version: ' + JXG.version);
 
+        createChannel();
+
         // Deep clone config.tables
         $.extend(true, tables, config.tables);
 
         $(window).on('resize', resizeBox);
-
-        setTableIds();
-        createTabPanel();
-        createBoard(tables[0]);
-        createResetDialog();
-
-        if (config.render) {
-            plotTable(tables[0]);
-        }
     }
 
     function resizeBox(){
@@ -148,8 +141,17 @@ var DataEntry = (function($, _, JXG, undefined) {
         createTabContent(tab, table);
     }
 
+    function cellValidator(value, callback) {
+        if (_.isFinite(value) || _.isEmpty(value)) {
+            callback(true);
+        }
+        else {
+            callback(false);
+        }
+    }
+
     function createTabContent(container, table) {
-        var chooseColumnsBt, plotTableBt, fitLineBtn, resetBtn, htmlFragment;
+        var chooseColumnsBt, plotTableBt, fitLineBtn, resetBtn, htmlFragment, columns = [];
 
         htmlFragment = [
             '<div class="half-line">',
@@ -166,10 +168,18 @@ var DataEntry = (function($, _, JXG, undefined) {
             ].join('');
         // Append tab content to container
         container.append(htmlFragment);
+        // Generate columns array
+        _.each(table.headers, function() {
+            columns.push({
+                validator: cellValidator,
+                allowInvalid: true
+            });
+        });
         // Generate handsontable
         table.htmlTable = new Handsontable($('#table-' + table.id).get(0), {
             data: table.data,
             colHeaders: table.headers,
+            columns: columns,
             height: 280,
             readOnly: table.readOnly
         });
@@ -181,12 +191,22 @@ var DataEntry = (function($, _, JXG, undefined) {
 
         plotTableBt = $('#plot-table-' + table.id);
         plotTableBt.on('click', function() {
-            plotTable(table);
+            try {
+                plotTable(table);
+            }
+            catch (err) {
+                window.alert(err.toString());
+            }
         });
 
         fitLineBtn = $('#fit-line-' + table.id);
         fitLineBtn.on('click', function() {
-            fitLine(table);
+            try {
+                fitLine(table);
+            }
+            catch (err) {
+                window.alert(err.toString());
+            }
         });
 
         resetBtn = $('#reset-' + table.id);
@@ -298,8 +318,8 @@ var DataEntry = (function($, _, JXG, undefined) {
 
     function plotTable(table) {
         var fitLineBtn = $('#fit-line-' + table.id);
-        clearBoard();
         setBoundingBox(table);
+        clearBoard();
         createBoard(table);
         plotData(table);
         fitLineBtn.attr('disabled', false);
@@ -308,8 +328,8 @@ var DataEntry = (function($, _, JXG, undefined) {
     function fitLine(table) {
         var f, m, b, vals, xVals, yVals, regLineEq;
 
-        clearBoard();
         setBoundingBox(table);
+        clearBoard();
         createBoard(table);
         plotData(table);
 
@@ -348,6 +368,23 @@ var DataEntry = (function($, _, JXG, undefined) {
         }
     }
 
+    function validatePlottedColumns(vals) {
+        var msg = 'Some cells contain invalid data marked in red and the data could not be plotted.' +
+        ' Please enter numeric values only and try again.'
+
+        _.each(vals.xVals, function(val, index) {
+            if (!_.isFinite(val) && !_.isEmpty(val)) {
+                throw msg;
+            }
+        });
+
+        _.each(vals.yVals, function(val, index) {
+            if (!_.isFinite(val) && !_.isEmpty(val)) {
+                throw msg;
+            }
+        });
+    }
+
     function getXYVals(table) {
         var i, j, xVals = [], yVals = [];
 
@@ -355,9 +392,6 @@ var DataEntry = (function($, _, JXG, undefined) {
             xVals.push(table.data[i][table.xColumn]);
             yVals.push(table.data[i][table.yColumn]);
         }
-
-        // xVals = _.compact(xVals);
-        // yVals = _.compact(yVals);
 
         return {
             'xVals': xVals,
@@ -369,6 +403,7 @@ var DataEntry = (function($, _, JXG, undefined) {
         var i, j, vals, xVals = [], yVals = [];
 
         vals = getXYVals(table);
+        validatePlottedColumns(vals);
         xVals = vals.xVals;
         yVals = vals.yVals;
 
@@ -411,7 +446,6 @@ var DataEntry = (function($, _, JXG, undefined) {
 
     function clearBoard() {
         JXG.JSXGraph.freeBoard(board);
-        // createBoard();
     }
 
     function getActiveTable() {
@@ -444,13 +478,70 @@ var DataEntry = (function($, _, JXG, undefined) {
     }
 
     function reset() {
-    	// clearBoard();
         clearRegLineEq();
         resetCellsBoard();
         plotTable(tables[getActiveTable()]);
     }
 
+    // Establish a channel to communicate with edX when the application is used
+    // inside a JSInput and hosted completely on a different domain.
+    function createChannel() {
+        var channel,
+            msg = 'The application is not embedded in an iframe. ' +
+                  'A channel could not be established';
+
+        // Establish a channel only if this application is embedded in an iframe.
+        // This will let the parent window communicate with the child window using
+        // RPC and bypass SOP restrictions.
+        if (window.parent !== window) {
+            channel = Channel.build({
+                window: window.parent,
+                origin: '*',
+                scope: 'JSInput'
+            });
+
+            channel.bind('getGrade', getGrade);
+            channel.bind('getState', getState);
+            channel.bind('setState', setState);
+        }
+        else {
+            console.log(msg);
+        }
+    }
+
+    function getState() {
+        return JSON.stringify({data: tables[0].data});
+    }
+
+    // Transaction object argument is not used here
+    // (see http://mozilla.github.io/jschannel/docs/)
+    function setState(transaction, stateStr) {
+        var state = JSON.parse(stateStr);
+        // Erase and deep clone
+        tables[0].data.length = 0;
+        $.extend(true, tables[0].data, state.data);
+
+        setTableIds();
+        createTabPanel();
+        createBoard(tables[0]);
+        createResetDialog();
+
+        if (config.render) {
+            plotTable(tables[0]);
+        }
+    }
+
+    function getGrade() {
+        // The following return value may or may not be used to grade server-side.
+        // If getState and setState are used, then the Python grader also gets
+        // access to the return value of getState and can choose it instead to grade
+        return JSON.stringify({data: tables[0].data});
+    }
+
     return {
         // Any field and/or method that needs to be public
+        getState: getState,
+        setState: setState,
+        getGrade: getGrade
     };
 })(jQuery, _, JXG);
