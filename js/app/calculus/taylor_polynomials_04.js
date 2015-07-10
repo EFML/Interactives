@@ -81,7 +81,7 @@ var DataEntry = (function($, _, JXG, undefined) {
     }
 
     function outputMath() {
-        katex.render('f(x) = tan^{-1}(x)', $('#math-line1').get(0));
+        katex.render('f(x) = \\tan^{-1}(x)', $('#math-line1').get(0));
         katex.render('\\text{Taylor polynomial:}', $('#math-line2').get(0));
         katex.render(taylorString(), $('#math-line3').get(0));
     }
