@@ -98,6 +98,9 @@ var DataEntry = (function($, _, JXG, undefined) {
             tMin = boundingBox[0];
             tMax = boundingBox[2];
         }
+        else if (config.toolNbr === 10) {
+            boundingBox = [-6.0, 12.0, 6.0, -12.0];
+        }
         else if (config.toolNbr === 11) {
             $('#linear-radio-button').on('change', function() {
                 radioButtonHandler(10);
