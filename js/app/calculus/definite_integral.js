@@ -20,7 +20,7 @@ var DataEntry = (function($, _, JXG, undefined) {
             [-5.0, 0.0, 5.0],
             [-5.0, 0.0, 4.0, 5.0],
             [-5.0, -2.0, 0.0, 2.0, 5.0],
-            [-5.0, 3.0, 5.0],
+            [-3.0, 3.0, 9.0],
             [-5.0, 0.0, 3.0, 5.0],
             [-5.0, -2.0, 0.0, 5.0], // the a value will be inserted afterwards
         ],
@@ -90,6 +90,13 @@ var DataEntry = (function($, _, JXG, undefined) {
             $('#curve-radio-button').on('change', function() {
                 radioButtonHandler(4);
             });
+        }
+        else if (config.toolNbr === 9) {
+            boundingBox = [-3.5, 13.0, 10.0, -13.0];
+            xMin = -3.0;
+            xMax = 9.0;
+            tMin = boundingBox[0];
+            tMax = boundingBox[2];
         }
         else if (config.toolNbr === 11) {
             $('#linear-radio-button').on('change', function() {
