@@ -31,7 +31,7 @@ var DataEntry = (function($, _, JXG, undefined) {
 
         $(window).on('resize', resizeBox);
         $(document).on('click', stopAnimation)
-        $('#dnext-help-link').on('click', toggle);
+        $('#dnext-about-link').on('click', toggle);
 
         createAnimBoard();
         createGraphBoard();
@@ -60,17 +60,17 @@ var DataEntry = (function($, _, JXG, undefined) {
     }
 
     function toggle() {
-        var link = $('#dnext-help-link'),
-            text = $('#dnext-help-text');
+        var link = $('#dnext-about-link'),
+            text = $('#dnext-about-text');
 
         text.toggle();
 
         if (text.css('display') === 'none') {
-            link.text('+ help');
+            link.text('+ about');
         }
         else {
             text.css('display', 'block');
-            link.text('- help');
+            link.text('- about');
         }
     }
 
