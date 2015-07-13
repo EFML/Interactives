@@ -298,28 +298,21 @@ var GraphingCalculator = (function($, _, MathJax, JXG, undefined) {
 
     function findZero(plot) {
         var x1Str = $('#x-start-' + plot.id).val(),
-            x2Str = $('#x-end-' + plot.id).val(),
-            f, x1, x2, zero, mathOutput;
+            f, x1, zero, mathOutput;
         $('.error-message').hide();
 
         try {
             f = board.jc.snippet(plot.fStr, true, 'x', true);
             x1 = parseNumber(x1Str);
-            x2 = parseNumber(x2Str);
-            if (_.isFinite(x1) && _.isFinite(x2)) {
+            if (_.isFinite(x1)) {
                 mathOutput = $('#mathjax-output-secondary-' + plot.id);
-                zero = JXG.Math.Numerics.fzero(f, [x1, x2]);
-                if(Math.abs(f(zero)) > epsilon) {
-                    mathOutput.html('Could not find a zero.');
-                }
-                else {
-                    mathOutput.html('`f_' + plot.name + '(' + numberToString(zero) + ') = 0`');
-                    MathJax.Hub.Queue(["Typeset", MathJax.Hub, 'mathjax-output-secondary-' + plot.id]);
-                }
+                zero = JXG.Math.Numerics.fzero(f, x1);
+                mathOutput.html('`f_' + plot.name + '(' + numberToString(zero) + ') = 0`');
+                MathJax.Hub.Queue(["Typeset", MathJax.Hub, 'mathjax-output-secondary-' + plot.id]);
                 mathOutput.css('color', plot.color);
             }
             else {
-                throw new UserException('Invalid bracket point for zero search.');
+                throw new UserException('Invalid starting point for zero search.');
             }
         }
         catch (e) {
