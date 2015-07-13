@@ -53,7 +53,7 @@ var DataEntry = (function($, _, JXG, undefined) {
         // Current: 0.99.3
         console.log('JSXGraph version: ' + JXG.version);
 
-        $('#dnext-help-link').on('click', toggle);
+        $('#dnext-about-link').on('click', toggle);
 
         createSlider();
         outputStaticMath();
@@ -61,17 +61,17 @@ var DataEntry = (function($, _, JXG, undefined) {
     }
 
     function toggle() {
-        var link = $('#dnext-help-link'),
-            text = $('#dnext-help-text');
+        var link = $('#dnext-about-link'),
+            text = $('#dnext-about-text');
 
         text.toggle();
 
         if (text.css('display') === 'none') {
-            link.text('+ help');
+            link.text('+ about');
         }
         else {
             text.css('display', 'block');
-            link.text('- help');
+            link.text('- about');
         }
     }
 

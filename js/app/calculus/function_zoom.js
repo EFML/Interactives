@@ -31,7 +31,7 @@ var DataEntry = (function($, _, JXG, undefined) {
         console.log('JSXGraph version: ' + JXG.version);
 
         $(window).on('resize', resizeBox);
-        $('#dnext-help-link').on('click', toggle);
+        $('#dnext-about-link').on('click', toggle);
 
         createBoard();
         createSlider();
@@ -49,17 +49,17 @@ var DataEntry = (function($, _, JXG, undefined) {
     }
 
     function toggle() {
-        var link = $('#dnext-help-link'),
-            text = $('#dnext-help-text');
+        var link = $('#dnext-about-link'),
+            text = $('#dnext-about-text');
 
         text.toggle();
 
         if (text.css('display') === 'none') {
-            link.text('+ help');
+            link.text('+ about');
         }
         else {
             text.css('display', 'block');
-            link.text('- help');
+            link.text('- about');
         }
     }
 
