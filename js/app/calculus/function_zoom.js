@@ -80,7 +80,7 @@ var DataEntry = (function($, _, JXG, undefined) {
     }
 
     function outputStaticMath() {
-        katex.render('\\text{Curve: } y = \\frac {sin (x)}{x}', $('#math-line1').get(0));
+        katex.render('\\text{Curve: } y = \\frac {\\sin (x)}{x}', $('#math-line1').get(0));
     }
 
     function outputDynamicMath() {

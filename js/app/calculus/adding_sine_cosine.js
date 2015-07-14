@@ -90,7 +90,7 @@ var DataEntry = (function($, _, JXG, undefined) {
     }
 
     function outputDynamicMath() {
-        katex.render('y = Asin(x) + Bcos(x) = ' + functionString(), $('#math-line1').get(0));
+        katex.render('y = A\\sin(x) + B\\cos(x) = ' + functionString(), $('#math-line1').get(0));
     }
 
     function functionString() {
@@ -98,13 +98,13 @@ var DataEntry = (function($, _, JXG, undefined) {
 
         if (a !== 0.0) {
             if (a === -1.0) {
-                aStr = '-sin(x)';
+                aStr = '-\\sin(x)';
             }
             else if (a === 1.0) {
-                aStr = 'sin(x)'
+                aStr = '\\sin(x)'
             }
             else {
-                aStr = nbrToString(a) + 'sin(x)'
+                aStr = nbrToString(a) + '\\sin(x)'
             }
         }
 
@@ -117,10 +117,10 @@ var DataEntry = (function($, _, JXG, undefined) {
 
         if (b !== 0.0) {
             if (b === -1.0 || b === 1.0) {
-                bStr = 'cos(x)';
+                bStr = '\\cos(x)';
             }
             else {
-                bStr = nbrToString(Math.abs(b)) + 'cos(x)'
+                bStr = nbrToString(Math.abs(b)) + '\\cos(x)'
             }
         }
 

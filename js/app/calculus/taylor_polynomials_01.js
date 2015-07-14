@@ -112,7 +112,7 @@ var DataEntry = (function($, _, JXG, undefined) {
     }
 
     function outputMath() {
-        katex.render('f(x) = \\frac{cos(x)}{x+2}', $('#math-line1').get(0));
+        katex.render('f(x) = \\frac{\\cos(x)}{x+2}', $('#math-line1').get(0));
         katex.render('\\text{Taylor polynomial:}', $('#math-line2').get(0));
         katex.render(taylorString(), $('#math-line3').get(0));
     }

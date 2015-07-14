@@ -10,9 +10,9 @@ var DataEntry = (function($, _, JXG, undefined) {
         dfFn = [df0, df1, df2, df3, df4, df5],
         gFn = [g0, g1, g2, g3, g4, g5],
         dgFn = [dg0, dg1, dg2, dg3, dg4, dg5],
-        fFnStr  = ['log(x^2) + 3x', '\\sqrt{e^x}-1', '3x', '', '3x + 2e^{-x}', '\\sqrt{x}'],
+        fFnStr  = ['\\log(x^2) + 3x', '\\sqrt{e^x}-1', '3x', '', '3x + 2e^{-x}', '\\sqrt{x}'],
         dfFnStr = ['\\frac{2}{x} + 3', '\\frac{\\sqrt{e^x}}{2}', '3', '', '3 - 2e^{-x}', '\\frac{1}{2\\sqrt{x}}'],
-        gFnStr  = ['2log(5x^2) + 4x', 'x', 'x + e^{-x}', '', '4x + e^{-x}', 'log(x+1)'],
+        gFnStr  = ['2\\log(5x^2) + 4x', 'x', 'x + e^{-x}', '', '4x + e^{-x}', '\\log(x+1)'],
         dgFnStr = ['\\frac{4}{x} + 4', '1', '1 - e^{-x}', '', '4 - e^{-x}', '\\frac{1}{x+1}'],
 
         config = window.infOverInfSettings || {

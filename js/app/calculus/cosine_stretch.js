@@ -77,8 +77,8 @@ var DataEntry = (function($, _, JXG, undefined) {
     }
 
     function outputStaticMath() {
-        katex.render('y = Acos(3x)', $('#math-line1').get(0));
-        katex.render('y = \\frac{sin(3(x+0.001)-sin(3x)}{0.001}', $('#math-line2').get(0));
+        katex.render('y = A\\cos(3x)', $('#math-line1').get(0));
+        katex.render('y = \\frac{\\sin(3(x+0.001)-\\sin(3x)}{0.001}', $('#math-line2').get(0));
     }
 
     function f(x) {

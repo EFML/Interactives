@@ -102,7 +102,7 @@ var DataEntry = (function($, _, JXG, undefined) {
 
         mathOutput1 = $('#math-line1');
         mathOutput1.hide();
-        mathOutput1.html('\\( f(x) = \\begin{cases}1 - \\frac{sin(x)}{x} & x \\not= 0 \\\\0 & x = 0 \\end{cases} \\)');
+        mathOutput1.html('\\( f(x) = \\begin{cases}1 - \\frac{\\sin(x)}{x} & x \\not= 0 \\\\0 & x = 0 \\end{cases} \\)');
         mathOutput1.css('color', 'Red');
         MathJax.Hub.Queue(["Typeset", MathJax.Hub, 'math-line1']);
 
