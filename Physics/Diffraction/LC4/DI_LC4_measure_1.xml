@@ -15,7 +15,7 @@ grader = vectordraw.Grader(success_message, custom_checks)
 ]]>
 </script>
 <p>
-Draw rulers using your mouse to measure lengths in the image. The Ruler Properties window will display the length of your ruler in the appropriate distance measurement.
+Make at least one measurement of the distance between first-order minimums for the slit-width = 0.02 cm diffraction pattern image. The Ruler Properties window will display the length of your ruler in the appropriate distance measurement.
 </p>
 <p>
 <i>This activity involves the drawing tool. Use your mouse (click) or finger (tap) to draw a ruler or adjust the ruler using the control points on either end.</i>

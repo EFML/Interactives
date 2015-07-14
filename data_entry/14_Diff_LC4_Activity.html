@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <title>Data Entry</title>
+    <link rel="stylesheet" type="text/css" href="../css/vendor/jquery_ui/smoothness/jquery-ui.min.css">
+    <link rel="stylesheet" type="text/css" href="../css/vendor/handsontable/handsontable.full.min.css">
+    <link rel="stylesheet" type="text/css" href="../css/common.css">
+    <link rel="stylesheet" type="text/css" href="../css/app/data_entry/data-entry.css">
+    <script type="text/javascript" src="../js/vendor/jsxgraphcore.js"></script>
+    <script type="text/javascript" src="../js/vendor/underscore-min.js"></script>
+    <script type="text/javascript" src="../js/vendor/jquery.min.js"></script>
+    <script type="text/javascript" src="../js/vendor/jquery-ui.min.js"></script>
+    <script type="text/javascript" src="../js/vendor/handsontable.full.min.js"></script>
+    <script type="text/javascript" src="../js/vendor/jschannel.js"></script>
+    <script type="text/javascript">
+      <!--
+      // http://www.w3schools.com/cssref/css_colornames.asp
+      // Graphing calculator colors: 'Crimson', 'MediumSeaGreen', 'RoyalBlue', 'Orange', 'Turquoise'
+      -->
+      var DataEntrySettings = {
+        tables: [
+          {
+            name: 'Experiment 1',
+            data: [
+              [0.02, '', '', '', '', ''],
+              [0.04, '', '', '', '', ''],
+              [0.08, '', '', '', '', ''],
+              [0.16, '', '', '', '', ''],
+            ],
+            headers: ['d (cm)', 'min to min (cm)', 'x (cm)', 'theta', 'sin(theta)', '1/d (1/cm)'],
+            xColumn: 0,
+            yColumn: 1,
+            dataPoints: {
+              color: 'DodgerBlue',
+            },
+            fitLine: {
+              color: 'Crimson'
+            },
+          }
+        ],
+        render: false
+      };
+    </script>
+    <script type="text/javascript" src="../js/app/data_entry/jsinput_problem.js" defer></script>
+  </head>
+  <body>
+    <div class="container">
+      <div class="control-panel"></div>
+      <div class="jxgbox" id="jxgbox"></div>
+      <div id="choose-columns-dialog-form"></div>
+      <div id="reset-dialog-form"></div>
+    </div>
+  </body>
+</html>
