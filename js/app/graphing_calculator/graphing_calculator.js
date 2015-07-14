@@ -46,6 +46,7 @@ var GraphingCalculator = (function($, _, MathJax, JXG, undefined) {
         $('#plot').on('click', plotter);
         $('#clear-all').on('click', clearAll);
         $('#main-mathjax-input').on('input', updateMainMathjaxOutput);
+        $('#main-mathjax-input').on('dblclick', preventDoubleClickDefault);
         $(window).on('resize', resizeBox);
     }
 
@@ -55,6 +56,12 @@ var GraphingCalculator = (function($, _, MathJax, JXG, undefined) {
         board.resizeContainer(boardWidth, board.canvasHeight);
         board.setBoundingBox(initBoundingBox);
         board.update();
+    }
+
+    // On Mac OSX, double clicking the equation input to select all the text will make the browser go to top of the page.
+    // Avoid this behavior.
+    function preventDoubleClickDefault(event){
+        event.preventDefault();
     }
 
     function updateMainMathjaxOutput() {
