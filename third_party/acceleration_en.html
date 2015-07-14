@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+
+<html lang="en">
+
+<head>
+<title>Motion with constant acceleration</title>
+<link rel="stylesheet" href="css/page.css" type="text/css">
+<style type="text/css">
+div.panel {position: absolute; font-family: sans-serif; font-size: 12px; font-weight: bold;}
+button {width: 220px; height: 30px; border-radius: 0px; font-family: sans-serif; font-size: 12px; font-weight: bold;}
+input[type="checkbox"] {border-radius: 0px;}
+input[type="text"] {width: 150px; border-radius: 0px; font-family: sans-serif; font-size: 12px; font-weight: bold;}
+.left {margin-left: 10px;}
+.unit {margin-left: 5px;}
+</style>
+<script src="js/page_en.js"></script>
+<script src="js/acceleration.js"></script>
+<script src="js/acceleration_en.js"></script>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<meta name="description" content="HTML5 app: Motion with constant acceleration">
+<meta name="author" content="Walter Fendt">
+<meta name="keywords" content="app, physics, mechanics, kinematics, acceleration">
+</head>
+
+<body>
+
+<h1>Motion with Constant Acceleration</h1>
+
+<p>This HTML5 app shows a car moving with <em class="Begriff">constant acceleration</em>. The green control panel contains text fields
+where you can vary the values of <em class="Begriff">initial position</em>, <em class="Begriff">initital velocity</em> and
+<em class="Begriff">acceleration</em> (don't forget to press the &quot;Enter&quot; key!). By using the buttons at the top right you can
+bring back the car to its initial position or stop and resume the simulation. If you choose the option &quot;Slow&nbsp;motion&quot;,
+the movement will be ten times slower.</p>
+
+<p>Three digital clocks indicate the time elapsed since the start. As soon as the car has reached the green respectively red light barrier
+with its front bumper, the corresponding clock will stop. Both light barriers are adjustable by dragging the mouse with pressed mouse button.</p>
+
+<p>Three <em class="Begriff">diagrams</em> illustrate the motion of the vehicle:</p>
+<ul>
+<li><em class="Begriff">Position x</em> versus <em class="Begriff">time t</em></li>
+<li><em class="Begriff">Velocity v</em> versus <em class="Begriff">time t</em></li>
+<li><em class="Begriff">Acceleration a</em> versus <em class="Begriff">time t</em></li>
+</ul>
+
+<div style="position: relative; width: 780px; height: 400px; display: block; margin: 0px auto;">
+
+<div style="position: absolute; top: 0px; left: 0px;">
+<canvas id="cv" width=540 height=400 style="border: 1px solid black;"><span style="color: red;">This browser doesn't support HTML 5 canvas!</span></canvas>
+</div>
+
+<div class="panel" style="top: 0px; left: 540px; width: 240px; height: 400px; background-color: #00ff00; border: 1px solid black; font-size: 12px; font-weight: bold;">
+
+<div class="panel" style="top: 10px;"><button id="bu1" class="left" style="background-color: #00ffff;">Reset</button></div>
+<div class="panel" style="top: 50px;"><button id="bu2" class="left" style="background-color: #ffff00;">Start</button></div>
+<div class="panel" style="top: 95px;"><input id="cbSlow" class="left" name="cbSlow" type="checkbox" value=""><label for="cbSlow" style="margin-left: 5px; vertical-align: 1px;">Slow motion</label></div>
+<div class="panel" style="top: 130px;"><label for="ipx0" class="left">Initial position:</label></div>
+<div class="panel" style="top: 150px;"><input id="ipx0" class="left" type="text"><span class="unit">m</span></div>
+<div class="panel" style="top: 180px;"><label for="ipv0" class="left">Initial velocity:</label></div>
+<div class="panel" style="top: 200px;"><input id="ipv0" class="left" type="text"><span class="unit">m/s</span></div>
+<div class="panel" style="top: 230px;"><label for="ipa" class="left">Acceleration:</label></div>
+<div class="panel" style="top: 250px;"><input id="ipa" class="left" type="text"><span class="unit">m/s&sup2;</span></div>
+<div class="panel" style="top: 290px;"><input id="rbv" class="left" type="radio" name="bg" value=""><label for="rbv" style="margin-left: 5px; vertical-align: 1px;">Vector of velocity</label></div>
+<div class="panel" style="top: 320px;"><input id="rba" class="left" type="radio" name="bg" value=""><label for="rba" style="margin-left: 5px; vertical-align: 1px;">Vector of acceleration</label></div>
+<div class="panel" style="top: 360px;"><span class="left">&copy;&nbsp; W. Fendt 2000</span></div>
+</div>
+
+</div>
+
+<script type="text/javascript">endPage("acceleration",2,11,2000,11,10,2014);</script>
+
+</body>
+</html>

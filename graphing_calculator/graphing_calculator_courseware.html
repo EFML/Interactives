@@ -1,0 +1,36 @@
+
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <title>Graphing Calculator</title>
+    <link rel="stylesheet" type="text/css" href="../css/vendor/jquery_ui/smoothness/jquery-ui.min.css">
+    <link rel="stylesheet" type="text/css" href="../css/common.css">
+    <link rel="stylesheet" type="text/css" href="../css/app/graphing_calculator/graphing-calculator-courseware.css">
+    <script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=AM_HTMLorMML-full"></script>
+    <script type="text/javascript" src="../js/vendor/jsxgraphcore.js"></script>
+    <script type="text/javascript" src="../js/vendor/underscore-min.js"></script>
+    <script type="text/javascript" src="../js/vendor/jquery.min.js"></script>
+    <script type="text/javascript" src="../js/vendor/jquery-ui.min.js"></script>
+    <script type="text/javascript" src="../js/app/graphing_calculator/graphing_calculator.js" defer></script>
+  </head>
+  <body>
+    <div class="container">
+      <div class="control-panel">
+        <div class="half-line">
+          <input class="wide-text" id="main-mathjax-input" type="text" placeholder="Type a function f(x)" value="x^3+x^2-6*x"><span class="error-message">Please enter a valid function.</span>
+        </div>
+        <div class="full-line">
+          <div class="mathjax-output" id="main-mathjax-output">`f(x) = x^3+x^2-6*x`</div>
+        </div>
+        <div class="full-line">
+          <button class="button" id="plot">Plot</button><button class="button" id="clear-all">Clear All</button>
+        </div>
+        <div class="half-line" id="function-tabs">
+          <ul></ul>
+        </div>
+      </div>
+      <div class="jxgbox" id="jxgbox"></div>
+    </div>
+  </body>
+</html>

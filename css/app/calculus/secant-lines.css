@@ -19,11 +19,11 @@
   font-weight: 700;
   font-size: 18px;
   clear: both; }
-.dnext-tool-header .dnext-help-link {
+.dnext-tool-header .dnext-about-link {
   float: right;
   width: 20%;
   padding: 5px; }
-.dnext-tool-header .dnext-help-link a {
+.dnext-tool-header .dnext-about-link a {
   float: right;
   color: #1d9dd9;
   text-decoration: none;
@@ -32,13 +32,13 @@
   font-size: 18px;
   font-style: normal;
   clear: both; }
-.dnext-tool-header .dnext-help-link a:hover {
+.dnext-tool-header .dnext-about-link a:hover {
   color: #70c4ec; }
-.dnext-tool-header .dnext-help-text {
+.dnext-tool-header .dnext-about-text {
   clear: both;
   padding: 5px;
   display: none; }
-.dnext-tool-header .dnext-help-text p, .dnext-tool-header .dnext-help-text li {
+.dnext-tool-header .dnext-about-text p, .dnext-tool-header .dnext-about-text li {
   color: #646464;
   font-family: "Open Sans", "Verdana", "Geneva", sans-serif;
   font-weight: 400;

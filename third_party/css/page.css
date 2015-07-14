@@ -1,0 +1,184 @@
+/* Cascading Style Sheets für Applet-Seiten */
+/* Letzte Änderung: 2014-03-23              */
+
+body {                                      /* Gesamte Seite */
+  background-color:white;                   /* Hintergrund weiß */
+  font-family:Arial,Helvetica,sans-serif;   /* Serifenlose Schrift */
+  font-size:12pt;                           /* Schrifthöhe 12 pt */
+  font-weight:normal;                       /* Schrift normal */
+  }
+
+h1 {                                        /* Überschrift */
+  background-color:yellow;                  /* Hintergrund gelb */
+  border-style:solid;                       /* Rand durchgezogen */
+  border-width:8pt;                         /* Randbreite 8 pt */
+  border-color:blue;                        /* Rand blau */
+  padding:5pt;                              /* Innenabstand 5 pt */
+  text-align:center;                        /* Text zentriert */
+  font-family:Arial,Helvetica,sans-serif;   /* Serifenlose Schrift */
+  font-size:18pt;                           /* Schrifthöhe 18 pt */
+  font-weight:bold;                         /* Fettdruck */
+  }
+
+p {                                         /* Absatz */
+  font-family:Arial,Helvetica,sans-serif;   /* Serifenlose Schrift */
+  font-size:12pt;                           /* Schrifthöhe 12 pt */
+  font-weight:normal;                       /* Schrift normal */
+  }
+
+p.Formel {                                  /* Absatz für Größen einer Formel */
+  font-family:"Courier New",Courier;        /* Zeichensatz Courier */
+  font-size:10pt;                           /* Schrifthöhe 10 pt */
+  font-weight:normal;                       /* Schrift normal */
+  }
+ 
+*.Ende {                                    /* Absatz für URL usw. */
+  font-family:Arial,Helvetica,sans-serif;   /* Serifenlose Schrift */
+  font-size:10pt;                           /* Schrifthöhe 10 pt */
+  font-weight:normal;                       /* Schrift normal */
+  }
+
+ul {                                        /* Ungeordnete Liste */
+  font-family:Arial,Helvetica,sans-serif;   /* Serifenlose Schrift */
+  font-size:12pt;                           /* Schrifthöhe 12 pt */
+  font-weight:normal;                       /* Schrift normal */
+  }
+
+ol {                                        /* Geordnete Liste */
+  font-family:Arial,Helvetica,sans-serif;   /* Serifenlose Schrift */
+  font-size:12pt;                           /* Schrifthöhe 12 pt */
+  font-weight:normal;                       /* Schrift normal */
+  }
+  
+div.Abstand {                               /* Vertikaler Zwischenraum */
+  height:10pt;                              /* Höhe 10 pt */
+  }
+
+a:link {                                    /* Link (noch nicht besucht) */
+  color:blue;                               /* Farbe blau */
+  }
+
+a:visited {                                 /* Link (schon besucht) */
+  color:blue;                               /* Farbe blau */
+  }
+
+a:hover {                                   /* Mauszeiger über dem Link */
+  color:#ff0000;                            /* Farbe rot */
+  text-decoration:underline;                /* Text unterstrichen */
+  }
+  
+a.prg {                                     /* Link für Programmstart */
+  background-color:#ffff00;
+  border-style:solid;                       /* Rand durchgezogen */
+  border-width:3pt;                         /* Randbreite 3 pt */
+  border-color:#ff0000;                     /* Randfarbe rot */
+  padding:10pt;                             /* Innenabstand 10 pt */
+  font-family:Arial,Helvetica,sans-serif;   /* Serifenlose Schrift */
+  font-size:14pt;                           /* Schrifthöhe 14 pt */
+  font-weight:bold;                         /* Fettdruck */
+  }
+
+/* Tabellen */
+
+table.Def {                                 /* Tabelle für Definitionen */
+  background-color:#00ff7f;                 /* Hintergrund hellgrün */
+  border-style:double;                      /* Rand doppelt */
+  border-width:6pt;                         /* Randbreite 6 pt */
+  border-color:black;                       /* Randfarbe schwarz */
+  }
+
+td.Def {                                    /* Tabellenzelle für Definitionen */
+  background-color:#00ff7f;                 /* Hintergrund hellgrün */
+  padding-top:5pt;                          /* Innenabstand oben 5 pt */
+  padding-bottom:5pt;                       /* Innenabstand unten 5 pt */
+  padding-left:10pt;                        /* Innenabstand links 10 pt */
+  padding-right:10pt;                       /* Innenabstand rechts 10 pt */
+  text-align:left;                          /* Textausrichtung linksbündig */
+  font-family:Arial,Helvetica,sans-serif;   /* Serifenlose Schrift */
+  font-size:14pt;                           /* Schrifthöhe 14 pt */
+  color:black;                              /* Schriftfarbe schwarz */
+  }
+
+table.Satz {                                /* Tabelle für Lehrsätze u. Ä. */
+  background-color:#ff80a0;                 /* Hintergrund hellrot */
+  border-style:double;                      /* Rand doppelt */
+  border-width:6pt;                         /* Randbreite 6 pt */
+  border-color:black;                       /* Randfarbe schwarz */
+  }
+
+td.Satz {                                   /* Tabellenzelle für Sätze u. Ä. */
+  background-color:#ff80a0;                 /* Hintergrund hellrot */
+  padding-top:5pt;                          /* Innenabstand oben 5 pt */
+  padding-bottom:5pt;                       /* Innenabstand unten 5 pt */
+  padding-left:10pt;                        /* Innenabstand links 10 pt */
+  padding-right:10pt;                       /* Innenabstand rechts 10 pt */
+  text-align:left;                          /* Textausrichtung linksbündig */
+  font-family:Arial,Helvetica,sans-serif;   /* Serifenlose Schrift */
+  font-size:14pt;                           /* Schrifthöhe 14 pt */
+  color:black;                              /* Schriftfarbe schwarz */
+  }
+
+table.Formel {                              /* Tabelle für Formeln */
+  background-color:#00e0ff;                 /* Hintergrund cyan */
+  border-style:solid;                       /* Rand durchgezogen */
+  border-width:3pt;                         /* Randbreite 3 pt */
+  border-color:black;                       /* Randfarbe schwarz */
+  }
+
+td.Formel {                                 /* Tabellenzelle für Formeln */
+  background-color:#00e0ff;                 /* Hintergrund cyan */
+  padding-top:5pt;                          /* Innenabstand oben 5 pt */
+  padding-bottom:5pt;                       /* Innenabstand unten 5 pt */
+  padding-left:10pt;                        /* Innenabstand links 10 pt */
+  padding-right:10pt;                       /* Innenabstand rechts 10 pt */
+  text-align:center;                        /* Textausrichtung zentriert */
+  font-family:Arial,Helvetica,sans-serif;   /* Serifenlose Schrift */
+  font-size:14pt;                           /* Schrifthöhe 14 pt */
+  color:black;                              /* Schriftfarbe schwarz */
+  border-color:black;
+  }
+
+table.Index {                               /* Tabelle für Link zum Index */
+  background-color:black;                   /* Hintergrund schwarz */
+  color:white;                              /* Text weiß */
+  border-style:double;                      /* Rand doppelt */
+  border-width:4pt;                         /* Randbreite 4 pt */
+  border-color:silver;                      /* Randfarbe silber */
+  }
+
+td.Index1 {                                 /* Tabellenzelle für Icon */
+  background-color:yellow;                  /* Hintergrund gelb */
+  padding:10pt;                             /* Innenabstand 10 pt */
+  text-align:center;                        /* Textausrichtung zentriert */
+  }
+
+td.Index2 {                                 /* Tabellenzelle für Text */
+  background-color:yellow;                  /* Hintergrund gelb */
+  padding:5pt;                              /* Innenabstand 5 pt */
+  text-align:center;                        /* Textausrichtung zentriert */
+  font-family:Arial,Helvetica,sans-serif;   /* Serifenlose Schrift */
+  font-size:12pt;                           /* Schrifthöhe 12 pt */
+  font-weight:bold;                         /* Fettdruck */
+  color:black;
+  }
+
+hr.Trennlinie {                             /* Trennlinie */
+  width:40%;                                /* Breite 40 % */
+  border-bottom:solid thin blue;            /* Linie durchgezogen, dünn, blau */
+  }
+  
+hr.Bruchstrich {                            /* Bruchstrich */
+  height:2px;
+  border-width:0px;
+  color:gray;
+  background-color:black;
+  }
+ 
+em.Begriff {                                /* Hervorhebung (Begriff) */
+  font-style:normal;                        /* Schrift normal */
+  color:blue;                               /* Schriftfarbe blau */
+  }
+  
+span.nobr {
+  white-space:nowrap;                       /* Kein automatischer Zeilenumbruch */
+  }

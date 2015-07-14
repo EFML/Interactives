@@ -33,7 +33,7 @@ var DataEntry = (function($, _, JXG, undefined) {
         console.log('JSXGraph version: ' + JXG.version);
 
         $(window).on('resize', resizeBox);
-        $('#dnext-help-link').on('click', toggle);
+        $('#dnext-about-link').on('click', toggle);
 
         createBoard();
         createSlider();
@@ -50,17 +50,17 @@ var DataEntry = (function($, _, JXG, undefined) {
     }
 
     function toggle() {
-        var link = $('#dnext-help-link'),
-            text = $('#dnext-help-text');
+        var link = $('#dnext-about-link'),
+            text = $('#dnext-about-text');
 
         text.toggle();
 
         if (text.css('display') === 'none') {
-            link.text('+ help');
+            link.text('+ about');
         }
         else {
             text.css('display', 'block');
-            link.text('- help');
+            link.text('- about');
         }
     }
 
@@ -81,7 +81,7 @@ var DataEntry = (function($, _, JXG, undefined) {
     }
 
     function outputMath() {
-        katex.render('f(x) = tan^{-1}(x)', $('#math-line1').get(0));
+        katex.render('f(x) = \\tan^{-1}(x)', $('#math-line1').get(0));
         katex.render('\\text{Taylor polynomial:}', $('#math-line2').get(0));
         katex.render(taylorString(), $('#math-line3').get(0));
     }
