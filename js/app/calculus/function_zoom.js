@@ -2,7 +2,7 @@ var DataEntry = (function($, _, JXG, undefined) {
     'use strict';
 
     var yCenter = 1.0, xMin = -10.0, xMax = 10.0, yMin = -4.0, yMax = 6.0,
-        zoom = 1.0, precision = 6,
+        zoom = 1.0, precision = 3,
         boundingBox = [zoom*xMin, yCenter + zoom*yMax, zoom*xMax, yCenter + zoom*yMin],
         board;
 
@@ -102,6 +102,9 @@ var DataEntry = (function($, _, JXG, undefined) {
 
     function createBoard() {
         var xAxis, yAxis, xAxisLabel, yAxisLabel, xOffset1, yOffset1, xOffset2, yOffset2;
+
+        JXG.Options.text.fontSize = 14;
+
         board = JXG.JSXGraph.initBoard('jxgbox', {
             boundingbox: boundingBox,
             axis: false,
@@ -115,7 +118,6 @@ var DataEntry = (function($, _, JXG, undefined) {
         xAxis = board.create('axis', [[0.0, 0.0], [1.0, 0.0]], {
             withLabel: false
         });
-
         yAxis = board.create('axis', [[0.0, 0.0], [0.0, 1.0]], {
             withLabel: false
         });
