@@ -460,6 +460,8 @@ var DataEntry = (function($, _, JXG, undefined) {
     function createGraphBoard() {
         var xAxis, yAxis, xAxisLabel, yAxisLabel, xOffset1, yOffset1, xOffset2, yOffset2;
 
+        JXG.Options.text.fontSize = 14;
+
         graphBoard = JXG.JSXGraph.initBoard('graph-board', {
             boundingbox: boundingBox,
             axis: false,

@@ -473,6 +473,7 @@ var DataEntry = (function($, _, JXG, undefined) {
         JXG.Options.axis.ticks.insertTicks = false;
         JXG.Options.axis.ticks.majorHeight = 100;
         JXG.Options.axis.ticks.ticksDistance = 5;
+        JXG.Options.text.fontSize = 14;
 
         fGraphBoard = JXG.JSXGraph.initBoard('height-graph-board', {
             boundingbox: fGraphBoundingBox,
@@ -494,6 +495,8 @@ var DataEntry = (function($, _, JXG, undefined) {
     }
 
     function creategGraphBoard() {
+        JXG.Options.text.fontSize = 14;
+
         gGraphBoard = JXG.JSXGraph.initBoard('velocity-graph-board', {
             boundingbox: gGraphBoundingBox,
             axis: false,

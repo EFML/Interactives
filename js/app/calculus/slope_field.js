@@ -154,7 +154,10 @@ var DataEntry = (function($, _, JXG, undefined) {
 
     function createBoard() {
         var xAxis, yAxis, xAxisLabel, yAxisLabel, xOffset1, yOffset1, xOffset2, yOffset2;
+
         JXG.Options.axis.ticks.majorHeight = -1;
+        JXG.Options.text.fontSize = 14;
+
         board = JXG.JSXGraph.initBoard('jxgbox', {
             boundingbox: boundingBox,
             axis: false,

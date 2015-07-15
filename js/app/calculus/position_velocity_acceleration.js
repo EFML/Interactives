@@ -173,6 +173,9 @@ var DataEntry = (function($, _, JXG, undefined) {
 
     function createPosBoard() {
         var xAxis, yAxis, xAxisLabel, yAxisLabel, xOffset1, yOffset1, xOffset2, yOffset2;
+
+        JXG.Options.text.fontSize = 14;
+
         posBoard = JXG.JSXGraph.initBoard('position-board', {
             boundingbox: posBoundingBox,
             axis: false,
@@ -232,6 +235,9 @@ var DataEntry = (function($, _, JXG, undefined) {
 
     function createVelBoard() {
         var xAxis, yAxis, xAxisLabel, yAxisLabel, xOffset1, yOffset1, xOffset2, yOffset2;
+
+        JXG.Options.text.fontSize = 14;
+
         velBoard = JXG.JSXGraph.initBoard('velocity-board', {
             boundingbox: velBoundingBox,
             axis: false,
@@ -291,6 +297,9 @@ var DataEntry = (function($, _, JXG, undefined) {
 
     function createAccBoard() {
         var xAxis, yAxis, xAxisLabel, yAxisLabel, xOffset1, yOffset1, xOffset2, yOffset2;
+
+        JXG.Options.text.fontSize = 14;
+
         accBoard = JXG.JSXGraph.initBoard('acceleration-board', {
             boundingbox: accBoundingBox,
             axis: false,

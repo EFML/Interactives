@@ -166,6 +166,9 @@ var DataEntry = (function($, _, JXG, undefined) {
 
     function createAnimBoard() {
         var yAxis, yAxisLabel, xOffset, yOffset;
+
+        JXG.Options.text.fontSize = 14;
+
         animBoard = JXG.JSXGraph.initBoard('anim-board', {
             boundingbox: animBoundingBox,
             axis: false,
@@ -209,6 +212,9 @@ var DataEntry = (function($, _, JXG, undefined) {
 
     function createHeightGraphBoard() {
         var xAxis, yAxis, xAxisLabel, yAxisLabel, xOffset1, yOffset1, xOffset2, yOffset2;
+
+        JXG.Options.text.fontSize = 14;
+
         heightGraphBoard = JXG.JSXGraph.initBoard('height-graph-board', {
             boundingbox: heightGraphBoundingBox,
             axis: false,
@@ -277,6 +283,9 @@ var DataEntry = (function($, _, JXG, undefined) {
 
     function createVelocityGraphBoard() {
         var xAxis, yAxis, xAxisLabel, yAxisLabel, xOffset1, yOffset1, xOffset2, yOffset2;
+
+        JXG.Options.text.fontSize = 14;
+
         velocityGraphBoard = JXG.JSXGraph.initBoard('velocity-graph-board', {
             boundingbox: heightGraphBoundingBox,
             axis: false,
