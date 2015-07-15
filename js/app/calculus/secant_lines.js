@@ -29,28 +29,9 @@ var DataEntry = (function($, _, JXG, undefined) {
 
     var fCurve, secantLine, aPointAxis, aPointCurve, bPointAxis, bPointCurve, aLine, bLine;
 
-    init();console.log(fStr)
+    init();
 
     function init() {
-        // Check version of JQuery
-        // Studio and LMS: 1.7.2
-        // Current: 2.1.3
-        console.log('JQuery version:' + $.fn.jquery);
-        // Check version of UnderscoreJS
-        // Studio and LMS: 1.4.4
-        // Current: 1.8.2
-        console.log('UnderscoreJS version: ' + _.VERSION);
-        // Check version of jQuery UI
-        // Studio and LMS: 1.10.0
-        // Current: 1.11
-        console.log('JQuery UI version: ' + $.ui.version);
-        // Check version of MathJax
-        // Studio and LMS use CDN and are up to date with current version 2.5.1
-        // console.log('MathJax CDN version: ' + MathJax.cdnVersion);
-        // Check version of JSXGraph:
-        // Current: 0.99.3
-        console.log('JSXGraph version: ' + JXG.version);
-
         $(window).on('resize', resizeBox);
         $('#dnext-about-link').on('click', toggle);
 
