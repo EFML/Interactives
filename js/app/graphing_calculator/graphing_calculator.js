@@ -1,6 +1,6 @@
 var GraphingCalculator = (function($, _, MathJax, JXG, undefined) {
     'use strict';
-    var initBoundingBox = [-11, 11, 11, -11];
+    var initBoundingBox = [-12, 12, 12, -12];
     var board, fCurves = [], dfCurves = [], tangents = [], mainMathjaxOutput = null, plots = [],
     // http://www.w3schools.com/cssref/css_colornames.asp
     plotColors = [
