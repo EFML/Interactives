@@ -1,8 +1,7 @@
 var GraphingCalculator = (function($, _, MathJax, JXG, undefined) {
     'use strict';
     var initBoundingBox = [-11, 11, 11, -11];
-    var board = JXG.JSXGraph.initBoard('jxgbox', {boundingbox: initBoundingBox, axis: true, showCopyright: false});
-    var fCurves = [], dfCurves = [], tangents = [], mainMathjaxOutput = null, plots = [],
+    var board, fCurves = [], dfCurves = [], tangents = [], mainMathjaxOutput = null, plots = [],
     // http://www.w3schools.com/cssref/css_colornames.asp
     plotColors = [
         'Crimson', 'MediumSeaGreen', 'RoyalBlue', 'Orange', 'Turquoise'
@@ -31,6 +30,10 @@ var GraphingCalculator = (function($, _, MathJax, JXG, undefined) {
         // Check version of JSXGraph:
         // Current: 0.99.3
         console.log('JSXGraph version: ' + JXG.version);
+
+        // Increase font size from default 12px to 14px
+        JXG.Options.text.fontSize = 14;
+        board = JXG.JSXGraph.initBoard('jxgbox', {boundingbox: initBoundingBox, axis: true, showCopyright: false});
 
         // Redefine some constants in board.jc
         delete board.jc.builtIn.EULER;

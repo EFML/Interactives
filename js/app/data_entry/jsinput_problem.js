@@ -67,6 +67,9 @@ var DataEntry = (function($, _, JXG, undefined) {
 
     function createBoard(table) {
         var xAxis, yAxis, xAxisLabel, yAxisLabel, xOffset1, yOffset1, xOffset2, yOffset2;
+
+        JXG.Options.text.fontSize = 14;
+
         board = JXG.JSXGraph.initBoard('jxgbox', {
             boundingbox: boundingBox,
             axis: false,
@@ -79,7 +82,6 @@ var DataEntry = (function($, _, JXG, undefined) {
         xAxis = board.create('axis', [[0.0, 0.0], [1.0, 0.0]], {
             withLabel: false
         });
-
         yAxis = board.create('axis', [[0.0, 0.0], [0.0, 1.0]], {
             withLabel: false
         });
