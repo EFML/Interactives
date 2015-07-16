@@ -1,0 +1,19 @@
+@import 'calculus';
+
+.dnext-tool-container {
+  .jxgbox {
+    @extend .jsxgraph-box;
+    height: 250px;
+  }
+
+  .controls {
+    width: 100%;
+  }
+
+  #t-slider {
+    width: 400px;
+    display: inline-block;
+    margin-left: 10px;
+    margin-right: 10px;
+  }
+}
