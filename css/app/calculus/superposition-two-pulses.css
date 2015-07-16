@@ -1,0 +1,135 @@
+.dnext-tool-header {
+  min-width: 667px;
+  max-width: 820px;
+  background-color: #e0e0e0;
+  box-sizing: border-box;
+  overflow: hidden;
+  margin: 0 auto;
+  overflow: auto;
+  border: solid #505050 1px;
+  border-top-left-radius: 10px;
+  border-top-right-radius: 10px;
+  border-bottom: none; }
+.dnext-tool-header .dnext-title {
+  float: left;
+  width: 75%;
+  padding: 5px;
+  color: #555555;
+  font-family: "Open Sans", "Verdana", "Geneva", sans-serif;
+  font-weight: 700;
+  font-size: 18px;
+  clear: both; }
+.dnext-tool-header .dnext-about-link {
+  float: right;
+  width: 20%;
+  padding: 5px; }
+.dnext-tool-header .dnext-about-link a {
+  float: right;
+  color: #1d9dd9;
+  text-decoration: none;
+  font-family: "Open Sans", "Verdana", "Geneva", sans-serif;
+  font-weight: 700;
+  font-size: 18px;
+  font-style: normal;
+  clear: both; }
+.dnext-tool-header .dnext-about-link a:hover {
+  color: #70c4ec; }
+.dnext-tool-header .dnext-about-text {
+  clear: both;
+  padding: 5px;
+  display: none; }
+.dnext-tool-header .dnext-about-text p, .dnext-tool-header .dnext-about-text li {
+  color: #646464;
+  font-family: "Open Sans", "Verdana", "Geneva", sans-serif;
+  font-weight: 400;
+  font-size: 16px; }
+
+.regular-text {
+  font-family: "Open Sans", "Verdana", "Geneva", sans-serif;
+  font-weight: 400;
+  font-size: 1.21em; }
+
+.math-text {
+  font-size: 110%; }
+
+.dnext-tool-container {
+  background: #c8c8c8;
+  min-width: 667px;
+  max-width: 820px;
+  margin: 0 auto;
+  padding: 20px;
+  overflow: hidden;
+  box-sizing: border-box;
+  border: solid #505050 1px;
+  border-bottom-left-radius: 10px;
+  border-bottom-right-radius: 10px; }
+.dnext-tool-container::after {
+  clear: both;
+  content: "";
+  display: table; }
+.dnext-tool-container .jsxgraph-box, .dnext-tool-container .jxgbox {
+  background: white;
+  overflow: hidden;
+  box-sizing: border-box;
+  border: solid #356aa0 1px;
+  vertical-align: top;
+  margin-bottom: 20px;
+  -webkit-border-radius: 10px;
+  -moz-border-radius: 10px;
+  -ms-border-radius: 10px;
+  border-radius: 10px; }
+.dnext-tool-container .line, .dnext-tool-container .double-line, .dnext-tool-container .full-line, .dnext-tool-container .half-line, .dnext-tool-container .quarter-line {
+  width: 100%;
+  float: left;
+  display: inline-block;
+  box-sizing: border-box; }
+.dnext-tool-container .double-line {
+  margin-top: 40px; }
+.dnext-tool-container .full-line {
+  margin-top: 20px; }
+.dnext-tool-container .half-line {
+  margin-top: 10px; }
+.dnext-tool-container .quarter-line {
+  margin-top: 5px; }
+.dnext-tool-container input[type=radio] {
+  width: 2em;
+  margin: 0;
+  padding: 0;
+  font-size: 1em;
+  opacity: 0; }
+.dnext-tool-container input[type=radio] + label {
+  display: inline-block;
+  margin-left: -2.0em;
+  line-height: 1.5em;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none; }
+.dnext-tool-container input[type=radio]:focus + label {
+  color: #4479ba; }
+.dnext-tool-container input[type=radio]:hover + label {
+  color: #4479ba; }
+.dnext-tool-container input[type=radio] + label:hover {
+  color: #4479ba; }
+.dnext-tool-container input[type=radio]:checked + label > i.fa-circle-o {
+  display: none; }
+.dnext-tool-container input[type=radio]:checked + label > i.fa-dot-circle-o {
+  display: inline-block;
+  letter-spacing: 0.5em; }
+.dnext-tool-container input[type=radio] + label > i.fa-circle-o {
+  display: inline-block;
+  letter-spacing: 0.5em; }
+.dnext-tool-container input[type=radio] + label > i.fa-dot-circle-o {
+  display: none; }
+
+.dnext-tool-container .jxgbox {
+  height: 250px; }
+.dnext-tool-container .controls {
+  width: 100%; }
+.dnext-tool-container #t-slider {
+  width: 400px;
+  display: inline-block;
+  margin-left: 10px;
+  margin-right: 10px; }
+
+/*# sourceMappingURL=superposition-two-pulses.css.map */
