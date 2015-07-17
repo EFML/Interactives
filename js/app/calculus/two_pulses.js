@@ -2,7 +2,7 @@ var DataEntry = (function($, _, JXG, undefined) {
     'use strict';
 
     var boundingBox = [-0.25, 1.5, 11.0, -1.5],
-        config = window.superpositionTwoPulsesSettings || {
+        config = window.twoPulsesSettings || {
             forwardPulseWidth: 0.5,
             forwardPulseAmp: 0.5,
             backwardPulseWidth: 0.5,
@@ -15,7 +15,8 @@ var DataEntry = (function($, _, JXG, undefined) {
         forwardPulseAmp = config.forwardPulseWidth,
         c = config.c,
         t = 0.0, tMin = 0.0, tMax = 5.0, tStep = 0.01,
-        superpositionWaveBoard, superpositionWaveCurve,
+        forwardWaveBoard, backwardWaveBoard,
+        forwardWaveCurve, backwardWaveCurve,
         tSlider, tSliderValue, animateButton, backwardButton, forwardButton, animateIcon,
         isAnimating = false, anim;
 
@@ -25,9 +26,10 @@ var DataEntry = (function($, _, JXG, undefined) {
         $(window).on('resize', resizeBox);
         $('#dnext-about-link').on('click', toggle);
 
-        createSuperpositionWaveBoard();
+        createForwardWaveBoard();
+        createBackwardWaveBoard();
         createSlider();
-        updateGraph();
+        updateGraphs();
 
         animateButton = $('#animate');
         animateButton.on('click', animateButtonHandler);
@@ -43,10 +45,14 @@ var DataEntry = (function($, _, JXG, undefined) {
 
     function resizeBox(){
         var containerWidth = $('.dnext-tool-container').width();
-        superpositionWaveBoard.needsFullUpdate = true;
-        superpositionWaveBoard.resizeContainer(containerWidth, superpositionWaveBoard.canvasHeight);
-        superpositionWaveBoard.setBoundingBox(boundingBox);
-        superpositionWaveBoard.update();
+        forwardWaveBoard.needsFullUpdate = true;
+        forwardWaveBoard.resizeContainer(containerWidth, forwardWaveBoard.canvasHeight);
+        forwardWaveBoard.setBoundingBox(boundingBox);
+        forwardWaveBoard.update();
+        backwardWaveBoard.needsFullUpdate = true;
+        backwardWaveBoard.resizeContainer(containerWidth, backwardWaveBoard.canvasHeight);
+        backwardWaveBoard.setBoundingBox(boundingBox);
+        backwardWaveBoard.update();
     }
 
     function toggle() {
@@ -75,7 +81,7 @@ var DataEntry = (function($, _, JXG, undefined) {
             slide: function(event, ui ) {
                 tSliderValue.html(ui.value);
                 t = ui.value;
-                updateGraph();
+                updateGraphs();
             }
         });
     }
@@ -116,10 +122,6 @@ var DataEntry = (function($, _, JXG, undefined) {
         return backwardPulse(x + c*t);
     }
 
-    function superpositionWave(x) {
-        return forwardWave(x) + backwardWave(x);
-    }
-
     function startAnimation() {
         if (!isAnimating) {
             if (tSlider.slider('value') === tMax) {
@@ -153,7 +155,7 @@ var DataEntry = (function($, _, JXG, undefined) {
     function updateAnimation() {
         t = tSlider.slider('value');
         tSliderValue.html(t);
-        updateGraph();
+        updateGraphs();
     }
 
     function animate() {
@@ -165,10 +167,10 @@ var DataEntry = (function($, _, JXG, undefined) {
         updateAnimation();
     }
 
-    function createSuperpositionWaveBoard() {
+    function createForwardWaveBoard() {
         JXG.Options.text.fontSize = 14;
 
-        superpositionWaveBoard = JXG.JSXGraph.initBoard('superposition-wave-board', {
+        forwardWaveBoard = JXG.JSXGraph.initBoard('forward-wave-board', {
             boundingbox: boundingBox,
             axis: true,
             showNavigation: false,
@@ -178,26 +180,51 @@ var DataEntry = (function($, _, JXG, undefined) {
             grid: false
         });
 
-        superpositionWaveCurve = superpositionWaveBoard.create(
+        forwardWaveCurve = forwardWaveBoard.create(
             'curve',
             [[], []],
             {strokeWidth: 2, strokeColor: 'blue', highlight: false}
         );
     }
 
-    function updateGraph() {
-        var dataX = [], dataY = [],
+    function createBackwardWaveBoard() {
+        JXG.Options.text.fontSize = 14;
+
+        backwardWaveBoard = JXG.JSXGraph.initBoard('backward-wave-board', {
+            boundingbox: boundingBox,
+            axis: true,
+            showNavigation: false,
+            zoom: false,
+            pan: false,
+            showCopyright: false,
+            grid: false
+        });
+
+        backwardWaveCurve = backwardWaveBoard.create(
+            'curve',
+            [[], []],
+            {strokeWidth: 2, strokeColor: 'blue', highlight: false}
+        );
+    }
+
+    function updateGraphs() {
+        var dataX = [], forwardWaveDataY = [], backwardWaveDataY = [], superpositionWaveDataY = [],
             x, xMin = -0.001, xMax = 11.0, xInc = 0.01;
 
         for (x = xMin; x <= xMax; x += xInc) {
             dataX.push(x);
-            dataY.push(superpositionWave(x));
+            forwardWaveDataY.push(forwardWave(x));
+            backwardWaveDataY.push(backwardWave(x));
         }
 
-        superpositionWaveCurve.dataX = dataX;
-        superpositionWaveCurve.dataY = dataY;
+        forwardWaveCurve.dataX = dataX;
+        forwardWaveCurve.dataY = forwardWaveDataY;
 
-        superpositionWaveBoard.update();
+        backwardWaveCurve.dataX = dataX;
+        backwardWaveCurve.dataY = backwardWaveDataY;
+
+        forwardWaveBoard.update();
+        backwardWaveBoard.update();
     }
 
     return {
