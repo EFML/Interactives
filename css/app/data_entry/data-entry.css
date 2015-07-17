@@ -1,14 +1,6 @@
 .ui-widget {
   font-size: 80%; }
 
-/* 
-// Use the following to enable vertical scrollbars on tab
-.ui-tabs-panel {
-  height: 425px;
-  overflow-x: hidden;
-  overflow-y: auto;
-}
-*/
 .container {
   background: #c8c8c8;
   min-width: 667px;
@@ -29,7 +21,6 @@
 .container .control-panel {
   background: #e0e0e0;
   width: 100%;
-  height: 500px;
   float: left;
   padding: 20px;
   margin-bottom: 20px;

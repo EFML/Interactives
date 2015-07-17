@@ -25,7 +25,8 @@ var DataEntry = (function($, _, JXG, undefined) {
     var tables = [],
         boundingBox = [-11.0, 11.0, 11.0, -11.0],
         board, chooseColumnsDialog, resetDialog,
-        precision = 3;
+        precision = 3,
+        singleTableEl, singleTable; // Last minute hack to get the table resize when browser window does;
 
     init();
 
@@ -44,6 +45,9 @@ var DataEntry = (function($, _, JXG, undefined) {
         board.resizeContainer(boardWidth, board.canvasHeight);
         board.setBoundingBox(boundingBox);
         board.update();
+        // Last minute hack to get the table resize when browser window does
+        singleTableEl.width(boardWidth - 40);
+        singleTable.render();
     }
 
     function createBoard(table) {
@@ -108,7 +112,9 @@ var DataEntry = (function($, _, JXG, undefined) {
         else {
             panel = $('<div class="half-line ui-tabs-panel" />');
             $('.control-panel').append(panel);
-            createTabContent(panel, tables[0]);
+            // Last minute hack to get the table resize when browser window does
+            singleTable = createTabContent(panel, tables[0]);
+            singleTableEl = $(singleTable.rootElement);
         }
     }
 
@@ -141,13 +147,12 @@ var DataEntry = (function($, _, JXG, undefined) {
                 '<div id="table-' + table.id + '" />',
             '</div>',
             '<div class="half-line" id="reg-line-eq-' + table.id + '" />',
-            '<div class="full-line">',
+            '<div class="half-line">',
                 '<button class="button" id="choose-columns-' + table.id + '">Choose Columns</button>',
                 '<button class="button" id="plot-table-' + table.id + '">Plot Table</button>',
                 '<button class="button" id="fit-line-' + table.id + '" disabled>Fit Line</button>',
                 '<button class="button" id="reset-' + table.id + '">Reset</button>',
-            '</div>',
-            '<div class="half-line" />'
+            '</div>'
             ].join('');
         // Append tab content to container
         container.append(htmlFragment);
@@ -163,7 +168,11 @@ var DataEntry = (function($, _, JXG, undefined) {
             data: table.data,
             colHeaders: table.headers,
             columns: columns,
-            height: 280,
+            // Last minute hack to get the table resize when browser window does
+            width: $('.container').width() - 40,
+            stretchH: 'all',
+            height: 390,
+            // End hack
             readOnly: table.readOnly
         });
         // Bind button event listeners
@@ -196,6 +205,9 @@ var DataEntry = (function($, _, JXG, undefined) {
         resetBtn.on('click', function() {
             openResetDialog();
         });
+
+        // Last minute hack to get the table resize when browser window does
+        return table.htmlTable;
     }
 
     function createChooseColumnsDialog() {
