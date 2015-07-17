@@ -1,7 +1,7 @@
 ////////////
 // brd1 1
 ////////////
-bboxlimits = [-1.5, 12, 12, -1];
+bboxlimits = [-1.85, 12, 12, -1.1];
 var brd1 = JXG.JSXGraph.initBoard('jxgbox1', {axis:false, 
                                         showCopyright: false,
                                         showNavigation: false,
@@ -18,7 +18,7 @@ yaxis1 = brd1.create('axis', [[0, 0], [0, 11]], {withLabel: false});
 //Axes
 xaxis1.removeAllTicks();
 yaxis1.removeAllTicks();
-var xlabel1 = brd1.create('text',[-1.4,10,"Interest<br>Rate"],{fixed:true});
+var xlabel1 = brd1.create('text',[-1.75,10,"Nominal<br>Interest<br>Rate"],{fixed:true});
 var ylabel1 = brd1.create('text',[8,-0.5,"Quantity of Money"],{fixed:true});
 
 
