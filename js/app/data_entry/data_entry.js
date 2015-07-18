@@ -14,7 +14,8 @@ var DataEntry = (function($, _, JXG, undefined) {
             		color: 'Crimson',
             	},
             	fitLine: {
-            		color: 'MediumSeaGreen'
+            		color: 'MediumSeaGreen',
+                    precision: 3
             	},
                 readOnly: false
           	}
@@ -25,7 +26,6 @@ var DataEntry = (function($, _, JXG, undefined) {
     var tables = [],
         boundingBox = [-11.0, 11.0, 11.0, -11.0],
         board, chooseColumnsDialog, resetDialog,
-        precision = 3,
         singleTableEl, singleTable; // Last minute hack to get the table resize when browser window does
 
     init();
@@ -319,7 +319,7 @@ var DataEntry = (function($, _, JXG, undefined) {
             // Calculate parameters of line manually, y = mx + b
             b = f(0.0);
             m = f(1.0) - b;
-            regLineEq.html('y = ' + m.toFixed(precision) + 'x + ' +  b.toFixed(precision));
+            regLineEq.html('y = ' + m.toFixed(table.fitLine.precision) + 'x + ' +  b.toFixed(table.fitLine.precision));
             regLineEq.css('color', table.fitLine.color);
             board.create(
                 'functiongraph',
