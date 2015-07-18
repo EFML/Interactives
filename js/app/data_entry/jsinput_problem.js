@@ -21,11 +21,12 @@ var DataEntry = (function($, _, JXG, undefined) {
                 readOnly: false
           	}
         ],
+        initBoundingBox: [-11.0, 11.0, 11.0, -11.0],
         render: true
     };
 
     var tables = [],
-        boundingBox = [-11.0, 11.0, 11.0, -11.0],
+        boundingBox = config.initBoundingBox,
         board, chooseColumnsDialog, resetDialog,
         singleTableEl, singleTable; // Last minute hack to get the table resize when browser window does;
 
