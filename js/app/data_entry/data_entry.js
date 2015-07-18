@@ -15,7 +15,8 @@ var DataEntry = (function($, _, JXG, undefined) {
             	},
             	fitLine: {
             		color: 'MediumSeaGreen',
-                    precision: 3
+                    precision: 3,
+                    render: true
             	},
                 readOnly: false
           	}
@@ -180,6 +181,10 @@ var DataEntry = (function($, _, JXG, undefined) {
         fitLineBtn.on('click', function() {
             fitLine(table);
         });
+
+        if(!table.fitLine.render) {
+            fitLineBtn.hide();
+        }
 
         resetBtn = $('#reset-' + table.id);
         resetBtn.on('click', function() {
