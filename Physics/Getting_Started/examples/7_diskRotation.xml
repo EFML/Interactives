@@ -1,0 +1,24 @@
+<problem display_name="Current Direction">
+<script type="loncapa/python">
+<![CDATA[
+import vectordraw
+grader = vectordraw.Grader()
+]]>
+</script>
+<p>
+Below is a diagram of parallel circuit consisting of a 6V battery and two resistors, R<sub>1</sub> and R<sub>2</sub>. If R<sub>1</sub> = 10 Ohms, and R<sub>2</sub> = 2 Ohms, which direction will the current flow through each resistor.
+</p>
+<p>
+  <i>This is a vector drawing problem type. Use your mouse, or the "add vector" button to place vectors at the blue dots below each resistor. Be sure to place the correctly labeled vector below the appropriate resistor. </i>
+</p>
+<customresponse cfn="grader.cfn">
+  <jsinput gradefn="getInput"
+    get_statefn="getState"
+    set_statefn="setState"
+    initial_state='{}'
+    width="800"
+    height="500"
+    html_file="/static/7_diskRotation.html"
+    />
+</customresponse>
+</problem>

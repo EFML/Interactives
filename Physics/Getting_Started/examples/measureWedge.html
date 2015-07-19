@@ -9,29 +9,31 @@
         <div id="vectordraw" />
         <script type="text/javascript">
           // Background image, vectors, and points are defined below.
+          var vecColors = ['DodgerBlue','DodgerBlue','DodgerBlue'];
+          var pointColors = ['DarkGray','DarkGray','DarkGray'];
           var vectordraw_settings = {
               width: 550,
               height: 450,
               bounding_box_size: 8,
-              add_vector_label: "Add Selected Vector",
+              add_vector_label: "Add Ruler",
               background: {
-                  src: 'https://dnextinteractives.s3.amazonaws.com/Physics/Gravitational_Electric_Potentials/LC4/pointChargeField.png',
+                  src: 'https://dnextinteractives.s3.amazonaws.com/Physics/Getting_Started/examples/wedge.png',
                   width: 18
               },
               vectors: [
-                    {name: 'A', description: 'Electric Field Point A', coords: [[4, 4], [7, 7]], render: false},
-                    {name: 'B', description: 'Electric Field  Point B', coords: [[3, 3], [6, 6]], render: false},
-                    {name: 'C', description: 'Electric Field  Point C', coords: [[3, 3], [6, 6]], render: false}
+                    {name: 'R1', length_factor: 0.48, length_units:"units", type:"segment", description: 'Ruler #1', coords: [[2, -2], [2, 6]], render: false, style:{color:vecColors[0], labelColor:vecColors[0], pointColor:pointColors[0], width:"6"}},
+                    {name: 'R2', length_factor: 0.48, length_units:"units", type:"segment", description: 'Ruler #2', coords: [[3, -2], [3, 6]], render: false, style:{color:vecColors[1], labelColor:vecColors[1], pointColor:pointColors[1], width:"6"}},
               ],
-              // points: [{name: 'cmA', coords: [-0.1,-2.2]},
-              //          {name: 'cmB', coords: [-4.0,0.21]},
-              //          {name: 'cmC', coords: [2.5,2.9]}
+              // points: [{name: 'cmA', coords: [-2.85,0.28]},
+              //          {name: 'cmB', coords: [-5.2,0.28]},
+              //          {name: 'cmC', coords: [-0.265,5.45]}
               //          ],
               expected_result: {
-                 'A': {angle: 270, angle_tolerance: 3, tail: [-0.1,-2.2], tail_tolerance: 0.25},
-                 'B': {angle: 180, angle_tolerance: 3, tail: [-4.0,0.21], tail_tolerance: 0.25},
-                 'C': {angle: 45, angle_tolerance: 3, tail: [2.5,2.9], tail_tolerance: 0.25}
-              }
+                 //'R1': {segment_coords: [[-4, -4.5], [5, 5]], coord_tolerance: 2.0},
+              },
+              custom_checks: [
+                  {check: 'check_if_correct_vectors_plotted'}
+              ]
           };
         </script>
 

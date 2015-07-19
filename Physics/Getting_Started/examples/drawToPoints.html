@@ -9,24 +9,29 @@
         <div id="vectordraw" />
         <script type="text/javascript">
           // Background image, vectors, and points are defined below.
+          var vecColors = ['DodgerBlue','DodgerBlue','DodgerBlue'];
+          var pointColors = ['DarkGray','DarkGray','DarkGray'];
           var vectordraw_settings = {
-              width: 500,
-              //height: 450,
+              width: 550,
+              height: 450,
               bounding_box_size: 8,
               add_vector_label: "Add Vector",
               background: {
-                  src: 'https://dnextinteractives.s3.amazonaws.com/Physics/Force_Diagrams/Pre/protractor.png',
-                  width: 20
+                  src: 'https://dnextinteractives.s3.amazonaws.com/Physics/Getting_Started/examples/points.png',
+                  width: 18
               },
               vectors: [
-                    {
-                        name: 'V', description: 'Vector #1', coords: [[2, 2], [7, 8]], render: false
-                    },
+                    {name: 'V', description: 'Vector AB', coords: [[2, -2], [2, 6]], render: false, style:{color:'DodgerBlue', pointColor:'Crimson', width:"6"}},
               ],
-              points: [{name: 'cm', coords: [0, -4.8]}],
+              // points: [{name: 'cmA', coords: [-4.05,-2.85]},
+              //          {name: 'cmB', coords: [3.55,4.45]}
+              //          ],
               expected_result: {
-                 'V': {angle: 32, angle_tolerance: 1, tail: [0, -4.8], tail_tolerance: 0.25},
-              }
+                 'V': {tail: [-4.05,-2.85], tip: [3.55,4.45], tail_tolerance: 0.35, tip_tolerance: 0.35},
+              },
+              custom_checks: [
+                  {check: 'check_if_correct_vectors_plotted'}
+              ]
           };
         </script>
 
