@@ -152,7 +152,7 @@ var DataEntry = (function($, _, JXG, undefined) {
                 '<button class="button" id="plot-table-' + table.id + '">Plot Table</button>',
                 '<button class="button" id="fit-line-' + table.id + '" disabled>Fit Line</button>',
                 '<button class="button" id="reset-' + table.id + '">Reset</button>',
-            '</div>',
+            '</div>'
             ].join('');
         // Append tab content to container
         container.append(htmlFragment);
@@ -175,12 +175,22 @@ var DataEntry = (function($, _, JXG, undefined) {
 
         plotTableBt = $('#plot-table-' + table.id);
         plotTableBt.on('click', function() {
-            plotTable(table);
+            try {
+                plotTable(table);
+            }
+            catch (err) {
+                window.alert(err.toString());
+            }
         });
 
         fitLineBtn = $('#fit-line-' + table.id);
         fitLineBtn.on('click', function() {
-            fitLine(table);
+            try {
+                fitLine(table);
+            }
+            catch (err) {
+                window.alert(err.toString());
+            }
         });
 
         if(!table.fitLine.render) {
@@ -299,8 +309,8 @@ var DataEntry = (function($, _, JXG, undefined) {
 
     function plotTable(table) {
         var fitLineBtn = $('#fit-line-' + table.id);
-        clearBoard();
         setBoundingBox(table);
+        clearBoard();
         createBoard(table);
         plotData(table);
         fitLineBtn.attr('disabled', false);
@@ -309,8 +319,8 @@ var DataEntry = (function($, _, JXG, undefined) {
     function fitLine(table) {
         var f, m, b, vals, xVals, yVals, regLineEq;
 
-        clearBoard();
         setBoundingBox(table);
+        clearBoard();
         createBoard(table);
         plotData(table);
 
@@ -318,6 +328,10 @@ var DataEntry = (function($, _, JXG, undefined) {
         vals = getXYVals(table);
         xVals = vals.xVals;
         yVals = vals.yVals;
+
+        // Remove eventual paired empty values. They will cause the plot of an erroneous fit line.
+        xVals = _.without(xVals, '');
+        yVals = _.without(yVals, '');
 
          if (xVals.length > 1 && yVals.length > 1) {
             f = JXG.Math.Numerics.regressionPolynomial(1, xVals, yVals);
@@ -349,6 +363,37 @@ var DataEntry = (function($, _, JXG, undefined) {
         }
     }
 
+    function isEmptyStr(str) {
+        return str === '';
+    }
+
+    function validatePlottedColumns(vals) {
+        var msg1 = 'Some cells contain invalid data marked in red and the data could not be plotted.' +
+                   ' Please enter numeric values only and try again.',
+            msg2 = 'Some non-empty cells are being plotted against empty cells.' +
+                   ' Please make sure both x and y values are present on a row.';
+
+        // Check if the values are numeric or empty
+        _.each(vals.xVals, function(val, index) {
+            if (!_.isFinite(val) && !isEmptyStr(val)) {
+                throw msg1;
+            }
+        });
+
+        _.each(vals.yVals, function(val, index) {
+            if (!_.isFinite(val) && !isEmptyStr(val)) {
+                throw msg1;
+            }
+        });
+
+        // Check that if one cell of a column is not empty the corresponding one is also not empty
+        _.each(vals.xVals, function(val, index) {
+            if ((isEmptyStr(val) && !isEmptyStr(vals.yVals[index])) || (_.isFinite(val) && !_.isFinite(vals.yVals[index]))) {
+                throw msg2;
+            }
+        });
+    }
+
     function getXYVals(table) {
         var i, j, xVals = [], yVals = [];
 
@@ -367,6 +412,7 @@ var DataEntry = (function($, _, JXG, undefined) {
         var i, j, vals, xVals = [], yVals = [];
 
         vals = getXYVals(table);
+        validatePlottedColumns(vals);
         xVals = vals.xVals;
         yVals = vals.yVals;
 
@@ -409,7 +455,6 @@ var DataEntry = (function($, _, JXG, undefined) {
 
     function clearBoard() {
         JXG.JSXGraph.freeBoard(board);
-        // createBoard();
     }
 
     function getActiveTable() {
@@ -442,7 +487,6 @@ var DataEntry = (function($, _, JXG, undefined) {
     }
 
     function reset() {
-    	// clearBoard();
         clearRegLineEq();
         resetCellsBoard();
         plotTable(tables[getActiveTable()]);
