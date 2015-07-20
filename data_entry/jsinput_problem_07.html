@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <title>Data Entry</title>
+    <link rel="stylesheet" type="text/css" href="../css/vendor/jquery_ui/smoothness/jquery-ui.min.css">
+    <link rel="stylesheet" type="text/css" href="../css/vendor/handsontable/handsontable.full.min.css">
+    <link rel="stylesheet" type="text/css" href="../css/common.css">
+    <link rel="stylesheet" type="text/css" href="../css/app/data_entry/data-entry.css">
+    <script type="text/javascript" src="../js/vendor/jsxgraphcore.js"></script>
+    <script type="text/javascript" src="../js/vendor/underscore-min.js"></script>
+    <script type="text/javascript" src="../js/vendor/jquery.min.js"></script>
+    <script type="text/javascript" src="../js/vendor/jquery-ui.min.js"></script>
+    <script type="text/javascript" src="../js/vendor/handsontable.full.min.js"></script>
+    <script type="text/javascript" src="../js/vendor/jschannel.js"></script>
+    <script type="text/javascript">
+      <!--
+      // http://www.w3schools.com/cssref/css_colornames.asp
+      // Graphing calculator colors: 'Crimson', 'MediumSeaGreen', 'RoyalBlue', 'Orange', 'Turquoise'
+      -->
+      var DataEntrySettings = {
+        tables: [
+          {
+            name: 'Experiment 1',
+            data: [
+              [0,  0.2,  ''],
+              [1,  1.2,  ''],
+              [2,  2.15, ''],
+              [3,  2.95, ''],
+              [4,  4.25, ''],
+              [5,  4.9,  ''],
+              [6,  5.94, ''],
+              [7,  7.2,  ''],
+              [8,  8.3,  ''],
+              [9,  8.99, ''],
+              [10, 10.3, ''],
+              ['', '',   ''],
+              ['', '',   ''],
+              ['', '',   ''],
+              ['', '',   '']
+            ],
+            headers: ['x', 'y<sub>1</sub>', 'y<sub>2</sub>'],
+            xColumn: 0,
+            yColumn: 1,
+            dataPoints: {
+              color: 'DodgerBlue',
+            },
+            fitLine: {
+              color: 'Crimson',
+              precision: 3,
+              render: true
+            },
+          }
+        ],
+        initBoundingBox: [-0.5, 10.5, 10.5, -0.5],
+        render: false
+      };
+    </script>
+    <script type="text/javascript" src="../js/app/data_entry/jsinput_problem.js" defer></script>
+  </head>
+  <body>
+    <div class="container">
+      <div class="control-panel"></div>
+      <div class="jxgbox" id="jxgbox"></div>
+      <div id="choose-columns-dialog-form"></div>
+      <div id="reset-dialog-form"></div>
+    </div>
+  </body>
+</html>
