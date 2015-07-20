@@ -350,7 +350,7 @@ var DataEntry = (function($, _, JXG, undefined) {
             board.create(
                 'functiongraph',
                 [f],
-                {strokeWidth: 3, strokeColor: table.fitLine.color}
+                {strokeWidth: 3, strokeColor: table.fitLine.color, highlight: false}
             );
         }
     }

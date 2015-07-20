@@ -30,10 +30,12 @@
             xColumn: 0,
             yColumn: 1,
             dataPoints: {
-            	color: 'Crimson',
+            	color: 'DodgerBlue'
             },
             fitLine: {
-            	color: 'MediumSeaGreen'
+              color: 'Crimson',
+              precision: 3,
+              render: true
             },
             readOnly: false
           },
@@ -47,7 +49,9 @@
             xColumn: 1,
             yColumn: 0,
             dataPoints: {
-            	color: 'RoyalBlue',
+            	color: 'MediumSeaGreen',
+              precision: 3,
+              render: true
             },
             fitLine: {
             	color: 'Orange'
@@ -55,6 +59,7 @@
             readOnly: true
           }
         ],
+        initBoundingBox: [-11.0, 11.0, 11.0, -11.0],
         render: false
       };
     </script>

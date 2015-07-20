@@ -330,7 +330,7 @@ var DataEntry = (function($, _, JXG, undefined) {
             board.create(
                 'functiongraph',
                 [f],
-                {strokeWidth: 3, strokeColor: table.fitLine.color}
+                {strokeWidth: 3, strokeColor: table.fitLine.color, highlight: false}
             );
         }
     }
@@ -356,9 +356,6 @@ var DataEntry = (function($, _, JXG, undefined) {
             xVals.push(table.data[i][table.xColumn]);
             yVals.push(table.data[i][table.yColumn]);
         }
-
-        // xVals = _.compact(xVals);
-        // yVals = _.compact(yVals);
 
         return {
             'xVals': xVals,
