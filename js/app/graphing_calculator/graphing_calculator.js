@@ -324,7 +324,7 @@ var GraphingCalculator = (function($, _, MathJax, JXG, undefined) {
                 dfx0 = df(x0);
                 mathOutput = $('#mathjax-output-secondary-' + plot.id);
                 mathOutput.html(
-                    '`(df_' + plot.name + ')/dt (' + numberToString(x0) +' ) = ' + numberToString(dfx0) + '`'
+                    '`(df_' + plot.name + ')/dx (' + numberToString(x0) +' ) = ' + numberToString(dfx0) + '`'
                 );
                 MathJax.Hub.Queue(["Typeset", MathJax.Hub, 'mathjax-output-secondary-' + plot.id]);
                 mathOutput.css('color', plot.color);
