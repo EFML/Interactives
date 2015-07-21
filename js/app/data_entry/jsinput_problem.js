@@ -242,7 +242,7 @@ var DataEntry = (function($, _, JXG, undefined) {
             .append(htmlFragment)
             .dialog({
                 autoOpen: false,
-                title: 'Warning',
+                title: 'Choose Columns',
                 modal: true,
                 width: 350,
                 resizable: false,
@@ -336,14 +336,11 @@ var DataEntry = (function($, _, JXG, undefined) {
 
         regLineEq = $('#reg-line-eq-' + table.id);
         vals = getXYVals(table);
+        validatePlottedColumns(vals);
         xVals = vals.xVals;
         yVals = vals.yVals;
 
-        // Remove eventual paired empty values. They will cause the plot of an erroneous fit line.
-        xVals = _.without(xVals, '');
-        yVals = _.without(yVals, '');
-
-         if (xVals.length > 1 && yVals.length > 1) {
+        if (xVals.length > 1 && yVals.length > 1) {
             f = JXG.Math.Numerics.regressionPolynomial(1, xVals, yVals);
             // f.getTerm()); => doesn't work!
             // Calculate parameters of line manually, y = mx + b
@@ -373,35 +370,33 @@ var DataEntry = (function($, _, JXG, undefined) {
         }
     }
 
-    function isEmptyStr(str) {
-        return str === '';
-    }
-
     function validatePlottedColumns(vals) {
         var msg1 = 'Some cells contain invalid data marked in red and the data could not be plotted.' +
                    ' Please enter numeric values only and try again.',
-            msg2 = 'Some non-empty cells are being plotted against empty cells.' +
-                   ' Please make sure both x and y values are present on a row.';
+            xVals = [], yVals = [];
 
         // Check if the values are numeric or empty
         _.each(vals.xVals, function(val, index) {
-            if (!_.isFinite(val) && !isEmptyStr(val)) {
+            if (!_.isFinite(val) && !_.isEmpty(val)) {
                 throw msg1;
             }
         });
 
         _.each(vals.yVals, function(val, index) {
-            if (!_.isFinite(val) && !isEmptyStr(val)) {
+            if (!_.isFinite(val) && !_.isEmpty(val)) {
                 throw msg1;
             }
         });
 
-        // Check that if one cell of a column is not empty the corresponding one is also not empty
+        // Only keep rows that contain two valid cells
         _.each(vals.xVals, function(val, index) {
-            if ((isEmptyStr(val) && !isEmptyStr(vals.yVals[index])) || (_.isFinite(val) && !_.isFinite(vals.yVals[index]))) {
-                throw msg2;
+            if (_.isFinite(val) && _.isFinite(vals.yVals[index])) {
+                xVals.push(val);
+                yVals.push(vals.yVals[index]);
             }
         });
+        vals.xVals = xVals;
+        vals.yVals = yVals;
     }
 
     function getXYVals(table) {
