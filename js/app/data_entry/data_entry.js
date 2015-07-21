@@ -28,7 +28,8 @@ var DataEntry = (function($, _, JXG, undefined) {
     var tables = [],
         boundingBox = config.initBoundingBox,
         board, chooseColumnsDialog, resetDialog,
-        singleTableEl, singleTable; // Last minute hack to get the table resize when browser window does
+        singleTableEl, singleTable, // Last minute hack to get the table resize when browser window does;
+        textHeaders = []; // Last minute hack to deal with headers containing HTML markup as <sub></sub>, <sup></sup>
 
     init();
 
@@ -208,10 +209,15 @@ var DataEntry = (function($, _, JXG, undefined) {
 
     function createChooseColumnsDialog() {
         var index = getActiveTable(),
-            optionsHtmlFragment = '', htmlFragment;
+            optionsHtmlFragment = '', htmlFragment, div, text;
 
         _.each(tables[index].headers, function(header) {
-            optionsHtmlFragment += '<option>' + header + '</option>';
+            // Last minute hack, strip HTML
+            div = document.createElement("div");
+            div.innerHTML = header;
+            text = div.innerText;
+            optionsHtmlFragment += '<option>' + text + '</option>';
+            textHeaders.push(text);
         });
 
         htmlFragment = [
@@ -254,10 +260,10 @@ var DataEntry = (function($, _, JXG, undefined) {
             width: 300,
         });
 
-        $("#x-column").val(tables[index].headers[tables[index].xColumn]);
+        $("#x-column").val(textHeaders[tables[index].xColumn]);
         $("#x-column").selectmenu("refresh");
 
-        $("#y-column").val(tables[index].headers[tables[index].yColumn]);
+        $("#y-column").val(textHeaders[tables[index].yColumn]);
         $("#y-column").selectmenu("refresh");
     }
 
@@ -284,9 +290,8 @@ var DataEntry = (function($, _, JXG, undefined) {
         var xColumnSelectedItem = $("#x-column").val(),
             yColumnSelectedItem = $("#y-column").val(),
             index = getActiveTable();
-
-        tables[index].xColumn = tables[index].headers.indexOf(xColumnSelectedItem);
-        tables[index].yColumn = tables[index].headers.indexOf(yColumnSelectedItem);
+        tables[index].xColumn = textHeaders.indexOf(xColumnSelectedItem);
+        tables[index].yColumn = textHeaders.indexOf(yColumnSelectedItem);
         chooseColumnsDialog.dialog('close');
     }
 
