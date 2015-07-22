@@ -219,13 +219,14 @@ var DataEntry = (function($, _, JXG, undefined) {
 
     function createChooseColumnsDialog() {
         var index = getActiveTable(),
-            optionsHtmlFragment = '', htmlFragment, div, text;
+            optionsHtmlFragment = '', htmlFragment, el, text;
+
+        el = $('<div/>');
 
         _.each(tables[index].headers, function(header) {
-            // Last minute hack, strip HTML
-            div = document.createElement("div");
-            div.innerHTML = header;
-            text = div.innerText;
+            // Last minute hack, strip HTML from headers.
+            el.html(header);
+            text = el.text();
             optionsHtmlFragment += '<option>' + text + '</option>';
             textHeaders.push(text);
         });
