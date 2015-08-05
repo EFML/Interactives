@@ -49,7 +49,7 @@ var iS2D = brd1.create('intersection', [AD2, SRAS2, 0], {visible:false});
 // Draggable Dashed Lines for Board 1
 ////////////
 var dashS2 = createDashedLines2Axis(brd1,iS2D,
-                                  {fixed:false,
+                                  {fixed:true,
                                    withLabel:false,
                                    xlabel:'Y<sub>2</sub>',
                                    ylabel:'PL<sub>2</sub>',
@@ -59,7 +59,8 @@ var dashS2 = createDashedLines2Axis(brd1,iS2D,
 // Fixed Dashed Lines for Board 1
 ////////////
 var dashesFixedB1 = createDashedLines2Axis(brd1,iSDfix,
-                                          {withLabel:true,
+                                          {fixed:true,
+                                           withLabel:true,
                                            xlabel:'rY<sub>1</sub>',
                                            ylabel:'PL<sub>1</sub>',
                                            color:'DodgerBlue'});
