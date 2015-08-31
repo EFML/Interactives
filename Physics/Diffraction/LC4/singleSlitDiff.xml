@@ -1,0 +1,36 @@
+<problem display_name="webGLDemo">
+<script type="loncapa/python">
+<![CDATA[
+import vectordraw
+
+def check_if_correct_vectors_plotted(check, vectors):
+    L = len(vectors)
+    if L == 0:
+        return 'You have not drawn a ruler. Please make sure you have made at least one measurement.'
+
+custom_checks = {
+  'check_if_correct_vectors_plotted': check_if_correct_vectors_plotted
+}
+
+success_message = 'Good job!'
+
+grader = vectordraw.Grader(success_message, custom_checks)
+]]>
+</script>
+<p>
+Draw rulers using your mouse to measure lengths in the image. The Ruler Properties window will display the length.
+</p>
+<p>
+  <i>Testing segment tool as a measurement device.</i>
+</p>
+<customresponse cfn="grader.cfn">
+  <jsinput gradefn="getInput"
+    get_statefn="getState"
+    set_statefn="setState"
+    initial_state='{}'
+    width="800"
+    height="480"
+    html_file="https://dnextinteractives.s3.amazonaws.com/Physics/Diffraction/LC4/singleSlitDiff.html"
+    />
+</customresponse>
+</problem>

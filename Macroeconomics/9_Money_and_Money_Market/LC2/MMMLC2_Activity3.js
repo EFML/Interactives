@@ -1,4 +1,4 @@
-bboxlimits = [-1.6, 12, 12, -1.1];
+bboxlimits = [-1.85, 12, 12, -1.1];
 var brd1 = JXG.JSXGraph.initBoard('jxgbox1', {axis:false, 
                                         showCopyright: false,
                                         showNavigation: false,
@@ -15,7 +15,7 @@ yaxis = brd1.create('axis', [[0, 0], [0, 12]], {withLabel: true, label: {offset:
 //Axes
 xaxis.removeAllTicks();
 yaxis.removeAllTicks();
-var ylabel = brd1.create('text',[-1.5,10,"Interest<br>Rate"],{fixed:true});
+var ylabel = brd1.create('text',[-1.75,10,"Nominal<br>Interest<br>Rate"],{fixed:true});
 var xlabel = brd1.create('text',[8,-0.5,"Quantity of Money"],{fixed:true});
 
 //Demand 1
@@ -29,8 +29,8 @@ var G = brd1.create('glider',[6.0,6.0,D1],{fixed:true,visible:false});
 var dashD1 = createDashedLines2Axis(brd1,G,
                                   {fixed:true,
                                    withLabel:true,
-                                   xlabel:'Y<sub>1</sub>',
-                                   ylabel:'R<sub>1</sub>',
+                                   xlabel:'M<sub>1</sub>',
+                                   ylabel:'r<sub>1</sub>',
                                    color:'Gray'});
 
 
@@ -47,7 +47,7 @@ var G = brd1.create('glider',[6.0,6.0,D2],{name:'A',withLabel:false,fixed:true})
 var dashD2 = createDashedLines2Axis(brd1,G,
                                   {fixed:false,
                                    withLabel:false,
-                                   xlabel:'Y<sub>2</sub>',
+                                   xlabel:'M<sub>2</sub>',
                                    ylabel:'',
                                    color:'DodgerBlue'});
 

@@ -129,7 +129,7 @@ createDashedLines2Axis = function(board,intersection,options) {
     var Y1,Y2,YLine,X1,X2,XLine,obj={};
     var Y1 = board.create('point',[0, intersection.Y()],
                      {'withLabel':withLabel,'name':ylabel,'visible':true,'size':'0.5',
-                     'strokeColor':'Gray','label':{'offset':yoffsets}});
+                      'fixed':fixed, 'strokeColor':'Gray','label':{'offset':yoffsets}});
 
     var Y2 = board.create('point',[intersection.X(), intersection.Y()],
                      {'withLabel':false,'visible':false,'size':'0.0','strokeColor':''});
@@ -139,7 +139,7 @@ createDashedLines2Axis = function(board,intersection,options) {
 
     var X1 = board.create('point',[intersection.X(), 0],
                      {'withLabel':withLabel,'name':xlabel,'visible':true,'size':'0.5',
-                     'strokeColor':'Gray','label':{'offset':xoffsets}});
+                      'fixed':fixed, 'strokeColor':'Gray','label':{'offset':xoffsets}});
 
     var X2 = board.create('point',[intersection.X(), intersection.Y()],
                      {'withLabel':false,'visible':false,'size':'0.0','strokeColor':''});

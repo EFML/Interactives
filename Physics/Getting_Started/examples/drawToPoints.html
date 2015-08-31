@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <link href="//cdnjs.cloudflare.com/ajax/libs/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet" type="text/css" />
+        <link href="https://dnextinteractives.s3.amazonaws.com/Physics/JS/vectordraw.css" rel="stylesheet" type="text/css" />
+    </head>
+
+    <body>
+        <div id="vectordraw" />
+        <script type="text/javascript">
+          // Background image, vectors, and points are defined below.
+          var vecColors = ['DodgerBlue','DodgerBlue','DodgerBlue'];
+          var pointColors = ['DarkGray','DarkGray','DarkGray'];
+          var vectordraw_settings = {
+              width: 550,
+              height: 450,
+              bounding_box_size: 8,
+              add_vector_label: "Add Vector",
+              background: {
+                  src: 'https://dnextinteractives.s3.amazonaws.com/Physics/Getting_Started/examples/points.png',
+                  width: 18
+              },
+              vectors: [
+                    {name: 'V', description: 'Vector AB', coords: [[2, -2], [2, 6]], render: false, style:{color:'DodgerBlue', pointColor:'Crimson', width:"6"}},
+              ],
+              // points: [{name: 'cmA', coords: [-4.05,-2.85]},
+              //          {name: 'cmB', coords: [3.55,4.45]}
+              //          ],
+              expected_result: {
+                 'V': {tail: [-4.05,-2.85], tip: [3.55,4.45], tail_tolerance: 0.35, tip_tolerance: 0.35},
+              },
+              custom_checks: [
+                  {check: 'check_if_correct_vectors_plotted'}
+              ]
+          };
+        </script>
+
+        <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/underscore.js/1.8.2/underscore-min.js"></script>
+        <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+        <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/jsxgraph/0.98/jsxgraphcore.js"></script>
+        <script type="text/javascript" src="https://dnextinteractives.s3.amazonaws.com/Physics/JS/vectordraw.js"></script>
+    </body>
+</html>
