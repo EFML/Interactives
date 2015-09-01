@@ -35,11 +35,11 @@ AD1.setAttribute({fixed:true,'dash':1,'fixed':true,'highlight':false});
 var AD2 = createLine(brd1,{ltype:'Demand',name:'$D<sub>2</sub>',color:'Orange'});
 AD2.setAttribute({fixed:false,'highlight':false,withLabel:false});
 
- 
+
 ////////////
 // Intersection Box 1
 ////////////
-var iSDfix = brd1.create('intersection', [AD1, SRAS1, 0], {visible:false}); 
+var iSDfix = brd1.create('intersection', [AD1, SRAS1, 0], {visible:false});
 var iS2D = brd1.create('intersection', [AD2, SRAS2, 0], {visible:false});
 
 ////////////
@@ -66,7 +66,7 @@ var dashS2 = createDashedLines2Axis(brd1,iS2D,
 //////////////////
 // Interactivity
 //////////////////
-brd1.on('move', function() {      
+brd1.on('move', function() {
     //Moving Dashed Lines in Board 1
     dashS2.Y1.moveTo([0, iS2D.Y()]);
     dashS2.Y2.moveTo([iS2D.X(), iS2D.Y()]);
@@ -76,7 +76,7 @@ brd1.on('move', function() {
 
 });
 
-brd1.on('mousedown', function() {      
+brd1.on('mousedown', function() {
     AD2.setAttribute({withLabel:true});
     SRAS2.setAttribute({withLabel:true});
     dashS2.Y1.setAttribute({withLabel:true});
@@ -116,7 +116,7 @@ getState = function(){
     return statestr;
 }
 
-getGrade = function() {    
+getGrade = function() {
     var state = {};
     statestr = JSON.stringify(state);
     //console.log('hello',statestr);

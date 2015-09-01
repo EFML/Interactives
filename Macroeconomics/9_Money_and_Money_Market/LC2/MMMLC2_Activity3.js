@@ -1,12 +1,12 @@
 bboxlimits = [-1.85, 12, 12, -1.1];
-var brd1 = JXG.JSXGraph.initBoard('jxgbox1', {axis:false, 
+var brd1 = JXG.JSXGraph.initBoard('jxgbox1', {axis:false,
                                         showCopyright: false,
                                         showNavigation: false,
                                         zoom: false,
                                         pan: false,
                                         boundingbox:bboxlimits,
                                         grid: false,
-                                        hasMouseUp: true, 
+                                        hasMouseUp: true,
 });
 
 xaxis = brd1.create('axis', [[0, 0], [12, 0]], {withLabel: true, label: {offset: [320,-20]}});
@@ -60,7 +60,7 @@ toggleLabels = function(toggle) {
 //////////////////
 // Interactivity
 //////////////////
-brd1.on('move', function() {      
+brd1.on('move', function() {
     //Moving Dashed Lines in Board 1
     dashD2.Y1.moveTo([0, G.Y()]);
     dashD2.Y2.moveTo([G.X(), G.Y()]);
@@ -70,7 +70,7 @@ brd1.on('move', function() {
     brd1.update()
 });
 
-brd1.on('mousedown', function() {      
+brd1.on('mousedown', function() {
     toggleLabels(true);
     brd1.update()
 });
@@ -82,16 +82,16 @@ decreaseXY = function() {
 
     var speed = 1000;
     toggleLabels(true);
-    
+
     D2.point1.moveTo([D2.point1.X()-1.5,D2.point1.Y()],speed);
     D2.point2.moveTo([D2.point2.X()-1.5,D2.point2.Y()],speed);
-    
+
     dashD2.Y1.moveTo([0, G.Y()],speed);
     dashD2.Y2.moveTo([G.X()-1.5, G.Y()],speed);
 
     dashD2.X1.moveTo([G.X()-1.5, 0],speed);
     dashD2.X2.moveTo([G.X()-1.5, G.Y()],speed);
-    
+
     brd1.update();
 }
 
@@ -101,30 +101,30 @@ increaseXY = function() {
     resetAnimation(0);
     toggleLabels(true);
     brd1.update();
-    
+
     D2.point1.moveTo([D2.point1.X()+1.5,D2.point1.Y()],speed);
     D2.point2.moveTo([D2.point2.X()+1.5,D2.point2.Y()],speed);
-    
+
     dashD2.Y1.moveTo([0, G.Y()],speed);
     dashD2.Y2.moveTo([G.X()+1.5, G.Y()],speed);
 
     dashD2.X1.moveTo([G.X()+1.5, 0],speed);
     dashD2.X2.moveTo([G.X()+1.5, G.Y()],speed);
-    
+
     brd1.update();
 }
 
 resetAnimation = function(speed) {
-    toggleLabels(false);                
+    toggleLabels(false);
     D2.point1.moveTo([2.0,9.5],speed);
     D2.point2.moveTo([9.5,2.0],speed);
-    
+
     dashD2.Y1.moveTo([0, 5.75],speed);
     dashD2.Y2.moveTo([5.75, 5.75],speed);
 
     dashD2.X1.moveTo([5.75, 0],speed);
     dashD2.X2.moveTo([5.75, 5.75],speed);
-    
+
     brd1.update();
 }
 
@@ -133,7 +133,7 @@ getInput = function(){
     state = {};
     statestr = JSON.stringify(state);
     console.log(statestr)
-    
+
     //IPython Notebook Considerations
     document.getElementById('spaceBelow').innerHTML += '<br>'+statestr;
     var command = "state = '" + statestr + "'";
@@ -158,5 +158,4 @@ setState = function(statestr){
     console.log(statestr);
     console.debug('State updated successfully from saved.');
 }
-            
-        
+

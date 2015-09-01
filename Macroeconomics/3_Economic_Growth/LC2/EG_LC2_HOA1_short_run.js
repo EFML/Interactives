@@ -63,9 +63,9 @@ var dashA = createDashedLines2Axis(brd1,iA,
 //////////////////
 // Interactivity
 //////////////////
-brd1.on('move', function() {      
+brd1.on('move', function() {
     //Moving Dashed Lines in Board 1
-    
+
     dashA.Y1.moveTo([0, iA.Y()]);
     dashA.Y2.moveTo([iA.X(), iA.Y()]);
 
@@ -74,7 +74,7 @@ brd1.on('move', function() {
 
 });
 
-brd1.on('mousedown', function() {      
+brd1.on('mousedown', function() {
     // AD2.setAttribute({withLabel:true});
     // SRAS2.setAttribute({withLabel:true});
     // dashS2.Y1.setAttribute({withLabel:true});
@@ -114,7 +114,7 @@ getState = function(){
     return statestr;
 }
 
-getGrade = function() {    
+getGrade = function() {
     var state = {"iS2D":{'X':iS2D.X(),'Y':iS2D.Y()},
                  "iSDfix":{'X':iSDfix.X(),'Y':iSDfix.Y()},
                  "AD2":{'p1X':AD2.point1.X(),'p2X':AD2.point2.X(),

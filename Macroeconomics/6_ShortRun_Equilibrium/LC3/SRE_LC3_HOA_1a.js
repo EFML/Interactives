@@ -48,10 +48,10 @@ H1.setAttribute({'fixed':true,'withLabel':false,'highlight':true,"visible":false
 ////////////
 // Intersection Box 1
 ////////////
-var iSDfix = brd1.create('intersection', [AD1, SRAS1, 0], {'visible':false}); 
+var iSDfix = brd1.create('intersection', [AD1, SRAS1, 0], {'visible':false});
 var iSD = brd1.create('intersection', [H1, SRAS2, 0], {'visible':false});
 
-var iDonly = brd1.create('intersection', [H1, AD1, 0], {"visible":true,withLabel:false,color:"Red"}); 
+var iDonly = brd1.create('intersection', [H1, AD1, 0], {"visible":true,withLabel:false,color:"Red"});
 var iSonly = brd1.create('intersection', [H1, SRAS2, 0], {"visible":true,withLabel:false,color:"Blue"});
 
 
@@ -91,7 +91,7 @@ var dashesDonly = createDashedLines2Axis(brd1,iDonly,
                                            });
 
 ////////////
-// Dashes for Demand and Supply 
+// Dashes for Demand and Supply
 ////////////
 var dashesSD = createDashedLines2Axis(brd1,iSD,
                                            {withLabel:false,
@@ -106,7 +106,7 @@ var dashesSD = createDashedLines2Axis(brd1,iSD,
 //////////////////
 // Interactivity
 //////////////////
-brd1.on('move', function() {      
+brd1.on('move', function() {
     //Moving Dashed Lines for Demand/Supply
     dashesSD.Y1.moveTo([0, iSD.Y()]);
     dashesSD.Y2.moveTo([iSD.X(), iSD.Y()]);
@@ -130,7 +130,7 @@ brd1.on('move', function() {
 
 });
 
-brd1.on('mousedown', function() {      
+brd1.on('mousedown', function() {
     SRAS2.setAttribute({withLabel:true});
     // dashesSD.Y1.setAttribute({withLabel:true});
     // dashesSD.X1.setAttribute({withLabel:true});
@@ -161,7 +161,7 @@ setState = function(transaction, statestr){
 
         brd1.update();
     }
-    
+
     console.debug('State updated successfully from saved.');
 }
 
@@ -172,7 +172,7 @@ getState = function(){
     return statestr;
 }
 
-getGrade = function() {    
+getGrade = function() {
     var state = {"AD2":{'p1X':AD2.point1.X(),'p2X':AD2.point2.X(),
                         'p1Y':AD2.point1.Y(),'p2Y':AD2.point2.Y()},
                  "AD1":{'p1X':AD1.point1.X(),'p2X':AD1.point2.X(),

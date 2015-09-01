@@ -47,7 +47,7 @@ toggleLabels = function(toggle) {
 //////////////////
 // Interactivity
 //////////////////
-brd1.on('move', function() {      
+brd1.on('move', function() {
     //Moving Dashed Lines in Board 1
     dashD2.Y1.moveTo([0, G.Y()]);
     dashD2.Y2.moveTo([G.X(), G.Y()]);
@@ -57,7 +57,7 @@ brd1.on('move', function() {
     brd1.update()
 });
 
-brd1.on('mousedown', function() {      
+brd1.on('mousedown', function() {
     toggleLabels(true);
     brd1.update()
 });
@@ -68,16 +68,16 @@ decreaseXY = function() {
     brd1.update();
 
     toggleLabels(true);
-    
+
     D2.point1.moveTo([D2.point1.X()-curveShift,D2.point1.Y()-curveShift],animationSpeed);
     D2.point2.moveTo([D2.point2.X()-curveShift,D2.point2.Y()-curveShift],spanimationSpeedeed);
-    
+
     dashD2.Y1.moveTo([0, G.Y()-curveShift],animationSpeed);
     dashD2.Y2.moveTo([G.X()-curveShift, G.Y()-curveShift],animationSpeed);
 
     dashD2.X1.moveTo([G.X()-curveShift, 0],speed);
     dashD2.X2.moveTo([G.X()-curveShift, G.Y()-curveShift],speed);
-    
+
     brd1.update();
 }
 
@@ -86,24 +86,24 @@ increaseXY = function() {
     resetAnimation(0);
     toggleLabels(true);
     brd1.update();
-    
+
     AD2.point1.moveTo([AD2.point1.X()+curveShift,AD2.point1.Y()+curveShift],animationSpeed);
     AD2.point2.moveTo([AD2.point2.X()+curveShift,AD2.point2.Y()+curveShift],animationSpeed);
-    
+
     dashD2.Y1.moveTo([0, G.Y()+curveShift],animationSpeed);
     dashD2.Y2.moveTo([G.X()+curveShift, G.Y()+curveShift],animationSpeed);
 
     dashD2.X1.moveTo([G.X()+curveShift, 0],animationSpeed);
     dashD2.X2.moveTo([G.X()+curveShift, G.Y()+curveShift],animationSpeed);
-    
+
     brd1.update();
 }
 
 resetAnimation = function(speed) {
-    toggleLabels(false);                
+    toggleLabels(false);
     AD2.point1.moveTo([2.0,9.5],speed);
     AD2.point2.moveTo([9.5,2.0],speed);
-    
+
     G.moveTo([Gfix.X(),Gfix.X()],speed);
 
     dashD2.Y1.moveTo([0, 5.75],speed);
@@ -111,14 +111,14 @@ resetAnimation = function(speed) {
 
     dashD2.X1.moveTo([5.75, 0],speed);
     dashD2.X2.moveTo([5.75, 5.75],speed);
-    
+
     brd1.update();
 }
 
 increaseA = function() {
     resetAnimation();
     brd1.update();
-    
+
     toggleLabels(true);
     G.moveTo([G.X()-curveShift,G.X()+curveShift],1000);
 
@@ -134,7 +134,7 @@ increaseA = function() {
 decreaseA = function() {
     resetAnimation();
     brd1.update();
-    
+
     toggleLabels(true);
     G.moveTo([G.X()+curveShift,G.X()-curveShift],1000);
 
@@ -167,7 +167,7 @@ setState = function(transaction, statestr){
 
         brd1.update();
     }
-    
+
     console.debug('State updated successfully from saved.');
 }
 
@@ -178,7 +178,7 @@ getState = function(){
     return statestr;
 }
 
-getGrade = function() {    
+getGrade = function() {
     var state = {"AD2":{'p1X':AD2.point1.X(),'p2X':AD2.point2.X(),
                         'p1Y':AD2.point1.Y(),'p2Y':AD2.point2.Y()},
                  "AD1":{'p1X':AD1.point1.X(),'p2X':AD1.point2.X(),

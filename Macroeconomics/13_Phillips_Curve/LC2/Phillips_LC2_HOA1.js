@@ -2,14 +2,14 @@
 // BOARD 1
 ////////////
 bboxlimits = [-1.5, 12, 12, -1];
-var brd1 = JXG.JSXGraph.initBoard('jxgbox1', {axis:false, 
+var brd1 = JXG.JSXGraph.initBoard('jxgbox1', {axis:false,
                                         showCopyright: false,
                                         showNavigation: false,
                                         zoom: false,
                                         pan: false,
                                         boundingbox:bboxlimits,
                                         grid: false,
-                                        hasMouseUp: true, 
+                                        hasMouseUp: true,
 });
 
 xaxis1 = brd1.create('axis', [[0, 0], [11, 0]], {withLabel: false});
@@ -31,7 +31,7 @@ SRPC2.setAttribute({'withLabel':false,'highlight':false});
 
 
 //Interactivityd
-brd1.on('mousedown', function() {      
+brd1.on('mousedown', function() {
     SRPC2.setAttribute({withLabel:true});
     brd1.update()
 });
@@ -41,7 +41,7 @@ increaseLaborProd = function() {
     [2.0,9.5]
     SRPC2.point1.moveTo([1.0,8.5],1000);
     SRPC2.point2.moveTo([8.5,1.0],1000);
-    SRPC2.setAttribute({withLabel:true});                
+    SRPC2.setAttribute({withLabel:true});
     brd1.update();
 }
 
@@ -77,7 +77,7 @@ setState = function(transaction,statestr){
     //     brd1.removeObject('AD2');
     //     var point1 = [state["dragLine"]["p1X"],state["dragLine"]["p1Y"]];
     //     var point2 = [state["dragLine"]["p2X"],state["dragLine"]["p2Y"]]
-        
+
     //     //Demand Line 2 - moveable
     //     AD2.point1.moveTo(point1,0);
     //     AD2.point2.moveTo(point2,0);

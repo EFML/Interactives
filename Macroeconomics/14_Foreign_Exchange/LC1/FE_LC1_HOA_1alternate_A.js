@@ -2,7 +2,7 @@
 // BOARD 1
 ////////////
 
-var brd1 = createBoard('jxgbox1',{xname:' ', 
+var brd1 = createBoard('jxgbox1',{xname:' ',
                                   yname:"Price<br>( $/&euro; )",grid:false,'xpos':[8,-0.5],'ypos':[-1.25,10]});
 
 // //Supply Line 1 - fixed
@@ -21,11 +21,11 @@ var brd1 = createBoard('jxgbox1',{xname:' ',
 // var AD2 = createLine(brd1,{ltype:'Demand',name:'$D<sub>2</sub>',color:'Orange'});
 // AD2.setAttribute({fixed:true,'highlight':false,withLabel:false});
 
- 
+
 ////////////
 // Intersection Box 1
 ////////////
-// var iSDfix = brd1.create('intersection', [AD1, SRAS1, 0], {visible:false}); 
+// var iSDfix = brd1.create('intersection', [AD1, SRAS1, 0], {visible:false});
 // var iS2D = brd1.create('intersection', [AD2, SRAS2, 0], {visible:false});
 
 
@@ -43,7 +43,7 @@ var brd1 = createBoard('jxgbox1',{xname:' ',
 // //////////////////
 // // Interactivity
 // //////////////////
-// brd1.on('move', function() {      
+// brd1.on('move', function() {
 //     //Moving Dashed Lines in Board 1
 //     dashS2.Y1.moveTo([0, iS2D.Y()]);
 //     dashS2.Y2.moveTo([iS2D.X(), iS2D.Y()]);
@@ -53,7 +53,7 @@ var brd1 = createBoard('jxgbox1',{xname:' ',
 
 // });
 
-// brd1.on('mousedown', function() {      
+// brd1.on('mousedown', function() {
 //     AD2.setAttribute({withLabel:true});
 //     SRAS2.setAttribute({withLabel:true});
 //     dashS2.Y1.setAttribute({withLabel:true});
@@ -93,7 +93,7 @@ getState = function(){
     return statestr;
 }
 
-getGrade = function() {    
+getGrade = function() {
     var state = {};
     statestr = JSON.stringify(state);
     //console.log('hello',statestr);

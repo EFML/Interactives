@@ -48,7 +48,7 @@ AD1.setAttribute({'fixed':true,'highlight':false});
 
 // G = brd1.create('glider',[6.0,6.0,AD2],{name:'A'});
 
-// brd1.on('mousedown', function() {      
+// brd1.on('mousedown', function() {
 //     AD2.setAttribute({withLabel:true,offset:[125,-85]});
 //     brd1.update()
 // });
@@ -74,7 +74,7 @@ setState = function(transaction, statestr){
 
         brd1.update();
     }
-    
+
     console.debug('State updated successfully from saved.');
 }
 
@@ -85,7 +85,7 @@ getState = function(){
     return statestr;
 }
 
-getGrade = function() {    
+getGrade = function() {
     var state = {"AD2":{'p1X':AD2.point1.X(),'p2X':AD2.point2.X(),
                         'p1Y':AD2.point1.Y(),'p2Y':AD2.point2.Y()},
                  "AD1":{'p1X':AD1.point1.X(),'p2X':AD1.point2.X(),

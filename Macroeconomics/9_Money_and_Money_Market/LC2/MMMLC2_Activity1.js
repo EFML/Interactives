@@ -2,14 +2,14 @@
 // brd1 1
 ////////////
 bboxlimits = [-1.7, 12, 12, -1];
-var brd1 = JXG.JSXGraph.initBoard('jxgbox1', {axis:false, 
+var brd1 = JXG.JSXGraph.initBoard('jxgbox1', {axis:false,
                                         showCopyright: false,
                                         showNavigation: false,
                                         zoom: false,
                                         pan: false,
                                         boundingbox:bboxlimits,
                                         grid: false,
-                                        hasMouseUp: true, 
+                                        hasMouseUp: true,
 });
 
 xaxis1 = brd1.create('axis', [[0, 0], [11, 0]], {withLabel: false});
@@ -55,7 +55,7 @@ C3.on('down', function () {
 resetColors = function(curves) {
     for(i=0;i<curves.length;i++) {
         curves[i].setAttribute({strokeColor: 'Gray',strokeWidth: 4});
-    } 
+    }
 }
 
 //Standard edX JSinput functions
@@ -89,9 +89,8 @@ setState = function(statestr){
     //console.log(statestr);
     console.debug('State updated successfully from saved.');
 }
-            
+
 createChannel(getGrade, getState, setState);
 
 
 
-        

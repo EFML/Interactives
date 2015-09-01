@@ -15,15 +15,15 @@ createBoard = function(brdName,options) {
     var yname = options.yname || 'y-label';
     var bbox = options.bboxlimits || [-2.5, 12, 12, -2.0];
 
-    var board = JXG.JSXGraph.initBoard(brdName, {axis:false, 
+    var board = JXG.JSXGraph.initBoard(brdName, {axis:false,
                                       showCopyright: false,
                                       showNavigation: false,
                                       zoom: false,
                                       pan: false,
                                       boundingbox:bboxlimits,
                                       grid: true,
-                                      hasMouseUp: true, 
-    });         
+                                      hasMouseUp: true,
+    });
 
     xaxis = board.create('axis', [[0, 0], [11, 0]], {withLabel: false});
     yaxis = board.create('axis', [[0, 0], [0, 11]], {withLabel: false});
@@ -111,11 +111,11 @@ createLine = function(board,options) {
 createDashedLines2Axis = function(board,intersection,options) {
     var fixed = options.fixed || true;  // defaults
     var withLabel = options.withLabel || false;
-    var xlabel = options.xlabel || '';  
+    var xlabel = options.xlabel || '';
     var ylabel = options.ylabel || '';
     var color = options.color || 'gray';
     var visible = options.visible || true;
-    
+
     var Y1,Y2,YLine,X1,X2,XLine,obj={};
     var Y1 = board.create('point',[0, intersection.Y()],
                      {'withLabel':withLabel,'name':ylabel,'visible':true,'size':'0.5',
@@ -136,8 +136,8 @@ createDashedLines2Axis = function(board,intersection,options) {
 
     var XLine = board.create('segment',[X1,X2],
                         {'strokeColor':color,'strokeWidth':'2','dash':'1','fixed':fixed,'visible':visible});
-    
-    
+
+
     var obj = {
         Y1: Y1,
         Y2: Y2,
@@ -146,6 +146,6 @@ createDashedLines2Axis = function(board,intersection,options) {
         X2: X2,
         XLine: XLine
     }
-    
+
     return obj;
 }

@@ -2,14 +2,14 @@
 // brd1 1
 ////////////
 bboxlimits = [-1.85, 12, 12, -1.1];
-var brd1 = JXG.JSXGraph.initBoard('jxgbox1', {axis:false, 
+var brd1 = JXG.JSXGraph.initBoard('jxgbox1', {axis:false,
                                         showCopyright: false,
                                         showNavigation: false,
                                         zoom: false,
                                         pan: false,
                                         boundingbox:bboxlimits,
                                         grid: false,
-                                        hasMouseUp: true, 
+                                        hasMouseUp: true,
 });
 
 xaxis1 = brd1.create('axis', [[0, 0], [11, 0]], {withLabel: false});
@@ -35,7 +35,7 @@ console.log(original.point1.X(),original.point1.Y())
 
 G = brd1.create('glider',[6.75,6.75,AD2],{name:'A'});
 
-brd1.on('mousedown', function() {      
+brd1.on('mousedown', function() {
     //AD2.setAttribute({withLabel:true,offset:[125,-85]});
     brd1.update()
 });
@@ -90,7 +90,7 @@ getGrade = function(){
     state = {};
     statestr = JSON.stringify(state);
     console.log(statestr)
-    
+
     //IPython Notebook Considerations
     document.getElementById('spaceBelow').innerHTML += '<br>'+statestr;
     var command = "state = '" + statestr + "'";
@@ -115,10 +115,9 @@ setState = function(statestr){
     console.log(statestr);
     console.debug('State updated successfully from saved.');
 }
-            
+
 
 createChannel(getGrade, getState, setState);
 
 
 
-        

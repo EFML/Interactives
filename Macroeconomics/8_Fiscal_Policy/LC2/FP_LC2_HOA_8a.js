@@ -2,7 +2,7 @@
 // BOARD 1
 ////////////
 
-var brd1 = createBoard('jxgbox1',{xname:"Real GDP", 
+var brd1 = createBoard('jxgbox1',{xname:"Real GDP",
                                   yname:"Price<br>Level",grid:false,'xpos':[9,-0.5]});
 
 //Supply Line 1 - fixed
@@ -21,11 +21,11 @@ AD1.setAttribute({fixed:true,'dash':1,'fixed':true,'highlight':false});
 var AD2 = createDemand(brd1,{name:'AD<sub>2</sub>',color:'Orange'});
 AD2.setAttribute({fixed:true,'highlight':false,withLabel:false});
 
- 
+
 ////////////
 // Intersection Box 1
 ////////////
-var iSDfix = brd1.create('intersection', [AD1, SRAS1, 0], {visible:false}); 
+var iSDfix = brd1.create('intersection', [AD1, SRAS1, 0], {visible:false});
 
 ////////////
 // Fixed Dashed Lines for Board 1
@@ -77,7 +77,7 @@ getState = function(){
     return statestr;
 }
 
-getGrade = function() {    
+getGrade = function() {
     var state = {};
     statestr = JSON.stringify(state);
     //console.log('hello',statestr);

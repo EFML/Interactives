@@ -3,7 +3,7 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <style> 
+        <style>
             body {
                 margin: 10px;
                 /*padding-top: 40px;*/
@@ -16,24 +16,24 @@
         <div style="width: 100%; overflow: hidden;">
             <div id='jxgbox1' class='jxgbox' style='width:450px; height:350px; float:left; border: solid #1f628d 2px;'></div>
         </div>
-        
+
         <!-- COMMENT: Where our Javascript begins. -->
         <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jsxgraph/0.98/jsxgraphcore.js"></script>
         <script type='text/javascript'>
 
             JXG.Options.point.showInfobox = false;
-        
+
             bboxlimits = [-1.1, 12, 12, -1.1];
-            var board = JXG.JSXGraph.initBoard('jxgbox1', {axis:false, 
+            var board = JXG.JSXGraph.initBoard('jxgbox1', {axis:false,
                                                     showCopyright: false,
                                                     showNavigation: false,
                                                     zoom: false,
                                                     pan: false,
                                                     boundingbox:bboxlimits,
                                                     grid: false,
-                                                    hasMouseUp: true, 
+                                                    hasMouseUp: true,
             });
-            
+
             xaxis = board.create('axis', [[0, 0], [12, 0]], {withLabel: true, name: "b=?", label: {offset: [320,-20]}});
             yaxis = board.create('axis', [[0, 0], [0, 12]], {withLabel: true, name: "a=?", label: {offset: [-60,260]}});
 
@@ -42,7 +42,7 @@
             yaxis.removeAllTicks();
             var ylabel = board.create('text',[-1.0,10,"a=?"],{fixed:true,fontsize:18,highlight:false});
             var xlabel = board.create('text',[9,-0.5,"b=?"],{fixed:true,fontsize:18,highlight:false});
-            
+
             //Define Segments
             var xi1 = 2.0
             var yi1 = 10.0
@@ -50,15 +50,15 @@
             var yi2 = 2.0
             var f1 = board.create('point',[xi1,yi1],{withLabel:false,visible:false});
             var f2 = board.create('point',[xi2,yi2],{withLabel:false,visible:false});
-            
+
             //AD1
             var Curve = board.create('segment',[f1,f2],{strokeColor:'Blue',strokeWidth:'3',
                                                       name:'c=?',withLabel:true,
                                                       fixed:true,highlight:false,
                                                       label:{fontSize:20,color:'Black',highlight:false,offset:[125,-85]}});
-            
-            
-            
+
+
+
         </script>
     </body>
 </html>

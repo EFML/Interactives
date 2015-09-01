@@ -4,7 +4,7 @@
 var cfx = 800.0/12.0;
 var cfy = 27.0/12.0;
 newbbox = [-120, 27, 800, -4];
-var brd1 = createBoard('jxgbox1',{xname:" ", 
+var brd1 = createBoard('jxgbox1',{xname:" ",
                                   yname:" ",
                                   grid:false,bboxlimits:newbbox});
 
@@ -14,11 +14,11 @@ var brd1 = createBoard('jxgbox1',{xname:" ",
 //Axes
 // xaxis1.removeAllTicks();
 // yaxis1.removeAllTicks();
-// 
-// 
-xaxis = brd1.create('axis', [[0, 0], [1,0]], 
-      {name:'Quantity of Money ($billions)', 
-      withLabel: false, 
+//
+//
+xaxis = brd1.create('axis', [[0, 0], [1,0]],
+      {name:'Quantity of Money ($billions)',
+      withLabel: false,
       // label: {position: 'rt',  // possible values are 'lft', 'rt', 'top', 'bot'
       //      offset: [-10, -50]   // (in pixels)
       //      }
@@ -28,14 +28,14 @@ brd1.create('ticks', [xaxis, [0,100,200,300,400,500,600,700,800]], {strokeColor:
 var xlabel1 = brd1.create('text',[400,-2.75,"Quantity of Money ($billions)"],{fixed:true, highlight:false});
 
 
-yaxis = brd1.create('axis', [[0, 0], [0, 1]], 
-      {name:'', 
-      withLabel: true, 
+yaxis = brd1.create('axis', [[0, 0], [0, 1]],
+      {name:'',
+      withLabel: true,
       // label: {
       //   position: 'rt',  // possible values are 'lft', 'rt', 'top', 'bot'
       //   offset: [-20, 0]   // (in pixels)
       //   }
-      });         
+      });
 yaxis.removeAllTicks();
 brd1.create('ticks', [yaxis, [0,5,10,15,20,25,30]], {strokeColor: 'Black', majorHeight: 15, drawLabels: true});
 var ylabel1 = brd1.create('text',[-110,22,"Nominal<br>Interest<br>Rate"],{fixed:true, highlight:false});
@@ -48,7 +48,7 @@ var MD1 = brd1.create('segment',[[cfx*1.45,cfy*9.0],[cfx*9.0,cfy*1.45]],
                         'name':'D','withLabel':false,
                         'fixed':true,'dash':1,
                         'highlight':false,
-                        'label':{'offset':[140,-145]}});  
+                        'label':{'offset':[140,-145]}});
 
 
 //Demand Line 2 - moveable
@@ -57,7 +57,7 @@ var MD2 = brd1.create('segment',[[cfx*1.45,cfy*9.0],[cfx*9.0,cfy*1.45]],
                         'name':'M<sub>D</sub>','withLabel':true,
                         'fixed':false,
                         'highlight':true,
-                        'label':{'offset':[150,-140]}});  
+                        'label':{'offset':[150,-140]}});
 
 ////////////
 //LRAS - straight line
@@ -67,7 +67,7 @@ var S = brd1.create('segment',[[cfx*6.0,cfy*11.0],[cfx*6.0,cfy*1.0]],
                         'name':'M<sub>S</sub>','withLabel':true,
                         'fixed':true,
                         'highlight':false,
-                        'label':{'offset':[0,185]}});  
+                        'label':{'offset':[0,185]}});
 
 ////////////
 // Intersection Box 1
@@ -88,7 +88,7 @@ var dashS2 = createDashedLines2Axis(brd1,iB1SD,
 //////////////////
 // Interactivity
 //////////////////
-brd1.on('move', function() {      
+brd1.on('move', function() {
     //Moving 1st set of Dashed Lines in Board 1
     dashS2.Y1.moveTo([0, iB1SD.Y()]);
     dashS2.Y2.moveTo([iB1SD.X(), iB1SD.Y()]);
@@ -125,7 +125,7 @@ setState = function(transaction, statestr){
 
         MD2.point1.moveTo([state['MD2']['X1'],state['MD2']['Y1']],0);
         MD2.point2.moveTo([state['MD2']['X2'],state['MD2']['Y2']],0);
-        
+
         dashS2.Y1.moveTo([0, iB1SD.Y()]);
         dashS2.Y2.moveTo([iB1SD.X(), iB1SD.Y()]);
 

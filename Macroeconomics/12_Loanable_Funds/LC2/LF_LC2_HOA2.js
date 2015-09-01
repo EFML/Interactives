@@ -32,11 +32,11 @@ var brd2 = createBoard('jxgbox2',{bboxlimits:bbox2,xname:"Private Investment $",
 //Demand Line 2 - moveable
 var DB2 = createLine(brd2,{'ltype':'Demand','name':'Invest<br>Demand</sub>','color':'Crimson'})
 DB2.setAttribute({'fixed':true,'withLabel':true,'highlight':false});
-         
+
 ////////
 // Intersection Box 1
 ////////
-var iSDB1 = brd1.create('intersection', [SB1, DB1, 0], {visible:false});    
+var iSDB1 = brd1.create('intersection', [SB1, DB1, 0], {visible:false});
 
 ////////////
 // Dashes for Board 1
@@ -54,7 +54,7 @@ var dashesB1 = createDashedLines2Axis(brd1,iSDB1,
 
 ////////////
 // Dashes in Box 2
-////////////            
+////////////
 
 // FIXED
 var dashesB2fix = createDashedLines2Axis(brd2,iSDB1,
@@ -121,7 +121,7 @@ var iIDy = brd2.create('intersection', [dashesB2.YLine, DB2, 0], {visible:false}
 brd1.addChild(brd2);
 
 // brd1.on('move', function(){
-        
+
 //     //Dashed Lines 1
 //     dashB1Yp1.moveTo([0, iSD.Y()]);
 //     dashB1Yp2.moveTo([iSD.X(), iSD.Y()]);
@@ -141,7 +141,7 @@ brd1.addChild(brd2);
 //////////////////
 // Interactivity
 //////////////////
-brd1.on('move', function() {      
+brd1.on('move', function() {
     //Moving Dashed Lines in Board 1
     dashesB1.Y1.moveTo([0, iSDB1.Y()]);
     dashesB1.Y2.moveTo([iSDB1.X(), iSDB1.Y()]);
@@ -164,7 +164,7 @@ brd1.on('move', function() {
     // //BOARD 2
     // //Moving Point A2
     // // DB2YP1.moveTo([0, iS2D.Y()]);
-    // // DB2YP2.moveTo([iB2SRPC1.X(),iS2D.Y()]);    
+    // // DB2YP2.moveTo([iB2SRPC1.X(),iS2D.Y()]);
 
     // //Orange Dashed Lines Board 2
     // dashesA2B2.Y1.moveTo([0, iB2SRPC1.Y()]);
@@ -185,7 +185,7 @@ getInput = function(){
                            'p1Y':staticLine.point1.Y(),'p2Y':staticLine.point2.Y()}};
     statestr = JSON.stringify(state);
     console.log(statestr)
-    
+
     //IPython Notebook Considerations
     document.getElementById('spaceBelow').innerHTML += '<br>'+statestr;
     var command = "state = '" + statestr + "'";

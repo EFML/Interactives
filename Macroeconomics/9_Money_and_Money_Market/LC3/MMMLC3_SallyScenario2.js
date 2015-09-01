@@ -8,15 +8,15 @@ JXG.Options.text.fontSize = 15;
 // BOARD 1
 ////////////
 bboxlimits = [-2.5, 12, 12, -2.0];
-var brd1 = JXG.JSXGraph.initBoard('jxgbox1', {axis:false, 
+var brd1 = JXG.JSXGraph.initBoard('jxgbox1', {axis:false,
                                         showCopyright: false,
                                         showNavigation: false,
                                         zoom: false,
                                         pan: false,
                                         boundingbox:bboxlimits,
                                         grid: true,
-                                        hasMouseUp: true, 
-});         
+                                        hasMouseUp: true,
+});
 
 xaxis1 = brd1.create('axis', [[0, 0], [11, 0]], {withLabel: false});
 yaxis1 = brd1.create('axis', [[0, 0], [0, 11]], {withLabel: false});
@@ -31,15 +31,15 @@ var ylabel1 = brd1.create('text',[-2.45,10,"Nominal<br>Interest<br>Rate"],{fixed
 // BOARD 2
 ////////////
 bboxlimits2 = [-2.5, 12, 12, -2.0];
-var brd2 = JXG.JSXGraph.initBoard('jxgbox2', {axis:false, 
+var brd2 = JXG.JSXGraph.initBoard('jxgbox2', {axis:false,
                                         showCopyright: false,
                                         showNavigation: false,
                                         zoom: false,
                                         pan: false,
                                         boundingbox:bboxlimits2,
                                         grid: true,
-                                        hasMouseUp: true, 
-});        
+                                        hasMouseUp: true,
+});
 
 xaxis2 = brd2.create('axis', [[0, 0], [11, 0]], {withLabel: false});
 yaxis2 = brd2.create('axis', [[0, 0], [0, 11]], {withLabel: false});
@@ -108,14 +108,14 @@ var D2fixed = brd2.create('segment',[d1B2,d2B2],{withLabel:false,fixed:true,'nam
 
 var D2 = brd2.create('segment',[As,Bs],{withLabel:true,'name':'D<sub>2</sub>',highlight:false,
                                         color:'DodgerBlue',label:{offset:[90,-90]}});
-            
+
 var iSDB2 = brd2.create('intersection',[S2,D2],{withLabel:false,highlight:false});
 
 
 createDashedLines2Axis = function(board,intersection,options) {
     var fixed = options.fixed || true;  // defaults
     var withLabel = options.withLabel || false;
-    var xlabel = options.xlabel || '';  
+    var xlabel = options.xlabel || '';
     var ylabel = options.ylabel || '';
     var color = options.color || 'gray';
     var visible = options.visible || true;
@@ -168,14 +168,14 @@ var dashB2 = createDashedLines2Axis(brd2,iSDB2,{fixed:false,withLabel:true,color
 //////////////////
 // Interactivity
 //////////////////
-brd1.on('move', function() {      
+brd1.on('move', function() {
     //Moving 1st set of Dashed Lines in Board 1
     dashB1.Y1.moveTo([0, iSDB.Y()]);
     dashB1.Y2.moveTo([iSDB.X(), iSDB.Y()]);
 
     dashB1.X1.moveTo([iSDB.X(), 0]);
     dashB1.X2.moveTo([iSDB.X(), iSDB.Y()]);
-        
+
     //Moving Board 2 Dashed Lines
     dashB2.Y1.moveTo([0, iSDB2.Y()]);
     dashB2.Y2.moveTo([iSDB2.X(), iSDB2.Y()]);

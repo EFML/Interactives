@@ -84,7 +84,7 @@ var D1B2 = createLine(brd2,{'ltype':'Demand','name':'D<sub>1</sub>',color:'Gray'
 D1B2.setAttribute({'fixed':true});
 
 var D2B2 = createTransformLine(brd2,{'ltype':'Demand','transform':sliderPositive,'name':'D<sub>2</sub>',color:'DodgerBlue'});
-//Intersection Board 2     
+//Intersection Board 2
 var iSDB2 = brd2.create('intersection',[SB2,D2B2],{withLabel:false,highlight:false});
 
 
@@ -98,7 +98,7 @@ var D1B3 = createLine(brd3,{'ltype':'Demand','name':'D<sub>1</sub>',color:'Gray'
 D1B3.setAttribute({'fixed':true});
 
 var D2B3 = createTransformLine(brd3,{'ltype':'Demand','transform':sliderNegative,'name':'D<sub>2</sub>',color:'DodgerBlue'});
-//Intersection Board 2     
+//Intersection Board 2
 var iSDB3 = brd3.create('intersection',[SB3,D2B3],{withLabel:false,highlight:false});
 
 
@@ -112,7 +112,7 @@ var D1B4 = createLine(brd4,{'ltype':'Vertical','name':'D<sub>1</sub>',color:'Gra
 D1B4.setAttribute({'fixed':true});
 
 var D2B4 = createTransformLine(brd4,{'ltype':'Vertical','transform':sliderNegative,'name':'D<sub>2</sub>',color:'DodgerBlue'});
-//Intersection Board 2     
+//Intersection Board 2
 var iSDB4 = brd4.create('intersection',[SB4,D2B4],{withLabel:false,highlight:false});
 
 
@@ -152,7 +152,7 @@ var iSDB = brd6.create('intersection',[D2B6,S6],{withLabel:false,highlight:false
 createDashedLines2Axis = function(board,intersection,options) {
     var fixed = options.fixed || true;  // defaults
     var withLabel = options.withLabel || false;
-    var xlabel = options.xlabel || '';  
+    var xlabel = options.xlabel || '';
     var ylabel = options.ylabel || '';
     var color = options.color || 'gray';
     var visible = options.visible || true;
@@ -205,14 +205,14 @@ var dashB2 = createDashedLines2Axis(brd2,iSDB2,{fixed:false,withLabel:true,color
 //////////////////
 // Interactivity
 //////////////////
-brd1.on('move', function() {      
+brd1.on('move', function() {
     //Moving 1st set of Dashed Lines in Board 1
     dashB1.Y1.moveTo([0, iSDB1.Y()]);
     dashB1.Y2.moveTo([iSDB1.X(), iSDB1.Y()]);
 
     dashB1.X1.moveTo([iSDB1.X(), 0]);
     dashB1.X2.moveTo([iSDB1.X(), iSDB1.Y()]);
-        
+
     //Moving Board 2 Dashed Lines
     dashB2.Y1.moveTo([0, iSDB2.Y()]);
     dashB2.Y2.moveTo([iSDB2.X(), iSDB2.Y()]);

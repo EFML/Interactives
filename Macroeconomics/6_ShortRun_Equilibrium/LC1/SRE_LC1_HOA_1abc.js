@@ -2,14 +2,14 @@
 // BOARD 1
 ////////////
 bboxlimits = [-1.5, 12, 12, -1.2];
-var brd1 = JXG.JSXGraph.initBoard('jxgbox1', {axis:false, 
+var brd1 = JXG.JSXGraph.initBoard('jxgbox1', {axis:false,
                                         showCopyright: false,
                                         showNavigation: false,
                                         zoom: false,
                                         pan: false,
                                         boundingbox:bboxlimits,
                                         grid: false,
-                                        hasMouseUp: true, 
+                                        hasMouseUp: true,
 });
 
 xaxis1 = brd1.create('axis', [[0, 0], [11, 0]], {withLabel: false});
@@ -49,9 +49,9 @@ H.setAttribute({'withLabel':false,'highlight':true,"visible":false});
 ////////////
 // Intersection Box 1
 ////////////
-var iSDfix = brd1.create('intersection', [AD1, SRAS1, 0], {'visible':false}); 
+var iSDfix = brd1.create('intersection', [AD1, SRAS1, 0], {'visible':false});
 
-var iDonly = brd1.create('intersection', [H, AD1, 0], {"visible":true,withLabel:false,color:"Red"}); 
+var iDonly = brd1.create('intersection', [H, AD1, 0], {"visible":true,withLabel:false,color:"Red"});
 var iSonly = brd1.create('intersection', [H, SRAS1, 0], {"visible":true,withLabel:false,color:"Blue"});
 
 
@@ -98,7 +98,7 @@ dashesDonly.X1.setAttribute({label:{offset:[5,15],strokeColor:'red'}});
 //////////////////
 // Interactivity
 //////////////////
-brd1.on('move', function() {      
+brd1.on('move', function() {
     //Moving Dashed Lines for Supply
     dashesSonly.Y1.moveTo([0, iSonly.Y()]);
     dashesSonly.Y2.moveTo([iSonly.X(), iSonly.Y()]);
@@ -115,7 +115,7 @@ brd1.on('move', function() {
 
 });
 
-brd1.on('mousedown', function() {      
+brd1.on('mousedown', function() {
     dashesSonly.Y1.setAttribute({withLabel:true});
     dashesSonly.X1.setAttribute({withLabel:true});
     dashesDonly.Y1.setAttribute({withLabel:true});
@@ -143,7 +143,7 @@ getState = function(){
     return statestr;
 }
 
-getGrade = function() {    
+getGrade = function() {
     var state = {"sliderB1":slidery.Value()};
     statestr = JSON.stringify(state);
     // console.log('hello',statestr);

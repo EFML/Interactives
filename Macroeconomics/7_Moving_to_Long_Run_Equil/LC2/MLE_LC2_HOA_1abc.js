@@ -2,14 +2,14 @@
 // BOARD 1
 ////////////
 bboxlimits = [-1.5, 12, 12, -1.2];
-var brd1 = JXG.JSXGraph.initBoard('jxgbox1', {axis:false, 
+var brd1 = JXG.JSXGraph.initBoard('jxgbox1', {axis:false,
                                         showCopyright: false,
                                         showNavigation: false,
                                         zoom: false,
                                         pan: false,
                                         boundingbox:bboxlimits,
                                         grid: false,
-                                        hasMouseUp: true, 
+                                        hasMouseUp: true,
 });
 
 xaxis1 = brd1.create('axis', [[0, 0], [11, 0]], {withLabel: false});
@@ -38,11 +38,11 @@ AD1.setAttribute({'dash':1,'fixed':true,'highlight':false});
 var AD2 = createDemand(brd1,{name:'AD<sub>2</sub>',color:'Orange'});
 AD2.setAttribute({withLabel:false});
 
- 
+
 ////////////
 // Intersection Box 1
 ////////////
-var iSDfix = brd1.create('intersection', [AD1, SRAS1, 0], {visible:false}); 
+var iSDfix = brd1.create('intersection', [AD1, SRAS1, 0], {visible:false});
 var iS2D = brd1.create('intersection', [AD2, SRAS2, 0], {visible:false});
 
 ////////////
@@ -77,7 +77,7 @@ var labelLRAS = brd1.create('text',[6.7,-0.4,"rY<sub>F</sub>"],{fixed:true});
 //////////////////
 // Interactivity
 //////////////////
-brd1.on('move', function() {      
+brd1.on('move', function() {
     //Moving Dashed Lines in Board 1
     dashS2.Y1.moveTo([0, iS2D.Y()]);
     dashS2.Y2.moveTo([iS2D.X(), iS2D.Y()]);
@@ -87,7 +87,7 @@ brd1.on('move', function() {
 
 });
 
-brd1.on('mousedown', function() {      
+brd1.on('mousedown', function() {
     AD2.setAttribute({withLabel:true});
     SRAS2.setAttribute({withLabel:true});
     dashS2.Y1.setAttribute({withLabel:true});
@@ -115,7 +115,7 @@ setState = function(transaction, statestr){
 
         brd1.update();
     }
-    
+
     console.debug('State updated successfully from saved.');
 }
 
@@ -126,7 +126,7 @@ getState = function(){
     return statestr;
 }
 
-getGrade = function() {    
+getGrade = function() {
     var state = {"AD2":{'p1X':AD2.point1.X(),'p2X':AD2.point2.X(),
                         'p1Y':AD2.point1.Y(),'p2Y':AD2.point2.Y()},
                  "AD1":{'p1X':AD1.point1.X(),'p2X':AD1.point2.X(),

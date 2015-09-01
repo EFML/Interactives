@@ -30,11 +30,11 @@ LRAS1.setAttribute({'label':{'offset':[20,0]}});
 var LRAS2 = createTransformLine(brd1,{'transformList':[sliderXPositive],ltype:'Vertical',
                                       name:'LRAS<sub>2</sub>',color:'DodgerBlue'});
 LRAS2.setAttribute({fixed:false,'highlight':false,withLabel:false});
- 
+
 // ////////////
 // // Intersection Box 1
 // ////////////
-var iSDfix = brd1.create('intersection', [LRAS1, SRAS1, 0], {visible:false}); 
+var iSDfix = brd1.create('intersection', [LRAS1, SRAS1, 0], {visible:false});
 var iS2D = brd1.create('intersection', [LRAS2, SRAS1, 0], {visible:false});
 
 ////////////
@@ -80,7 +80,7 @@ dashesFixedB1.YLine.setAttribute({visible:false});
 //////////////////
 // Interactivity
 //////////////////
-brd1.on('move', function() {      
+brd1.on('move', function() {
     //Moving Dashed Lines in Board 1
     dashS2.Y1.moveTo([0, iS2D.Y()]);
     dashS2.Y2.moveTo([iS2D.X(), iS2D.Y()]);
@@ -90,7 +90,7 @@ brd1.on('move', function() {
 
 });
 
-brd1.on('mousedown', function() {      
+brd1.on('mousedown', function() {
     LRAS2.setAttribute({withLabel:true});
     dashS2.X1.setAttribute({withLabel:true});
     dashS2.Y1.setAttribute({withLabel:true});
@@ -122,7 +122,7 @@ getState = function(){
     return statestr;
 }
 
-getGrade = function() {    
+getGrade = function() {
     var state = {"LRAS2":{'X0':LRAS1.point1.X(),
                           'slider':sliderx.Value()}};
     statestr = JSON.stringify(state);

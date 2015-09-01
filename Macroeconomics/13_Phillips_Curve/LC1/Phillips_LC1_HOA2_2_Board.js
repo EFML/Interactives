@@ -14,11 +14,11 @@ AD1.setAttribute({'dash':1,'fixed':true,'highlight':false});
 //Demand Line 2 - moveable
 var AD2 = createLine(brd1,{'ltype':'Demand','name':'AD<sub>2</sub>','color':'Orange'})
 AD2.setAttribute({withLabel:false});
-            
+
 ////////////
 // Intersection Box 1
 ////////////
-var iSDfix = brd1.create('intersection', [AD1, SB1, 0], {visible:false}); 
+var iSDfix = brd1.create('intersection', [AD1, SB1, 0], {visible:false});
 var iS2D = brd1.create('intersection', [AD2, SB1, 0], {visible:false});
 
 ////////////
@@ -79,7 +79,7 @@ var iB2fixed = brd2.create('point', [iB2SRPC.X(), iB2SRPC.Y()], {name:'A<sub>1</
 //////////////////
 // Interactivity
 //////////////////
-brd1.on('move', function() {      
+brd1.on('move', function() {
     //Moving Dashed Lines in Board 1
     dashesB1.Y1.moveTo([0, iS2D.Y()]);
     dashesB1.Y2.moveTo([iS2D.X(), iS2D.Y()]);
@@ -88,11 +88,11 @@ brd1.on('move', function() {
     dashesB1.X2.moveTo([iS2D.X(), iS2D.Y()]);
 
     DB2YP1.moveTo([0, iS2D.Y()]);
-    DB2YP2.moveTo([iB2SRPC.X(),iS2D.Y()]);   
+    DB2YP2.moveTo([iB2SRPC.X(),iS2D.Y()]);
 
 });
 
-brd1.on('mousedown', function() {      
+brd1.on('mousedown', function() {
     AD2.setAttribute({withLabel:true});
     iB2SRPC.setAttribute({visible:true});
 
@@ -109,7 +109,7 @@ resetAnimation = function() {
     //Initial line coords
     var c1 = [2.0,9.5];
     var c2 = [9.5,2.0];
-    
+
     //Animated Curve
     AD2.point1.moveTo(c1,0);
     AD2.point2.moveTo(c2,0);
@@ -124,13 +124,13 @@ resetAnimation = function() {
     dashesB1.XLine.setAttribute({visible:false});
     dashesB1.YLine.setAttribute({visible:false});
 
-    //Dashed Lines                
+    //Dashed Lines
     dashesB1.Y1.moveTo([0, iS2D.Y()],0);
     dashesB1.Y2.moveTo([iS2D.X(), iS2D.Y()],0);
 
     dashesB1.X1.moveTo([iS2D.X(), 0],0);
     dashesB1.X2.moveTo([iS2D.X(), iS2D.Y()],0);
-    
+
     brd1.update();
     brd2.update();
 };
@@ -145,7 +145,7 @@ setState = function(transaction,statestr){
     //     brd1.removeObject('AD2');
     //     var point1 = [state["dragLine"]["p1X"],state["dragLine"]["p1Y"]];
     //     var point2 = [state["dragLine"]["p2X"],state["dragLine"]["p2Y"]]
-        
+
     //     //Demand Line 2 - moveable
     //     AD2.point1.moveTo(point1,0);
     //     AD2.point2.moveTo(point2,0);

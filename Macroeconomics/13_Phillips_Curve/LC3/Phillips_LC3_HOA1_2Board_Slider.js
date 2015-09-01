@@ -51,7 +51,7 @@ LRAS.setAttribute({'withLabel':true,'fixed':true,'highlight':true,strokeWidth:3}
 ////////////
 // Intersection Box 1
 ////////////
-var iSDfix = brd1.create('intersection', [AD1, S1B1, 0], {visible:false}); 
+var iSDfix = brd1.create('intersection', [AD1, S1B1, 0], {visible:false});
 var iS2D = brd1.create('intersection', [AD2, S1B1, 0], {visible:false});
 var iSLB1 = brd1.create('intersection', [LRAS, S2B1, 0], {visible:false});
 
@@ -145,12 +145,12 @@ LRPC.setAttribute({'dash':3,'withLabel':true,'fixed':true,'highlight':true,strok
 //Intersection B2
 var iSDB2fix = brd2.create('intersection', [SRPC1, LRPC, 0], {name:'A1',highlight:false,
                                                               fillColor:'DodgerBlue',strokeColor:'DodgerBlue',
-                                                              withLabel:true,visible:true}); 
+                                                              withLabel:true,visible:true});
 
 //Intersection B2
 var iSLB2 = brd2.create('intersection', [SRPC2, LRPC, 0], {name:'A3',highlight:false,
                                                               fillColor:'Lime',strokeColor:'Lime',
-                                                              withLabel:true,visible:false}); 
+                                                              withLabel:true,visible:false});
 
 ////////////
 // Dashes for fixed SRPC1
@@ -225,7 +225,7 @@ var sliderLabelB2Y = brd2.create('text',
 //////////////////
 // Interactivity
 //////////////////
-brd1.on('move', function() {      
+brd1.on('move', function() {
     //Moving Dashed Lines in Board 1
     dashesB1.Y1.moveTo([0, iS2D.Y()]);
     dashesB1.Y2.moveTo([iS2D.X(), iS2D.Y()]);
@@ -242,7 +242,7 @@ brd1.on('move', function() {
     //BOARD 2
     //Moving Point A2
     // DB2YP1.moveTo([0, iS2D.Y()]);
-    // DB2YP2.moveTo([iB2SRPC1.X(),iS2D.Y()]);    
+    // DB2YP2.moveTo([iB2SRPC1.X(),iS2D.Y()]);
 
     //Orange Dashed Lines Board 2
     dashesA2B2.Y1.moveTo([0, iB2SRPC1.Y()]);
@@ -252,7 +252,7 @@ brd1.on('move', function() {
 
 });
 
-brd1.on('mousedown', function() {      
+brd1.on('mousedown', function() {
     // AD2.setAttribute({withLabel:true});
     // iB2SRPC.setAttribute({visible:true});
 
@@ -299,7 +299,7 @@ setState = function(transaction,statestr){
     //     brd1.removeObject('AD2');
     //     var point1 = [state["dragLine"]["p1X"],state["dragLine"]["p1Y"]];
     //     var point2 = [state["dragLine"]["p2X"],state["dragLine"]["p2Y"]]
-        
+
     //     //Demand Line 2 - moveable
     //     AD2.point1.moveTo(point1,0);
     //     AD2.point2.moveTo(point2,0);

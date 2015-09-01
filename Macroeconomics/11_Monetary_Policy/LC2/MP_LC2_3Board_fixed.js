@@ -74,7 +74,7 @@ var D1B2 = createLine(brd2,{'ltype':'Demand','name':'D',color:'Gray'});
 D1B2.setAttribute({'fixed':true});
 
 // var D2B2 = createTransformLine(brd2,{'ltype':'Demand','transformList':[sliderPositive],'name':'D<sub>2</sub>',color:'DodgerBlue'});
-//Intersection Board 2     
+//Intersection Board 2
 var iSDB2 = brd2.create('intersection',[SB2,D1B2],{withLabel:false,highlight:false});
 
 //Dashed Lines - Board 2
@@ -86,7 +86,7 @@ var dashB2 = createDashedLines2Axis(brd2,iSDB2,{fixed:false,withLabel:false,colo
 ////////////
 // BOARD 3
 ////////////
-//Supply Board 3 
+//Supply Board 3
 var SB3 = createLine(brd3,{'ltype':'Supply','name':'SRAS',color:'Gray'});
 SB3.setAttribute({'fixed':true});
 //Demand Board 3
@@ -95,7 +95,7 @@ D1B3.setAttribute({dash:2,strokeWidth:3,'fixed':true});
 
 var D2B3 = createTransformLine(brd3,{'ltype':'Demand','transformList':[sliderPositive],'name':'AD<sub>2</sub>',color:'DodgerBlue'});
 D2B3.setAttribute({withLabel:false});
-//Intersection Board 2     
+//Intersection Board 2
 var iSDB3 = brd3.create('intersection',[SB3,D2B3],{withLabel:false,highlight:false});
 
 //Dashed Lines - Board 3
@@ -123,14 +123,14 @@ var dashB3 = createDashedLines2Axis(brd3,iSDB3,{fixed:false,withLabel:false,colo
 // });
 
 
-brd1.on('move', function() {      
+brd1.on('move', function() {
     //Moving 1st set of Dashed Lines in Board 1
     dashB1.Y1.moveTo([0, iSDB1.Y()]);
     dashB1.Y2.moveTo([iSDB1.X(), iSDB1.Y()]);
 
     dashB1.X1.moveTo([iSDB1.X(), 0]);
     dashB1.X2.moveTo([iSDB1.X(), iSDB1.Y()]);
-        
+
     //Moving Board 2 Dashed Lines
     dashB2.Y1.moveTo([0, iSDB2.Y()]);
     dashB2.Y2.moveTo([iSDB2.X(), iSDB2.Y()]);

@@ -86,7 +86,7 @@ var D1B2 = createLine(brd2,{'ltype':'Demand','name':'D',color:'Gray'});
 D1B2.setAttribute({'fixed':true});
 
 // var D2B2 = createTransformLine(brd2,{'ltype':'Demand','transformList':[sliderB2Pos],'name':'D<sub>2</sub>',color:'DodgerBlue'});
-//Intersection Board 2     
+//Intersection Board 2
 var iSDB2 = brd2.create('intersection',[SB2,D1B2],{withLabel:false,highlight:false});
 
 //Dashed Lines - Board 2
@@ -98,7 +98,7 @@ var dashB2 = createDashedLines2Axis(brd2,iSDB2,{fixed:false,withLabel:false,colo
 ////////////
 // BOARD 3
 ////////////
-//Supply Board 3 
+//Supply Board 3
 var SB3 = createLine(brd3,{'ltype':'Supply','name':'SRAS',color:'Gray'});
 SB3.setAttribute({'fixed':true});
 //Demand Board 3
@@ -107,7 +107,7 @@ D1B3.setAttribute({dash:2,strokeWidth:3,'fixed':true});
 
 var D2B3 = createTransformLine(brd3,{'ltype':'Demand','transformList':[sliderB3Trans],'name':'AD<sub>2</sub>',color:'DodgerBlue'});
 D2B3.setAttribute({withLabel:false});
-//Intersection Board 2     
+//Intersection Board 2
 var iSDB3 = brd3.create('intersection',[SB3,D2B3],{withLabel:false,highlight:false});
 
 //Dashed Lines - Board 3
@@ -135,12 +135,12 @@ brd2.on('mousedown', function() {
 brd3.on('mousedown', function() {
     dashB3.X1.setAttribute({withLabel:true});
     dashB3.Y1.setAttribute({withLabel:true});
-    
+
     D2B3.setAttribute({withLabel:true});
 });
 
 
-brd1.on('move', function() {      
+brd1.on('move', function() {
     //Moving 1st set of Dashed Lines in Board 1
     dashB1.Y1.moveTo([0, iSDB1.Y()]);
     dashB1.Y2.moveTo([iSDB1.X(), iSDB1.Y()]);
@@ -149,7 +149,7 @@ brd1.on('move', function() {
     dashB1.X2.moveTo([iSDB1.X(), iSDB1.Y()]);
 });
 
-brd2.on('move', function() {      
+brd2.on('move', function() {
     //Moving Board 2 Dashed Lines
     dashB2.Y1.moveTo([0, iSDB2.Y()]);
     dashB2.Y2.moveTo([iSDB2.X(), iSDB2.Y()]);
@@ -158,7 +158,7 @@ brd2.on('move', function() {
     dashB2.X2.moveTo([iSDB2.X(), iSDB2.Y()]);
 });
 
-brd3.on('move', function() {      
+brd3.on('move', function() {
     //Moving Board 2 Dashed Lines
     dashB3.Y1.moveTo([0, iSDB3.Y()]);
     dashB3.Y2.moveTo([iSDB3.X(), iSDB3.Y()]);
@@ -192,7 +192,7 @@ getState = function(){
     return statestr;
 }
 
-getGrade = function() {    
+getGrade = function() {
     var state = {"sliderB1":sliderB1.Value(),
                  "sliderB2":sliderB2.Value(),
                  "sliderB3":sliderB3.Value()

@@ -2,14 +2,14 @@
 // BOARD 1
 ////////////
 // bboxlimits = [-1.5, 12, 12, -1];
-// var brd1 = JXG.JSXGraph.initBoard('jxgbox1', {axis:false, 
+// var brd1 = JXG.JSXGraph.initBoard('jxgbox1', {axis:false,
 //                                         showCopyright: false,
 //                                         showNavigation: false,
 //                                         zoom: false,
 //                                         pan: false,
 //                                         boundingbox:bboxlimits,
 //                                         grid: false,
-//                                         hasMouseUp: true, 
+//                                         hasMouseUp: true,
 // });
 
 // xaxis1 = brd1.create('axis', [[0, 0], [11, 0]], {withLabel: false});
@@ -71,11 +71,11 @@ AD1.setAttribute({fixed:true,'dash':1,'fixed':true,'highlight':false});
 var AD2 = createTransformLine(brd1,{'transformList':[sliderXPositive],ltype:'Demand',name:'AD<sub>2</sub>',color:'Orange'});
 AD2.setAttribute({fixed:false,'highlight':false,withLabel:false});
 
- 
+
 ////////////
 // Intersection Box 1
 ////////////
-var iSDfix = brd1.create('intersection', [AD1, SRAS1, 0], {visible:false}); 
+var iSDfix = brd1.create('intersection', [AD1, SRAS1, 0], {visible:false});
 var iS2D = brd1.create('intersection', [AD2, SRAS2, 0], {visible:false});
 
 ////////////
@@ -110,7 +110,7 @@ var LRAS = brd1.create('segment',[[5.75,11.0],[5.75,0.0]],
 //////////////////
 // Interactivity
 //////////////////
-brd1.on('move', function() {      
+brd1.on('move', function() {
     //Moving Dashed Lines in Board 1
     dashS2.Y1.moveTo([0, iS2D.Y()]);
     dashS2.Y2.moveTo([iS2D.X(), iS2D.Y()]);
@@ -120,7 +120,7 @@ brd1.on('move', function() {
 
 });
 
-brd1.on('mousedown', function() {      
+brd1.on('mousedown', function() {
     AD2.setAttribute({withLabel:true});
     SRAS2.setAttribute({withLabel:true});
     dashS2.Y1.setAttribute({withLabel:true});
@@ -160,7 +160,7 @@ getState = function(){
     return statestr;
 }
 
-getGrade = function() {    
+getGrade = function() {
     var state = {"iS2D":{'X':iS2D.X(),'Y':iS2D.Y()},
                  "iSDfix":{'X':iSDfix.X(),'Y':iSDfix.Y()},
                  "AD2":{'p1X':AD2.point1.X(),'p2X':AD2.point2.X(),

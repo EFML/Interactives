@@ -2,14 +2,14 @@
 // BOARD 1
 ////////////
 bboxlimits = [-1.5, 12, 12, -1];
-var brd1 = JXG.JSXGraph.initBoard('jxgbox1', {axis:false, 
+var brd1 = JXG.JSXGraph.initBoard('jxgbox1', {axis:false,
                                         showCopyright: false,
                                         showNavigation: false,
                                         zoom: false,
                                         pan: false,
                                         boundingbox:bboxlimits,
                                         grid: false,
-                                        hasMouseUp: true, 
+                                        hasMouseUp: true,
 });
 
 xaxis1 = brd1.create('axis', [[0, 0], [11, 0]], {withLabel: false});
@@ -32,11 +32,11 @@ AD1.setAttribute({'dash':1,'fixed':true,'highlight':false});
 //Demand Line 2 - moveable
 var AD2 = createDemand(brd1,{name:'AD<sub>2</sub>',color:'DodgerBlue'});
 AD2.setAttribute({withLabel:false});
-            
+
 ////////////
 // Intersection Box 1
 ////////////
-var iSDfix = brd1.create('intersection', [AD1, Supply, 0], {visible:false}); 
+var iSDfix = brd1.create('intersection', [AD1, Supply, 0], {visible:false});
 var iS2D = brd1.create('intersection', [AD2, Supply, 0], {visible:false});
 
 ////////////
@@ -65,7 +65,7 @@ var dashS2 = createDashedLines2Axis(brd1,iS2D,
 //////////////////
 // Interactivity
 //////////////////
-brd1.on('move', function() {      
+brd1.on('move', function() {
     dashS2.Y1.moveTo([0, iS2D.Y()]);
     dashS2.Y2.moveTo([iS2D.X(), iS2D.Y()]);
 
@@ -73,7 +73,7 @@ brd1.on('move', function() {
     dashS2.X2.moveTo([iS2D.X(), iS2D.Y()]);
 });
 
-brd1.on('mousedown', function() {      
+brd1.on('mousedown', function() {
     AD2.setAttribute({withLabel:true});
     dashS2.Y1.setAttribute({withLabel:true});
     brd1.update()
@@ -84,45 +84,45 @@ startAnimation = function() {
     //Initial line coords
     c1 = [2.0,9.5];
     c2 = [9.5,2.0];
-    
+
     AD2.setAttribute({withLabel:true});
     dashS2.Y1.setAttribute({withLabel:true});
-    
+
     //Animated Curve
     AD2.point1.moveTo([c1[0]+1,c1[1]+1],1000);
     AD2.point2.moveTo([c2[0]+1,c2[1]+1],1000);
-    
+
     //Dashed Lines
     dashS2.Y1.moveTo([0, iS2D.Y()+1],1000);
     dashS2.Y2.moveTo([iS2D.X()+1, iS2D.Y()+1],1000);
 
     dashS2.X1.moveTo([iS2D.X()+1, 0],1000);
     dashS2.X2.moveTo([iS2D.X()+1, iS2D.Y()+1],1000);
-    
-    brd1.update();                
+
+    brd1.update();
 };
 
 resetAnimation = function() {
     //Initial line coords
     var c1 = [2.0,9.5];
     var c2 = [9.5,2.0];
-    
+
     //Animated Curve
     AD2.point1.moveTo(c1,10);
     AD2.point2.moveTo(c2,10);
     AD2.setAttribute({withLabel:false});
-    
-    
+
+
     brd1.update();
 
-    //Dashed Lines                
+    //Dashed Lines
     dashS2.Y1.moveTo([0, iS2D.Y()],0);
     dashS2.Y2.moveTo([iS2D.X(), iS2D.Y()],0);
 
     dashS2.X1.moveTo([iS2D.X(), 0],0);
     dashS2.X2.moveTo([iS2D.X(), iS2D.Y()],0);
     dashS2.Y1.setAttribute({withLabel:false});
-    
+
     brd1.update();
 };
 
@@ -136,7 +136,7 @@ setState = function(transaction,statestr){
         brd1.removeObject('AD2');
         var point1 = [state["dragLine"]["p1X"],state["dragLine"]["p1Y"]];
         var point2 = [state["dragLine"]["p2X"],state["dragLine"]["p2Y"]]
-        
+
         //Demand Line 2 - moveable
         AD2.point1.moveTo(point1,0);
         AD2.point2.moveTo(point2,0);
