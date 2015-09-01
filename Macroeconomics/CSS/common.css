@@ -1,0 +1,49 @@
+.dnext-tool-container { /*<div style="width: 750;">*/
+	width: 100%;
+	overflow: hidden;
+}
+
+.dnext-tool-container .single-board {
+	width: 500px;
+	height: 450px;
+	float: left;
+	border: solid #1f628d 2px;
+}
+
+.dnext-tool-container .double-board-left {
+	width: 350px;
+	height: 300px;
+	float: left;
+	border: solid #1f628d 2px;
+}
+
+.dnext-tool-container .double-board-right {
+	width: 350px;
+	height: 300px;
+	margin-left: 365px; /*375px*/
+	border: solid #1f628d 2px;
+}
+
+.dnext-tool-container .triple-board-left {
+	width: 250px;
+	height: 240px;
+	float: left;
+	border: solid #1f628d 2px;
+}
+
+.dnext-tool-container .triple-board-center {
+	width: 250px;
+	height: 240px;
+	float: left;
+    margin-left: 10px;
+	border: solid #1f628d 2px;
+}
+
+.dnext-tool-container .triple-board-right {
+	width: 250px;
+	height: 240px;
+	float: left;
+	margin-left: 10px;
+	border: solid #1f628d 2px;
+}
+
