@@ -59,8 +59,10 @@ var dashS2 = createDashedLines2Axis(brd1,iS2D,
                                ylabel:'PL<sub>2</sub>',
                                color:'DodgerBlue'});
 
-
-
+////////////////////////
+// External DOM button
+////////////////////////
+var resetAnimationBtn = document.getElementById('resetAnimationBtn');
 
 //////////////////
 // Interactivity
@@ -77,6 +79,30 @@ brd1.on('mousedown', function() {
     AD2.setAttribute({withLabel:true});
     dashS2.Y1.setAttribute({withLabel:true});
     brd1.update()
+});
+
+resetAnimationBtn.addEventListener('click', function() {
+    //Initial line coords
+    var c1 = [2.0,9.5];
+    var c2 = [9.5,2.0];
+
+    //Animated Curve
+    AD2.point1.moveTo(c1,10);
+    AD2.point2.moveTo(c2,10);
+    AD2.setAttribute({withLabel:false});
+
+
+    brd1.update();
+
+    //Dashed Lines
+    dashS2.Y1.moveTo([0, iS2D.Y()],0);
+    dashS2.Y2.moveTo([iS2D.X(), iS2D.Y()],0);
+
+    dashS2.X1.moveTo([iS2D.X(), 0],0);
+    dashS2.X2.moveTo([iS2D.X(), iS2D.Y()],0);
+    dashS2.Y1.setAttribute({withLabel:false});
+
+    brd1.update();
 });
 
 //Animation
@@ -98,30 +124,6 @@ startAnimation = function() {
 
     dashS2.X1.moveTo([iS2D.X()+1, 0],1000);
     dashS2.X2.moveTo([iS2D.X()+1, iS2D.Y()+1],1000);
-
-    brd1.update();
-};
-
-resetAnimation = function() {
-    //Initial line coords
-    var c1 = [2.0,9.5];
-    var c2 = [9.5,2.0];
-
-    //Animated Curve
-    AD2.point1.moveTo(c1,10);
-    AD2.point2.moveTo(c2,10);
-    AD2.setAttribute({withLabel:false});
-
-
-    brd1.update();
-
-    //Dashed Lines
-    dashS2.Y1.moveTo([0, iS2D.Y()],0);
-    dashS2.Y2.moveTo([iS2D.X(), iS2D.Y()],0);
-
-    dashS2.X1.moveTo([iS2D.X(), 0],0);
-    dashS2.X2.moveTo([iS2D.X(), iS2D.Y()],0);
-    dashS2.Y1.setAttribute({withLabel:false});
 
     brd1.update();
 };

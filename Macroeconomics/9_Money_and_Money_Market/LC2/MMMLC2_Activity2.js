@@ -40,6 +40,16 @@ brd1.on('mousedown', function() {
     brd1.update()
 });
 
+/////////////////////////
+// External DOM buttons
+/////////////////////////
+var animationEconomicsEffectBtn = document.getElementById('animationEconomicsEffectBtn');
+var resetAnimationBtn = document.getElementById('resetAnimationBtn');
+
+//Interactivity
+animationEconomicsEffectBtn.addEventListener('click', increaseA);
+resetAnimationBtn.addEventListener('click', resetAnimation);
+
 //Animation for shifting curve SouthWest
 decreaseXY = function() {
     resetAnimation();
@@ -58,7 +68,7 @@ increaseXY = function() {
     brd1.update();
 }
 
-increaseA = function() {
+function increaseA() {
     resetAnimation();
     brd1.update();
     G.moveTo([4.0,8.0],1000);
@@ -72,7 +82,7 @@ decreaseA = function() {
     brd1.update();
 }
 
-resetAnimation = function() {
+function resetAnimation() {
     //AD2.point1.moveTo([2.0,10.0],10);
     //AD2.point2.moveTo([10.0,2.0],10);
     AD2.point1.moveTo([2.0,9.5],10);

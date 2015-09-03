@@ -44,6 +44,12 @@ toggleLabels = function(toggle) {
     AD2.setAttribute({withLabel:toggle});
 };
 
+/////////////////////////
+// External DOM buttons
+/////////////////////////
+var increaseABtn = document.getElementById('increaseABtn');
+var resetAnimationBtn = document.getElementById('resetAnimationBtn');
+
 //////////////////
 // Interactivity
 //////////////////
@@ -60,6 +66,11 @@ brd1.on('move', function() {
 brd1.on('mousedown', function() {
     toggleLabels(true);
     brd1.update()
+});
+
+increaseABtn.addEventListener('click', increaseA);
+resetAnimationBtn.addEventListener('click', function() {
+    resetAnimation(0);
 });
 
 //Animation for shifting curve SouthWest
@@ -99,7 +110,7 @@ increaseXY = function() {
     brd1.update();
 }
 
-resetAnimation = function(speed) {
+function resetAnimation(speed) {
     toggleLabels(false);
     AD2.point1.moveTo([2.0,9.5],speed);
     AD2.point2.moveTo([9.5,2.0],speed);
@@ -115,7 +126,7 @@ resetAnimation = function(speed) {
     brd1.update();
 }
 
-increaseA = function() {
+function increaseA() {
     resetAnimation();
     brd1.update();
 

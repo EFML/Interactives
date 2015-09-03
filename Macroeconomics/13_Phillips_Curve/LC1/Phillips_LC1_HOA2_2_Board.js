@@ -75,6 +75,10 @@ var iB2SRPC = brd2.create('intersection', [DB2Y, SRPC, 0], {name:'A<sub>2</sub>'
 var iB2fixed = brd2.create('point', [iB2SRPC.X(), iB2SRPC.Y()], {name:'A<sub>1</sub>',visible:true,
                                                                  fixed:true,fillColor:'Gray',
                                                                  strokeColor:'Gray'});
+////////////////////////
+// External DOM button
+////////////////////////
+var resetAnimationBtn = document.getElementById('resetAnimationBtn');
 
 //////////////////
 // Interactivity
@@ -105,7 +109,7 @@ brd1.on('mousedown', function() {
     brd1.update()
 });
 
-resetAnimation = function() {
+resetAnimationBtn.addEventListener('click', function() {
     //Initial line coords
     var c1 = [2.0,9.5];
     var c2 = [9.5,2.0];
@@ -133,7 +137,7 @@ resetAnimation = function() {
 
     brd1.update();
     brd2.update();
-};
+});
 
 
 setState = function(transaction,statestr){

@@ -38,8 +38,66 @@ brd1.on('mousedown', function() {
     brd1.update()
 });
 
+/////////////////////////
+// External DOM buttons
+/////////////////////////
+var increaseInterestRateBtn = document.getElementById('increaseInterestRateBtn');
+var higherPriceLevelBtn = document.getElementById('higherPriceLevelBtn');
+var decreaseGovernmentSpendingBtn = document.getElementById('decreaseGovernmentSpendingBtn');
+var increaseRealBalancesBtn = document.getElementById('increaseRealBalancesBtn');
+var increaseExportsBtn = document.getElementById('increaseExportsBtn');
+var increasePersonalIncomeTaxesBtn = document.getElementById('increasePersonalIncomeTaxesBtn');
+var increaseConsumerConfidenceBtn = document.getElementById('increaseConsumerConfidenceBtn');
+
+var decreaseABtn = document.getElementById('decreaseABtn');
+var increaseABtn = document.getElementById('increaseABtn');
+var decreaseXYBtn = document.getElementById('decreaseXYBtn');
+var increaseXYBtn = document.getElementById('increaseXYBtn');
+
+var resetAnimationBtn = document.getElementById('resetAnimationBtn');
+
+//Interactivity
+if (increaseInterestRateBtn) {
+    increaseInterestRateBtn.addEventListener('click', decreaseXY);
+}
+if (higherPriceLevelBtn) {
+    higherPriceLevelBtn.addEventListener('click', increaseA);
+}
+if (decreaseGovernmentSpendingBtn) {
+    decreaseGovernmentSpendingBtn.addEventListener('click', decreaseXY);
+}
+if (increaseRealBalancesBtn) {
+    increaseRealBalancesBtn.addEventListener('click', decreaseA);
+}
+if (increaseExportsBtn) {
+    increaseExportsBtn.addEventListener('click', increaseXY);
+}
+if (increasePersonalIncomeTaxesBtn) {
+    increasePersonalIncomeTaxesBtn.addEventListener('click', decreaseXY);
+}
+if (increaseConsumerConfidenceBtn) {
+    increaseConsumerConfidenceBtn.addEventListener('click', increaseXY);
+}
+
+if (decreaseABtn) {
+    decreaseABtn.addEventListener('click', decreaseA);
+}
+if (increaseABtn) {
+    increaseABtn.addEventListener('click', increaseA);
+}
+if (decreaseXYBtn) {
+    decreaseXYBtn.addEventListener('click', decreaseXY);
+}
+if (increaseXYBtn) {
+    increaseXYBtn.addEventListener('click', increaseXY);
+}
+
+if (resetAnimationBtn) {
+    resetAnimationBtn.addEventListener('click', resetAnimation);
+}
+
 //Animation for shifting curve SouthWest
-decreaseXY = function() {
+function decreaseXY() {
     resetAnimation();
     brd1.update();
     AD2.point1.moveTo([1.0,9.0],1000);
@@ -49,7 +107,7 @@ decreaseXY = function() {
 }
 
 //Animation for shifting curve NorthEast
-increaseXY = function() {
+function increaseXY() {
     resetAnimation();
     brd1.update();
     AD2.point1.moveTo([3.0,11.0],1000);
@@ -58,21 +116,21 @@ increaseXY = function() {
     brd1.update();
 }
 
-increaseA = function() {
+function increaseA() {
     resetAnimation();
     brd1.update();
     G.moveTo([4.0,8.0],1000);
     brd1.update();
 }
 
-decreaseA = function() {
+function decreaseA() {
     resetAnimation();
     brd1.update();
     G.moveTo([8.0,4.0],1000);
     brd1.update();
 }
 
-resetAnimation = function() {
+function resetAnimation() {
     AD2.point1.moveTo([2.0,9.5],10);
     AD2.point2.moveTo([9.5,2.0],10);
     G.moveTo([6.0,6.0],10);

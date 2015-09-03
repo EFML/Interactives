@@ -57,6 +57,14 @@ toggleLabels = function(toggle) {
     D2.setAttribute({withLabel:toggle});
 };
 
+/////////////////////////
+// External DOM buttons
+/////////////////////////
+var riseMoneyDemandBtn = document.getElementById('riseMoneyDemandBtn');
+var fallMoneyDemandBtn = document.getElementById('fallMoneyDemandBtn');
+var resetAnimationBtn = document.getElementById('resetAnimationBtn');
+
+
 //////////////////
 // Interactivity
 //////////////////
@@ -75,8 +83,14 @@ brd1.on('mousedown', function() {
     brd1.update()
 });
 
+riseMoneyDemandBtn.addEventListener('click', increaseXY);
+fallMoneyDemandBtn.addEventListener('click', decreaseXY);
+resetAnimationBtn.addEventListener('click', function() {
+    resetAnimation(0);
+});
+
 //Animation for shifting curve SouthWest
-decreaseXY = function() {
+function decreaseXY() {
     resetAnimation(0);
     brd1.update();
 
@@ -96,7 +110,7 @@ decreaseXY = function() {
 }
 
 //Animation for shifting curve NorthEast
-increaseXY = function() {
+function increaseXY() {
     var speed = 1000;
     resetAnimation(0);
     toggleLabels(true);
@@ -114,7 +128,7 @@ increaseXY = function() {
     brd1.update();
 }
 
-resetAnimation = function(speed) {
+function resetAnimation(speed) {
     toggleLabels(false);
     D2.point1.moveTo([2.0,9.5],speed);
     D2.point2.moveTo([9.5,2.0],speed);

@@ -29,6 +29,11 @@ SRPC1.setAttribute({'dash':1,'fixed':true,'highlight':false});
 var SRPC2 = createDemand(brd1,{name:'SRPC2',color:'DodgerBlue'});
 SRPC2.setAttribute({'withLabel':false,'highlight':false});
 
+/////////////////////////
+// External DOM buttons
+/////////////////////////
+var increaseLaborProdBtn = document.getElementById('increaseLaborProdBtn');
+var resetAnimationBtn = document.getElementById('resetAnimationBtn');
 
 //Interactivityd
 brd1.on('mousedown', function() {
@@ -36,8 +41,11 @@ brd1.on('mousedown', function() {
     brd1.update()
 });
 
+increaseLaborProdBtn.addEventListener('click', increaseLaborProd);
+resetAnimationBtn.addEventListener('click', resetAnimation);
+
 //Animation for Unknown Condition
-increaseLaborProd = function() {
+function increaseLaborProd() {
     [2.0,9.5]
     SRPC2.point1.moveTo([1.0,8.5],1000);
     SRPC2.point2.moveTo([8.5,1.0],1000);
@@ -61,7 +69,7 @@ increaseKeyInputPrice = function() {
     brd1.update();
 }
 
-resetAnimation = function() {
+function resetAnimation() {
     SRPC2.point1.moveTo([2.0,9.5],0);
     SRPC2.point2.moveTo([9.5,2.0],0);
     SRPC2.setAttribute({withLabel:false});
