@@ -144,3 +144,50 @@
 	margin-left: 10px;
 	display: inline-block;
 }
+
+.dnext-tool-container .full-line {
+  margin-top: 20px;
+}
+
+.dnext-tool-container .half-line {
+  margin-top: 10px;
+}
+
+.dnext-tool-container .quarter-line {
+  margin-top: 5px;
+}
+
+.dnext-tool-container .button {
+  font-family: "Verdana", "Geneva", sans-serif;
+  font-weight: 400;
+  font-size: 14px;
+}
+
+.dnext-tool-container .button {
+  color: white;
+  background: #4479ba;
+  -webkit-border-radius: 4px;
+  -moz-border-radius: 4px;
+  -ms-border-radius: 4px;
+  border-radius: 4px;
+  border: solid 1px #20538D;
+  text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.4);
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.4), 0 1px;
+  padding: 5px 10px;
+  margin-right: 2px;
+  -webkit-transition-duration: 0.2s;
+  -moz-transition-duration: 0.2s;
+  transition-duration: 0.2s;
+}
+
+.dnext-tool-container .button:hover {
+  background: #356094;
+  border: solid 1px #2A4E77;
+  text-decoration: none;
+}
+
+.dnext-tool-container .button:active {
+  box-shadow: inset 0 1px 4px rgba(0, 0, 0, 0.6);
+  background: #2E5481;
+  border: solid 1px #203E5F;
+}
