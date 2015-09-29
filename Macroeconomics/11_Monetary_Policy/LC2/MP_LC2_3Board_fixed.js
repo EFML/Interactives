@@ -145,8 +145,3 @@ brd1.on('move', function() {
     dashB3.X1.moveTo([iSDB3.X(), 0]);
     dashB3.X2.moveTo([iSDB3.X(), iSDB3.Y()]);
 });
-
-
-
-
-

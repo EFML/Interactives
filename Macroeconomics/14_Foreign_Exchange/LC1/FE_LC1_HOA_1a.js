@@ -1,74 +1,89 @@
-////////////
-// BOARD 1
-////////////
+var brd1;
 
-var brd1 = createBoard('jxgbox1',{xname:"Q of US Dollars",
-                                  yname:"&pound;/$",grid:false,'xpos':[8,-0.5]});
+function init() {
+    ////////////
+    // BOARD 1
+    ////////////
 
-//Supply Line 1 - fixed
-var SRAS1 = createLine(brd1,{ltype:'Supply',name:'$S<sub>1</sub>',color:'DodgerBlue'});
-SRAS1.setAttribute({fixed:true,'dash':1,'fixed':true,'highlight':false});
+    brd1 = createBoard('jxgbox1',{xname:"Q of US Dollars",
+                                      yname:"&pound;/$",grid:false,'xpos':[8,-0.5]});
 
-//Supply Line 2 - moveable
-var SRAS2 = createLine(brd1,{ltype:'Supply',name:'$S<sub>2</sub>',color:'DodgerBlue'});
-SRAS2.setAttribute({fixed:false,'highlight':false,withLabel:false});
+    //Supply Line 1 - fixed
+    var SRAS1 = createLine(brd1,{ltype:'Supply',name:'$S<sub>1</sub>',color:'DodgerBlue'});
+    SRAS1.setAttribute({fixed:true,'dash':1,'fixed':true,'highlight':false});
 
-//Demand Line 1 - fixed
-var AD1 = createLine(brd1,{ltype:'Demand',name:'$D<sub>1</sub>',color:'Orange'});
-AD1.setAttribute({fixed:true,'dash':1,'fixed':true,'highlight':false});
+    //Supply Line 2 - moveable
+    var SRAS2 = createLine(brd1,{ltype:'Supply',name:'$S<sub>2</sub>',color:'DodgerBlue'});
+    SRAS2.setAttribute({fixed:false,'highlight':false,withLabel:false});
 
-//Demand Line 2 - moveable
-var AD2 = createLine(brd1,{ltype:'Demand',name:'$D<sub>2</sub>',color:'Orange'});
-AD2.setAttribute({fixed:false,'highlight':false,withLabel:false});
+    //Demand Line 1 - fixed
+    var AD1 = createLine(brd1,{ltype:'Demand',name:'$D<sub>1</sub>',color:'Orange'});
+    AD1.setAttribute({fixed:true,'dash':1,'fixed':true,'highlight':false});
 
-////////////
-// Intersection Box 1
-////////////
-var iSDfix = brd1.create('intersection', [AD1, SRAS1, 0], {visible:false});
-var iS2D = brd1.create('intersection', [AD2, SRAS2, 0], {visible:false});
+    //Demand Line 2 - moveable
+    var AD2 = createLine(brd1,{ltype:'Demand',name:'$D<sub>2</sub>',color:'Orange'});
+    AD2.setAttribute({fixed:false,'highlight':false,withLabel:false});
 
-// ////////////
-// // Fixed Dashed Lines for Board 1
-// ////////////
-// var dashesFixedB1 = createDashedLines2Axis(brd1,iSDfix,
-//                                           {withLabel:true,
-//                                            xlabel:'',
-//                                            ylabel:'',
-//                                            yoffsets:[-45,0],
-//                                            color:'DodgerBlue'});
+    ////////////
+    // Intersection Box 1
+    ////////////
+    var iSDfix = brd1.create('intersection', [AD1, SRAS1, 0], {visible:false});
+    var iS2D = brd1.create('intersection', [AD2, SRAS2, 0], {visible:false});
 
-////////////
-// Draggable Dashed Lines for Board 1
-////////////
-var dashS2 = createDashedLines2Axis(brd1,iS2D,
-                                  {fixed:false,
-                                   withLabel:true,
-                                   xlabel:'Q<sup>*</sup>',
-                                   ylabel:'&pound;0.5/$1',
-                                   yoffsets:[5,10],
-                                   color:'Orange'});
+    // ////////////
+    // // Fixed Dashed Lines for Board 1
+    // ////////////
+    // var dashesFixedB1 = createDashedLines2Axis(brd1,iSDfix,
+    //                                           {withLabel:true,
+    //                                            xlabel:'',
+    //                                            ylabel:'',
+    //                                            yoffsets:[-45,0],
+    //                                            color:'DodgerBlue'});
 
-//////////////////
-// Interactivity
-//////////////////
-brd1.on('move', function() {
-    //Moving Dashed Lines in Board 1
-    dashS2.Y1.moveTo([0, iS2D.Y()]);
-    dashS2.Y2.moveTo([iS2D.X(), iS2D.Y()]);
+    ////////////
+    // Draggable Dashed Lines for Board 1
+    ////////////
+    var dashS2 = createDashedLines2Axis(brd1,iS2D,
+                                      {fixed:false,
+                                       withLabel:true,
+                                       xlabel:'Q<sup>*</sup>',
+                                       ylabel:'&pound;0.5/$1',
+                                       yoffsets:[5,10],
+                                       color:'Orange'});
 
-    dashS2.X1.moveTo([iS2D.X(), 0]);
-    dashS2.X2.moveTo([iS2D.X(), iS2D.Y()]);
+    //////////////////
+    // Interactivity
+    //////////////////
+    brd1.on('move', function() {
+        //Moving Dashed Lines in Board 1
+        dashS2.Y1.moveTo([0, iS2D.Y()]);
+        dashS2.Y2.moveTo([iS2D.X(), iS2D.Y()]);
 
+        dashS2.X1.moveTo([iS2D.X(), 0]);
+        dashS2.X2.moveTo([iS2D.X(), iS2D.Y()]);
+
+    });
+
+    brd1.on('mousedown', function() {
+        AD2.setAttribute({withLabel:true});
+        SRAS2.setAttribute({withLabel:true});
+        dashS2.Y1.setAttribute({withLabel:true});
+        dashS2.X1.setAttribute({withLabel:true});
+        brd1.update()
+    });
+}
+
+/////////////////////////
+// External DOM button
+/////////////////////////
+var resetAnimationBtn = document.getElementById('resetAnimationBtn');
+
+resetAnimationBtn.addEventListener('click', function() {
+    JXG.JSXGraph.freeBoard(brd1);
+    init();
 });
 
-brd1.on('mousedown', function() {
-    AD2.setAttribute({withLabel:true});
-    SRAS2.setAttribute({withLabel:true});
-    dashS2.Y1.setAttribute({withLabel:true});
-    dashS2.X1.setAttribute({withLabel:true});
-    brd1.update()
-});
-
+init();
 
 //Standard edX JSinput functions
 setState = function(transaction,statestr){
@@ -109,5 +124,3 @@ getGrade = function() {
 }
 
 createChannel(getGrade, getState, setState);
-
-

@@ -1,100 +1,103 @@
-bboxlimits = [-1.75, 12, 12, -1.25];
-var brd1 = JXG.JSXGraph.initBoard('jxgbox1', {axis:false,
-                                        showCopyright: false,
-                                        showNavigation: false,
-                                        zoom: false,
-                                        pan: false,
-                                        boundingbox:bboxlimits,
-                                        grid: false,
-                                        hasMouseUp: true,
-});
+var brd1, dashS1, S, iSD;
 
-xaxis = brd1.create('axis', [[0, 0], [12, 0]], {withLabel: true, label: {offset: [320,-20]}});
-yaxis = brd1.create('axis', [[0, 0], [0, 12]], {withLabel: true, label: {offset: [-60,260]}});
+function init() {
+    bboxlimits = [-1.75, 12, 12, -1.25];
+    brd1 = JXG.JSXGraph.initBoard('jxgbox1', {axis:false,
+                                            showCopyright: false,
+                                            showNavigation: false,
+                                            zoom: false,
+                                            pan: false,
+                                            boundingbox:bboxlimits,
+                                            grid: false,
+                                            hasMouseUp: true,
+    });
 
-//Axes
-xaxis.removeAllTicks();
-yaxis.removeAllTicks();
-var ylabel = brd1.create('text',[-1.65,10,"Nominal<br>Interest<br>Rate"],{fixed:true});
-var xlabel = brd1.create('text',[8.5,-0.55,"Quantity of Money"],{fixed:true});
+    xaxis = brd1.create('axis', [[0, 0], [12, 0]], {withLabel: true, label: {offset: [320,-20]}});
+    yaxis = brd1.create('axis', [[0, 0], [0, 12]], {withLabel: true, label: {offset: [-60,260]}});
 
-//Demand 1
-var D1 = createLine(brd1,{ltype:'Demand',name:'D<sub>1</sub>',color:'DodgerBlue'});
-D1.setAttribute({fixed:true});
+    //Axes
+    xaxis.removeAllTicks();
+    yaxis.removeAllTicks();
+    var ylabel = brd1.create('text',[-1.65,10,"Nominal<br>Interest<br>Rate"],{fixed:true});
+    var xlabel = brd1.create('text',[8.5,-0.55,"Quantity of Money"],{fixed:true});
 
-////////////
-//LRAS - straight line
-////////////
-var Sx1 = 5.75;
-var Sx2 = Sx1;
-var Sy1 = 0.5;
-var Sy2 = 10.5;
+    //Demand 1
+    var D1 = createLine(brd1,{ltype:'Demand',name:'D<sub>1</sub>',color:'DodgerBlue'});
+    D1.setAttribute({fixed:true});
 
-var Sfix = brd1.create('segment',[[5.75,10.5],[5.75,0.5]],
-                       {'strokeColor':'Gray','strokeWidth':'3',
-                        'name':'S<sub>1</sub>','withLabel':true,
-                        'fixed':true,'dash':1,
-                        'highlight':false,
-                        'label':{'offset':[0,185]}});
+    ////////////
+    //LRAS - straight line
+    ////////////
+    var Sx1 = 5.75;
+    var Sx2 = Sx1;
+    var Sy1 = 0.5;
+    var Sy2 = 10.5;
 
-var S = brd1.create('segment',[[3.75,10.5],[3.75,0.5]],
-                       {'strokeColor':'Lime','strokeWidth':'5',
-                        'name':'S<sub>2</sub>','withLabel':true,
-                        'fixed':false,
-                        'highlight':true,
-                        'label':{'offset':[0,185]}});
+    var Sfix = brd1.create('segment',[[5.75,10.5],[5.75,0.5]],
+                           {'strokeColor':'Gray','strokeWidth':'3',
+                            'name':'S<sub>1</sub>','withLabel':true,
+                            'fixed':true,'dash':1,
+                            'highlight':false,
+                            'label':{'offset':[0,185]}});
 
-var iSDfix = brd1.create('intersection', [Sfix, D1, 0], {visible:false});
+    S = brd1.create('segment',[[3.75,10.5],[3.75,0.5]],
+                           {'strokeColor':'Lime','strokeWidth':'5',
+                            'name':'S<sub>2</sub>','withLabel':true,
+                            'fixed':false,
+                            'highlight':true,
+                            'label':{'offset':[0,185]}});
 
-var iSD = brd1.create('intersection', [S, D1, 0], {visible:false});
+    var iSDfix = brd1.create('intersection', [Sfix, D1, 0], {visible:false});
 
-////////////
-// Fixed Dashed Lines for Board 1
-////////////
-var dashS1 = createDashedLines2Axis(brd1,iSD,
-                                  {fixed:false,
-                                   withLabel:true,
-                                   xlabel:'Q<sub>2</sub>',
-                                   ylabel:'NIR<sub>2</sub>',
-                                   color:'Gray'});
+    iSD = brd1.create('intersection', [S, D1, 0], {visible:false});
 
-var dashSfix = createDashedLines2Axis(brd1,iSDfix,
-                                  {fixed:true,
-                                   withLabel:true,
-                                   xlabel:'Q<sub>1</sub>',
-                                   ylabel:'NIR<sub>1</sub>',
-                                   color:'Gray'});
+    ////////////
+    // Fixed Dashed Lines for Board 1
+    ////////////
+    dashS1 = createDashedLines2Axis(brd1,iSD,
+                                      {fixed:false,
+                                       withLabel:true,
+                                       xlabel:'Q<sub>2</sub>',
+                                       ylabel:'NIR<sub>2</sub>',
+                                       color:'Gray'});
 
+    var dashSfix = createDashedLines2Axis(brd1,iSDfix,
+                                      {fixed:true,
+                                       withLabel:true,
+                                       xlabel:'Q<sub>1</sub>',
+                                       ylabel:'NIR<sub>1</sub>',
+                                       color:'Gray'});
 
-toggleLabels = function(toggle) {
+    //////////////////
+    // Interactivity
+    //////////////////
+    brd1.on('move', function() {
+        //Moving Dashed Lines in Board 1
+        dashS1.Y1.moveTo([0, iSD.Y()]);
+        dashS1.Y2.moveTo([iSD.X(), iSD.Y()]);
+
+        dashS1.X1.moveTo([iSD.X(), 0]);
+        dashS1.X2.moveTo([iSD.X(), iSD.Y()]);
+        brd1.update()
+    });
+
+    brd1.on('mousedown', function() {
+        toggleLabels(true);
+        brd1.update()
+    });
+}
+
+var delta = 2.0;
+
+function toggleLabels(toggle) {
     dashS1.X1.setAttribute({withLabel:toggle});
     dashS1.Y1.setAttribute({withLabel:toggle});
     S.setAttribute({withLabel:toggle});
 };
 
-//////////////////
-// Interactivity
-//////////////////
-brd1.on('move', function() {
-    //Moving Dashed Lines in Board 1
-    dashS1.Y1.moveTo([0, iSD.Y()]);
-    dashS1.Y2.moveTo([iSD.X(), iSD.Y()]);
-
-    dashS1.X1.moveTo([iSD.X(), 0]);
-    dashS1.X2.moveTo([iSD.X(), iSD.Y()]);
-    brd1.update()
-});
-
-brd1.on('mousedown', function() {
-    toggleLabels(true);
-    brd1.update()
-});
-
-var delta = 2.0;
-
 //Animation for shifting curve SouthWest
-decreaseXY = function() {
-    resetAnimation(0);
+function decreaseXY() {
+    resetAnimation();
     brd1.update();
 
     var speed = 1000;
@@ -113,9 +116,9 @@ decreaseXY = function() {
 }
 
 //Animation for shifting curve NorthEast
-increaseXY = function() {
+function increaseXY() {
     var speed = 1000;
-    resetAnimation(0);
+    resetAnimation();
     toggleLabels(true);
     //brd1.update();
 
@@ -131,19 +134,17 @@ increaseXY = function() {
     brd1.update();
 }
 
-resetAnimation = function(speed) {
-    toggleLabels(false);
-    S.point1.moveTo([Sx1,Sy1],speed);
-    S.point2.moveTo([Sx2,Sy2],speed);
+/////////////////////////
+// External DOM button
+/////////////////////////
+var resetAnimationBtn = document.getElementById('resetAnimationBtn');
 
-    dashS1.Y1.moveTo([0, 5.75],speed);
-    dashS1.Y2.moveTo([5.75, 5.75],speed);
+resetAnimationBtn.addEventListener('click', function() {
+    JXG.JSXGraph.freeBoard(brd1);
+    init();
+});
 
-    dashS1.X1.moveTo([5.75, 0],speed);
-    dashS1.X2.moveTo([5.75, 5.75],speed);
-
-    brd1.update();
-}
+init();
 
 //Standard edX JSinput functions
 getInput = function(){
@@ -175,4 +176,3 @@ setState = function(statestr){
     console.log(statestr);
     console.debug('State updated successfully from saved.');
 }
-

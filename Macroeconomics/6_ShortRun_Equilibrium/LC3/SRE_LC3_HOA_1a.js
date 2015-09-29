@@ -1,145 +1,161 @@
-//Custom Parameters
-labelOffset = {'X':130,'Y':140};
+var brd1;
 
-bbox = [-1.5, 12, 12, -1.5];
-var brd1 = createBoard('jxgbox1',{bboxlimits:bbox,xname:"Real GDP", 'xpos':[9,-0.5],
-                                  yname:"Price<br>Level",grid:false,'ypos':[-1.25,10.0]});
+function init() {
+  //Custom Parameters
+  labelOffset = {'X':130,'Y':140};
 
-//Sliders
-var sliderx = brd1.create('slider',[[3.0,-1.0],[8,-1.0],[0,0,1.4]],{withLabel:false,snapWidth:0.05,
-                                                                       color:'Crimson'});
-// var slidery = brd1.create('slider',[[-1.0,2.75],[-1.0,8.75],[-1.4,0,0]],{withLabel:false,snapWidth:0.05,
-//                                                                        color:'Black'});
+  bbox = [-1.5, 12, 12, -1.5];
+  brd1 = createBoard('jxgbox1',{bboxlimits:bbox,xname:"Real GDP", 'xpos':[9,-0.5],
+                                    yname:"Price<br>Level",grid:false,'ypos':[-1.25,10.0]});
 
-//Postivit Slider Transformation
-sliderXPositive = brd1.create('transform',[
-    function(){return sliderx.Value()},
-    function(){return -sliderx.Value()}],
-    {type:'translate'}
-    );
+  //Sliders
+  var sliderx = brd1.create('slider',[[3.0,-1.0],[8,-1.0],[0,0,1.4]],{withLabel:false,snapWidth:0.05,
+                                                                         color:'Crimson'});
+  // var slidery = brd1.create('slider',[[-1.0,2.75],[-1.0,8.75],[-1.4,0,0]],{withLabel:false,snapWidth:0.05,
+  //                                                                        color:'Black'});
 
-// sliderYPositive = brd1.create('transform',[
-//     function(){return slidery.Value()},
-//     function(){return slidery.Value()}],
-//     {type:'translate'}
-//     );
+  //Postivit Slider Transformation
+  sliderXPositive = brd1.create('transform',[
+      function(){return sliderx.Value()},
+      function(){return -sliderx.Value()}],
+      {type:'translate'}
+      );
 
-
-//Supply Line 1 - fixed
-var SRAS1 = createLine(brd1,{'ltype':'Supply','name':'AS<sub>1924</sub>',color:'DodgerBlue'});
-SRAS1.setAttribute({"dash":1,'fixed':true,'highlight':false});
-
-//Demand Line 2 - moveable
-var SRAS2 = createTransformLine(brd1,{'transformList':[sliderXPositive],'ltype':'Supply','name':'AS<sub>1929</sub>','color':'DodgerBlue'})
-SRAS2.setAttribute({'withLabel':false,'highlight':true,"visible":true});
-
-//Demand Line 1 - fixed
-var AD1 = createLine(brd1,{'ltype':'Demand','name':'AD','color':'Crimson'})
-AD1.setAttribute({'fixed':true,'highlight':false});
-
-//Fake line for intersection at equilibrium
-var H1 = createLine(brd1,{'ltype':'Horizontal','name':'H','color':'Orange'});
-H1.setAttribute({'fixed':true,'withLabel':false,'highlight':true,"visible":false});
-
-// var H2 = createTransformLine(brd1,{'transformList':[sliderYPositive],'ltype':'Horizontal','name':'H','color':'Orange'});
-// H2.setAttribute({'fixed':true,'withLabel':false,'highlight':true,"visible":false});
+  // sliderYPositive = brd1.create('transform',[
+  //     function(){return slidery.Value()},
+  //     function(){return slidery.Value()}],
+  //     {type:'translate'}
+  //     );
 
 
-////////////
-// Intersection Box 1
-////////////
-var iSDfix = brd1.create('intersection', [AD1, SRAS1, 0], {'visible':false});
-var iSD = brd1.create('intersection', [H1, SRAS2, 0], {'visible':false});
+  //Supply Line 1 - fixed
+  var SRAS1 = createLine(brd1,{'ltype':'Supply','name':'AS<sub>1924</sub>',color:'DodgerBlue'});
+  SRAS1.setAttribute({"dash":1,'fixed':true,'highlight':false});
 
-var iDonly = brd1.create('intersection', [H1, AD1, 0], {"visible":true,withLabel:false,color:"Red"});
-var iSonly = brd1.create('intersection', [H1, SRAS2, 0], {"visible":true,withLabel:false,color:"Blue"});
+  //Demand Line 2 - moveable
+  var SRAS2 = createTransformLine(brd1,{'transformList':[sliderXPositive],'ltype':'Supply','name':'AS<sub>1929</sub>','color':'DodgerBlue'})
+  SRAS2.setAttribute({'withLabel':false,'highlight':true,"visible":true});
 
+  //Demand Line 1 - fixed
+  var AD1 = createLine(brd1,{'ltype':'Demand','name':'AD','color':'Crimson'})
+  AD1.setAttribute({'fixed':true,'highlight':false});
 
-////////////
-// Fixed Dashed Lines for Board 1
-////////////
-var dashesFixedB1 = createDashedLines2Axis(brd1,iSDfix,
-                                          {withLabel:true,
-                                           xlabel:'RGDP<sub>1924</sub>',
-                                           ylabel:'102',
-                                           yoffsets:[5,10],
-                                           color:'DarkGray'});
+  //Fake line for intersection at equilibrium
+  var H1 = createLine(brd1,{'ltype':'Horizontal','name':'H','color':'Orange'});
+  H1.setAttribute({'fixed':true,'withLabel':false,'highlight':true,"visible":false});
 
-
-////////////
-// Dashes for Supply Only
-////////////
-var dashesSonly = createDashedLines2Axis(brd1,iSonly,
-                                           {withLabel:false,
-                                           xlabel:'AS<sup>*</sup>',
-                                           xoffsets:[5,24],
-                                           ylabel:'',
-                                           yoffsets:[5,10],
-                                           color:'Lime'
-                                           });
-
-////////////
-// Dashes for Demand Only
-////////////
-var dashesDonly = createDashedLines2Axis(brd1,iDonly,
-                                           {withLabel:false,
-                                           xlabel:'AD<sup>*</sup>',
-                                           xoffsets:[5,24],
-                                           ylabel:'',
-                                           yoffsets:[5,10],
-                                           color:'DodgerBlue'
-                                           });
-
-////////////
-// Dashes for Demand and Supply
-////////////
-var dashesSD = createDashedLines2Axis(brd1,iSD,
-                                           {withLabel:false,
-                                           xlabel:'',
-                                           xoffsets:[5,12],
-                                           ylabel:'PL<sub>1</sub>',
-                                           yoffsets:[5,10],
-                                           color:'Crimson'
-                                           });
+  // var H2 = createTransformLine(brd1,{'transformList':[sliderYPositive],'ltype':'Horizontal','name':'H','color':'Orange'});
+  // H2.setAttribute({'fixed':true,'withLabel':false,'highlight':true,"visible":false});
 
 
-//////////////////
-// Interactivity
-//////////////////
-brd1.on('move', function() {
-    //Moving Dashed Lines for Demand/Supply
-    dashesSD.Y1.moveTo([0, iSD.Y()]);
-    dashesSD.Y2.moveTo([iSD.X(), iSD.Y()]);
+  ////////////
+  // Intersection Box 1
+  ////////////
+  var iSDfix = brd1.create('intersection', [AD1, SRAS1, 0], {'visible':false});
+  var iSD = brd1.create('intersection', [H1, SRAS2, 0], {'visible':false});
 
-    dashesSD.X1.moveTo([iSD.X(), 0]);
-    dashesSD.X2.moveTo([iSD.X(), iSD.Y()]);
+  var iDonly = brd1.create('intersection', [H1, AD1, 0], {"visible":true,withLabel:false,color:"Red"});
+  var iSonly = brd1.create('intersection', [H1, SRAS2, 0], {"visible":true,withLabel:false,color:"Blue"});
 
-    //Moving Dashed Lines for Supply only
-    dashesSonly.Y1.moveTo([0, iSonly.Y()]);
-    dashesSonly.Y2.moveTo([iSonly.X(), iSonly.Y()]);
 
-    dashesSonly.X1.moveTo([iSonly.X(), 0]);
-    dashesSonly.X2.moveTo([iSonly.X(), iSonly.Y()]);
+  ////////////
+  // Fixed Dashed Lines for Board 1
+  ////////////
+  var dashesFixedB1 = createDashedLines2Axis(brd1,iSDfix,
+                                            {withLabel:true,
+                                             xlabel:'RGDP<sub>1924</sub>',
+                                             ylabel:'102',
+                                             yoffsets:[5,10],
+                                             color:'DarkGray'});
 
-    //Moving Dashed Lines for Demand only
-    dashesDonly.Y1.moveTo([0, iDonly.Y()]);
-    dashesDonly.Y2.moveTo([iDonly.X(), iDonly.Y()]);
 
-    dashesDonly.X1.moveTo([iDonly.X(), 0]);
-    dashesDonly.X2.moveTo([iDonly.X(), iDonly.Y()]);
+  ////////////
+  // Dashes for Supply Only
+  ////////////
+  var dashesSonly = createDashedLines2Axis(brd1,iSonly,
+                                             {withLabel:false,
+                                             xlabel:'AS<sup>*</sup>',
+                                             xoffsets:[5,24],
+                                             ylabel:'',
+                                             yoffsets:[5,10],
+                                             color:'Lime'
+                                             });
 
+  ////////////
+  // Dashes for Demand Only
+  ////////////
+  var dashesDonly = createDashedLines2Axis(brd1,iDonly,
+                                             {withLabel:false,
+                                             xlabel:'AD<sup>*</sup>',
+                                             xoffsets:[5,24],
+                                             ylabel:'',
+                                             yoffsets:[5,10],
+                                             color:'DodgerBlue'
+                                             });
+
+  ////////////
+  // Dashes for Demand and Supply
+  ////////////
+  var dashesSD = createDashedLines2Axis(brd1,iSD,
+                                             {withLabel:false,
+                                             xlabel:'',
+                                             xoffsets:[5,12],
+                                             ylabel:'PL<sub>1</sub>',
+                                             yoffsets:[5,10],
+                                             color:'Crimson'
+                                             });
+
+
+  //////////////////
+  // Interactivity
+  //////////////////
+  brd1.on('move', function() {
+      //Moving Dashed Lines for Demand/Supply
+      dashesSD.Y1.moveTo([0, iSD.Y()]);
+      dashesSD.Y2.moveTo([iSD.X(), iSD.Y()]);
+
+      dashesSD.X1.moveTo([iSD.X(), 0]);
+      dashesSD.X2.moveTo([iSD.X(), iSD.Y()]);
+
+      //Moving Dashed Lines for Supply only
+      dashesSonly.Y1.moveTo([0, iSonly.Y()]);
+      dashesSonly.Y2.moveTo([iSonly.X(), iSonly.Y()]);
+
+      dashesSonly.X1.moveTo([iSonly.X(), 0]);
+      dashesSonly.X2.moveTo([iSonly.X(), iSonly.Y()]);
+
+      //Moving Dashed Lines for Demand only
+      dashesDonly.Y1.moveTo([0, iDonly.Y()]);
+      dashesDonly.Y2.moveTo([iDonly.X(), iDonly.Y()]);
+
+      dashesDonly.X1.moveTo([iDonly.X(), 0]);
+      dashesDonly.X2.moveTo([iDonly.X(), iDonly.Y()]);
+
+  });
+
+  brd1.on('mousedown', function() {
+      SRAS2.setAttribute({withLabel:true});
+      // dashesSD.Y1.setAttribute({withLabel:true});
+      // dashesSD.X1.setAttribute({withLabel:true});
+      dashesSonly.Y1.setAttribute({withLabel:true});
+      dashesSonly.X1.setAttribute({withLabel:true});
+      dashesDonly.Y1.setAttribute({withLabel:true});
+      dashesDonly.X1.setAttribute({withLabel:true});
+      brd1.update()
+  });
+}
+
+/////////////////////////
+// External DOM buttons
+/////////////////////////
+var resetAnimationBtn = document.getElementById('resetAnimationBtn');
+
+resetAnimationBtn.addEventListener('click', function() {
+    JXG.JSXGraph.freeBoard(brd1);
+    init();
 });
 
-brd1.on('mousedown', function() {
-    SRAS2.setAttribute({withLabel:true});
-    // dashesSD.Y1.setAttribute({withLabel:true});
-    // dashesSD.X1.setAttribute({withLabel:true});
-    dashesSonly.Y1.setAttribute({withLabel:true});
-    dashesSonly.X1.setAttribute({withLabel:true});
-    dashesDonly.Y1.setAttribute({withLabel:true});
-    dashesDonly.X1.setAttribute({withLabel:true});
-    brd1.update()
-});
+init();
 
 //Standard edX JSinput functions
 setState = function(transaction, statestr){
@@ -187,5 +203,3 @@ getGrade = function() {
 }
 
 createChannel(getGrade, getState, setState);
-
-

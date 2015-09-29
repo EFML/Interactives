@@ -1,48 +1,64 @@
-var animationSpeed = 1000;
-var curveShift = 1.5
-////////////
-// BOARD 1
-////////////
-var brd1 = createBoard('jxgbox1',{xname:"Real GDP", yname:"Price<br>Level",
-                                  grid:false,'xpos':[8,-0.5]});
+var animationSpeed, curveShift, brd1, AD2, dashD2, G, D2;
 
-//Demand Line 1 - fixed
-var AD1 = createLine(brd1,{ltype:'Demand',name:'AD<sub>1</sub>',color:'Gray'});
-AD1.setAttribute({'dash':1,'fixed':true,'highlight':false});
+function init() {
+    animationSpeed = 1000;
+    curveShift = 1.5
+    ////////////
+    // BOARD 1
+    ////////////
+    brd1 = createBoard('jxgbox1',{xname:"Real GDP", yname:"Price<br>Level",
+                                      grid:false,'xpos':[8,-0.5]});
 
-//Demand Line 2 - moveable
-var AD2 = createLine(brd1,{ltype:'Demand',name:'AD<sub>2</sub>',color:'DodgerBlue'});
-AD2.setAttribute({withLabel:false});
+    //Demand Line 1 - fixed
+    var AD1 = createLine(brd1,{ltype:'Demand',name:'AD<sub>1</sub>',color:'Gray'});
+    AD1.setAttribute({'dash':1,'fixed':true,'highlight':false});
 
-var Gfix = brd1.create('glider',[6.0,6.0,AD1],{fixed:true,visible:false});
-var G = brd1.create('glider',[6.0,6.0,AD2],{name:'A'});
+    //Demand Line 2 - moveable
+    AD2 = createLine(brd1,{ltype:'Demand',name:'AD<sub>2</sub>',color:'DodgerBlue'});
+    AD2.setAttribute({withLabel:false});
 
-////////////
-// Fixed Dashed Lines for Board 1
-////////////
-var dashD1 = createDashedLines2Axis(brd1,Gfix,
-                                  {fixed:true,
-                                   withLabel:true,
-                                   xlabel:'R<sub>1</sub>',
-                                   ylabel:'P<sub>1</sub>',
-                                   color:'Gray'});
+    var Gfix = brd1.create('glider',[6.0,6.0,AD1],{fixed:true,visible:false});
+    G = brd1.create('glider',[6.0,6.0,AD2],{name:'A'});
+
+    ////////////
+    // Fixed Dashed Lines for Board 1
+    ////////////
+    var dashD1 = createDashedLines2Axis(brd1,Gfix,
+                                      {fixed:true,
+                                       withLabel:true,
+                                       xlabel:'R<sub>1</sub>',
+                                       ylabel:'P<sub>1</sub>',
+                                       color:'Gray'});
 
 
-////////////
-// Draggable Dashed Lines for Board 1
-////////////
-var dashD2 = createDashedLines2Axis(brd1,G,
-                                  {fixed:false,
-                                   withLabel:false,
-                                   xlabel:'R<sub>2</sub>',
-                                   ylabel:'P<sub>2</sub>',
-                                   color:'DarkGray'});
+    ////////////
+    // Draggable Dashed Lines for Board 1
+    ////////////
+    dashD2 = createDashedLines2Axis(brd1,G,
+                                      {fixed:false,
+                                       withLabel:false,
+                                       xlabel:'R<sub>2</sub>',
+                                       ylabel:'P<sub>2</sub>',
+                                       color:'DarkGray'});
 
-toggleLabels = function(toggle) {
-    dashD2.X1.setAttribute({withLabel:toggle});
-    dashD2.Y1.setAttribute({withLabel:toggle});
-    AD2.setAttribute({withLabel:toggle});
-};
+    //////////////////
+    // Interactivity
+    //////////////////
+    brd1.on('move', function() {
+        //Moving Dashed Lines in Board 1
+        dashD2.Y1.moveTo([0, G.Y()]);
+        dashD2.Y2.moveTo([G.X(), G.Y()]);
+
+        dashD2.X1.moveTo([G.X(), 0]);
+        dashD2.X2.moveTo([G.X(), G.Y()]);
+        brd1.update()
+    });
+
+    brd1.on('mousedown', function() {
+        toggleLabels(true);
+        brd1.update()
+    });
+}
 
 /////////////////////////
 // External DOM buttons
@@ -50,32 +66,20 @@ toggleLabels = function(toggle) {
 var increaseABtn = document.getElementById('increaseABtn');
 var resetAnimationBtn = document.getElementById('resetAnimationBtn');
 
-//////////////////
-// Interactivity
-//////////////////
-brd1.on('move', function() {
-    //Moving Dashed Lines in Board 1
-    dashD2.Y1.moveTo([0, G.Y()]);
-    dashD2.Y2.moveTo([G.X(), G.Y()]);
-
-    dashD2.X1.moveTo([G.X(), 0]);
-    dashD2.X2.moveTo([G.X(), G.Y()]);
-    brd1.update()
-});
-
-brd1.on('mousedown', function() {
-    toggleLabels(true);
-    brd1.update()
-});
-
 increaseABtn.addEventListener('click', increaseA);
 resetAnimationBtn.addEventListener('click', function() {
-    resetAnimation(0);
+    resetAnimation();
 });
 
+function toggleLabels(toggle) {
+    dashD2.X1.setAttribute({withLabel:toggle});
+    dashD2.Y1.setAttribute({withLabel:toggle});
+    AD2.setAttribute({withLabel:toggle});
+};
+
 //Animation for shifting curve SouthWest
-decreaseXY = function() {
-    resetAnimation(0);
+function decreaseXY() {
+    resetAnimation();
     brd1.update();
 
     toggleLabels(true);
@@ -93,8 +97,8 @@ decreaseXY = function() {
 }
 
 //Animation for shifting curve NorthEast
-increaseXY = function() {
-    resetAnimation(0);
+function increaseXY() {
+    resetAnimation();
     toggleLabels(true);
     brd1.update();
 
@@ -106,22 +110,6 @@ increaseXY = function() {
 
     dashD2.X1.moveTo([G.X()+curveShift, 0],animationSpeed);
     dashD2.X2.moveTo([G.X()+curveShift, G.Y()+curveShift],animationSpeed);
-
-    brd1.update();
-}
-
-function resetAnimation(speed) {
-    toggleLabels(false);
-    AD2.point1.moveTo([2.0,9.5],speed);
-    AD2.point2.moveTo([9.5,2.0],speed);
-
-    G.moveTo([Gfix.X(),Gfix.X()],speed);
-
-    dashD2.Y1.moveTo([0, 5.75],speed);
-    dashD2.Y2.moveTo([5.75, 5.75],speed);
-
-    dashD2.X1.moveTo([5.75, 0],speed);
-    dashD2.X2.moveTo([5.75, 5.75],speed);
 
     brd1.update();
 }
@@ -142,7 +130,7 @@ function increaseA() {
     brd1.update();
 }
 
-decreaseA = function() {
+function decreaseA() {
     resetAnimation();
     brd1.update();
 
@@ -157,6 +145,13 @@ decreaseA = function() {
 
     brd1.update();
 }
+
+function resetAnimation() {
+    JXG.JSXGraph.freeBoard(brd1);
+    init();
+}
+
+init();
 
 //Standard edX JSinput functions
 setState = function(transaction, statestr){

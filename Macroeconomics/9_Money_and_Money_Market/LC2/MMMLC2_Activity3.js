@@ -1,61 +1,77 @@
-bboxlimits = [-1.85, 12, 12, -1.1];
-var brd1 = JXG.JSXGraph.initBoard('jxgbox1', {axis:false,
-                                        showCopyright: false,
-                                        showNavigation: false,
-                                        zoom: false,
-                                        pan: false,
-                                        boundingbox:bboxlimits,
-                                        grid: false,
-                                        hasMouseUp: true,
-});
+var brd1, D2, dashD2, G;
 
-xaxis = brd1.create('axis', [[0, 0], [12, 0]], {withLabel: true, label: {offset: [320,-20]}});
-yaxis = brd1.create('axis', [[0, 0], [0, 12]], {withLabel: true, label: {offset: [-60,260]}});
+function init() {
+    bboxlimits = [-1.85, 12, 12, -1.1];
+    brd1 = JXG.JSXGraph.initBoard('jxgbox1', {axis:false,
+                                            showCopyright: false,
+                                            showNavigation: false,
+                                            zoom: false,
+                                            pan: false,
+                                            boundingbox:bboxlimits,
+                                            grid: false,
+                                            hasMouseUp: true,
+    });
 
-//Axes
-xaxis.removeAllTicks();
-yaxis.removeAllTicks();
-var ylabel = brd1.create('text',[-1.75,10,"Nominal<br>Interest<br>Rate"],{fixed:true});
-var xlabel = brd1.create('text',[8,-0.5,"Quantity of Money"],{fixed:true});
+    xaxis = brd1.create('axis', [[0, 0], [12, 0]], {withLabel: true, label: {offset: [320,-20]}});
+    yaxis = brd1.create('axis', [[0, 0], [0, 12]], {withLabel: true, label: {offset: [-60,260]}});
 
-//Demand 1
-var D1 = createDemand(brd1,{name:'D<sub>1</sub>',color:'Gray'});
-D1.setAttribute({fixed:true, dash:1});
-var G = brd1.create('glider',[6.0,6.0,D1],{fixed:true,visible:false});
+    //Axes
+    xaxis.removeAllTicks();
+    yaxis.removeAllTicks();
+    var ylabel = brd1.create('text',[-1.75,10,"Nominal<br>Interest<br>Rate"],{fixed:true});
+    var xlabel = brd1.create('text',[8,-0.5,"Quantity of Money"],{fixed:true});
 
-////////////
-// Fixed Dashed Lines for Board 1
-////////////
-var dashD1 = createDashedLines2Axis(brd1,G,
-                                  {fixed:true,
-                                   withLabel:true,
-                                   xlabel:'M<sub>1</sub>',
-                                   ylabel:'r<sub>1</sub>',
-                                   color:'Gray'});
+    //Demand 1
+    var D1 = createDemand(brd1,{name:'D<sub>1</sub>',color:'Gray'});
+    D1.setAttribute({fixed:true, dash:1});
+    G = brd1.create('glider',[6.0,6.0,D1],{fixed:true,visible:false});
+
+    ////////////
+    // Fixed Dashed Lines for Board 1
+    ////////////
+    var dashD1 = createDashedLines2Axis(brd1,G,
+                                      {fixed:true,
+                                       withLabel:true,
+                                       xlabel:'M<sub>1</sub>',
+                                       ylabel:'r<sub>1</sub>',
+                                       color:'Gray'});
 
 
-//Demand 2
-var D2 = createDemand(brd1,{name:'D<sub>2</sub>',color:'DodgerBlue'});
-D2.setAttribute({withLabel:false,offset:[125,-85]});
+    //Demand 2
+    D2 = createDemand(brd1,{name:'D<sub>2</sub>',color:'DodgerBlue'});
+    D2.setAttribute({withLabel:false,offset:[125,-85]});
 
-//Glider along demand curve
-var G = brd1.create('glider',[6.0,6.0,D2],{name:'A',withLabel:false,fixed:true});
+    //Glider along demand curve
+    G = brd1.create('glider',[6.0,6.0,D2],{name:'A',withLabel:false,fixed:true});
 
-////////////
-// Draggable Dashed Lines for Board 1
-////////////
-var dashD2 = createDashedLines2Axis(brd1,G,
-                                  {fixed:false,
-                                   withLabel:false,
-                                   xlabel:'M<sub>2</sub>',
-                                   ylabel:'',
-                                   color:'DodgerBlue'});
+    ////////////
+    // Draggable Dashed Lines for Board 1
+    ////////////
+    dashD2 = createDashedLines2Axis(brd1,G,
+                                      {fixed:false,
+                                       withLabel:false,
+                                       xlabel:'M<sub>2</sub>',
+                                       ylabel:'',
+                                       color:'DodgerBlue'});
 
-toggleLabels = function(toggle) {
-    dashD2.X1.setAttribute({withLabel:toggle});
-    dashD2.Y1.setAttribute({withLabel:toggle});
-    D2.setAttribute({withLabel:toggle});
-};
+    //////////////////
+    // Interactivity
+    //////////////////
+    brd1.on('move', function() {
+        //Moving Dashed Lines in Board 1
+        dashD2.Y1.moveTo([0, G.Y()]);
+        dashD2.Y2.moveTo([G.X(), G.Y()]);
+
+        dashD2.X1.moveTo([G.X(), 0]);
+        dashD2.X2.moveTo([G.X(), G.Y()]);
+        brd1.update()
+    });
+
+    brd1.on('mousedown', function() {
+        toggleLabels(true);
+        brd1.update()
+    });
+}
 
 /////////////////////////
 // External DOM buttons
@@ -64,34 +80,19 @@ var riseMoneyDemandBtn = document.getElementById('riseMoneyDemandBtn');
 var fallMoneyDemandBtn = document.getElementById('fallMoneyDemandBtn');
 var resetAnimationBtn = document.getElementById('resetAnimationBtn');
 
-
-//////////////////
-// Interactivity
-//////////////////
-brd1.on('move', function() {
-    //Moving Dashed Lines in Board 1
-    dashD2.Y1.moveTo([0, G.Y()]);
-    dashD2.Y2.moveTo([G.X(), G.Y()]);
-
-    dashD2.X1.moveTo([G.X(), 0]);
-    dashD2.X2.moveTo([G.X(), G.Y()]);
-    brd1.update()
-});
-
-brd1.on('mousedown', function() {
-    toggleLabels(true);
-    brd1.update()
-});
-
 riseMoneyDemandBtn.addEventListener('click', increaseXY);
 fallMoneyDemandBtn.addEventListener('click', decreaseXY);
-resetAnimationBtn.addEventListener('click', function() {
-    resetAnimation(0);
-});
+resetAnimationBtn.addEventListener('click', resetAnimation);
+
+function toggleLabels(toggle) {
+    dashD2.X1.setAttribute({withLabel:toggle});
+    dashD2.Y1.setAttribute({withLabel:toggle});
+    D2.setAttribute({withLabel:toggle});
+};
 
 //Animation for shifting curve SouthWest
 function decreaseXY() {
-    resetAnimation(0);
+    resetAnimation();
     brd1.update();
 
     var speed = 1000;
@@ -112,7 +113,7 @@ function decreaseXY() {
 //Animation for shifting curve NorthEast
 function increaseXY() {
     var speed = 1000;
-    resetAnimation(0);
+    resetAnimation();
     toggleLabels(true);
     brd1.update();
 
@@ -128,19 +129,12 @@ function increaseXY() {
     brd1.update();
 }
 
-function resetAnimation(speed) {
-    toggleLabels(false);
-    D2.point1.moveTo([2.0,9.5],speed);
-    D2.point2.moveTo([9.5,2.0],speed);
-
-    dashD2.Y1.moveTo([0, 5.75],speed);
-    dashD2.Y2.moveTo([5.75, 5.75],speed);
-
-    dashD2.X1.moveTo([5.75, 0],speed);
-    dashD2.X2.moveTo([5.75, 5.75],speed);
-
-    brd1.update();
+function resetAnimation() {
+    JXG.JSXGraph.freeBoard(brd1);
+    init();
 }
+
+init();
 
 //Standard edX JSinput functions
 getInput = function(){
