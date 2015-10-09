@@ -63,6 +63,6 @@ getGrade = function() {
     return statestr;
 }
 
-createChannel(getGrade, getState, setState);
+MacroLib.createChannel(getGrade, getState, setState);
 
 

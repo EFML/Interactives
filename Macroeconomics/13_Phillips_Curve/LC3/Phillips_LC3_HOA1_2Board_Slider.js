@@ -1,15 +1,16 @@
-var Macro = (function(JXG) {
+var Macro = (function(JXG, MacroLib) {
   'use strict';
   var brd1, brd2;
 
   function init() {
+    MacroLib.init(MacroLib.TWO_BOARDS);
     JXG.Options.text.fontSize = 13;
 
     ////////////
     // BOARD 1
     ////////////
     var bboxlimits1 = [-1.5, 12, 12, -1.5];
-    brd1 = createBoard('jxgbox1',{bboxlimits:bboxlimits1, xname:"Real GDP", yname:"PL",grid:false,'xpos':[9,-0.5]});
+    brd1 = MacroLib.createBoard('jxgbox1',{bboxlimits:bboxlimits1, xname:"Real GDP", yname:"PL",grid:false,'xpos':[9,-0.5]});
 
     //Sliders
     var slidery = brd1.create('slider',[[-1.0,2.0],[-1.0,8],[-1.0,0,2.0]],{withLabel:false,snapWidth:0.05,
@@ -34,23 +35,23 @@ var Macro = (function(JXG) {
 
 
     //Supply Line 1 - fixed
-    var S1B1 = createLine(brd1,{'ltype':'Supply','name':'SRAS<sub>1</sub>',color:'Lime'});
+    var S1B1 = MacroLib.createLine(brd1,{'ltype':'Supply','name':'SRAS<sub>1</sub>',color:'Lime'});
     S1B1.setAttribute({'dash':1,'fixed':true,'highlight':false});
 
     //Supply Line 2 - moveable
-    var S2B1 = createTransformLine(brd1,{'transformList':[sliderYPositive],'ltype':'Supply','name':'SRAS<sub>2</sub>',color:'Lime'});
+    var S2B1 = MacroLib.createTransformLine(brd1,{'transformList':[sliderYPositive],'ltype':'Supply','name':'SRAS<sub>2</sub>',color:'Lime'});
     S2B1.setAttribute({'highlight':true,'withLabel':false});
 
     //Demand Line 1 - fixed
-    var AD1 = createLine(brd1,{'ltype':'Demand','name':'AD<sub>1</sub>','color':'Orange'})
+    var AD1 = MacroLib.createLine(brd1,{'ltype':'Demand','name':'AD<sub>1</sub>','color':'Orange'})
     AD1.setAttribute({'dash':1,'fixed':true,'highlight':false});
 
     //Demand Line 2 - moveable
-    var AD2 = createTransformLine(brd1,{'transformList':[sliderXPositive],'ltype':'Demand','name':'AD<sub>2</sub>','color':'Orange'})
+    var AD2 = MacroLib.createTransformLine(brd1,{'transformList':[sliderXPositive],'ltype':'Demand','name':'AD<sub>2</sub>','color':'Orange'})
     AD2.setAttribute({'withLabel':false,'highlight':true});
 
     //LRAS - fixed
-    var LRAS = createLine(brd1,{'ltype':'Vertical','name':'LRAS','color':'DodgerBlue'})
+    var LRAS = MacroLib.createLine(brd1,{'ltype':'Vertical','name':'LRAS','color':'DodgerBlue'})
     LRAS.setAttribute({'withLabel':true,'fixed':true,'highlight':true,strokeWidth:3});
 
     ////////////
@@ -63,7 +64,7 @@ var Macro = (function(JXG) {
     ////////////
     // Dashes for fixed Line
     ////////////
-    var dashesB1fixed = createDashedLines2Axis(brd1,iSDfix,
+    var dashesB1fixed = MacroLib.createDashedLines2Axis(brd1,iSDfix,
                                                {withLabel:true,
                                                xlabel:'rY<sub>1</sub>',
                                                xoffsets:[5,15],
@@ -75,7 +76,7 @@ var Macro = (function(JXG) {
     ////////////
     // Dashes for draggable Moveable Line
     ////////////
-    var dashesB1 = createDashedLines2Axis(brd1,iS2D,
+    var dashesB1 = MacroLib.createDashedLines2Axis(brd1,iS2D,
                                                {withLabel:true,
                                                xlabel:'rY<sub>2</sub>',
                                                xoffsets:[5,15],
@@ -92,7 +93,7 @@ var Macro = (function(JXG) {
     ////////////
     // Dashes for draggable SRAS2
     ////////////
-    var dashesLRASB1 = createDashedLines2Axis(brd1,iSLB1,
+    var dashesLRASB1 = MacroLib.createDashedLines2Axis(brd1,iSLB1,
                                                {withLabel:true,
                                                xlabel:'',
                                                xoffsets:[5,15],
@@ -110,7 +111,7 @@ var Macro = (function(JXG) {
     // BOARD 2
     ////////////
     var bboxlimits2 = [-2.5, 12, 12, -1.5];
-    brd2 = createBoard('jxgbox2',{bboxlimits:bboxlimits2,xname:"UR", yname:"Inflation<br>Rate", 'xpos':[10,-0.5], 'ypos':[-2.4,10], grid:false});
+    brd2 = MacroLib.createBoard('jxgbox2',{bboxlimits:bboxlimits2,xname:"UR", yname:"Inflation<br>Rate", 'xpos':[10,-0.5], 'ypos':[-2.4,10], grid:false});
 
     //////////
     // Connect Boards and Movement
@@ -135,7 +136,7 @@ var Macro = (function(JXG) {
     var gr2 = brd2.create('group',[C2,D2]);
 
     //SRPC - fixed
-    var SRPC1 = createLine(brd2,{'ltype':'Demand','name':'SRPC<sub>1</sub>','color':'DodgerBlue'});
+    var SRPC1 = MacroLib.createLine(brd2,{'ltype':'Demand','name':'SRPC<sub>1</sub>','color':'DodgerBlue'});
     SRPC1.setAttribute({'fixed':true,'highlight':false});
 
     //LRAS - fixed
@@ -160,7 +161,7 @@ var Macro = (function(JXG) {
     ////////////
     // Dashes for fixed SRPC1
     ////////////
-    var dashesB2 = createDashedLines2Axis(brd2,iSDB2fix,
+    var dashesB2 = MacroLib.createDashedLines2Axis(brd2,iSDB2fix,
                                                {withLabel:true,
                                                 fixed:true,
                                                 xlabel:'5.0%',
@@ -195,7 +196,7 @@ var Macro = (function(JXG) {
     ////////////
     // Dashes for moveable SRPC2
     ////////////
-    var dashesA2B2 = createDashedLines2Axis(brd2,iB2SRPC1,
+    var dashesA2B2 = MacroLib.createDashedLines2Axis(brd2,iB2SRPC1,
                                                {withLabel:true,
                                                 xlabel:'',
                                                 ylabel:'',
@@ -348,11 +349,11 @@ var Macro = (function(JXG) {
       return statestr;
   }
 
-  createChannel(getGrade, getState, setState);
+  MacroLib.createChannel(getGrade, getState, setState);
 
   return {
       setState: setState,
       getState: getState,
-      getGrade
+      getGrade: getGrade
     };
-})(JXG, undefined);
+})(JXG, MacroLib, undefined);

@@ -1,14 +1,15 @@
-var Macro = (function(JXG) {
+var Macro = (function(JXG, MacroLib) {
   'use strict';
   var brd1;
 
   function init() {
+    MacroLib.init(MacroLib.ONE_BOARD);
     ////////////
     // BOARD 1
     ////////////
     var newBBox = [-1.5, 12, 12, -1.75];
 
-    brd1 = createBoard('jxgbox1',{xname:"Real GDP", yname:"Price<br>Level",
+    brd1 = MacroLib.createBoard('jxgbox1',{xname:"Real GDP", yname:"Price<br>Level",
                                       grid:false,'xpos':[8,-0.5],'ypos':[-1.25,10], bboxlimits:newBBox});
 
     //Sliders
@@ -23,16 +24,16 @@ var Macro = (function(JXG) {
         );
 
     // //Supply Line 1 - fixed
-    var SRAS1 = createLine(brd1,{ltype:'Supply',name:'SRAS',color:'DodgerBlue'});
+    var SRAS1 = MacroLib.createLine(brd1,{ltype:'Supply',name:'SRAS',color:'DodgerBlue'});
     SRAS1.setAttribute({'fixed':true,'highlight':false});
 
     //LRAS 1 - fixed
-    var LRAS1 = createLine(brd1,{ltype:'Vertical',name:'LRAS<sub>1</sub>',color:'DarkGray'});
+    var LRAS1 = MacroLib.createLine(brd1,{ltype:'Vertical',name:'LRAS<sub>1</sub>',color:'DarkGray'});
     LRAS1.setAttribute({fixed:true,'dash':1,'fixed':true,'highlight':true});
     LRAS1.setAttribute({'label':{'offset':[20,0]}});
 
     //LRAS 2 - moveable
-    var LRAS2 = createTransformLine(brd1,{'transformList':[sliderXPositive],ltype:'Vertical',
+    var LRAS2 = MacroLib.createTransformLine(brd1,{'transformList':[sliderXPositive],ltype:'Vertical',
                                           name:'LRAS<sub>2</sub>',color:'DarkGray'});
     LRAS2.setAttribute({fixed:false,'highlight':false,withLabel:false});
 
@@ -45,7 +46,7 @@ var Macro = (function(JXG) {
     ////////////
     // Draggable Dashed Lines for Board 1
     ////////////
-    var dashS2 = createDashedLines2Axis(brd1,iS2D,
+    var dashS2 = MacroLib.createDashedLines2Axis(brd1,iS2D,
                                       {fixed:false,
                                        withLabel:false,
                                        xlabel:'Y<sub>2</sub>',
@@ -137,11 +138,11 @@ var Macro = (function(JXG) {
       return statestr;
   }
 
-  createChannel(getGrade, getState, setState);
+  MacroLib.createChannel(getGrade, getState, setState);
 
   return {
     setState: setState,
     getState: getState,
     getGrade
   };
-})(JXG, undefined);
+})(JXG, MacroLib, undefined);

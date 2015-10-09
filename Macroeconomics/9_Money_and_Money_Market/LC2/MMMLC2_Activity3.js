@@ -1,8 +1,9 @@
-var Macro = (function(JXG) {
+var Macro = (function(JXG, MacroLib) {
     'use strict';
     var brd1, D2, dashD2, G;
 
     function init() {
+        MacroLib.init(MacroLib.ONE_BOARD);
         var bboxlimits = [-1.85, 12, 12, -1.1];
         brd1 = JXG.JSXGraph.initBoard('jxgbox1', {axis:false,
                                                 showCopyright: false,
@@ -24,14 +25,14 @@ var Macro = (function(JXG) {
         var xlabel = brd1.create('text',[8,-0.5,"Quantity of Money"],{fixed:true});
 
         //Demand 1
-        var D1 = createDemand(brd1,{name:'D<sub>1</sub>',color:'Gray'});
+        var D1 = MacroLib.createDemand(brd1,{name:'D<sub>1</sub>',color:'Gray'});
         D1.setAttribute({fixed:true, dash:1});
         G = brd1.create('glider',[6.0,6.0,D1],{fixed:true,visible:false});
 
         ////////////
         // Fixed Dashed Lines for Board 1
         ////////////
-        var dashD1 = createDashedLines2Axis(brd1,G,
+        var dashD1 = MacroLib.createDashedLines2Axis(brd1,G,
                                           {fixed:true,
                                            withLabel:true,
                                            xlabel:'M<sub>1</sub>',
@@ -40,7 +41,7 @@ var Macro = (function(JXG) {
 
 
         //Demand 2
-        D2 = createDemand(brd1,{name:'D<sub>2</sub>',color:'DodgerBlue'});
+        D2 = MacroLib.createDemand(brd1,{name:'D<sub>2</sub>',color:'DodgerBlue'});
         D2.setAttribute({withLabel:false,offset:[125,-85]});
 
         //Glider along demand curve
@@ -49,7 +50,7 @@ var Macro = (function(JXG) {
         ////////////
         // Draggable Dashed Lines for Board 1
         ////////////
-        dashD2 = createDashedLines2Axis(brd1,G,
+        dashD2 = MacroLib.createDashedLines2Axis(brd1,G,
                                           {fixed:false,
                                            withLabel:false,
                                            xlabel:'M<sub>2</sub>',
@@ -139,6 +140,23 @@ var Macro = (function(JXG) {
     init();
 
     //Standard edX JSinput functions
+    function getGrade(){
+        state = {};
+        statestr = JSON.stringify(state);
+        console.log(statestr)
+
+        //IPython Notebook Considerations
+        document.getElementById('spaceBelow').innerHTML += '<br>'+statestr;
+        var command = "state = '" + statestr + "'";
+        console.log(command);
+
+        //Kernel
+        var kernel = IPython.notebook.kernel;
+        kernel.execute(command);
+
+        return statestr;
+    }
+
     function getInput(){
         state = {};
         statestr = JSON.stringify(state);
@@ -172,6 +190,6 @@ var Macro = (function(JXG) {
     return {
         setState: setState,
         getState: getState,
-        getGrade
+        getGrade: getGrade
     };
-})(JXG, undefined);
+})(JXG, MacroLib, undefined);

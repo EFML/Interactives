@@ -1,13 +1,14 @@
-var Macro = (function(JXG) {
+var Macro = (function(JXG, MacroLib) {
   'use strict';
   var brd1;
 
   function init() {
+    MacroLib.init(MacroLib.ONE_BOARD);
     //Custom Parameters
-    labelOffset = {'X':130,'Y':140};
+    MacroLib.labelOffset = {'X':130,'Y':140};
 
     var bbox = [-1.5, 12, 12, -1.5];
-    brd1 = createBoard('jxgbox1',{bboxlimits:bbox,xname:"Real GDP", 'xpos':[9,-0.5],
+    brd1 = MacroLib.createBoard('jxgbox1',{bboxlimits:bbox,xname:"Real GDP", 'xpos':[9,-0.5],
                                       yname:"Price<br>Level",grid:false,'ypos':[-1.25,10.0]});
 
     //Sliders
@@ -30,19 +31,19 @@ var Macro = (function(JXG) {
     //     );
 
     //Supply Line 1 - fixed
-    var SRAS1 = createLine(brd1,{'ltype':'Supply','name':'AS<sub>1929</sub>',color:'DodgerBlue'});
+    var SRAS1 = MacroLib.createLine(brd1,{'ltype':'Supply','name':'AS<sub>1929</sub>',color:'DodgerBlue'});
     SRAS1.setAttribute({'fixed':true,'highlight':false});
 
     //Demand Line 1 - fixed
-    var AD1 = createLine(brd1,{'ltype':'Demand','name':'AD<sub>1929</sub>','color':'Crimson'});
+    var AD1 = MacroLib.createLine(brd1,{'ltype':'Demand','name':'AD<sub>1929</sub>','color':'Crimson'});
     AD1.setAttribute({'dash':1,'fixed':true,'highlight':false});
 
     //Demand Line 2 - moveable
-    var AD2 = createTransformLine(brd1,{'transformList':[sliderXPositive],'ltype':'Demand','name':'AD<sub>1933</sub>','color':'Crimson'});
+    var AD2 = MacroLib.createTransformLine(brd1,{'transformList':[sliderXPositive],'ltype':'Demand','name':'AD<sub>1933</sub>','color':'Crimson'});
     AD2.setAttribute({'withLabel':false,'highlight':true,"visible":true});
 
     //Fake line for intersection at equilibrium
-    var H1 = createLine(brd1,{'ltype':'Horizontal','name':'H','color':'Orange'});
+    var H1 = MacroLib.createLine(brd1,{'ltype':'Horizontal','name':'H','color':'Orange'});
     H1.setAttribute({'fixed':true,'withLabel':false,'highlight':true,"visible":false});
 
     // var H2 = createTransformLine(brd1,{'transformList':[sliderYPositive],'ltype':'Horizontal','name':'H','color':'Orange'});
@@ -62,7 +63,7 @@ var Macro = (function(JXG) {
     ////////////
     // Fixed Dashed Lines for Board 1
     ////////////
-    var dashesFixedB1 = createDashedLines2Axis(brd1,iSDfix,
+    var dashesFixedB1 = MacroLib.createDashedLines2Axis(brd1,iSDfix,
                                               {withLabel:true,
                                                xlabel:'RGDP<sub>1929</sub>',
                                                ylabel:'100',
@@ -72,7 +73,7 @@ var Macro = (function(JXG) {
     ////////////
     // Dashes for Demand and Supply
     ////////////
-    var dashesSD = createDashedLines2Axis(brd1,iSD,
+    var dashesSD = MacroLib.createDashedLines2Axis(brd1,iSD,
                                                {withLabel:false,
                                                xlabel:'RGDP<sub>1933</sub>',
                                                xoffsets:[5,15],
@@ -84,7 +85,7 @@ var Macro = (function(JXG) {
     ////////////
     // Dashes for Supply Only
     ////////////
-    var dashesSonly = createDashedLines2Axis(brd1,iSonly,
+    var dashesSonly = MacroLib.createDashedLines2Axis(brd1,iSonly,
                                                {withLabel:false,
                                                xlabel:'AS<sup>*</sup>',
                                                xoffsets:[5,35],
@@ -96,7 +97,7 @@ var Macro = (function(JXG) {
     ////////////
     // Dashes for Demand Only
     ////////////
-    var dashesDonly = createDashedLines2Axis(brd1,iDonly,
+    var dashesDonly = MacroLib.createDashedLines2Axis(brd1,iDonly,
                                                {withLabel:false,
                                                xlabel:'AD<sup>*</sup>',
                                                xoffsets:[5,35],
@@ -209,11 +210,11 @@ var Macro = (function(JXG) {
       return statestr;
   }
 
-  createChannel(getGrade, getState, setState);
+  MacroLib.createChannel(getGrade, getState, setState);
 
   return {
       setState: setState,
       getState: getState,
       getGrade
   };
-})(JXG, undefined);
+})(JXG, MacroLib, undefined);

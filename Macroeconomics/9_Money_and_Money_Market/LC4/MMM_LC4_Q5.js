@@ -1,4 +1,4 @@
-var Macro = (function(JXG) {
+var Macro = (function(JXG, MacroLib) {
   'use strict';
     var brd1, dashS1, S, iSD;
 
@@ -24,7 +24,7 @@ var Macro = (function(JXG) {
         var xlabel = brd1.create('text',[8.5,-0.55,"Quantity of Money"],{fixed:true});
 
         //Demand 1
-        var D1 = createLine(brd1,{ltype:'Demand',name:'D<sub>1</sub>',color:'DodgerBlue'});
+        var D1 = MacroLib.createLine(brd1,{ltype:'Demand',name:'D<sub>1</sub>',color:'DodgerBlue'});
         D1.setAttribute({fixed:true});
 
         ////////////
@@ -56,14 +56,14 @@ var Macro = (function(JXG) {
         ////////////
         // Fixed Dashed Lines for Board 1
         ////////////
-        dashS1 = createDashedLines2Axis(brd1,iSD,
+        dashS1 = MacroLib.createDashedLines2Axis(brd1,iSD,
                                           {fixed:false,
                                            withLabel:true,
                                            xlabel:'Q<sub>2</sub>',
                                            ylabel:'NIR<sub>2</sub>',
                                            color:'Gray'});
 
-        var dashSfix = createDashedLines2Axis(brd1,iSDfix,
+        var dashSfix = MacroLib.createDashedLines2Axis(brd1,iSDfix,
                                           {fixed:true,
                                            withLabel:true,
                                            xlabel:'Q<sub>1</sub>',
@@ -182,6 +182,6 @@ var Macro = (function(JXG) {
     return {
         setState: setState,
         getState: getState,
-        getGrade
+        getGrade: getGrade
     };
-})(JXG, undefined);
+})(JXG, MacroLib, undefined);

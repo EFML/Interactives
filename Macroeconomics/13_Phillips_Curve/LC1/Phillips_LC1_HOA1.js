@@ -1,8 +1,9 @@
-var Macro = (function(JXG) {
+var Macro = (function(JXG, MacroLib) {
     'use strict';
     var brd1;
 
     function init() {
+        MacroLib.init(MacroLib.ONE_BOARD);
         ////////////
         // BOARD 1
         ////////////
@@ -27,15 +28,15 @@ var Macro = (function(JXG) {
         var ylabel1 = brd1.create('text',[9,-0.5,"RGDP"],{fixed:true});
 
         //Supply Line 1 - fixed
-        var Supply = createSupply(brd1,{name:'SRAS',color:'Gray'});
+        var Supply = MacroLib.createSupply(brd1,{name:'SRAS',color:'Gray'});
         Supply.setAttribute({'fixed':true,'highlight':false});
 
         //Demand Line 1 - fixed
-        var AD1 = createDemand(brd1,{name:'AD<sub>1</sub>',color:'Gray'});
+        var AD1 = MacroLib.createDemand(brd1,{name:'AD<sub>1</sub>',color:'Gray'});
         AD1.setAttribute({'dash':1,'fixed':true,'highlight':false});
 
         //Demand Line 2 - moveable
-        var AD2 = createDemand(brd1,{name:'AD<sub>2</sub>',color:'DodgerBlue'});
+        var AD2 = MacroLib.createDemand(brd1,{name:'AD<sub>2</sub>',color:'DodgerBlue'});
         AD2.setAttribute({withLabel:false});
 
         ////////////
@@ -47,7 +48,7 @@ var Macro = (function(JXG) {
         ////////////
         // Dashes for fixed Line
         ////////////
-        var dashB1 = createDashedLines2Axis(brd1,iSDfix,
+        var dashB1 = MacroLib.createDashedLines2Axis(brd1,iSDfix,
                                       {fixed:true,
                                        withLabel:true,
                                        xlabel:'',
@@ -57,7 +58,7 @@ var Macro = (function(JXG) {
         ////////////
         // Dashes for draggable Moveable Line
         ////////////
-        var dashS2 = createDashedLines2Axis(brd1,iS2D,
+        var dashS2 = MacroLib.createDashedLines2Axis(brd1,iS2D,
                                       {fixed:false,
                                        withLabel:false,
                                        xlabel:'',
@@ -134,11 +135,11 @@ var Macro = (function(JXG) {
         return statestr;
     }
 
-    createChannel(getGrade, getState, setState);
+    MacroLib.createChannel(getGrade, getState, setState);
 
     return {
         setState: setState,
         getState: getState,
-        getGrade
-        };
-})(JXG, undefined);
+        getGrade: getGrade
+    };
+})(JXG, MacroLib, undefined);

@@ -1,12 +1,11 @@
-var Macro = (function(JXG) {
+var Macro = (function(JXG, MacroLib) {
     'use strict';
     var brd1;
 
     function init() {
+        MacroLib.init(MacroLib.ONE_BOARD);
         //General Parameters for Macro
-        JXG.Options.point.showInfobox = false;
         JXG.Options.segment.strokeColor = 'Gray';
-        JXG.Options.segment.strokeWidth = '5';
         JXG.Options.text.fontSize = 15;
 
         ////////////
@@ -201,4 +200,4 @@ var Macro = (function(JXG) {
     });
 
     init();
-})(JXG, undefined);
+})(JXG, MacroLib, undefined);

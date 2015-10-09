@@ -1,22 +1,23 @@
-var Macro = (function(JXG) {
+var Macro = (function(JXG, MacroLib) {
   'use strict';
     var animationSpeed, curveShift, brd1, AD2, dashD2, G;
 
     function init() {
+        MacroLib.init(MacroLib.ONE_BOARD);
         animationSpeed = 1000;
         curveShift = 1.5
         ////////////
         // BOARD 1
         ////////////
-        brd1 = createBoard('jxgbox1',{xname:"Real GDP", yname:"Price<br>Level",
+        brd1 = MacroLib.createBoard('jxgbox1',{xname:"Real GDP", yname:"Price<br>Level",
                                           grid:false,'xpos':[8,-0.5]});
 
         //Demand Line 1 - fixed
-        var AD1 = createLine(brd1,{ltype:'Demand',name:'AD<sub>1</sub>',color:'Gray'});
+        var AD1 = MacroLib.createLine(brd1,{ltype:'Demand',name:'AD<sub>1</sub>',color:'Gray'});
         AD1.setAttribute({'dash':1,'fixed':true,'highlight':false});
 
         //Demand Line 2 - moveable
-        AD2 = createLine(brd1,{ltype:'Demand',name:'AD<sub>2</sub>',color:'DodgerBlue'});
+        AD2 = MacroLib.createLine(brd1,{ltype:'Demand',name:'AD<sub>2</sub>',color:'DodgerBlue'});
         AD2.setAttribute({withLabel:false});
 
         var Gfix = brd1.create('glider',[6.0,6.0,AD1],{fixed:true,visible:false});
@@ -25,7 +26,7 @@ var Macro = (function(JXG) {
         ////////////
         // Fixed Dashed Lines for Board 1
         ////////////
-        var dashD1 = createDashedLines2Axis(brd1,Gfix,
+        var dashD1 = MacroLib.createDashedLines2Axis(brd1,Gfix,
                                           {fixed:true,
                                            withLabel:true,
                                            xlabel:'R<sub>1</sub>',
@@ -36,7 +37,7 @@ var Macro = (function(JXG) {
         ////////////
         // Draggable Dashed Lines for Board 1
         ////////////
-        dashD2 = createDashedLines2Axis(brd1,G,
+        dashD2 = MacroLib.createDashedLines2Axis(brd1,G,
                                           {fixed:false,
                                            withLabel:false,
                                            xlabel:'R<sub>2</sub>',
@@ -206,11 +207,11 @@ var Macro = (function(JXG) {
         return statestr;
     }
 
-    createChannel(getGrade, getState, setState);
+    MacroLib.createChannel(getGrade, getState, setState);
 
     return {
         setState: setState,
         getState: getState,
-        getGrade
+        getGrade: getGrade
     };
-})(JXG, undefined);
+})(JXG, MacroLib, undefined);

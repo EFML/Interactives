@@ -1,15 +1,16 @@
-var Macro = (function(JXG) {
+var Macro = (function(JXG, MacroLib) {
     'use strict';
   var brd1;
 
   function init() {
+    MacroLib.init(MacroLib.ONE_BOARD);
     ////////////
     // BOARD 1
     ////////////
     var cfx = 800.0/12.0;
     var cfy = 27.0/12.0;
     var newbbox = [-120, 27, 800, -4];
-    brd1 = createBoard('jxgbox1',{xname:" ",
+    brd1 = MacroLib.createBoard('jxgbox1',{xname:" ",
                                       yname:" ",
                                       grid:false,bboxlimits:newbbox});
 
@@ -83,7 +84,7 @@ var Macro = (function(JXG) {
     ////////////
     // Draggable Dashed Lines for Board 1
     ////////////
-    var dashS2 = createDashedLines2Axis(brd1,iB1SD,
+    var dashS2 = MacroLib.createDashedLines2Axis(brd1,iB1SD,
                                               {fixed:false,
                                                withLabel:false,
                                                xlabel:'',
@@ -156,11 +157,11 @@ var Macro = (function(JXG) {
       console.debug('State updated successfully from saved.');
   }
 
-  createChannel(getGrade, getState, setState);
+  MacroLib.createChannel(getGrade, getState, setState);
 
   return {
       setState: setState,
       getState: getState,
       getGrade
   };
-})(JXG, undefined);
+})(JXG, MacroLib, undefined);

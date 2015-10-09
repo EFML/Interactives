@@ -1,14 +1,15 @@
-var Macro = (function(JXG) {
+var Macro = (function(JXG, MacroLib) {
   'use strict';
   var brd1;
 
   function init() {
+    MacroLib.init(MacroLib.ONE_BOARD);
     ////////////
     // BOARD 1
     ////////////
     var newBBox = [-2.2, 12, 12, -1.75];
 
-    brd1 = createBoard('jxgbox1',{xname:"Capital Goods", yname:"Consumer<br>Goods",
+    brd1 = MacroLib.createBoard('jxgbox1',{xname:"Capital Goods", yname:"Consumer<br>Goods",
                                       grid:false,'xpos':[8,-0.5],'ypos':[-2.1,10],bboxlimits:newBBox});
 
     //Sliders
@@ -55,7 +56,7 @@ var Macro = (function(JXG) {
     ////////////
     // Fixed Dashed Lines for Board 1
     ////////////
-    var dashA = createDashedLines2Axis(brd1,iA,
+    var dashA = MacroLib.createDashedLines2Axis(brd1,iA,
                                       {fixed:true,
                                        withLabel:true,
                                        xlabel:'K<sub>A</sub>',
@@ -145,11 +146,11 @@ var Macro = (function(JXG) {
       return statestr;
   }
 
-  createChannel(getGrade, getState, setState);
+  MacroLib.createChannel(getGrade, getState, setState);
 
   return {
             setState: setState,
             getState: getState,
             getGrade
           };
-})(JXG, undefined);
+})(JXG, MacroLib, undefined);

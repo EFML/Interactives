@@ -1,7 +1,8 @@
-var Macro = (function(JXG) {
+var Macro = (function(JXG, MacroLib) {
     'use strict';
     var brd1, D2, dashD2;
     function init() {
+        MacroLib.init(MacroLib.ONE_BOARD);
         var bboxlimits = [-1.6, 12, 12, -1.1];
         var brd1 = JXG.JSXGraph.initBoard('jxgbox1', {axis:false,
                                                 showCopyright: false,
@@ -23,14 +24,14 @@ var Macro = (function(JXG) {
         var xlabel = brd1.create('text',[8,-0.5,"Quantity of Money"],{fixed:true});
 
         //Demand 1
-        var D1 = createDemand(brd1,{name:'D<sub>1</sub>',color:'Gray'});
+        var D1 = MacroLib.createDemand(brd1,{name:'D<sub>1</sub>',color:'Gray'});
         D1.setAttribute({fixed:true, dash:1});
         var G = brd1.create('glider',[6.0,6.0,D1],{fixed:true,visible:false});
 
         ////////////
         // Fixed Dashed Lines for Board 1
         ////////////
-        var dashD1 = createDashedLines2Axis(brd1,G,
+        var dashD1 = MacroLib.createDashedLines2Axis(brd1,G,
                                           {fixed:true,
                                            withLabel:true,
                                            xlabel:'Y<sub>1</sub>',
@@ -48,7 +49,7 @@ var Macro = (function(JXG) {
         ////////////
         // Draggable Dashed Lines for Board 1
         ////////////
-        dashD2 = createDashedLines2Axis(brd1,G,
+        dashD2 = MacroLib.createDashedLines2Axis(brd1,G,
                                           {fixed:false,
                                            withLabel:false,
                                            xlabel:'Y<sub>2</sub>',
@@ -160,6 +161,6 @@ var Macro = (function(JXG) {
     return {
         setState: setState,
         getState: getState,
-        getGrade
+        getGrade: getGrade
     };
-})(JXG, undefined);
+})(JXG, MacroLib, undefined);

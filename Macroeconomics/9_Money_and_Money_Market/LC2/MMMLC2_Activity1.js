@@ -1,8 +1,9 @@
-var Macro = (function(JXG) {
+var Macro = (function(JXG, MacroLib) {
     'use strict';
     var brd1;
 
     function init() {
+        MacroLib.init(MacroLib.ONE_BOARD);
         ////////////
         // brd1 1
         ////////////
@@ -27,11 +28,11 @@ var Macro = (function(JXG) {
         var ylabel1 = brd1.create('text',[8,-0.5,"Quantity of Money"],{fixed:true});
 
         //Curve 1 - fixed
-        var C1 = createDemand(brd1,{name:'C<sub>1</sub>',color:'Gray'});
+        var C1 = MacroLib.createDemand(brd1,{name:'C<sub>1</sub>',color:'Gray'});
         C1.setAttribute({fixed:true,withLabel:true, 'highlight':true});
 
         //Curve 2 - fixed
-        var C2 = createSupply(brd1,{name:'C<sub>2</sub>',color:'Gray'});
+        var C2 = MacroLib.createSupply(brd1,{name:'C<sub>2</sub>',color:'Gray'});
         C2.setAttribute({fixed:true,withLabel:true, 'highlight':true});
 
         //Curve 3 - fixed
@@ -58,7 +59,7 @@ var Macro = (function(JXG) {
         });
 
         function resetColors(curves) {
-            for(i=0;i<curves.length;i++) {
+            for(var i=0;i<curves.length;i++) {
                 curves[i].setAttribute({strokeColor: 'Gray',strokeWidth: 4});
             }
         }
@@ -108,11 +109,11 @@ var Macro = (function(JXG) {
         console.debug('State updated successfully from saved.');
     }
 
-    createChannel(getGrade, getState, setState);
+    MacroLib.createChannel(getGrade, getState, setState);
 
     return {
         setState: setState,
         getState: getState,
-        getGrade
+        getGrade: getGrade
     };
-})(JXG, undefined);
+})(JXG, MacroLib, undefined);

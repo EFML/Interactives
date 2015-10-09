@@ -1,8 +1,9 @@
-var Macro = (function(JXG) {
+var Macro = (function(JXG, MacroLib) {
     'use strict';
     var brd1, SRPC2;
 
     function init() {
+        MacroLib.init(MacroLib.ONE_BOARD);
         ////////////
         // BOARD 1
         ////////////
@@ -27,11 +28,11 @@ var Macro = (function(JXG) {
         var ylabel = brd1.create('text',[9,-0.5,"UR"],{fixed:true});
 
         //Supply Line 1 - fixed
-        var SRPC1 = createDemand(brd1,{name:'SRPC1',color:'Gray'});
+        var SRPC1 = MacroLib.createDemand(brd1,{name:'SRPC1',color:'Gray'});
         SRPC1.setAttribute({'dash':1,'fixed':true,'highlight':false});
 
         //Supply Line 1 - fixed
-        SRPC2 = createDemand(brd1,{name:'SRPC2',color:'DodgerBlue'});
+        SRPC2 = MacroLib.createDemand(brd1,{name:'SRPC2',color:'DodgerBlue'});
         SRPC2.setAttribute({'withLabel':false,'highlight':false});
 
         //Interactivity
@@ -120,11 +121,11 @@ var Macro = (function(JXG) {
         return statestr;
     }
 
-    createChannel(getGrade, getState, setState);
+    MacroLib.createChannel(getGrade, getState, setState);
 
     return {
         setState: setState,
         getState: getState,
-        getGrade
+        getGrade: getGrade
     };
-})(JXG, undefined);
+})(JXG, MacroLib, undefined);

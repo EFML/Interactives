@@ -1,8 +1,9 @@
-var Macro = (function(JXG) {
+var Macro = (function(JXG, MacroLib) {
     'use strict';
     var brd1, dashS1, S, iSD;
 
     function init() {
+        MacroLib.init(MacroLib.ONE_BOARD);
         var bboxlimits = [-1.6, 12, 12, -1.1];
         brd1 = JXG.JSXGraph.initBoard('jxgbox1', {axis:false,
                                                 showCopyright: false,
@@ -24,7 +25,7 @@ var Macro = (function(JXG) {
         var xlabel = brd1.create('text',[8.5,-0.5,"Quantity of Money"],{fixed:true});
 
         //Demand 1
-        var D1 = createLine(brd1,{ltype:'Demand',name:'D<sub>1</sub>',color:'DodgerBlue'});
+        var D1 = MacroLib.createLine(brd1,{ltype:'Demand',name:'D<sub>1</sub>',color:'DodgerBlue'});
         D1.setAttribute({fixed:true});
 
         ////////////
@@ -56,14 +57,14 @@ var Macro = (function(JXG) {
         ////////////
         // Fixed Dashed Lines for Board 1
         ////////////
-        dashS1 = createDashedLines2Axis(brd1,iSD,
+        dashS1 = MacroLib.createDashedLines2Axis(brd1,iSD,
                                           {fixed:false,
                                            withLabel:false,
                                            xlabel:'Y<sub>2</sub>',
                                            ylabel:'R<sub>2</sub>',
                                            color:'Gray'});
 
-        var dashSfix = createDashedLines2Axis(brd1,iSDfix,
+        var dashSfix = MacroLib.createDashedLines2Axis(brd1,iSDfix,
                                           {fixed:true,
                                            withLabel:true,
                                            xlabel:'Y<sub>1</sub>',
@@ -182,11 +183,11 @@ var Macro = (function(JXG) {
         console.log(statestr);
         console.debug('State updated successfully from saved.');
     }
-        createChannel(getGrade, getState, setState);
+        MacroLib.createChannel(getGrade, getState, setState);
 
     return {
         setState: setState,
         getState: getState,
-        getGrade
+        getGrade: getGrade
     };
-})(JXG, undefined);
+})(JXG, MacroLib, undefined);

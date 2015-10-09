@@ -1,23 +1,24 @@
-var Macro = (function(JXG) {
+var Macro = (function(JXG, MacroLib) {
     'use strict';
     var brd1, brd2;
 
     function init() {
+        MacroLib.init(MacroLib.TWO_BOARDS);
         ////////////
         // BOARD 1
         ////////////
-        brd1 = createBoard('jxgbox1',{xname:"Real GDP", yname:"PL",grid:false});
+        brd1 = MacroLib.createBoard('jxgbox1',{xname:"Real GDP", yname:"PL",grid:false});
 
         //Supply Line 1 - fixed
-        var SB1 = createLine(brd1,{'ltype':'Supply','name':'SRAS',color:'Gray'});
+        var SB1 = MacroLib.createLine(brd1,{'ltype':'Supply','name':'SRAS',color:'Gray'});
         SB1.setAttribute({'fixed':true,'highlight':false});
 
         //Demand Line 1 - fixed
-        var AD1 = createLine(brd1,{'ltype':'Demand','name':'AD<sub>1</sub>','color':'Gray'})
+        var AD1 = MacroLib.createLine(brd1,{'ltype':'Demand','name':'AD<sub>1</sub>','color':'Gray'})
         AD1.setAttribute({'dash':1,'fixed':true,'highlight':false});
 
         //Demand Line 2 - moveable
-        var AD2 = createLine(brd1,{'ltype':'Demand','name':'AD<sub>2</sub>','color':'Orange'})
+        var AD2 = MacroLib.createLine(brd1,{'ltype':'Demand','name':'AD<sub>2</sub>','color':'Orange'})
         AD2.setAttribute({withLabel:false});
 
         ////////////
@@ -29,7 +30,7 @@ var Macro = (function(JXG) {
         ////////////
         // Dashes for fixed Line
         ////////////
-        var dashesB1fixed = createDashedLines2Axis(brd1,iSDfix,
+        var dashesB1fixed = MacroLib.createDashedLines2Axis(brd1,iSDfix,
                                                    {withLabel:true,
                                                    xlabel:'rY<sub>1</sub>',
                                                    ylabel:'PL<sub>1</sub>',
@@ -39,7 +40,7 @@ var Macro = (function(JXG) {
         ////////////
         // Dashes for draggable Moveable Line
         ////////////
-        var dashesB1 = createDashedLines2Axis(brd1,iS2D,
+        var dashesB1 = MacroLib.createDashedLines2Axis(brd1,iS2D,
                                                    {withLabel:true,
                                                    xlabel:'rY<sub>2</sub>',
                                                    ylabel:'PL<sub>2</sub>',
@@ -55,7 +56,7 @@ var Macro = (function(JXG) {
         // BOARD 2
         ////////////
         var bboxlimits2 = [-2.5, 12, 12, -1.5];
-        brd2 = createBoard('jxgbox2',{bboxlimits:bboxlimits2,xname:"UR", yname:"Inflation<br>Rate", 'ypos':[-2.4,10], grid:false});
+        brd2 = MacroLib.createBoard('jxgbox2',{bboxlimits:bboxlimits2,xname:"UR", yname:"Inflation<br>Rate", 'ypos':[-2.4,10], grid:false});
 
         //////////
         // Connect Boards and Movement
@@ -63,7 +64,7 @@ var Macro = (function(JXG) {
         brd1.addChild(brd2);
 
         //SRPC - fixed
-        var SRPC = createLine(brd2,{'ltype':'Demand','name':'SRPC','color':'Blue'});
+        var SRPC = MacroLib.createLine(brd2,{'ltype':'Demand','name':'SRPC','color':'Blue'});
         SRPC.setAttribute({'fixed':true,'highlight':false});
 
         ////////
@@ -163,12 +164,11 @@ var Macro = (function(JXG) {
         return statestr;
     }
 
-
-    createChannel(getGrade, getState, setState);
+    MacroLib.createChannel(getGrade, getState, setState);
 
     return {
         setState: setState,
         getState: getState,
-        getGrade
+        getGrade: getGrade
     };
-})(JXG, undefined);
+})(JXG, MacroLib, undefined);

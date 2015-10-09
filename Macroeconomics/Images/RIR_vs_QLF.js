@@ -19,7 +19,7 @@ var brd1 = createBoard('jxgbox1',{xname:"Quantity of Loanable Funds", yname:"Rea
 // var LRAS2 = createTransformLine(brd1,{'transformList':[sliderXPositive],ltype:'Vertical',
 //                                       name:'LRAS<sub>2</sub>',color:'DarkGray'});
 // LRAS2.setAttribute({fixed:false,'highlight':false,withLabel:false});
- 
+
 
 //Guides
 var L = newBBox[1];
@@ -60,6 +60,6 @@ getGrade = function() {
     return statestr;
 }
 
-createChannel(getGrade, getState, setState);
+MacroLib.createChannel(getGrade, getState, setState);
 
 

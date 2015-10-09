@@ -1,29 +1,30 @@
-var Macro = (function(JXG) {
+var Macro = (function(JXG, MacroLib) {
     'use strict';
     var brd1;
 
     function init() {
+        MacroLib.init(MacroLib.ONE_BOARD);
         ////////////
         // BOARD 1
         ////////////
 
-        brd1 = createBoard('jxgbox1',{xname:"Real GDP",
+        brd1 = MacroLib.createBoard('jxgbox1',{xname:"Real GDP",
                                           yname:"Price<br>Level",grid:false,'xpos':[9,-0.5]});
 
         //Supply Line 1 - fixed
-        var SRAS1 = createSupply(brd1,{name:'SRAS<sub>1</sub>',color:'DodgerBlue'});
+        var SRAS1 = MacroLib.createSupply(brd1,{name:'SRAS<sub>1</sub>',color:'DodgerBlue'});
         SRAS1.setAttribute({fixed:true,'dash':1,'fixed':true,'highlight':false});
 
         //Supply Line 2 - moveable
-        var SRAS2 = createSupply(brd1,{name:'SRAS<sub>2</sub>',color:'DodgerBlue'});
+        var SRAS2 = MacroLib.createSupply(brd1,{name:'SRAS<sub>2</sub>',color:'DodgerBlue'});
         SRAS2.setAttribute({fixed:true,'highlight':false,withLabel:false});
 
         //Demand Line 1 - fixed
-        var AD1 = createDemand(brd1,{name:'AD<sub>1</sub>',color:'Orange'});
+        var AD1 = MacroLib.createDemand(brd1,{name:'AD<sub>1</sub>',color:'Orange'});
         AD1.setAttribute({fixed:true,'dash':1,'fixed':true,'highlight':false});
 
         //Demand Line 2 - moveable
-        var AD2 = createDemand(brd1,{name:'AD<sub>2</sub>',color:'Orange'});
+        var AD2 = MacroLib.createDemand(brd1,{name:'AD<sub>2</sub>',color:'Orange'});
         AD2.setAttribute({fixed:true,'highlight':false,withLabel:false});
 
 
@@ -35,7 +36,7 @@ var Macro = (function(JXG) {
         ////////////
         // Fixed Dashed Lines for Board 1
         ////////////
-        var dashesFixedB1 = createDashedLines2Axis(brd1,iSDfix,
+        var dashesFixedB1 = MacroLib.createDashedLines2Axis(brd1,iSDfix,
                                                   {withLabel:true,
                                                    xlabel:'Y<sub>1</sub>',
                                                    ylabel:'PL<sub>1</sub>',
@@ -102,11 +103,11 @@ var Macro = (function(JXG) {
         return statestr;
     }
 
-    createChannel(getGrade, getState, setState);
+    MacroLib.createChannel(getGrade, getState, setState);
 
     return {
         setState: setState,
         getState: getState,
-        getGrade
+        getGrade: getGrade
     };
-})(JXG, undefined);
+})(JXG, MacroLib, undefined);

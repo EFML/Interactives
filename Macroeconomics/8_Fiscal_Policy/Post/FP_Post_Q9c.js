@@ -1,13 +1,14 @@
-var Macro = (function(JXG) {
+var Macro = (function(JXG, MacroLib) {
   'use strict';
   var brd1;
 
   function init() {
+    MacroLib.init(MacroLib.ONE_BOARD);
     //Custom Parameters
-    var labelOffset = {'X':130,'Y':140};
+    MacroLib.labelOffset = {'X':130,'Y':140};
 
     var bbox = [-1.5, 12, 12, -1.5];
-    brd1 = createBoard('jxgbox1',{bboxlimits:bbox,xname:"Real National Income", 'xpos':[8.75,-0.65],
+    brd1 = MacroLib.createBoard('jxgbox1',{bboxlimits:bbox,xname:"Real National Income", 'xpos':[8.75,-0.65],
                                       yname:"Price<br>Level",grid:false,'ypos':[-1.25,10.0]});
 
     //Sliders
@@ -30,15 +31,15 @@ var Macro = (function(JXG) {
     //     );
 
     //Supply Line 1 - fixed
-    var SRAS1 = createLine(brd1,{'ltype':'Supply','name':'SRAS',color:'DodgerBlue'});
+    var SRAS1 = MacroLib.createLine(brd1,{'ltype':'Supply','name':'SRAS',color:'DodgerBlue'});
     SRAS1.setAttribute({'fixed':true,'highlight':false});
 
     //Demand Line 1 - fixed
-    var AD1 = createLine(brd1,{'ltype':'Demand','name':'AD<sub>1</sub>','color':'Orange'});
+    var AD1 = MacroLib.createLine(brd1,{'ltype':'Demand','name':'AD<sub>1</sub>','color':'Orange'});
     AD1.setAttribute({'dash':1,'fixed':true,'highlight':false});
 
     //Demand Line 2 - moveable
-    var AD2 = createTransformLine(brd1,{'transformList':[sliderXPositive],'ltype':'Demand','name':'AD<sub>2</sub>','color':'Orange'});
+    var AD2 = MacroLib.createTransformLine(brd1,{'transformList':[sliderXPositive],'ltype':'Demand','name':'AD<sub>2</sub>','color':'Orange'});
     AD2.setAttribute({'withLabel':false,'highlight':true,"visible":true});
 
 
@@ -61,7 +62,7 @@ var Macro = (function(JXG) {
     ////////////
     // Fixed Dashed Lines for Board 1
     ////////////
-    var dashesFixedB1 = createDashedLines2Axis(brd1,iSDfix,
+    var dashesFixedB1 = MacroLib.createDashedLines2Axis(brd1,iSDfix,
                                               {withLabel:true,
                                                xlabel:'RGDP<sub>1</sub>',
                                                ylabel:'PL<sub>1</sub>',
@@ -71,7 +72,7 @@ var Macro = (function(JXG) {
     ////////////
     // Dashes for Demand and Supply
     ////////////
-    var dashesSD = createDashedLines2Axis(brd1,iSD,
+    var dashesSD = MacroLib.createDashedLines2Axis(brd1,iSD,
                                                {withLabel:false,
                                                xlabel:'RGDP<sub>2</sub>',
                                                xoffsets:[5,15],
@@ -159,11 +160,11 @@ var Macro = (function(JXG) {
       return statestr;
   }
 
-  createChannel(getGrade, getState, setState);
+  MacroLib.createChannel(getGrade, getState, setState);
 
   return {
       setState: setState,
       getState: getState,
       getGrade
   };
-})(JXG, undefined);
+})(JXG, MacroLib, undefined);

@@ -1,8 +1,9 @@
-var Macro = (function(JXG) {
+var Macro = (function(JXG, MacroLib) {
     'use strict';
     var brd1, AD2, G;
 
     function init() {
+        MacroLib.init(MacroLib.ONE_BOARD);
         ////////////
         // brd1 1
         ////////////
@@ -28,11 +29,11 @@ var Macro = (function(JXG) {
 
 
         //Demand Line 1 - fixed
-        var AD1 = createDemand(brd1,{color:'Gray'});
+        var AD1 = MacroLib.createDemand(brd1,{color:'Gray'});
         AD1.setAttribute({'dash':1,'fixed':true,'highlight':false});
 
         //Demand Line 2 - moveable
-        var AD2 = createDemand(brd1,{name:'AD<sub>1</sub>',color:'DodgerBlue'});
+        var AD2 = MacroLib.createDemand(brd1,{name:'AD<sub>1</sub>',color:'DodgerBlue'});
         AD2.setAttribute({withLabel:true, 'highlight':true});
 
         var original = AD2;
@@ -125,11 +126,11 @@ var Macro = (function(JXG) {
         console.debug('State updated successfully from saved.');
     }
 
-    createChannel(getGrade, getState, setState);
+    MacroLib.createChannel(getGrade, getState, setState);
 
     return {
         setState: setState,
         getState: getState,
-        getGrade
+        getGrade: getGrade
     };
-})(JXG, undefined);
+})(JXG, MacroLib, undefined);
