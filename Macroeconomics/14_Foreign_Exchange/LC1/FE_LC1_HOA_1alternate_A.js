@@ -8,8 +8,13 @@ var Macro = (function(JXG, MacroLib) {
         // BOARD 1
         ////////////
 
-        brd1 = MacroLib.createBoard('jxgbox1',{xname:' ',
-                                          yname:"Price<br>( $/&euro; )",grid:false,'xpos':[8,-0.5],'ypos':[-1.25,10]});
+        brd1 = MacroLib.createBoard('jxgbox1', {
+            xname: ' ',
+            yname: "Price<br>( $/&euro; )",
+            grid: false,
+            'xpos': [8, -0.5],
+            'ypos': [-1.25, 10]
+        });
     }
 
     /////////////////////////
@@ -25,7 +30,7 @@ var Macro = (function(JXG, MacroLib) {
     init();
 
     //Standard edX JSinput functions
-    function setState(transaction,statestr){
+    function setState(transaction, statestr) {
         state = JSON.parse(statestr);
         //console.log(state);
         //console.log(state["dragLine"]);
@@ -48,7 +53,7 @@ var Macro = (function(JXG, MacroLib) {
         console.debug('State updated successfully from saved.');
     }
 
-    function getState(){
+    function getState() {
         var state = JSON.parse(getGrade());
         statestr = JSON.stringify(state);
         // console.log(statestr);
