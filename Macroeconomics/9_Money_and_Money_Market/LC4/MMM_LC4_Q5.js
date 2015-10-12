@@ -3,6 +3,7 @@ var Macro = (function(JXG, MacroLib) {
     var brd1, dashS1, S, iSD;
 
     function init() {
+        MacroLib.init(MacroLib.ONE_BOARD);
         var bboxlimits = [-1.75, 12, 12, -1.25];
         brd1 = JXG.JSXGraph.initBoard('jxgbox1', {
             axis: false,
@@ -204,7 +205,7 @@ var Macro = (function(JXG, MacroLib) {
     init();
 
     //Standard edX JSinput functions
-    function getInput() {
+    function getGrade() {
         state = {};
         statestr = JSON.stringify(state);
         console.log(statestr)
@@ -235,6 +236,8 @@ var Macro = (function(JXG, MacroLib) {
         console.log(statestr);
         console.debug('State updated successfully from saved.');
     }
+
+    MacroLib.createChannel(getGrade, getState, setState);
 
     return {
         setState: setState,

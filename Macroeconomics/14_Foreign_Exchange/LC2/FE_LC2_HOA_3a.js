@@ -78,7 +78,7 @@ var Macro = (function(JXG, MacroLib) {
         });
 
         //Supply Line 2 - moveable
-        var SRAS2 = createTransformLine(brd1, {
+        var SRAS2 = MacroLib.createTransformLine(brd1, {
             'transformList': [sliderX1Positive],
             ltype: 'Supply',
             name: '$S<sub>2</sub>',

@@ -203,9 +203,6 @@ var Macro = (function(JXG, MacroLib) {
             dashesDonly.X1.setAttribute({
                 withLabel: true
             });
-            sliderLabel128.setAttribute({
-                visible: true
-            });
             brd1.update()
         });
     }

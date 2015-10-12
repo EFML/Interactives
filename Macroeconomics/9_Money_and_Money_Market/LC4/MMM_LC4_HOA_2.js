@@ -210,7 +210,7 @@ var Macro = (function(JXG, MacroLib) {
     init();
 
     //Standard edX JSinput functions
-    function getInput() {
+    function getGrade() {
         state = {};
         statestr = JSON.stringify(state);
         console.log(statestr)

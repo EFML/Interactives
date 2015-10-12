@@ -107,7 +107,7 @@ var Macro = (function(JXG, MacroLib) {
         ////////////
         // Fixed Dashed Lines for Board 1
         ////////////
-        var dashesFixedB1 = createDashedLines2Axis(brd1, iSDfix, {
+        var dashesFixedB1 = MacroLib.createDashedLines2Axis(brd1, iSDfix, {
             withLabel: true,
             xlabel: 'Y<sub>1</sub>',
             ylabel: 'PL<sub>1</sub>',
