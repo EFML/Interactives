@@ -76,8 +76,6 @@ var Macro = (function(JXG, MacroLib) {
                                {'strokeColor':'DarkGray','strokeWidth':'3',
                                 'name':'LRAS','withLabel':true, 'fixed':true,
                                 'label':{'offset':[-15,200]}});
-        // var labelLRAS = brd1.create('text',[2.7,-0.4,"rY<sub>F</sub>"],{fixed:true});
-
 
         //////////////////
         // Interactivity

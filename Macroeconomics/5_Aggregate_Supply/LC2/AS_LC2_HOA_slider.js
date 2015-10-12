@@ -37,9 +37,9 @@ var Macro = (function(JXG, MacroLib) {
                                           name:'LRAS<sub>2</sub>',color:'DarkGray'});
     LRAS2.setAttribute({fixed:false,'highlight':false,withLabel:false});
 
-    // ////////////
-    // // Intersection Box 1
-    // ////////////
+    //////////////
+    //// Intersection Box 1
+    //////////////
     var iSDfix = brd1.create('intersection', [LRAS1, SRAS1, 0], {visible:false});
     var iS2D = brd1.create('intersection', [LRAS2, SRAS1, 0], {visible:false});
 
@@ -61,21 +61,6 @@ var Macro = (function(JXG, MacroLib) {
                                                xlabel:'Y<sub>1</sub>',
                                                ylabel:'PL<sub>1</sub>',
                                                color:'DodgerBlue'});
-
-    ////////////
-    //LRAS - straight line
-    ////////////
-    // var LRASfix = brd1.create('segment',[[5.75,11.0],[5.75,0.0]],
-    //                        {'strokeColor':'DarkGray','strokeWidth':'5',
-    //                         'name':'LRAS','withLabel':true, 'fixed':true,
-    //                         'label':{'offset':[-15,200]}});
-    // LRASfix.setAttribute({'dash':1,'fixed':true,'highlight':false});
-
-    // var LRAS = brd1.create('segment',[[5.75,11.0],[5.75,0.0]],
-    //                        {'strokeColor':'DarkGray','strokeWidth':'6',
-    //                         'name':'LRAS','withLabel':true, 'fixed':false,
-    //                         'label':{'offset':[-15,200]}});
-
 
     //////////////////
     // Interactivity

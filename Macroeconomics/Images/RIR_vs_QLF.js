@@ -6,21 +6,6 @@ var newBBox = [-1.75, 12, 12, -1.75];
 var brd1 = createBoard('jxgbox1',{xname:"Quantity of Loanable Funds", yname:"Real<br>Interest<br>Rate",
                                   grid:false,'xpos':[6,-0.5],'ypos':[-1.55,10], bboxlimits:newBBox});
 
-// // //Supply Line 1 - fixed
-// var SRAS1 = createLine(brd1,{ltype:'Supply',name:'SRAS',color:'DodgerBlue'});
-// SRAS1.setAttribute({'fixed':true,'highlight':false});
-
-// //LRAS 1 - fixed
-// var LRAS1 = createLine(brd1,{ltype:'Vertical',name:'LRAS<sub>1</sub>',color:'DarkGray'});
-// LRAS1.setAttribute({fixed:true,'dash':1,'fixed':true,'highlight':true});
-// LRAS1.setAttribute({'label':{'offset':[20,0]}});
-
-// //LRAS 2 - moveable
-// var LRAS2 = createTransformLine(brd1,{'transformList':[sliderXPositive],ltype:'Vertical',
-//                                       name:'LRAS<sub>2</sub>',color:'DarkGray'});
-// LRAS2.setAttribute({fixed:false,'highlight':false,withLabel:false});
-
-
 //Guides
 var L = newBBox[1];
 var GY1 = brd1.create('segment',[[L/4,0.0],[L/4,L]],{name:'GY1',color:'DarkGray',dash:1,strokeWidth:2});
@@ -53,7 +38,7 @@ getState = function(){
     return statestr;
 }
 
-getGrade = function() {    
+getGrade = function() {
     var state = {"LRAS2":{'X':sliderx.Value()}};
     statestr = JSON.stringify(state);
     //console.log('hello',statestr);

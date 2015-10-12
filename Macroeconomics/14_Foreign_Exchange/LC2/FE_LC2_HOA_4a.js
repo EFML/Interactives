@@ -21,7 +21,7 @@ var Macro = (function(JXG, MacroLib) {
     var sliderx2 = brd1.create('slider',[[3.5,-2.0],[8.5,-2.0],[0.0,0,2.0]],{withLabel:false,snapWidth:0.05,
                                                                            color:'Orange'});
 
-    //Postivit Slider Transformation
+    //Positive Slider Transformation
     var sliderX1Positive = brd1.create('transform',[
         function(){return sliderx1.Value()},
         function(){return 0.0}],

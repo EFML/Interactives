@@ -73,8 +73,6 @@ var Macro = (function(JXG, MacroLib) {
             );
 
         //Demand Board 1
-        //var D1 = brd1.create('segment',[[2,9.5],[9.5,2]],{'name':'D',withLabel:true,label:{offset:[100,-100]}})
-        //var S1 = createSupply(brd1,{'name':'S',withLabel:true,label:{offset:[90,90]}});
         var S1 = brd1.create('segment',[[5.75,1.0],[5.75,11.0]],{withLabel:true,name:'M<sub>S</sub>',
                                                                  label:{offset:[0,115]}});
 

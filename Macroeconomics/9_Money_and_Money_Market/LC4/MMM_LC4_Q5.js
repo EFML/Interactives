@@ -122,7 +122,6 @@ var Macro = (function(JXG, MacroLib) {
         var speed = 1000;
         resetAnimation();
         toggleLabels(true);
-        //brd1.update();
 
         S.point1.moveTo([S.point1.X()+delta,S.point1.Y()],speed);
         S.point2.moveTo([S.point2.X()+delta,S.point2.Y()],speed);

@@ -65,7 +65,6 @@ var Macro = (function(JXG, MacroLib) {
 
         //Intersection of SD board 1
         var iSDB1 = brd1.create('intersection',[S2,D1],{withLabel:false,highlight:false});
-        //var gSDB1 = brd1.create('glider',[3.75,7.75,S1],{withLabel:false,highlight:false});
 
         //Dashed Lines - Board 1
         var dashB1fixed = MacroLib.createDashedLines2Axis(brd1,iSDB1,{fixed:true,withLabel:true,color:'Gray',
@@ -91,7 +90,6 @@ var Macro = (function(JXG, MacroLib) {
         var D1B2 = MacroLib.createLine(brd2,{'ltype':'Demand','name':'D',color:'Gray'});
         D1B2.setAttribute({'fixed':true});
 
-        // var D2B2 = createTransformLine(brd2,{'ltype':'Demand','transformList':[sliderB2Pos],'name':'D<sub>2</sub>',color:'DodgerBlue'});
         //Intersection Board 2
         var iSDB2 = brd2.create('intersection',[SB2,D1B2],{withLabel:false,highlight:false});
 

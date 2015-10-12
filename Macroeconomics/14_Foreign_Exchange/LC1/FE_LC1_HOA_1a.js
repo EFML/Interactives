@@ -33,16 +33,6 @@ var Macro = (function(JXG, MacroLib) {
         var iSDfix = brd1.create('intersection', [AD1, SRAS1, 0], {visible:false});
         var iS2D = brd1.create('intersection', [AD2, SRAS2, 0], {visible:false});
 
-        // ////////////
-        // // Fixed Dashed Lines for Board 1
-        // ////////////
-        // var dashesFixedB1 = createDashedLines2Axis(brd1,iSDfix,
-        //                                           {withLabel:true,
-        //                                            xlabel:'',
-        //                                            ylabel:'',
-        //                                            yoffsets:[-45,0],
-        //                                            color:'DodgerBlue'});
-
         ////////////
         // Draggable Dashed Lines for Board 1
         ////////////

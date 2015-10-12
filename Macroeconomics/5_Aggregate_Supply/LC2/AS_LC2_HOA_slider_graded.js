@@ -62,21 +62,6 @@ var Macro = (function(JXG, MacroLib) {
                                                ylabel:'PL<sub>1</sub>',
                                                color:'DodgerBlue'});
 
-    ////////////
-    //LRAS - straight line
-    ////////////
-    // var LRASfix = brd1.create('segment',[[5.75,11.0],[5.75,0.0]],
-    //                        {'strokeColor':'DarkGray','strokeWidth':'5',
-    //                         'name':'LRAS','withLabel':true, 'fixed':true,
-    //                         'label':{'offset':[-15,200]}});
-    // LRASfix.setAttribute({'dash':1,'fixed':true,'highlight':false});
-
-    // var LRAS = brd1.create('segment',[[5.75,11.0],[5.75,0.0]],
-    //                        {'strokeColor':'DarkGray','strokeWidth':'6',
-    //                         'name':'LRAS','withLabel':true, 'fixed':false,
-    //                         'label':{'offset':[-15,200]}});
-
-
     //////////////////
     // Interactivity
     //////////////////

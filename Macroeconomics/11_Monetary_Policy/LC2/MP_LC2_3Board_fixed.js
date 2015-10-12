@@ -79,7 +79,6 @@ var Macro = (function(JXG, MacroLib) {
         var D1B2 = MacroLib.createLine(brd2,{'ltype':'Demand','name':'D',color:'Gray'});
         D1B2.setAttribute({'fixed':true});
 
-        // var D2B2 = createTransformLine(brd2,{'ltype':'Demand','transformList':[sliderPositive],'name':'D<sub>2</sub>',color:'DodgerBlue'});
         //Intersection Board 2
         var iSDB2 = brd2.create('intersection',[SB2,D1B2],{withLabel:false,highlight:false});
 
@@ -109,24 +108,6 @@ var Macro = (function(JXG, MacroLib) {
                                                         xlabel:'Y<sub>1</sub>',ylabel:'P<sub>1</sub>'});
         var dashB3 = MacroLib.createDashedLines2Axis(brd3,iSDB3,{fixed:false,withLabel:false,color:'DodgerBlue',
                                                         xlabel:'Y<sub>2</sub>',ylabel:'P<sub>2</sub>'});
-
-
-        // //////////////////
-        // // Interactivity
-        // //////////////////
-        // brd1.on('mousedown', function() {
-        //     dashB1.X1.setAttribute({withLabel:true});
-        //     dashB1.Y1.setAttribute({withLabel:true});
-
-        //     dashB2.X1.setAttribute({withLabel:true});
-        //     dashB2.Y1.setAttribute({withLabel:true});
-
-        //     dashB3.X1.setAttribute({withLabel:true});
-        //     dashB3.Y1.setAttribute({withLabel:true});
-
-        //     S2.setAttribute({withLabel:true});
-        //     D2B3.setAttribute({withLabel:true});
-        // });
 
 
         brd1.on('move', function() {

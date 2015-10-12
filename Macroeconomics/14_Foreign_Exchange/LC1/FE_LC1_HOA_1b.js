@@ -7,26 +7,6 @@ var Macro = (function(JXG, MacroLib) {
         ////////////
         // BOARD 1
         ////////////
-        // bboxlimits = [-1.5, 12, 12, -1];
-        // var brd1 = JXG.JSXGraph.initBoard('jxgbox1', {axis:false,
-        //                                         showCopyright: false,
-        //                                         showNavigation: false,
-        //                                         zoom: false,
-        //                                         pan: false,
-        //                                         boundingbox:bboxlimits,
-        //                                         grid: false,
-        //                                         hasMouseUp: true,
-        // });
-
-        // xaxis1 = brd1.create('axis', [[0, 0], [11, 0]], {withLabel: false});
-        // yaxis1 = brd1.create('axis', [[0, 0], [0, 11]], {withLabel: false});
-
-        // //Axes
-        // xaxis1.removeAllTicks();
-        // yaxis1.removeAllTicks();
-        // var xlabel1 = brd1.create('text',[-1.2,10,"Price<br>Level"],{fixed:true});
-        // var ylabel1 = brd1.create('text',[9,-0.5,"Real GDP"],{fixed:true});
-
         brd1 = MacroLib.createBoard('jxgbox1',{xname:"Q of US Dollars",
                                           yname:"&pound;/$",grid:false,'xpos':[8,-0.5]});
 
@@ -53,16 +33,6 @@ var Macro = (function(JXG, MacroLib) {
         var iSDfix = brd1.create('intersection', [AD1, SRAS1, 0], {visible:false});
         var iS2D = brd1.create('intersection', [AD2, SRAS2, 0], {visible:false});
 
-        // ////////////
-        // // Fixed Dashed Lines for Board 1
-        // ////////////
-        // var dashesFixedB1 = createDashedLines2Axis(brd1,iSDfix,
-        //                                           {withLabel:true,
-        //                                            xlabel:'',
-        //                                            ylabel:'',
-        //                                            yoffsets:[-45,0],
-        //                                            color:'DodgerBlue'});
-
         ////////////
         // Draggable Dashed Lines for Board 1
         ////////////
@@ -86,14 +56,6 @@ var Macro = (function(JXG, MacroLib) {
             dashS2.X2.moveTo([iS2D.X(), iS2D.Y()]);
 
         });
-
-        // brd1.on('mousedown', function() {
-        //     AD2.setAttribute({withLabel:true});
-        //     SRAS2.setAttribute({withLabel:true});
-        //     dashS2.Y1.setAttribute({withLabel:true});
-        //     dashS2.X1.setAttribute({withLabel:true});
-        //     brd1.update()
-        // });
     }
 
     /////////////////////////

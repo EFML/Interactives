@@ -31,13 +31,6 @@ var Macro = (function(JXG, MacroLib) {
         //Demand Line 1 - fixed
         var AD1 = MacroLib.createDemand(brd1,{c1:c1,c2:c2, name:'AD<sub>2</sub>',color:'Blue'});
         AD1.setAttribute({'fixed':true,'highlight':false});
-
-        // G = brd1.create('glider',[6.0,6.0,AD2],{name:'A'});
-
-        // brd1.on('mousedown', function() {
-        //     AD2.setAttribute({withLabel:true,offset:[125,-85]});
-        //     brd1.update()
-        // });
     }
 
     /////////////////////////

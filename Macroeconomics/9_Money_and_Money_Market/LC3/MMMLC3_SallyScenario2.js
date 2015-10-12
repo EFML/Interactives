@@ -75,7 +75,6 @@ var Macro = (function(JXG, MacroLib) {
         //Demand Board 1
         var D1 = brd1.create('segment',[[2,9.5],[9.5,2]],{'name':'M<sub>D</sub>',fixed:true,
                                                           withLabel:true,label:{offset:[100,-100]}});
-        //var S1 = brd1.create('segment',[[5.75,1.0],[5.75,11.0]],{withLabel:true,name:'M<sub>S</sub>',label:{offset:[0,115]}});
 
         //Supply Board 1 - with slider transformation
         var s1B1 = brd1.create('point',[3.75,1.0],{visible:false});
@@ -92,12 +91,10 @@ var Macro = (function(JXG, MacroLib) {
 
         //Intersection of SD board 1
         var iSDB = brd1.create('intersection',[S1,D1],{withLabel:false,highlight:false});
-        //var gSDB1 = brd1.create('glider',[3.75,7.75,S1],{withLabel:false,highlight:false});
 
         brd1.addChild(brd2);
 
         //Demand Board 2 - with a Positive transformation
-        //var S2 = createSupply(brd2,{withLabel:true,'name':'S<sub>2</sub>'});
         var S2 = brd2.create('segment',[[2.0,2.0],[9.5,9.5]],{withLabel:true,name:'S<sub>2</sub>',label:{offset:[90,90]}});
 
         //Supply Board 2 - with a Negative transformation

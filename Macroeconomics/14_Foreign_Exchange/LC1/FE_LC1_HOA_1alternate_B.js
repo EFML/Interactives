@@ -61,14 +61,6 @@ var Macro = (function(JXG, MacroLib) {
             dashS2.X2.moveTo([iS2D.X(), iS2D.Y()]);
 
         });
-
-        // brd1.on('mousedown', function() {
-        //     AD2.setAttribute({withLabel:true});
-        //     SRAS2.setAttribute({withLabel:true});
-        //     dashS2.Y1.setAttribute({withLabel:true});
-        //     dashS2.X1.setAttribute({withLabel:true});
-        //     brd1.update()
-        // });
     }
 
     /////////////////////////

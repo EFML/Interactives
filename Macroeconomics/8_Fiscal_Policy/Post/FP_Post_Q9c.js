@@ -14,21 +14,12 @@ var Macro = (function(JXG, MacroLib) {
     //Sliders
     var sliderx = brd1.create('slider',[[3.0,-1.0],[8,-1.0],[0.0,0,1.4]],{withLabel:false,snapWidth:0.05,
                                                                            color:'Orange'});
-    // var slidery = brd1.create('slider',[[-1.0,2.75],[-1.0,8.75],[0.0,0.0,1.4]],{withLabel:false,snapWidth:0.05,
-    //                                                                        color:'Black'});
-
     //Positive Slider Transformation
     var sliderXPositive = brd1.create('transform',[
         function(){return sliderx.Value()},
         function(){return sliderx.Value()}],
         {type:'translate'}
         );
-
-    // sliderYPositive = brd1.create('transform',[
-    //     function(){return slidery.Value()},
-    //     function(){return slidery.Value()}],
-    //     {type:'translate'}
-    //     );
 
     //Supply Line 1 - fixed
     var SRAS1 = MacroLib.createLine(brd1,{'ltype':'Supply','name':'SRAS',color:'DodgerBlue'});

@@ -12,10 +12,6 @@ var Macro = (function(JXG, MacroLib) {
     brd1 = MacroLib.createBoard('jxgbox1',{xname:"Capital Goods", yname:"Consumer<br>Goods",
                                       grid:false,'xpos':[8,-0.5],'ypos':[-2.1,10],bboxlimits:newBBox});
 
-    // //Sliders
-    // var sliderx = brd1.create('slider',[[2.5,-1.2],[7.5,-1.2],[-2.0,0.0,2.0]],{withLabel:false,snapWidth:0.01,
-    //                                                                        color:'DodgerBlue'});
-
     //Sliders
     var slidery = brd1.create('slider',[[-1.5,2],[-1.5,7],[3.0,5.0,7.0]],{withLabel:false,snapWidth:0.01,
                                                                            color:'Crimson'});
@@ -27,27 +23,12 @@ var Macro = (function(JXG, MacroLib) {
         {type:'translate'}
         );
 
-    // var sliderRX = brd1.create('transform',[
-    //     function(){return sliderx.Value()},
-    //     function(){return 0.0}],
-    //     {type:'translate'}
-    //     );
-
-    // var sliderRY = brd1.create('transform',[
-    //     function(){return 0.0},
-    //     function(){return sliderx.Value()}],
-    //     {type:'translate'}
-    //     );
-
     // Create an arc out of three free points
     var Radius = 8.0;
     var po = brd1.create('point', [-1, -1],{visible:false});
     var tmpx = brd1.create('point',[Radius, 0.0],{visible:false});
     // var px = brd1.create('point', [tmpx, [sliderRX]],{visible:false});
     var tmpy = brd1.create('point',[0.0, Radius],{visible:false});
-    // var py = brd1.create('point', [tmpy, [sliderRY]],{visible:false});
-
-    // var semifix = brd1.create('arc', [po, tmpx, tmpy],{strokeWidth:4,strokeColor:'Gray',highlight:false,dash:1});
     var semi = brd1.create('arc', [po, tmpx, tmpy],{strokeWidth:5,strokeColor:'DodgerBlue',highlight:false});
 
 

@@ -84,36 +84,6 @@ var Macro = (function(JXG, MacroLib) {
                                                    color:'DarkGray'
                                                    });
 
-        // var dashB2Yp1 = brd2.create('point',[0, iSD.Y()],{withLabel:false,visible:false});
-        // var dashB2Yp2 = brd2.create('point',[iSD.X(), iSD.Y()],{withLabel:false,visible:false});
-        // var dashB2Y2 = brd2.create('segment',[dashB2Yp1,dashB2Yp2],{straightFirst:false, straightLast:false,
-        //                                                                strokeColor:'DarkGray',strokeWidth:'2',
-        //                                                                dash:'1',fixed:true}
-        //                       );
-
-        // var dashB2Xp1 = brd2.create('point',[iSD.X(), 0],{withLabel:false,visible:false});
-        // var dashB2Xp2 = brd2.create('point',[iSD.X(), iSD.Y()],{withLabel:false,visible:false});
-        // var dashB2X2 = brd2.create('segment',[dashB2Xp1,dashB2Xp2],{straightFirst:false, straightLast:false,
-        //                                                                strokeColor:'DarkGray',strokeWidth:'2',
-        //                                                                dash:'1',fixed:true}
-        //                       );
-
-
-        // //STATIC SET
-        // var dashYstaticp21 = brd2.create('point',[0, iSD.Y()],{withLabel:false,visible:false});
-        // var dashYstaticp22 = brd2.create('point',[iSD.X(), iSD.Y()],{withLabel:false,visible:false});
-        // var dashYstatic2 = brd2.create('segment',[dashYstaticp21,dashYstaticp22],{straightFirst:false, straightLast:false,
-        //                                                                strokeColor:'LightGray',strokeWidth:'2',
-        //                                                                dash:'1',fixed:true}
-        //                       );
-
-        // var dashXstaticp21 = brd2.create('point',[iSD.X(), 0],{withLabel:false,visible:false});
-        // var dashXstaticp22 = brd2.create('point',[iSD.X(), iSD.Y()],{withLabel:false,visible:false});
-        // var dashXstatic2 = brd2.create('segment',[dashXstaticp21,dashXstaticp22],{straightFirst:false, straightLast:false,
-        //                                                                strokeColor:'LightGray',strokeWidth:'2',
-        //                                                                dash:'1',fixed:true}
-        //                       );
-
         ////////
         // Intersections Box 2
         ////////
@@ -125,24 +95,6 @@ var Macro = (function(JXG, MacroLib) {
         //////////
 
         brd1.addChild(brd2);
-
-        // brd1.on('move', function(){
-
-        //     //Dashed Lines 1
-        //     dashB1Yp1.moveTo([0, iSD.Y()]);
-        //     dashB1Yp2.moveTo([iSD.X(), iSD.Y()]);
-
-        //     dashB1Xp1.moveTo([iSD.X(), 0]);
-        //     dashB1Xp2.moveTo([iSD.X(), iSD.Y()]);
-
-        //     //Dashed Lines 2
-        //     dashB2Yp1.moveTo([0, iSD.Y()]);
-        //     dashB2Yp2.moveTo([iIDy.X(), iSD.Y()]);
-
-        //     dashB2Xp1.moveTo([iIDy.X(), 0]);
-        //     dashB2Xp2.moveTo([iIDy.X(), iSD.Y()]);
-        // });
-
 
         //////////////////
         // Interactivity
@@ -159,25 +111,6 @@ var Macro = (function(JXG, MacroLib) {
             dashesB2.Y2.moveTo([iIDy.X(), iSDB1.Y()]);
             dashesB2.X1.moveTo([iIDy.X(), 0]);
             dashesB2.X2.moveTo([iIDy.X(), iSDB1.Y()]);
-
-            // //Green Dashed Lines Board 1
-            // dashesLRASB1.Y1.moveTo([0, iSLB1.Y()]);
-            // dashesLRASB1.Y2.moveTo([iSLB1.X(), iSLB1.Y()]);
-            // dashesLRASB1.X1.moveTo([iSLB1.X(), 0]);
-            // dashesLRASB1.X2.moveTo([iSLB1.X(), iSLB1.Y()]);
-            // brd1.update()
-
-            // //BOARD 2
-            // //Moving Point A2
-            // // DB2YP1.moveTo([0, iS2D.Y()]);
-            // // DB2YP2.moveTo([iB2SRPC1.X(),iS2D.Y()]);
-
-            // //Orange Dashed Lines Board 2
-            // dashesA2B2.Y1.moveTo([0, iB2SRPC1.Y()]);
-            // dashesA2B2.Y2.moveTo([iB2SRPC1.X(), iB2SRPC1.Y()]);
-            // dashesA2B2.X1.moveTo([iB2SRPC1.X(), 0]);
-            // dashesA2B2.X2.moveTo([iB2SRPC1.X(), iB2SRPC1.Y()]);
-
         });
     }
 

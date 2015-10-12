@@ -24,17 +24,6 @@ SRAS1.setAttribute({'fixed':true,'highlight':false});
 SRAS1.point2.moveTo([10.0,10.0],0);
 brd1.update();
 
-// //LRAS 1 - fixed
-// var LRAS1 = createLine(brd1,{ltype:'Vertical',name:'LRAS<sub>1</sub>',color:'DarkGray'});
-// LRAS1.setAttribute({fixed:true,'dash':1,'fixed':true,'highlight':true});
-// LRAS1.setAttribute({'label':{'offset':[20,0]}});
-
-// //LRAS 2 - moveable
-// var LRAS2 = createTransformLine(brd1,{'transformList':[sliderXPositive],ltype:'Vertical',
-//                                       name:'LRAS<sub>2</sub>',color:'DarkGray'});
-// LRAS2.setAttribute({fixed:false,'highlight':false,withLabel:false});
-
-
 //Standard edX JSinput functions
 setState = function(transaction,statestr){
     state = JSON.parse(statestr);

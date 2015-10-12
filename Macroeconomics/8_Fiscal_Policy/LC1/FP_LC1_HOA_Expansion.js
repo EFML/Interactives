@@ -7,29 +7,6 @@ var Macro = (function(JXG, MacroLib) {
     ////////////
     // BOARD 1
     ////////////
-    // bboxlimits = [-1.5, 12, 12, -1];
-    // var brd1 = JXG.JSXGraph.initBoard('jxgbox1', {axis:false,
-    //                                         showCopyright: false,
-    //                                         showNavigation: false,
-    //                                         zoom: false,
-    //                                         pan: false,
-    //                                         boundingbox:bboxlimits,
-    //                                         grid: false,
-    //                                         hasMouseUp: true,
-    // });
-
-    // xaxis1 = brd1.create('axis', [[0, 0], [11, 0]], {withLabel: false});
-    // yaxis1 = brd1.create('axis', [[0, 0], [0, 11]], {withLabel: false});
-
-    // //Axes
-    // xaxis1.removeAllTicks();
-    // yaxis1.removeAllTicks();
-    // var xlabel1 = brd1.create('text',[-1.2,10,"Price<br>Level"],{fixed:true});
-    // var ylabel1 = brd1.create('text',[9,-0.5,"Real GDP"],{fixed:true});
-
-    ////////////
-    // BOARD 1
-    ////////////
 
     var newBBox = [-1.5, 12, 12, -1.75];
 
@@ -40,24 +17,12 @@ var Macro = (function(JXG, MacroLib) {
     var sliderx = brd1.create('slider',[[3.5,-1.2],[8.5,-1.2],[0.0,0,1.4]],{withLabel:false,snapWidth:0.05,
                                                                            color:'Orange'});
 
-    //Postivit Slider Transformation
+    //Positive Slider Transformation
     var sliderXPositive = brd1.create('transform',[
         function(){return sliderx.Value()},
         function(){return sliderx.Value()}],
         {type:'translate'}
         );
-
-    // //Supply Line 1 - fixed
-    // var SRAS1 = createSupply(brd1,{name:'SRAS<sub>1</sub>',color:'DodgerBlue'});
-    // SRAS1.setAttribute({'dash':1,'fixed':true,'highlight':false});
-
-    // //Supply Line 2 - moveable
-    // var SRAS2 = createSupply(brd1,{name:'SRAS<sub>2</sub>',color:'DodgerBlue'});
-    // SRAS2.setAttribute({withLabel:false});
-
-    // //Demand Line 1 - fixed
-    // var AD1 = createDemand(brd1,{name:'AD<sub>1</sub>',color:'Orange'});
-    // AD1.setAttribute({'dash':1,'fixed':true,'highlight':false});
 
     //Supply Line 1 - fixed
     var SRAS1 = MacroLib.createLine(brd1,{ltype:'Supply',name:'SRAS<sub>1</sub>',color:'DodgerBlue'});
@@ -72,8 +37,6 @@ var Macro = (function(JXG, MacroLib) {
     AD1.setAttribute({fixed:true,'dash':1,'fixed':true,'highlight':false});
 
     // //Demand Line 2 - moveable
-    // var AD2 = createDemand(brd1,{name:'AD<sub>2</sub>',color:'Orange'});
-    // AD2.setAttribute({withLabel:false});
     var AD2 = MacroLib.createTransformLine(brd1,{'transformList':[sliderXPositive],ltype:'Demand',name:'AD<sub>2</sub>',color:'Orange'});
     AD2.setAttribute({fixed:false,'highlight':false,withLabel:false});
 
@@ -110,8 +73,6 @@ var Macro = (function(JXG, MacroLib) {
                            {'strokeColor':'DarkGray','strokeWidth':'3',
                             'name':'LRAS','withLabel':true, 'fixed':true,
                             'label':{'offset':[-15,200]}});
-    // var labelLRAS = brd1.create('text',[2.7,-0.4,"rY<sub>F</sub>"],{fixed:true});
-
 
     //////////////////
     // Interactivity

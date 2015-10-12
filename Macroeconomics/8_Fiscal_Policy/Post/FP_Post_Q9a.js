@@ -11,25 +11,6 @@ var Macro = (function(JXG, MacroLib) {
     brd1 = MacroLib.createBoard('jxgbox1',{bboxlimits:bbox,xname:"Real National Income", 'xpos':[8.75,-0.65],
                                       yname:"Price<br>Level",grid:false,'ypos':[-1.25,10.0]});
 
-    // //Sliders
-    // var sliderx = brd1.create('slider',[[3.0,-1.0],[8,-1.0],[0.0,0,1.4]],{withLabel:false,snapWidth:0.05,
-    //                                                                        color:'Orange'});
-    // var slidery = brd1.create('slider',[[-1.0,2.75],[-1.0,8.75],[0.0,0.0,1.4]],{withLabel:false,snapWidth:0.05,
-    //                                                                        color:'Black'});
-
-    // //Postivit Slider Transformation
-    // sliderXPositive = brd1.create('transform',[
-    //     function(){return sliderx.Value()},
-    //     function(){return sliderx.Value()}],
-    //     {type:'translate'}
-    //     );
-
-    // sliderYPositive = brd1.create('transform',[
-    //     function(){return slidery.Value()},
-    //     function(){return slidery.Value()}],
-    //     {type:'translate'}
-    //     );
-
     //Supply Line 1 - fixed
     var SRAS1 = MacroLib.createLine(brd1,{'ltype':'Supply','name':'SRAS',color:'DodgerBlue'});
     SRAS1.setAttribute({'fixed':true,'highlight':false});

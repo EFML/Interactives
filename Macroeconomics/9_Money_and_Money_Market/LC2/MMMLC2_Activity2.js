@@ -41,7 +41,6 @@ var Macro = (function(JXG, MacroLib) {
         G = brd1.create('glider',[6.75,6.75,AD2],{name:'A'});
 
         brd1.on('mousedown', function() {
-            //AD2.setAttribute({withLabel:true,offset:[125,-85]});
             brd1.update()
         });
     }

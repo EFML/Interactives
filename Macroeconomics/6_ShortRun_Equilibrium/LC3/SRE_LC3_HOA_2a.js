@@ -14,22 +14,12 @@ var Macro = (function(JXG, MacroLib) {
     //Sliders
     var sliderx = brd1.create('slider',[[3.0,-1.0],[8,-1.0],[-1.4,0,0]],{withLabel:false,snapWidth:0.05,
                                                                            color:'Crimson'});
-    // var slidery = brd1.create('slider',[[-1.0,2.75],[-1.0,8.75],[-1.4,0,0]],{withLabel:false,snapWidth:0.05,
-    //                                                                        color:'Black'});
-
-    //Postivit Slider Transformation
+    //Positive Slider Transformation
     var sliderXPositive = brd1.create('transform',[
         function(){return sliderx.Value()},
         function(){return -sliderx.Value()}],
         {type:'translate'}
         );
-
-    // sliderYPositive = brd1.create('transform',[
-    //     function(){return slidery.Value()},
-    //     function(){return slidery.Value()}],
-    //     {type:'translate'}
-    //     );
-
 
     //Supply Line 1 - fixed
     var SRAS1 = MacroLib.createLine(brd1,{'ltype':'Supply','name':'AS<sub>1973</sub>',color:'DodgerBlue'});
@@ -46,10 +36,6 @@ var Macro = (function(JXG, MacroLib) {
     //Fake line for intersection at equilibrium
     var H1 = MacroLib.createLine(brd1,{'ltype':'Horizontal','name':'H','color':'Orange'});
     H1.setAttribute({'fixed':true,'withLabel':false,'highlight':true,"visible":false});
-
-    // var H2 = createTransformLine(brd1,{'transformList':[sliderYPositive],'ltype':'Horizontal','name':'H','color':'Orange'});
-    // H2.setAttribute({'fixed':true,'withLabel':false,'highlight':true,"visible":false});
-
 
     ////////////
     // Intersection Box 1
@@ -138,8 +124,6 @@ var Macro = (function(JXG, MacroLib) {
 
     brd1.on('mousedown', function() {
         SRAS2.setAttribute({withLabel:true});
-        // dashesSD.Y1.setAttribute({withLabel:true});
-        // dashesSD.X1.setAttribute({withLabel:true});
         dashesSonly.Y1.setAttribute({withLabel:true});
         dashesSonly.X1.setAttribute({withLabel:true});
         dashesDonly.Y1.setAttribute({withLabel:true});

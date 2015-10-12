@@ -15,20 +15,9 @@ var Macro = (function(JXG, MacroLib) {
                                       yname:" ",
                                       grid:false,bboxlimits:newbbox});
 
-    // xaxis1 = brd1.create('axis', [[0, 0], [11, 0]], {withLabel: false});
-    // yaxis1 = brd1.create('axis', [[0, 0], [0, 11]], {withLabel: false});
-
-    // //Axes
-    // xaxis1.removeAllTicks();
-    // yaxis1.removeAllTicks();
-
-
     var xaxis = brd1.create('axis', [[0, 0], [1,0]],
           {name:'Quantity of Money ($billions)',
           withLabel: false,
-          // label: {position: 'rt',  // possible values are 'lft', 'rt', 'top', 'bot'
-          //      offset: [-10, -50]   // (in pixels)
-          //      }
           });
     xaxis.removeAllTicks();
     brd1.create('ticks', [xaxis, [0,100,200,300,400,500,600,700,800]], {strokeColor: 'Black', majorHeight: 15, drawLabels: true, label:{offset:[0,-20]}});
@@ -38,10 +27,6 @@ var Macro = (function(JXG, MacroLib) {
     var yaxis = brd1.create('axis', [[0, 0], [0, 1]],
           {name:'',
           withLabel: true,
-          // label: {
-          //   position: 'rt',  // possible values are 'lft', 'rt', 'top', 'bot'
-          //   offset: [-20, 0]   // (in pixels)
-          //   }
           });
     yaxis.removeAllTicks();
     brd1.create('ticks', [yaxis, [0,5,10,15,20,25,30]], {strokeColor: 'Black', majorHeight: 15, drawLabels: true});
@@ -55,15 +40,6 @@ var Macro = (function(JXG, MacroLib) {
                             'fixed':true,'dash':0,
                             'highlight':false,
                             'label':{'offset':[140,-145]}});
-
-
-    // //Demand Line 2 - moveable
-    // var MD2 = brd1.create('segment',[[cfx*1.45,cfy*9.0],[cfx*9.0,cfy*1.45]],
-    //                        {'strokeColor':'Orange','strokeWidth':'5',
-    //                         'name':'M<sub>D</sub>','withLabel':true,
-    //                         'fixed':false,
-    //                         'highlight':true,
-    //                         'label':{'offset':[150,-140]}});
 
     ////////////
     //LRAS - straight line

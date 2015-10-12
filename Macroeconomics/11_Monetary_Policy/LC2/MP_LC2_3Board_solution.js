@@ -79,7 +79,6 @@ var Macro = (function(JXG, MacroLib) {
         var D1B2 = MacroLib.createLine(brd2,{'ltype':'Demand','name':'D',color:'Gray'});
         D1B2.setAttribute({'fixed':true});
 
-        // var D2B2 = createTransformLine(brd2,{'ltype':'Demand','transformList':[sliderPositive],'name':'D<sub>2</sub>',color:'DodgerBlue'});
         //Intersection Board 2
         var iSDB2 = brd2.create('intersection',[SB2,D1B2],{withLabel:false,highlight:false});
 
