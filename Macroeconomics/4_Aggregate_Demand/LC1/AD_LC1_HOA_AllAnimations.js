@@ -9,7 +9,7 @@ var Macro = (function(JXG, MacroLib) {
         ////////////
         // BOARD 1
         ////////////
-        bboxlimits = [-1.5, 12, 12, -1.2];
+        var bboxlimits = [-1.5, 12, 12, -1.2];
         brd1 = JXG.JSXGraph.initBoard('jxgbox1', {
             axis: false,
             showCopyright: false,
@@ -21,13 +21,13 @@ var Macro = (function(JXG, MacroLib) {
             hasMouseUp: true,
         });
 
-        xaxis1 = brd1.create('axis', [
+        var xaxis1 = brd1.create('axis', [
             [0, 0],
             [11, 0]
         ], {
             withLabel: false
         });
-        yaxis1 = brd1.create('axis', [
+        var yaxis1 = brd1.create('axis', [
             [0, 0],
             [0, 11]
         ], {
@@ -37,10 +37,10 @@ var Macro = (function(JXG, MacroLib) {
         //Axes
         xaxis1.removeAllTicks();
         yaxis1.removeAllTicks();
-        var xlabel1 = brd1.create('text', [9, -0.5, "Real GDP"], {
+        var xlabel1 = brd1.create('text', [9, -0.5, 'Real GDP'], {
             fixed: true
         });
-        var ylabel1 = brd1.create('text', [-1.2, 10, "Price<br>Level"], {
+        var ylabel1 = brd1.create('text', [-1.2, 10, 'Price<br>Level'], {
             fixed: true
         });
 
@@ -73,7 +73,7 @@ var Macro = (function(JXG, MacroLib) {
                 withLabel: true,
                 offset: [125, -85]
             });
-            brd1.update()
+            brd1.update();
         });
     }
 

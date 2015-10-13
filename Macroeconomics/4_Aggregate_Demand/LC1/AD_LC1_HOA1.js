@@ -35,10 +35,10 @@ var Macro = (function(JXG, MacroLib) {
         //Axes
         xaxis1.removeAllTicks();
         yaxis1.removeAllTicks();
-        var xlabel1 = brd1.create('text', [9, -0.5, "Real GDP"], {
+        var xlabel1 = brd1.create('text', [9, -0.5, 'Real GDP'], {
             fixed: true
         });
-        var ylabel1 = brd1.create('text', [-1.2, 10, "Price<br>Level"], {
+        var ylabel1 = brd1.create('text', [-1.2, 10, 'Price<br>Level'], {
             fixed: true
         });
 
@@ -71,7 +71,7 @@ var Macro = (function(JXG, MacroLib) {
                 withLabel: true,
                 offset: [125, -85]
             });
-            brd1.update()
+            brd1.update();
         });
     }
 

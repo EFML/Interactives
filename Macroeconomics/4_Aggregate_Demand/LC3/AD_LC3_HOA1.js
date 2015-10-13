@@ -12,8 +12,8 @@ var Macro = (function(JXG, MacroLib) {
         // var newBBox = [-1.5, 12, 12, -1.2];
 
         brd1 = MacroLib.createBoard('jxgbox1', {
-            xname: "Real GDP",
-            yname: "Price<br>Level",
+            xname: 'Real GDP',
+            yname: 'Price<br>Level',
             grid: false,
             'xpos': [9, -0.5],
             'ypos': [-1.25, 10]
@@ -49,8 +49,8 @@ var Macro = (function(JXG, MacroLib) {
 
         c1 = [3.25, 10.75];
         c2 = [10.75, 3.25];
-        //Demand Line 1 - fixed
-        var AD1 = MacroLib.createDemand(brd1, {
+        //Demand Line 1 - fixed -- Error here?
+        AD1 = MacroLib.createDemand(brd1, {
             c1: c1,
             c2: c2,
             name: 'AD<sub>2</sub>',

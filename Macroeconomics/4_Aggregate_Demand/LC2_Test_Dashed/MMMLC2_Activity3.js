@@ -1,6 +1,6 @@
 var Macro = (function(JXG, MacroLib) {
     'use strict';
-    var brd1, D2, dashD2;
+    var brd1, D2, dashD2, G1, G2;
 
     function init() {
         MacroLib.init(MacroLib.ONE_BOARD);
@@ -38,10 +38,10 @@ var Macro = (function(JXG, MacroLib) {
         //Axes
         xaxis.removeAllTicks();
         yaxis.removeAllTicks();
-        var ylabel = brd1.create('text', [-1.5, 10, "Interest<br>Rate"], {
+        var ylabel = brd1.create('text', [-1.5, 10, 'Interest<br>Rate'], {
             fixed: true
         });
-        var xlabel = brd1.create('text', [8, -0.5, "Quantity of Money"], {
+        var xlabel = brd1.create('text', [8, -0.5, 'Quantity of Money'], {
             fixed: true
         });
 
@@ -54,7 +54,7 @@ var Macro = (function(JXG, MacroLib) {
             fixed: true,
             dash: 1
         });
-        var G = brd1.create('glider', [6.0, 6.0, D1], {
+        G1 = brd1.create('glider', [6.0, 6.0, D1], {
             fixed: true,
             visible: false
         });
@@ -62,7 +62,7 @@ var Macro = (function(JXG, MacroLib) {
         ////////////
         // Fixed Dashed Lines for Board 1
         ////////////
-        var dashD1 = MacroLib.createDashedLines2Axis(brd1, G, {
+        var dashD1 = MacroLib.createDashedLines2Axis(brd1, G1, {
             fixed: true,
             withLabel: true,
             xlabel: 'Y<sub>1</sub>',
@@ -72,7 +72,7 @@ var Macro = (function(JXG, MacroLib) {
 
 
         //Demand 2
-        D2 = createDemand(brd1, {
+        D2 = MacroLib.createDemand(brd1, {
             name: 'D<sub>2</sub>',
             color: 'DodgerBlue'
         });
@@ -82,7 +82,7 @@ var Macro = (function(JXG, MacroLib) {
         });
 
         //Glider along demand curve
-        var G = brd1.create('glider', [6.0, 6.0, D2], {
+        G2 = brd1.create('glider', [6.0, 6.0, D2], {
             name: 'A',
             withLabel: false,
             fixed: true
@@ -91,7 +91,7 @@ var Macro = (function(JXG, MacroLib) {
         ////////////
         // Draggable Dashed Lines for Board 1
         ////////////
-        dashD2 = MacroLib.createDashedLines2Axis(brd1, G, {
+        dashD2 = MacroLib.createDashedLines2Axis(brd1, G2, {
             fixed: false,
             withLabel: false,
             xlabel: 'Y<sub>2</sub>',
@@ -104,17 +104,17 @@ var Macro = (function(JXG, MacroLib) {
         //////////////////
         brd1.on('move', function() {
             //Moving Dashed Lines in Board 1
-            dashD2.Y1.moveTo([0, G.Y()]);
-            dashD2.Y2.moveTo([G.X(), G.Y()]);
+            dashD2.Y1.moveTo([0, G2.Y()]);
+            dashD2.Y2.moveTo([G2.X(), G2.Y()]);
 
-            dashD2.X1.moveTo([G.X(), 0]);
-            dashD2.X2.moveTo([G.X(), G.Y()]);
-            brd1.update()
+            dashD2.X1.moveTo([G2.X(), 0]);
+            dashD2.X2.moveTo([G2.X(), G2.Y()]);
+            brd1.update();
         });
 
         brd1.on('mousedown', function() {
             toggleLabels(true);
-            brd1.update()
+            brd1.update();
         });
     }
 
@@ -128,7 +128,7 @@ var Macro = (function(JXG, MacroLib) {
         D2.setAttribute({
             withLabel: toggle
         });
-    };
+    }
 
     //Animation for shifting curve SouthWest
     function decreaseXY() {
@@ -141,11 +141,11 @@ var Macro = (function(JXG, MacroLib) {
         D2.point1.moveTo([D2.point1.X() - 1.5, D2.point1.Y()], speed);
         D2.point2.moveTo([D2.point2.X() - 1.5, D2.point2.Y()], speed);
 
-        dashD2.Y1.moveTo([0, G.Y()], speed);
-        dashD2.Y2.moveTo([G.X() - 1.5, G.Y()], speed);
+        dashD2.Y1.moveTo([0, G2.Y()], speed);
+        dashD2.Y2.moveTo([G2.X() - 1.5, G2.Y()], speed);
 
-        dashD2.X1.moveTo([G.X() - 1.5, 0], speed);
-        dashD2.X2.moveTo([G.X() - 1.5, G.Y()], speed);
+        dashD2.X1.moveTo([G2.X() - 1.5, 0], speed);
+        dashD2.X2.moveTo([G2.X() - 1.5, G2.Y()], speed);
 
         brd1.update();
     }
@@ -160,11 +160,11 @@ var Macro = (function(JXG, MacroLib) {
         D2.point1.moveTo([D2.point1.X() + 1.5, D2.point1.Y()], speed);
         D2.point2.moveTo([D2.point2.X() + 1.5, D2.point2.Y()], speed);
 
-        dashD2.Y1.moveTo([0, G.Y()], speed);
-        dashD2.Y2.moveTo([G.X() + 1.5, G.Y()], speed);
+        dashD2.Y1.moveTo([0, G2.Y()], speed);
+        dashD2.Y2.moveTo([G2.X() + 1.5, G2.Y()], speed);
 
-        dashD2.X1.moveTo([G.X() + 1.5, 0], speed);
-        dashD2.X2.moveTo([G.X() + 1.5, G.Y()], speed);
+        dashD2.X1.moveTo([G2.X() + 1.5, 0], speed);
+        dashD2.X2.moveTo([G2.X() + 1.5, G2.Y()], speed);
 
         brd1.update();
     }
@@ -176,42 +176,4 @@ var Macro = (function(JXG, MacroLib) {
 
     init();
 
-    //Standard edX JSinput functions
-    function getInput() {
-        state = {};
-        statestr = JSON.stringify(state);
-        console.log(statestr)
-
-        //IPython Notebook Considerations
-        document.getElementById('spaceBelow').innerHTML += '<br>' + statestr;
-        var command = "state = '" + statestr + "'";
-        console.log(command);
-
-        //Kernel
-        var kernel = IPython.notebook.kernel;
-        kernel.execute(command);
-
-        return statestr;
-    }
-
-    function getState() {
-        state = {
-            'input': JSON.parse(getInput())
-        };
-        statestr = JSON.stringify(state);
-        return statestr
-    }
-
-    function setState(statestr) {
-        $('#msg').html('setstate ' + statestr);
-        state = JSON.parse(statestr);
-        console.log(statestr);
-        console.debug('State updated successfully from saved.');
-    }
-
-    return {
-        setState: setState,
-        getState: getState,
-        getGrade: getGrade
-    };
 })(JXG, MacroLib, undefined);

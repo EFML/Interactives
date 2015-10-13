@@ -1,17 +1,17 @@
 var Macro = (function(JXG, MacroLib) {
     'use strict';
-    var animationSpeed, curveShift, brd1, AD2, dashD2, G;
+    var animationSpeed, curveShift, brd1, D2, AD2, dashD2, G;
 
     function init() {
         MacroLib.init(MacroLib.ONE_BOARD);
         animationSpeed = 1000;
-        curveShift = 1.5
-            ////////////
-            // BOARD 1
-            ////////////
+        curveShift = 1.5;
+        ////////////
+        // BOARD 1
+        ////////////
         brd1 = MacroLib.createBoard('jxgbox1', {
-            xname: "Real GDP",
-            yname: "Price<br>Level",
+            xname: 'Real GDP',
+            yname: 'Price<br>Level',
             grid: false,
             'xpos': [8, -0.5]
         });
@@ -79,12 +79,12 @@ var Macro = (function(JXG, MacroLib) {
 
             dashD2.X1.moveTo([G.X(), 0]);
             dashD2.X2.moveTo([G.X(), G.Y()]);
-            brd1.update()
+            brd1.update();
         });
 
         brd1.on('mousedown', function() {
             toggleLabels(true);
-            brd1.update()
+            brd1.update();
         });
     }
 
@@ -115,7 +115,7 @@ var Macro = (function(JXG, MacroLib) {
         AD2.setAttribute({
             withLabel: toggle
         });
-    };
+    }
 
     //Animation for shifting curve SouthWest
     function decreaseXY() {
@@ -125,13 +125,13 @@ var Macro = (function(JXG, MacroLib) {
         toggleLabels(true);
 
         D2.point1.moveTo([D2.point1.X() - curveShift, D2.point1.Y() - curveShift], animationSpeed);
-        D2.point2.moveTo([D2.point2.X() - curveShift, D2.point2.Y() - curveShift], spanimationSpeedeed);
+        D2.point2.moveTo([D2.point2.X() - curveShift, D2.point2.Y() - curveShift], animationSpeed);
 
         dashD2.Y1.moveTo([0, G.Y() - curveShift], animationSpeed);
         dashD2.Y2.moveTo([G.X() - curveShift, G.Y() - curveShift], animationSpeed);
 
-        dashD2.X1.moveTo([G.X() - curveShift, 0], speed);
-        dashD2.X2.moveTo([G.X() - curveShift, G.Y() - curveShift], speed);
+        dashD2.X1.moveTo([G.X() - curveShift, 0], animationSpeed);
+        dashD2.X2.moveTo([G.X() - curveShift, G.Y() - curveShift], animationSpeed);
 
         brd1.update();
     }
