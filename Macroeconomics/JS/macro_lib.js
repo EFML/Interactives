@@ -25,7 +25,7 @@ var MacroLib = (function(JXG) {
                 labelOffset = {'X':150,'Y':140};
                 defaultXpos = [9,-0.5];
                 defaultYpos = [-1.2,10];
-                defaultXoffset = [-5,-15]
+                defaultXoffset = [-5,-15];
                 defaultYoffset = [-35,-2];
                 break;
             case TWO_BOARDS:
@@ -35,7 +35,7 @@ var MacroLib = (function(JXG) {
                 labelOffset = {'X':95,'Y':95};
                 defaultXpos = [8,-0.5];
                 defaultYpos = [-1.0,10];
-                defaultXoffset = [-5,-15]
+                defaultXoffset = [-5,-15];
                 defaultYoffset = [-35,-2];
                 break;
             case THREE_BOARDS:
@@ -87,28 +87,28 @@ var MacroLib = (function(JXG) {
     }
 
     function lineCoords(ltype) {
-        var ltype = ltype || 'Supply';
+        ltype = ltype || 'Supply';
         var c1,c2,offset;
-        if (ltype == 'Demand') {
+        if (ltype === 'Demand') {
             c1 = [2.0,9.5];
             c2 = [9.5,2.0];
             offset = [labelOffset.X,-labelOffset.Y];
         }
-        else if (ltype =='Supply') {
+        else if (ltype === 'Supply') {
             c1 = [2.0,2.0];
             c2 = [9.5,9.5];
             offset = [labelOffset.X,labelOffset.Y];
         }
         // Was offset = [0,labelOffset.Y+30] for all files using Macro_1Board.js, Macro_2Board.js, Macro_3Board.js
-        else if (ltype =='Vertical') {
+        else if (ltype === 'Vertical') {
             c1 = [5.75,0.5];
             c2 = [5.75,11.0];
-            offset = [0,labelOffset.Y+45]
+            offset = [0,labelOffset.Y+45];
         }
-        else if (ltype =='Horizontal') {
+        else if (ltype === 'Horizontal') {
             c1 = [0.5,5.75];
             c2 = [11.0,5.75];
-            offset = [0,labelOffset.Y+45]
+            offset = [0,labelOffset.Y+45];
         }
 
         return [c1,c2,offset];
@@ -208,7 +208,6 @@ var MacroLib = (function(JXG) {
         var color = options.color || 'gray';
         var visible = options.visible || true;
 
-        var Y1,Y2,YLine,X1,X2,XLine,obj={};
         var Y1 = board.create('point',[0, intersection.Y()],
                          {'withLabel':withLabel,'name':ylabel,'visible':true,'size':'0.5',
                           'fixed':fixed, 'strokeColor':'Gray','label':{'offset':yoffsets}});
@@ -237,7 +236,7 @@ var MacroLib = (function(JXG) {
             X1: X1,
             X2: X2,
             XLine: XLine
-        }
+        };
 
         return obj;
     }
