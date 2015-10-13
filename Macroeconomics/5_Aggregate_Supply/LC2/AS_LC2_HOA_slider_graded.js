@@ -10,8 +10,8 @@ var Macro = (function(JXG, MacroLib) {
         var newBBox = [-1.5, 12, 12, -1.75];
 
         brd1 = MacroLib.createBoard('jxgbox1', {
-            xname: "Real GDP",
-            yname: "Price<br>Level",
+            xname: 'Real GDP',
+            yname: 'Price<br>Level',
             grid: false,
             'xpos': [8, -0.5],
             'ypos': [-1.25, 10],
@@ -32,10 +32,10 @@ var Macro = (function(JXG, MacroLib) {
         //Positive Slider Transformation
         var sliderXPositive = brd1.create('transform', [
             function() {
-                return sliderx.Value()
+                return sliderx.Value();
             },
             function() {
-                return 0.0
+                return 0.0;
             }
         ], {
             type: 'translate'
@@ -59,7 +59,6 @@ var Macro = (function(JXG, MacroLib) {
             color: 'DarkGray'
         });
         LRAS1.setAttribute({
-            fixed: true,
             'dash': 1,
             'fixed': true,
             'highlight': true
@@ -137,7 +136,7 @@ var Macro = (function(JXG, MacroLib) {
             dashS2.Y1.setAttribute({
                 withLabel: true
             });
-            brd1.update()
+            brd1.update();
         });
     }
 

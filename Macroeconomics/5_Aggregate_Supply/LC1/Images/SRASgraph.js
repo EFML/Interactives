@@ -8,8 +8,8 @@ var Macro = (function(JXG, MacroLib) {
         var newBBox = [-1.5, 12, 12, -1.75];
 
         var brd1 = MacroLib.createBoard('jxgbox1', {
-            xname: "Real GDP",
-            yname: "Price<br>Level",
+            xname: 'Real GDP',
+            yname: 'Price<br>Level',
             grid: false,
             'xpos': [8, -0.5],
             'ypos': [-1.25, 10],
