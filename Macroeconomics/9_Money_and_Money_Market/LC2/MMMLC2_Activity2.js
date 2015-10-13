@@ -123,44 +123,4 @@ var Macro = (function(JXG, MacroLib) {
 
     init();
 
-    //Standard edX JSinput functions
-    function getGrade() {
-        state = {};
-        statestr = JSON.stringify(state);
-        console.log(statestr)
-
-        //IPython Notebook Considerations
-        document.getElementById('spaceBelow').innerHTML += '<br>' + statestr;
-        var command = "state = '" + statestr + "'";
-        console.log(command);
-
-        //Kernel
-        var kernel = IPython.notebook.kernel;
-        kernel.execute(command);
-
-        return statestr;
-    }
-
-    function getState() {
-        state = {
-            'input': JSON.parse(getGrade())
-        };
-        statestr = JSON.stringify(state);
-        return statestr
-    }
-
-    function setState(statestr) {
-        $('#msg').html('setstate ' + statestr);
-        state = JSON.parse(statestr);
-        console.log(statestr);
-        console.debug('State updated successfully from saved.');
-    }
-
-    MacroLib.createChannel(getGrade, getState, setState);
-
-    return {
-        setState: setState,
-        getState: getState,
-        getGrade: getGrade
-    };
 })(JXG, MacroLib, undefined);

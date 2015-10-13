@@ -271,18 +271,4 @@ var Macro = (function(JXG, MacroLib) {
 
     init();
 
-    //Standard edX JSinput functions
-    function setState(transaction, statestr) {}
-
-    function getState() {}
-
-    function getGrade() {}
-
-    MacroLib.createChannel(getGrade, getState, setState);
-
-    return {
-        setState: setState,
-        getState: getState,
-        getGrade: getGrade
-    };
 })(JXG, MacroLib, undefined);
