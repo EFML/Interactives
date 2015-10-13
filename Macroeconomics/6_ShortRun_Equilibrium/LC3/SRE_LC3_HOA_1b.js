@@ -13,9 +13,9 @@ var Macro = (function(JXG, MacroLib) {
         var bbox = [-1.5, 12, 12, -1.5];
         brd1 = MacroLib.createBoard('jxgbox1', {
             bboxlimits: bbox,
-            xname: "Real GDP",
+            xname: 'Real GDP',
             'xpos': [9, -0.5],
-            yname: "Price<br>Level",
+            yname: 'Price<br>Level',
             grid: false,
             'ypos': [-1.25, 10.0]
         });
@@ -43,10 +43,10 @@ var Macro = (function(JXG, MacroLib) {
         //Positive Slider Transformation
         var sliderXPositive = brd1.create('transform', [
             function() {
-                return sliderx.Value()
+                return sliderx.Value();
             },
             function() {
-                return -sliderx.Value()
+                return -sliderx.Value();
             }
         ], {
             type: 'translate'
@@ -54,10 +54,10 @@ var Macro = (function(JXG, MacroLib) {
 
         var sliderYPositive = brd1.create('transform', [
             function() {
-                return slidery.Value()
+                return slidery.Value();
             },
             function() {
-                return slidery.Value()
+                return slidery.Value();
             }
         ], {
             type: 'translate'
@@ -71,7 +71,7 @@ var Macro = (function(JXG, MacroLib) {
             color: 'DodgerBlue'
         });
         SRAS1.setAttribute({
-            "dash": 1,
+            'dash': 1,
             'fixed': true,
             'highlight': false
         });
@@ -82,11 +82,11 @@ var Macro = (function(JXG, MacroLib) {
             'ltype': 'Supply',
             'name': 'AS<sub>1929</sub>',
             'color': 'DodgerBlue'
-        })
+        });
         SRAS2.setAttribute({
             'withLabel': false,
             'highlight': true,
-            "visible": true
+            'visible': true
         });
 
         //Demand Line 1 - fixed
@@ -94,7 +94,7 @@ var Macro = (function(JXG, MacroLib) {
             'ltype': 'Demand',
             'name': 'AD',
             'color': 'Crimson'
-        })
+        });
         AD1.setAttribute({
             'fixed': true,
             'highlight': false
@@ -110,7 +110,7 @@ var Macro = (function(JXG, MacroLib) {
             'fixed': true,
             'withLabel': false,
             'highlight': true,
-            "visible": false
+            'visible': false
         });
 
         var H2 = MacroLib.createTransformLine(brd1, {
@@ -123,7 +123,7 @@ var Macro = (function(JXG, MacroLib) {
             'fixed': true,
             'withLabel': false,
             'highlight': true,
-            "visible": false
+            'visible': false
         });
 
 
@@ -138,14 +138,14 @@ var Macro = (function(JXG, MacroLib) {
         });
 
         var iDonly = brd1.create('intersection', [H1, AD1, 0], {
-            "visible": true,
+            'visible': true,
             withLabel: false,
-            color: "Red"
+            color: 'Red'
         });
         var iSonly = brd1.create('intersection', [H1, SRAS2, 0], {
-            "visible": true,
+            'visible': true,
             withLabel: false,
-            color: "Blue"
+            color: 'Blue'
         });
 
 
@@ -201,7 +201,7 @@ var Macro = (function(JXG, MacroLib) {
 
         var sliderLabel100 = brd1.create('text', [0.15,
             function(y) {
-                return (H2.point1.Y() + 0.3)
+                return (H2.point1.Y() + 0.3);
             },
             function() {
                 return (102.0 - 2.0 * slidery.Value() / slidery._smin).toFixed(0);
@@ -263,7 +263,7 @@ var Macro = (function(JXG, MacroLib) {
             sliderLabel100.setAttribute({
                 visible: true
             });
-            brd1.update()
+            brd1.update();
         });
     }
 

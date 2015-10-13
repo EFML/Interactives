@@ -36,10 +36,10 @@ var Macro = (function(JXG, MacroLib) {
         xaxis1.removeAllTicks();
         yaxis1.removeAllTicks();
 
-        var xlabel1 = brd1.create('text', [9, -0.5, "Real GDP"], {
+        var xlabel1 = brd1.create('text', [9, -0.5, 'Real GDP'], {
             fixed: true
         });
-        var ylabel1 = brd1.create('text', [-1.2, 10, "Price<br>Level"], {
+        var ylabel1 = brd1.create('text', [-1.2, 10, 'Price<br>Level'], {
             fixed: true
         });
 
@@ -57,10 +57,10 @@ var Macro = (function(JXG, MacroLib) {
         //Positive Slider Transformation
         var sliderYPositive = brd1.create('transform', [
             function() {
-                return 0.0
+                return 0.0;
             },
             function() {
-                return slidery.Value()
+                return slidery.Value();
             }
         ], {
             type: 'translate'
@@ -82,7 +82,7 @@ var Macro = (function(JXG, MacroLib) {
             'ltype': 'Demand',
             'name': 'AD<sub>0</sub>',
             'color': 'Crimson'
-        })
+        });
         AD1.setAttribute({
             'fixed': true,
             'highlight': false
@@ -94,11 +94,11 @@ var Macro = (function(JXG, MacroLib) {
             'ltype': 'Horizontal',
             'name': 'H',
             'color': 'Orange'
-        })
+        });
         H.setAttribute({
             'withLabel': false,
             'highlight': true,
-            "visible": false
+            'visible': false
         });
 
 
@@ -110,14 +110,14 @@ var Macro = (function(JXG, MacroLib) {
         });
 
         var iDonly = brd1.create('intersection', [H, AD1, 0], {
-            "visible": true,
+            'visible': true,
             withLabel: false,
-            color: "Red"
+            color: 'Red'
         });
         var iSonly = brd1.create('intersection', [H, SRAS1, 0], {
-            "visible": true,
+            'visible': true,
             withLabel: false,
-            color: "Blue"
+            color: 'Blue'
         });
 
 
@@ -205,7 +205,7 @@ var Macro = (function(JXG, MacroLib) {
             dashesDonly.X1.setAttribute({
                 withLabel: true
             });
-            brd1.update()
+            brd1.update();
         });
     }
 

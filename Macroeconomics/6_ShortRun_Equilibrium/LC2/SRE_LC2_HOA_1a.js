@@ -13,9 +13,9 @@ var Macro = (function(JXG, MacroLib) {
         var bbox = [-1.5, 12, 12, -1.5];
         brd1 = MacroLib.createBoard('jxgbox1', {
             bboxlimits: bbox,
-            xname: "Real GDP",
+            xname: 'Real GDP',
             'xpos': [9, -0.5],
-            yname: "Price<br>Level",
+            yname: 'Price<br>Level',
             grid: false,
             'ypos': [-1.25, 10.0]
         });
@@ -34,10 +34,10 @@ var Macro = (function(JXG, MacroLib) {
         //Positive Slider Transformation
         var sliderXPositive = brd1.create('transform', [
             function() {
-                return sliderx.Value()
+                return sliderx.Value();
             },
             function() {
-                return sliderx.Value()
+                return sliderx.Value();
             }
         ], {
             type: 'translate'
@@ -76,7 +76,7 @@ var Macro = (function(JXG, MacroLib) {
         AD2.setAttribute({
             'withLabel': false,
             'highlight': true,
-            "visible": true
+            'visible': true
         });
 
         //Fake line for intersection at equilibrium
@@ -90,7 +90,7 @@ var Macro = (function(JXG, MacroLib) {
             'fixed': true,
             'withLabel': false,
             'highlight': true,
-            "visible": false
+            'visible': false
         });
 
         ////////////
@@ -104,14 +104,14 @@ var Macro = (function(JXG, MacroLib) {
         });
 
         var iDonly = brd1.create('intersection', [H1, AD2, 0], {
-            "visible": true,
+            'visible': true,
             withLabel: false,
-            color: "Red"
+            color: 'Red'
         });
         var iSonly = brd1.create('intersection', [H1, SRAS1, 0], {
-            "visible": true,
+            'visible': true,
             withLabel: false,
-            color: "Blue"
+            color: 'Blue'
         });
 
 
@@ -206,7 +206,7 @@ var Macro = (function(JXG, MacroLib) {
             dashesDonly.X1.setAttribute({
                 withLabel: true
             });
-            brd1.update()
+            brd1.update();
         });
     }
 
