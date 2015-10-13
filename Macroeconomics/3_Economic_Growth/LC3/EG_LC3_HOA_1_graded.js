@@ -1,7 +1,7 @@
 // Used as JSInput
 var Macro = (function(JXG, MacroLib) {
     'use strict';
-    var brd1;
+    var brd1, sliderx, LRAS1, LRAS2;
 
     function init() {
         MacroLib.init(MacroLib.ONE_BOARD);
@@ -11,8 +11,8 @@ var Macro = (function(JXG, MacroLib) {
         var newBBox = [-1.5, 12, 12, -1.75];
 
         brd1 = MacroLib.createBoard('jxgbox1', {
-            xname: "Real GDP",
-            yname: "Price<br>Level",
+            xname: 'Real GDP',
+            yname: 'Price<br>Level',
             grid: false,
             'xpos': [9, -0.5],
             'ypos': [-1.25, 10],
@@ -20,7 +20,7 @@ var Macro = (function(JXG, MacroLib) {
         });
 
         //Sliders
-        var sliderx = brd1.create('slider', [
+        sliderx = brd1.create('slider', [
             [3.0, -1.2],
             [8.5, -1.2],
             [-2.25, 0, 2.25]
@@ -33,10 +33,10 @@ var Macro = (function(JXG, MacroLib) {
         //Positive Slider Transformation
         var sliderXPositive = brd1.create('transform', [
             function() {
-                return sliderx.Value()
+                return sliderx.Value();
             },
             function() {
-                return 0.0
+                return 0.0;
             }
         ], {
             type: 'translate'
@@ -55,13 +55,12 @@ var Macro = (function(JXG, MacroLib) {
         });
 
         //LRAS 1 - fixed
-        var LRAS1 = MacroLib.createLine(brd1, {
+        LRAS1 = MacroLib.createLine(brd1, {
             ltype: 'Vertical',
             name: 'LRAS<sub>1</sub>',
             color: 'DarkGray'
         });
         LRAS1.setAttribute({
-            fixed: true,
             'dash': 1,
             'fixed': true,
             'highlight': true
@@ -73,7 +72,7 @@ var Macro = (function(JXG, MacroLib) {
         });
 
         //LRAS 2 - moveable
-        var LRAS2 = MacroLib.createTransformLine(brd1, {
+        LRAS2 = MacroLib.createTransformLine(brd1, {
             'transformList': [sliderXPositive],
             ltype: 'Vertical',
             name: 'LRAS<sub>2</sub>',
@@ -153,7 +152,7 @@ var Macro = (function(JXG, MacroLib) {
             dashS2.Y1.setAttribute({
                 withLabel: true
             });
-            brd1.update()
+            brd1.update();
         });
     }
 
@@ -171,13 +170,11 @@ var Macro = (function(JXG, MacroLib) {
 
     //Standard edX JSinput functions
     function setState(transaction, statestr) {
-        state = JSON.parse(statestr);
-        // console.log(state);
-        //console.log(state["dragLine"]);
+        var state = JSON.parse(statestr);
 
-        if (state["LRAS2"]) {
+        if (state.LRAS2) {
             //Slider position is a function of the original slider position and the slider value
-            var spos = state["LRAS2"]["X0"] + state["LRAS2"]["slider"];
+            var spos = state.LRAS2.X0 + state.LRAS2.slider;
             sliderx.moveTo([spos, 0], 0);
             LRAS2.setAttribute({
                 withLabel: true
@@ -190,20 +187,18 @@ var Macro = (function(JXG, MacroLib) {
 
     function getState() {
         var state = JSON.parse(getGrade());
-        statestr = JSON.stringify(state);
-        // console.log(statestr);
+        var statestr = JSON.stringify(state);
         return statestr;
     }
 
     function getGrade() {
         var state = {
-            "LRAS2": {
+            'LRAS2': {
                 'X0': LRAS1.point1.X(),
                 'slider': sliderx.Value()
             }
         };
-        statestr = JSON.stringify(state);
-        //console.log('hello',statestr);
+        var statestr = JSON.stringify(state);
         return statestr;
     }
 

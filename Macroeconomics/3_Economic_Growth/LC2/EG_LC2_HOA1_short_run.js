@@ -10,8 +10,8 @@ var Macro = (function(JXG, MacroLib) {
         var newBBox = [-2.2, 12, 12, -1.75];
 
         brd1 = MacroLib.createBoard('jxgbox1', {
-            xname: "Capital Goods",
-            yname: "Consumer<br>Goods",
+            xname: 'Capital Goods',
+            yname: 'Consumer<br>Goods',
             grid: false,
             'xpos': [8, -0.5],
             'ypos': [-2.1, 10],
@@ -32,10 +32,10 @@ var Macro = (function(JXG, MacroLib) {
         //Positive Slider Transformation
         var sliderYPositive = brd1.create('transform', [
             function() {
-                return slidery.Value()
+                return slidery.Value();
             },
             function() {
-                return 0.0
+                return 0.0;
             }
         ], {
             type: 'translate'
