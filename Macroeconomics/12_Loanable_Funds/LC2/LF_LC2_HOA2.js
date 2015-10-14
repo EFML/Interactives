@@ -10,9 +10,9 @@ var Macro = (function(JXG, MacroLib) {
         var bbox1 = [-2.3, 12, 13, -2.3];
         brd1 = MacroLib.createBoard('jxgbox1', {
             bboxlimits: bbox1,
-            xname: "Quantity Loanable Funds (Public and Private)",
+            xname: 'Quantity Loanable Funds (Public and Private)',
             'xpos': [4, -1.1],
-            yname: "Real<br>Interest<br>Rate",
+            yname: 'Real<br>Interest<br>Rate',
             grid: false,
             'ypos': [-2.2, 10.0]
         });
@@ -48,7 +48,7 @@ var Macro = (function(JXG, MacroLib) {
             'name': 'D<sub>LF</sub>',
             'color': 'DodgerBlue',
             storkeWidth: 4
-        })
+        });
         DB1.setAttribute({
             'dash': 1,
             'fixed': true,
@@ -56,12 +56,12 @@ var Macro = (function(JXG, MacroLib) {
             'highlight': false
         });
 
-        //Demand Line 2 - moveable
-        var DB1 = MacroLib.createLine(brd1, {
+        //Demand Line 2 - moveable -- Error?
+        DB1 = MacroLib.createLine(brd1, {
             'ltype': 'Demand',
             'name': 'D<sub>LF</sub>',
             'color': 'DodgerBlue'
-        })
+        });
         DB1.setAttribute({
             'withLabel': true,
             'highlight': false
@@ -73,9 +73,9 @@ var Macro = (function(JXG, MacroLib) {
         var bbox2 = [-2.3, 12, 13, -2.3];
         brd2 = MacroLib.createBoard('jxgbox2', {
             bboxlimits: bbox2,
-            xname: "Private Investment $",
+            xname: 'Private Investment $',
             'xpos': [6.0, -1.5],
-            yname: "Real<br>Interest<br>Rate",
+            yname: 'Real<br>Interest<br>Rate',
             grid: false,
             'ypos': [-2.2, 10.0]
         });
@@ -85,7 +85,7 @@ var Macro = (function(JXG, MacroLib) {
             'ltype': 'Demand',
             'name': 'Invest<br>Demand</sub>',
             'color': 'Crimson'
-        })
+        });
         DB2.setAttribute({
             'fixed': true,
             'withLabel': true,

@@ -207,6 +207,6 @@ var Macro = (function(JXG, MacroLib) {
     return {
         setState: setState,
         getState: getState,
-        getGrade
+        getGrade: getGrade
     };
 })(JXG, MacroLib, undefined);
