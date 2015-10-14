@@ -10,7 +10,7 @@ var Macro = (function(JXG, MacroLib) {
 
         brd1 = MacroLib.createBoard('jxgbox1', {
             xname: ' ',
-            yname: "Price<br>( $/&euro; )",
+            yname: 'Price<br>( $/&euro; )',
             grid: false,
             'xpos': [8, -0.5],
             'ypos': [-1.25, 10]
@@ -23,7 +23,6 @@ var Macro = (function(JXG, MacroLib) {
             color: 'DodgerBlue'
         });
         SRAS1.setAttribute({
-            fixed: true,
             'dash': 1,
             'fixed': true,
             'highlight': false
@@ -48,7 +47,6 @@ var Macro = (function(JXG, MacroLib) {
             color: 'Orange'
         });
         AD1.setAttribute({
-            fixed: true,
             'dash': 1,
             'fixed': true,
             'highlight': false

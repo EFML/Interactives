@@ -10,7 +10,7 @@ var Macro = (function(JXG, MacroLib) {
 
         brd1 = MacroLib.createBoard('jxgbox1', {
             xname: ' ',
-            yname: "Price<br>( $/&euro; )",
+            yname: 'Price<br>( $/&euro; )',
             grid: false,
             'xpos': [8, -0.5],
             'ypos': [-1.25, 10]
