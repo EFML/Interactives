@@ -35,10 +35,10 @@ var Macro = (function(JXG, MacroLib) {
         //Axes
         xaxis1.removeAllTicks();
         yaxis1.removeAllTicks();
-        var xlabel1 = brd1.create('text', [-1.2, 10, "Price<br>Level"], {
+        var xlabel1 = brd1.create('text', [-1.2, 10, 'Price<br>Level'], {
             fixed: true
         });
-        var ylabel1 = brd1.create('text', [9, -0.5, "Real GDP"], {
+        var ylabel1 = brd1.create('text', [9, -0.5, 'Real GDP'], {
             fixed: true
         });
 
@@ -130,7 +130,7 @@ var Macro = (function(JXG, MacroLib) {
                 'offset': [-15, 200]
             }
         });
-        var labelLRAS = brd1.create('text', [2.7, -0.4, "rY<sub>F</sub>"], {
+        var labelLRAS = brd1.create('text', [2.7, -0.4, 'rY<sub>F</sub>'], {
             fixed: true
         });
 
@@ -161,7 +161,7 @@ var Macro = (function(JXG, MacroLib) {
             dashS2.X1.setAttribute({
                 withLabel: true
             });
-            brd1.update()
+            brd1.update();
         });
     }
 
@@ -177,72 +177,4 @@ var Macro = (function(JXG, MacroLib) {
 
     init();
 
-    //Standard edX JSinput functions
-    function setState(statestr) {
-        state = JSON.parse(statestr);
-        //console.log(state);
-        //console.log(state["dragLine"]);
-
-        if (state["AD2"] && state["SRAS2"]) {
-            //brd1.removeObject('AD2');
-            var point1 = [state["AD2"]["p1X"], state["AD2"]["p1Y"]];
-            var point2 = [state["AD2"]["p2X"], state["AD2"]["p2Y"]]
-            AD2.point1.moveTo(point1, 0);
-            AD2.point2.moveTo(point2, 0);
-
-            var point1 = [state["SRAS2"]["p1X"], state["SRAS2"]["p1Y"]];
-            var point2 = [state["SRAS2"]["p2X"], state["SRAS2"]["p2Y"]]
-            SRAS2.point1.moveTo(point1, 0);
-            SRAS2.point2.moveTo(point2, 0);
-
-            brd1.update();
-        }
-
-        console.debug('State updated successfully from saved.');
-    }
-
-    function getState() {
-        var state = JSON.parse(getInput());
-        statestr = JSON.stringify(state);
-        // console.log(statestr);
-        return statestr;
-    }
-
-    function getInput() {
-        var state = {
-            "AD2": {
-                'p1X': AD2.point1.X(),
-                'p2X': AD2.point2.X(),
-                'p1Y': AD2.point1.Y(),
-                'p2Y': AD2.point2.Y()
-            },
-            "AD1": {
-                'p1X': AD1.point1.X(),
-                'p2X': AD1.point2.X(),
-                'p1Y': AD1.point1.Y(),
-                'p2Y': AD1.point2.Y()
-            },
-            "SRAS2": {
-                'p1X': SRAS2.point1.X(),
-                'p2X': SRAS2.point2.X(),
-                'p1Y': SRAS2.point1.Y(),
-                'p2Y': SRAS2.point2.Y()
-            },
-            "SRAS1": {
-                'p1X': SRAS1.point1.X(),
-                'p2X': SRAS1.point2.X(),
-                'p1Y': SRAS1.point1.Y(),
-                'p2Y': SRAS1.point2.Y()
-            }
-        };
-        statestr = JSON.stringify(state);
-        console.log('hello', statestr);
-        return statestr;
-    }
-
-    return {
-        setState: setState,
-        getState: getState,
-        getGrade
-    };
 })(JXG, MacroLib, undefined);

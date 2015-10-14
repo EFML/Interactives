@@ -1,7 +1,7 @@
 // Used as JSInput
 var Macro = (function(JXG, MacroLib) {
     'use strict';
-    var brd1;
+    var brd1, AD1, AD2, SRAS1, SRAS2;
 
     function init() {
         MacroLib.init(MacroLib.ONE_BOARD);
@@ -36,15 +36,15 @@ var Macro = (function(JXG, MacroLib) {
         //Axes
         xaxis1.removeAllTicks();
         yaxis1.removeAllTicks();
-        var xlabel1 = brd1.create('text', [-1.2, 10, "Price<br>Level"], {
+        var xlabel1 = brd1.create('text', [-1.2, 10, 'Price<br>Level'], {
             fixed: true
         });
-        var ylabel1 = brd1.create('text', [9, -0.5, "Real GDP"], {
+        var ylabel1 = brd1.create('text', [9, -0.5, 'Real GDP'], {
             fixed: true
         });
 
         //Supply Line 1 - fixed
-        var SRAS1 = MacroLib.createSupply(brd1, {
+        SRAS1 = MacroLib.createSupply(brd1, {
             name: 'SRAS<sub>1</sub>',
             color: 'DodgerBlue'
         });
@@ -55,7 +55,7 @@ var Macro = (function(JXG, MacroLib) {
         });
 
         //Supply Line 2 - moveable
-        var SRAS2 = MacroLib.createSupply(brd1, {
+        SRAS2 = MacroLib.createSupply(brd1, {
             name: 'SRAS<sub>2</sub>',
             color: 'DodgerBlue'
         });
@@ -64,7 +64,7 @@ var Macro = (function(JXG, MacroLib) {
         });
 
         //Demand Line 1 - fixed
-        var AD1 = MacroLib.createDemand(brd1, {
+        AD1 = MacroLib.createDemand(brd1, {
             name: 'AD<sub>1</sub>',
             color: 'Orange'
         });
@@ -75,7 +75,7 @@ var Macro = (function(JXG, MacroLib) {
         });
 
         //Demand Line 2 - moveable
-        var AD2 = MacroLib.createDemand(brd1, {
+        AD2 = MacroLib.createDemand(brd1, {
             name: 'AD<sub>2</sub>',
             color: 'Orange'
         });
@@ -131,7 +131,7 @@ var Macro = (function(JXG, MacroLib) {
                 'offset': [-15, 200]
             }
         });
-        var labelLRAS = brd1.create('text', [2.7, -0.4, "rY<sub>F</sub>"], {
+        var labelLRAS = brd1.create('text', [2.7, -0.4, 'rY<sub>F</sub>'], {
             fixed: true
         });
 
@@ -162,7 +162,7 @@ var Macro = (function(JXG, MacroLib) {
             dashS2.X1.setAttribute({
                 withLabel: true
             });
-            brd1.update()
+            brd1.update();
         });
     }
 
@@ -180,19 +180,15 @@ var Macro = (function(JXG, MacroLib) {
 
     //Standard edX JSinput functions
     function setState(transaction, statestr) {
-        state = JSON.parse(statestr);
-        //console.log(state);
-        //console.log(state["dragLine"]);
-
-        if (state["AD2"] && state["SRAS2"]) {
-            //brd1.removeObject('AD2');
-            var point1 = [state["AD2"]["p1X"], state["AD2"]["p1Y"]];
-            var point2 = [state["AD2"]["p2X"], state["AD2"]["p2Y"]]
+        var state = JSON.parse(statestr);
+        if (state.AD2 && state.SRAS2) {
+            var point1 = [state.AD2.p1X, state.AD2.p1Y];
+            var point2 = [state.AD2.p2X, state.AD2.p2Y];
             AD2.point1.moveTo(point1, 0);
             AD2.point2.moveTo(point2, 0);
 
-            var point1 = [state["SRAS2"]["p1X"], state["SRAS2"]["p1Y"]];
-            var point2 = [state["SRAS2"]["p2X"], state["SRAS2"]["p2Y"]]
+            point1 = [state.SRAS2.p1X, state.SRAS2.p1Y];
+            point2 = [state.SRAS2.p2X, state.SRAS2.p2Y];
             SRAS2.point1.moveTo(point1, 0);
             SRAS2.point2.moveTo(point2, 0);
 
@@ -204,40 +200,38 @@ var Macro = (function(JXG, MacroLib) {
 
     function getState() {
         var state = JSON.parse(getGrade());
-        statestr = JSON.stringify(state);
-        // console.log(statestr);
+        var statestr = JSON.stringify(state);
         return statestr;
     }
 
     function getGrade() {
         var state = {
-            "AD2": {
+            'AD2': {
                 'p1X': AD2.point1.X(),
                 'p2X': AD2.point2.X(),
                 'p1Y': AD2.point1.Y(),
                 'p2Y': AD2.point2.Y()
             },
-            "AD1": {
+            'AD1': {
                 'p1X': AD1.point1.X(),
                 'p2X': AD1.point2.X(),
                 'p1Y': AD1.point1.Y(),
                 'p2Y': AD1.point2.Y()
             },
-            "SRAS2": {
+            'SRAS2': {
                 'p1X': SRAS2.point1.X(),
                 'p2X': SRAS2.point2.X(),
                 'p1Y': SRAS2.point1.Y(),
                 'p2Y': SRAS2.point2.Y()
             },
-            "SRAS1": {
+            'SRAS1': {
                 'p1X': SRAS1.point1.X(),
                 'p2X': SRAS1.point2.X(),
                 'p1Y': SRAS1.point1.Y(),
                 'p2Y': SRAS1.point2.Y()
             }
         };
-        statestr = JSON.stringify(state);
-        //console.log('hello',statestr);
+        var statestr = JSON.stringify(state);
         return statestr;
     }
 
@@ -246,6 +240,6 @@ var Macro = (function(JXG, MacroLib) {
     return {
         setState: setState,
         getState: getState,
-        getGrade
+        getGrade: getGrade
     };
 })(JXG, MacroLib, undefined);
