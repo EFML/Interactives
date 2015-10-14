@@ -35,11 +35,11 @@ var Macro = (function(JXG, MacroLib) {
         //Axes
         xaxis1.removeAllTicks();
         yaxis1.removeAllTicks();
-        var xlabel = brd1.create('text', [-1.2, 10, "\u03c0"], {
+        var xlabel = brd1.create('text', [-1.2, 10, '\u03c0'], {
             fontSize: 24,
             fixed: true
         });
-        var ylabel = brd1.create('text', [9, -0.5, "UR"], {
+        var ylabel = brd1.create('text', [9, -0.5, 'UR'], {
             fixed: true
         });
 
@@ -69,7 +69,7 @@ var Macro = (function(JXG, MacroLib) {
             SRPC2.setAttribute({
                 withLabel: true
             });
-            brd1.update()
+            brd1.update();
         });
     }
 

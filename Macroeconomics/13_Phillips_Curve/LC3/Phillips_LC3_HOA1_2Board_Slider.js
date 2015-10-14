@@ -12,8 +12,8 @@ var Macro = (function(JXG, MacroLib) {
         var bboxlimits1 = [-1.5, 12, 12, -1.5];
         brd1 = MacroLib.createBoard('jxgbox1', {
             bboxlimits: bboxlimits1,
-            xname: "Real GDP",
-            yname: "PL",
+            xname: 'Real GDP',
+            yname: 'PL',
             grid: false,
             'xpos': [9, -0.5]
         });
@@ -42,10 +42,10 @@ var Macro = (function(JXG, MacroLib) {
         //Positive Slider Transformation
         var sliderYPositive = brd1.create('transform', [
             function() {
-                return -slidery.Value()
+                return -slidery.Value();
             },
             function() {
-                return 0.0
+                return 0.0;
             }
         ], {
             type: 'translate'
@@ -54,10 +54,10 @@ var Macro = (function(JXG, MacroLib) {
         //Positive Slider Transformation
         var sliderXPositive = brd1.create('transform', [
             function() {
-                return sliderx.Value()
+                return sliderx.Value();
             },
             function() {
-                return 0.0
+                return 0.0;
             }
         ], {
             type: 'translate'
@@ -93,7 +93,7 @@ var Macro = (function(JXG, MacroLib) {
             'ltype': 'Demand',
             'name': 'AD<sub>1</sub>',
             'color': 'Orange'
-        })
+        });
         AD1.setAttribute({
             'dash': 1,
             'fixed': true,
@@ -106,7 +106,7 @@ var Macro = (function(JXG, MacroLib) {
             'ltype': 'Demand',
             'name': 'AD<sub>2</sub>',
             'color': 'Orange'
-        })
+        });
         AD2.setAttribute({
             'withLabel': false,
             'highlight': true
@@ -117,7 +117,7 @@ var Macro = (function(JXG, MacroLib) {
             'ltype': 'Vertical',
             'name': 'LRAS',
             'color': 'DodgerBlue'
-        })
+        });
         LRAS.setAttribute({
             'withLabel': true,
             'fixed': true,
@@ -206,8 +206,8 @@ var Macro = (function(JXG, MacroLib) {
         var bboxlimits2 = [-2.5, 12, 12, -1.5];
         brd2 = MacroLib.createBoard('jxgbox2', {
             bboxlimits: bboxlimits2,
-            xname: "UR",
-            yname: "Inflation<br>Rate",
+            xname: 'UR',
+            yname: 'Inflation<br>Rate',
             'xpos': [10, -0.5],
             'ypos': [-2.4, 10],
             grid: false
@@ -339,10 +339,10 @@ var Macro = (function(JXG, MacroLib) {
             //[DB2YP1,DB2YP2],
             [
                 [0, function(x) {
-                    return (iSDB2fix.Y() + sliderx.Value())
+                    return (iSDB2fix.Y() + sliderx.Value());
                 }],
                 [iSLB2.X(), function(x) {
-                    return (iSDB2fix.Y() + sliderx.Value())
+                    return (iSDB2fix.Y() + sliderx.Value());
                 }]
             ], {
                 visible: false,
@@ -392,7 +392,7 @@ var Macro = (function(JXG, MacroLib) {
         //                                   }]);
 
         var sliderLabelB2X = brd2.create('text', [function(x) {
-                return (iB2SRPC1.X() - 0.5)
+                return (iB2SRPC1.X() - 0.5);
             }, -0.5,
             function() {
                 return (5.0 - sliderx.Value()).toFixed(1) + '%';
@@ -404,7 +404,7 @@ var Macro = (function(JXG, MacroLib) {
 
         var sliderLabelB2Y = brd2.create('text', [-1.75,
             function(y) {
-                return (iB2SRPC1.Y() + 0.0)
+                return (iB2SRPC1.Y() + 0.0);
             },
             function() {
                 return (2.0 + sliderx.Value()).toFixed(1) + '%';
@@ -429,7 +429,7 @@ var Macro = (function(JXG, MacroLib) {
             dashesLRASB1.Y2.moveTo([iSLB1.X(), iSLB1.Y()]);
             dashesLRASB1.X1.moveTo([iSLB1.X(), 0]);
             dashesLRASB1.X2.moveTo([iSLB1.X(), iSLB1.Y()]);
-            brd1.update()
+            brd1.update();
 
             //BOARD 2
             //Moving Point A2
@@ -483,7 +483,7 @@ var Macro = (function(JXG, MacroLib) {
                 visible: true
             });
 
-            brd1.update()
+            brd1.update();
 
             // Board 2
             //First set of moveable lines

@@ -8,8 +8,8 @@ var Macro = (function(JXG, MacroLib) {
         // BOARD 1
         ////////////
         brd1 = MacroLib.createBoard('jxgbox1', {
-            xname: "Real GDP",
-            yname: "PL",
+            xname: 'Real GDP',
+            yname: 'PL',
             grid: false
         });
 
@@ -41,7 +41,7 @@ var Macro = (function(JXG, MacroLib) {
             'ltype': 'Demand',
             'name': 'AD<sub>1</sub>',
             'color': 'Orange'
-        })
+        });
         AD1.setAttribute({
             'dash': 1,
             'fixed': true,
@@ -53,7 +53,7 @@ var Macro = (function(JXG, MacroLib) {
             'ltype': 'Demand',
             'name': 'AD<sub>2</sub>',
             'color': 'Orange'
-        })
+        });
         AD2.setAttribute({
             'withLabel': false,
             'highlight': true
@@ -64,7 +64,7 @@ var Macro = (function(JXG, MacroLib) {
             'ltype': 'Vertical',
             'name': 'LRAS',
             'color': 'DodgerBlue'
-        })
+        });
         LRAS.setAttribute({
             'withLabel': true,
             'fixed': true,
@@ -148,8 +148,8 @@ var Macro = (function(JXG, MacroLib) {
         var bboxlimits2 = [-2.5, 12, 12, -1.5];
         brd2 = MacroLib.createBoard('jxgbox2', {
             bboxlimits: bboxlimits2,
-            xname: "UR",
-            yname: "Inflation<br>Rate",
+            xname: 'UR',
+            yname: 'Inflation<br>Rate',
             'ypos': [-2.4, 10],
             grid: false
         });
@@ -214,11 +214,11 @@ var Macro = (function(JXG, MacroLib) {
         });
 
         //LRAS - fixed
-        var LRAS = MacroLib.createLine(brd2, {
+        LRAS = MacroLib.createLine(brd2, {
             'ltype': 'Vertical',
             'name': 'LRPC',
             'color': 'DodgerBlue'
-        })
+        });
         LRAS.setAttribute({
             'dash': 3,
             'withLabel': true,
@@ -316,7 +316,7 @@ var Macro = (function(JXG, MacroLib) {
             dashesLRASB1.Y2.moveTo([iSLB1.X(), iSLB1.Y()]);
             dashesLRASB1.X1.moveTo([iSLB1.X(), 0]);
             dashesLRASB1.X2.moveTo([iSLB1.X(), iSLB1.Y()]);
-            brd1.update()
+            brd1.update();
 
             //BOARD 2
             //Moving Point A2
@@ -370,7 +370,7 @@ var Macro = (function(JXG, MacroLib) {
                 visible: true
             });
 
-            brd1.update()
+            brd1.update();
 
             // Board 2
 

@@ -1,7 +1,7 @@
 // Used as JSInput
 var Macro = (function(JXG, MacroLib) {
     'use strict';
-    var brd1;
+    var brd1, AD1, AD2;
 
     function init() {
         MacroLib.init(MacroLib.ONE_BOARD);
@@ -36,10 +36,10 @@ var Macro = (function(JXG, MacroLib) {
         //Axes
         xaxis1.removeAllTicks();
         yaxis1.removeAllTicks();
-        var xlabel1 = brd1.create('text', [-1.2, 10, "PL"], {
+        var xlabel1 = brd1.create('text', [-1.2, 10, 'PL'], {
             fixed: true
         });
-        var ylabel1 = brd1.create('text', [9, -0.5, "RGDP"], {
+        var ylabel1 = brd1.create('text', [9, -0.5, 'RGDP'], {
             fixed: true
         });
 
@@ -54,7 +54,7 @@ var Macro = (function(JXG, MacroLib) {
         });
 
         //Demand Line 1 - fixed
-        var AD1 = MacroLib.createDemand(brd1, {
+        AD1 = MacroLib.createDemand(brd1, {
             name: 'AD<sub>1</sub>',
             color: 'Gray'
         });
@@ -65,7 +65,7 @@ var Macro = (function(JXG, MacroLib) {
         });
 
         //Demand Line 2 - moveable
-        var AD2 = MacroLib.createDemand(brd1, {
+        AD2 = MacroLib.createDemand(brd1, {
             name: 'AD<sub>2</sub>',
             color: 'DodgerBlue'
         });
@@ -123,7 +123,7 @@ var Macro = (function(JXG, MacroLib) {
             dashS2.Y1.setAttribute({
                 withLabel: true
             });
-            brd1.update()
+            brd1.update();
         });
     }
 
@@ -141,14 +141,12 @@ var Macro = (function(JXG, MacroLib) {
 
     //Standard edX JSinput functions
     function setState(transaction, statestr) {
-        state = JSON.parse(statestr);
-        //console.log(state);
-        //console.log(state["dragLine"]);
+        var state = JSON.parse(statestr);
 
-        if (state["dragLine"]) {
+        if (state.dragLine) {
             brd1.removeObject('AD2');
-            var point1 = [state["dragLine"]["p1X"], state["dragLine"]["p1Y"]];
-            var point2 = [state["dragLine"]["p2X"], state["dragLine"]["p2Y"]]
+            var point1 = [state.dragLine.p1X, state.dragLine.p1Y];
+            var point2 = [state.dragLine.p2X, state.dragLine.p2Y];
 
             //Demand Line 2 - moveable
             AD2.point1.moveTo(point1, 0);
@@ -156,36 +154,32 @@ var Macro = (function(JXG, MacroLib) {
 
             brd1.update();
         }
-        //alert(statestr);
         console.debug('State updated successfully from saved.');
     }
 
     function getState() {
-        state = JSON.parse(getGrade());
-        statestr = JSON.stringify(state);
-        // console.log(statestr);
+        var state = JSON.parse(getGrade());
+        var statestr = JSON.stringify(state);
         return statestr;
     }
 
     //Standard edX JSinput functions
     function getGrade() {
-        state = {
-            "dragLine": {
+        var state = {
+            'dragLine': {
                 'p1X': AD2.point1.X(),
                 'p2X': AD2.point2.X(),
                 'p1Y': AD2.point1.Y(),
                 'p2Y': AD2.point2.Y()
             },
-            "staticLine": {
+            'staticLine': {
                 'p1X': AD1.point1.X(),
                 'p2X': AD1.point2.X(),
                 'p1Y': AD1.point1.Y(),
                 'p2Y': AD1.point2.Y()
             }
         };
-        statestr = JSON.stringify(state);
-        console.log(statestr);
-
+        var statestr = JSON.stringify(state);
         return statestr;
     }
 
