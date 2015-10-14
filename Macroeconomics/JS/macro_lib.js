@@ -1,6 +1,8 @@
 var MacroLib = (function(JXG) {
     'use strict';
-    var ONE_BOARD = 1, TWO_BOARDS = 2, THREE_BOARDS = 3;
+    var ONE_BOARD = 1,
+        TWO_BOARDS = 2,
+        THREE_BOARDS = 3;
 
     //Bounding Box Limits
     var defaultBBox;
@@ -22,125 +24,156 @@ var MacroLib = (function(JXG) {
                 JXG.Options.text.fontSize = 16;
                 JXG.Options.text.highlight = false;
                 defaultBBox = [-1.5, 12, 12, -1.0];
-                labelOffset = {'X':150,'Y':140};
-                defaultXpos = [9,-0.5];
-                defaultYpos = [-1.2,10];
-                defaultXoffset = [-5,-15];
-                defaultYoffset = [-35,-2];
+                labelOffset = {
+                    'X': 150,
+                    'Y': 140
+                };
+                defaultXpos = [9, -0.5];
+                defaultYpos = [-1.2, 10];
+                defaultXoffset = [-5, -15];
+                defaultYoffset = [-35, -2];
                 break;
             case TWO_BOARDS:
                 JXG.Options.text.fontSize = 15;
                 // JXG.Options.text.highlight was equal to true. OK?
                 defaultBBox = [-1.5, 12, 12, -1.5];
-                labelOffset = {'X':95,'Y':95};
-                defaultXpos = [8,-0.5];
-                defaultYpos = [-1.0,10];
-                defaultXoffset = [-5,-15];
-                defaultYoffset = [-35,-2];
+                labelOffset = {
+                    'X': 95,
+                    'Y': 95
+                };
+                defaultXpos = [8, -0.5];
+                defaultYpos = [-1.0, 10];
+                defaultXoffset = [-5, -15];
+                defaultYoffset = [-35, -2];
                 break;
             case THREE_BOARDS:
                 JXG.Options.text.fontSize = 15;
                 JXG.Options.text.highlight = false;
                 defaultBBox = [-1.75, 12, 12, -2.0];
-                labelOffset = {'X':70,'Y':70};
-                defaultXpos = [8,-1];
-                defaultYpos = [-1.5,10];
-                defaultXoffset = [2,10];
-                defaultYoffset = [4,-10];
+                labelOffset = {
+                    'X': 70,
+                    'Y': 70
+                };
+                defaultXpos = [8, -1];
+                defaultYpos = [-1.5, 10];
+                defaultXoffset = [2, 10];
+                defaultYoffset = [4, -10];
                 break;
-
         }
     }
 
-    function createBoard(brdName,options) {
+    function createBoard(brdName, options) {
         var xname = options.xname || 'x-label';
         // In MacroAllBoards.js: xpos = options.xpos || [8,-0.5];
         var xpos = options.xpos || defaultXpos;
 
         var yname = options.yname || 'y-label';
-         // In MacroAllBoards.js: xpos = options.xpos || [-1.0,10];
+        // In MacroAllBoards.js: xpos = options.xpos || [-1.0,10];
         var ypos = options.ypos || defaultYpos;
 
         var bboxlimits = options.bboxlimits || defaultBBox;
         var grid = options.grid || false;
 
-        var board = JXG.JSXGraph.initBoard(brdName, {axis:false,
-                                          showCopyright: false,
-                                          showNavigation: false,
-                                          zoom: false,
-                                          pan: false,
-                                          boundingbox:bboxlimits,
-                                          grid: grid,
-                                          hasMouseUp: true,
+        var board = JXG.JSXGraph.initBoard(brdName, {
+            axis: false,
+            showCopyright: false,
+            showNavigation: false,
+            zoom: false,
+            pan: false,
+            boundingbox: bboxlimits,
+            grid: grid,
+            hasMouseUp: true,
         });
 
-        var xaxis = board.create('axis', [[0, 0], [11, 0]], {withLabel: false});
-        var yaxis = board.create('axis', [[0, 0], [0, 11]], {withLabel: false});
+        var xaxis = board.create('axis', [
+            [0, 0],
+            [11, 0]
+        ], {
+            withLabel: false
+        });
+        var yaxis = board.create('axis', [
+            [0, 0],
+            [0, 11]
+        ], {
+            withLabel: false
+        });
 
         //Axes
         xaxis.removeAllTicks();
         yaxis.removeAllTicks();
-        var xlabel = board.create('text',[xpos[0],xpos[1],xname],{fixed:true});
-        var ylabel = board.create('text',[ypos[0],ypos[1],yname],{fixed:true});
+        var xlabel = board.create('text', [xpos[0], xpos[1], xname], {
+            fixed: true
+        });
+        var ylabel = board.create('text', [ypos[0], ypos[1], yname], {
+            fixed: true
+        });
 
         return board;
     }
 
     function lineCoords(ltype) {
         ltype = ltype || 'Supply';
-        var c1,c2,offset;
+        var c1, c2, offset;
         if (ltype === 'Demand') {
-            c1 = [2.0,9.5];
-            c2 = [9.5,2.0];
-            offset = [labelOffset.X,-labelOffset.Y];
-        }
-        else if (ltype === 'Supply') {
-            c1 = [2.0,2.0];
-            c2 = [9.5,9.5];
-            offset = [labelOffset.X,labelOffset.Y];
+            c1 = [2.0, 9.5];
+            c2 = [9.5, 2.0];
+            offset = [labelOffset.X, -labelOffset.Y];
+        } else if (ltype === 'Supply') {
+            c1 = [2.0, 2.0];
+            c2 = [9.5, 9.5];
+            offset = [labelOffset.X, labelOffset.Y];
         }
         // Was offset = [0,labelOffset.Y+30] for all files using Macro_1Board.js, Macro_2Board.js, Macro_3Board.js
         else if (ltype === 'Vertical') {
-            c1 = [5.75,0.5];
-            c2 = [5.75,11.0];
-            offset = [0,labelOffset.Y+45];
-        }
-        else if (ltype === 'Horizontal') {
-            c1 = [0.5,5.75];
-            c2 = [11.0,5.75];
-            offset = [0,labelOffset.Y+45];
+            c1 = [5.75, 0.5];
+            c2 = [5.75, 11.0];
+            offset = [0, labelOffset.Y + 45];
+        } else if (ltype === 'Horizontal') {
+            c1 = [0.5, 5.75];
+            c2 = [11.0, 5.75];
+            offset = [0, labelOffset.Y + 45];
         }
 
-        return [c1,c2,offset];
+        return [c1, c2, offset];
     }
 
-    function createLine(board,options) {
+    function createLine(board, options) {
         var name = options.name || '';
         var color = options.color || JXG.Options.segment.strokeColor;
         var ltype = options.ltype || 'Supply';
         var fixed = options.type || true;
-        var c1,c2,D1,D2,offset;
+        var c1, c2, D1, D2, offset;
 
         var tmp = lineCoords(ltype);
         c1 = tmp[0];
         c2 = tmp[1];
         offset = tmp[2];
 
-        D1 = board.create('point',c1,{withLabel:false,visible:false});
-        D2 = board.create('point',c2,{withLabel:false,visible:false});
-        return board.create('segment',[D1,D2],{'strokeColor':color,
-                                               'name':name,'withLabel':true,
-                                               'label':{'offset':offset}
-                                              });
+        D1 = board.create('point', c1, {
+            withLabel: false,
+            visible: false
+        });
+        D2 = board.create('point', c2, {
+            withLabel: false,
+            visible: false
+        });
+        return board.create('segment', [D1, D2], {
+            'strokeColor': color,
+            'name': name,
+            'withLabel': true,
+            'label': {
+                'offset': offset
+            }
+        });
     }
 
-    function createTransformLine(board,options) {
+    function createTransformLine(board, options) {
         var name = options.name || '';
         var color = options.color || JXG.Options.segment.strokeColor;
         var ltype = options.ltype || 'Supply';
         var fixed = options.type || true;
         var transformList = options.transformList || [undefined];
-        var c1,c2,D1,D2,offset;
+        var c1, c2, D1, D2, offset;
 
         var tmp = lineCoords(ltype);
         c1 = tmp[0];
@@ -148,53 +181,86 @@ var MacroLib = (function(JXG) {
         offset = tmp[2];
 
         //Supply Board 1 - with slider transformation
-        var s1B1 = board.create('point',c1,{visible:false});
-        var s2B1 = board.create('point',c2,{visible:false});
-        var pS1 = board.create('point',[s1B1,transformList],{visible:false});
-        var pS2 = board.create('point',[s2B1,transformList],{visible:false});
+        var s1B1 = board.create('point', c1, {
+            visible: false
+        });
+        var s2B1 = board.create('point', c2, {
+            visible: false
+        });
+        var pS1 = board.create('point', [s1B1, transformList], {
+            visible: false
+        });
+        var pS2 = board.create('point', [s2B1, transformList], {
+            visible: false
+        });
 
-        return board.create('segment',[pS1,pS2],{withLabel:true,highlight:false,'name':name,
-                                                 color:color,'label':{'offset':offset}
-                                                });
+        return board.create('segment', [pS1, pS2], {
+            withLabel: true,
+            highlight: false,
+            'name': name,
+            color: color,
+            'label': {
+                'offset': offset
+            }
+        });
     }
 
     //DO NOT DELETE - Used in older interactives
-    function createSupply(board,options) {
+    function createSupply(board, options) {
         var name = options.name || '';
         var color = options.color || JXG.Options.segment.strokeColor;
-        var c1,c2,S1,S2,N;
+        var c1, c2, S1, S2, N;
 
-        c1 = [2.0,2.0];
-        c2 = [9.5,9.5];
-        S1 = board.create('point',c1,{withLabel:false,visible:false});
-        S2 = board.create('point',c2,{withLabel:false,visible:false});
-        //N = board.create('text',[S2.X(),S2.Y(),name]);
-        return board.create('segment',[S1,S2],{'strokeColor':color,
-                                               'name':name,'withLabel':true,
-                                               'label':{'offset':[labelOffset.X,labelOffset.Y]}
-                                              });
+        c1 = [2.0, 2.0];
+        c2 = [9.5, 9.5];
+        S1 = board.create('point', c1, {
+            withLabel: false,
+            visible: false
+        });
+        S2 = board.create('point', c2, {
+            withLabel: false,
+            visible: false
+        });
+        return board.create('segment', [S1, S2], {
+            'strokeColor': color,
+            'name': name,
+            'withLabel': true,
+            'label': {
+                'offset': [labelOffset.X, labelOffset.Y]
+            }
+        });
     }
 
     //DO NOT DELETE - Used in older interactives
-    function createDemand(board,options) {
+    function createDemand(board, options) {
         var name = options.name || '';
         var color = options.color || JXG.Options.segment.strokeColor;
-        var c1,c2,D1,D2;
+        var c1, c2, D1, D2;
 
-        c1 = [2.0,9.5];
-        c2 = [9.5,2.0];
-        D1 = board.create('point',c1,{withLabel:false,visible:false});
-        D2 = board.create('point',c2,{withLabel:false,visible:false});
-        return board.create('segment',[D1,D2],{'strokeColor':color,
-                                               'name':name,'withLabel':true,
-                                               'label':{'offset':[labelOffset.X,-labelOffset.Y]}
-                                              });
+        c1 = [2.0, 9.5];
+        c2 = [9.5, 2.0];
+        D1 = board.create('point', c1, {
+            withLabel: false,
+            visible: false
+        });
+        D2 = board.create('point', c2, {
+            withLabel: false,
+            visible: false
+        });
+        return board.create('segment', [D1, D2], {
+            'strokeColor': color,
+            'name': name,
+            'withLabel': true,
+            'label': {
+                'offset': [labelOffset.X, -labelOffset.Y]
+            }
+        });
     }
 
     /////////////////////////////////////////////////////////////
     // Dashed Lines
-    function createDashedLines2Axis(board,intersection,options) {
-        var fixed = options.fixed || true;  // defaults
+    function createDashedLines2Axis(board, intersection, options) {
+        var fixed = options.fixed || true; // defaults
         var withLabel = options.withLabel || false;
 
         var xlabel = options.xlabel || '';
@@ -208,25 +274,59 @@ var MacroLib = (function(JXG) {
         var color = options.color || 'gray';
         var visible = options.visible || true;
 
-        var Y1 = board.create('point',[0, intersection.Y()],
-                         {'withLabel':withLabel,'name':ylabel,'visible':true,'size':'0.5',
-                          'fixed':fixed, 'strokeColor':'Gray','label':{'offset':yoffsets}});
+        var Y1 = board.create('point', [0, intersection.Y()], {
+            'withLabel': withLabel,
+            'name': ylabel,
+            'visible': true,
+            'size': '0.5',
+            'fixed': fixed,
+            'strokeColor': 'Gray',
+            'label': {
+                'offset': yoffsets
+            }
+        });
 
-        var Y2 = board.create('point',[intersection.X(), intersection.Y()],
-                         {'withLabel':false,'visible':false,'size':'0.0','strokeColor':''});
+        var Y2 = board.create('point', [intersection.X(), intersection.Y()], {
+            'withLabel': false,
+            'visible': false,
+            'size': '0.0',
+            'strokeColor': ''
+        });
 
-        var YLine = board.create('segment',[Y1,Y2],
-                            {'strokeColor':color,'strokeWidth':'2','dash':'1','fixed':fixed,'visible':visible});
+        var YLine = board.create('segment', [Y1, Y2], {
+            'strokeColor': color,
+            'strokeWidth': '2',
+            'dash': '1',
+            'fixed': fixed,
+            'visible': visible
+        });
 
-        var X1 = board.create('point',[intersection.X(), 0],
-                         {'withLabel':withLabel,'name':xlabel,'visible':true,'size':'0.5',
-                          'fixed':fixed, 'strokeColor':'Gray','label':{'offset':xoffsets}});
+        var X1 = board.create('point', [intersection.X(), 0], {
+            'withLabel': withLabel,
+            'name': xlabel,
+            'visible': true,
+            'size': '0.5',
+            'fixed': fixed,
+            'strokeColor': 'Gray',
+            'label': {
+                'offset': xoffsets
+            }
+        });
 
-        var X2 = board.create('point',[intersection.X(), intersection.Y()],
-                         {'withLabel':false,'visible':false,'size':'0.0','strokeColor':''});
+        var X2 = board.create('point', [intersection.X(), intersection.Y()], {
+            'withLabel': false,
+            'visible': false,
+            'size': '0.0',
+            'strokeColor': ''
+        });
 
-        var XLine = board.create('segment',[X1,X2],
-                            {'strokeColor':color,'strokeWidth':'2','dash':'1','fixed':fixed,'visible':visible});
+        var XLine = board.create('segment', [X1, X2], {
+            'strokeColor': color,
+            'strokeWidth': '2',
+            'dash': '1',
+            'fixed': fixed,
+            'visible': visible
+        });
 
 
         var obj = {
@@ -244,27 +344,26 @@ var MacroLib = (function(JXG) {
     // Establish a channel to communicate with edX when the application is used
     // inside a JSInput and hosted completely on a different domain.
     function createChannel(getGrade, getState, setState) {
-      var channel,
-        msg = 'The application is not embedded in an iframe. ' +
-              'A channel could not be established';
+        var channel,
+            msg = 'The application is not embedded in an iframe. ' +
+            'A channel could not be established';
 
-      // Establish a channel only if this application is embedded in an iframe.
-      // This will let the parent window communicate with the child window using
-      // RPC and bypass SOP restrictions.
-      if (window.parent !== window) {
-        channel = Channel.build({
-          window: window.parent,
-          origin: '*',
-          scope: 'JSInput'
-        });
+        // Establish a channel only if this application is embedded in an iframe.
+        // This will let the parent window communicate with the child window using
+        // RPC and bypass SOP restrictions.
+        if (window.parent !== window) {
+            channel = Channel.build({
+                window: window.parent,
+                origin: '*',
+                scope: 'JSInput'
+            });
 
-        channel.bind('getGrade', getGrade);
-        channel.bind('getState', getState);
-        channel.bind('setState', setState);
-      }
-      else {
-        console.log(msg);
-      }
+            channel.bind('getGrade', getGrade);
+            channel.bind('getState', getState);
+            channel.bind('setState', setState);
+        } else {
+            console.log(msg);
+        }
     }
 
     /*
@@ -366,11 +465,38 @@ var MacroLib = (function(JXG) {
       </problem>
     */
 
+    function setLabelOffset(val) {
+        labelOffset = val;
+    }
+
+    function setDefaultXpos(val) {
+        defaultXpos = val;
+    }
+
+    function setDefaultYpos(val) {
+        defaultYpos = val;
+    }
+
+    function setDefaultXoffset(val) {
+        defaultXoffset = val;
+    }
+
+    function setDefaultYoffset(val) {
+        defaultYoffset = val;
+    }
+
     return {
+        // Constants
         ONE_BOARD: ONE_BOARD,
         TWO_BOARDS: TWO_BOARDS,
         THREE_BOARDS: THREE_BOARDS,
-        labelOffset: labelOffset,
+        // Public field setters
+        labelOffset: setLabelOffset,
+        defaultXpos: setDefaultXpos,
+        defaultYpos: setDefaultYpos,
+        defaultXoffset: setDefaultXoffset,
+        defaultYoffset: setDefaultYoffset,
+        // Public methods
         init: init,
         createBoard: createBoard,
         lineCoords: lineCoords,
