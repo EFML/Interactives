@@ -9,8 +9,8 @@ var Macro = (function(JXG, MacroLib) {
         ////////////
 
         brd1 = MacroLib.createBoard('jxgbox1', {
-            xname: "Real GDP",
-            yname: "Price<br>Level",
+            xname: 'Real GDP',
+            yname: 'Price<br>Level',
             grid: false,
             'xpos': [9, -0.5]
         });
@@ -21,7 +21,6 @@ var Macro = (function(JXG, MacroLib) {
             color: 'DodgerBlue'
         });
         SRAS1.setAttribute({
-            fixed: true,
             'dash': 1,
             'fixed': true,
             'highlight': false
@@ -44,7 +43,6 @@ var Macro = (function(JXG, MacroLib) {
             color: 'Orange'
         });
         AD1.setAttribute({
-            fixed: true,
             'dash': 1,
             'fixed': true,
             'highlight': false
