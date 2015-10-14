@@ -10,9 +10,9 @@ var Macro = (function(JXG, MacroLib) {
         var bbox = [-1.75, 12.5, 12, -2.75];
         brd1 = MacroLib.createBoard('jxgbox1', {
             bboxlimits: bbox,
-            xname: "Q Money",
-            yname: "NIR"
-        })
+            xname: 'Q Money',
+            yname: 'NIR'
+        });
 
         ////////////
         // BOARD 2
@@ -21,18 +21,18 @@ var Macro = (function(JXG, MacroLib) {
         brd2 = MacroLib.createBoard('jxgbox2', {
             bboxlimits: bbox,
             xpos: [4, -1],
-            xname: "Investment Demand",
-            yname: "RIR"
-        })
+            xname: 'Investment Demand',
+            yname: 'RIR'
+        });
 
         ////////////
         // BOARD 3
         ////////////
         brd3 = MacroLib.createBoard('jxgbox3', {
             bboxlimits: bbox,
-            xname: "RGDP",
-            yname: "PL"
-        })
+            xname: 'RGDP',
+            yname: 'PL'
+        });
 
         //Slider Board 1
         var sliderB1 = brd1.create('slider', [
@@ -47,10 +47,10 @@ var Macro = (function(JXG, MacroLib) {
 
         var sliderB1Trans = brd1.create('transform', [
             function() {
-                return sliderB1.Value()
+                return sliderB1.Value();
             },
             function() {
-                return 0.0
+                return 0.0;
             }
         ], {
             type: 'translate'
@@ -68,10 +68,10 @@ var Macro = (function(JXG, MacroLib) {
         });
         var sliderB2Trans = brd2.create('transform', [
             function() {
-                return sliderB2.Value()
+                return sliderB2.Value();
             },
             function() {
-                return 0.0
+                return 0.0;
             }
         ], {
             type: 'translate'
@@ -89,10 +89,10 @@ var Macro = (function(JXG, MacroLib) {
         });
         var sliderB3Trans = brd3.create('transform', [
             function() {
-                return sliderB3.Value()
+                return sliderB3.Value();
             },
             function() {
-                return 0.0
+                return 0.0;
             }
         ], {
             type: 'translate'

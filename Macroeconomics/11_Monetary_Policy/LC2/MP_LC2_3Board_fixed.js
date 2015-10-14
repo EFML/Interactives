@@ -8,26 +8,26 @@ var Macro = (function(JXG, MacroLib) {
         // BOARD 1
         ////////////
         brd1 = MacroLib.createBoard('jxgbox1', {
-            xname: "Q Money",
-            yname: "NIR"
-        })
+            xname: 'Q Money',
+            yname: 'NIR'
+        });
 
         ////////////
         // BOARD 2
         ////////////
         brd2 = MacroLib.createBoard('jxgbox2', {
             xpos: [4, -1],
-            xname: "Investment Demand",
-            yname: "RIR"
-        })
+            xname: 'Investment Demand',
+            yname: 'RIR'
+        });
 
         ////////////
         // BOARD 3
         ////////////
         brd3 = MacroLib.createBoard('jxgbox3', {
-            xname: "RGDP",
-            yname: "PL"
-        })
+            xname: 'RGDP',
+            yname: 'PL'
+        });
 
         //Sliders
         var sliderx = brd1.create('slider', [
@@ -37,18 +37,17 @@ var Macro = (function(JXG, MacroLib) {
         ], {
             visible: false,
             withLabel: false,
-            snapWidth: 0.05,
-            snapWidth: 1,
+            snapWidth: 0.05, // Removed a duplicate snapWidth: 1,
             color: 'DodgerBlue'
         });
 
         //Positive Slider Transformation
         var sliderPositive = brd1.create('transform', [
             function() {
-                return sliderx.Value()
+                return sliderx.Value();
             },
             function() {
-                return 0.0
+                return 0.0;
             }
         ], {
             type: 'translate'
@@ -57,10 +56,10 @@ var Macro = (function(JXG, MacroLib) {
         //Negative Slider Transformation
         var sliderNegative = brd1.create('transform', [
             function() {
-                return -sliderx.Value()
+                return -sliderx.Value();
             },
             function() {
-                return 0.0
+                return 0.0;
             }
         ], {
             type: 'translate'

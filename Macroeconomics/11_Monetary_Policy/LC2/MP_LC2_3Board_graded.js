@@ -1,7 +1,7 @@
 // Used as JSInput
 var Macro = (function(JXG, MacroLib) {
     'use strict';
-    var brd1, brd2, brd3;
+    var brd1, brd2, brd3, sliderB1, sliderB2, sliderB3;
 
     function init() {
         MacroLib.init(MacroLib.THREE_BOARDS);
@@ -11,9 +11,9 @@ var Macro = (function(JXG, MacroLib) {
         var bbox = [-1.75, 12.5, 12, -2.75];
         brd1 = MacroLib.createBoard('jxgbox1', {
             bboxlimits: bbox,
-            xname: "Q Money",
-            yname: "NIR"
-        })
+            xname: 'Q Money',
+            yname: 'NIR'
+        });
 
         ////////////
         // BOARD 2
@@ -22,21 +22,21 @@ var Macro = (function(JXG, MacroLib) {
         brd2 = MacroLib.createBoard('jxgbox2', {
             bboxlimits: bbox,
             xpos: [4, -1],
-            xname: "Investment Demand",
-            yname: "RIR"
-        })
+            xname: 'Investment Demand',
+            yname: 'RIR'
+        });
 
         ////////////
         // BOARD 3
         ////////////
         brd3 = MacroLib.createBoard('jxgbox3', {
             bboxlimits: bbox,
-            xname: "RGDP",
-            yname: "PL"
-        })
+            xname: 'RGDP',
+            yname: 'PL'
+        });
 
         //Slider Board 1
-        var sliderB1 = brd1.create('slider', [
+        sliderB1 = brd1.create('slider', [
             [2.0, -1.75],
             [8, -1.75],
             [-1.75, 0, 1.75]
@@ -48,17 +48,17 @@ var Macro = (function(JXG, MacroLib) {
 
         var sliderB1Trans = brd1.create('transform', [
             function() {
-                return sliderB1.Value()
+                return sliderB1.Value();
             },
             function() {
-                return 0.0
+                return 0.0;
             }
         ], {
             type: 'translate'
         });
 
         //Slider Board 2
-        var sliderB2 = brd2.create('slider', [
+        sliderB2 = brd2.create('slider', [
             [2.0, -1.75],
             [8, -1.75],
             [-1.75, 0, 1.75]
@@ -69,17 +69,17 @@ var Macro = (function(JXG, MacroLib) {
         });
         var sliderB2Trans = brd2.create('transform', [
             function() {
-                return sliderB2.Value()
+                return sliderB2.Value();
             },
             function() {
-                return 0.0
+                return 0.0;
             }
         ], {
             type: 'translate'
         });
 
         //Slider Board 1
-        var sliderB3 = brd3.create('slider', [
+        sliderB3 = brd3.create('slider', [
             [2.0, -1.75],
             [8, -1.75],
             [-1.75, 0, 1.75]
@@ -90,10 +90,10 @@ var Macro = (function(JXG, MacroLib) {
         });
         var sliderB3Trans = brd3.create('transform', [
             function() {
-                return sliderB3.Value()
+                return sliderB3.Value();
             },
             function() {
-                return 0.0
+                return 0.0;
             }
         ], {
             type: 'translate'
@@ -188,7 +188,6 @@ var Macro = (function(JXG, MacroLib) {
             'fixed': true
         });
 
-        // var D2B2 = createTransformLine(brd2,{'ltype':'Demand','transformList':[sliderB2Pos],'name':'D<sub>2</sub>',color:'DodgerBlue'});
         //Intersection Board 2
         var iSDB2 = brd2.create('intersection', [SB2, D1B2], {
             withLabel: false,
@@ -349,36 +348,31 @@ var Macro = (function(JXG, MacroLib) {
 
     //Standard edX JSinput functions
     function setState(transaction, statestr) {
-        state = JSON.parse(statestr);
-        //console.log(state);
-        //console.log(state["dragLine"]);
+        var state = JSON.parse(statestr);
 
-        if (state["sliderB1"] && state["sliderB2"] && state["sliderB3"]) {
-            //brd1.removeObject('AD2');
-            // sliderB1.Value() = state['sliderB1']
-            // sliderB2.Value() = state['sliderB2']
-            // sliderB3.Value() = state['sliderB3']
+        if (state.sliderB1 && state.sliderB2 && state.sliderB3) {
+            // brd1.removeObject('AD2');
+            // sliderB1.Value() = state.sliderB1;
+            // sliderB2.Value() = state.sliderB2;
+            // sliderB3.Value() = state.sliderB3;
             brd1.update();
         }
-
         console.debug('State updated successfully from saved.');
     }
 
     function getState() {
         var state = JSON.parse(getGrade());
-        statestr = JSON.stringify(state);
-        // console.log(statestr);
+        var statestr = JSON.stringify(state);
         return statestr;
     }
 
     function getGrade() {
         var state = {
-            "sliderB1": sliderB1.Value(),
-            "sliderB2": sliderB2.Value(),
-            "sliderB3": sliderB3.Value()
+            'sliderB1': sliderB1.Value(),
+            'sliderB2': sliderB2.Value(),
+            'sliderB3': sliderB3.Value()
         };
-        statestr = JSON.stringify(state);
-        // console.log('hello',statestr);
+        var statestr = JSON.stringify(state);
         return statestr;
     }
 
