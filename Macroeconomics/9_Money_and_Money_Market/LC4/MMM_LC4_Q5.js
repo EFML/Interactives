@@ -38,10 +38,10 @@ var Macro = (function(JXG, MacroLib) {
         //Axes
         xaxis.removeAllTicks();
         yaxis.removeAllTicks();
-        var ylabel = brd1.create('text', [-1.65, 10, "Nominal<br>Interest<br>Rate"], {
+        var ylabel = brd1.create('text', [-1.65, 10, 'Nominal<br>Interest<br>Rate'], {
             fixed: true
         });
-        var xlabel = brd1.create('text', [8.5, -0.55, "Quantity of Money"], {
+        var xlabel = brd1.create('text', [8.5, -0.55, 'Quantity of Money'], {
             fixed: true
         });
 
@@ -131,12 +131,12 @@ var Macro = (function(JXG, MacroLib) {
 
             dashS1.X1.moveTo([iSD.X(), 0]);
             dashS1.X2.moveTo([iSD.X(), iSD.Y()]);
-            brd1.update()
+            brd1.update();
         });
 
         brd1.on('mousedown', function() {
             toggleLabels(true);
-            brd1.update()
+            brd1.update();
         });
     }
 
@@ -152,7 +152,7 @@ var Macro = (function(JXG, MacroLib) {
         S.setAttribute({
             withLabel: toggle
         });
-    };
+    }
 
     //Animation for shifting curve SouthWest
     function decreaseXY() {
@@ -192,15 +192,16 @@ var Macro = (function(JXG, MacroLib) {
         brd1.update();
     }
 
+    function resetAnimation() {
+        JXG.JSXGraph.freeBoard(brd1);
+        init();
+    }
+
     /////////////////////////
     // External DOM button
     /////////////////////////
     var resetAnimationBtn = document.getElementById('resetAnimationBtn');
-
-    resetAnimationBtn.addEventListener('click', function() {
-        JXG.JSXGraph.freeBoard(brd1);
-        init();
-    });
+    resetAnimationBtn.addEventListener('click', resetAnimation);
 
     init();
 

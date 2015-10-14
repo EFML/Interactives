@@ -1,7 +1,7 @@
 // Used as JSInput
 var Macro = (function(JXG, MacroLib) {
     'use strict';
-    var brd1;
+    var brd1, C1, C2, C3;
 
     function init() {
         MacroLib.init(MacroLib.ONE_BOARD);
@@ -36,15 +36,15 @@ var Macro = (function(JXG, MacroLib) {
         //Axes
         xaxis1.removeAllTicks();
         yaxis1.removeAllTicks();
-        var xlabel1 = brd1.create('text', [-1.6, 10, "Nominal<br>Interest<br>Rate"], {
+        var xlabel1 = brd1.create('text', [-1.6, 10, 'Nominal<br>Interest<br>Rate'], {
             fixed: true
         });
-        var ylabel1 = brd1.create('text', [8, -0.5, "Quantity of Money"], {
+        var ylabel1 = brd1.create('text', [8, -0.5, 'Quantity of Money'], {
             fixed: true
         });
 
         //Curve 1 - fixed
-        var C1 = MacroLib.createDemand(brd1, {
+        C1 = MacroLib.createDemand(brd1, {
             name: 'C<sub>1</sub>',
             color: 'Gray'
         });
@@ -55,7 +55,7 @@ var Macro = (function(JXG, MacroLib) {
         });
 
         //Curve 2 - fixed
-        var C2 = MacroLib.createSupply(brd1, {
+        C2 = MacroLib.createSupply(brd1, {
             name: 'C<sub>2</sub>',
             color: 'Gray'
         });
@@ -66,7 +66,7 @@ var Macro = (function(JXG, MacroLib) {
         });
 
         //Curve 3 - fixed
-        var C3 = brd1.create('segment', [
+        C3 = brd1.create('segment', [
             [5.75, 11.0],
             [5.75, 1.0]
         ], {
@@ -135,37 +135,33 @@ var Macro = (function(JXG, MacroLib) {
             'C2': C2.getAttribute('strokeColor'),
             'C3': C3.getAttribute('strokeColor'),
         };
-        statestr = JSON.stringify(state);
-        //console.log(statestr)
-
+        var statestr = JSON.stringify(state);
         return statestr;
     }
 
     function getState() {
-        state = {
+        var state = {
             'input': JSON.parse(getGrade())
         };
-        statestr = JSON.stringify(state);
-        return statestr
+        var statestr = JSON.stringify(state);
+        return statestr;
     }
 
     function setState(statestr) {
-        state = JSON.parse(statestr);
-        state = state['input'];
-        //console.log(state['input']);
-        if (state["C1"] && state["C2"] && state["C3"]) {
+        var state = JSON.parse(statestr);
+        state = state.input;
+        if (state.C1 && state.C2 && state.C3) {
             C1.setAttribute({
-                strokeColor: state['C1']
+                strokeColor: state.C1
             });
             C2.setAttribute({
-                strokeColor: state['C2']
+                strokeColor: state.C2
             });
             C3.setAttribute({
-                strokeColor: state['C3']
+                strokeColor: state.C3
             });
         }
         brd1.update();
-        //console.log(statestr);
         console.debug('State updated successfully from saved.');
     }
 

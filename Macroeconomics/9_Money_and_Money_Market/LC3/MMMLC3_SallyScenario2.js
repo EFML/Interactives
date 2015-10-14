@@ -39,10 +39,10 @@ var Macro = (function(JXG, MacroLib) {
         //Axes
         xaxis1.removeAllTicks();
         yaxis1.removeAllTicks();
-        var xlabel1 = brd1.create('text', [6, -0.5, "Quantity of Money"], {
+        var xlabel1 = brd1.create('text', [6, -0.5, 'Quantity of Money'], {
             fixed: true
         });
-        var ylabel1 = brd1.create('text', [-2.45, 10, "Nominal<br>Interest<br>Rate"], {
+        var ylabel1 = brd1.create('text', [-2.45, 10, 'Nominal<br>Interest<br>Rate'], {
             fixed: true
         });
 
@@ -77,11 +77,11 @@ var Macro = (function(JXG, MacroLib) {
         //Axes
         xaxis2.removeAllTicks();
         yaxis2.removeAllTicks();
-        var xlabel2 = brd2.create('text', [3.0, -0.5, "Quantity of Bonds per Period"], {
+        var xlabel2 = brd2.create('text', [3.0, -0.5, 'Quantity of Bonds per Period'], {
             fixed: true,
             highlight: false
         });
-        var ylabel2 = brd2.create('text', [-2.45, 10, "Price of<br>Bonds"], {
+        var ylabel2 = brd2.create('text', [-2.45, 10, 'Price of<br>Bonds'], {
             fixed: true,
             highlight: false
         });
@@ -100,10 +100,10 @@ var Macro = (function(JXG, MacroLib) {
         //Positive Slider Transformation
         var sliderPositive = brd1.create('transform', [
             function() {
-                return sliderx.Value()
+                return sliderx.Value();
             },
             function() {
-                return 0.0
+                return 0.0;
             }
         ], {
             type: 'translate'
@@ -112,10 +112,10 @@ var Macro = (function(JXG, MacroLib) {
         //Negative Slider Transformation
         var sliderNegative = brd1.create('transform', [
             function() {
-                return sliderx.Value()
+                return sliderx.Value();
             },
             function() {
-                return 0.0
+                return 0.0;
             }
         ], {
             type: 'translate'
@@ -240,7 +240,6 @@ var Macro = (function(JXG, MacroLib) {
             var color = options.color || 'gray';
             var visible = options.visible || true;
 
-            var Y1, Y2, YLine, X1, X2, XLine, obj = {};
             var Y1 = board.create('point', [0, intersection.Y()], {
                 'withLabel': withLabel,
                 'name': ylabel,
@@ -301,7 +300,7 @@ var Macro = (function(JXG, MacroLib) {
                 X1: X1,
                 X2: X2,
                 XLine: XLine
-            }
+            };
 
             return obj;
         }

@@ -35,10 +35,10 @@ var Macro = (function(JXG, MacroLib) {
         //Axes
         xaxis1.removeAllTicks();
         yaxis1.removeAllTicks();
-        var xlabel1 = brd1.create('text', [-1.75, 10, "Nominal<br>Interest<br>Rate"], {
+        var xlabel1 = brd1.create('text', [-1.75, 10, 'Nominal<br>Interest<br>Rate'], {
             fixed: true
         });
-        var ylabel1 = brd1.create('text', [8, -0.5, "Quantity of Money"], {
+        var ylabel1 = brd1.create('text', [8, -0.5, 'Quantity of Money'], {
             fixed: true
         });
 
@@ -70,7 +70,7 @@ var Macro = (function(JXG, MacroLib) {
         });
 
         brd1.on('mousedown', function() {
-            brd1.update()
+            brd1.update();
         });
     }
 

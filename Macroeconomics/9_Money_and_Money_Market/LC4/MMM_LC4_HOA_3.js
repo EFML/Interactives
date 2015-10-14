@@ -1,7 +1,7 @@
 // Used as JSInput
 var Macro = (function(JXG, MacroLib) {
     'use strict';
-    var brd1;
+    var brd1, MS1, MS2, iB1SD, dashS2;
 
     function init() {
         MacroLib.init(MacroLib.ONE_BOARD);
@@ -13,8 +13,8 @@ var Macro = (function(JXG, MacroLib) {
         var newbbox = [-120, 27, 800, -4];
 
         brd1 = MacroLib.createBoard('jxgbox1', {
-            xname: " ",
-            yname: " ",
+            xname: ' ',
+            yname: ' ',
             grid: false,
             bboxlimits: newbbox
         });
@@ -35,7 +35,7 @@ var Macro = (function(JXG, MacroLib) {
                 offset: [0, -20]
             }
         });
-        var xlabel1 = brd1.create('text', [400, -2.75, "Quantity of Money ($billions)"], {
+        var xlabel1 = brd1.create('text', [400, -2.75, 'Quantity of Money ($billions)'], {
             fixed: true,
             highlight: false
         });
@@ -54,7 +54,7 @@ var Macro = (function(JXG, MacroLib) {
             majorHeight: 15,
             drawLabels: true
         });
-        var ylabel1 = brd1.create('text', [-110, 22, "Nominal<br>Interest<br>Rate"], {
+        var ylabel1 = brd1.create('text', [-110, 22, 'Nominal<br>Interest<br>Rate'], {
             fixed: true,
             highlight: false
         });
@@ -80,7 +80,7 @@ var Macro = (function(JXG, MacroLib) {
         ////////////
         //LRAS - straight line
         ////////////
-        var MS1 = brd1.create('segment', [
+        MS1 = brd1.create('segment', [
             [cfx * 6.0, cfy * 11.0],
             [cfx * 6.0, cfy * 1.0]
         ], {
@@ -96,7 +96,7 @@ var Macro = (function(JXG, MacroLib) {
             }
         });
 
-        var MS2 = brd1.create('segment', [
+        MS2 = brd1.create('segment', [
             [cfx * 6.0, cfy * 11.0],
             [cfx * 6.0, cfy * 1.0]
         ], {
@@ -115,7 +115,7 @@ var Macro = (function(JXG, MacroLib) {
         // Intersection Box 1
         ////////////
         //S Intersection
-        var iB1SD = brd1.create('intersection', [MS2, MD1, 0], {
+        iB1SD = brd1.create('intersection', [MS2, MD1, 0], {
             size: 4,
             visible: true,
             color: 'DarkBlue',
@@ -125,7 +125,7 @@ var Macro = (function(JXG, MacroLib) {
         ////////////
         // Draggable Dashed Lines for Board 1
         ////////////
-        var dashS2 = MacroLib.createDashedLines2Axis(brd1, iB1SD, {
+        dashS2 = MacroLib.createDashedLines2Axis(brd1, iB1SD, {
             fixed: false,
             withLabel: false,
             xlabel: '',
@@ -149,7 +149,7 @@ var Macro = (function(JXG, MacroLib) {
             MS2.setAttribute({
                 withLabel: true
             });
-            brd1.update()
+            brd1.update();
         });
     }
 
@@ -181,27 +181,26 @@ var Macro = (function(JXG, MacroLib) {
                 'Y2': MS2.point2.Y()
             }
         };
-        statestr = JSON.stringify(state);
-        //console.log(statestr)
+        var statestr = JSON.stringify(state);
 
         return statestr;
     }
 
     function getState() {
-        state = JSON.parse(getGrade());
-        statestr = JSON.stringify(state);
-        return statestr
+        var state = JSON.parse(getGrade());
+        var statestr = JSON.stringify(state);
+        return statestr;
     }
 
     function setState(transaction, statestr) {
-        state = JSON.parse(statestr);
-        //console.log(state['input']);
-        if (state["MS1"] && state["MS2"]) {
-            MS1.point1.moveTo([state['MS1']['X1'], state['MS1']['Y1']], 0);
-            MS1.point2.moveTo([state['MS1']['X2'], state['MS1']['Y2']], 0);
+        var state = JSON.parse(statestr);
 
-            MS2.point1.moveTo([state['MS2']['X1'], state['MS2']['Y1']], 0);
-            MS2.point2.moveTo([state['MS2']['X2'], state['MS2']['Y2']], 0);
+        if (state.MS1 && state.MS2) {
+            MS1.point1.moveTo([state.MS1.X1, state.MS1.Y1], 0);
+            MS1.point2.moveTo([state.MS1.X2, state.MS1.Y2], 0);
+
+            MS2.point1.moveTo([state.MS2.X1, state.MS2.Y1], 0);
+            MS2.point2.moveTo([state.MS2.X2, state.MS2.Y2], 0);
 
             dashS2.Y1.moveTo([0, iB1SD.Y()]);
             dashS2.Y2.moveTo([iB1SD.X(), iB1SD.Y()]);
@@ -212,7 +211,6 @@ var Macro = (function(JXG, MacroLib) {
 
         }
         brd1.update();
-        //console.log(statestr);
         console.debug('State updated successfully from saved.');
     }
 
@@ -221,6 +219,6 @@ var Macro = (function(JXG, MacroLib) {
     return {
         setState: setState,
         getState: getState,
-        getGrade
+        getGrade: getGrade
     };
 })(JXG, MacroLib, undefined);
