@@ -1,3 +1,4 @@
+// Used as JSInput
 var Macro = (function(JXG, MacroLib) {
     'use strict';
     var brd1, brd2, brd3;
@@ -345,4 +346,41 @@ var Macro = (function(JXG, MacroLib) {
 
     init();
 
+    //Standard edX JSinput functions
+    function setState(transaction, statestr) {
+        var state = JSON.parse(statestr);
+
+        if (state.sliderB1 && state.sliderB2 && state.sliderB3) {
+            // brd1.removeObject('AD2');
+            // sliderB1.Value() = state.sliderB1;
+            // sliderB2.Value() = state.sliderB2;
+            // sliderB3.Value() = state.sliderB3;
+            brd1.update();
+        }
+        console.debug('State updated successfully from saved.');
+    }
+
+    function getState() {
+        var state = JSON.parse(getGrade());
+        var statestr = JSON.stringify(state);
+        return statestr;
+    }
+
+    function getGrade() {
+        var state = {
+            // 'sliderB1': sliderB1.Value(),
+            // 'sliderB2': sliderB2.Value(),
+            // 'sliderB3': sliderB3.Value()
+        };
+        var statestr = JSON.stringify(state);
+        return statestr;
+    }
+
+    MacroLib.createChannel(getGrade, getState, setState);
+
+    return {
+        setState: setState,
+        getState: getState,
+        getGrade: getGrade
+    };
 })(JXG, MacroLib, undefined);
