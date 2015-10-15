@@ -94,17 +94,17 @@ var DataEntry = (function($, _, JXG, undefined) {
             startAnimation();
         }
         event.stopPropagation();
-    };
+    }
 
     function backwardButtonHandler(event) {
         tSlider.slider('value', tSlider.slider('value') - tStep);
         updateAnimation();
-    };
+    }
 
     function forwardButtonHandler(event) {
         tSlider.slider('value', tSlider.slider('value') + tStep);
         updateAnimation();
-    };
+    }
 
     function forwardPulse(x) {
         return (0.0 <= x && x <= forwardPulseWidth) ? forwardPulseAmp : 0.0;

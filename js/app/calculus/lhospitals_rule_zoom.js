@@ -70,7 +70,7 @@ var DataEntry = (function($, _, JXG, undefined) {
             step: 0.001,
             value: zoom,
             slide: function(event, ui ) {
-                $("#a-slider-value" ).html(ui.value);
+                $('#a-slider-value' ).html(ui.value);
                 zoom = ui.value;
                 updateGraph();
                 board.update();
@@ -80,16 +80,16 @@ var DataEntry = (function($, _, JXG, undefined) {
     }
 
     function outputStaticMath() {
-        katex.render("f(x) = " +  fStr, $('#math-line1-col1').get(0));
-        katex.render("f'(x) = " + dfStr, $('#math-line1-col2').get(0));
-        katex.render("g(x) = " +  gStr, $('#math-line2-col1').get(0));
-        katex.render("g'(x) = " + dgStr, $('#math-line2-col2').get(0));
+        katex.render('f(x) = ' +  fStr, $('#math-line1-col1').get(0));
+        katex.render('f\'(x) = ' + dfStr, $('#math-line1-col2').get(0));
+        katex.render('g(x) = ' +  gStr, $('#math-line2-col1').get(0));
+        katex.render('g\'(x) = ' + dgStr, $('#math-line2-col2').get(0));
     }
 
     function outputDynamicMath() {
-        katex.render("a = " + xStr() +
-                     "\\quad\\quad \\frac{f(a)}{g(a)} = " + fgFracStr() +
-                     "\\quad\\quad \\frac{f'(a)}{g'(a)} = " + dfdgFracStr(), $('#math-line3').get(0));
+        katex.render('a = ' + xStr() +
+                     '\\quad\\quad \\frac{f(a)}{g(a)} = ' + fgFracStr() +
+                     '\\quad\\quad \\frac{f\'(a)}{g\'(a)} = ' + dfdgFracStr(), $('#math-line3').get(0));
         katex.render('\\text{Window: }' + boundingBoxString(), $('#math-line4').get(0));
     }
 

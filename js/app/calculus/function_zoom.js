@@ -51,7 +51,7 @@ var DataEntry = (function($, _, JXG, undefined) {
             step: 0.001,
             value: zoom,
             slide: function(event, ui ) {
-                $("#a-slider-value" ).html(ui.value);
+                $('#a-slider-value' ).html(ui.value);
                 zoom = ui.value;
                 updateGraph();
                 board.update();

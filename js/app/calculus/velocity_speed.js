@@ -11,7 +11,7 @@ var DataEntry = (function($, _, JXG, undefined) {
 
     function init() {
         $(window).on('resize', resizeBox);
-        $(document).on('click', stopAnimation)
+        $(document).on('click', stopAnimation);
         $('#dnext-about-link').on('click', toggle);
 
         createVelocityGraphBoard();
@@ -86,17 +86,17 @@ var DataEntry = (function($, _, JXG, undefined) {
             startAnimation();
         }
         event.stopPropagation();
-    };
+    }
 
     function backwardButtonHandler(event) {
         tSlider.slider('value', tSlider.slider('value') - tStep);
         updateAnimation();
-    };
+    }
 
     function forwardButtonHandler(event) {
         tSlider.slider('value', tSlider.slider('value') + tStep);
         updateAnimation();
-    };
+    }
 
     function outputDynamicMath() {
         katex.render(areaVelocityStr(), $('#math-line1').get(0));

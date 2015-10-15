@@ -49,7 +49,7 @@ var DataEntry = (function($, _, JXG, undefined) {
             step: 0.1,
             value: xp,
             slide: function(event, ui ) {
-                $("#x-slider-value" ).html(ui.value);
+                $('#x-slider-value' ).html(ui.value);
                 xp = ui.value;
                 yp = f(xp);
                 outputDynamicMath();
@@ -64,7 +64,7 @@ var DataEntry = (function($, _, JXG, undefined) {
             step: 0.1,
             value: a,
             slide: function(event, ui ) {
-                $("#a-slider-value" ).html(ui.value);
+                $('#a-slider-value' ).html(ui.value);
                 a = ui.value;
                 yp = f(xp);
                 outputDynamicMath();
@@ -117,7 +117,7 @@ var DataEntry = (function($, _, JXG, undefined) {
         }
         else {
             str = nbr.toExponential(5);
-            eIndex = str.indexOf('e')
+            eIndex = str.indexOf('e');
             mantissa = str.slice(0, eIndex);
             mantissa = parseFloat(mantissa).toString(); // Removes insignificant trailing zeroes
             exponentSign = str.charAt(eIndex+1);

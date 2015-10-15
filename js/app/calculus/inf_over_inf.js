@@ -1,8 +1,7 @@
 var DataEntry = (function($, _, JXG, undefined) {
     'use strict';
 
-    var fGraphBoundingBox = [], gGraphBoundingBox = [], x0, x0Min, x0Max, x0Step, fGraphxAxisTicks = [], fGraphxAxisLabels = [], fGraphyAxisTicks = [], fGraphyAxisLabels = [],
-        gGraphxAxisTicks = [], gGraphxAxisLabels = [], gGraphyAxisTicks = [], gGraphyAxisLabels = [],
+    var fGraphBoundingBox = [], gGraphBoundingBox = [], fGraphxAxisTicks = [], fGraphxAxisLabels = [], fGraphyAxisTicks = [], fGraphyAxisLabels = [], gGraphxAxisTicks = [], gGraphxAxisLabels = [], gGraphyAxisTicks = [], gGraphyAxisLabels = [],
         fGraphBoard, gGraphBoard, x0Slider, x0SliderValue, fGraphBoundingBoxValue, gGraphBoundingBoxValue,
         halfSpan = 10.0, x0Precision = 2, precision = 6,
 
@@ -98,18 +97,18 @@ var DataEntry = (function($, _, JXG, undefined) {
     }
 
     function outputStaticMath() {
-        katex.render("f(x) = " +  fStr, $('#math-line1').get(0));
-        katex.render("f'(x) = " + dfStr, $('#math-line2').get(0));
-        katex.render("g(x) = " +  gStr, $('#math-line3').get(0));
-        katex.render("g'(x) = " + dgStr, $('#math-line4').get(0));
+        katex.render('f(x) = ' +  fStr, $('#math-line1').get(0));
+        katex.render('f\'(x) = ' + dfStr, $('#math-line2').get(0));
+        katex.render('g(x) = ' +  gStr, $('#math-line3').get(0));
+        katex.render('g\'(x) = ' + dgStr, $('#math-line4').get(0));
     }
 
     function outputDynamicMath() {
-        katex.render("x = " + x0Str(), $('#math-line5').get(0));
-        katex.render("f(x) = " + fx0Str(), $('#math-line6').get(0));
-        katex.render("g(x) = " + gx0Str(), $('#math-line7').get(0));
-        katex.render("\\frac{f(x)}{g(x)} = " + fgFracStr(), $('#math-line8').get(0));
-        katex.render("\\frac{f'(x)}{g'(x)} = " + dfdgFracStr(), $('#math-line9').get(0));
+        katex.render('x = ' + x0Str(), $('#math-line5').get(0));
+        katex.render('f(x) = ' + fx0Str(), $('#math-line6').get(0));
+        katex.render('g(x) = ' + gx0Str(), $('#math-line7').get(0));
+        katex.render('\\frac{f(x)}{g(x)} = ' + fgFracStr(), $('#math-line8').get(0));
+        katex.render('\\frac{f\'(x)}{g\'(x)} = ' + dfdgFracStr(), $('#math-line9').get(0));
     }
 
     function calculateGraphsBounds() {
@@ -283,7 +282,7 @@ var DataEntry = (function($, _, JXG, undefined) {
     }
 
     function g5(x) {
-        return Math.log(x+1.0)
+        return Math.log(x+1.0);
     }
 
     function dg0(x) {
@@ -330,7 +329,7 @@ var DataEntry = (function($, _, JXG, undefined) {
             result.push(t);
         }
 
-        return result
+        return result;
     }
 
     function numberToString(nbr) {
@@ -382,8 +381,8 @@ var DataEntry = (function($, _, JXG, undefined) {
         }
 
 
-        xTickValues = getTickValues(boundingBox[0], boundingBox[2], tickStep),
-        yTickValues = getTickValues(boundingBox[3], boundingBox[1], tickStep),
+        xTickValues = getTickValues(boundingBox[0], boundingBox[2], tickStep);
+        yTickValues = getTickValues(boundingBox[3], boundingBox[1], tickStep);
 
         // x-axis
         xLabelxPos = function(index) {

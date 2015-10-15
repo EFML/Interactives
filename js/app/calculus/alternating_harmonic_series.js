@@ -50,7 +50,7 @@ var DataEntry = (function($, _, JXG, undefined) {
             max: nMax,
             value: n,
             slide: function(event, ui ) {
-                $("#n-slider-value" ).html(ui.value);
+                $('#n-slider-value' ).html(ui.value);
                 n = ui.value;
                 setSeriesPointsVisibility();
                 board.update();
@@ -112,8 +112,8 @@ var DataEntry = (function($, _, JXG, undefined) {
                 fixed: true,
                 name: '',
                 size: 2,
-                strokeColor: "red",
-                fillColor: "red"
+                strokeColor: 'red',
+                fillColor: 'red'
             });
             if (i !== 1) {
                 aVal.hideElement();
@@ -124,8 +124,8 @@ var DataEntry = (function($, _, JXG, undefined) {
                 fixed: true,
                 name: '',
                 size: 2,
-                strokeColor: "blue",
-                fillColor: "blue"
+                strokeColor: 'blue',
+                fillColor: 'blue'
             });
             if (i !== 1) {
                 sVal.hideElement();

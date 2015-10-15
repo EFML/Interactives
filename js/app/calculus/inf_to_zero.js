@@ -1,8 +1,7 @@
 var DataEntry = (function($, _, JXG, undefined) {
     'use strict';
 
-    var x0, x0Min, x0Max, x0Step,
-        x0Slider, x0SliderValue,
+    var x0Slider, x0SliderValue,
 
         fFn = [f0, f1],
         gFn = [g0, g1],
@@ -75,20 +74,20 @@ var DataEntry = (function($, _, JXG, undefined) {
     }
 
     function outputStaticMath() {
-        katex.render("f(x) = " +  fStr, $('#math-line1').get(0));
-        katex.render("g(x) = " +  gStr, $('#math-line2').get(0));
-        katex.render("(f(x))^{g(x)} = " + fpowgStr, $('#math-line3').get(0));
+        katex.render('f(x) = ' +  fStr, $('#math-line1').get(0));
+        katex.render('g(x) = ' +  gStr, $('#math-line2').get(0));
+        katex.render('(f(x))^{g(x)} = ' + fpowgStr, $('#math-line3').get(0));
         if (fnNbr === 1) {
-            katex.render("e^2 \\approx 7.3890561", $('#math-line8').get(0));
+            katex.render('e^2 \\approx 7.3890561', $('#math-line8').get(0));
         }
     }
 
     function outputDynamicMath() {
         katex.render(x0Str(), $('#x0-slider-value').get(0));
-        katex.render("x = " + x0Str(), $('#math-line4').get(0));
-        katex.render("f(x) = " + fx0Str(), $('#math-line5').get(0));
-        katex.render("g(x) = " + gx0Str(), $('#math-line6').get(0));
-        katex.render("(f(x))^{g(x)} = " + fpowgx0Str(), $('#math-line7').get(0));
+        katex.render('x = ' + x0Str(), $('#math-line4').get(0));
+        katex.render('f(x) = ' + fx0Str(), $('#math-line5').get(0));
+        katex.render('g(x) = ' + gx0Str(), $('#math-line6').get(0));
+        katex.render('(f(x))^{g(x)} = ' + fpowgx0Str(), $('#math-line7').get(0));
     }
 
     function x0Str() {
@@ -144,7 +143,7 @@ var DataEntry = (function($, _, JXG, undefined) {
         }
         else {
             str = nbr.toExponential(5);
-            eIndex = str.indexOf('e')
+            eIndex = str.indexOf('e');
             mantissa = str.slice(0, eIndex);
             mantissa = parseFloat(mantissa).toString(); // Removes insignificant trailing zeroes
             exponentSign = str.charAt(eIndex+1);

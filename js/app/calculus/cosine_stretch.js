@@ -49,7 +49,7 @@ var DataEntry = (function($, _, JXG, undefined) {
             step: 0.1,
             value: amplitude,
             slide: function(event, ui ) {
-                $("#amplitude-slider-value" ).html(ui.value);
+                $('#amplitude-slider-value' ).html(ui.value);
                 amplitude = ui.value;
                 fCurve.updateCurve();
                 board.update();

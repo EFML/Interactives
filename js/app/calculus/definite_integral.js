@@ -42,7 +42,7 @@ var DataEntry = (function($, _, JXG, undefined) {
 
     function init() {
         $(window).on('resize', resizeBox);
-        $(document).on('click', stopAnimation)
+        $(document).on('click', stopAnimation);
         $('#dnext-about-link').on('click', toggle);
 
         if (config.toolNbr === 1) {
@@ -184,17 +184,17 @@ var DataEntry = (function($, _, JXG, undefined) {
             startAnimation();
         }
         event.stopPropagation();
-    };
+    }
 
     function backwardButtonHandler(event) {
         xSlider.slider('value', xSlider.slider('value') - xStep);
         updateAnimation();
-    };
+    }
 
     function forwardButtonHandler(event) {
         xSlider.slider('value', xSlider.slider('value') + xStep);
         updateAnimation();
-    };
+    }
 
     function radioButtonHandler(nbr) {
         fnNbr = nbr;
@@ -384,7 +384,7 @@ var DataEntry = (function($, _, JXG, undefined) {
     }
 
     function intSecondPiecewise2(a, b) {
-        return 0.5*a*Math.sqrt(4.0-a*a) + 2.0*Math.asin(0.5*a) - 0.5*b*Math.sqrt(4.0-b*b) - 2.0*Math.asin(0.5*b)
+        return 0.5*a*Math.sqrt(4.0-a*a) + 2.0*Math.asin(0.5*a) - 0.5*b*Math.sqrt(4.0-b*b) - 2.0*Math.asin(0.5*b);
     }
 
     function intSecondPiecewise3(a, b) {
@@ -625,7 +625,7 @@ var DataEntry = (function($, _, JXG, undefined) {
             area.dataX.length = 0;
             area.dataY.length = 0;
             area.updateCurve();
-        })
+        });
 
         for (i = 0; i < zones.length - 1; i++) {
             xZone.length = 0;

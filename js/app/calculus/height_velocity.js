@@ -11,7 +11,7 @@ var DataEntry = (function($, _, JXG, undefined) {
 
     function init() {
         $(window).on('resize', resizeBox);
-        $(document).on('click', stopAnimation)
+        $(document).on('click', stopAnimation);
         $('#dnext-about-link').on('click', toggle);
 
         createAnimBoard();
@@ -90,17 +90,17 @@ var DataEntry = (function($, _, JXG, undefined) {
             startAnimation();
         }
         event.stopPropagation();
-    };
+    }
 
     function backwardButtonHandler(event) {
         tSlider.slider('value', tSlider.slider('value') - tStep);
         updateAnimation();
-    };
+    }
 
     function forwardButtonHandler(event) {
         tSlider.slider('value', tSlider.slider('value') + tStep);
         updateAnimation();
-    };
+    }
 
     function outputDynamicMath() {
         katex.render('h(t) = ' + height(t).toFixed(precision), $('#math-line1').get(0));
@@ -205,8 +205,8 @@ var DataEntry = (function($, _, JXG, undefined) {
             fixed: true,
             name: '',
             size: 2,
-            strokeColor: "red",
-            fillColor: "red"
+            strokeColor: 'red',
+            fillColor: 'red'
         });
     }
 
@@ -267,8 +267,8 @@ var DataEntry = (function($, _, JXG, undefined) {
             fixed: true,
             name: '',
             size: 2,
-            strokeColor: "red",
-            fillColor: "red"
+            strokeColor: 'red',
+            fillColor: 'red'
         });
 
         heightGraphLine = heightGraphBoard.create('line', [[t, 0.0], [t, height(t)]], {
@@ -338,8 +338,8 @@ var DataEntry = (function($, _, JXG, undefined) {
             fixed: true,
             name: '',
             size: 2,
-            strokeColor: "red",
-            fillColor: "red"
+            strokeColor: 'red',
+            fillColor: 'red'
         });
 
         velocityGraphLine = velocityGraphBoard.create('line', [[t, 0.0], [t, velocity(t)]], {

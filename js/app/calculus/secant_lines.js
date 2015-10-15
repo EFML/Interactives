@@ -73,7 +73,7 @@ var DataEntry = (function($, _, JXG, undefined) {
             step: aStep,
             value: a,
             slide: function(event, ui ) {
-                $("#a-slider-value" ).html(ui.value);
+                $('#a-slider-value' ).html(ui.value);
                 a = ui.value;
                 updateGraph();
                 board.update();
