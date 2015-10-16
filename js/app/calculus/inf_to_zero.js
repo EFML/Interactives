@@ -1,4 +1,4 @@
-var DataEntry = (function($, _, JXG, undefined) {
+(function($, _, JXG, undefined) {
     'use strict';
 
     var x0Slider, x0SliderValue,
@@ -152,8 +152,4 @@ var DataEntry = (function($, _, JXG, undefined) {
             return mantissa + '\\times' + '10^{' + exponentSign + exponent + '}';
         }
     }
-
-    return {
-        // Any field and/or method that needs to be public
-    };
 })(jQuery, _, JXG);

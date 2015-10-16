@@ -1,4 +1,4 @@
-var DataEntry = (function($, _, JXG, undefined) {
+(function($, _, JXG, undefined) {
     'use strict';
 
     var configs = [
@@ -42,7 +42,7 @@ var DataEntry = (function($, _, JXG, undefined) {
                 b: 2.0
             }
         ],
-        toolNbr = window.toolNbr || 0,
+        toolNbr = window.secantLinesSettings || 0,
         config, f, fStr, df, boundingBox,
         a, aMin, aMax, aStep, b,
         fixedSecantStr, slope, precision = 6, board, aSlider, aSliderValue;
@@ -358,8 +358,4 @@ var DataEntry = (function($, _, JXG, undefined) {
         }
         secantLine.point2.moveTo([b, fb], 0);
     }
-
-    return {
-        // Any field and/or method that needs to be public
-    };
 })(jQuery, _, JXG);

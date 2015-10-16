@@ -1,4 +1,4 @@
-var DataEntry = (function($, _, JXG, undefined) {
+(function($, _, JXG, undefined) {
     'use strict';
 
     var boundingBox = [-6.0, 6.0, 6.0, -6.0],
@@ -24,7 +24,7 @@ var DataEntry = (function($, _, JXG, undefined) {
             [-5.0, 0.0, 3.0, 5.0],
             [-5.0, -2.0, 0.0, 5.0], // the a value will be inserted afterwards
         ],
-        config = window.ToolsSettings || {
+        config = window.definiteIntegralSettings || {
             toolNbr: 1,
             fnInit: 1,
             aInit: -1.0,
@@ -659,8 +659,4 @@ var DataEntry = (function($, _, JXG, undefined) {
 
         graphBoard.update();
     }
-
-    return {
-        // Any field and/or method that needs to be public
-    };
 })(jQuery, _, JXG);

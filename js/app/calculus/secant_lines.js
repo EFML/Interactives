@@ -1,4 +1,4 @@
-var DataEntry = (function($, _, JXG, undefined) {
+(function($, _, JXG, undefined) {
     'use strict';
 
     var fFn = [f0, f1, f2],
@@ -274,8 +274,4 @@ var DataEntry = (function($, _, JXG, undefined) {
         }
         secantLine.point2.moveTo([b, fb], 0);
     }
-
-    return {
-        // Any field and/or method that needs to be public
-    };
 })(jQuery, _, JXG);

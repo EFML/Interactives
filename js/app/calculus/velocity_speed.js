@@ -1,4 +1,4 @@
-var DataEntry = (function($, _, JXG, undefined) {
+(function($, _, JXG, undefined) {
     'use strict';
 
     var heightGraphBoundingBox = [-1.0, 12, 11.0, -12.0],
@@ -399,8 +399,4 @@ var DataEntry = (function($, _, JXG, undefined) {
         speedGraphLineRight.point1.moveTo([t, 0.0], 0);
         speedGraphLineRight.point2.moveTo([t, speed(t)], 0);
     }
-
-    return {
-        // Any field and/or method that needs to be public
-    };
 })(jQuery, _, JXG);

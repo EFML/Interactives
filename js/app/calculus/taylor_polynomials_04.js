@@ -1,4 +1,4 @@
-var DataEntry = (function($, _, JXG, undefined) {
+(function($, _, JXG, undefined) {
     'use strict';
 
     var boundingBox = [-5.0, 5.0, 5.0, -5.0],
@@ -195,8 +195,4 @@ var DataEntry = (function($, _, JXG, undefined) {
             strokeWidth: 2, strokeColor: 'blue',dash: 2,  highlight: false
         });
     }
-
-    return {
-        // Any field and/or method that needs to be public
-    };
 })(jQuery, _, JXG);

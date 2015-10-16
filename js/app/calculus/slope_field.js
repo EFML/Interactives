@@ -1,4 +1,4 @@
-var DataEntry = (function($, _, JXG, undefined) {
+(function($, _, JXG, undefined) {
     'use strict';
 
     var board, initialPoint, slopeField = [], solutionCurve, asymptoteLine1, asymptoteLine2,
@@ -270,8 +270,4 @@ var DataEntry = (function($, _, JXG, undefined) {
         });
         */
     }
-
-    return {
-        // Any field and/or method that needs to be public
-    };
 })(jQuery, _, JXG);

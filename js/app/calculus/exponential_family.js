@@ -1,4 +1,4 @@
-var DataEntry = (function($, _, JXG, undefined) {
+(function($, _, JXG, undefined) {
     'use strict';
 
     var boundingBox = [-7.0, 11.0, 11.0, -7.0],
@@ -189,8 +189,4 @@ var DataEntry = (function($, _, JXG, undefined) {
     function updateGraph() {
         pPoint.setPosition(JXG.COORDS_BY_USER, [xp, yp]);
     }
-
-    return {
-        // Any field and/or method that needs to be public
-    };
 })(jQuery, _, JXG);

@@ -1,4 +1,4 @@
-var DataEntry = (function($, _, JXG, undefined) {
+(function($, _, JXG, undefined) {
     'use strict';
 
     var animBoundingBox = [-2.0, 12.0, 2.0, -12.0], heightGraphBoundingBox = [-1.0, 12, 11.0, -12.0],
@@ -361,8 +361,4 @@ var DataEntry = (function($, _, JXG, undefined) {
         velocityGraphLine.point1.moveTo([t, 0.0], 0);
         velocityGraphLine.point2.moveTo([t, velocity(t)], 0);
     }
-
-    return {
-        // Any field and/or method that needs to be public
-    };
 })(jQuery, _, JXG);

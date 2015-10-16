@@ -1,4 +1,4 @@
-var DataEntry = (function($, _, JXG, undefined) {
+(function($, _, JXG, undefined) {
     'use strict';
 
     var yCenter = 1.0, xMin = -10.0, xMax = 10.0, yMin = -4.0, yMax = 6.0,
@@ -137,8 +137,4 @@ var DataEntry = (function($, _, JXG, undefined) {
         boundingBox = [zoom*xMin, yCenter + zoom*yMax, zoom*xMax, yCenter + zoom*yMin];
         board.setBoundingBox(boundingBox);
     }
-
-    return {
-        // Any field and/or method that needs to be public
-    };
 })(jQuery, _, JXG);

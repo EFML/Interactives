@@ -1,4 +1,4 @@
-var DataEntry = (function($, _, JXG, undefined) {
+(function($, _, JXG, undefined) {
     'use strict';
 
     var xMin = -11.0, xMax = 11.0, yMin = -8.0, yMax = 8.0, zoom = 4.0/11.0, xPos = 1.3,xCenter = 0.0, boundsPrecision = 3, precision = 6,
@@ -14,7 +14,7 @@ var DataEntry = (function($, _, JXG, undefined) {
         gFnStr  = ['\\sin(-x)',                'x',                        '\\sin(x)',   'x-1',          'e^{x}'],
         dgFnStr = ['-\\cos(-x)',               '1',                        '\\cos(x)',   '1',            'e^{x}'],
 
-        config = window.LHospitalZoomSettings || {fnNbr: 0},
+        config = window.lhospitalRuleZoomSettings || {fnNbr: 0},
         fnNbr = config.fnNbr,
 
         f = fFn[fnNbr],
@@ -348,8 +348,4 @@ var DataEntry = (function($, _, JXG, undefined) {
             xAxisGliderDrag();
         }
     }
-
-    return {
-        // Any field and/or method that needs to be public
-    };
 })(jQuery, _, JXG);
