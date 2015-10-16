@@ -3,7 +3,7 @@ var DataEntry = (function($, _, JXG, undefined) {
     var config = window.DataEntrySettings || {
         tables: [
           	{
-            	name: "Experience 1",
+            	name: 'Experience 1',
                 data: [
               		[0.0, 0.0], [1.0, 1.0], [2.0, 3.0], [3.0, 5.0], [4.0, 7.0], [5.0, 10.0]
             	],
@@ -110,7 +110,7 @@ var DataEntry = (function($, _, JXG, undefined) {
             _.each(tables, function(table) {
                 createTab(table);
             });
-            $("#table-tabs").tabs();
+            $('#table-tabs').tabs();
         }
         else {
             panel = $('<div class="half-line ui-tabs-panel" />');
@@ -122,7 +122,7 @@ var DataEntry = (function($, _, JXG, undefined) {
     }
 
     function createTab(table) {
-        var tabPanel = $("#table-tabs"),
+        var tabPanel = $('#table-tabs'),
             tabTitle = tabPanel.children('ul'),
             tab = $('<div id="tab-' + table.id + '" />');
         // Append tab title
@@ -263,19 +263,19 @@ var DataEntry = (function($, _, JXG, undefined) {
             overflow: 'visible'
         });
 
-        $("#x-column").selectmenu({
+        $('#x-column').selectmenu({
             width: 300,
         });
 
-        $("#y-column").selectmenu({
+        $('#y-column').selectmenu({
             width: 300,
         });
 
-        $("#x-column").val(textHeaders[tables[index].xColumn]);
-        $("#x-column").selectmenu("refresh");
+        $('#x-column').val(textHeaders[tables[index].xColumn]);
+        $('#x-column').selectmenu('refresh');
 
-        $("#y-column").val(textHeaders[tables[index].yColumn]);
-        $("#y-column").selectmenu("refresh");
+        $('#y-column').val(textHeaders[tables[index].yColumn]);
+        $('#y-column').selectmenu('refresh');
     }
 
     function createResetDialog() {
@@ -298,8 +298,8 @@ var DataEntry = (function($, _, JXG, undefined) {
     }
 
     function okChooseColumnsDialog() {
-        var xColumnSelectedItem = $("#x-column").val(),
-            yColumnSelectedItem = $("#y-column").val(),
+        var xColumnSelectedItem = $('#x-column').val(),
+            yColumnSelectedItem = $('#y-column').val(),
             index = getActiveTable();
         tables[index].xColumn = textHeaders.indexOf(xColumnSelectedItem);
         tables[index].yColumn = textHeaders.indexOf(yColumnSelectedItem);
@@ -416,7 +416,7 @@ var DataEntry = (function($, _, JXG, undefined) {
         return {
             'xVals': xVals,
             'yVals': yVals
-        }
+        };
     }
 
     function getXYBounds(table) {
@@ -436,7 +436,7 @@ var DataEntry = (function($, _, JXG, undefined) {
                 'xMax': Math.max.apply(null, xVals),
                 'yMin': Math.min.apply(null, yVals),
                 'yMax': Math.max.apply(null, yVals)
-            }
+            };
         }
     }
 
@@ -445,7 +445,7 @@ var DataEntry = (function($, _, JXG, undefined) {
 
         bounds = getXYBounds(table);
 
-        if (bounds != null) {
+        if (bounds !== null) {
             xSpan = Math.abs(bounds.xMax - bounds.xMin);
             ySpan = Math.abs(bounds.yMax - bounds.yMin);
             xOffset = xSpan / 5.0;
@@ -469,7 +469,7 @@ var DataEntry = (function($, _, JXG, undefined) {
     }
 
     function getActiveTable() {
-        return tables.length > 1 ? $("#table-tabs").tabs('option', 'active') : 0;
+        return tables.length > 1 ? $('#table-tabs').tabs('option', 'active') : 0;
     }
 
     function resetCellsBoard() {
