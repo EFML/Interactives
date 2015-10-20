@@ -9,9 +9,8 @@ var Macro = (function(JXG, MacroLib) {
         ////////////
         // BOARD 1
         ////////////
-        var bboxlimits1 = [-1.5, 12, 12, -1.5];
         brd1 = MacroLib.createBoard('jxgbox1', {
-            bboxlimits: bboxlimits1,
+            bboxlimits: [-1.5, 12, 12, -1.5],
             xname: 'Real GDP',
             yname: 'PL',
             grid: false,
@@ -203,9 +202,8 @@ var Macro = (function(JXG, MacroLib) {
         ////////////
         // BOARD 2
         ////////////
-        var bboxlimits2 = [-2.5, 12, 12, -1.5];
         brd2 = MacroLib.createBoard('jxgbox2', {
-            bboxlimits: bboxlimits2,
+            bboxlimits: [-2.5, 12, 12, -1.5],
             xname: 'UR',
             yname: 'Inflation<br>Rate',
             'xpos': [10, -0.5],

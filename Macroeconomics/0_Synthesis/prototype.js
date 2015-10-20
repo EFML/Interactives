@@ -10,7 +10,7 @@ var Macro = (function(JXG, MacroLib) {
         JXG.Options.segment.strokeWidth = 5;
 
         ////Custom Parameters
-        var bboxlimits = [-2.5, 12, 12, -2.0];
+        var bbox = [-2.5, 12, 12, -2.0];
 
         MacroLib.labelOffset({
             'X': 65,
@@ -23,7 +23,7 @@ var Macro = (function(JXG, MacroLib) {
         // BOARD 1
         ////////////
         brd1 = MacroLib.createBoard('jxgbox1', {
-            bboxlimits: bboxlimits,
+            bboxlimits: bbox,
             xname: 'Q Money',
             yname: 'NIR',
             grid: true
@@ -33,7 +33,7 @@ var Macro = (function(JXG, MacroLib) {
         // BOARD 2
         ////////////
         brd2 = MacroLib.createBoard('jxgbox2', {
-            bboxlimits: bboxlimits,
+            bboxlimits: bbox,
             xname: 'Q Bonds per Period',
             yname: 'Price<br>Bonds',
             grid: true
@@ -43,7 +43,7 @@ var Macro = (function(JXG, MacroLib) {
         // BOARD 3
         ////////////
         brd3 = MacroLib.createBoard('jxgbox3', {
-            bboxlimits: bboxlimits,
+            bboxlimits: bbox,
             grid: true
         });
 
@@ -51,7 +51,7 @@ var Macro = (function(JXG, MacroLib) {
         // BOARD 4
         ////////////
         brd4 = MacroLib.createBoard('jxgbox4', {
-            bboxlimits: bboxlimits,
+            bboxlimits: bbox,
             grid: true
         });
 
@@ -59,7 +59,7 @@ var Macro = (function(JXG, MacroLib) {
         // BOARD 5
         ////////////
         brd5 = MacroLib.createBoard('jxgbox5', {
-            bboxlimits: bboxlimits,
+            bboxlimits: bbox,
             grid: true
         });
 
@@ -67,7 +67,7 @@ var Macro = (function(JXG, MacroLib) {
         // BOARD 6
         ////////////
         brd6 = MacroLib.createBoard('jxgbox6', {
-            bboxlimits: bboxlimits,
+            bboxlimits: bbox,
             grid: true
         });
 

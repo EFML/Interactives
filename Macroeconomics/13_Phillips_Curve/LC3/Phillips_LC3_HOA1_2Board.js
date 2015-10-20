@@ -145,9 +145,8 @@ var Macro = (function(JXG, MacroLib) {
         ////////////
         // BOARD 2
         ////////////
-        var bboxlimits2 = [-2.5, 12, 12, -1.5];
         brd2 = MacroLib.createBoard('jxgbox2', {
-            bboxlimits: bboxlimits2,
+            bboxlimits: [-2.5, 12, 12, -1.5],
             xname: 'UR',
             yname: 'Inflation<br>Rate',
             'ypos': [-2.4, 10],
