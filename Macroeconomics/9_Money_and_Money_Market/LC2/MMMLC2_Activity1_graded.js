@@ -8,39 +8,12 @@ var Macro = (function(JXG, MacroLib) {
         ////////////
         // brd1 1
         ////////////
-        var bboxlimits = [-1.7, 12, 12, -1];
-        brd1 = JXG.JSXGraph.initBoard('jxgbox1', {
-            axis: false,
-            showCopyright: false,
-            showNavigation: false,
-            zoom: false,
-            pan: false,
-            boundingbox: bboxlimits,
-            grid: false,
-            hasMouseUp: true,
-        });
-
-        var xaxis1 = brd1.create('axis', [
-            [0, 0],
-            [11, 0]
-        ], {
-            withLabel: false
-        });
-        var yaxis1 = brd1.create('axis', [
-            [0, 0],
-            [0, 11]
-        ], {
-            withLabel: false
-        });
-
-        //Axes
-        xaxis1.removeAllTicks();
-        yaxis1.removeAllTicks();
-        var xlabel1 = brd1.create('text', [-1.6, 10, 'Nominal<br>Interest<br>Rate'], {
-            fixed: true
-        });
-        var ylabel1 = brd1.create('text', [8, -0.5, 'Quantity of Money'], {
-            fixed: true
+        brd1 = MacroLib.createBoard('jxgbox1', {
+            bboxlimits: [-1.7, 12, 12, -1],
+            xname: 'Quantity of Money',
+            yname: 'Nominal<br>Interest<br>Rate',
+            xpos: [8, -0.5],
+            ypos: [-1.6, 10]
         });
 
         //Curve 1 - fixed

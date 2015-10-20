@@ -11,79 +11,25 @@ var Macro = (function(JXG, MacroLib) {
         ////////////
         // BOARD 1
         ////////////
-        var bboxlimits = [-2.5, 12, 12, -2.0];
-        brd1 = JXG.JSXGraph.initBoard('jxgbox1', {
-            axis: false,
-            showCopyright: false,
-            showNavigation: false,
-            zoom: false,
-            pan: false,
-            boundingbox: bboxlimits,
-            grid: true,
-            hasMouseUp: true,
-        });
-
-        var xaxis1 = brd1.create('axis', [
-            [0, 0],
-            [11, 0]
-        ], {
-            withLabel: false
-        });
-        var yaxis1 = brd1.create('axis', [
-            [0, 0],
-            [0, 11]
-        ], {
-            withLabel: false
-        });
-
-        //Axes
-        xaxis1.removeAllTicks();
-        yaxis1.removeAllTicks();
-        var xlabel1 = brd1.create('text', [6, -0.5, 'Quantity of Money'], {
-            fixed: true
-        });
-        var ylabel1 = brd1.create('text', [-2.45, 10, 'Nominal<br>Interest<br>Rate'], {
-            fixed: true
+        brd1 = MacroLib.createBoard('jxgbox1', {
+            bboxlimits: [-2.5, 12, 12, -2.0],
+            xname: 'Quantity of Money',
+            yname: 'Nominal<br>Interest<br>Rate',
+            xpos: [6, -0.5],
+            ypos: [-2.45, 10],
+            grid: true
         });
 
         ////////////
         // BOARD 2
         ////////////
-        var bboxlimits2 = [-2.5, 12, 12, -2.0];
-        var brd2 = JXG.JSXGraph.initBoard('jxgbox2', {
-            axis: false,
-            showCopyright: false,
-            showNavigation: false,
-            zoom: false,
-            pan: false,
-            boundingbox: bboxlimits2,
-            grid: true,
-            hasMouseUp: true,
-        });
-
-        var xaxis2 = brd2.create('axis', [
-            [0, 0],
-            [11, 0]
-        ], {
-            withLabel: false
-        });
-        var yaxis2 = brd2.create('axis', [
-            [0, 0],
-            [0, 11]
-        ], {
-            withLabel: false
-        });
-
-        //Axes
-        xaxis2.removeAllTicks();
-        yaxis2.removeAllTicks();
-        var xlabel2 = brd2.create('text', [3.0, -0.5, 'Quantity of Bonds per Period'], {
-            fixed: true,
-            highlight: false
-        });
-        var ylabel2 = brd2.create('text', [-2.45, 10, 'Price of<br>Bonds'], {
-            fixed: true,
-            highlight: false
+        var brd2 = MacroLib.createBoard('jxgbox2', {
+            bboxlimits: [-2.5, 12, 12, -2.0],
+            xname: 'Quantity of Bonds per Period',
+            yname: 'Price of<br>Bonds',
+            xpos: [3.0, -0.5],
+            ypos: [-2.45, 10],
+            grid: true
         });
 
         //Sliders

@@ -4,45 +4,12 @@ var Macro = (function(JXG, MacroLib) {
 
     function init() {
         MacroLib.init(MacroLib.ONE_BOARD);
-        var bboxlimits = [-1.75, 12, 12, -1.25];
-        brd1 = JXG.JSXGraph.initBoard('jxgbox1', {
-            axis: false,
-            showCopyright: false,
-            showNavigation: false,
-            zoom: false,
-            pan: false,
-            boundingbox: bboxlimits,
-            grid: false,
-            hasMouseUp: true,
-        });
-
-        var xaxis = brd1.create('axis', [
-            [0, 0],
-            [12, 0]
-        ], {
-            withLabel: true,
-            label: {
-                offset: [320, -20]
-            }
-        });
-        var yaxis = brd1.create('axis', [
-            [0, 0],
-            [0, 12]
-        ], {
-            withLabel: true,
-            label: {
-                offset: [-60, 260]
-            }
-        });
-
-        //Axes
-        xaxis.removeAllTicks();
-        yaxis.removeAllTicks();
-        var ylabel = brd1.create('text', [-1.65, 10, 'Nominal<br>Interest<br>Rate'], {
-            fixed: true
-        });
-        var xlabel = brd1.create('text', [8.5, -0.55, 'Quantity of Money'], {
-            fixed: true
+        brd1 = MacroLib.createBoard('jxgbox1', {
+            bboxlimits: [-1.75, 12, 12, -1.25],
+            xname: 'Quantity of Money',
+            yname: 'Nominal<br>Interest<br>Rate',
+            xpos: [8.5, -0.55],
+            ypos: [-1.65, 10]
         });
 
         //Demand 1
