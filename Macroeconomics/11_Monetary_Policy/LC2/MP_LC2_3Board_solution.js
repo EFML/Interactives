@@ -104,7 +104,6 @@ var Macro = (function(JXG, MacroLib) {
             withLabel: false,
             highlight: false
         });
-        //var gSDB1 = brd1.create('glider',[3.75,7.75,S1],{withLabel:false,highlight:false});
 
         //Dashed Lines - Board 1
         var dashB1fixed = MacroLib.createDashedLines2Axis(brd1, iSDB1, {

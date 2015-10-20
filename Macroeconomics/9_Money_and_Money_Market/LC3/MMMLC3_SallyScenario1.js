@@ -124,7 +124,6 @@ var Macro = (function(JXG, MacroLib) {
         brd1.addChild(brd2);
 
         //Demand Board 2 - with a Positive transformation
-        //var S2 = createSupply(brd2,{withLabel:true,'name':'S<sub>2</sub>'});
         var S2 = brd2.create('segment', [
             [2.0, 2.0],
             [9.5, 9.5]

@@ -328,13 +328,7 @@ var Macro = (function(JXG, MacroLib) {
         // Invisible axis line - allows us to move points up and down the SRPC1 curve
         // See the next intersection. DB2Y intersects with SRPC1
         ////////
-        // var DB2YP1 = brd2.create('point',[0, iSLB2.Y()],{withLabel:false,visible:false});
-        // var DB2YP2 = brd2.create('point',[iSLB2.X(), iSLB2.Y()],{withLabel:false,visible:false});
-        // var fakeD = brd2.create('segment',[DB2YP1,DB2YP2],{visible:true,strokeColor:'gray',strokeWidth:'2',
-        //                                                             dash:'0',fixed:true} );
-
         var fakeD = brd2.create('segment',
-            //[DB2YP1,DB2YP2],
             [
                 [0, function(x) {
                     return (iSDB2fix.Y() + sliderx.Value());
@@ -382,12 +376,6 @@ var Macro = (function(JXG, MacroLib) {
         dashesA2B2.YLine.setAttribute({
             visible: false
         });
-
-        // var sliderLabelB2Y = brd2.create('text',
-        //                                  [0.25,(iB2SRPC1.Y()+sliderx.Value())+0.4,
-        //                                   function() {
-        //                                     return (iB2SRPC1.Y()-3.75+sliderx.Value()).toFixed(1)+'%';
-        //                                   }]);
 
         var sliderLabelB2X = brd2.create('text', [function(x) {
                 return (iB2SRPC1.X() - 0.5);

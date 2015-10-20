@@ -128,14 +128,6 @@ var Macro = (function(JXG, MacroLib) {
             dashA.X2.moveTo([iA.X(), iA.Y()]);
 
         });
-
-        brd1.on('mousedown', function() {
-            // AD2.setAttribute({withLabel:true});
-            // SRAS2.setAttribute({withLabel:true});
-            // dashS2.Y1.setAttribute({withLabel:true});
-            // dashS2.X1.setAttribute({withLabel:true});
-            // brd1.update()
-        });
     }
 
     /////////////////////////

@@ -120,13 +120,6 @@ var Macro = (function(JXG, MacroLib) {
             dashesSD.X2.moveTo([iSD.X(), iSD.Y()]);
 
         });
-
-        brd1.on('mousedown', function() {
-            // AD2.setAttribute({withLabel:true});
-            // dashesSD.Y1.setAttribute({withLabel:true});
-            // dashesSD.X1.setAttribute({withLabel:true});
-            // brd1.update()
-        });
     }
 
     /////////////////////////

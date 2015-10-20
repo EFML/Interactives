@@ -6,9 +6,9 @@ var Macro = (function(JXG, MacroLib) {
         MacroLib.init(MacroLib.ONE_BOARD);
         animationSpeed = 1000;
         curveShift = 1.5;
-            ////////////
-            // BOARD 1
-            ////////////
+        ////////////
+        // BOARD 1
+        ////////////
         brd1 = MacroLib.createBoard('jxgbox1', {
             xname: 'Real GDP',
             yname: 'Price<br>Level',

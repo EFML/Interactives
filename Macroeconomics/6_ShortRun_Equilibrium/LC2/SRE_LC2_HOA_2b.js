@@ -99,7 +99,6 @@ var Macro = (function(JXG, MacroLib) {
         });
 
         //Fake line for intersection at equilibrium
-        //Fake line for intersection at equilibrium
         var H1 = MacroLib.createLine(brd1, {
             'ltype': 'Horizontal',
             'name': 'H',

@@ -5,7 +5,7 @@ var Macro = (function(JXG, MacroLib) {
         ////////////
         // BOARD 1
         ////////////
-        var newBBox = [-1.5, 12, 12, -1.75];
+        var bbox = [-1.5, 12, 12, -1.75];
 
         var brd1 = MacroLib.createBoard('jxgbox1', {
             xname: 'Real GDP',
@@ -13,12 +13,12 @@ var Macro = (function(JXG, MacroLib) {
             grid: false,
             'xpos': [8, -0.5],
             'ypos': [-1.25, 10],
-            bboxlimits: newBBox
+            bboxlimits: bbox
         });
 
 
         //Guides
-        var L = newBBox[1];
+        var L = bbox[1];
         var GY1 = brd1.create('segment', [
             [L / 4, 0.0],
             [L / 4, L]
