@@ -1,6 +1,6 @@
 var Macro = (function(JXG, MacroLib) {
     'use strict';
-    var board, supplyLine1, supplyLine2, glider1, glider2, dashes1, dashes2, supplySlider, priceSlider;
+    var board, supplyLine1, supplyLine2, glider1, glider2, dashes1, dashes2, supplySlider, priceSlider, supplySliderText, priceSliderText;
 
     function init() {
         MacroLib.init(MacroLib.ONE_BOARD);
@@ -73,25 +73,13 @@ var Macro = (function(JXG, MacroLib) {
             snapWidth: 0.01,
             color: 'Orange'
         });
-
-        supplySlider.on('mousedown', function() {
-            if (priceSlider.Value() !== 5.75) {
-                shiftPrice(5.75);
-                // Set slider to initial position
-                priceSlider.setGliderPosition(0.5)
-            }
-            supplyLine2.setAttribute({
-                withLabel: true,
-                offset: [125, -85]
-            });
-            glider2.showElement();
-            dashedLinesVisibility(dashes2, true);
-        });
-
-        supplySlider.on('drag', function() {
-            var t = supplySlider.Value();
-            shiftSupply([t, -t]);
-        });
+        supplySliderText = board.create(
+            'text',
+            [3.25, -1.55,'<strong>&Delta;S</strong>'],
+            {strokeColor: 'Orange', anchorX: 'right', anchorY: 'middle'}
+        );
+        supplySlider.on('mousedown', supplySliderMouseDown);
+        supplySlider.on('drag', supplySliderMouseDrag);
 
         // Price slider
         priceSlider = board.create('slider', [
@@ -103,39 +91,67 @@ var Macro = (function(JXG, MacroLib) {
             snapWidth: 0.05,
             color: 'Crimson'
         });
+        priceSliderText = board.create(
+            'text',
+            [-1.90, 3.5,'<strong>&Delta;QS</strong>'],
+            {strokeColor: 'Crimson', anchorY: 'top'}
+        );
+        priceSlider.on('mousedown', priceSliderMouseDown);
+        priceSlider.on('drag', priceSliderMouseDrag);
+    }
 
-        priceSlider.on('mousedown', function() {
-            if (supplySlider.Value() !== 0) {
-                shiftSupply([0, 0]);
-                // Set slider to initial position
-                supplySlider.setGliderPosition(0.5);
-            }
-            supplyLine2.setAttribute({
-                withLabel: true,
-                offset: [125, -85]
-            });
-            glider2.showElement();
-            dashedLinesVisibility(dashes2, true);
+    function supplySliderMouseDown() {
+        if (priceSlider.Value() !== 5.75) {
+            shiftPrice(5.75);
+            // Set slider to initial position
+            priceSlider.setGliderPosition(0.5)
+        }
+        supplyLine2.setAttribute({
+            withLabel: true,
+            offset: [125, -85]
         });
+        glider2.showElement();
+        dashedLinesVisibility(dashes2, true);
+    }
 
-        priceSlider.on('drag', function() {
-            var price = priceSlider.Value();
-            shiftPrice(price);
-        });
+    function supplySliderMouseDrag() {
+        var t = supplySlider.Value();
+        shiftSupply([t, -t]);
+    }
+
+    function priceSliderMouseDown() {
+        if (supplySlider.Value() !== 0) {
+            shiftSupply([0, 0]);
+            // Set slider to initial position
+            supplySlider.setGliderPosition(0.5);
+        }
+        // supplyLine2.setAttribute({
+        //     withLabel: true,
+        //     offset: [125, -85]
+        // });
+        glider2.showElement();
+        dashedLinesVisibility(dashes2, true);
+    }
+
+    function priceSliderMouseDrag() {
+        var price = priceSlider.Value();
+        shiftPrice(price);
+    }
+
+    // Map the slider values in [slider._smin, slider._smax] to [0, 1]
+    // This is used to set the slider value directly via the glider.
+    function normalizeSliderValue(slider, value) {
+        return (value - slider._smin) / (slider._smax - slider._smin);
     }
 
     /////////////////////////
     // External DOM buttons
     /////////////////////////
     var resetAnimationBtn = document.getElementById('resetAnimationBtn');
-    var checkBtn = document.getElementById('checkBtn');
 
     //Interactivity
     if (resetAnimationBtn) {
         resetAnimationBtn.addEventListener('click', resetAnimation);
-    }
-    if (checkBtn) {
-        checkBtn.addEventListener('click', check);
     }
 
     // Supply lines are y = ax + b with a = 1 and b = 0. Middle of line segment: (5.75, 5.75)
@@ -145,18 +161,18 @@ var Macro = (function(JXG, MacroLib) {
         init();
     }
 
-    function check() {
-        var supply = supplySlider.Value(),
-            price = priceSlider.Value(),
-            str = 'No change.';
+    // function check() {
+    //     var supply = supplySlider.Value(),
+    //         price = priceSlider.Value(),
+    //         str = 'No change.';
 
-        str = supply < 0.0 ? 'Decrease in Supply.' : str;
-        str = supply > 0.0 ? 'Increase in Supply.' : str;
-        str = price < 5.75 ? 'Decrease in Quantity Supplied.' : str;
-        str = price > 5.75 ? 'Increase in Quantity Supplied.' : str;
+    //     str = supply < 0.0 ? 'Decrease in Supply.' : str;
+    //     str = supply > 0.0 ? 'Increase in Supply.' : str;
+    //     str = price < 5.75 ? 'Decrease in Quantity Supplied.' : str;
+    //     str = price > 5.75 ? 'Increase in Quantity Supplied.' : str;
 
-        alert(str);
-    }
+    //     alert(str);
+    // }
 
     function shiftSupply(trans) {
         var destPt0 = board.create('point', [glider1.X() + trans[0], glider1.Y() + trans[1]], {
@@ -217,5 +233,51 @@ var Macro = (function(JXG, MacroLib) {
     }
 
     init();
+
+    //Standard edX JSinput functions
+    function setState(transaction, stateStr) {
+        var state = JSON.parse(stateStr);
+
+        if (state.supply) {
+            if (state.supply !== 0.0) {
+                supplySlider.setGliderPosition(normalizeSliderValue(
+                    supplySlider, state.supply)
+                );
+                supplySliderMouseDown();
+                supplySliderMouseDrag();
+            }
+        }
+        if (state.price) {
+            if (state.price !== 5.75) {
+                priceSlider.setGliderPosition(normalizeSliderValue(
+                    priceSlider, state.price)
+                );
+                priceSliderMouseDown();
+                priceSliderMouseDrag();
+            }
+        }
+        console.debug('State updated successfully from saved.');
+    }
+
+    function getState() {
+        var state = {
+            'supply': supplySlider.Value(),
+            'price': priceSlider.Value()
+        };
+        return JSON.stringify(state);
+        console.debug('State successfully saved.');
+    }
+
+    function getGrade() {
+        return getState();
+    }
+
+    MacroLib.createChannel(getGrade, getState, setState);
+
+    return {
+        setState: setState,
+        getState: getState,
+        getGrade: getGrade
+    };
 
 })(JXG, MacroLib, undefined);
