@@ -1,6 +1,12 @@
 var Macro = (function(JXG, MacroLib) {
     'use strict';
-    var board, polygons = [], priceSlider;
+    var board, polygons = [], worldPriceSlider,
+    W, IWLTopPt, IWDTopPt, IWSTopPt, IWRTopPt, IELPt, IERPt,
+    IWLBottomPt, IWDBottomPt, IWSBottomPt, IWRBottomPt,
+    state = {
+        worldPrice: 5.75,
+        polygonColors: initPolygonColors()
+    };
 
     function init() {
         MacroLib.init(MacroLib.ONE_BOARD);
@@ -88,7 +94,7 @@ var Macro = (function(JXG, MacroLib) {
         });
 
         // World Price horizontal line
-        var W = board.create('segment', [[0, 5.75], [7.5, 5.75]], {
+        W = board.create('segment', [[0, state.worldPrice], [7.5, state.worldPrice]], {
             strokeColor: 'black',
             strokeWidth: 2,
             name: 'P world',
@@ -102,35 +108,35 @@ var Macro = (function(JXG, MacroLib) {
 
         // Top
         // Intersection of world price and top left vertical line
-        var IWLTopPt = board.create('glider', [0, 5.75, LTop], params);
+        IWLTopPt = board.create('glider', [0, state.worldPrice, LTop], params);
 
         // Intersection of world price and top demand line
-        var IWDTopPt = board.create('glider', [3.75, 5.75, DTop], params);
+        IWDTopPt = board.create('glider', [3.75, state.worldPrice, DTop], params);
 
         // Intersection of world price and top supply line
-        var IWSTopPt = board.create('glider', [3.75, 5.75, STop], params);
+        IWSTopPt = board.create('glider', [3.75, state.worldPrice, STop], params);
 
         // Intersection of world price and top right vertical line
-        var IWRTopPt = board.create('glider', [7.5, 5.75, RTop], params);
+        IWRTopPt = board.create('glider', [7.5, state.worldPrice, RTop], params);
 
         // Middle
         // Intersection of horizontal equilibrium line and left vertical line
-        var IELPt = board.create('glider', [0, 5.75, LBottom], params);
+        IELPt = board.create('glider', [0, 5.75, LBottom], params);
         // Intersection of horizontal equilibrium line and right vertical line
-        var IERPt = board.create('glider', [7.5, 5.75, RBottom], params);
+        IERPt = board.create('glider', [7.5, 5.75, RBottom], params);
 
         // Bottom
         // Intersection of world price and bottom left vertical line
-        var IWLBottomPt = board.create('glider', [0, 5.75, LBottom], params);
+        IWLBottomPt = board.create('glider', [0, state.worldPrice, LBottom], params);
 
         // Intersection of world price and bottom demand line
-        var IWDBottomPt = board.create('glider', [3.75, 5.75, DBottom], params);
+        IWDBottomPt = board.create('glider', [3.75, state.worldPrice, DBottom], params);
 
         // Intersection of world price and bottom supply line
-        var IWSBottomPt = board.create('glider', [3.75, 5.75, SBottom], params);
+        IWSBottomPt = board.create('glider', [3.75, state.worldPrice, SBottom], params);
 
         // Intersection of world price and bottom right vertical line
-        var IWRBottomPt = board.create('glider', [7.5, 5.75, RBottom], params);
+        IWRBottomPt = board.create('glider', [7.5, state.worldPrice, RBottom], params);
 
         // Polygons, start at top left point then traverse other points clockwise
         params = {
@@ -298,162 +304,181 @@ var Macro = (function(JXG, MacroLib) {
         });
 
         // Price slider
-        priceSlider = board.create('slider', [
+        worldPriceSlider = board.create('slider', [
             [-1.5, 2.0],
             [-1.5, 9.5],
-            [2.0, 5.75, 9.5]
+            [2.0, state.worldPrice, 9.5]
         ], {
             withLabel: false,
             snapWidth: 0.05,
             color: 'crimson'
         });
 
-        // Supply is: y = x + 2
-        // Demand is: y = -x + 9.5
-        priceSlider.on('drag', function() {
-            var price = priceSlider.Value();
-            W.point1.moveTo([0, price]);
-            W.point2.moveTo([7.5, price]);
-            // All these gliders get constrained to their line segments
-            IWLTopPt.moveTo([0, price]);
-            IWDTopPt.moveTo([9.5 - price, price]);
-            IWSTopPt.moveTo([price - 2, price]);
-            IWRTopPt.moveTo([7.5, price]);
-            IWLBottomPt.moveTo([0, price]);
-            IWDBottomPt.moveTo([9.5 - price, price]);
-            IWSBottomPt.moveTo([price - 2, price]);
-            IWRBottomPt.moveTo([7.5, price]);
-        });
+        worldPriceSlider.on('drag', worldPriceSliderMouseDrag);
     }
 
     /////////////////////////
     // External DOM buttons
     /////////////////////////
     var resetAnimationBtn = document.getElementById('resetAnimationBtn');
-    var checkBtn = document.getElementById('checkBtn');
 
     //Interactivity
     if (resetAnimationBtn) {
         resetAnimationBtn.addEventListener('click', resetAnimation);
     }
-    if (checkBtn) {
-        checkBtn.addEventListener('click', check);
-    }
 
     function resetAnimation() {
         JXG.JSXGraph.freeBoard(board);
+        state = {
+            worldPrice: 5.75,
+            polygonColors: initPolygonColors()
+        };
         init();
     }
 
-    function check() {
-        var i, iStr, len = polygons.length, polColor, polColor, polStr = '', price = priceSlider.Value(), priceStr,
-            excludedIndices = [], csPols = [], psPols = [], csAnswer, psAnswer, csStr = '', psStr = '';
+    // function check() {
+    //     var i, iStr, len = polygons.length, polColor, polColor, polStr = '', price = worldPriceSlider.Value(), priceStr,
+    //         excludedIndices = [], csPols = [], psPols = [], csAnswer, psAnswer, csStr = '', psStr = '';
 
-        // Get price zone and exclude polygons that are not apparent
-        if (price === 5.75) {
-            priceStr = 'World price is the same as domestic price.'
-            // Exclude all middle polygons (top and bottom)
-            excludedIndices = [3, 4, 5, 6, 7, 8];
-        }
-        else if (price > 5.75) {
-            priceStr = 'World price is higher than domestic price.'
-            // Exclude all middle bottom polygons
-            excludedIndices = [6, 7, 8];
-        }
-        else {
-            priceStr = 'World price is lower than domestic price.'
-            // Exclude all middle top polygons
-            excludedIndices = [3, 4, 5];
-        }
+    //     // Get price zone and exclude polygons that are not apparent
+    //     if (price === 5.75) {
+    //         priceStr = 'World price is the same as domestic price.'
+    //         // Exclude all middle polygons (top and bottom)
+    //         excludedIndices = [3, 4, 5, 6, 7, 8];
+    //     }
+    //     else if (price > 5.75) {
+    //         priceStr = 'World price is higher than domestic price.'
+    //         // Exclude all middle bottom polygons
+    //         excludedIndices = [6, 7, 8];
+    //     }
+    //     else {
+    //         priceStr = 'World price is lower than domestic price.'
+    //         // Exclude all middle top polygons
+    //         excludedIndices = [3, 4, 5];
+    //     }
 
-        for (i = 0; i < len; i++) {
-            // Not part of excluded, invisible polygons, report its state
-            if (excludedIndices.indexOf(i) === -1) {
-                iStr = (i+1).toString();
-                polColor = polygons[i].getAttribute('fillColor');
-                if (polColor === 'silver') {
-                    polStr += 'Polygon ' + iStr + ' has not been labeled.';
-                }
-                else if (polColor === 'dodgerblue') {
-                    polStr += 'Polygon ' + iStr + ' has been labeled as a Consumer Surplus.';
-                    csPols.push(i);
-                }
-                else if (polColor === 'orange') {
-                    polStr += 'Polygon ' + iStr + ' has been labeled as a Producer Surplus.';
-                    psPols.push(i);
-                }
-                polStr += '\n';
-            }
-        }
+    //     for (i = 0; i < len; i++) {
+    //         // Not part of excluded, invisible polygons, report its state
+    //         if (excludedIndices.indexOf(i) === -1) {
+    //             iStr = (i+1).toString();
+    //             polColor = polygons[i].getAttribute('fillColor');
+    //             if (polColor === 'silver') {
+    //                 polStr += 'Polygon ' + iStr + ' has not been labeled.';
+    //             }
+    //             else if (polColor === 'dodgerblue') {
+    //                 polStr += 'Polygon ' + iStr + ' has been labeled as a Consumer Surplus.';
+    //                 csPols.push(i);
+    //             }
+    //             else if (polColor === 'orange') {
+    //                 polStr += 'Polygon ' + iStr + ' has been labeled as a Producer Surplus.';
+    //                 psPols.push(i);
+    //             }
+    //             polStr += '\n';
+    //         }
+    //     }
 
-        csAnswer = csCorrect(csPols);
-        psAnswer = psCorrect(psPols);
+    //     csAnswer = csCorrect(csPols);
+    //     psAnswer = psCorrect(psPols);
 
-        if (csAnswer) {
-            csStr = "YOU HAVE CORRECTLY IDENTIFIED THE CONSUMER SURPLUS AREA."
-        }
-        else {
-            csStr = "YOU HAVE NOT CORRECTLY IDENTIFIED THE CONSUMER SURPLUS AREA."
-        }
-        csStr += '\n';
+    //     if (csAnswer) {
+    //         csStr = "YOU HAVE CORRECTLY IDENTIFIED THE CONSUMER SURPLUS AREA."
+    //     }
+    //     else {
+    //         csStr = "YOU HAVE NOT CORRECTLY IDENTIFIED THE CONSUMER SURPLUS AREA."
+    //     }
+    //     csStr += '\n';
 
-        if (psAnswer) {
-            psStr = "YOU HAVE CORRECTLY IDENTIFIED THE PRODUCER SURPLUS AREA."
-        }
-        else {
-            psStr = "YOU HAVE NOT CORRECTLY IDENTIFIED THE PRODUCER SURPLUS AREA."
-        }
-        psStr += '\n';
+    //     if (psAnswer) {
+    //         psStr = "YOU HAVE CORRECTLY IDENTIFIED THE PRODUCER SURPLUS AREA."
+    //     }
+    //     else {
+    //         psStr = "YOU HAVE NOT CORRECTLY IDENTIFIED THE PRODUCER SURPLUS AREA."
+    //     }
+    //     psStr += '\n';
 
-        alert(csStr + '\n' + psStr + '\n' + polStr + '\n' + priceStr);
-    }
+    //     alert(csStr + '\n' + psStr + '\n' + polStr + '\n' + priceStr);
+    // }
 
     // Consumer surplus area has been correctly marked
-    function csCorrect(pols) {
-        var i, len, price = priceSlider.Value(), csIndices = [], result;
+    // function csCorrect(pols) {
+    //     var i, len, price = worldPriceSlider.Value(), csIndices = [], result;
 
-        if (price === 5.75 || price > 5.75) {
-            csIndices = [0];
-        }
-        else {
-            csIndices = [0, 6, 7];
-        }
+    //     if (price === 5.75 || price > 5.75) {
+    //         csIndices = [0];
+    //     }
+    //     else {
+    //         csIndices = [0, 6, 7];
+    //     }
 
-        if (csIndices.length !== pols.length) {
-            return false;
-        }
+    //     if (csIndices.length !== pols.length) {
+    //         return false;
+    //     }
 
-        for (i = 0, len = csIndices.length; i < len; i++) {
+    //     for (i = 0, len = csIndices.length; i < len; i++) {
 
-            if (csIndices[i] !== pols[i]) {
-                return false;
-            }
-        }
-        return true;
-    }
+    //         if (csIndices[i] !== pols[i]) {
+    //             return false;
+    //         }
+    //     }
+    //     return true;
+    // }
 
     // Producer surplus area has been correctly marked
-    function psCorrect(pols) {
-        var i, len, price = priceSlider.Value(), psIndices = [], result;
+    // function psCorrect(pols) {
+    //     var i, len, price = worldPriceSlider.Value(), psIndices = [], result;
 
-        if (price === 5.75 || price < 5.75) {
-            psIndices = [9];
-        }
-        else {
-            psIndices = [3, 4, 9];
-        }
+    //     if (price === 5.75 || price < 5.75) {
+    //         psIndices = [9];
+    //     }
+    //     else {
+    //         psIndices = [3, 4, 9];
+    //     }
 
-        if (psIndices.length !== pols.length) {
-            return false;
-        }
+    //     if (psIndices.length !== pols.length) {
+    //         return false;
+    //     }
 
-        for (i = 0, len = psIndices.length; i < len; i++) {
+    //     for (i = 0, len = psIndices.length; i < len; i++) {
 
-            if (psIndices[i] !== pols[i]) {
-                return false;
-            }
+    //         if (psIndices[i] !== pols[i]) {
+    //             return false;
+    //         }
+    //     }
+    //     return true;
+    // }
+
+    // Map the slider values in [slider._smin, slider._smax] to [0, 1]
+    // This is used to set the slider value directly via the glider.
+    function normalizeSliderValue(slider, value) {
+        return (value - slider._smin) / (slider._smax - slider._smin);
+    }
+
+    // Supply is: y = x + 2
+    // Demand is: y = -x + 9.5
+    function worldPriceSliderMouseDrag() {
+        var worldPrice = worldPriceSlider.Value();
+        state.worldPrice = worldPrice;
+
+        W.point1.moveTo([0, worldPrice]);
+        W.point2.moveTo([7.5, worldPrice]);
+        // All these gliders get constrained to their line segments
+        IWLTopPt.moveTo([0, worldPrice]);
+        IWDTopPt.moveTo([9.5 - worldPrice, worldPrice]);
+        IWSTopPt.moveTo([worldPrice - 2, worldPrice]);
+        IWRTopPt.moveTo([7.5, worldPrice]);
+        IWLBottomPt.moveTo([0, worldPrice]);
+        IWDBottomPt.moveTo([9.5 - worldPrice, worldPrice]);
+        IWSBottomPt.moveTo([worldPrice - 2, worldPrice]);
+        IWRBottomPt.moveTo([7.5, worldPrice]);
+    }
+
+    function initPolygonColors() {
+        var i, colors = [];
+
+        for (i = 0; i < 12; i++) {
+            colors[i] = 'silver';
         }
-        return true;
+        return colors;
     }
 
     function colorPolygons(label) {
@@ -464,7 +489,18 @@ var Macro = (function(JXG, MacroLib) {
                 polygons[i].setAttribute({
                     fillColor: fillColor
                 });
+                state.polygonColors[i] = fillColor;
             }
+        }
+    }
+
+    function colorPolygonsFromIndices() {
+        var i, len = polygons.length;
+
+        for (i = 0; i < len; i++) {
+            polygons[i].setAttribute({
+                fillColor: state.polygonColors[i]
+            });
         }
     }
 
@@ -551,5 +587,37 @@ var Macro = (function(JXG, MacroLib) {
     // }
 
     init();
+
+    //Standard edX JSinput functions
+    function setState(transaction, stateStr) {
+        var newState = JSON.parse(stateStr);
+
+        if (newState.worldPrice && newState.polygonColors.length == 12) {
+            state = newState;
+            worldPriceSlider.setGliderPosition(normalizeSliderValue(
+                worldPriceSlider, state.worldPrice)
+            );console.log(state.worldPrice)
+            worldPriceSliderMouseDrag();
+            colorPolygonsFromIndices();
+        }
+        console.debug('State updated successfully from saved.');
+    }
+
+    function getState() {
+        return JSON.stringify(state);
+        console.debug('State successfully saved.');
+    }
+
+    function getGrade() {
+        return getState();
+    }
+
+    MacroLib.createChannel(getGrade, getState, setState);
+
+    return {
+        setState: setState,
+        getState: getState,
+        getGrade: getGrade
+    };
 
 })(JXG, MacroLib, undefined);
