@@ -2,14 +2,19 @@ var Macro = (function(JXG, MacroLib) {
     'use strict';
     var boundingBox, board, xAxis, yAxis, xTicks, yTicks, xLabels, yLabels,
         supplyLine, demandLine, supplyDashedLines, demandDashedLines,
-        yAxisPts, supplyLinePts, demandLinePts, P, QS, QD;
+        yAxisPts, supplyLinePts, demandLinePts,
+        state = {
+            selectedPointIndex: '',
+            QD: '',
+            QS: '',
+            P: ''
+        };
 
     function init() {
         MacroLib.init(MacroLib.ONE_BOARD);
 
         boundingBox = [-50, 6, 300, -1];
         xLabels = [], yLabels = [], yAxisPts = [], supplyLinePts = [], demandLinePts = [];
-        P = '', QS = '', QD = '';
 
         board = JXG.JSXGraph.initBoard('jxgbox1', {
             boundingbox: boundingBox,
@@ -136,50 +141,8 @@ var Macro = (function(JXG, MacroLib) {
             );
             // Interactivity
             yAxisPts[i-1].on('mousedown', function() {
-                var i, index = getIndex(yAxisPts, this);
-                dashedLinesVisibility(supplyDashedLines, true);
-                dashedLinesVisibility(demandDashedLines, true);
-                moveDashedLines(supplyDashedLines, supplyLinePts[index], 0);
-                moveDashedLines(demandDashedLines, demandLinePts[4-index], 0);
-                QS = supplyLinePts[index].X().toPrecision();
-                QD = demandLinePts[4-index].X().toPrecision();
-                P = supplyLinePts[index].Y().toPrecision();
-
-                for (i = 0; i < xLabels.length; i++) {
-                    xLabels[i].setAttribute({
-                        strokecolor: 'black'
-                    });
-                    yLabels[i].setAttribute({
-                        strokecolor: 'black'
-                    });
-                }
-                xLabels[index+1].setAttribute({
-                    strokecolor: 'red'
-                });
-                xLabels[5-index].setAttribute({
-                    strokecolor: 'red'
-                });
-                yLabels[index+1].setAttribute({
-                    strokecolor: 'red'
-                });
-
-                // Equilibrium
-                if (index === 2) {
-                    supplyDashedLines.X1.setAttribute({
-                        name: 'QS = QD'
-                    });
-                    demandDashedLines.X1.setAttribute({
-                        name: ''
-                    });
-                }
-                else {
-                    supplyDashedLines.X1.setAttribute({
-                        name: 'QS'
-                    });
-                    demandDashedLines.X1.setAttribute({
-                        name: 'QD'
-                    });
-                }
+                var index = getIndex(yAxisPts, this);
+                selectPoint(index)
             });
         }
 
@@ -228,28 +191,78 @@ var Macro = (function(JXG, MacroLib) {
         dashedLinesVisibility(demandDashedLines, false);
     }
 
+    function selectPoint(index) {
+        var i;
+        dashedLinesVisibility(supplyDashedLines, true);
+        dashedLinesVisibility(demandDashedLines, true);
+        moveDashedLines(supplyDashedLines, supplyLinePts[index], 0);
+        moveDashedLines(demandDashedLines, demandLinePts[4-index], 0);
+        state.selectedPointIndex = index;
+        state.QS = supplyLinePts[index].X().toPrecision();
+        state.QD = demandLinePts[4-index].X().toPrecision();
+        state.P = supplyLinePts[index].Y().toPrecision();
+
+        for (i = 0; i < xLabels.length; i++) {
+            xLabels[i].setAttribute({
+                strokecolor: 'black'
+            });
+            yLabels[i].setAttribute({
+                strokecolor: 'black'
+            });
+        }
+        xLabels[index+1].setAttribute({
+            strokecolor: 'red'
+        });
+        xLabels[5-index].setAttribute({
+            strokecolor: 'red'
+        });
+        yLabels[index+1].setAttribute({
+            strokecolor: 'red'
+        });
+
+        // Equilibrium
+        if (index === 2) {
+            supplyDashedLines.X1.setAttribute({
+                name: 'QS = QD'
+            });
+            demandDashedLines.X1.setAttribute({
+                name: ''
+            });
+        }
+        else {
+            supplyDashedLines.X1.setAttribute({
+                name: 'QS'
+            });
+            demandDashedLines.X1.setAttribute({
+                name: 'QD'
+            });
+        }
+    }
+
     /////////////////////////
     // External DOM buttons
     /////////////////////////
     var resetAnimationBtn = document.getElementById('resetAnimationBtn');
-    var checkBtn = document.getElementById('checkBtn');
 
     // Interactivity
     if (resetAnimationBtn) {
         resetAnimationBtn.addEventListener('click', resetAnimation);
     }
-    if (checkBtn) {
-        checkBtn.addEventListener('click', check);
-    }
 
     function resetAnimation() {
         JXG.JSXGraph.freeBoard(board);
+        state = {
+            selectedPointIndex: '',
+            QD: '',
+            QS: '',
+            P: ''
+        };
         init();
     }
 
-    function check() {
-        alert('QD = ' + QD + '\n' + 'QS = ' + QS + '\n' + 'P = ' + P);
-    }
+    // function check() {
+    //     alert('QD = ' + QD + '\n' + 'QS = ' + QS + '\n' + 'P = ' + P);
+    // }
 
     function dashedLinesVisibility(dashedLines, vis) {
         if (vis) {
@@ -284,5 +297,32 @@ var Macro = (function(JXG, MacroLib) {
     }
 
     init();
+
+    // Standard edX JSinput functions.
+    function setState(transaction, stateStr) {
+        state = JSON.parse(stateStr);
+
+        if (state.selectedPointIndex.length !== 0) {
+            selectPoint(state.selectedPointIndex);
+        }
+        console.debug('State updated successfully from saved.');
+    }
+
+    function getState() {
+        return JSON.stringify(state);
+        console.debug('State successfully saved.');
+    }
+
+    function getGrade() {
+        return getState();
+    }
+
+    MacroLib.createChannel(getGrade, getState, setState);
+
+    return {
+        setState: setState,
+        getState: getState,
+        getGrade: getGrade
+    };
 
 })(JXG, MacroLib, undefined);
