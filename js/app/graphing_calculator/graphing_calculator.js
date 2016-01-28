@@ -24,7 +24,7 @@ var GraphingCalculator = (function($, _, MathJax, JXG, undefined) {
 
         // Set up MathJax
         MathJax.Hub.queue.Push(function () {
-            mainMathjaxOutput = MathJax.Hub.getAllJax("#main-mathjax-output")[0];
+            mainMathjaxOutput = MathJax.Hub.getAllJax('#main-mathjax-output')[0];
         });
 
         $('#plot').on('click', plotter);
@@ -55,8 +55,8 @@ var GraphingCalculator = (function($, _, MathJax, JXG, undefined) {
     function createTab(plot) {
         var functionCb, derivativeCb, tangentCb,
             deleteBt, findZeroBtn, findDerivativeBtn, findIntegralBtn, mathInput, mathOutput,
-            tabPanel = $("#function-tabs"),
-            tabList = $("#function-tabs ul"),
+            tabPanel = $('#function-tabs'),
+            tabList = $('#function-tabs ul'),
             currentTab = tabPanel.find('li').length,
             htmlFragment = [
             '<div id="tab-' + plot.id + '">',
@@ -121,7 +121,7 @@ var GraphingCalculator = (function($, _, MathJax, JXG, undefined) {
         mathInput = $('#main-mathjax-input');
         mathOutput = $('#mathjax-output-' + plot.id);
         mathOutput.html('`f_' + plot.name + '(x) = ' + mathInput.val() + '`');
-        MathJax.Hub.Queue(["Typeset", MathJax.Hub, 'mathjax-output-' + plot.id]);
+        MathJax.Hub.Queue(['Typeset', MathJax.Hub, 'mathjax-output-' + plot.id]);
         mathOutput.css('color', plot.color);
 
         // Add event listeners to checkboxes
@@ -147,7 +147,7 @@ var GraphingCalculator = (function($, _, MathJax, JXG, undefined) {
             if (tabPanel.find('.ui-tabs-nav li').length !== 1) {
                 tabPanel.find('.ui-tabs-nav li').children('a[href="#tab-' + plot.id + '"]').parent().remove();
                 tabPanel.find('#tab-' + plot.id).remove();
-                tabPanel.tabs("refresh");
+                tabPanel.tabs('refresh');
 
                 // Remove all plot elements from board
                 board.removeObject(plot.fCurve);
@@ -274,12 +274,12 @@ var GraphingCalculator = (function($, _, MathJax, JXG, undefined) {
     }
 
     function clearAll() {
-        var tabPanel = $("#function-tabs");
+        var tabPanel = $('#function-tabs');
         if (plots.length > 0) {
             JXG.JSXGraph.freeBoard(board);
             board = JXG.JSXGraph.initBoard('jxgbox', {boundingbox: initBoundingBox, axis: true, showCopyright: false});
             plots.length = 0;
-            tabPanel.tabs( "destroy" );
+            tabPanel.tabs( 'destroy' );
             tabPanel.contents().each(function() {
                 $(this).remove();
             });
@@ -299,7 +299,7 @@ var GraphingCalculator = (function($, _, MathJax, JXG, undefined) {
                 mathOutput = $('#mathjax-output-secondary-' + plot.id);
                 zero = JXG.Math.Numerics.fzero(f, x1);
                 mathOutput.html('`f_' + plot.name + '(' + numberToString(zero) + ') = 0`');
-                MathJax.Hub.Queue(["Typeset", MathJax.Hub, 'mathjax-output-secondary-' + plot.id]);
+                MathJax.Hub.Queue(['Typeset', MathJax.Hub, 'mathjax-output-secondary-' + plot.id]);
                 mathOutput.css('color', plot.color);
             }
             else {
@@ -326,7 +326,7 @@ var GraphingCalculator = (function($, _, MathJax, JXG, undefined) {
                 mathOutput.html(
                     '`(df_' + plot.name + ')/dx (' + numberToString(x0) +' ) = ' + numberToString(dfx0) + '`'
                 );
-                MathJax.Hub.Queue(["Typeset", MathJax.Hub, 'mathjax-output-secondary-' + plot.id]);
+                MathJax.Hub.Queue(['Typeset', MathJax.Hub, 'mathjax-output-secondary-' + plot.id]);
                 mathOutput.css('color', plot.color);
             }
             else {
@@ -355,7 +355,7 @@ var GraphingCalculator = (function($, _, MathJax, JXG, undefined) {
                     '`int_' + numberToString(x1) + '^' + numberToString(x2) + 'f_' + plot.name + '(x)dx = ' +
                     numberToString(intfx1x2) + '`'
                 );
-                MathJax.Hub.Queue(["Typeset", MathJax.Hub, 'mathjax-output-secondary-' + plot.id]);
+                MathJax.Hub.Queue(['Typeset', MathJax.Hub, 'mathjax-output-secondary-' + plot.id]);
                 mathOutput.css('color', plot.color);
             }
             else {
@@ -382,7 +382,7 @@ var GraphingCalculator = (function($, _, MathJax, JXG, undefined) {
 
     function UserException(message) {
         this.message = message;
-        this.name = "UserException";
+        this.name = 'UserException';
     }
 
     return {
