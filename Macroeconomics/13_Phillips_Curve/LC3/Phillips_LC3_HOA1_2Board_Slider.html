@@ -1,30 +1,35 @@
-
 <!DOCTYPE html>
 <html>
     <head>
         <meta charset="UTF-8">
         <title>Phillips Curve: LC3 HOA #1</title>
+        <link rel="stylesheet" type="text/css" href="../../CSS/normalize.css">
+        <link rel="stylesheet" type="text/css" href="../../CSS/common.css">
         <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jsxgraph/0.98/jsxgraphcore.js"></script>
         <script src="https://code.jquery.com/jquery-1.10.2.js"></script>
     </head>
-
     <body>
-        <div style="width: 100%; overflow: hidden;">
-            <div id='jxgbox1' class='jxgbox' style='width:350px; height:300px; float:left; border: solid #1f628d 2px;'></div>        
-            <div id='jxgbox2' class='jxgbox' style='width:350px; height:300px; margin-left: 365px; border: solid #1f628d 2px;'></div>
+        <div class="dnext-tool-header double-board">
+            <div class="dnext-title">
+                Phillips Curve: LC3 HOA #1
+            </div>
+            <div class="dnext-about-link">
+                <a id="dnext-about-link" href="#">+ about</a>
+            </div>
+            <div id="dnext-about-text" class="dnext-about-text">
+                <p>
+                    Developed by Davidson Next.
+                </p>
+            </div>
         </div>
-        
-        <!--
-        <ul class="stack button-group">
-            <li><input class="btn" type="button" value="Reset" onClick="resetAnimation()"></li>
-        </ul>
-        -->
-        
-        
-        
-        <script type="text/javascript" src="../../JS/jschannel.js"></script>
-        <script type="text/javascript" src="../../JS/edxintegration.js"></script>
-        <script type="text/javascript" src="../../JS/Macro_2Board.js"></script>
+        <div class="dnext-tool-container double-board">
+            <div id="jxgbox1" class="jxgbox double-board-left"></div>
+            <div id="jxgbox2" class="jxgbox double-board-right"></div>
+            <div class="full-line">
+                <button class="button" id="resetAnimationBtn">Reset</button>
+            </div>
+        </div>
+        <script type="text/javascript" src="../../JS/macro_lib.js"></script>
         <script type="text/javascript" src="Phillips_LC3_HOA1_2Board_Slider.js"></script>
     </body>
 </html>

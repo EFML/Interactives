@@ -1,216 +1,34 @@
-
 <!DOCTYPE html>
 <html>
     <head>
-        <style> 
-            body {
-                margin: 10px;
-                /*padding-top: 40px;*/
-            }
-        </style>
-    </head>
-
-    <body>
-        
-        <div style="width: 100%; overflow: hidden;">
-            <div id='jxgbox1' class='jxgbox' style='width:350px; height:300px; float:left; border: solid #1f628d 2px;'></div>        
-            <div id='jxgbox2' class='jxgbox' style='width:350px; height:300px; margin-left: 375px; border: solid #1f628d 2px;'></div>
-        </div>
-        
-        <!-- COMMENT: Where our Javascript begins. -->
+        <meta charset="UTF-8">
+        <title>Money and the Money Market: LC3 HOA #2a</title>
+        <link rel="stylesheet" type="text/css" href="../../CSS/normalize.css">
+        <link rel="stylesheet" type="text/css" href="../../CSS/common.css">
         <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jsxgraph/0.98/jsxgraphcore.js"></script>
-        
-        <!-- COMMENT: Specific Davidson Next calls built on JSXGraph. Must be loaded after JSXgraph. -->
-        <script type="text/javascript" src="../../js/Macro_t1.0.js"></script>
-        
-        <script type='text/javascript'>
-            
-            //General Parameters for Macro
-            JXG.Options.point.showInfobox = false;
-            JXG.Options.segment.strokeColor = 'Gray';
-            JXG.Options.segment.strokeWidth = '5';
-            JXG.Options.text.fontSize = 15;
-            
-            ////////////
-            // BOARD 1
-            ////////////
-            bboxlimits = [-2.5, 12, 12, -2.0];
-            var brd1 = JXG.JSXGraph.initBoard('jxgbox1', {axis:false, 
-                                                    showCopyright: false,
-                                                    showNavigation: false,
-                                                    zoom: false,
-                                                    pan: false,
-                                                    boundingbox:bboxlimits,
-                                                    grid: true,
-                                                    hasMouseUp: true, 
-            });         
-
-            xaxis1 = brd1.create('axis', [[0, 0], [11, 0]], {withLabel: false});
-            yaxis1 = brd1.create('axis', [[0, 0], [0, 11]], {withLabel: false});
-
-            //Axes
-            xaxis1.removeAllTicks();
-            yaxis1.removeAllTicks();
-            var xlabel1 = brd1.create('text',[6,-0.5,"Quantity of Money"],{fixed:true});
-            var ylabel1 = brd1.create('text',[-2.45,10,"Nominal<br>Interest<br>Rate"],{fixed:true});
-            
-            ////////////
-            // BOARD 2
-            ////////////
-            bboxlimits2 = [-2.5, 12, 12, -2.0];
-            var brd2 = JXG.JSXGraph.initBoard('jxgbox2', {axis:false, 
-                                                    showCopyright: false,
-                                                    showNavigation: false,
-                                                    zoom: false,
-                                                    pan: false,
-                                                    boundingbox:bboxlimits2,
-                                                    grid: true,
-                                                    hasMouseUp: true, 
-            });        
-            
-            xaxis2 = brd2.create('axis', [[0, 0], [11, 0]], {withLabel: false});
-            yaxis2 = brd2.create('axis', [[0, 0], [0, 11]], {withLabel: false});
-
-            //Axes
-            xaxis2.removeAllTicks();
-            yaxis2.removeAllTicks();
-            var xlabel2 = brd2.create('text',[3.0,-0.5,"Quantity of Bonds per Period"],{fixed:true,highlight:false});
-            var ylabel2 = brd2.create('text',[-2.45,10,"Price of<br>Bonds"],{fixed:true,highlight:false});
-            
-            //Sliders
-            var sliderx = brd1.create('slider',[[2.0,-1.25],[8,-1.25],[-2.5,0,1.5]],{withLabel:false,snapWidth:0.05,
-                                                                                     color:'Orange'});
-            
-            //Postivit Slider Transformation
-            sliderPositive = brd1.create('transform',[
-                function(){return sliderx.Value()},
-                function(){return 0.0}],
-                {type:'translate'}
-                );
-        
-            //Negative Slider Transformation
-            sliderNegative = brd1.create('transform',[
-                function(){return -sliderx.Value()},
-                function(){return 0.0}],
-                {type:'translate'}
-                );
-            
-            //Demand Board 1
-            var D1 = brd1.create('segment',[[2,9.5],[9.5,2]],{'name':'M<sub>D</sub>',fixed:true,
-                                                              withLabel:true,label:{offset:[100,-100]}});
-            //var S1 = brd1.create('segment',[[5.75,1.0],[5.75,11.0]],{withLabel:true,name:'M<sub>S</sub>',label:{offset:[0,115]}});
-            
-            //Supply Board 1 - with slider transformation
-            var s1B1 = brd1.create('point',[6.75,1.0],{visible:false});
-            var s2B1 = brd1.create('point',[6.75,11.0],{visible:false});
-            var pS1 = brd1.create('point',[s1B1,[sliderPositive]],{visible:false});
-            var pS2 = brd1.create('point',[s2B1,[sliderPositive]],{visible:false});
-            
-            var S1fixed = brd1.create('segment',[s1B1,s2B1],{withLabel:false,fixed:true,'name':'M<sub>S1</sub>',
-                                                         highlight:false,dash:'1',strokeWidth:'3',
-                                                         label:{offset:[0,115]}});
-            
-            var S1 = brd1.create('segment',[pS1,pS2],{withLabel:true,highlight:false,'name':'M<sub>S2</sub>',
-                                                      color:'DodgerBlue',label:{offset:[0,115]}});
-            
-            //Intersection of SD board 1
-            var iSDB = brd1.create('intersection',[S1,D1],{withLabel:false,highlight:false});
-            //var gSDB1 = brd1.create('glider',[6.75,4.75,S1],{withLabel:false,highlight:false});
-            
-            brd1.addChild(brd2);
-            
-            //Demand Board 2 - with a Positive transformation
-            //var S2 = createSupply(brd2,{withLabel:true,'name':'S<sub>2</sub>'});
-            var D2 = brd2.create('segment',[[2.0,9.5],[9.5,2.0]],{withLabel:true,name:'D',label:{offset:[90,-90]}});
-            
-            //Supply Board 2 - with a Negative transformation
-            var s1B2 = brd2.create('point',[2.0,2.0],{visible:false});
-            var s2B2 = brd2.create('point',[9.5,9.5],{visible:false});
-            var As = brd2.create('point',[s1B2,[sliderNegative]],{visible:false});
-            var Bs = brd2.create('point',[s2B2,[sliderNegative]],{visible:false});
-            
-            var S2fixed = brd2.create('segment',[s1B2,s2B2],{withLabel:false,fixed:true,'name':'D<sub>1</sub>',
-                                                         highlight:false,dash:'1',strokeWidth:'3',
-                                                         label:{offset:[90,-90]}});
-            
-            var S2 = brd2.create('segment',[As,Bs],{withLabel:true,'name':'S<sub>2</sub>',highlight:false,
-                                                    color:'DodgerBlue',label:{offset:[90,90]}});
-                        
-            var iSDB2 = brd2.create('intersection',[S2,D2],{withLabel:false,highlight:false});
-            
-            
-            createDashedLines2Axis = function(board,intersection,options) {
-                var fixed = options.fixed || true;  // defaults
-                var withLabel = options.withLabel || false;
-                var xlabel = options.xlabel || '';  
-                var ylabel = options.ylabel || '';
-                var color = options.color || 'gray';
-                var visible = options.visible || true;
-
-                var Y1,Y2,YLine,X1,X2,XLine,obj={};
-                var Y1 = board.create('point',[0, intersection.Y()],
-                                 {'withLabel':withLabel,'name':ylabel,'visible':true,'size':'0.5',
-                                 'strokeColor':'Gray','label':{'offset':[2,12]}});
-
-                var Y2 = board.create('point',[intersection.X(), intersection.Y()],
-                                 {'withLabel':false,'visible':false,'size':'0.0','strokeColor':''});
-
-                var YLine = board.create('segment',[Y1,Y2],
-                                    {'strokeColor':color,'strokeWidth':'2','dash':'1','fixed':fixed,'visible':visible});
-
-                var X1 = board.create('point',[intersection.X(), 0],
-                                 {'withLabel':withLabel,'name':xlabel,'visible':true,'size':'0.5',
-                                 'strokeColor':'Gray','label':{'offset':[2,12]}});
-
-                var X2 = board.create('point',[intersection.X(), intersection.Y()],
-                                 {'withLabel':false,'visible':false,'size':'0.0','strokeColor':''});
-
-                var XLine = board.create('segment',[X1,X2],
-                                    {'strokeColor':color,'strokeWidth':'2','dash':'1','fixed':fixed,'visible':visible});
-
-
-                var obj = {
-                    Y1: Y1,
-                    Y2: Y2,
-                    YLine: YLine,
-                    X1: X1,
-                    X2: X2,
-                    XLine: XLine
-                }
-
-                return obj;
-            }
-            
-            
-            //Dashed Lines - Board 1
-            var dashB1fixed = createDashedLines2Axis(brd1,iSDB,{fixed:true,withLabel:false,color:'Gray'});
-            var dashB1 = createDashedLines2Axis(brd1,iSDB,{fixed:false,withLabel:true,color:'DodgerBlue',
-                                                           xlabel:'Q<sub>S</sub>',ylabel:'NIR'});
-            
-            //Dashed Lines - Board 2
-            var dashB2fixed = createDashedLines2Axis(brd2,iSDB2,{fixed:true,withLabel:false,color:'Gray'});
-            var dashB2 = createDashedLines2Axis(brd2,iSDB2,{fixed:false,withLabel:true,color:'DodgerBlue',
-                                                            xlabel:'Q<sub>2</sub>',ylabel:'P<sub>2</sub>'});
-            
-            //////////////////
-            // Interactivity
-            //////////////////
-            brd1.on('move', function() {      
-                //Moving 1st set of Dashed Lines in Board 1
-                dashB1.Y1.moveTo([0, iSDB.Y()]);
-                dashB1.Y2.moveTo([iSDB.X(), iSDB.Y()]);
-
-                dashB1.X1.moveTo([iSDB.X(), 0]);
-                dashB1.X2.moveTo([iSDB.X(), iSDB.Y()]);
-                    
-                //Moving Board 2 Dashed Lines
-                dashB2.Y1.moveTo([0, iSDB2.Y()]);
-                dashB2.Y2.moveTo([iSDB2.X(), iSDB2.Y()]);
-
-                dashB2.X1.moveTo([iSDB2.X(), 0]);
-                dashB2.X2.moveTo([iSDB2.X(), iSDB2.Y()]);
-            });
-            
-        </script>
+    </head>
+    <body>
+        <div class="dnext-tool-header double-board">
+            <div class="dnext-title">
+              Money and the Money Market: LC3 HOA #2a
+            </div>
+            <div class="dnext-about-link">
+                <a id="dnext-about-link" href="#">+ about</a>
+            </div>
+            <div id="dnext-about-text" class="dnext-about-text">
+                <p>
+                    Developed by Davidson Next.
+                </p>
+            </div>
+        </div>
+        <div class="dnext-tool-container double-board">
+            <div id="jxgbox1" class="jxgbox double-board-left"></div>
+            <div id="jxgbox2" class="jxgbox double-board-right"></div>
+            <div class="full-line">
+                <button class="button" id="resetAnimationBtn">Reset</button>
+            </div>
+        </div>
+        <script type="text/javascript" src="../../JS/macro_lib.js"></script>
+        <script type="text/javascript" src="MMMLC3_SallyScenario3.js"></script>
     </body>
 </html>

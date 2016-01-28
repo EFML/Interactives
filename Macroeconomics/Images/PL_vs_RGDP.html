@@ -1,23 +1,29 @@
-
 <!DOCTYPE html>
 <html>
     <head>
         <meta charset="UTF-8">
         <title>Generic Plotting</title>
+        <link rel="stylesheet" type="text/css" href="../CSS/common.css">
         <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jsxgraph/0.98/jsxgraphcore.js"></script>
     </head>
-
     <body>
-        <div style="width: 100%; overflow: hidden;">
-            <div id='jxgbox1' class='jxgbox' style='width:500px; height:450px; float:left;'></div>        
+        <div class="dnext-tool-header single-board">
+            <div class="dnext-title">
+              Generic Plotting
+            </div>
+            <div class="dnext-about-link">
+                <a id="dnext-about-link" href="#">+ about</a>
+            </div>
+            <div id="dnext-about-text" class="dnext-about-text">
+                <p>
+                    Developed by Davidson Next.
+                </p>
+            </div>
         </div>
-        
-        
-        
-        <script type="text/javascript" src="../JS/jschannel.js"></script>
-        <script type="text/javascript" src="../JS/edxintegration.js"></script>
-        <script type="text/javascript" src="../JS/params1Board.js"></script>
-        <script type="text/javascript" src="../JS/MacroAllBoards.js"></script>
+        <div class="dnext-tool-container single-board">
+            <div id="jxgbox1" class="jxgbox single-board-center"></div>
+        </div>
+        <script type="text/javascript" src="../JS/macro_lib.js"></script>
         <script type="text/javascript" src="PL_vs_RGDP.js"></script>
     </body>
 </html>

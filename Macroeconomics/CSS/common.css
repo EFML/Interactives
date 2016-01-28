@@ -1,0 +1,193 @@
+.dnext-tool-header {
+   min-width: 476px;
+   max-width: 820px;
+   background-color: #e0e0e0;
+   box-sizing: border-box;
+   overflow: hidden;
+   margin: 0 auto;
+   overflow: auto;
+   border: solid #505050 1px;
+   border-top-left-radius: 10px;
+   border-top-right-radius: 10px;
+   border-bottom: none;
+}
+
+.dnext-tool-header .dnext-title {
+   float: left;
+   width: 75%;
+   padding: 5px;
+   color: #555555;
+   font-family: "Verdana", "Geneva", sans-serif;
+   font-weight: 700;
+   font-size: 18px;
+   clear: both;
+}
+
+.dnext-tool-header .dnext-about-link {
+   float: right;
+   width: 20%;
+   padding: 5px;
+}
+
+.dnext-tool-header .dnext-about-link a {
+   float: right;
+   color: #1d9dd9;
+   text-decoration: none;
+   font-family: "Verdana", "Geneva", sans-serif;
+   font-weight: 700;
+   font-size: 18px;
+   font-style: normal;
+   clear: both;
+}
+
+.dnext-tool-header .dnext-about-link a:hover {
+  color: #70c4ec;
+}
+
+.dnext-tool-header .dnext-about-text {
+  clear: both;
+  padding: 5px;
+  display: none;
+}
+
+.dnext-tool-header .dnext-about-text p, .dnext-tool-header .dnext-about-text li {
+  color: #646464;
+  font-family: "Verdana", "Geneva", sans-serif;
+  font-weight: 400;
+  font-size: 16px;
+}
+
+.dnext-tool-container {
+	background: #c8c8c8;
+	overflow: hidden;
+	margin: 0 auto;
+	padding: 20px;
+	box-sizing: border-box;
+  border: solid #505050 1px;
+  border-bottom-left-radius: 10px;
+  border-bottom-right-radius: 10px;
+  white-space: nowrap;
+  word-spacing: 0;
+  font-size: 0px;
+}
+
+/*
+  Width of content area in edX is:
+  min-width: 476px;
+  max-width: 820px;
+*/
+
+.single-board {
+  min-width: 476px;
+  max-width: 544px;
+}
+
+.double-board {
+  min-width: 476px;
+  max-width: 756px;
+}
+
+.triple-board {
+  min-width: 476px;
+  max-width: 816px;
+}
+
+.dnext-tool-container::after {
+  clear: both;
+  content: "";
+  display: table;
+}
+
+.dnext-tool-container .jxgbox {
+  background: white;
+  border: solid #356aa0 1px;
+  -webkit-border-radius: 10px;
+  -moz-border-radius: 10px;
+  -ms-border-radius: 10px;
+  border-radius: 10px;
+  vertical-align: top;
+  margin-bottom: 0px;
+  display: inline-block;
+}
+
+.dnext-tool-container .single-board-center {
+	width: 500px;
+	height: 450px;
+}
+
+.dnext-tool-container .double-board-left {
+	width: 350px;
+	height: 300px;
+  margin-right: 10px;
+}
+
+.dnext-tool-container .double-board-right {
+	width: 350px;
+	height: 300px;
+}
+
+.dnext-tool-container .triple-board-left {
+	width: 250px;
+	height: 240px;
+	margin-right: 10px;
+}
+
+.dnext-tool-container .triple-board-center {
+	width: 250px;
+	height: 240px;
+	display: inline-block;
+}
+
+.dnext-tool-container .triple-board-right {
+	width: 250px;
+	height: 240px;
+	margin-left: 10px;
+	display: inline-block;
+}
+
+.dnext-tool-container .full-line {
+  margin-top: 20px;
+}
+
+.dnext-tool-container .half-line {
+  margin-top: 10px;
+}
+
+.dnext-tool-container .quarter-line {
+  margin-top: 5px;
+}
+
+.dnext-tool-container .button {
+  font-family: "Verdana", "Geneva", sans-serif;
+  font-weight: 400;
+  font-size: 14px;
+}
+
+.dnext-tool-container .button {
+  color: white;
+  background: #4479ba;
+  -webkit-border-radius: 4px;
+  -moz-border-radius: 4px;
+  -ms-border-radius: 4px;
+  border-radius: 4px;
+  border: solid 1px #20538D;
+  text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.4);
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.4), 0 1px;
+  padding: 5px 10px;
+  margin-right: 2px;
+  -webkit-transition-duration: 0.2s;
+  -moz-transition-duration: 0.2s;
+  transition-duration: 0.2s;
+}
+
+.dnext-tool-container .button:hover {
+  background: #356094;
+  border: solid 1px #2A4E77;
+  text-decoration: none;
+}
+
+.dnext-tool-container .button:active {
+  box-shadow: inset 0 1px 4px rgba(0, 0, 0, 0.6);
+  background: #2E5481;
+  border: solid 1px #203E5F;
+}

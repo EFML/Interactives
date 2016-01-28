@@ -1,29 +1,35 @@
-
 <!DOCTYPE html>
 <html>
     <head>
         <meta charset="UTF-8">
         <title>Money and the Money Market: LC2 HOA #3</title>
+        <link rel="stylesheet" type="text/css" href="../../CSS/normalize.css">
+        <link rel="stylesheet" type="text/css" href="../../CSS/common.css">
         <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jsxgraph/0.98/jsxgraphcore.js"></script>
-        
     </head>
-
     <body>
-        <div style="width: 100%; overflow: hidden;">
-            <div id='jxgbox1' class='jxgbox' style='width:500px; height:450px; float:left; border: solid #1f628d 2px;'></div>        
+        <div class="dnext-tool-header single-board">
+            <div class="dnext-title">
+              Money and the Money Market: LC2 HOA #3
+            </div>
+            <div class="dnext-about-link">
+                <a id="dnext-about-link" href="#">+ about</a>
+            </div>
+            <div id="dnext-about-text" class="dnext-about-text">
+                <p>
+                    Developed by Davidson Next.
+                </p>
+            </div>
         </div>
-        
-        <div class="line">
-            <input class="btn" type="button" value="Rise in Money Demand" onClick="increaseXY()">
-            <input class="btn" type="button" value="Fall in Money Demand" onClick="decreaseXY()">
-            <input class="btn" type="button" value="Reset" onClick="resetAnimation()">
+        <div class="dnext-tool-container single-board">
+            <div id="jxgbox1" class="jxgbox single-board-center"></div>
+            <div class="full-line">
+                <button class="button" id="riseMoneyDemandBtn">Rise in Money Demand</button>
+                <button class="button" id="fallMoneyDemandBtn">Fall in Money Demand</button>
+                <button class="button" id="resetAnimationBtn">Reset</button>
+            </div>
         </div>
-        
-        
-        
-        <script type="text/javascript" src="../../JS/jschannel.js"></script>
-        <script type="text/javascript" src="../../JS/edxintegration.js"></script>
-        <script type="text/javascript" src="../../JS/Macro_1Board.js"></script>
+        <script type="text/javascript" src="../../JS/macro_lib.js"></script>
         <script type="text/javascript" src="MMMLC2_Activity3.js"></script>
     </body>
 </html>
