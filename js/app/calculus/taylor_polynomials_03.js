@@ -1,4 +1,4 @@
-var DataEntry = (function($, _, JXG, undefined) {
+(function($, _, JXG, undefined) {
     'use strict';
 
     var boundingBox = [-11.0, 11.0, 11.0, -11.0],
@@ -52,7 +52,7 @@ var DataEntry = (function($, _, JXG, undefined) {
             max: 10.0,
             value: center,
             slide: function(event, ui ) {
-                $("#center-slider-value" ).html(ui.value);
+                $('#center-slider-value' ).html(ui.value);
                 center = ui.value;
                 taylorCurve.Y = taylor(center, degree);
                 taylorCurve.updateCurve();
@@ -67,7 +67,7 @@ var DataEntry = (function($, _, JXG, undefined) {
             max: 10,
             value: degree,
             slide: function(event, ui ) {
-                $("#degree-slider-value" ).html(ui.value);
+                $('#degree-slider-value' ).html(ui.value);
                 degree = ui.value;
                 taylorCurve.Y = taylor(center, degree);
                 taylorCurve.updateCurve();
@@ -102,7 +102,7 @@ var DataEntry = (function($, _, JXG, undefined) {
             expStr = 'e';
         }
         else {
-             expStr = 'e^{' + expPoint.toFixed() +'}'
+             expStr = 'e^{' + expPoint.toFixed() +'}';
         }
 
         expPoint = 1.0 - center;
@@ -224,13 +224,13 @@ var DataEntry = (function($, _, JXG, undefined) {
             }
 
             return result;
-        }
+        };
     }
 
     function getTaylorTerm(a, i) {
         return function(x) {
             return (coeff[i](a)/factorial(i)) * Math.pow((x - a), i);
-        }
+        };
     }
 
     function createBoard() {
@@ -277,20 +277,20 @@ var DataEntry = (function($, _, JXG, undefined) {
         fCurve = board.create(
             'functiongraph',
             [f],
-            {strokeWidth: 3, strokeColor: "red", highlight:false}
+            {strokeWidth: 3, strokeColor: 'red', highlight:false}
         );
 
         centerSeriesPoint = board.create('point', [center, f(center)], {
             fixed: true,
             name: '',
-            strokeColor: "blue",
-            fillColor: "blue"
+            strokeColor: 'blue',
+            fillColor: 'blue'
         });
 
         taylorCurve = board.create(
             'functiongraph',
             [taylor(center, degree)],
-            {strokeWidth: 3, strokeColor: "green", highlight:false}
+            {strokeWidth: 3, strokeColor: 'green', highlight:false}
         );
     }
 
@@ -298,8 +298,4 @@ var DataEntry = (function($, _, JXG, undefined) {
         JXG.JSXGraph.freeBoard(board);
         createBoard();
     }
-
-    return {
-        // Any field and/or method that needs to be public
-    };
 })(jQuery, _, JXG);

@@ -1,4 +1,4 @@
-var DataEntry = (function($, _, JXG, undefined) {
+(function($, _, JXG, undefined) {
     'use strict';
 
     var boundingBox = [-0.25, 1.5, 11.0, -1.5],
@@ -94,17 +94,17 @@ var DataEntry = (function($, _, JXG, undefined) {
             startAnimation();
         }
         event.stopPropagation();
-    };
+    }
 
     function backwardButtonHandler(event) {
         tSlider.slider('value', tSlider.slider('value') - tStep);
         updateAnimation();
-    };
+    }
 
     function forwardButtonHandler(event) {
         tSlider.slider('value', tSlider.slider('value') + tStep);
         updateAnimation();
-    };
+    }
 
     function forwardPulse(x) {
         return (0.0 <= x && x <= forwardPulseWidth) ? forwardPulseAmp : 0.0;
@@ -226,8 +226,4 @@ var DataEntry = (function($, _, JXG, undefined) {
         forwardWaveBoard.update();
         backwardWaveBoard.update();
     }
-
-    return {
-        // Any field and/or method that needs to be public
-    };
 })(jQuery, _, JXG);

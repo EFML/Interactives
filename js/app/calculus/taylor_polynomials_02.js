@@ -1,4 +1,4 @@
-var DataEntry = (function($, _, JXG, undefined) {
+(function($, _, JXG, undefined) {
     'use strict';
 
     var boundingBox = [-11.0, 11.0, 11.0, -6.0],
@@ -53,7 +53,7 @@ var DataEntry = (function($, _, JXG, undefined) {
             max: 10.0,
             value: center,
             slide: function(event, ui ) {
-                $("#center-slider-value" ).html(ui.value);
+                $('#center-slider-value' ).html(ui.value);
                 center = ui.value;
                 taylorCurve.Y = taylor(center, degree);
                 taylorCurve.updateCurve();
@@ -68,7 +68,7 @@ var DataEntry = (function($, _, JXG, undefined) {
             max: 4,
             value: degree,
             slide: function(event, ui ) {
-                $("#degree-slider-value" ).html(ui.value);
+                $('#degree-slider-value' ).html(ui.value);
                 degree = ui.value;
                 taylorCurve.Y = taylor(center, degree);
                 taylorCurve.updateCurve();
@@ -85,13 +85,13 @@ var DataEntry = (function($, _, JXG, undefined) {
         mathOutput1.hide();
         mathOutput1.html('\\( f(x) = \\begin{cases}1 - \\frac{\\sin(x)}{x} & x \\not= 0 \\\\0 & x = 0 \\end{cases} \\)');
         mathOutput1.css('color', 'Red');
-        MathJax.Hub.Queue(["Typeset", MathJax.Hub, 'math-line1']);
+        MathJax.Hub.Queue(['Typeset', MathJax.Hub, 'math-line1']);
 
         mathOutput2 = $('#math-line2');
         mathOutput2.hide();
         mathOutput2.html('\\( \\text{Taylor polynomial:} \\)');
         mathOutput2.css('color', 'Green');
-        MathJax.Hub.Queue(["Typeset", MathJax.Hub, 'math-line2']);
+        MathJax.Hub.Queue(['Typeset', MathJax.Hub, 'math-line2']);
 
         mathOutput1.show();
         mathOutput2.show();
@@ -103,7 +103,7 @@ var DataEntry = (function($, _, JXG, undefined) {
         mathOutput = $('#math-line3');
         mathOutput.html('\\(' + taylorString() +  '\\)');
         mathOutput.css('color', 'Green');
-        MathJax.Hub.Queue(["Typeset", MathJax.Hub, 'math-line3']);
+        MathJax.Hub.Queue(['Typeset', MathJax.Hub, 'math-line3']);
 
     }
 
@@ -221,13 +221,13 @@ var DataEntry = (function($, _, JXG, undefined) {
             }
 
             return result;
-        }
+        };
     }
 
     function getTaylorTerm(a, i) {
         return function(x) {
             return (coeff[i](a)/factorial(i)) * Math.pow((x - a), i);
-        }
+        };
     }
 
     function createBoard() {
@@ -272,20 +272,20 @@ var DataEntry = (function($, _, JXG, undefined) {
         fCurve = board.create(
             'functiongraph',
             [f],
-            {strokeWidth: 3, strokeColor: "red", highlight:false}
+            {strokeWidth: 3, strokeColor: 'red', highlight:false}
         );
 
         centerSeriesPoint = board.create('point', [center, f(center)], {
             fixed: true,
             name: '',
-            strokeColor: "blue",
-            fillColor: "blue"
+            strokeColor: 'blue',
+            fillColor: 'blue'
         });
 
         taylorCurve = board.create(
             'functiongraph',
             [taylor(center, degree)],
-            {strokeWidth: 3, strokeColor: "green", highlight:false}
+            {strokeWidth: 3, strokeColor: 'green', highlight:false}
         );
     }
 
@@ -293,8 +293,4 @@ var DataEntry = (function($, _, JXG, undefined) {
         JXG.JSXGraph.freeBoard(board);
         createBoard();
     }
-
-    return {
-        // Any field and/or method that needs to be public
-    };
 })(jQuery, _, JXG);

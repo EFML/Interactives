@@ -1,4 +1,4 @@
-var DataEntry = (function($, _, JXG, undefined) {
+(function($, _, JXG, undefined) {
     'use strict';
 
     var xMin = -2.1, xMax = 2.25, yMin = -5.0, yMax = 5.0,
@@ -49,7 +49,7 @@ var DataEntry = (function($, _, JXG, undefined) {
             step: 0.1,
             value: amplitude,
             slide: function(event, ui ) {
-                $("#amplitude-slider-value" ).html(ui.value);
+                $('#amplitude-slider-value' ).html(ui.value);
                 amplitude = ui.value;
                 fCurve.updateCurve();
                 board.update();
@@ -131,8 +131,4 @@ var DataEntry = (function($, _, JXG, undefined) {
             {strokeWidth: 3, strokeColor: 'blue', dash: 2, highlight: false}
         );
     }
-
-    return {
-        // Any field and/or method that needs to be public
-    };
 })(jQuery, _, JXG);

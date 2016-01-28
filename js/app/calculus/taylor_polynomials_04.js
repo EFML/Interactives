@@ -1,4 +1,4 @@
-var DataEntry = (function($, _, JXG, undefined) {
+(function($, _, JXG, undefined) {
     'use strict';
 
     var boundingBox = [-5.0, 5.0, 5.0, -5.0],
@@ -51,7 +51,7 @@ var DataEntry = (function($, _, JXG, undefined) {
             max: 25,
             value: degree,
             slide: function(event, ui ) {
-                $("#degree-slider-value" ).html(ui.value);
+                $('#degree-slider-value' ).html(ui.value);
                 degree = ui.value;
                 taylorCurve.Y = taylor(center, degree);
                 taylorCurve.updateCurve();
@@ -107,7 +107,7 @@ var DataEntry = (function($, _, JXG, undefined) {
             else {
                 return Math.pow(-1.0, (n-1)/2)*Math.pow(x, n)/n;
             }
-        }
+        };
     }
 
     function taylor(a, n) {
@@ -126,7 +126,7 @@ var DataEntry = (function($, _, JXG, undefined) {
             }
 
             return result;
-        }
+        };
     }
 
     function createBoard() {
@@ -171,32 +171,28 @@ var DataEntry = (function($, _, JXG, undefined) {
         fCurve = board.create(
             'functiongraph',
             [f],
-            {strokeWidth: 3, strokeColor: "red", highlight: false}
+            {strokeWidth: 3, strokeColor: 'red', highlight: false}
         );
 
         centerSeriesPoint = board.create('point', [center, f(center)], {
             fixed: true,
             name: '',
-            strokeColor: "blue",
-            fillColor: "blue"
+            strokeColor: 'blue',
+            fillColor: 'blue'
         });
 
         taylorCurve = board.create(
             'functiongraph',
             [taylor(degree)],
-            {strokeWidth: 3, strokeColor: "green", highlight: false}
+            {strokeWidth: 3, strokeColor: 'green', highlight: false}
         );
 
         radiusLeftLine = board.create('line', [[center+radius, -10.0], [center+radius, 10.0]], {
-            strokeWidth: 2, strokeColor: "blue",dash: 2,  highlight: false
+            strokeWidth: 2, strokeColor: 'blue',dash: 2,  highlight: false
         });
 
         radiusRightLine = board.create('line', [[center-radius, -10.0], [center-radius, 10.0]], {
-            strokeWidth: 2, strokeColor: "blue",dash: 2,  highlight: false
+            strokeWidth: 2, strokeColor: 'blue',dash: 2,  highlight: false
         });
     }
-
-    return {
-        // Any field and/or method that needs to be public
-    };
 })(jQuery, _, JXG);

@@ -1,4 +1,4 @@
-var DataEntry = (function($, _, JXG, undefined) {
+(function($, _, JXG, undefined) {
     'use strict';
 
     var xMin = -11.0, xMax = 11.0, yMin = -8.0, yMax = 8.0, zoom = 4.0/11.0, xPos = 1.3,xCenter = 0.0, boundsPrecision = 3, precision = 6,
@@ -14,7 +14,7 @@ var DataEntry = (function($, _, JXG, undefined) {
         gFnStr  = ['\\sin(-x)',                'x',                        '\\sin(x)',   'x-1',          'e^{x}'],
         dgFnStr = ['-\\cos(-x)',               '1',                        '\\cos(x)',   '1',            'e^{x}'],
 
-        config = window.LHospitalZoomSettings || {fnNbr: 0},
+        config = window.lhospitalRuleZoomSettings || {fnNbr: 0},
         fnNbr = config.fnNbr,
 
         f = fFn[fnNbr],
@@ -70,7 +70,7 @@ var DataEntry = (function($, _, JXG, undefined) {
             step: 0.001,
             value: zoom,
             slide: function(event, ui ) {
-                $("#a-slider-value" ).html(ui.value);
+                $('#a-slider-value' ).html(ui.value);
                 zoom = ui.value;
                 updateGraph();
                 board.update();
@@ -80,16 +80,16 @@ var DataEntry = (function($, _, JXG, undefined) {
     }
 
     function outputStaticMath() {
-        katex.render("f(x) = " +  fStr, $('#math-line1-col1').get(0));
-        katex.render("f'(x) = " + dfStr, $('#math-line1-col2').get(0));
-        katex.render("g(x) = " +  gStr, $('#math-line2-col1').get(0));
-        katex.render("g'(x) = " + dgStr, $('#math-line2-col2').get(0));
+        katex.render('f(x) = ' +  fStr, $('#math-line1-col1').get(0));
+        katex.render('f\'(x) = ' + dfStr, $('#math-line1-col2').get(0));
+        katex.render('g(x) = ' +  gStr, $('#math-line2-col1').get(0));
+        katex.render('g\'(x) = ' + dgStr, $('#math-line2-col2').get(0));
     }
 
     function outputDynamicMath() {
-        katex.render("a = " + xStr() +
-                     "\\quad\\quad \\frac{f(a)}{g(a)} = " + fgFracStr() +
-                     "\\quad\\quad \\frac{f'(a)}{g'(a)} = " + dfdgFracStr(), $('#math-line3').get(0));
+        katex.render('a = ' + xStr() +
+                     '\\quad\\quad \\frac{f(a)}{g(a)} = ' + fgFracStr() +
+                     '\\quad\\quad \\frac{f\'(a)}{g\'(a)} = ' + dfdgFracStr(), $('#math-line3').get(0));
         katex.render('\\text{Window: }' + boundingBoxString(), $('#math-line4').get(0));
     }
 
@@ -348,8 +348,4 @@ var DataEntry = (function($, _, JXG, undefined) {
             xAxisGliderDrag();
         }
     }
-
-    return {
-        // Any field and/or method that needs to be public
-    };
 })(jQuery, _, JXG);

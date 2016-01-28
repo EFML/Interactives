@@ -1,4 +1,4 @@
-var DataEntry = (function($, _, JXG, undefined) {
+(function($, _, JXG, undefined) {
     'use strict';
 
     var boundingBox = [-0.5, 5.0, 3.5, -5.0],
@@ -49,7 +49,7 @@ var DataEntry = (function($, _, JXG, undefined) {
             step: 0.1,
             value: a,
             slide: function(event, ui ) {
-                $("#a-slider-value" ).html(ui.value);
+                $('#a-slider-value' ).html(ui.value);
                 a = ui.value;
                 outputDynamicMath();
                 board.update();
@@ -62,7 +62,7 @@ var DataEntry = (function($, _, JXG, undefined) {
             step: 0.1,
             value: b,
             slide: function(event, ui ) {
-                $("#b-slider-value" ).html(ui.value);
+                $('#b-slider-value' ).html(ui.value);
                 b = ui.value;
                 outputDynamicMath();
                 board.update();
@@ -82,18 +82,18 @@ var DataEntry = (function($, _, JXG, undefined) {
                 aStr = '-\\sin(x)';
             }
             else if (a === 1.0) {
-                aStr = '\\sin(x)'
+                aStr = '\\sin(x)';
             }
             else {
-                aStr = nbrToString(a) + '\\sin(x)'
+                aStr = nbrToString(a) + '\\sin(x)';
             }
         }
 
         if (b > 0.0 && a !== 0.0) {
-                bOp = '+'
+                bOp = '+';
         }
         else if (b < 0.0 && a !== 0.0) {
-                bOp = '-'
+                bOp = '-';
         }
 
         if (b !== 0.0) {
@@ -101,7 +101,7 @@ var DataEntry = (function($, _, JXG, undefined) {
                 bStr = '\\cos(x)';
             }
             else {
-                bStr = nbrToString(Math.abs(b)) + '\\cos(x)'
+                bStr = nbrToString(Math.abs(b)) + '\\cos(x)';
             }
         }
 
@@ -173,8 +173,4 @@ var DataEntry = (function($, _, JXG, undefined) {
             {strokeWidth: 3, strokeColor: 'blue', highlight: false}
         );
     }
-
-    return {
-        // Any field and/or method that needs to be public
-    };
 })(jQuery, _, JXG);

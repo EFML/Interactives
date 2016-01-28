@@ -1,4 +1,4 @@
-var DataEntry = (function($, _, JXG, undefined) {
+(function($, _, JXG, undefined) {
     'use strict';
 
     var posBoundingBox = [-0.5, 1.5, 3.2, -1.5],
@@ -91,17 +91,17 @@ var DataEntry = (function($, _, JXG, undefined) {
             startAnimation();
         }
         event.stopPropagation();
-    };
+    }
 
     function backwardButtonHandler(event) {
         tSlider.slider('value', tSlider.slider('value') - tStep);
         updateAnimation();
-    };
+    }
 
     function forwardButtonHandler(event) {
         tSlider.slider('value', tSlider.slider('value') + tStep);
         updateAnimation();
-    };
+    }
 
     function outputDynamicMath() {
         katex.render('x = ' + position(t).toFixed(precision), $('#math-line1').get(0));
@@ -368,8 +368,4 @@ var DataEntry = (function($, _, JXG, undefined) {
         accLine.point1.moveTo([t, 0.0], 0);
         accLine.point2.moveTo([t, acceleration(t)], 0);
     }
-
-    return {
-        // Any field and/or method that needs to be public
-    };
 })(jQuery, _, JXG);

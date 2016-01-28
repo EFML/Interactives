@@ -1,4 +1,4 @@
-var DataEntry = (function($, _, JXG, undefined) {
+(function($, _, JXG, undefined) {
     'use strict';
 
     var boundingBox = [-7.0, 11.0, 11.0, -7.0],
@@ -50,7 +50,7 @@ var DataEntry = (function($, _, JXG, undefined) {
             step: 0.1,
             value: xp,
             slide: function(event, ui ) {
-                $("#p-slider-value" ).html(ui.value);
+                $('#p-slider-value' ).html(ui.value);
                 xp = ui.value;
                 yp = f(xp);
                 slope = df(xp);
@@ -90,7 +90,7 @@ var DataEntry = (function($, _, JXG, undefined) {
         }
         else {
             str = nbr.toExponential(5);
-            eIndex = str.indexOf('e')
+            eIndex = str.indexOf('e');
             mantissa = str.slice(0, eIndex);
             mantissa = parseFloat(mantissa).toString(); // Removes insignificant trailing zeroes
             exponentSign = str.charAt(eIndex+1);
@@ -165,8 +165,4 @@ var DataEntry = (function($, _, JXG, undefined) {
     function updateGraph() {
         pPoint.setPosition(JXG.COORDS_BY_USER, [xp, yp]);
     }
-
-    return {
-        // Any field and/or method that needs to be public
-    };
 })(jQuery, _, JXG);

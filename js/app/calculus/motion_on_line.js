@@ -1,4 +1,4 @@
-var DataEntry = (function($, _, JXG, undefined) {
+(function($, _, JXG, undefined) {
     'use strict';
 
     var animBoundingBox = [-2.0, 5.0, 25.0, -5.0], graphBoundingBox = [-1.0, 22, 9.0, -3.0],
@@ -11,7 +11,7 @@ var DataEntry = (function($, _, JXG, undefined) {
 
     function init() {
         $(window).on('resize', resizeBox);
-        $(document).on('click', stopAnimation)
+        $(document).on('click', stopAnimation);
         $('#dnext-about-link').on('click', toggle);
 
         createAnimBoard();
@@ -81,17 +81,17 @@ var DataEntry = (function($, _, JXG, undefined) {
             startAnimation();
         }
         event.stopPropagation();
-    };
+    }
 
     function backwardButtonHandler(event) {
         tSlider.slider('value', tSlider.slider('value') - tStep);
         updateAnimation();
-    };
+    }
 
     function forwardButtonHandler(event) {
         tSlider.slider('value', tSlider.slider('value') + tStep);
         updateAnimation();
-    };
+    }
 
     function outputDynamicMath() {
         katex.render('y = s(t) = ' + position(t).toFixed(precision), $('#math-line1').get(0));
@@ -197,8 +197,8 @@ var DataEntry = (function($, _, JXG, undefined) {
             fixed: true,
             name: '',
             size: 2,
-            strokeColor: "red",
-            fillColor: "red"
+            strokeColor: 'red',
+            fillColor: 'red'
         });
     }
 
@@ -259,8 +259,8 @@ var DataEntry = (function($, _, JXG, undefined) {
             fixed: true,
             name: '',
             size: 2,
-            strokeColor: "red",
-            fillColor: "red"
+            strokeColor: 'red',
+            fillColor: 'red'
         });
 
         sLine = graphBoard.create('line', [[t, 0.0], [t, position(t)]], {
@@ -279,8 +279,4 @@ var DataEntry = (function($, _, JXG, undefined) {
         sLine.point1.moveTo([t, 0.0], 0);
         sLine.point2.moveTo([t, position(t)], 0);
     }
-
-    return {
-        // Any field and/or method that needs to be public
-    };
 })(jQuery, _, JXG);
