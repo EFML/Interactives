@@ -341,6 +341,47 @@ var MacroLib = (function(JXG) {
         return obj;
     }
 
+    // When an interactive is loaded in an iFrame, we try to post a message containing its height
+    // to the parent window so that it can resize it.
+    function onLoadPostMessage() {
+        var parent = window.parent,
+            url = window.location.href,
+            height, data;
+
+        // Interactive is loaded in an iFrame
+        if (parent !== window) {
+            window.addEventListener('load', function(event) {
+                height = getDocumentHeight();
+                console.info('Interactive located at ' + url);
+                try {
+                    data = {
+                        type: 'iframe-resize',
+                        url: url,
+                        height: height
+                    };
+                    parent.postMessage(data, '*');
+                    console.info('Posted a message containing its height ' + height + 'px');
+                }
+                catch (e) {
+                    console.info(
+                        'Could not post a message containing its height.' +
+                        'No resizing will occur and default iFrame size will be used.'
+                    );
+                }
+            });
+        }
+    }
+
+    function getDocumentHeight() {
+        var d = document;
+
+        return Math.max(
+            d.body.scrollHeight, d.documentElement.scrollHeight,
+            d.body.offsetHeight, d.documentElement.offsetHeight,
+            d.body.clientHeight, d.documentElement.clientHeight
+        );
+    }
+
     // Establish a channel to communicate with edX when the application is used
     // inside a JSInput and hosted completely on a different domain.
     function createChannel(getGrade, getState, setState) {
@@ -505,6 +546,7 @@ var MacroLib = (function(JXG) {
         createSupply: createSupply,
         createDemand: createDemand,
         createDashedLines2Axis: createDashedLines2Axis,
+        onLoadPostMessage: onLoadPostMessage,
         createChannel: createChannel
     };
 })(JXG, undefined);
