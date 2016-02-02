@@ -110,6 +110,12 @@
   display: inline-block;
 }
 
+/* Added to new Macro interatives only */
+.dnext-tool-container .JXGtext {
+    font-family: Arial, Helvetica, Geneva, sans-serif;
+}
+/* End add */
+
 .dnext-tool-container .single-board-center {
 	width: 500px;
 	height: 450px;
@@ -156,6 +162,16 @@
 .dnext-tool-container .quarter-line {
   margin-top: 5px;
 }
+
+/* Added to new Macro interatives only */
+.dnext-tool-container .left-column {
+  float: left;
+}
+
+.dnext-tool-container .right-column {
+  float: right;
+}
+/* End add */
 
 .dnext-tool-container .button {
   font-family: "Verdana", "Geneva", sans-serif;
