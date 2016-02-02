@@ -17,12 +17,10 @@ var Macro = (function(JXG, MacroLib) {
             'ypos': [-1.25, 10]
         });
 
-        var c1 = [2.0, 9.5];
-        var c2 = [9.5, 2.0];
-        //Demand Line 1 - fixed
-        var AD = MacroLib.createDemand(brd1, {
-            c1: c1,
-            c2: c2,
+        //Demand Line AD - fixed
+        var AD = MacroLib.createDemand1(brd1, {
+            c1: [2.0, 9.5],
+            c2: [9.5, 2.0],
             name: 'AD',
             color: 'Gray'
         });
@@ -31,12 +29,10 @@ var Macro = (function(JXG, MacroLib) {
             'highlight': false
         });
 
-        c1 = [2.5, 10];
-        c2 = [10, 2.5];
-        //Demand Line 1 - fixed
-        var AD1 = MacroLib.createDemand(brd1, {
-            c1: c1,
-            c2: c2,
+        //Demand Line AD1 - fixed
+        var AD1 = MacroLib.createDemand1(brd1, {
+            c1: [2.5, 10],
+            c2: [10, 2.5],
             name: 'AD<sub>1</sub>',
             color: 'DodgerBlue'
         });
@@ -45,30 +41,18 @@ var Macro = (function(JXG, MacroLib) {
             'highlight': false
         });
 
-        c1 = [3.25, 10.75];
-        c2 = [10.75, 3.25];
-        //Demand Line 1 - fixed -- Error here?
-        AD1 = MacroLib.createDemand(brd1, {
-            c1: c1,
-            c2: c2,
+        //Demand Line AD2 - fixed
+        var AD2 = MacroLib.createDemand1(brd1, {
+            c1: [3.25, 10.75],
+            c2: [10.75, 3.25],
             name: 'AD<sub>2</sub>',
             color: 'Blue'
         });
-        AD1.setAttribute({
+        AD2.setAttribute({
             'fixed': true,
             'highlight': false
         });
     }
-
-    /////////////////////////
-    // External DOM buttons
-    /////////////////////////
-    var resetAnimationBtn = document.getElementById('resetAnimationBtn');
-
-    resetAnimationBtn.addEventListener('click', function() {
-        JXG.JSXGraph.freeBoard(brd1);
-        init();
-    });
 
     init();
     MacroLib.onLoadPostMessage();

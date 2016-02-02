@@ -231,6 +231,34 @@ var MacroLib = (function(JXG) {
         });
     }
 
+    // TODO: Following function is a fix for
+    // 06-aggregate-demand/lc3/hoa1.js
+    // 06-aggregate-demand/lc3/hoa2.js
+    function createDemand1(board, options) {
+        var name = options.name || '';
+        var color = options.color || JXG.Options.segment.strokeColor;
+        var c1, c2, D1, D2;
+
+        c1 = c1 = options.c1 || [2.0, 9.5];
+        c2 = options.c2 || [9.5,2.0];
+        D1 = board.create('point', c1, {
+            withLabel: false,
+            visible: false
+        });
+        D2 = board.create('point', c2, {
+            withLabel: false,
+            visible: false
+        });
+        return board.create('segment', [D1, D2], {
+            'strokeColor': color,
+            'name': name,
+            'withLabel': true,
+            'label': {
+                'offset': [labelOffset.X, -labelOffset.Y]
+            }
+        });
+    }
+
     //DO NOT DELETE - Used in older interactives
     function createDemand(board, options) {
         var name = options.name || '';
@@ -545,6 +573,7 @@ var MacroLib = (function(JXG) {
         createTransformLine: createTransformLine,
         createSupply: createSupply,
         createDemand: createDemand,
+        createDemand1: createDemand1,
         createDashedLines2Axis: createDashedLines2Axis,
         onLoadPostMessage: onLoadPostMessage,
         createChannel: createChannel
