@@ -87,5 +87,6 @@ var Macro = (function(JXG, MacroLib) {
     increaseLaborProdBtn.addEventListener('click', increaseLaborProd);
 
     init();
+    MacroLib.onLoadPostMessage();
 
 })(JXG, MacroLib, undefined);

@@ -239,4 +239,6 @@ var Macro = (function(JXG, MacroLib) {
     });
 
     init();
+    MacroLib.onLoadPostMessage();
+
 })(JXG, MacroLib, undefined);

@@ -174,5 +174,6 @@ var Macro = (function(JXG, MacroLib) {
     resetAnimationBtn.addEventListener('click', resetAnimation);
 
     init();
+    MacroLib.onLoadPostMessage();
 
 })(JXG, MacroLib, undefined);
