@@ -25,7 +25,7 @@ var Macro = (function(JXG, MacroLib) {
         ////////////
         // BOARD 2
         ////////////
-        var brd2 = MacroLib.createBoard('jxgbox2', {
+        brd2 = MacroLib.createBoard('jxgbox2', {
             bboxlimits: [-2.5, 12, 12, -2.0],
             xname: 'Quantity of Bonds per Period',
             yname: 'Price of<br>Bonds',
