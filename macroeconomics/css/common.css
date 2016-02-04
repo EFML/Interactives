@@ -12,7 +12,7 @@
    padding: 5px 0px 5px 0px;
    color: #555555;
    text-align: center;
-   font-family: "Verdana", "Geneva", sans-serif;
+   font-family: "Open Sans", "Verdana", "Geneva", sans-serif;
    font-weight: 700;
    font-size: 18px;
 }
@@ -134,7 +134,7 @@
 /* End add */
 
 .dnext-tool-container .button {
-  font-family: "Verdana", "Geneva", sans-serif;
+  font-family: "Open Sans", "Verdana", "Geneva", sans-serif;
   font-weight: 400;
   font-size: 14px;
 }
