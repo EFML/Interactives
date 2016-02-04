@@ -70,11 +70,13 @@
   display: inline-block;
 }
 
-/* Added to new Macro interatives only */
+/* Match text used in JSXGraph to the one used in edX for normal text. */
 .dnext-tool-container .JXGtext {
-    font-family: Arial, Helvetica, Geneva, sans-serif;
+    font-family: "Open Sans", "Verdana", "Geneva", sans-serif;
+    font-weight: 400 ;
+    /* No idea where this is set further down the line by JSXGraph. Give this rule precedence.*/
+    color: #4c4c4c !important;
 }
-/* End add */
 
 .dnext-tool-container .single-board-center {
 	width: 500px;
