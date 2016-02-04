@@ -344,6 +344,7 @@ var Macro = (function(JXG, MacroLib) {
     });
 
     init();
+    MacroLib.onLoadPostMessage();
 
     //Standard edX JSinput functions
     function setState(transaction, statestr) {
