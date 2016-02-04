@@ -14,7 +14,8 @@ var Macro = (function(JXG, MacroLib) {
         });
 
         //Supply Line 1 - fixed
-        var SRPC1 = MacroLib.createDemand(brd1, {
+        var SRPC1 = MacroLib.createLine(brd1, {
+            ltype: 'Demand',
             name: 'SRPC1',
             color: 'Gray'
         });
@@ -25,7 +26,8 @@ var Macro = (function(JXG, MacroLib) {
         });
 
         //Supply Line 1 - fixed
-        SRPC2 = MacroLib.createDemand(brd1, {
+        SRPC2 = MacroLib.createLine(brd1, {
+            ltype: 'Demand',
             name: 'SRPC2',
             color: 'DodgerBlue'
         });

@@ -15,7 +15,8 @@ var Macro = (function(JXG, MacroLib) {
         });
 
         //Supply Line 1 - fixed
-        SRAS1 = MacroLib.createSupply(brd1, {
+        SRAS1 = MacroLib.createLine(brd1, {
+            ltype: 'Supply',
             name: 'SRAS<sub>1</sub>',
             color: 'DodgerBlue'
         });
@@ -26,7 +27,8 @@ var Macro = (function(JXG, MacroLib) {
         });
 
         //Supply Line 2 - moveable
-        SRAS2 = MacroLib.createSupply(brd1, {
+        SRAS2 = MacroLib.createLine(brd1, {
+            ltype: 'Supply',
             name: 'SRAS<sub>2</sub>',
             color: 'DodgerBlue'
         });
@@ -35,7 +37,8 @@ var Macro = (function(JXG, MacroLib) {
         });
 
         //Demand Line 1 - fixed
-        AD1 = MacroLib.createDemand(brd1, {
+        AD1 = MacroLib.createLine(brd1, {
+            ltype: 'Demand',
             name: 'AD<sub>1</sub>',
             color: 'Orange'
         });
@@ -46,7 +49,8 @@ var Macro = (function(JXG, MacroLib) {
         });
 
         //Demand Line 2 - moveable
-        AD2 = MacroLib.createDemand(brd1, {
+        AD2 = MacroLib.createLine(brd1, {
+            ltype: 'Demand',
             name: 'AD<sub>2</sub>',
             color: 'Orange'
         });

@@ -13,7 +13,8 @@ var Macro = (function(JXG, MacroLib) {
         });
 
         //Demand 1
-        var D1 = MacroLib.createDemand(brd1, {
+        var D1 = MacroLib.createLine(brd1, {
+            ltype: 'Demand',
             name: 'D<sub>1</sub>',
             color: 'Gray'
         });
@@ -39,7 +40,8 @@ var Macro = (function(JXG, MacroLib) {
 
 
         //Demand 2
-        D2 = MacroLib.createDemand(brd1, {
+        D2 = MacroLib.createLine(brd1, {
+            ltype: 'Demand',
             name: 'D<sub>2</sub>',
             color: 'DodgerBlue'
         });

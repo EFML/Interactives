@@ -17,7 +17,8 @@ var Macro = (function(JXG, MacroLib) {
         });
 
         //Curve 1 - fixed
-        C1 = MacroLib.createDemand(brd1, {
+        C1 = MacroLib.createLine(brd1, {
+            ltype: 'Demand',
             name: 'C<sub>1</sub>',
             color: 'Gray'
         });
@@ -28,7 +29,8 @@ var Macro = (function(JXG, MacroLib) {
         });
 
         //Curve 2 - fixed
-        C2 = MacroLib.createSupply(brd1, {
+        C2 = MacroLib.createLine(brd1, {
+            ltype: 'Supply',
             name: 'C<sub>2</sub>',
             color: 'Gray'
         });

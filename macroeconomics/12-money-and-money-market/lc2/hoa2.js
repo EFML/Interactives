@@ -16,7 +16,8 @@ var Macro = (function(JXG, MacroLib) {
         });
 
         //Demand Line 1 - fixed
-        var AD1 = MacroLib.createDemand(brd1, {
+        var AD1 = MacroLib.createLine(brd1, {
+            ltype: 'Demand',
             color: 'Gray'
         });
         AD1.setAttribute({
@@ -26,7 +27,8 @@ var Macro = (function(JXG, MacroLib) {
         });
 
         //Demand Line 2 - moveable
-        var AD2 = MacroLib.createDemand(brd1, {
+        var AD2 = MacroLib.createLine(brd1, {
+            ltype: 'Demand',
             name: 'AD<sub>1</sub>',
             color: 'DodgerBlue'
         });

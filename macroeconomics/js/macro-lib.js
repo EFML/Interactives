@@ -25,8 +25,8 @@ var MacroLib = (function(JXG) {
                 JXG.Options.text.highlight = false;
                 defaultBBox = [-1.5, 12, 12, -1.0];
                 labelOffset = {
-                    'X': 150,
-                    'Y': 140
+                    X: 10,
+                    Y: 10
                 };
                 defaultXpos = [9, -0.5];
                 defaultYpos = [-1.2, 10];
@@ -35,11 +35,11 @@ var MacroLib = (function(JXG) {
                 break;
             case TWO_BOARDS:
                 JXG.Options.text.fontSize = 15;
-                // JXG.Options.text.highlight was equal to true. OK?
+                JXG.Options.text.highlight = false;
                 defaultBBox = [-1.5, 12, 12, -1.5];
                 labelOffset = {
-                    'X': 95,
-                    'Y': 95
+                    X: 5,
+                    Y: 5
                 };
                 defaultXpos = [8, -0.5];
                 defaultYpos = [-1.0, 10];
@@ -51,8 +51,8 @@ var MacroLib = (function(JXG) {
                 JXG.Options.text.highlight = false;
                 defaultBBox = [-1.75, 12, 12, -2.0];
                 labelOffset = {
-                    'X': 70,
-                    'Y': 70
+                    X: 5,
+                    Y: 5
                 };
                 defaultXpos = [8, -1];
                 defaultYpos = [-1.5, 10];
@@ -112,42 +112,44 @@ var MacroLib = (function(JXG) {
     }
 
     function lineCoords(ltype) {
+        var c1, c2;
+
         ltype = ltype || 'Supply';
-        var c1, c2, offset;
+
         if (ltype === 'Demand') {
             c1 = [2.0, 9.5];
             c2 = [9.5, 2.0];
-            offset = [labelOffset.X, -labelOffset.Y];
         } else if (ltype === 'Supply') {
             c1 = [2.0, 2.0];
             c2 = [9.5, 9.5];
-            offset = [labelOffset.X, labelOffset.Y];
         }
-        // Was offset = [0,labelOffset.Y+30] for all files using Macro_1Board.js, Macro_2Board.js, Macro_3Board.js
         else if (ltype === 'Vertical') {
             c1 = [5.75, 0.5];
             c2 = [5.75, 11.0];
-            offset = [0, labelOffset.Y + 45];
         } else if (ltype === 'Horizontal') {
             c1 = [0.5, 5.75];
             c2 = [11.0, 5.75];
-            offset = [0, labelOffset.Y + 45];
         }
 
-        return [c1, c2, offset];
+        return [c1, c2];
     }
 
     function createLine(board, options) {
         var name = options.name || '';
-        var color = options.color || JXG.Options.segment.strokeColor;
+        var strokeColor = options.color || JXG.Options.segment.strokeColor;
         var ltype = options.ltype || 'Supply';
         var fixed = options.type || true;
-        var c1, c2, D1, D2, offset;
+        var c1, c2, D1, D2, coords;
 
-        var tmp = lineCoords(ltype);
-        c1 = tmp[0];
-        c2 = tmp[1];
-        offset = tmp[2];
+        if (!options.c1 && !options.c2) {
+            coords = lineCoords(ltype);
+            c1 = coords[0];
+            c2 = coords[1];
+        }
+        else {
+            c1 = options.c1;console.log('in')
+            c2 = options.c2;
+        }
 
         D1 = board.create('point', c1, {
             withLabel: false,
@@ -157,132 +159,89 @@ var MacroLib = (function(JXG) {
             withLabel: false,
             visible: false
         });
+
         return board.create('segment', [D1, D2], {
-            'strokeColor': color,
-            'name': name,
-            'withLabel': true,
-            'label': {
-                'offset': offset
-            }
+            name: name,
+            strokeColor: strokeColor,
+            withLabel: true,
+            label: getLabelOffset(D1, D2, ltype)
         });
     }
 
     function createTransformLine(board, options) {
         var name = options.name || '';
-        var color = options.color || JXG.Options.segment.strokeColor;
+        var strokeColor = options.color || JXG.Options.segment.strokeColor;
         var ltype = options.ltype || 'Supply';
         var fixed = options.type || true;
         var transformList = options.transformList || [undefined];
-        var c1, c2, D1, D2, offset;
+        var c1, c2, D1, D2, coords;
 
-        var tmp = lineCoords(ltype);
-        c1 = tmp[0];
-        c2 = tmp[1];
-        offset = tmp[2];
+        if (!options.c1 && !options.c2) {
+            coords = lineCoords(ltype);
+            c1 = coords[0];
+            c2 = coords[1];
+        }
+        else {
+            c1 = options.c1;
+            c2 = options.c2;
+        }
 
         //Supply Board 1 - with slider transformation
         var s1B1 = board.create('point', c1, {
+             withLabel: false,
             visible: false
         });
         var s2B1 = board.create('point', c2, {
+            withLabel: false,
             visible: false
         });
         var pS1 = board.create('point', [s1B1, transformList], {
+             withLabel: false,
             visible: false
         });
         var pS2 = board.create('point', [s2B1, transformList], {
+            withLabel: false,
             visible: false
         });
 
         return board.create('segment', [pS1, pS2], {
+            name: name,
+            strokeColor: strokeColor,
             withLabel: true,
-            highlight: false,
-            'name': name,
-            color: color,
-            'label': {
-                'offset': offset
-            }
+            label: getLabelOffset(pS1, pS2, ltype),
+            highlight: false
         });
     }
 
-    //DO NOT DELETE - Used in older interactives
-    function createSupply(board, options) {
-        var name = options.name || '';
-        var color = options.color || JXG.Options.segment.strokeColor;
-        var c1, c2, S1, S2, N;
+    function getLabelOffset(point1, point2, ltype) {
+        var x1, x2, y1, y2, dx, dy, anchorX, anchorY;
 
-        c1 = [2.0, 2.0];
-        c2 = [9.5, 9.5];
-        S1 = board.create('point', c1, {
-            withLabel: false,
-            visible: false
-        });
-        S2 = board.create('point', c2, {
-            withLabel: false,
-            visible: false
-        });
-        return board.create('segment', [S1, S2], {
-            'strokeColor': color,
-            'name': name,
-            'withLabel': true,
-            'label': {
-                'offset': [labelOffset.X, labelOffset.Y]
-            }
-        });
-    }
+        x1 = point1.coords.scrCoords[1];
+        x2 = point2.coords.scrCoords[1];
+        y1 = point1.coords.scrCoords[2];
+        y2 = point2.coords.scrCoords[2];
+        dx = Math.round((x2-x1)/2);
+        dy = -Math.round((y2-y1)/2);
 
-    // TODO: Following function is a fix for
-    // 06-aggregate-demand/lc3/hoa1.js
-    // 06-aggregate-demand/lc3/hoa2.js
-    function createDemand1(board, options) {
-        var name = options.name || '';
-        var color = options.color || JXG.Options.segment.strokeColor;
-        var c1, c2, D1, D2;
+        dx += Math.sign(dx)*labelOffset.X;
+        dy += Math.sign(dy)*labelOffset.Y;
 
-        c1 = c1 = options.c1 || [2.0, 9.5];
-        c2 = options.c2 || [9.5,2.0];
-        D1 = board.create('point', c1, {
-            withLabel: false,
-            visible: false
-        });
-        D2 = board.create('point', c2, {
-            withLabel: false,
-            visible: false
-        });
-        return board.create('segment', [D1, D2], {
-            'strokeColor': color,
-            'name': name,
-            'withLabel': true,
-            'label': {
-                'offset': [labelOffset.X, -labelOffset.Y]
-            }
-        });
-    }
+        if (ltype === 'Demand' || ltype === 'Supply' || ltype === 'Horizontal') {
+            anchorX = 'left';
+            anchorY = 'middle';
+        }
+        else if (ltype === 'Vertical') {
+            anchorX = 'middle';
+            anchorY = 'bottom';
 
-    //DO NOT DELETE - Used in older interactives
-    function createDemand(board, options) {
-        var name = options.name || '';
-        var color = options.color || JXG.Options.segment.strokeColor;
-        var c1, c2, D1, D2;
+        }
 
-        c1 = [2.0, 9.5];
-        c2 = [9.5, 2.0];
-        D1 = board.create('point', c1, {
-            withLabel: false,
-            visible: false
-        });
-        D2 = board.create('point', c2, {
-            withLabel: false,
-            visible: false
-        });
-        return board.create('segment', [D1, D2], {
-            'strokeColor': color,
-            'name': name,
-            'withLabel': true,
-            'label': {
-                'offset': [labelOffset.X, -labelOffset.Y]
-            }
-        });
+        return {
+            offset: [dx, dy],
+            anchorX: anchorX,
+            anchorY: anchorY
+        }
+
     }
 
     /////////////////////////////////////////////////////////////
@@ -571,9 +530,6 @@ var MacroLib = (function(JXG) {
         lineCoords: lineCoords,
         createLine: createLine,
         createTransformLine: createTransformLine,
-        createSupply: createSupply,
-        createDemand: createDemand,
-        createDemand1: createDemand1,
         createDashedLines2Axis: createDashedLines2Axis,
         onLoadPostMessage: onLoadPostMessage,
         createChannel: createChannel

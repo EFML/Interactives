@@ -18,7 +18,7 @@ var Macro = (function(JXG, MacroLib) {
         });
 
         //Demand Line AD - fixed
-        var AD = MacroLib.createDemand1(brd1, {
+        var AD = MacroLib.createLine(brd1, {
             c1: [2.0, 9.5],
             c2: [9.5, 2.0],
             name: 'AD',
@@ -30,7 +30,7 @@ var Macro = (function(JXG, MacroLib) {
         });
 
         //Demand Line AD1 - fixed
-        var AD1 = MacroLib.createDemand1(brd1, {
+        var AD1 = MacroLib.createLine(brd1, {
             c1: [2.5, 10],
             c2: [10, 2.5],
             name: 'AD<sub>1</sub>',
@@ -42,7 +42,7 @@ var Macro = (function(JXG, MacroLib) {
         });
 
         //Demand Line AD2 - fixed
-        var AD2 = MacroLib.createDemand1(brd1, {
+        var AD2 = MacroLib.createLine(brd1, {
             c1: [3.25, 10.75],
             c2: [10.75, 3.25],
             name: 'AD<sub>2</sub>',

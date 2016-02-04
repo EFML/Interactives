@@ -26,7 +26,7 @@ var Macro = (function(JXG, MacroLib) {
         });
 
         // Supply Line 2 - moveable
-        supplyLine2 = MacroLib.createSupply(board, {
+        supplyLine2 = MacroLib.createLine(board, {
             ltype: 'Supply',
             name: 'S<sub>2</sub>',
             color: 'Orange'

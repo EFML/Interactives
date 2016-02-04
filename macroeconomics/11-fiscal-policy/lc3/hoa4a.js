@@ -14,7 +14,8 @@ var Macro = (function(JXG, MacroLib) {
         });
 
         //Supply Line 1 - fixed
-        var SRAS1 = MacroLib.createSupply(brd1, {
+        var SRAS1 = MacroLib.createLine(brd1, {
+            ltype: 'Supply',
             name: 'SRAS<sub>1</sub>',
             color: 'DodgerBlue'
         });
@@ -25,7 +26,8 @@ var Macro = (function(JXG, MacroLib) {
         });
 
         //Demand Line 1 - fixed
-        var AD1 = MacroLib.createDemand(brd1, {
+        var AD1 = MacroLib.createLine(brd1, {
+            ltype: 'Demand',
             name: 'AD<sub>1</sub>',
             color: 'Orange'
         });

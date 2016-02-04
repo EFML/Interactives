@@ -129,7 +129,7 @@ var Macro = (function(JXG, MacroLib) {
         });
 
         // Supply Line 2 - moveable
-        supplyLine22 = MacroLib.createSupply(brd2, {
+        supplyLine22 = MacroLib.createLine(brd2, {
             ltype: 'Supply',
             name: 'S<sub>2</sub>',
             color: 'Orange'
