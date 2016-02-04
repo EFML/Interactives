@@ -17,16 +17,6 @@ var Macro = (function(JXG, MacroLib) {
         });
     }
 
-    /////////////////////////
-    // External DOM button
-    /////////////////////////
-    var resetAnimationBtn = document.getElementById('resetAnimationBtn');
-
-    resetAnimationBtn.addEventListener('click', function() {
-        JXG.JSXGraph.freeBoard(brd1);
-        init();
-    });
-
     init();
     MacroLib.onLoadPostMessage();
 
