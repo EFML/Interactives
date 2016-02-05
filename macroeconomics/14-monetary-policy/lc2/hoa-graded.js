@@ -331,6 +331,18 @@ var Macro = (function(JXG, MacroLib) {
         });
     }
 
+    // TODO: the following functions should go into MacroLib
+    // Map the slider values in [slider._smin, slider._smax] to [0, 1]
+    // This is used to set the slider value directly via the glider.
+    function normalizeSliderValue(slider, value) {
+        return (value - slider._smin) / (slider._smax - slider._smin);
+    }
+
+    function isValidNumber(value) {
+        return typeof value === 'number' && isFinite(value);
+    }
+    // END TODO
+
     ////////////////////////
     // External DOM button
     ////////////////////////
@@ -350,30 +362,32 @@ var Macro = (function(JXG, MacroLib) {
     function setState(transaction, statestr) {
         var state = JSON.parse(statestr);
 
-        if (state.sliderB1 && state.sliderB2 && state.sliderB3) {
-            // brd1.removeObject('AD2');
-            // sliderB1.Value() = state.sliderB1;
-            // sliderB2.Value() = state.sliderB2;
-            // sliderB3.Value() = state.sliderB3;
-            brd1.update();
+        if (isValidNumber(state.sliderB1) && isValidNumber(state.sliderB2)  && isValidNumber(state.sliderB3)) {
+            sliderB1.setGliderPosition(normalizeSliderValue(
+                sliderB1, state.sliderB1)
+            );
+            sliderB2.setGliderPosition(normalizeSliderValue(
+                sliderB2, state.sliderB2)
+            );
+            sliderB3.setGliderPosition(normalizeSliderValue(
+                sliderB3, state.sliderB3)
+            );
         }
         console.debug('State updated successfully from saved.');
     }
 
     function getState() {
-        var state = JSON.parse(getGrade());
-        var statestr = JSON.stringify(state);
-        return statestr;
-    }
-
-    function getGrade() {
         var state = {
             'sliderB1': sliderB1.Value(),
             'sliderB2': sliderB2.Value(),
             'sliderB3': sliderB3.Value()
         };
-        var statestr = JSON.stringify(state);
-        return statestr;
+        return JSON.stringify(state);
+        console.debug('State successfully saved.');
+    }
+
+    function getGrade() {
+        return getState();
     }
 
     MacroLib.createChannel(getGrade, getState, setState);

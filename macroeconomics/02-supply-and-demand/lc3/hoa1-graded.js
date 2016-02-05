@@ -1,3 +1,4 @@
+// Used as JSInput
 var Macro = (function(JXG, MacroLib) {
     'use strict';
     var leftComponents = {el: 'jxgbox1'}, rightComponents = {el: 'jxgbox2'};

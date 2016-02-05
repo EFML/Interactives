@@ -1,3 +1,4 @@
+// Used as JSInput
 var Macro = (function(JXG, MacroLib) {
     'use strict';
     var board, supplyLine1, supplyLine2, glider1, glider2, dashes1, dashes2, supplySlider, priceSlider, supplySliderText, priceSliderText;
