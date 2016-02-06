@@ -42,7 +42,7 @@ var Macro = (function(JXG, MacroLib) {
             'highlight': false
         });
 
-        //Demand Line 2 - moveable
+        //Demand Line 2 - fixed
         var AD2 = MacroLib.createLine(brd1, {
             'ltype': 'Demand',
             'name': 'AD<sub>2</sub>',
@@ -51,6 +51,7 @@ var Macro = (function(JXG, MacroLib) {
         AD2.setAttribute({
             'withLabel': false,
             'highlight': false,
+            'fixed': true,
             'visible': true
         });
 
@@ -67,6 +68,7 @@ var Macro = (function(JXG, MacroLib) {
             'name': 'LRAS',
             'withLabel': true,
             'fixed': true,
+            'highlight': false,
             'label': {
                 'offset': [-15, 200]
             }
@@ -106,31 +108,7 @@ var Macro = (function(JXG, MacroLib) {
             yoffsets: [5, 10],
             color: 'Orange'
         });
-
-
-        //////////////////
-        // Interactivity
-        //////////////////
-        brd1.on('move', function() {
-            //Moving Dashed Lines for Demand/Supply
-            dashesSD.Y1.moveTo([0, iSD.Y()]);
-            dashesSD.Y2.moveTo([iSD.X(), iSD.Y()]);
-
-            dashesSD.X1.moveTo([iSD.X(), 0]);
-            dashesSD.X2.moveTo([iSD.X(), iSD.Y()]);
-
-        });
     }
-
-    /////////////////////////
-    // External DOM buttons
-    /////////////////////////
-    var resetAnimationBtn = document.getElementById('resetAnimationBtn');
-
-    resetAnimationBtn.addEventListener('click', function() {
-        JXG.JSXGraph.freeBoard(brd1);
-        init();
-    });
 
     init();
     MacroLib.onLoadPostMessage();

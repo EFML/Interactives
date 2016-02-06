@@ -25,14 +25,16 @@ var Macro = (function(JXG, MacroLib) {
             'highlight': false
         });
 
-        //Supply Line 2 - moveable
+        //Supply Line 2 - fixed
         SRAS2 = MacroLib.createLine(brd1, {
-           ltype: 'Supply',
+            ltype: 'Supply',
             name: 'SRAS<sub>2</sub>',
             color: 'DodgerBlue'
         });
         SRAS2.setAttribute({
-            withLabel: false
+            withLabel: false,
+            highlight: false,
+            fixed: true
         });
 
         //Demand Line 1 - fixed
@@ -47,14 +49,16 @@ var Macro = (function(JXG, MacroLib) {
             'highlight': false
         });
 
-        //Demand Line 2 - moveable
+        //Demand Line 2 - fixed
         AD2 = MacroLib.createLine(brd1, {
             ltype: 'Demand',
             name: 'AD<sub>2</sub>',
             color: 'Orange'
         });
         AD2.setAttribute({
-            withLabel: false
+            withLabel: false,
+            highlight: false,
+            fixed: true
         });
 
         ////////////
@@ -100,6 +104,7 @@ var Macro = (function(JXG, MacroLib) {
             'strokeWidth': '3',
             'name': 'LRAS',
             'withLabel': true,
+            'highlight': false,
             'fixed': true,
             'label': {
                 'offset': [-15, 200]
@@ -108,46 +113,7 @@ var Macro = (function(JXG, MacroLib) {
         var labelLRAS = brd1.create('text', [6.7, -0.4, 'rY<sub>F</sub>'], {
             fixed: true
         });
-
-        //////////////////
-        // Interactivity
-        //////////////////
-        brd1.on('move', function() {
-            //Moving Dashed Lines in Board 1
-            dashS2.Y1.moveTo([0, iS2D.Y()]);
-            dashS2.Y2.moveTo([iS2D.X(), iS2D.Y()]);
-
-            dashS2.X1.moveTo([iS2D.X(), 0]);
-            dashS2.X2.moveTo([iS2D.X(), iS2D.Y()]);
-
-        });
-
-        brd1.on('mousedown', function() {
-            AD2.setAttribute({
-                withLabel: true
-            });
-            SRAS2.setAttribute({
-                withLabel: true
-            });
-            dashS2.Y1.setAttribute({
-                withLabel: true
-            });
-            dashS2.X1.setAttribute({
-                withLabel: true
-            });
-            brd1.update();
-        });
     }
-
-    /////////////////////////
-    // External DOM button
-    /////////////////////////
-    var resetAnimationBtn = document.getElementById('resetAnimationBtn');
-
-    resetAnimationBtn.addEventListener('click', function() {
-        JXG.JSXGraph.freeBoard(brd1);
-        init();
-    });
 
     init();
     MacroLib.onLoadPostMessage();

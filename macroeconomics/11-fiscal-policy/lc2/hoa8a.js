@@ -27,7 +27,7 @@ var Macro = (function(JXG, MacroLib) {
             'highlight': false
         });
 
-        //Supply Line 2 - moveable
+        //Supply Line 2 - fixed
         var SRAS2 = MacroLib.createLine(brd1, {
             ltype: 'Supply',
             name: 'SRAS<sub>2</sub>',
@@ -51,7 +51,7 @@ var Macro = (function(JXG, MacroLib) {
             'highlight': false
         });
 
-        //Demand Line 2 - moveable
+        //Demand Line 2 - fixed
         var AD2 = MacroLib.createLine(brd1, {
             ltype: 'Demand',
             name: 'AD<sub>2</sub>',
@@ -99,16 +99,6 @@ var Macro = (function(JXG, MacroLib) {
             }
         });
     }
-
-    /////////////////////////
-    // External DOM buttons
-    /////////////////////////
-    var resetAnimationBtn = document.getElementById('resetAnimationBtn');
-
-    resetAnimationBtn.addEventListener('click', function() {
-        JXG.JSXGraph.freeBoard(brd1);
-        init();
-    });
 
     init();
     MacroLib.onLoadPostMessage();
