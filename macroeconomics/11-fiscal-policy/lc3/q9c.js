@@ -6,17 +6,17 @@ var Macro = (function(JXG, MacroLib) {
         MacroLib.init(MacroLib.ONE_BOARD);
         //Custom Parameters
         MacroLib.labelOffset({
-            'X': 130,
-            'Y': 140
+            X: 130,
+            Y: 140
         });
 
         brd1 = MacroLib.createBoard('jxgbox1', {
             bboxlimits: [-1.5, 12, 12, -1.5],
             xname: 'Real National Income',
-            'xpos': [8.75, -0.65],
+            xpos: [8.75, -0.65],
             yname: 'Price<br>Level',
             grid: false,
-            'ypos': [-1.25, 10.0]
+            ypos: [-1.25, 10.0]
         });
 
         //Sliders
@@ -43,38 +43,38 @@ var Macro = (function(JXG, MacroLib) {
 
         //Supply Line 1 - fixed
         var SRAS1 = MacroLib.createLine(brd1, {
-            'ltype': 'Supply',
-            'name': 'SRAS',
+            ltype: 'Supply',
+            name: 'SRAS',
             color: 'DodgerBlue'
         });
         SRAS1.setAttribute({
-            'fixed': true,
-            'highlight': false
+            fixed: true,
+            highlight: false
         });
 
         //Demand Line 1 - fixed
         var AD1 = MacroLib.createLine(brd1, {
-            'ltype': 'Demand',
-            'name': 'AD<sub>1</sub>',
-            'color': 'Orange'
+            ltype: 'Demand',
+            name: 'AD<sub>1</sub>',
+            color: 'Orange'
         });
         AD1.setAttribute({
-            'dash': 1,
-            'fixed': true,
-            'highlight': false
+            dash: 1,
+            fixed: true,
+            highlight: false
         });
 
         //Demand Line 2 - moveable
         var AD2 = MacroLib.createTransformLine(brd1, {
-            'transformList': [sliderXPositive],
-            'ltype': 'Demand',
-            'name': 'AD<sub>2</sub>',
-            'color': 'Orange'
+            transformList: [sliderXPositive],
+            ltype: 'Demand',
+            name: 'AD<sub>2</sub>',
+            color: 'Orange'
         });
         AD2.setAttribute({
-            'withLabel': false,
-            'highlight': true,
-            'visible': true
+            withLabel: false,
+            highlight: true,
+            visible: true
         });
 
 
@@ -85,13 +85,13 @@ var Macro = (function(JXG, MacroLib) {
             [5.75, 11.0],
             [5.75, 0.0]
         ], {
-            'strokeColor': 'DarkGray',
-            'strokeWidth': '3',
-            'name': 'LRAS',
-            'withLabel': true,
-            'fixed': true,
-            'label': {
-                'offset': [-15, 200]
+            strokeColor: 'DarkGray',
+            strokeWidth: '3',
+            name: 'LRAS',
+            withLabel: true,
+            fixed: true,
+            label: {
+                offset: [-15, 200]
             }
         });
 
@@ -100,10 +100,10 @@ var Macro = (function(JXG, MacroLib) {
         // Intersection Box 1
         ////////////
         var iSDfix = brd1.create('intersection', [AD1, SRAS1, 0], {
-            'visible': false
+            visible: false
         });
         var iSD = brd1.create('intersection', [SRAS1, AD2, 0], {
-            'visible': false
+            visible: false
         });
 
 

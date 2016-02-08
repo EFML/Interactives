@@ -20,9 +20,9 @@ var Macro = (function(JXG, MacroLib) {
             color: 'Gray'
         });
         SRPC1.setAttribute({
-            'dash': 1,
-            'fixed': true,
-            'highlight': false
+            dash: 1,
+            fixed: true,
+            highlight: false
         });
 
         //Supply Line 1 - fixed

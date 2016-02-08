@@ -38,37 +38,37 @@ var Macro = (function(JXG, MacroLib) {
 
         //Supply Line 1 - fixed
         var SRAS1 = MacroLib.createLine(brd1, {
-            'ltype': 'Supply',
-            'name': 'AS<sub>0</sub>',
+            ltype: 'Supply',
+            name: 'AS<sub>0</sub>',
             color: 'DodgerBlue'
         });
         SRAS1.setAttribute({
-            'fixed': true,
-            'highlight': false
+            fixed: true,
+            highlight: false
         });
 
         //Demand Line 1 - fixed
         var AD1 = MacroLib.createLine(brd1, {
-            'ltype': 'Demand',
-            'name': 'AD<sub>0</sub>',
-            'color': 'Crimson'
+            ltype: 'Demand',
+            name: 'AD<sub>0</sub>',
+            color: 'Crimson'
         });
         AD1.setAttribute({
-            'fixed': true,
-            'highlight': false
+            fixed: true,
+            highlight: false
         });
 
         //Demand Line 2 - moveable
         var H = MacroLib.createTransformLine(brd1, {
-            'transformList': [sliderYPositive],
-            'ltype': 'Horizontal',
-            'name': 'H',
-            'color': 'Orange'
+            transformList: [sliderYPositive],
+            ltype: 'Horizontal',
+            name: 'H',
+            color: 'Orange'
         });
         H.setAttribute({
-            'withLabel': false,
-            'highlight': true,
-            'visible': false
+            withLabel: false,
+            highlight: true,
+            visible: false
         });
 
 
@@ -76,16 +76,16 @@ var Macro = (function(JXG, MacroLib) {
         // Intersection Box 1
         ////////////
         var iSDfix = brd1.create('intersection', [AD1, SRAS1, 0], {
-            'visible': false
+            visible: false
         });
 
         var iDonly = brd1.create('intersection', [H, AD1, 0], {
-            'visible': true,
+            visible: true,
             withLabel: false,
             color: 'Red'
         });
         var iSonly = brd1.create('intersection', [H, SRAS1, 0], {
-            'visible': true,
+            visible: true,
             withLabel: false,
             color: 'Blue'
         });

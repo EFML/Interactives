@@ -96,7 +96,7 @@ var Macro = (function(JXG, MacroLib) {
         var D1fixed = brd1.create('segment', [d1B1, d2B1], {
             withLabel: false,
             fixed: true,
-            'name': 'D<sub>1</sub>',
+            name: 'D<sub>1</sub>',
             highlight: false,
             dash: '1',
             strokeWidth: '3',
@@ -108,7 +108,7 @@ var Macro = (function(JXG, MacroLib) {
         var D1 = brd1.create('segment', [pD1, pD2], {
             withLabel: true,
             highlight: false,
-            'name': 'M<sub>D2</sub>',
+            name: 'M<sub>D2</sub>',
             color: 'DodgerBlue',
             label: {
                 offset: [90, -90]
@@ -152,7 +152,7 @@ var Macro = (function(JXG, MacroLib) {
         var D2fixed = brd2.create('segment', [d1B2, d2B2], {
             withLabel: false,
             fixed: true,
-            'name': 'D<sub>1</sub>',
+            name: 'D<sub>1</sub>',
             highlight: false,
             dash: '1',
             strokeWidth: '3',
@@ -163,7 +163,7 @@ var Macro = (function(JXG, MacroLib) {
 
         var D2 = brd2.create('segment', [As, Bs], {
             withLabel: true,
-            'name': 'D<sub>2</sub>',
+            name: 'D<sub>2</sub>',
             highlight: false,
             color: 'DodgerBlue',
             label: {
@@ -186,55 +186,55 @@ var Macro = (function(JXG, MacroLib) {
             var visible = options.visible || true;
 
             var Y1 = board.create('point', [0, intersection.Y()], {
-                'withLabel': withLabel,
-                'name': ylabel,
-                'visible': true,
-                'size': '0.5',
-                'strokeColor': 'Gray',
-                'label': {
+                withLabel: withLabel,
+                name: ylabel,
+                visible: true,
+                size: '0.5',
+                strokeColor: 'Gray',
+                label: {
                     'offset': [2, 12]
                 }
             });
 
             var Y2 = board.create('point', [intersection.X(), intersection.Y()], {
-                'withLabel': false,
-                'visible': false,
-                'size': '0.0',
-                'strokeColor': ''
+                withLabel: false,
+                visible: false,
+                size: '0.0',
+                strokeColor: ''
             });
 
             var YLine = board.create('segment', [Y1, Y2], {
-                'strokeColor': color,
-                'strokeWidth': '2',
-                'dash': '1',
-                'fixed': fixed,
-                'visible': visible
+                strokeColor: color,
+                strokeWidth: '2',
+                dash: '1',
+                fixed: fixed,
+                visible: visible
             });
 
             var X1 = board.create('point', [intersection.X(), 0], {
-                'withLabel': withLabel,
-                'name': xlabel,
-                'visible': true,
-                'size': '0.5',
-                'strokeColor': 'Gray',
-                'label': {
-                    'offset': [2, 12]
+                withLabel: withLabel,
+                name: xlabel,
+                visible: true,
+                size: '0.5',
+                strokeColor: 'Gray',
+                label: {
+                    offset: [2, 12]
                 }
             });
 
             var X2 = board.create('point', [intersection.X(), intersection.Y()], {
-                'withLabel': false,
-                'visible': false,
-                'size': '0.0',
-                'strokeColor': ''
+                withLabel: false,
+                visible: false,
+                size: '0.0',
+                strokeColor: ''
             });
 
             var XLine = board.create('segment', [X1, X2], {
-                'strokeColor': color,
-                'strokeWidth': '2',
-                'dash': '1',
-                'fixed': fixed,
-                'visible': visible
+                strokeColor: color,
+                strokeWidth: '2',
+                dash: '1',
+                fixed: fixed,
+                visible: visible
             });
 
 

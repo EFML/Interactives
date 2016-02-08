@@ -14,7 +14,7 @@ var Macro = (function(JXG, MacroLib) {
             xname: 'Real GDP',
             yname: 'PL',
             grid: false,
-            'xpos': [9, -0.5]
+            xpos: [9, -0.5]
         });
 
         //Sliders
@@ -65,62 +65,62 @@ var Macro = (function(JXG, MacroLib) {
 
         //Supply Line 1 - fixed
         var S1B1 = MacroLib.createLine(brd1, {
-            'ltype': 'Supply',
-            'name': 'SRAS<sub>1</sub>',
+            ltype: 'Supply',
+            name: 'SRAS<sub>1</sub>',
             color: 'Lime'
         });
         S1B1.setAttribute({
-            'dash': 1,
-            'fixed': true,
-            'highlight': false
+            dash: 1,
+            fixed: true,
+            highlight: false
         });
 
         //Supply Line 2 - moveable
         var S2B1 = MacroLib.createTransformLine(brd1, {
-            'transformList': [sliderYPositive],
-            'ltype': 'Supply',
-            'name': 'SRAS<sub>2</sub>',
+            transformList: [sliderYPositive],
+            ltype: 'Supply',
+            name: 'SRAS<sub>2</sub>',
             color: 'Lime'
         });
         S2B1.setAttribute({
-            'highlight': true,
-            'withLabel': false
+            highlight: true,
+            withLabel: false
         });
 
         //Demand Line 1 - fixed
         var AD1 = MacroLib.createLine(brd1, {
-            'ltype': 'Demand',
-            'name': 'AD<sub>1</sub>',
-            'color': 'Orange'
+            ltype: 'Demand',
+            name: 'AD<sub>1</sub>',
+            color: 'Orange'
         });
         AD1.setAttribute({
-            'dash': 1,
-            'fixed': true,
-            'highlight': false
+            dash: 1,
+            fixed: true,
+            highlight: false
         });
 
         //Demand Line 2 - moveable
         var AD2 = MacroLib.createTransformLine(brd1, {
-            'transformList': [sliderXPositive],
-            'ltype': 'Demand',
-            'name': 'AD<sub>2</sub>',
-            'color': 'Orange'
+            transformList: [sliderXPositive],
+            ltype: 'Demand',
+            name: 'AD<sub>2</sub>',
+            color: 'Orange'
         });
         AD2.setAttribute({
-            'withLabel': false,
-            'highlight': true
+            withLabel: false,
+            highlight: true
         });
 
         //LRAS - fixed
         var LRAS = MacroLib.createLine(brd1, {
-            'ltype': 'Vertical',
-            'name': 'LRAS',
-            'color': 'DodgerBlue'
+            ltype: 'Vertical',
+            name: 'LRAS',
+            color: 'DodgerBlue'
         });
         LRAS.setAttribute({
-            'withLabel': true,
-            'fixed': true,
-            'highlight': true,
+            withLabel: true,
+            fixed: true,
+            highlight: true,
             strokeWidth: 3
         });
 
@@ -206,8 +206,8 @@ var Macro = (function(JXG, MacroLib) {
             bboxlimits: [-2.5, 12, 12, -1.5],
             xname: 'UR',
             yname: 'Inflation<br>Rate',
-            'xpos': [10, -0.5],
-            'ypos': [-2.4, 10],
+            xpos: [10, -0.5],
+            ypos: [-2.4, 10],
             grid: false
         });
 
@@ -261,13 +261,13 @@ var Macro = (function(JXG, MacroLib) {
 
         //SRPC - fixed
         var SRPC1 = MacroLib.createLine(brd2, {
-            'ltype': 'Demand',
-            'name': 'SRPC<sub>1</sub>',
-            'color': 'DodgerBlue'
+            ltype: 'Demand',
+            name: 'SRPC<sub>1</sub>',
+            color: 'DodgerBlue'
         });
         SRPC1.setAttribute({
-            'fixed': true,
-            'highlight': false
+            fixed: true,
+            highlight: false
         });
 
         //LRAS - fixed
@@ -276,18 +276,18 @@ var Macro = (function(JXG, MacroLib) {
             [6.25, 0.5],
             [6.25, 11.0]
         ], {
-            'strokeColor': 'DodgerBlue',
-            'name': 'LRPC',
-            'withLabel': true,
-            'label': {
-                'offset': [0, 125]
+            strokeColor: 'DodgerBlue',
+            name: 'LRPC',
+            withLabel: true,
+            label: {
+                offset: [0, 125]
             }
         });
         LRPC.setAttribute({
-            'dash': 3,
-            'withLabel': true,
-            'fixed': true,
-            'highlight': true,
+            dash: 3,
+            withLabel: true,
+            fixed: true,
+            highlight: true,
             strokeWidth: 2
         });
 

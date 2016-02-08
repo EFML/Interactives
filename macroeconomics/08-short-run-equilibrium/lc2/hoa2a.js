@@ -6,17 +6,17 @@ var Macro = (function(JXG, MacroLib) {
         MacroLib.init(MacroLib.ONE_BOARD);
         //Custom Parameters
         MacroLib.labelOffset({
-            'X': 130,
-            'Y': 140
+            X: 130,
+            Y: 140
         });
 
         brd1 = MacroLib.createBoard('jxgbox1', {
             bboxlimits: [-1.5, 12, 12, -1.5],
             xname: 'Real GDP',
-            'xpos': [9, -0.5],
+            xpos: [9, -0.5],
             yname: 'Price<br>Level',
             grid: false,
-            'ypos': [-1.25, 10.0]
+            ypos: [-1.25, 10.0]
         });
 
         //Sliders
@@ -43,70 +43,70 @@ var Macro = (function(JXG, MacroLib) {
 
         //Supply Line 1 - fixed
         var SRAS1 = MacroLib.createLine(brd1, {
-            'ltype': 'Supply',
-            'name': 'AS<sub>1929</sub>',
+            ltype: 'Supply',
+            name: 'AS<sub>1929</sub>',
             color: 'DodgerBlue'
         });
         SRAS1.setAttribute({
-            'fixed': true,
-            'highlight': false
+            fixed: true,
+            highlight: false
         });
 
         //Demand Line 1 - fixed
         var AD1 = MacroLib.createLine(brd1, {
-            'ltype': 'Demand',
-            'name': 'AD<sub>1929</sub>',
-            'color': 'Crimson'
+            ltype: 'Demand',
+            name: 'AD<sub>1929</sub>',
+            color: 'Crimson'
         });
         AD1.setAttribute({
-            'dash': 1,
-            'fixed': true,
-            'highlight': false
+            dash: 1,
+            fixed: true,
+            highlight: false
         });
 
         //Demand Line 2 - moveable
         var AD2 = MacroLib.createTransformLine(brd1, {
-            'transformList': [sliderXPositive],
-            'ltype': 'Demand',
-            'name': 'AD<sub>1933</sub>',
-            'color': 'Crimson'
+            transformList: [sliderXPositive],
+            ltype: 'Demand',
+            name: 'AD<sub>1933</sub>',
+            color: 'Crimson'
         });
         AD2.setAttribute({
-            'withLabel': false,
-            'highlight': true,
-            'visible': true
+            withLabel: false,
+            highlight: true,
+            visible: true
         });
 
         //Fake line for intersection at equilibrium
         var H1 = MacroLib.createLine(brd1, {
-            'ltype': 'Horizontal',
-            'name': 'H',
-            'color': 'Orange'
+            ltype: 'Horizontal',
+            name: 'H',
+            color: 'Orange'
         });
         H1.setAttribute({
-            'fixed': true,
-            'withLabel': false,
-            'highlight': true,
-            'visible': false
+            fixed: true,
+            withLabel: false,
+            highlight: true,
+            visible: false
         });
 
         ////////////
         // Intersection Box 1
         ////////////
         var iSDfix = brd1.create('intersection', [AD1, SRAS1, 0], {
-            'visible': false
+            visible: false
         });
         var iSD = brd1.create('intersection', [H1, AD2, 0], {
-            'visible': false
+            visible: false
         });
 
         var iDonly = brd1.create('intersection', [H1, AD2, 0], {
-            'visible': true,
+            visible: true,
             withLabel: false,
             color: 'Red'
         });
         var iSonly = brd1.create('intersection', [H1, SRAS1, 0], {
-            'visible': true,
+            visible: true,
             withLabel: false,
             color: 'Blue'
         });

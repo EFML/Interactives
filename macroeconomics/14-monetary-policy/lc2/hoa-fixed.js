@@ -71,8 +71,8 @@ var Macro = (function(JXG, MacroLib) {
         ////////////
         //Demand Board 1
         var D1 = MacroLib.createLine(brd1, {
-            'ltype': 'Demand',
-            'name': 'D<sub>M</sub>',
+            ltype: 'Demand',
+            name: 'D<sub>M</sub>',
             color: 'Gray'
         });
         D1.setAttribute({
@@ -80,20 +80,20 @@ var Macro = (function(JXG, MacroLib) {
         });
         //Supply Board 1
         var S1 = MacroLib.createLine(brd1, {
-            'ltype': 'Vertical',
-            'name': 'S<sub>M1</sub>',
+            ltype: 'Vertical',
+            name: 'S<sub>M1</sub>',
             color: 'Gray'
         });
         S1.setAttribute({
             dash: 2,
             strokeWidth: 3,
-            'fixed': true
+            fixed: true
         });
 
         var S2 = MacroLib.createTransformLine(brd1, {
-            'ltype': 'Vertical',
-            'transformList': [sliderPositive],
-            'name': 'S<sub>M2</sub>',
+            ltype: 'Vertical',
+            transformList: [sliderPositive],
+            name: 'S<sub>M2</sub>',
             color: 'DodgerBlue'
         });
         S2.setAttribute({
@@ -135,9 +135,9 @@ var Macro = (function(JXG, MacroLib) {
         ////////////
         //Demand Board 2 - with a Positive transformation
         var SB2 = MacroLib.createTransformLine(brd2, {
-            'ltype': 'Vertical',
-            'transformList': [sliderPositive],
-            'name': 'S<sub>1</sub>',
+            ltype: 'Vertical',
+            transformList: [sliderPositive],
+            name: 'S<sub>1</sub>',
             color: 'Gray'
         });
         SB2.setAttribute({
@@ -145,12 +145,12 @@ var Macro = (function(JXG, MacroLib) {
         });
         //Supply Board 2
         var D1B2 = MacroLib.createLine(brd2, {
-            'ltype': 'Demand',
-            'name': 'D',
+            ltype: 'Demand',
+            name: 'D',
             color: 'Gray'
         });
         D1B2.setAttribute({
-            'fixed': true
+            fixed: true
         });
 
         //Intersection Board 2
@@ -180,29 +180,29 @@ var Macro = (function(JXG, MacroLib) {
         ////////////
         //Supply Board 3
         var SB3 = MacroLib.createLine(brd3, {
-            'ltype': 'Supply',
-            'name': 'SRAS',
+            ltype: 'Supply',
+            name: 'SRAS',
             color: 'Gray'
         });
         SB3.setAttribute({
-            'fixed': true
+            fixed: true
         });
         //Demand Board 3
         var D1B3 = MacroLib.createLine(brd3, {
-            'ltype': 'Demand',
-            'name': 'AD<sub>1</sub>',
+            ltype: 'Demand',
+            name: 'AD<sub>1</sub>',
             color: 'Gray'
         });
         D1B3.setAttribute({
             dash: 2,
             strokeWidth: 3,
-            'fixed': true
+            fixed: true
         });
 
         var D2B3 = MacroLib.createTransformLine(brd3, {
-            'ltype': 'Demand',
-            'transformList': [sliderPositive],
-            'name': 'AD<sub>2</sub>',
+            ltype: 'Demand',
+            transformList: [sliderPositive],
+            name: 'AD<sub>2</sub>',
             color: 'DodgerBlue'
         });
         D2B3.setAttribute({

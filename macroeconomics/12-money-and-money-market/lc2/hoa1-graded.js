@@ -25,7 +25,7 @@ var Macro = (function(JXG, MacroLib) {
         C1.setAttribute({
             fixed: true,
             withLabel: true,
-            'highlight': true
+            highlight: true
         });
 
         //Curve 2 - fixed
@@ -37,7 +37,7 @@ var Macro = (function(JXG, MacroLib) {
         C2.setAttribute({
             fixed: true,
             withLabel: true,
-            'highlight': true
+            highlight: true
         });
 
         //Curve 3 - fixed
@@ -45,13 +45,13 @@ var Macro = (function(JXG, MacroLib) {
             [5.75, 11.0],
             [5.75, 1.0]
         ], {
-            'strokeColor': 'Gray',
-            'strokeWidth': '5',
-            'name': 'C<sub>3</sub>',
-            'withLabel': true,
-            'fixed': true,
-            'label': {
-                'offset': [0, -190]
+            strokeColor: 'Gray',
+            strokeWidth: '5',
+            name: 'C<sub>3</sub>',
+            withLabel: true,
+            fixed: true,
+            label: {
+                offset: [0, -190]
             }
         });
 

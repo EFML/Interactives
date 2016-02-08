@@ -21,8 +21,8 @@ var Macro = (function(JXG, MacroLib) {
             color: 'Gray'
         });
         Supply.setAttribute({
-            'fixed': true,
-            'highlight': false
+            fixed: true,
+            highlight: false
         });
 
         //Demand Line 1 - fixed
@@ -32,9 +32,9 @@ var Macro = (function(JXG, MacroLib) {
             color: 'Gray'
         });
         AD1.setAttribute({
-            'dash': 1,
-            'fixed': true,
-            'highlight': false
+            dash: 1,
+            fixed: true,
+            highlight: false
         });
 
         //Demand Line 2 - moveable

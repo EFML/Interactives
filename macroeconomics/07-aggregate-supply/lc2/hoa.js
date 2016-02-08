@@ -13,8 +13,8 @@ var Macro = (function(JXG, MacroLib) {
             xname: 'Real GDP',
             yname: 'Price<br>Level',
             grid: false,
-            'xpos': [8, -0.5],
-            'ypos': [-1.25, 10],
+            xpos: [8, -0.5],
+            ypos: [-1.25, 10],
             bboxlimits: newBBox
         });
 
@@ -48,8 +48,8 @@ var Macro = (function(JXG, MacroLib) {
             color: 'DodgerBlue'
         });
         SRAS1.setAttribute({
-            'fixed': true,
-            'highlight': false
+            fixed: true,
+            highlight: false
         });
 
         //LRAS 1 - fixed
@@ -59,26 +59,26 @@ var Macro = (function(JXG, MacroLib) {
             color: 'DarkGray'
         });
         LRAS1.setAttribute({
-            'dash': 1,
-            'fixed': true,
-            'highlight': true
+            dash: 1,
+            fixed: true,
+            highlight: true
         });
         LRAS1.setAttribute({
-            'label': {
+            label: {
                 'offset': [20, 0]
             }
         });
 
         //LRAS 2 - moveable
         var LRAS2 = MacroLib.createTransformLine(brd1, {
-            'transformList': [sliderXPositive],
+            transformList: [sliderXPositive],
             ltype: 'Vertical',
             name: 'LRAS<sub>2</sub>',
             color: 'DarkGray'
         });
         LRAS2.setAttribute({
             fixed: false,
-            'highlight': false,
+            highlight: false,
             withLabel: false
         });
 

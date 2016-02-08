@@ -12,7 +12,7 @@ var Macro = (function(JXG, MacroLib) {
             xname: 'Real GDP',
             yname: 'Price<br>Level',
             grid: false,
-            'xpos': [9, -0.5]
+            xpos: [9, -0.5]
         });
 
         //Supply Line 1 - fixed
@@ -22,9 +22,9 @@ var Macro = (function(JXG, MacroLib) {
             color: 'DodgerBlue'
         });
         SRAS1.setAttribute({
-            'dash': 1,
-            'fixed': true,
-            'highlight': false
+            dash: 1,
+            fixed: true,
+            highlight: false
         });
 
         //Supply Line 2 - fixed
@@ -35,7 +35,7 @@ var Macro = (function(JXG, MacroLib) {
         });
         SRAS2.setAttribute({
             fixed: true,
-            'highlight': false,
+            highlight: false,
             withLabel: false
         });
 
@@ -46,9 +46,9 @@ var Macro = (function(JXG, MacroLib) {
             color: 'Orange'
         });
         AD1.setAttribute({
-            'dash': 1,
-            'fixed': true,
-            'highlight': false
+            dash: 1,
+            fixed: true,
+            highlight: false
         });
 
         //Demand Line 2 - fixed
@@ -59,7 +59,7 @@ var Macro = (function(JXG, MacroLib) {
         });
         AD2.setAttribute({
             fixed: true,
-            'highlight': false,
+            highlight: false,
             withLabel: false
         });
 
@@ -88,14 +88,14 @@ var Macro = (function(JXG, MacroLib) {
             [5.75, 11.0],
             [5.75, 0.0]
         ], {
-            'strokeColor': 'DarkGray',
-            'strokeWidth': '3',
-            'highlight': false,
-            'name': 'LRAS',
-            'withLabel': true,
-            'fixed': true,
-            'label': {
-                'offset': [-15, 200]
+            strokeColor: 'DarkGray',
+            strokeWidth: '3',
+            highlight: false,
+            name: 'LRAS',
+            withLabel: true,
+            fixed: true,
+            label: {
+                offset: [-15, 200]
             }
         });
     }

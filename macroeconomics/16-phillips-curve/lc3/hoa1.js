@@ -15,60 +15,60 @@ var Macro = (function(JXG, MacroLib) {
 
         //Supply Line 1 - fixed
         var S1B1 = MacroLib.createLine(brd1, {
-            'ltype': 'Supply',
-            'name': 'SRAS<sub>1</sub>',
+            ltype: 'Supply',
+            name: 'SRAS<sub>1</sub>',
             color: 'Lime'
         });
         S1B1.setAttribute({
-            'dash': 1,
-            'fixed': true,
-            'highlight': false
+            dash: 1,
+            fixed: true,
+            highlight: false
         });
 
         //Supply Line 2 - moveable
         var S2B1 = MacroLib.createLine(brd1, {
-            'ltype': 'Supply',
-            'name': 'SRAS<sub>2</sub>',
+            ltype: 'Supply',
+            name: 'SRAS<sub>2</sub>',
             color: 'Lime'
         });
         S2B1.setAttribute({
-            'highlight': true,
-            'withLabel': false
+            highlight: true,
+            withLabel: false
         });
 
         //Demand Line 1 - fixed
         var AD1 = MacroLib.createLine(brd1, {
-            'ltype': 'Demand',
-            'name': 'AD<sub>1</sub>',
-            'color': 'Orange'
+            ltype: 'Demand',
+            name: 'AD<sub>1</sub>',
+            color: 'Orange'
         });
         AD1.setAttribute({
-            'dash': 1,
-            'fixed': true,
-            'highlight': false
+            dash: 1,
+            fixed: true,
+            highlight: false
         });
 
         //Demand Line 2 - moveable
         var AD2 = MacroLib.createLine(brd1, {
-            'ltype': 'Demand',
-            'name': 'AD<sub>2</sub>',
-            'color': 'Orange'
+            ltype: 'Demand',
+            name: 'AD<sub>2</sub>',
+            color: 'Orange'
         });
         AD2.setAttribute({
-            'withLabel': false,
-            'highlight': true
+            withLabel: false,
+            highlight: true
         });
 
         //LRAS - fixed
         var LRAS = MacroLib.createLine(brd1, {
-            'ltype': 'Vertical',
-            'name': 'LRAS',
-            'color': 'DodgerBlue'
+            ltype: 'Vertical',
+            name: 'LRAS',
+            color: 'DodgerBlue'
         });
         LRAS.setAttribute({
-            'withLabel': true,
-            'fixed': true,
-            'highlight': true,
+            withLabel: true,
+            fixed: true,
+            highlight: true,
             strokeWidth: 3
         });
 
@@ -149,7 +149,7 @@ var Macro = (function(JXG, MacroLib) {
             bboxlimits: [-2.5, 12, 12, -1.5],
             xname: 'UR',
             yname: 'Inflation<br>Rate',
-            'ypos': [-2.4, 10],
+            ypos: [-2.4, 10],
             grid: false
         });
 
@@ -203,26 +203,26 @@ var Macro = (function(JXG, MacroLib) {
 
         //SRPC - fixed
         var SRPC1 = MacroLib.createLine(brd2, {
-            'ltype': 'Demand',
-            'name': 'SRPC<sub>1</sub>',
-            'color': 'DodgerBlue'
+            ltype: 'Demand',
+            name: 'SRPC<sub>1</sub>',
+            color: 'DodgerBlue'
         });
         SRPC1.setAttribute({
-            'fixed': true,
-            'highlight': false
+            fixed: true,
+            highlight: false
         });
 
         //LRAS - fixed
         LRAS = MacroLib.createLine(brd2, {
-            'ltype': 'Vertical',
-            'name': 'LRPC',
-            'color': 'DodgerBlue'
+            ltype: 'Vertical',
+            name: 'LRPC',
+            color: 'DodgerBlue'
         });
         LRAS.setAttribute({
-            'dash': 3,
-            'withLabel': true,
-            'fixed': true,
-            'highlight': true,
+            dash: 3,
+            withLabel: true,
+            fixed: true,
+            highlight: true,
             strokeWidth: 2
         });
 

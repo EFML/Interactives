@@ -14,7 +14,7 @@ var Macro = (function(JXG, MacroLib) {
             xname: 'Q of US Dollars',
             yname: '&pound;/$',
             grid: false,
-            'xpos': [8, -0.5],
+            xpos: [8, -0.5],
             bboxlimits: newBBox
         });
 
@@ -49,21 +49,21 @@ var Macro = (function(JXG, MacroLib) {
             color: 'DodgerBlue'
         });
         SRAS1.setAttribute({
-            'dash': 1,
-            'fixed': true,
-            'highlight': false
+            dash: 1,
+            fixed: true,
+            highlight: false
         });
 
         //Supply Line 2 - moveable
         var SRAS2 = MacroLib.createTransformLine(brd1, {
-            'transformList': [sliderXPositive],
+            transformList: [sliderXPositive],
             ltype: 'Supply',
             name: '$S<sub>2</sub>',
             color: 'DodgerBlue'
         });
         SRAS2.setAttribute({
             fixed: false,
-            'highlight': false,
+            highlight: false,
             withLabel: false
         });
 
@@ -74,9 +74,9 @@ var Macro = (function(JXG, MacroLib) {
             color: 'Orange'
         });
         AD1.setAttribute({
-            'dash': 1,
-            'fixed': true,
-            'highlight': false
+            dash: 1,
+            fixed: true,
+            highlight: false
         });
 
         //Demand Line 2 - moveable
@@ -87,7 +87,7 @@ var Macro = (function(JXG, MacroLib) {
         });
         AD2.setAttribute({
             fixed: false,
-            'highlight': false,
+            highlight: false,
             withLabel: false
         });
 

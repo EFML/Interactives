@@ -12,8 +12,8 @@ var Macro = (function(JXG, MacroLib) {
             xname: 'Q<sub>&euro;</sub>',
             yname: 'Price<br>( $/&euro; )',
             grid: false,
-            'xpos': [11, -0.5],
-            'ypos': [-1.25, 10]
+            xpos: [11, -0.5],
+            ypos: [-1.25, 10]
         });
 
         //Supply Line 1 - fixed
@@ -23,9 +23,9 @@ var Macro = (function(JXG, MacroLib) {
             color: 'DodgerBlue'
         });
         SRAS1.setAttribute({
-            'dash': 1,
-            'fixed': true,
-            'highlight': false
+            dash: 1,
+            fixed: true,
+            highlight: false
         });
 
         //Supply Line 2 - moveable
@@ -36,7 +36,7 @@ var Macro = (function(JXG, MacroLib) {
         });
         SRAS2.setAttribute({
             fixed: true,
-            'highlight': false,
+            highlight: false,
             withLabel: false
         });
 
@@ -47,9 +47,9 @@ var Macro = (function(JXG, MacroLib) {
             color: 'Orange'
         });
         AD1.setAttribute({
-            'dash': 1,
-            'fixed': true,
-            'highlight': false
+            dash: 1,
+            fixed: true,
+            highlight: false
         });
 
         //Demand Line 2 - moveable
@@ -60,7 +60,7 @@ var Macro = (function(JXG, MacroLib) {
         });
         AD2.setAttribute({
             fixed: true,
-            'highlight': false,
+            highlight: false,
             withLabel: false
         });
 

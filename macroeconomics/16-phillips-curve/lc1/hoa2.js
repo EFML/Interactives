@@ -15,32 +15,32 @@ var Macro = (function(JXG, MacroLib) {
 
         //Supply Line 1 - fixed
         var SB1 = MacroLib.createLine(brd1, {
-            'ltype': 'Supply',
-            'name': 'SRAS',
+            ltype: 'Supply',
+            name: 'SRAS',
             color: 'Gray'
         });
         SB1.setAttribute({
-            'fixed': true,
-            'highlight': false
+            fixed: true,
+            highlight: false
         });
 
         //Demand Line 1 - fixed
         var AD1 = MacroLib.createLine(brd1, {
-            'ltype': 'Demand',
-            'name': 'AD<sub>1</sub>',
-            'color': 'Gray'
+            ltype: 'Demand',
+            name: 'AD<sub>1</sub>',
+            color: 'Gray'
         });
         AD1.setAttribute({
-            'dash': 1,
-            'fixed': true,
-            'highlight': false
+            dash: 1,
+            fixed: true,
+            highlight: false
         });
 
         //Demand Line 2 - moveable
         var AD2 = MacroLib.createLine(brd1, {
-            'ltype': 'Demand',
-            'name': 'AD<sub>2</sub>',
-            'color': 'Orange'
+            ltype: 'Demand',
+            name: 'AD<sub>2</sub>',
+            color: 'Orange'
         });
         AD2.setAttribute({
             withLabel: false
@@ -96,7 +96,7 @@ var Macro = (function(JXG, MacroLib) {
             bboxlimits: [-2.5, 12, 12, -1.5],
             xname: 'UR',
             yname: 'Inflation<br>Rate',
-            'ypos': [-2.4, 10],
+            ypos: [-2.4, 10],
             grid: false
         });
 
@@ -107,13 +107,13 @@ var Macro = (function(JXG, MacroLib) {
 
         //SRPC - fixed
         var SRPC = MacroLib.createLine(brd2, {
-            'ltype': 'Demand',
-            'name': 'SRPC',
-            'color': 'Blue'
+            ltype: 'Demand',
+            name: 'SRPC',
+            color: 'Blue'
         });
         SRPC.setAttribute({
-            'fixed': true,
-            'highlight': false
+            fixed: true,
+            highlight: false
         });
 
         ////////

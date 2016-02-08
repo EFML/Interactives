@@ -34,15 +34,15 @@ var Macro = (function(JXG, MacroLib) {
             [5.75, 10.5],
             [5.75, 0.5]
         ], {
-            'strokeColor': 'Gray',
-            'strokeWidth': '3',
-            'name': 'S<sub>1</sub>',
-            'withLabel': true,
-            'fixed': true,
-            'dash': 1,
-            'highlight': false,
-            'label': {
-                'offset': [0, 185]
+            strokeColor: 'Gray',
+            strokeWidth: '3',
+            name: 'S<sub>1</sub>',
+            withLabel: true,
+            fixed: true,
+            dash: 1,
+            highlight: false,
+            label: {
+                offset: [0, 185]
             }
         });
 
@@ -50,14 +50,14 @@ var Macro = (function(JXG, MacroLib) {
             [3.75, 10.5],
             [3.75, 0.5]
         ], {
-            'strokeColor': 'Lime',
-            'strokeWidth': '5',
-            'name': 'S<sub>2</sub>',
-            'withLabel': true,
-            'fixed': false,
-            'highlight': true,
-            'label': {
-                'offset': [0, 185]
+            strokeColor: 'Lime',
+            strokeWidth: '5',
+            name: 'S<sub>2</sub>',
+            withLabel: true,
+            fixed: false,
+            highlight: true,
+            label: {
+                offset: [0, 185]
             }
         });
 

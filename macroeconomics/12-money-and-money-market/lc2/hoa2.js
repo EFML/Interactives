@@ -21,9 +21,9 @@ var Macro = (function(JXG, MacroLib) {
             color: 'Gray'
         });
         AD1.setAttribute({
-            'dash': 1,
-            'fixed': true,
-            'highlight': false
+            dash: 1,
+            fixed: true,
+            highlight: false
         });
 
         //Demand Line 2 - moveable
@@ -34,7 +34,7 @@ var Macro = (function(JXG, MacroLib) {
         });
         AD2.setAttribute({
             withLabel: true,
-            'highlight': true
+            highlight: true
         });
 
         var original = AD2;

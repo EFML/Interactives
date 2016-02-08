@@ -66,15 +66,15 @@ var Macro = (function(JXG, MacroLib) {
             [cfx * 1.45, cfy * 9.0],
             [cfx * 9.0, cfy * 1.45]
         ], {
-            'strokeColor': 'Gray',
-            'strokeWidth': '3',
-            'name': 'D',
-            'withLabel': false,
-            'fixed': true,
-            'dash': 1,
-            'highlight': false,
-            'label': {
-                'offset': [140, -145]
+            strokeColor: 'Gray',
+            strokeWidth: '3',
+            name: 'D',
+            withLabel: false,
+            fixed: true,
+            dash: 1,
+            highlight: false,
+            label: {
+                offset: [140, -145]
             }
         });
 
@@ -84,14 +84,14 @@ var Macro = (function(JXG, MacroLib) {
             [cfx * 1.45, cfy * 9.0],
             [cfx * 9.0, cfy * 1.45]
         ], {
-            'strokeColor': 'Orange',
-            'strokeWidth': '5',
-            'name': 'M<sub>D</sub>',
-            'withLabel': true,
-            'fixed': false,
-            'highlight': true,
-            'label': {
-                'offset': [150, -140]
+            strokeColor: 'Orange',
+            strokeWidth: '5',
+            name: 'M<sub>D</sub>',
+            withLabel: true,
+            fixed: false,
+            highlight: true,
+            label: {
+                offset: [150, -140]
             }
         });
 
@@ -102,14 +102,14 @@ var Macro = (function(JXG, MacroLib) {
             [cfx * 6.0, cfy * 11.0],
             [cfx * 6.0, cfy * 1.0]
         ], {
-            'strokeColor': 'DodgerBlue',
-            'strokeWidth': '5',
-            'name': 'M<sub>S</sub>',
-            'withLabel': true,
-            'fixed': true,
-            'highlight': false,
-            'label': {
-                'offset': [0, 185]
+            strokeColor: 'DodgerBlue',
+            strokeWidth: '5',
+            name: 'M<sub>S</sub>',
+            withLabel: true,
+            fixed: true,
+            highlight: false,
+            label: {
+                offset: [0, 185]
             }
         });
 

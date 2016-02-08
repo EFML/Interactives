@@ -74,7 +74,7 @@ var Macro = (function(JXG, MacroLib) {
             [2, 9.5],
             [9.5, 2]
         ], {
-            'name': 'M<sub>D</sub>',
+            name: 'M<sub>D</sub>',
             fixed: true,
             withLabel: true,
             label: {
@@ -99,7 +99,7 @@ var Macro = (function(JXG, MacroLib) {
         var S1fixed = brd1.create('segment', [s1B1, s2B1], {
             withLabel: false,
             fixed: true,
-            'name': 'M<sub>S1</sub>',
+            name: 'M<sub>S1</sub>',
             highlight: false,
             dash: '1',
             strokeWidth: '3',
@@ -111,7 +111,7 @@ var Macro = (function(JXG, MacroLib) {
         var S1 = brd1.create('segment', [pS1, pS2], {
             withLabel: true,
             highlight: false,
-            'name': 'M<sub>S2</sub>',
+            name: 'M<sub>S2</sub>',
             color: 'DodgerBlue',
             label: {
                 offset: [0, 115]
@@ -155,7 +155,7 @@ var Macro = (function(JXG, MacroLib) {
         var S2fixed = brd2.create('segment', [s1B2, s2B2], {
             withLabel: false,
             fixed: true,
-            'name': 'D<sub>1</sub>',
+            name: 'D<sub>1</sub>',
             highlight: false,
             dash: '1',
             strokeWidth: '3',
@@ -166,7 +166,7 @@ var Macro = (function(JXG, MacroLib) {
 
         var S2 = brd2.create('segment', [As, Bs], {
             withLabel: true,
-            'name': 'S<sub>2</sub>',
+            name: 'S<sub>2</sub>',
             highlight: false,
             color: 'DodgerBlue',
             label: {

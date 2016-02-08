@@ -12,8 +12,8 @@ var Macro = (function(JXG, MacroLib) {
             xname: ' ',
             yname: 'Price<br>( $/&euro; )',
             grid: false,
-            'xpos': [8, -0.5],
-            'ypos': [-1.25, 10]
+            xpos: [8, -0.5],
+            ypos: [-1.25, 10]
         });
     }
 

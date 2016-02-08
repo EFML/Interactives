@@ -10,60 +10,60 @@ var Macro = (function(JXG, MacroLib) {
         brd1 = MacroLib.createBoard('jxgbox1', {
             bboxlimits: [-2.3, 12, 13, -2.3],
             xname: 'Quantity Loanable Funds (Public and Private)',
-            'xpos': [4, -1.1],
+            xpos: [4, -1.1],
             yname: 'Real<br>Interest<br>Rate',
             grid: false,
-            'ypos': [-2.2, 10.0]
+            ypos: [-2.2, 10.0]
         });
 
 
         //Supply Line 1 - fixed
         var SBfix = MacroLib.createLine(brd1, {
-            'ltype': 'Supply',
-            'name': 'S<sub>LF</sub>',
+            ltype: 'Supply',
+            name: 'S<sub>LF</sub>',
             color: 'Orange',
             storkeWidth: 4
         });
         SBfix.setAttribute({
-            'dash': 1,
-            'fixed': true,
-            'withLabel': false
+            dash: 1,
+            fixed: true,
+            withLabel: false
         });
 
         //Supply Line 2 - moveable
         var SB1 = MacroLib.createLine(brd1, {
-            'ltype': 'Supply',
-            'name': 'S<sub>LF</sub>',
+            ltype: 'Supply',
+            name: 'S<sub>LF</sub>',
             color: 'Orange'
         });
         SB1.setAttribute({
-            'highlight': false,
-            'withLabel': true
+            highlight: false,
+            withLabel: true
         });
 
         //Demand Line 1 - fixed
         var DB1 = MacroLib.createLine(brd1, {
-            'ltype': 'Demand',
-            'name': 'D<sub>LF</sub>',
-            'color': 'DodgerBlue',
+            ltype: 'Demand',
+            name: 'D<sub>LF</sub>',
+            color: 'DodgerBlue',
             storkeWidth: 4
         });
         DB1.setAttribute({
-            'dash': 1,
-            'fixed': true,
-            'withLabel': false,
-            'highlight': false
+            dash: 1,
+            fixed: true,
+            withLabel: false,
+            highlight: false
         });
 
         //Demand Line 2 - moveable -- Error?
         DB1 = MacroLib.createLine(brd1, {
-            'ltype': 'Demand',
-            'name': 'D<sub>LF</sub>',
-            'color': 'DodgerBlue'
+            ltype: 'Demand',
+            name: 'D<sub>LF</sub>',
+            color: 'DodgerBlue'
         });
         DB1.setAttribute({
-            'withLabel': true,
-            'highlight': false
+            withLabel: true,
+            highlight: false
         });
 
         ////////////
@@ -72,22 +72,22 @@ var Macro = (function(JXG, MacroLib) {
         brd2 = MacroLib.createBoard('jxgbox2', {
             bboxlimits: [-2.3, 12, 13, -2.3],
             xname: 'Private Investment $',
-            'xpos': [6.0, -1.5],
+            xpos: [6.0, -1.5],
             yname: 'Real<br>Interest<br>Rate',
             grid: false,
-            'ypos': [-2.2, 10.0]
+            ypos: [-2.2, 10.0]
         });
 
         //Demand Line 2 - moveable
         var DB2 = MacroLib.createLine(brd2, {
-            'ltype': 'Demand',
-            'name': 'Investment<br>Demand</sub>',
-            'color': 'Crimson'
+            ltype: 'Demand',
+            name: 'Investment<br>Demand</sub>',
+            color: 'Crimson'
         });
         DB2.setAttribute({
-            'fixed': true,
-            'withLabel': true,
-            'highlight': false
+            fixed: true,
+            withLabel: true,
+            highlight: false
         });
 
         ////////

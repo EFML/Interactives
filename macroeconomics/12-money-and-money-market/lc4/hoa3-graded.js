@@ -65,15 +65,15 @@ var Macro = (function(JXG, MacroLib) {
             [cfx * 1.45, cfy * 9.0],
             [cfx * 9.0, cfy * 1.45]
         ], {
-            'strokeColor': 'Orange',
-            'strokeWidth': '7',
-            'name': 'D',
-            'withLabel': false,
-            'fixed': true,
-            'dash': 0,
-            'highlight': false,
-            'label': {
-                'offset': [140, -145]
+            strokeColor: 'Orange',
+            strokeWidth: '7',
+            name: 'D',
+            withLabel: false,
+            fixed: true,
+            dash: 0,
+            highlight: false,
+            label: {
+                offset: [140, -145]
             }
         });
 
@@ -84,15 +84,15 @@ var Macro = (function(JXG, MacroLib) {
             [cfx * 6.0, cfy * 11.0],
             [cfx * 6.0, cfy * 1.0]
         ], {
-            'strokeColor': 'Gray',
-            'strokeWidth': '5',
-            'dash': 1,
-            'name': 'M<sub>S1</sub>',
-            'withLabel': true,
-            'fixed': true,
-            'highlight': false,
-            'label': {
-                'offset': [0, 185]
+            strokeColor: 'Gray',
+            strokeWidth: '5',
+            dash: 1,
+            name: 'M<sub>S1</sub>',
+            withLabel: true,
+            fixed: true,
+            highlight: false,
+            label: {
+                offset: [0, 185]
             }
         });
 
@@ -100,14 +100,14 @@ var Macro = (function(JXG, MacroLib) {
             [cfx * 6.0, cfy * 11.0],
             [cfx * 6.0, cfy * 1.0]
         ], {
-            'strokeColor': 'DodgerBlue',
-            'strokeWidth': '7',
-            'name': 'M<sub>S2</sub>',
-            'withLabel': false,
-            'fixed': false,
-            'highlight': false,
-            'label': {
-                'offset': [0, 185]
+            strokeColor: 'DodgerBlue',
+            strokeWidth: '7',
+            name: 'M<sub>S2</sub>',
+            withLabel: false,
+            fixed: false,
+            highlight: false,
+            label: {
+                offset: [0, 185]
             }
         });
 
