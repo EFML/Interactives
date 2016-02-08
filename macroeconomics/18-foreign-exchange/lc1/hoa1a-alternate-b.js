@@ -9,17 +9,17 @@ var Macro = (function(JXG, MacroLib) {
         ////////////
 
         brd1 = MacroLib.createBoard('jxgbox1', {
-            xname: ' ',
+            xname: 'Q<sub>&euro;</sub>',
             yname: 'Price<br>( $/&euro; )',
             grid: false,
-            'xpos': [8, -0.5],
+            'xpos': [11, -0.5],
             'ypos': [-1.25, 10]
         });
 
         //Supply Line 1 - fixed
         var SRAS1 = MacroLib.createLine(brd1, {
             ltype: 'Supply',
-            name: '$S<sub>1</sub>',
+            name: '&euro;S<sub>1</sub>',
             color: 'DodgerBlue'
         });
         SRAS1.setAttribute({
@@ -31,7 +31,7 @@ var Macro = (function(JXG, MacroLib) {
         //Supply Line 2 - moveable
         var SRAS2 = MacroLib.createLine(brd1, {
             ltype: 'Supply',
-            name: '$S<sub>2</sub>',
+            name: '&euro;S<sub>2</sub>',
             color: 'DodgerBlue'
         });
         SRAS2.setAttribute({
@@ -43,7 +43,7 @@ var Macro = (function(JXG, MacroLib) {
         //Demand Line 1 - fixed
         var AD1 = MacroLib.createLine(brd1, {
             ltype: 'Demand',
-            name: '$D<sub>1</sub>',
+            name: '&euro;D<sub>1</sub>',
             color: 'Orange'
         });
         AD1.setAttribute({

@@ -29,7 +29,7 @@ var Macro = (function(JXG, MacroLib) {
         //Demand Line 2 - moveable
         var AD2 = MacroLib.createLine(brd1, {
             ltype: 'Demand',
-            name: 'AD<sub>1</sub>',
+            name: 'D<sub>m</sub>',
             color: 'DodgerBlue'
         });
         AD2.setAttribute({

@@ -81,7 +81,7 @@ var Macro = (function(JXG, MacroLib) {
         //Demand Line 2 - moveable
         var DB2 = MacroLib.createLine(brd2, {
             'ltype': 'Demand',
-            'name': 'Invest<br>Demand</sub>',
+            'name': 'Investment<br>Demand</sub>',
             'color': 'Crimson'
         });
         DB2.setAttribute({
