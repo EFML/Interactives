@@ -4,11 +4,6 @@ var Macro = (function(JXG, MacroLib) {
 
     function init() {
         MacroLib.init(MacroLib.ONE_BOARD);
-        //Custom Parameters
-        MacroLib.labelOffset({
-            X: 130,
-            Y: 140
-        });
 
         brd1 = MacroLib.createBoard('jxgbox1', {
             bboxlimits: [-1.5, 12, 12, -1.5],
