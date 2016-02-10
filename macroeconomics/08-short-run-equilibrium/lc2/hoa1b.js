@@ -4,11 +4,6 @@ var Macro = (function(JXG, MacroLib) {
 
     function init() {
         MacroLib.init(MacroLib.ONE_BOARD);
-        //Custom Parameters
-        MacroLib.labelOffset({
-            X: 130,
-            Y: 140
-        });
 
         brd1 = MacroLib.createBoard('jxgbox1', {
             bboxlimits: [-1.5, 12, 12, -1.5],
@@ -164,7 +159,7 @@ var Macro = (function(JXG, MacroLib) {
         ////////////
         var dashesSonly = MacroLib.createDashedLines2Axis(brd1, iSonly, {
             withLabel: true,
-            xlabel: 'AS<sup>*</sup>',
+            xlabel: 'QAS<sup>*</sup>',
             xoffsets: [5, 32],
             ylabel: '',
             yoffsets: [5, 10],
@@ -188,7 +183,7 @@ var Macro = (function(JXG, MacroLib) {
         ////////////
         var dashesDonly = MacroLib.createDashedLines2Axis(brd1, iDonly, {
             withLabel: true,
-            xlabel: 'AD<sup>*</sup>',
+            xlabel: 'QAD<sup>*</sup>',
             xoffsets: [5, 32],
             ylabel: '',
             yoffsets: [5, 10],
