@@ -13,7 +13,7 @@ var Macro = (function(JXG, MacroLib) {
             xname: 'Real GDP',
             yname: 'Price<br>Level',
             grid: false,
-            xpos: [8, -0.5],
+            xpos: [9.5, -0.5],
             ypos: [-1.25, 10],
             bboxlimits: newBBox
         });
@@ -41,17 +41,6 @@ var Macro = (function(JXG, MacroLib) {
             type: 'translate'
         });
 
-        // //Supply Line 1 - fixed
-        var SRAS1 = MacroLib.createLine(brd1, {
-            ltype: 'Supply',
-            name: 'SRAS',
-            color: 'DodgerBlue'
-        });
-        SRAS1.setAttribute({
-            fixed: true,
-            highlight: false
-        });
-
         //LRAS 1 - fixed
         var LRAS1 = MacroLib.createLine(brd1, {
             ltype: 'Vertical',
@@ -61,7 +50,7 @@ var Macro = (function(JXG, MacroLib) {
         LRAS1.setAttribute({
             dash: 1,
             fixed: true,
-            highlight: true
+            highlight: false
         });
         LRAS1.setAttribute({
             label: {
@@ -82,58 +71,55 @@ var Macro = (function(JXG, MacroLib) {
             withLabel: false
         });
 
-        // ////////////
-        // // Intersection Box 1
-        // ////////////
-        var iSDfix = brd1.create('intersection', [LRAS1, SRAS1, 0], {
-            visible: false
-        });
-        var iS2D = brd1.create('intersection', [LRAS2, SRAS1, 0], {
-            visible: false
-        });
-
-        ////////////
-        // Draggable Dashed Lines for Board 1
-        ////////////
-        var dashS2 = MacroLib.createDashedLines2Axis(brd1, iS2D, {
-            fixed: false,
-            withLabel: false,
-            xlabel: 'Y<sub>2</sub>',
-            ylabel: 'PL<sub>2</sub>',
-            color: 'DarkGray'
-        });
-
-        ////////////
-        // Fixed Dashed Lines for Board 1
-        ////////////
-        var dashesFixedB1 = MacroLib.createDashedLines2Axis(brd1, iSDfix, {
+        //Projection of LRAS1 on x-axis - fixed
+        var ptAxis1 = brd1.create('point', [LRAS1.point1.X(), 0], {
+            name: 'Y<sub>1</sub>',
             withLabel: true,
-            xlabel: 'Y<sub>1</sub>',
-            ylabel: 'PL<sub>1</sub>',
-            color: 'DodgerBlue'
+            size: '0.5',
+            strokeColor: 'Gray',
+            visible: true,
+            label: {
+                offset: [-5, -15]
+            }
+        });
+
+        var dash1 = brd1.create('segment', [ptAxis1, LRAS1.point1], {
+            strokeColor: 'DarkGray',
+            strokeWidth: 2,
+            dash: 1
+        });
+
+        //Projection of LRAS2 on x-axis - moveable
+        var ptAxis2 = brd1.create('point', [LRAS2.point1.X(), 0], {
+            name: 'Y<sub>2</sub>',
+            withLabel: false,
+            size: '0.5',
+            strokeColor: 'Gray',
+            visible: true,
+            label: {
+                offset: [-5, -15]
+            }
+        });
+
+        var dash2 = brd1.create('segment', [ptAxis2, LRAS2.point1], {
+            strokeColor: 'DarkGray',
+            strokeWidth: 2,
+            dash: 1
         });
 
         //////////////////
         // Interactivity
         //////////////////
         brd1.on('move', function() {
-            //Moving Dashed Lines in Board 1
-            dashS2.Y1.moveTo([0, iS2D.Y()]);
-            dashS2.Y2.moveTo([iS2D.X(), iS2D.Y()]);
-
-            dashS2.X1.moveTo([iS2D.X(), 0]);
-            dashS2.X2.moveTo([iS2D.X(), iS2D.Y()]);
-
+            //Moving projection of LRAS2 on x-axis
+            ptAxis2.moveTo([LRAS2.point1.X(), 0]);
         });
 
         brd1.on('mousedown', function() {
             LRAS2.setAttribute({
                 withLabel: true
             });
-            dashS2.X1.setAttribute({
-                withLabel: true
-            });
-            dashS2.Y1.setAttribute({
+            ptAxis2.setAttribute({
                 withLabel: true
             });
             brd1.update();
