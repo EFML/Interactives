@@ -262,57 +262,57 @@ var MacroLib = (function(JXG) {
         var visible = options.visible || true;
 
         var Y1 = board.create('point', [0, intersection.Y()], {
-            'withLabel': withLabel,
-            'name': ylabel,
-            'visible': true,
-            'size': '0.5',
-            'fixed': fixed,
-            'strokeColor': 'Gray',
-            'label': {
-                'offset': yoffsets
+            withLabel: withLabel,
+            name: ylabel,
+            visible: true,
+            size: 0.5,
+            fixed: fixed,
+            strokeColor: 'Gray',
+            label: {
+                offset: yoffsets
             }
         });
 
         var Y2 = board.create('point', [intersection.X(), intersection.Y()], {
-            'withLabel': false,
-            'visible': false,
-            'size': '0.0',
-            'strokeColor': ''
+            withLabel: false,
+            visible: false,
+            size: 0.0,
+            strokeColor: ''
         });
 
         var YLine = board.create('segment', [Y1, Y2], {
-            'strokeColor': color,
-            'strokeWidth': '2',
-            'dash': '1',
-            'fixed': fixed,
-            'visible': visible
+            strokeColor: color,
+            strokeWidth: 2,
+            dash: 1,
+            fixed: fixed,
+            visible: visible
         });
 
         var X1 = board.create('point', [intersection.X(), 0], {
-            'withLabel': withLabel,
-            'name': xlabel,
-            'visible': true,
-            'size': '0.5',
-            'fixed': fixed,
-            'strokeColor': 'Gray',
-            'label': {
-                'offset': xoffsets
+            withLabel: withLabel,
+            name: xlabel,
+            visible: true,
+            size: 0.5,
+            fixed: fixed,
+            strokeColor: 'Gray',
+            label: {
+                offset: xoffsets
             }
         });
 
         var X2 = board.create('point', [intersection.X(), intersection.Y()], {
-            'withLabel': false,
-            'visible': false,
-            'size': '0.0',
-            'strokeColor': ''
+            withLabel: false,
+            visible: false,
+            size: 0.0,
+            strokeColor: ''
         });
 
         var XLine = board.create('segment', [X1, X2], {
-            'strokeColor': color,
-            'strokeWidth': '2',
-            'dash': '1',
-            'fixed': fixed,
-            'visible': visible
+            strokeColor: color,
+            strokeWidth: 2,
+            dash: 1,
+            fixed: fixed,
+            visible: visible
         });
 
 
