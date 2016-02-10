@@ -40,7 +40,6 @@ var Macro = (function(JXG, MacroLib) {
             highlight: false
         });
 
-
         var yaxis = brd1.create('axis', [
             [0, 0],
             [0, 1]
@@ -59,25 +58,19 @@ var Macro = (function(JXG, MacroLib) {
             highlight: false
         });
 
-
-
         //Demand Line 1 - fixed
         MD1 = brd1.create('segment', [
             [cfx * 1.45, cfy * 9.0],
             [cfx * 9.0, cfy * 1.45]
         ], {
             strokeColor: 'Gray',
-            strokeWidth: '3',
-            name: 'D',
+            strokeWidth: '5',
+            name: '',
             withLabel: false,
             fixed: true,
             dash: 1,
             highlight: false,
-            label: {
-                offset: [140, -145]
-            }
         });
-
 
         //Demand Line 2 - moveable
         MD2 = brd1.create('segment', [
@@ -109,7 +102,7 @@ var Macro = (function(JXG, MacroLib) {
             fixed: true,
             highlight: false,
             label: {
-                offset: [0, 185]
+                offset: [-10, 185]
             }
         });
 

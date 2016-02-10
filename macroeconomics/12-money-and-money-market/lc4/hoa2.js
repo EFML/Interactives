@@ -7,16 +7,16 @@ var Macro = (function(JXG, MacroLib) {
         brd1 = MacroLib.createBoard('jxgbox1', {
             bboxlimits: [-1.6, 12, 12, -1.1],
             xname: 'Quantity of Money',
-            yname: 'Interest<br>Rate',
-            xpos: [8.5, -0.5],
+            yname: 'Nominal<br>Interest<br>Rate',
+            xpos: [7.5, -0.5],
             ypos: [-1.5, 10]
         });
 
         //Demand 1
         var D1 = MacroLib.createLine(brd1, {
             ltype: 'Demand',
-            name: 'D<sub>1</sub>',
-            color: 'DodgerBlue'
+            name: 'M<sub>D1</sub>',
+            color: 'Orange'
         });
         D1.setAttribute({
             fixed: true
@@ -35,8 +35,8 @@ var Macro = (function(JXG, MacroLib) {
             [5.75, 0.5]
         ], {
             strokeColor: 'Gray',
-            strokeWidth: '3',
-            name: 'S<sub>1</sub>',
+            strokeWidth: '5',
+            name: 'M<sub>S1</sub>',
             withLabel: true,
             fixed: true,
             dash: 1,
@@ -50,9 +50,9 @@ var Macro = (function(JXG, MacroLib) {
             [5.75, 10.5],
             [5.75, 0.5]
         ], {
-            strokeColor: 'Lime',
+            strokeColor: 'DodgerBlue',
             strokeWidth: '5',
-            name: 'S<sub>2</sub>',
+            name: 'M<sub>S2</sub>',
             withLabel: false,
             fixed: false,
             highlight: true,
@@ -75,7 +75,7 @@ var Macro = (function(JXG, MacroLib) {
         dashS1 = MacroLib.createDashedLines2Axis(brd1, iSD, {
             fixed: false,
             withLabel: false,
-            xlabel: 'Y<sub>2</sub>',
+            xlabel: 'Q<sub>2</sub>',
             ylabel: 'R<sub>2</sub>',
             color: 'Gray'
         });
@@ -83,7 +83,7 @@ var Macro = (function(JXG, MacroLib) {
         var dashSfix = MacroLib.createDashedLines2Axis(brd1, iSDfix, {
             fixed: true,
             withLabel: true,
-            xlabel: 'Y<sub>1</sub>',
+            xlabel: 'Q<sub>1</sub>',
             ylabel: 'R<sub>1</sub>',
             color: 'Gray'
         });

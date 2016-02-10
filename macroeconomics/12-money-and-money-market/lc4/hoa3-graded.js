@@ -40,7 +40,6 @@ var Macro = (function(JXG, MacroLib) {
             highlight: false
         });
 
-
         var yaxis = brd1.create('axis', [
             [0, 0],
             [0, 1]
@@ -59,6 +58,19 @@ var Macro = (function(JXG, MacroLib) {
             highlight: false
         });
 
+        //Supply Line 1 - fixed
+        MS1 = brd1.create('segment', [
+            [cfx * 6.0, cfy * 11.0],
+            [cfx * 6.0, cfy * 1.0]
+        ], {
+            strokeColor: 'Gray',
+            strokeWidth: '5',
+            name: '',
+            withLabel: false,
+            fixed: true,
+            dash: 1,
+            highlight: false,
+        });
 
         //Demand Line 1 - fixed
         var MD1 = brd1.create('segment', [
@@ -66,48 +78,29 @@ var Macro = (function(JXG, MacroLib) {
             [cfx * 9.0, cfy * 1.45]
         ], {
             strokeColor: 'Orange',
-            strokeWidth: '7',
-            name: 'D',
-            withLabel: false,
-            fixed: true,
-            dash: 0,
-            highlight: false,
-            label: {
-                offset: [140, -145]
-            }
-        });
-
-        ////////////
-        //LRAS - straight line
-        ////////////
-        MS1 = brd1.create('segment', [
-            [cfx * 6.0, cfy * 11.0],
-            [cfx * 6.0, cfy * 1.0]
-        ], {
-            strokeColor: 'Gray',
             strokeWidth: '5',
-            dash: 1,
-            name: 'M<sub>S1</sub>',
+            name: 'M<sub>D</sub>',
             withLabel: true,
             fixed: true,
             highlight: false,
             label: {
-                offset: [0, 185]
+                offset: [150, -140]
             }
         });
 
+        //Supply Line 2 - moveable
         MS2 = brd1.create('segment', [
             [cfx * 6.0, cfy * 11.0],
             [cfx * 6.0, cfy * 1.0]
         ], {
             strokeColor: 'DodgerBlue',
-            strokeWidth: '7',
-            name: 'M<sub>S2</sub>',
-            withLabel: false,
+            strokeWidth: '5',
+            name: 'M<sub>S</sub>',
+            withLabel: true,
             fixed: false,
-            highlight: false,
+            highlight: true,
             label: {
-                offset: [0, 185]
+                offset: [-10, 185]
             }
         });
 
@@ -143,13 +136,6 @@ var Macro = (function(JXG, MacroLib) {
 
             dashS2.X1.moveTo([iB1SD.X(), 0]);
             dashS2.X2.moveTo([iB1SD.X(), iB1SD.Y()]);
-        });
-
-        brd1.on('mousedown', function() {
-            MS2.setAttribute({
-                withLabel: true
-            });
-            brd1.update();
         });
     }
 
