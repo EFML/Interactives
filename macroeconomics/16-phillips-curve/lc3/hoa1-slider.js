@@ -13,8 +13,7 @@ var Macro = (function(JXG, MacroLib) {
             bboxlimits: [-1.5, 12, 12, -1.5],
             xname: 'Real GDP',
             yname: 'PL',
-            grid: false,
-            xpos: [9, -0.5]
+            grid: false
         });
 
         //Sliders
@@ -206,7 +205,6 @@ var Macro = (function(JXG, MacroLib) {
             bboxlimits: [-2.5, 12, 12, -1.5],
             xname: 'UR',
             yname: 'Inflation<br>Rate',
-            xpos: [10, -0.5],
             ypos: [-2.4, 10],
             grid: false
         });

@@ -15,7 +15,6 @@ var Macro = (function(JXG, MacroLib) {
             bboxlimits: [-2.5, 12, 12, -2.0],
             xname: 'Quantity of Money',
             yname: 'Nominal<br>Interest<br>Rate',
-            xpos: [6, -0.5],
             ypos: [-2.45, 10],
             grid: true
         });
@@ -27,7 +26,6 @@ var Macro = (function(JXG, MacroLib) {
             bboxlimits: [-2.5, 12, 12, -2.0],
             xname: 'Quantity of Bonds per Period',
             yname: 'Price of<br>Bonds',
-            xpos: [3.0, -0.5],
             ypos: [-2.45, 10],
             grid: true
         });

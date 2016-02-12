@@ -6,9 +6,8 @@ var Macro = (function(JXG, MacroLib) {
         MacroLib.init(MacroLib.ONE_BOARD);
 
         brd1 = MacroLib.createBoard('jxgbox1', {
-            bboxlimits: [-1.5, 12, 12, -1.5],
-            xname: 'Real National Income',
-            xpos: [8.75, -0.65],
+            bboxlimits: [-1.5, 12, 12, -2.0],
+            xname: 'Real National<br>Income',
             yname: 'Price<br>Level',
             grid: false,
             ypos: [-1.25, 10.0]

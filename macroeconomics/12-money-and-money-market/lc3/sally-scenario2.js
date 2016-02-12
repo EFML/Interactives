@@ -12,10 +12,9 @@ var Macro = (function(JXG, MacroLib) {
         // BOARD 1
         ////////////
         brd1 = MacroLib.createBoard('jxgbox1', {
-            bboxlimits: [-2.5, 12, 12, -2.0],
-            xname: 'Quantity of Money',
+            bboxlimits: [-2.5, 12, 12, -2.5],
+            xname: 'Quantity<br>of Money',
             yname: 'Nominal<br>Interest<br>Rate',
-            xpos: [6, -0.5],
             ypos: [-2.45, 10],
             grid: true
         });
@@ -24,10 +23,9 @@ var Macro = (function(JXG, MacroLib) {
         // BOARD 2
         ////////////
         var brd2 = MacroLib.createBoard('jxgbox2', {
-            bboxlimits: [-2.5, 12, 12, -2.0],
-            xname: 'Quantity of Bonds per Period',
+            bboxlimits: [-2.5, 12, 12, -2.5],
+            xname: 'Quantity of Bonds<br>per Period',
             yname: 'Price of<br>Bonds',
-            xpos: [3.0, -0.5],
             ypos: [-2.45, 10],
             grid: true
         });

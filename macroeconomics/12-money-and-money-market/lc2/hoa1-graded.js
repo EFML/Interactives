@@ -9,10 +9,9 @@ var Macro = (function(JXG, MacroLib) {
         // brd1 1
         ////////////
         brd1 = MacroLib.createBoard('jxgbox1', {
-            bboxlimits: [-1.7, 12, 12, -1],
+            bboxlimits: [-2.0, 12, 12, -2.0],
             xname: 'Quantity of Money',
             yname: 'Nominal<br>Interest<br>Rate',
-            xpos: [8, -0.5],
             ypos: [-1.6, 10]
         });
 

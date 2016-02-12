@@ -13,8 +13,7 @@ var Macro = (function(JXG, MacroLib) {
             xname: 'Real GDP',
             yname: 'Price<br>Level',
             grid: false,
-            'xpos': [9, -0.5],
-            'ypos': [-1.25, 10]
+            ypos: [-1.25, 10]
         });
 
         //Demand Line AD - fixed
@@ -25,8 +24,8 @@ var Macro = (function(JXG, MacroLib) {
             color: 'Gray'
         });
         AD.setAttribute({
-            'fixed': true,
-            'highlight': false
+            fixed: true,
+            highlight: false
         });
 
         //Demand Line AD1 - fixed
@@ -37,8 +36,8 @@ var Macro = (function(JXG, MacroLib) {
             color: 'DodgerBlue'
         });
         AD1.setAttribute({
-            'fixed': true,
-            'highlight': false
+            fixed: true,
+            highlight: false
         });
 
         //Demand Line AD2 - fixed
@@ -49,8 +48,8 @@ var Macro = (function(JXG, MacroLib) {
             color: 'Blue'
         });
         AD2.setAttribute({
-            'fixed': true,
-            'highlight': false
+            fixed: true,
+            highlight: false
         });
     }
 

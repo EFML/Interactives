@@ -13,7 +13,6 @@ var Macro = (function(JXG, MacroLib) {
             xname: 'Real GDP',
             yname: 'Price<br>Level',
             grid: false,
-            'xpos': [8, -0.5]
         });
 
         //Demand Line 1 - fixed
@@ -23,9 +22,9 @@ var Macro = (function(JXG, MacroLib) {
             color: 'Gray'
         });
         AD1.setAttribute({
-            'dash': 1,
-            'fixed': true,
-            'highlight': false
+            dash: 1,
+            fixed: true,
+            highlight: false
         });
 
         //Demand Line 2 - moveable

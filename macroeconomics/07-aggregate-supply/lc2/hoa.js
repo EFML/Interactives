@@ -13,7 +13,6 @@ var Macro = (function(JXG, MacroLib) {
             xname: 'Real GDP',
             yname: 'Price<br>Level',
             grid: false,
-            xpos: [9.5, -0.5],
             ypos: [-1.25, 10],
             bboxlimits: newBBox
         });

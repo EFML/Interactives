@@ -12,7 +12,6 @@ var Macro = (function(JXG, MacroLib) {
             xname: 'Real GDP',
             yname: 'Price<br>Level',
             grid: false,
-            xpos: [9, -0.5]
         });
 
         //Supply Line 1 - fixed

@@ -13,7 +13,6 @@ var Macro = (function(JXG, MacroLib) {
             xname: 'Capital Goods',
             yname: 'Consumer<br>Goods',
             grid: false,
-            xpos: [8, -0.5],
             ypos: [-2.1, 10],
             bboxlimits: newBBox
         });

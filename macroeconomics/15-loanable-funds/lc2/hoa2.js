@@ -8,9 +8,8 @@ var Macro = (function(JXG, MacroLib) {
         // BOX 1
         ////////////
         brd1 = MacroLib.createBoard('jxgbox1', {
-            bboxlimits: [-2.3, 12, 13, -2.3],
-            xname: 'Quantity Loanable Funds (Public and Private)',
-            xpos: [4, -1.1],
+            bboxlimits: [-2.3, 12, 13, -2.5],
+            xname: 'Quantity Loanable Funds<br>(Public and Private)',
             yname: 'Real<br>Interest<br>Rate',
             grid: false,
             ypos: [-2.2, 10.0]
@@ -70,9 +69,8 @@ var Macro = (function(JXG, MacroLib) {
         // BOX 2
         ////////////
         brd2 = MacroLib.createBoard('jxgbox2', {
-            bboxlimits: [-2.3, 12, 13, -2.3],
-            xname: 'Private Investment $',
-            xpos: [6.0, -1.5],
+            bboxlimits: [-2.3, 12, 13, -2.5],
+            xname: 'Private<br>Investment $',
             yname: 'Real<br>Interest<br>Rate',
             grid: false,
             ypos: [-2.2, 10.0]

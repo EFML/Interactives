@@ -8,7 +8,6 @@ var Macro = (function(JXG, MacroLib) {
             bboxlimits: [-1.6, 12, 12, -1.1],
             xname: 'Quantity of Money',
             yname: 'Nominal<br>Interest<br>Rate',
-            xpos: [7.5, -0.5],
             ypos: [-1.5, 10]
         });
 

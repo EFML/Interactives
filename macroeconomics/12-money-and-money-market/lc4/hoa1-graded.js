@@ -35,7 +35,7 @@ var Macro = (function(JXG, MacroLib) {
                 offset: [0, -20]
             }
         });
-        var xlabel1 = brd1.create('text', [400, -2.75, 'Quantity of Money ($billions)'], {
+        var xlabel1 = brd1.create('text', [380, -2.75, 'Quantity of Money ($billions)'], {
             fixed: true,
             highlight: false
         });

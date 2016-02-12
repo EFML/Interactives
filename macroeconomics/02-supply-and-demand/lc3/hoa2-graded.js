@@ -33,8 +33,8 @@ var Macro = (function(JXG, MacroLib) {
             highlight: false,
             withLabel: true,
             label: {
-                position: 'rt',
-                offset: [10, -15]
+                //position: 'rt',
+                offset: [240, -15]
             }
         });
         xAxis.removeAllTicks();

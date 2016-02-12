@@ -9,7 +9,6 @@ var Macro = (function(JXG, MacroLib) {
             bboxlimits: [-2, 12, 12, -2],
             xname: 'Quantity of<br>ePhones',
             yname: 'Price per<br>ePhone',
-            xpos: [9, -1],
             ypos: [-1.9, 10.5]
         });
 

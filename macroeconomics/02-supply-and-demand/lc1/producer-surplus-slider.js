@@ -14,7 +14,6 @@ var Macro = (function(JXG, MacroLib) {
             bboxlimits: [-3.4, 12, 12, -2],
             xname: 'Quantity of<br>Shoes',
             yname: 'Price per pair<br>of Shoes',
-            xpos: [9, -1],
             ypos: [-3.1, 10.5]
         });
 

@@ -7,10 +7,9 @@ var Macro = (function(JXG, MacroLib) {
         MacroLib.init(MacroLib.TWO_BOARDS);
 
         brd1 = MacroLib.createBoard('jxgbox1', {
-            bboxlimits: [-3, 12, 12, -2],
-            xname: 'Quantity of Wheat',
+            bboxlimits: [-3, 12, 12, -3],
+            xname: 'Quantity<br>of Wheat',
             yname: 'Price of<br>Wheat',
-            xpos: [6, -0.5],
             ypos: [-2.6, 11]
         });
 
@@ -109,10 +108,9 @@ var Macro = (function(JXG, MacroLib) {
         MacroLib.init(MacroLib.TWO_BOARDS);
 
         brd2 = MacroLib.createBoard('jxgbox2', {
-            bboxlimits: [-3, 12, 12, -2],
-            xname: 'Quantity of Wheat',
+            bboxlimits: [-3, 12, 12, -3],
+            xname: 'Quantity<br>of Wheat',
             yname: 'Price of<br>Wheat',
-            xpos: [6, -0.46],
             ypos: [-2.6, 11]
         });
 

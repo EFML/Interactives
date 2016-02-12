@@ -10,7 +10,6 @@ var Macro = (function(JXG, MacroLib) {
             bboxlimits: [-3, 12, 12, -2],
             xname: 'Quantity of Wheat',
             yname: 'Price of<br>Wheat',
-            xpos: [6, -1],
             ypos: [-2.6, 11]
         });
 
@@ -87,7 +86,6 @@ var Macro = (function(JXG, MacroLib) {
             bboxlimits: [-3, 12, 12, -2],
             xname: 'Quantity of Wheat',
             yname: 'Price of<br>Wheat',
-            xpos: [6, -1],
             ypos: [-2.6, 11]
         });
 

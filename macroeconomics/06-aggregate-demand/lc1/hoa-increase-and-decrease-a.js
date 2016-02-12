@@ -12,8 +12,7 @@ var Macro = (function(JXG, MacroLib) {
         brd1 = MacroLib.createBoard('jxgbox1', {
             xname: 'Real GDP',
             yname: 'Price<br>Level',
-            grid: false,
-            xpos: [8, -0.5]
+            grid: false
         });
 
         //Demand Line 1 - fixed
