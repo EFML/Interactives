@@ -145,7 +145,7 @@ var Macro = (function(JXG, MacroLib) {
         //////////////////
         // Interactivity
         //////////////////
-        brd1.on('move', function() {
+        brd1.on('drag', function() {
             //Moving Dashed Lines for Supply
             dashesSonly.Y1.moveTo([0, iSonly.Y()]);
             dashesSonly.Y2.moveTo([iSonly.X(), iSonly.Y()]);

@@ -303,7 +303,7 @@ var Macro = (function(JXG, MacroLib) {
         });
 
 
-        brd1.on('move', function() {
+        brd1.on('drag', function() {
             //Moving 1st set of Dashed Lines in Board 1
             dashB1.Y1.moveTo([0, iSDB1.Y()]);
             dashB1.Y2.moveTo([iSDB1.X(), iSDB1.Y()]);
@@ -312,7 +312,7 @@ var Macro = (function(JXG, MacroLib) {
             dashB1.X2.moveTo([iSDB1.X(), iSDB1.Y()]);
         });
 
-        brd2.on('move', function() {
+        brd2.on('drag', function() {
             //Moving Board 2 Dashed Lines
             dashB2.Y1.moveTo([0, iSDB2.Y()]);
             dashB2.Y2.moveTo([iSDB2.X(), iSDB2.Y()]);
@@ -321,7 +321,7 @@ var Macro = (function(JXG, MacroLib) {
             dashB2.X2.moveTo([iSDB2.X(), iSDB2.Y()]);
         });
 
-        brd3.on('move', function() {
+        brd3.on('drag', function() {
             //Moving Board 2 Dashed Lines
             dashB3.Y1.moveTo([0, iSDB3.Y()]);
             dashB3.Y2.moveTo([iSDB3.X(), iSDB3.Y()]);

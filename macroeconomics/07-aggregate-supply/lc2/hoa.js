@@ -108,7 +108,7 @@ var Macro = (function(JXG, MacroLib) {
         //////////////////
         // Interactivity
         //////////////////
-        brd1.on('move', function() {
+        brd1.on('drag', function() {
             //Moving projection of LRAS2 on x-axis
             ptAxis2.moveTo([LRAS2.point1.X(), 0]);
         });

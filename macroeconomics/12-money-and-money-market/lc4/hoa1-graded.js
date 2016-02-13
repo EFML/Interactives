@@ -131,7 +131,7 @@ var Macro = (function(JXG, MacroLib) {
         //////////////////
         // Interactivity
         //////////////////
-        brd1.on('move', function() {
+        brd1.on('drag', function() {
             //Moving 1st set of Dashed Lines in Board 1
             dashS2.Y1.moveTo([0, iB1SD.Y()]);
             dashS2.Y2.moveTo([iB1SD.X(), iB1SD.Y()]);
