@@ -6,10 +6,9 @@ var Macro = (function(JXG, MacroLib) {
         MacroLib.init(MacroLib.ONE_BOARD);
 
         board = MacroLib.createBoard('jxgbox1', {
-            bboxlimits: [-2, 12, 12, -2],
+            bboxlimits: [-2.5, 12, 12, -2],
             xname: 'Quantity of<br>ePhones',
-            yname: 'Price per<br>ePhone',
-            ypos: [-1.9, 10.5]
+            yname: 'Price per<br>ePhone'
         });
 
         // Supply Line 1 - fixed

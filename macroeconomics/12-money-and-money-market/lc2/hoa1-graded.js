@@ -9,10 +9,9 @@ var Macro = (function(JXG, MacroLib) {
         // brd1 1
         ////////////
         brd1 = MacroLib.createBoard('jxgbox1', {
-            bboxlimits: [-2.0, 12, 12, -2.0],
+            bboxlimits: [-2.5, 12, 12, -2.0],
             xname: 'Quantity of Money',
-            yname: 'Nominal<br>Interest<br>Rate',
-            ypos: [-1.6, 10]
+            yname: 'Nominal<br>Interest<br>Rate'
         });
 
         //Curve 1 - fixed

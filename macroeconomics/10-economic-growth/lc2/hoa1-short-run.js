@@ -7,13 +7,12 @@ var Macro = (function(JXG, MacroLib) {
         ////////////
         // BOARD 1
         ////////////
-        var newBBox = [-2.2, 12, 12, -1.75];
+        var newBBox = [-3.0, 12, 12, -1.75];
 
         brd1 = MacroLib.createBoard('jxgbox1', {
             xname: 'Capital Goods',
             yname: 'Consumer<br>Goods',
             grid: false,
-            ypos: [-2.1, 10],
             bboxlimits: newBBox
         });
 

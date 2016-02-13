@@ -9,8 +9,7 @@ var Macro = (function(JXG, MacroLib) {
             bboxlimits: [-1.5, 12, 12, -2.0],
             xname: 'Real National<br>Income',
             yname: 'Price<br>Level',
-            grid: false,
-            ypos: [-1.25, 10.0]
+            grid: false
         });
 
         //Sliders

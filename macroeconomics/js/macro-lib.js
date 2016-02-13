@@ -10,7 +10,7 @@ var MacroLib = (function(JXG) {
     //Custom Parameters
     var labelOffset;
 
-    var defaultYpos, defaultXoffset, defaultYoffset;
+    var defaultXoffset, defaultYoffset;
 
     function init(nbrBoards) {
         //General Parameters for Macro
@@ -28,7 +28,6 @@ var MacroLib = (function(JXG) {
                     X: 10,
                     Y: 10
                 };
-                defaultYpos = [-1.2, 10];
                 defaultXoffset = [-5, -15];
                 defaultYoffset = [-35, -2];
                 break;
@@ -40,7 +39,6 @@ var MacroLib = (function(JXG) {
                     X: 5,
                     Y: 5
                 };
-                defaultYpos = [-1.0, 10];
                 defaultXoffset = [-5, -15];
                 defaultYoffset = [-35, -2];
                 break;
@@ -52,7 +50,6 @@ var MacroLib = (function(JXG) {
                     X: 5,
                     Y: 5
                 };
-                defaultYpos = [-1.5, 10];
                 defaultXoffset = [2, 10];
                 defaultYoffset = [4, -10];
                 break;
@@ -62,7 +59,6 @@ var MacroLib = (function(JXG) {
     function createBoard(brdName, options) {
         var xname = options.xname || 'x-label';
         var yname = options.yname || 'y-label';
-        var ypos = options.ypos || defaultYpos;
 
         var bboxlimits = options.bboxlimits || defaultBBox;
         var grid = options.grid || false;
@@ -97,17 +93,25 @@ var MacroLib = (function(JXG) {
         xaxis.removeAllTicks();
         yaxis.removeAllTicks();
         // x-axis label is right-justified and has:
-        // x offset of xwidth/25 from right edge of graph
+        // x offset of xwidth/40 from right edge of graph
         // y offset of yheight/50 from x-axis
-        var dx = (bboxlimits[2]-bboxlimits[0])/40;
-        var dy = (bboxlimits[3]-bboxlimits[1])/50;
-        var xlabel = board.create('text', [bboxlimits[2] - dx, dy, xname], {
+        var dx1 = (bboxlimits[2]-bboxlimits[0])/40;
+        var dy1 = (bboxlimits[3]-bboxlimits[1])/50;
+        var xlabel = board.create('text', [bboxlimits[2] - dx1, dy1, xname], {
             fixed: true,
             anchorX: 'right',
             anchorY: 'top'
         });
-        var ylabel = board.create('text', [ypos[0], ypos[1], yname], {
-            fixed: true
+        // y-axis label is right-justified and has:
+        // x offset of xwidth/50 from y-axis
+        // y offset of yheight/40 from top edge of graph
+        var dx2 = (bboxlimits[2]-bboxlimits[0])/50;
+        var dy2 = (bboxlimits[1]-bboxlimits[3])/40;
+        var ylabel = board.create('text', [-dx2, bboxlimits[1] - dy2, yname], {
+            fixed: true,
+            fixed: true,
+            anchorX: 'right',
+            anchorY: 'top'
         });
 
         return board;
@@ -499,10 +503,6 @@ var MacroLib = (function(JXG) {
         labelOffset = val;
     }
 
-    function setDefaultYpos(val) {
-        defaultYpos = val;
-    }
-
     function setDefaultXoffset(val) {
         defaultXoffset = val;
     }
@@ -518,7 +518,6 @@ var MacroLib = (function(JXG) {
         THREE_BOARDS: THREE_BOARDS,
         // Public field setters
         labelOffset: setLabelOffset,
-        defaultYpos: setDefaultYpos,
         defaultXoffset: setDefaultXoffset,
         defaultYoffset: setDefaultYoffset,
         // Public methods

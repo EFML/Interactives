@@ -13,8 +13,7 @@ var Macro = (function(JXG, MacroLib) {
         brd1 = MacroLib.createBoard('jxgbox1', {
             bboxlimits: [-3.4, 12, 12, -2],
             xname: 'Quantity of<br>Textbooks',
-            yname: 'Price per <br>Textbook',
-            ypos: [-2.6, 10.5]
+            yname: 'Price per <br>Textbook'
         });
 
         // Demand Line

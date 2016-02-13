@@ -18,10 +18,9 @@ var Macro = (function(JXG, MacroLib) {
         // BOARD 1
         ////////////
         board = MacroLib.createBoard('jxgbox1', {
-            bboxlimits: [-2, 12, 12, -2],
+            bboxlimits: [-2, 12, 12, -2.75],
             xname: 'Quantity',
-            yname: 'Price',
-            ypos: [-1.5, 11]
+            yname: 'Price'
         });
 
         var params = {visible: false};

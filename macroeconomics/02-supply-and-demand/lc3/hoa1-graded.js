@@ -15,8 +15,7 @@ var Macro = (function(JXG, MacroLib) {
         c.board = MacroLib.createBoard(c.el, {
             bboxlimits: [-2, 12, 12, -4],
             xname: 'Quantity',
-            yname: 'Price',
-            ypos: [-1.75, 11]
+            yname: 'Price'
         });
 
         // Demand Line 1 - fixed

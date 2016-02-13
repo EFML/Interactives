@@ -93,10 +93,9 @@ var Macro = (function(JXG, MacroLib) {
         // BOARD 2
         ////////////
         brd2 = MacroLib.createBoard('jxgbox2', {
-            bboxlimits: [-2.5, 12, 12, -1.5],
+            bboxlimits: [-3, 12, 12, -1.5],
             xname: 'UR',
             yname: 'Inflation<br>Rate',
-            ypos: [-2.4, 10],
             grid: false
         });
 

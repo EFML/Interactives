@@ -8,7 +8,7 @@ var Macro = (function(JXG, MacroLib) {
         ////////////
         // BOARD 1
         ////////////
-        var bbox = [-1.75, 12.5, 14, -3.5];
+        var bbox = [-2.5, 12.5, 14, -3.5];
         brd1 = MacroLib.createBoard('jxgbox1', {
             bboxlimits: bbox,
             xname: 'Q Money',

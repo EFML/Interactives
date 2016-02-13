@@ -10,7 +10,7 @@ var Macro = (function(JXG, MacroLib) {
         ////////////
         var cfx = 800.0 / 12.0;
         var cfy = 27.0 / 12.0;
-        var newbbox = [-120, 27, 800, -4];
+        var newbbox = [-170, 27, 800, -4];
 
         brd1 = MacroLib.createBoard('jxgbox1', {
             xname: ' ',
@@ -53,7 +53,7 @@ var Macro = (function(JXG, MacroLib) {
             majorHeight: 15,
             drawLabels: true
         });
-        var ylabel1 = brd1.create('text', [-110, 22, 'Nominal<br>Interest<br>Rate'], {
+        var ylabel1 = brd1.create('text', [-150, 24, 'Nominal<br>Interest<br>Rate'], {
             fixed: true,
             highlight: false
         });

@@ -11,10 +11,9 @@ var Macro = (function(JXG, MacroLib) {
         // BOARD 1
         ////////////
         brd1 = MacroLib.createBoard('jxgbox1', {
-            bboxlimits: [-3.4, 12, 12, -2],
+            bboxlimits: [-4, 12, 12, -2],
             xname: 'Quantity of<br>Shoes',
-            yname: 'Price per pair<br>of Shoes',
-            ypos: [-3.1, 10.5]
+            yname: 'Price per pair<br>of Shoes'
         });
 
         // Supply Line

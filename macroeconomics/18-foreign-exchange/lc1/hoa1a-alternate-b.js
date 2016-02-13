@@ -9,10 +9,10 @@ var Macro = (function(JXG, MacroLib) {
         ////////////
 
         brd1 = MacroLib.createBoard('jxgbox1', {
+            bboxlimits: [-1.75, 12, 12, -1.0],
             xname: 'Q<sub>&euro;</sub>',
             yname: 'Price<br>( $/&euro; )',
-            grid: false,
-            ypos: [-1.25, 10]
+            grid: false
         });
 
         //Supply Line 1 - fixed
