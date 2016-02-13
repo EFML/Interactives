@@ -53,8 +53,7 @@ var Macro = (function(JXG, MacroLib) {
         });
         var semi = brd1.create('arc', [po, tmpx, tmpy], {
             strokeWidth: 5,
-            strokeColor: 'DodgerBlue',
-            highlight: false
+            strokeColor: 'DodgerBlue'
         });
 
 

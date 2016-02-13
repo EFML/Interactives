@@ -104,8 +104,7 @@ var Macro = (function(JXG, MacroLib) {
 
         //Intersection of SD board 1
         var iSDB1 = brd1.create('intersection', [S2, D1], {
-            withLabel: false,
-            highlight: false
+            withLabel: false
         });
 
         //Dashed Lines - Board 1
@@ -157,8 +156,7 @@ var Macro = (function(JXG, MacroLib) {
 
         //Intersection Board 2
         var iSDB2 = brd2.create('intersection', [SB2, D1B2], {
-            withLabel: false,
-            highlight: false
+            withLabel: false
         });
 
         //Dashed Lines - Board 2
@@ -212,8 +210,7 @@ var Macro = (function(JXG, MacroLib) {
         });
         //Intersection Board 2
         var iSDB3 = brd3.create('intersection', [SB3, D2B3], {
-            withLabel: false,
-            highlight: false
+            withLabel: false
         });
 
         //Dashed Lines - Board 3

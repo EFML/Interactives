@@ -48,8 +48,7 @@ var Macro = (function(JXG, MacroLib) {
         });
         SRAS1.setAttribute({
             visible: false,
-            fixed: true,
-            highlight: false
+            fixed: true
         });
 
         //LRAS 1 - fixed
@@ -78,7 +77,6 @@ var Macro = (function(JXG, MacroLib) {
         });
         LRAS2.setAttribute({
             fixed: false,
-            highlight: false,
             withLabel: false
         });
 

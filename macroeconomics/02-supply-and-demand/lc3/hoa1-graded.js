@@ -26,8 +26,7 @@ var Macro = (function(JXG, MacroLib) {
         });
         c.demandLine1.setAttribute({
             dash: 1,
-            fixed: true,
-            highlight: false
+            fixed: true
         });
 
         // Demand Line 2 - moveable
@@ -38,8 +37,7 @@ var Macro = (function(JXG, MacroLib) {
         });
         c.demandLine2.setAttribute({
             withLabel: false,
-            fixed: true,
-            highlight: false
+            fixed: true
         });
 
         // Supply Line 1 - fixed
@@ -50,8 +48,7 @@ var Macro = (function(JXG, MacroLib) {
         });
         c.supplyLine1.setAttribute({
             dash: 1,
-            fixed: true,
-            highlight: false
+            fixed: true
         });
 
         // Supply Line 2 - moveable
@@ -62,8 +59,7 @@ var Macro = (function(JXG, MacroLib) {
         });
         c.supplyLine2.setAttribute({
             withLabel: false,
-            fixed: true,
-            highlight: false
+            fixed: true
         });
 
         // Intersection of Demand Line 1 and Supply line 1 - fixed

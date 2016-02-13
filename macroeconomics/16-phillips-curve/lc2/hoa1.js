@@ -21,8 +21,7 @@ var Macro = (function(JXG, MacroLib) {
         });
         SRPC1.setAttribute({
             dash: 1,
-            fixed: true,
-            highlight: false
+            fixed: true
         });
 
         //Supply Line 1 - fixed

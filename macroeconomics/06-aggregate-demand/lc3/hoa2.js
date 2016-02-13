@@ -23,8 +23,7 @@ var Macro = (function(JXG, MacroLib) {
             color: 'Gray'
         });
         AD.setAttribute({
-            fixed: true,
-            highlight: false
+            fixed: true
         });
 
         //Demand Line AD1 - fixed
@@ -47,8 +46,7 @@ var Macro = (function(JXG, MacroLib) {
             color: 'Blue'
         });
         AD2.setAttribute({
-            fixed: true,
-            highlight: false
+            fixed: true
         });
     }
 

@@ -30,7 +30,6 @@ var Macro = (function(JXG, MacroLib) {
 
         xAxis = board.create('axis', [[0.0, 0.0], [1.0, 0.0]], {
             name: 'Q',
-            highlight: false,
             withLabel: true,
             label: {
                 //position: 'rt',
@@ -60,7 +59,6 @@ var Macro = (function(JXG, MacroLib) {
 
         yAxis = board.create('axis', [[0.0, 0.0], [0.0, 1.0]], {
             name: 'P',
-            highlight: false,
             withLabel: true,
             label: {
                 position: 'rt',
@@ -91,8 +89,7 @@ var Macro = (function(JXG, MacroLib) {
             label: {
                 offset: [155, 140]
             },
-            fixed: true,
-            highlight: false
+            fixed: true
         });
 
         // Demand Line - fixed
@@ -103,15 +100,13 @@ var Macro = (function(JXG, MacroLib) {
             label: {
                 offset: [155, -140]
             },
-            fixed: true,
-            highlight: false
+            fixed: true
         });
 
         for (var i = 1; i < 6; i++) {
             supplyLinePts.push(
                 board.create('point', [i*50, i], {
                     fixed: true,
-                    highlight: false,
                     strokeColor: 'orange',
                     fillColor: 'orange',
                     withLabel: false,
@@ -122,7 +117,6 @@ var Macro = (function(JXG, MacroLib) {
             demandLinePts.push(
                 board.create('point', [i*50, 6-i], {
                     fixed: true,
-                    highlight: false,
                     strokeColor: 'dodgerblue',
                     fillColor: 'dodgerblue',
                     withLabel: false,

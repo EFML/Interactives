@@ -94,7 +94,6 @@ var Macro = (function(JXG, MacroLib) {
             withLabel: false,
             fixed: true,
             name: 'M<sub>S1</sub>',
-            highlight: false,
             dash: '1',
             strokeWidth: '3',
             label: {
@@ -104,7 +103,6 @@ var Macro = (function(JXG, MacroLib) {
 
         var S1 = brd1.create('segment', [pS1, pS2], {
             withLabel: true,
-            highlight: false,
             name: 'M<sub>S2</sub>',
             color: 'DodgerBlue',
             label: {
@@ -114,8 +112,7 @@ var Macro = (function(JXG, MacroLib) {
 
         //Intersection of SD board 1
         var iSDB = brd1.create('intersection', [S1, D1], {
-            withLabel: false,
-            highlight: false
+            withLabel: false
         });
 
         brd1.addChild(brd2);
@@ -150,7 +147,6 @@ var Macro = (function(JXG, MacroLib) {
             withLabel: false,
             fixed: true,
             name: 'D<sub>1</sub>',
-            highlight: false,
             dash: '1',
             strokeWidth: '3',
             label: {
@@ -161,7 +157,6 @@ var Macro = (function(JXG, MacroLib) {
         var D2 = brd2.create('segment', [As, Bs], {
             withLabel: true,
             name: 'D<sub>2</sub>',
-            highlight: false,
             color: 'DodgerBlue',
             label: {
                 offset: [90, -90]
@@ -169,8 +164,7 @@ var Macro = (function(JXG, MacroLib) {
         });
 
         var iSDB2 = brd2.create('intersection', [S2, D2], {
-            withLabel: false,
-            highlight: false
+            withLabel: false
         });
 
 

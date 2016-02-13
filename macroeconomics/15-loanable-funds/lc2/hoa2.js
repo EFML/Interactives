@@ -35,7 +35,6 @@ var Macro = (function(JXG, MacroLib) {
             color: 'Orange'
         });
         SB1.setAttribute({
-            highlight: false,
             withLabel: true
         });
 
@@ -49,8 +48,7 @@ var Macro = (function(JXG, MacroLib) {
         DB1.setAttribute({
             dash: 1,
             fixed: true,
-            withLabel: false,
-            highlight: false
+            withLabel: false
         });
 
         //Demand Line 2 - moveable -- Error?
@@ -60,8 +58,7 @@ var Macro = (function(JXG, MacroLib) {
             color: 'DodgerBlue'
         });
         DB1.setAttribute({
-            withLabel: true,
-            highlight: false
+            withLabel: true
         });
 
         ////////////
@@ -82,8 +79,7 @@ var Macro = (function(JXG, MacroLib) {
         });
         DB2.setAttribute({
             fixed: true,
-            withLabel: true,
-            highlight: false
+            withLabel: true
         });
 
         ////////

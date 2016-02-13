@@ -23,8 +23,7 @@ var Macro = (function(JXG, MacroLib) {
         });
         AD1.setAttribute({
             dash: 1,
-            fixed: true,
-            highlight: false
+            fixed: true
         });
 
         //Demand Line 2 - moveable

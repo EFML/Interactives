@@ -71,7 +71,6 @@ var Macro = (function(JXG, MacroLib) {
         S1B1.setAttribute({
             dash: 1,
             fixed: true,
-            highlight: false
         });
 
         //Supply Line 2 - moveable
@@ -94,8 +93,7 @@ var Macro = (function(JXG, MacroLib) {
         });
         AD1.setAttribute({
             dash: 1,
-            fixed: true,
-            highlight: false
+            fixed: true
         });
 
         //Demand Line 2 - moveable
@@ -248,7 +246,6 @@ var Macro = (function(JXG, MacroLib) {
             withLabel: false,
             strokeWidth: 5,
             strokeColor: 'Lime',
-            highlight: false,
             label: {
                 offset: [95, -95]
             }
@@ -263,8 +260,7 @@ var Macro = (function(JXG, MacroLib) {
             color: 'DodgerBlue'
         });
         SRPC1.setAttribute({
-            fixed: true,
-            highlight: false
+            fixed: true
         });
 
         //LRAS - fixed
@@ -291,7 +287,6 @@ var Macro = (function(JXG, MacroLib) {
         //Intersection B2
         var iSDB2fix = brd2.create('intersection', [SRPC1, LRPC, 0], {
             name: 'A1',
-            highlight: false,
             fillColor: 'DodgerBlue',
             strokeColor: 'DodgerBlue',
             withLabel: true,
@@ -301,7 +296,6 @@ var Macro = (function(JXG, MacroLib) {
         //Intersection B2
         var iSLB2 = brd2.create('intersection', [SRPC2, LRPC, 0], {
             name: 'A3',
-            highlight: false,
             fillColor: 'Lime',
             strokeColor: 'Lime',
             withLabel: true,
@@ -344,7 +338,6 @@ var Macro = (function(JXG, MacroLib) {
 
         var iB2SRPC1 = brd2.create('intersection', [fakeD, SRPC1, 0], {
             name: 'A2',
-            highlight: false,
             fillColor: 'Orange',
             strokeColor: 'Orange',
             withLabel: true,

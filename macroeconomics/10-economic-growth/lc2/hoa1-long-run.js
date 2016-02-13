@@ -83,13 +83,11 @@ var Macro = (function(JXG, MacroLib) {
         var semifix = brd1.create('arc', [po, tmpx, tmpy], {
             strokeWidth: 4,
             strokeColor: 'Gray',
-            highlight: false,
             dash: 1
         });
         var semi = brd1.create('arc', [po, px, py], {
             strokeWidth: 5,
-            strokeColor: 'DodgerBlue',
-            highlight: false
+            strokeColor: 'DodgerBlue'
         });
 
         var hA = brd1.create('segment', [

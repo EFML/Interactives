@@ -14,15 +14,22 @@ var MacroLib = (function(JXG) {
 
     function init(nbrBoards) {
         //General Parameters for Macro
-        JXG.Options.point.showInfobox = false;
-        JXG.Options.segment.strokeColor = 'Pink';
         JXG.Options.segment.strokeWidth = 5;
+        JXG.Options.point.showInfobox = false;
+        JXG.Options.point.highlight = false;
+        JXG.Options.point.fixed = true;
         JXG.Options.text.highlight = false;
+        JXG.Options.text.fixed = true;
+        JXG.Options.line.highlight = false;
+        JXG.Options.line.fixed = true;
+        JXG.Options.curve.highlight = false;
+        JXG.Options.curve.fixed = true;
+        JXG.Options.slider.highlight = true;
+        JXG.Options.slider.fixed = false;
 
         switch (nbrBoards) {
             case ONE_BOARD:
                 JXG.Options.text.fontSize = 16;
-                JXG.Options.text.highlight = false;
                 defaultBBox = [-1.5, 12, 12, -1.0];
                 labelOffset = {
                     X: 10,
@@ -33,7 +40,6 @@ var MacroLib = (function(JXG) {
                 break;
             case TWO_BOARDS:
                 JXG.Options.text.fontSize = 15;
-                JXG.Options.text.highlight = false;
                 defaultBBox = [-1.5, 12, 12, -1.5];
                 labelOffset = {
                     X: 5,
@@ -44,7 +50,6 @@ var MacroLib = (function(JXG) {
                 break;
             case THREE_BOARDS:
                 JXG.Options.text.fontSize = 15;
-                JXG.Options.text.highlight = false;
                 defaultBBox = [-1.75, 12, 12, -2.0];
                 labelOffset = {
                     X: 5,
@@ -78,15 +83,13 @@ var MacroLib = (function(JXG) {
             [0, 0],
             [11, 0]
         ], {
-            withLabel: false,
-            highlight: false
+            withLabel: false
         });
         var yaxis = board.create('axis', [
             [0, 0],
             [0, 11]
         ], {
-            withLabel: false,
-            highlight: false
+            withLabel: false
         });
 
         //Axes
@@ -153,7 +156,7 @@ var MacroLib = (function(JXG) {
             c2 = coords[1];
         }
         else {
-            c1 = options.c1;console.log('in')
+            c1 = options.c1;
             c2 = options.c2;
         }
 
@@ -214,8 +217,7 @@ var MacroLib = (function(JXG) {
             name: name,
             strokeColor: strokeColor,
             withLabel: true,
-            label: getLabelOffset(pS1, pS2, ltype),
-            highlight: false
+            label: getLabelOffset(pS1, pS2, ltype)
         });
     }
 

@@ -38,7 +38,6 @@ var Macro = (function(JXG, MacroLib) {
             withLabel: true,
             fixed: true,
             dash: 1,
-            highlight: false,
             label: {
                 offset: [0, 185]
             }

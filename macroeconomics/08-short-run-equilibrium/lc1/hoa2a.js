@@ -43,8 +43,7 @@ var Macro = (function(JXG, MacroLib) {
             color: 'DodgerBlue'
         });
         SRAS1.setAttribute({
-            fixed: true,
-            highlight: false
+            fixed: true
         });
 
         //Demand Line 1 - fixed
@@ -54,8 +53,7 @@ var Macro = (function(JXG, MacroLib) {
             color: 'Crimson'
         });
         AD1.setAttribute({
-            fixed: true,
-            highlight: false
+            fixed: true
         });
 
         //Demand Line 2 - moveable

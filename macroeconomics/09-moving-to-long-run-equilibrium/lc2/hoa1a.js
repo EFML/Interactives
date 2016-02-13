@@ -21,8 +21,7 @@ var Macro = (function(JXG, MacroLib) {
         });
         SRAS1.setAttribute({
             dash: 1,
-            fixed: true,
-            highlight: false
+            fixed: true
         });
 
         //Supply Line 2 - fixed
@@ -32,8 +31,7 @@ var Macro = (function(JXG, MacroLib) {
             color: 'DodgerBlue'
         });
         SRAS2.setAttribute({
-            withLabel: false,
-            highlight: false,
+            withLabel: false
             fixed: true
         });
 
@@ -45,8 +43,7 @@ var Macro = (function(JXG, MacroLib) {
         });
         AD1.setAttribute({
             dash: 1,
-            fixed: true,
-            highlight: false
+            fixed: true
         });
 
         //Demand Line 2 - fixed
@@ -57,7 +54,6 @@ var Macro = (function(JXG, MacroLib) {
         });
         AD2.setAttribute({
             withLabel: false,
-            highlight: false,
             fixed: true
         });
 
@@ -104,7 +100,6 @@ var Macro = (function(JXG, MacroLib) {
             strokeWidth: '3',
             name: 'LRAS',
             withLabel: true,
-            highlight: false,
             fixed: true,
             label: {
                 offset: [-15, 200]

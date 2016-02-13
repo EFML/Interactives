@@ -36,8 +36,7 @@ var Macro = (function(JXG, MacroLib) {
             }
         });
         var xlabel1 = brd1.create('text', [380, -2.75, 'Quantity of Money ($billions)'], {
-            fixed: true,
-            highlight: false
+            fixed: true
         });
 
         var yaxis = brd1.create('axis', [
@@ -54,8 +53,7 @@ var Macro = (function(JXG, MacroLib) {
             drawLabels: true
         });
         var ylabel1 = brd1.create('text', [-150, 24, 'Nominal<br>Interest<br>Rate'], {
-            fixed: true,
-            highlight: false
+            fixed: true
         });
 
         //Demand Line 1 - fixed
@@ -68,8 +66,7 @@ var Macro = (function(JXG, MacroLib) {
             name: '',
             withLabel: false,
             fixed: true,
-            dash: 1,
-            highlight: false,
+            dash: 1
         });
 
         //Demand Line 2 - moveable
@@ -100,7 +97,6 @@ var Macro = (function(JXG, MacroLib) {
             name: 'M<sub>S</sub>',
             withLabel: true,
             fixed: true,
-            highlight: false,
             label: {
                 offset: [-10, 185]
             }

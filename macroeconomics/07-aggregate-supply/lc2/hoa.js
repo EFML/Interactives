@@ -47,8 +47,7 @@ var Macro = (function(JXG, MacroLib) {
         });
         LRAS1.setAttribute({
             dash: 1,
-            fixed: true,
-            highlight: false
+            fixed: true
         });
         LRAS1.setAttribute({
             label: {
@@ -65,7 +64,6 @@ var Macro = (function(JXG, MacroLib) {
         });
         LRAS2.setAttribute({
             fixed: false,
-            highlight: false,
             withLabel: false
         });
 
