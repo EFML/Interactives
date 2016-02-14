@@ -91,7 +91,6 @@ var Macro = (function(JXG, MacroLib) {
 
         var D1fixed = brd1.create('segment', [d1B1, d2B1], {
             withLabel: false,
-            fixed: true,
             name: 'D<sub>1</sub>',
             dash: '1',
             strokeWidth: '3',
@@ -144,7 +143,6 @@ var Macro = (function(JXG, MacroLib) {
 
         var D2fixed = brd2.create('segment', [d1B2, d2B2], {
             withLabel: false,
-            fixed: true,
             name: 'D<sub>1</sub>',
             dash: '1',
             strokeWidth: '3',
@@ -243,7 +241,6 @@ var Macro = (function(JXG, MacroLib) {
 
         //Dashed Lines - Board 1
         var dashB1fixed = createDashedLines2Axis(brd1, iSDB, {
-            fixed: true,
             withLabel: false,
             color: 'Gray'
         });
@@ -257,7 +254,6 @@ var Macro = (function(JXG, MacroLib) {
 
         //Dashed Lines - Board 2
         var dashB2fixed = createDashedLines2Axis(brd2, iSDB2, {
-            fixed: true,
             withLabel: false,
             color: 'Gray'
         });

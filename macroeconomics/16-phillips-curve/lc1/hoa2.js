@@ -19,9 +19,6 @@ var Macro = (function(JXG, MacroLib) {
             name: 'SRAS',
             color: 'Gray'
         });
-        SB1.setAttribute({
-            fixed: true
-        });
 
         //Demand Line 1 - fixed
         var AD1 = MacroLib.createLine(brd1, {
@@ -30,8 +27,7 @@ var Macro = (function(JXG, MacroLib) {
             color: 'Gray'
         });
         AD1.setAttribute({
-            dash: 1,
-            fixed: true
+            dash: 1
         });
 
         //Demand Line 2 - moveable
@@ -108,9 +104,6 @@ var Macro = (function(JXG, MacroLib) {
             name: 'SRPC',
             color: 'Blue'
         });
-        SRPC.setAttribute({
-            fixed: true
-        });
 
         ////////
         // Dashed Line Box 2
@@ -127,8 +120,7 @@ var Macro = (function(JXG, MacroLib) {
             visible: false,
             strokeColor: 'gray',
             strokeWidth: '2',
-            dash: '1',
-            fixed: true
+            dash: '1'
         });
         ////////
         //Intersection for SRPC
@@ -141,7 +133,6 @@ var Macro = (function(JXG, MacroLib) {
         var iB2fixed = brd2.create('point', [iB2SRPC.X(), iB2SRPC.Y()], {
             name: 'A<sub>1</sub>',
             visible: true,
-            fixed: true,
             fillColor: 'Gray',
             strokeColor: 'Gray'
         });

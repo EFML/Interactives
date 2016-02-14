@@ -18,8 +18,7 @@ var Macro = (function(JXG, MacroLib) {
             color: 'Gray'
         });
         demandLine1.setAttribute({
-            dash: 1,
-            fixed: true
+            dash: 1
         });
 
         // Demand Line 2 - moveable

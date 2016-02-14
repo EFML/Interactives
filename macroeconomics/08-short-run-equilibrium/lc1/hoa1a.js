@@ -42,18 +42,12 @@ var Macro = (function(JXG, MacroLib) {
             name: 'AS<sub>0</sub>',
             color: 'DodgerBlue'
         });
-        SRAS1.setAttribute({
-            fixed: true
-        });
 
         //Demand Line 1 - fixed
         var AD1 = MacroLib.createLine(brd1, {
             ltype: 'Demand',
             name: 'AD<sub>0</sub>',
             color: 'Crimson'
-        });
-        AD1.setAttribute({
-            fixed: true
         });
 
         //Demand Line 2 - moveable

@@ -23,7 +23,6 @@ var Macro = (function(JXG, MacroLib) {
         });
         AD1.setAttribute({
             dash: 1,
-            fixed: true
         });
 
         //Demand Line 2 - moveable
@@ -37,7 +36,6 @@ var Macro = (function(JXG, MacroLib) {
         });
 
         var Gfix = brd1.create('glider', [6.0, 6.0, AD1], {
-            fixed: true,
             visible: false
         });
         G = brd1.create('glider', [6.0, 6.0, AD2], {
@@ -48,7 +46,6 @@ var Macro = (function(JXG, MacroLib) {
         // Fixed Dashed Lines for Board 1
         ////////////
         var dashD1 = MacroLib.createDashedLines2Axis(brd1, Gfix, {
-            fixed: true,
             withLabel: true,
             xlabel: 'R<sub>1</sub>',
             ylabel: 'P<sub>1</sub>',

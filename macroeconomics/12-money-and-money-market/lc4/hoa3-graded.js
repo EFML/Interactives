@@ -35,9 +35,7 @@ var Macro = (function(JXG, MacroLib) {
                 offset: [0, -20]
             }
         });
-        var xlabel1 = brd1.create('text', [380, -2.75, 'Quantity of Money ($billions)'], {
-            fixed: true
-        });
+        var xlabel1 = brd1.create('text', [380, -2.75, 'Quantity of Money ($billions)']);
 
         var yaxis = brd1.create('axis', [
             [0, 0],
@@ -52,9 +50,7 @@ var Macro = (function(JXG, MacroLib) {
             majorHeight: 15,
             drawLabels: true
         });
-        var ylabel1 = brd1.create('text', [-150, 24, 'Nominal<br>Interest<br>Rate'], {
-            fixed: true
-        });
+        var ylabel1 = brd1.create('text', [-150, 24, 'Nominal<br>Interest<br>Rate']);
 
         //Supply Line 1 - fixed
         MS1 = brd1.create('segment', [
@@ -65,7 +61,6 @@ var Macro = (function(JXG, MacroLib) {
             strokeWidth: '5',
             name: '',
             withLabel: false,
-            fixed: true,
             dash: 1,
         });
 
@@ -78,7 +73,6 @@ var Macro = (function(JXG, MacroLib) {
             strokeWidth: '5',
             name: 'M<sub>D</sub>',
             withLabel: true,
-            fixed: true
             label: {
                 offset: [150, -140]
             }

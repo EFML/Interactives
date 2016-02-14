@@ -41,9 +41,6 @@ var Macro = (function(JXG, MacroLib) {
             name: 'AS<sub>1917</sub>',
             color: 'DodgerBlue'
         });
-        SRAS1.setAttribute({
-            fixed: true
-        });
 
         //Demand Line 1 - fixed
         var AD1 = MacroLib.createLine(brd1, {
@@ -52,8 +49,7 @@ var Macro = (function(JXG, MacroLib) {
             color: 'Crimson'
         });
         AD1.setAttribute({
-            dash: 1,
-            fixed: true
+            dash: 1
         });
 
         //Demand Line 2 - moveable
@@ -76,7 +72,6 @@ var Macro = (function(JXG, MacroLib) {
             color: 'Orange'
         });
         H1.setAttribute({
-            fixed: true,
             withLabel: false,
             highlight: true,
             visible: false

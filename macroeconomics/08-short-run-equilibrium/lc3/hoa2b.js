@@ -63,8 +63,7 @@ var Macro = (function(JXG, MacroLib) {
             color: 'DodgerBlue'
         });
         SRAS1.setAttribute({
-            dash: 1,
-            fixed: true
+            dash: 1
         });
 
         //Demand Line 2 - moveable
@@ -86,9 +85,6 @@ var Macro = (function(JXG, MacroLib) {
             name: 'AD',
             color: 'Crimson'
         });
-        AD1.setAttribute({
-            fixed: true
-        });
 
         //Fake line for intersection at equilibrium
         var H1 = MacroLib.createLine(brd1, {
@@ -97,7 +93,6 @@ var Macro = (function(JXG, MacroLib) {
             color: 'Orange'
         });
         H1.setAttribute({
-            fixed: true,
             withLabel: false,
             highlight: true,
             visible: false
@@ -110,7 +105,6 @@ var Macro = (function(JXG, MacroLib) {
             color: 'Orange'
         });
         H2.setAttribute({
-            fixed: true,
             withLabel: false,
             highlight: true,
             visible: false

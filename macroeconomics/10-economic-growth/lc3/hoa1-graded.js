@@ -47,8 +47,7 @@ var Macro = (function(JXG, MacroLib) {
             color: 'DodgerBlue'
         });
         SRAS1.setAttribute({
-            visible: false,
-            fixed: true
+            visible: false
         });
 
         //LRAS 1 - fixed
@@ -59,7 +58,6 @@ var Macro = (function(JXG, MacroLib) {
         });
         LRAS1.setAttribute({
             dash: 1,
-            fixed: true,
             highlight: true
         });
         LRAS1.setAttribute({

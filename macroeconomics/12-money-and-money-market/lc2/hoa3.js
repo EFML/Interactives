@@ -17,11 +17,9 @@ var Macro = (function(JXG, MacroLib) {
             color: 'Gray'
         });
         D1.setAttribute({
-            fixed: true,
             dash: 1
         });
         G = brd1.create('glider', [6.0, 6.0, D1], {
-            fixed: true,
             visible: false
         });
 
@@ -29,7 +27,6 @@ var Macro = (function(JXG, MacroLib) {
         // Fixed Dashed Lines for Board 1
         ////////////
         var dashD1 = MacroLib.createDashedLines2Axis(brd1, G, {
-            fixed: true,
             withLabel: true,
             xlabel: 'M<sub>1</sub>',
             ylabel: 'r<sub>1</sub>',
@@ -51,8 +48,7 @@ var Macro = (function(JXG, MacroLib) {
         //Glider along demand curve
         G = brd1.create('glider', [6.0, 6.0, D2], {
             name: 'A',
-            withLabel: false,
-            fixed: true
+            withLabel: false
         });
 
         ////////////

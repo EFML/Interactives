@@ -51,9 +51,7 @@ var Macro = (function(JXG, MacroLib) {
         var xVals = [0, 50, 100, 150, 200, 250];
         for (i = 0; i < xVals.length; i++) {
             xLabels.push(
-                board.create('text', [xVals[i] + 4.4, -0.24, xVals[i].toString()], {
-                    fixed: true
-                })
+                board.create('text', [xVals[i] + 4.4, -0.24, xVals[i].toString()])
             );
         }
 
@@ -75,9 +73,7 @@ var Macro = (function(JXG, MacroLib) {
         var yVals = [0, 1, 2, 3, 4, 5];
         for (i = 0; i < yVals.length; i++) {
             yLabels.push(
-                board.create('text', [-14, yVals[i] + 0.155, yVals[i].toString()], {
-                    fixed: true
-                })
+                board.create('text', [-14, yVals[i] + 0.155, yVals[i].toString()])
             );
         }
 
@@ -88,8 +84,7 @@ var Macro = (function(JXG, MacroLib) {
             withLabel: true,
             label: {
                 offset: [155, 140]
-            },
-            fixed: true
+            }
         });
 
         // Demand Line - fixed
@@ -99,14 +94,12 @@ var Macro = (function(JXG, MacroLib) {
             withLabel: true,
             label: {
                 offset: [155, -140]
-            },
-            fixed: true
+            }
         });
 
         for (var i = 1; i < 6; i++) {
             supplyLinePts.push(
                 board.create('point', [i*50, i], {
-                    fixed: true,
                     strokeColor: 'orange',
                     fillColor: 'orange',
                     withLabel: false,
@@ -116,7 +109,6 @@ var Macro = (function(JXG, MacroLib) {
 
             demandLinePts.push(
                 board.create('point', [i*50, 6-i], {
-                    fixed: true,
                     strokeColor: 'dodgerblue',
                     fillColor: 'dodgerblue',
                     withLabel: false,
@@ -126,7 +118,6 @@ var Macro = (function(JXG, MacroLib) {
 
             yAxisPts.push(
                 board.create('point', [0, i], {
-                    fixed: true,
                     strokeColor: 'gray',
                     fillColor: 'gray',
                     withLabel: false,

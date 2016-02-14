@@ -21,7 +21,6 @@ var Macro = (function(JXG, MacroLib) {
             color: 'Gray'
         });
         C1.setAttribute({
-            fixed: true,
             withLabel: true,
             highlight: true
         });
@@ -33,7 +32,6 @@ var Macro = (function(JXG, MacroLib) {
             color: 'Gray'
         });
         C2.setAttribute({
-            fixed: true,
             withLabel: true,
             highlight: true
         });
@@ -47,7 +45,6 @@ var Macro = (function(JXG, MacroLib) {
             strokeWidth: '5',
             name: 'C<sub>3</sub>',
             withLabel: true,
-            fixed: true,
             label: {
                 offset: [0, -190]
             }

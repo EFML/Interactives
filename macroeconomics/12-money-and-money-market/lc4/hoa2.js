@@ -16,9 +16,6 @@ var Macro = (function(JXG, MacroLib) {
             name: 'M<sub>D1</sub>',
             color: 'Orange'
         });
-        D1.setAttribute({
-            fixed: true
-        });
 
         ////////////
         //LRAS - straight line
@@ -36,7 +33,6 @@ var Macro = (function(JXG, MacroLib) {
             strokeWidth: '5',
             name: 'M<sub>S1</sub>',
             withLabel: true,
-            fixed: true,
             dash: 1,
             label: {
                 offset: [0, 185]
@@ -70,7 +66,6 @@ var Macro = (function(JXG, MacroLib) {
         // Fixed Dashed Lines for Board 1
         ////////////
         dashS1 = MacroLib.createDashedLines2Axis(brd1, iSD, {
-            fixed: false,
             withLabel: false,
             xlabel: 'Q<sub>2</sub>',
             ylabel: 'R<sub>2</sub>',
@@ -78,7 +73,6 @@ var Macro = (function(JXG, MacroLib) {
         });
 
         var dashSfix = MacroLib.createDashedLines2Axis(brd1, iSDfix, {
-            fixed: true,
             withLabel: true,
             xlabel: 'Q<sub>1</sub>',
             ylabel: 'R<sub>1</sub>',

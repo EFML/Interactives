@@ -47,8 +47,7 @@ var Macro = (function(JXG, MacroLib) {
             color: 'DodgerBlue'
         });
         SRAS1.setAttribute({
-            dash: 1,
-            fixed: true
+            dash: 1
         });
 
         //Supply Line 2 - moveable
@@ -69,8 +68,7 @@ var Macro = (function(JXG, MacroLib) {
             color: 'Orange'
         });
         AD1.setAttribute({
-            dash: 1,
-            fixed: true
+            dash: 1
         });
 
         // //Demand Line 2 - moveable
@@ -128,7 +126,6 @@ var Macro = (function(JXG, MacroLib) {
             strokeWidth: '3',
             name: 'LRAS',
             withLabel: true,
-            fixed: true,
             label: {
                 offset: [-15, 200]
             }

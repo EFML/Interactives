@@ -21,8 +21,7 @@ var Macro = (function(JXG, MacroLib) {
             color: 'DodgerBlue'
         });
         SRAS1.setAttribute({
-            dash: 1,
-            fixed: true
+            dash: 1
         });
 
         //Supply Line 2 - moveable
@@ -42,8 +41,7 @@ var Macro = (function(JXG, MacroLib) {
             color: 'Orange'
         });
         AD1.setAttribute({
-            dash: 1,
-            fixed: true
+            dash: 1
         });
 
         //Demand Line 2 - moveable
@@ -71,7 +69,6 @@ var Macro = (function(JXG, MacroLib) {
         // Draggable Dashed Lines for Board 1
         ////////////
         var dashS2 = MacroLib.createDashedLines2Axis(brd1, iS2D, {
-            fixed: true,
             withLabel: false,
             xlabel: 'Y<sub>2</sub>',
             ylabel: 'PL<sub>2</sub>',
@@ -82,7 +79,6 @@ var Macro = (function(JXG, MacroLib) {
         // Fixed Dashed Lines for Board 1
         ////////////
         var dashesFixedB1 = MacroLib.createDashedLines2Axis(brd1, iSDfix, {
-            fixed: true,
             withLabel: true,
             xlabel: 'rY<sub>1</sub>',
             ylabel: 'PL<sub>1</sub>',
@@ -100,14 +96,11 @@ var Macro = (function(JXG, MacroLib) {
             strokeWidth: '3',
             name: 'LRAS',
             withLabel: true,
-            fixed: true,
             label: {
                 offset: [-15, 200]
             }
         });
-        var labelLRAS = brd1.create('text', [6.7, -0.4, 'rY<sub>F</sub>'], {
-            fixed: true
-        });
+        var labelLRAS = brd1.create('text', [6.7, -0.4, 'rY<sub>F</sub>']);
 
         //////////////////
         // Interactivity

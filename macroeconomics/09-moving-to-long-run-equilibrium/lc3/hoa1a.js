@@ -20,8 +20,7 @@ var Macro = (function(JXG, MacroLib) {
             color: 'DodgerBlue'
         });
         SRAS1.setAttribute({
-            dash: 1,
-            fixed: true
+            dash: 1
         });
 
         //Supply Line 2 - - fixed
@@ -31,8 +30,7 @@ var Macro = (function(JXG, MacroLib) {
             color: 'DodgerBlue'
         });
         SRAS2.setAttribute({
-            withLabel: false,
-            fixed: true
+            withLabel: false
         });
 
         //Demand Line 1 - fixed
@@ -42,8 +40,7 @@ var Macro = (function(JXG, MacroLib) {
             color: 'Orange'
         });
         AD1.setAttribute({
-            dash: 1,
-            fixed: true
+            dash: 1
         });
 
         //Demand Line 2 - fixed
@@ -53,8 +50,7 @@ var Macro = (function(JXG, MacroLib) {
             color: 'Orange'
         });
         AD2.setAttribute({
-            withLabel: false,
-            fixed: true
+            withLabel: false
         });
 
 
@@ -100,14 +96,11 @@ var Macro = (function(JXG, MacroLib) {
             strokeWidth: '3',
             name: 'LRAS',
             withLabel: true,
-            fixed: true,
             label: {
                 offset: [-15, 200]
             }
         });
-        var labelLRAS = brd1.create('text', [2.7, -0.4, 'rY<sub>F</sub>'], {
-            fixed: true
-        });
+        var labelLRAS = brd1.create('text', [2.7, -0.4, 'rY<sub>F</sub>']);
     }
 
     init();

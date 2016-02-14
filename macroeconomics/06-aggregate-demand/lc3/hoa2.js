@@ -22,9 +22,6 @@ var Macro = (function(JXG, MacroLib) {
             name: 'AD',
             color: 'Gray'
         });
-        AD.setAttribute({
-            fixed: true
-        });
 
         //Demand Line AD1 - fixed
         var AD1 = MacroLib.createLine(brd1, {
@@ -44,9 +41,6 @@ var Macro = (function(JXG, MacroLib) {
             c2: [8.25, 0.75],
             name: 'AD<sub>2</sub>',
             color: 'Blue'
-        });
-        AD2.setAttribute({
-            fixed: true
         });
     }
 

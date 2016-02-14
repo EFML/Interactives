@@ -22,8 +22,7 @@ var Macro = (function(JXG, MacroLib) {
             color: 'DodgerBlue'
         });
         SRAS1.setAttribute({
-            dash: 1,
-            fixed: true
+            dash: 1
         });
 
         //Supply Line 2 - moveable
@@ -33,7 +32,6 @@ var Macro = (function(JXG, MacroLib) {
             color: 'DodgerBlue'
         });
         SRAS2.setAttribute({
-            fixed: true,
             withLabel: false
         });
 
@@ -44,8 +42,7 @@ var Macro = (function(JXG, MacroLib) {
             color: 'Orange'
         });
         AD1.setAttribute({
-            dash: 1,
-            fixed: true
+            dash: 1
         });
 
         //Demand Line 2 - moveable
@@ -55,7 +52,6 @@ var Macro = (function(JXG, MacroLib) {
             color: 'Orange'
         });
         AD2.setAttribute({
-            fixed: true,
             withLabel: false
         });
 

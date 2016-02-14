@@ -70,7 +70,6 @@ var Macro = (function(JXG, MacroLib) {
         });
         S1B1.setAttribute({
             dash: 1,
-            fixed: true,
         });
 
         //Supply Line 2 - moveable
@@ -92,8 +91,7 @@ var Macro = (function(JXG, MacroLib) {
             color: 'Orange'
         });
         AD1.setAttribute({
-            dash: 1,
-            fixed: true
+            dash: 1
         });
 
         //Demand Line 2 - moveable
@@ -116,7 +114,6 @@ var Macro = (function(JXG, MacroLib) {
         });
         LRAS.setAttribute({
             withLabel: true,
-            fixed: true,
             highlight: true,
             strokeWidth: 3
         });
@@ -259,9 +256,6 @@ var Macro = (function(JXG, MacroLib) {
             name: 'SRPC<sub>1</sub>',
             color: 'DodgerBlue'
         });
-        SRPC1.setAttribute({
-            fixed: true
-        });
 
         //LRAS - fixed
         // var LRAS = createLine(brd2,{'ltype':'Vertical','name':'LRPC','color':'DodgerBlue'})
@@ -279,7 +273,6 @@ var Macro = (function(JXG, MacroLib) {
         LRPC.setAttribute({
             dash: 3,
             withLabel: true,
-            fixed: true,
             highlight: true,
             strokeWidth: 2
         });
@@ -307,7 +300,6 @@ var Macro = (function(JXG, MacroLib) {
         ////////////
         var dashesB2 = MacroLib.createDashedLines2Axis(brd2, iSDB2fix, {
             withLabel: true,
-            fixed: true,
             xlabel: '5.0%',
             xoffsets: [5, 10],
             ylabel: '2.0%',
@@ -332,8 +324,7 @@ var Macro = (function(JXG, MacroLib) {
                 withLabel: false,
                 strokeColor: 'gray',
                 strokeWidth: '2',
-                dash: '0',
-                fixed: true
+                dash: '0'
             });
 
         var iB2SRPC1 = brd2.create('intersection', [fakeD, SRPC1, 0], {

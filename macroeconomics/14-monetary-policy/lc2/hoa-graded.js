@@ -108,9 +108,6 @@ var Macro = (function(JXG, MacroLib) {
             name: 'D<sub>M</sub>',
             color: 'Gray'
         });
-        D1.setAttribute({
-            fixed: true
-        });
         //Supply Board 1
         var S1 = MacroLib.createLine(brd1, {
             ltype: 'Vertical',
@@ -119,8 +116,7 @@ var Macro = (function(JXG, MacroLib) {
         });
         S1.setAttribute({
             dash: 2,
-            strokeWidth: 3,
-            fixed: true
+            strokeWidth: 3
         });
 
         var S2 = MacroLib.createTransformLine(brd1, {
@@ -140,14 +136,12 @@ var Macro = (function(JXG, MacroLib) {
 
         //Dashed Lines - Board 1
         var dashB1fixed = MacroLib.createDashedLines2Axis(brd1, iSDB1, {
-            fixed: true,
             withLabel: true,
             color: 'Gray',
             xlabel: 'Q<sub>1</sub>',
             ylabel: 'N<sub>1</sub>'
         });
         var dashB1 = MacroLib.createDashedLines2Axis(brd1, iSDB1, {
-            fixed: false,
             withLabel: false,
             color: 'DodgerBlue',
             xlabel: 'Q<sub>2</sub>',
@@ -181,9 +175,6 @@ var Macro = (function(JXG, MacroLib) {
             name: 'D',
             color: 'Gray'
         });
-        D1B2.setAttribute({
-            fixed: true
-        });
 
         //Intersection Board 2
         var iSDB2 = brd2.create('intersection', [SB2, D1B2], {
@@ -192,7 +183,6 @@ var Macro = (function(JXG, MacroLib) {
 
         //Dashed Lines - Board 2
         var dashB2fixed = MacroLib.createDashedLines2Axis(brd2, iSDB2, {
-            fixed: true,
             withLabel: true,
             color: 'Gray',
             xlabel: 'Q<sub>1</sub>',
@@ -215,9 +205,6 @@ var Macro = (function(JXG, MacroLib) {
             name: 'SRAS',
             color: 'Gray'
         });
-        SB3.setAttribute({
-            fixed: true
-        });
         //Demand Board 3
         var D1B3 = MacroLib.createLine(brd3, {
             ltype: 'Demand',
@@ -226,8 +213,7 @@ var Macro = (function(JXG, MacroLib) {
         });
         D1B3.setAttribute({
             dash: 2,
-            strokeWidth: 3,
-            fixed: true
+            strokeWidth: 3
         });
 
         var D2B3 = MacroLib.createTransformLine(brd3, {
@@ -246,7 +232,6 @@ var Macro = (function(JXG, MacroLib) {
 
         //Dashed Lines - Board 3
         var dashB3fixed = MacroLib.createDashedLines2Axis(brd3, iSDB3, {
-            fixed: true,
             withLabel: true,
             color: 'Gray',
             xlabel: 'Y<sub>1</sub>',

@@ -19,8 +19,7 @@ var Macro = (function(JXG, MacroLib) {
             color: 'Gray'
         });
         supplyLine1.setAttribute({
-            dash: 1,
-            fixed: true
+            dash: 1
         });
 
         // Supply Line 2 - moveable

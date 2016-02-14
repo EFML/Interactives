@@ -24,7 +24,6 @@ var Macro = (function(JXG, MacroLib) {
         });
         SBfix.setAttribute({
             dash: 1,
-            fixed: true,
             withLabel: false
         });
 
@@ -47,7 +46,6 @@ var Macro = (function(JXG, MacroLib) {
         });
         DB1.setAttribute({
             dash: 1,
-            fixed: true,
             withLabel: false
         });
 
@@ -78,7 +76,6 @@ var Macro = (function(JXG, MacroLib) {
             color: 'Crimson'
         });
         DB2.setAttribute({
-            fixed: true,
             withLabel: true
         });
 
@@ -110,7 +107,6 @@ var Macro = (function(JXG, MacroLib) {
         // FIXED
         var dashesB2fix = MacroLib.createDashedLines2Axis(brd2, iSDB1, {
             withLabel: false,
-            fixed: true,
             xlabel: 'I<sub>1</sub>',
             // xoffsets:[5,15],
             ylabel: 'RIR<sub>1</sub>',

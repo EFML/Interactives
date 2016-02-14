@@ -37,7 +37,6 @@ var Macro = (function(JXG, MacroLib) {
             name: 'P',
             withLabel: true,
             visible: true,
-            fixed: true,
             strokeColor: 'Gray',
             fillColor: 'Gray',
             label: {

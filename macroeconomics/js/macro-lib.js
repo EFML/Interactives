@@ -101,7 +101,6 @@ var MacroLib = (function(JXG) {
         var dx1 = (bboxlimits[2]-bboxlimits[0])/40;
         var dy1 = (bboxlimits[3]-bboxlimits[1])/50;
         var xlabel = board.create('text', [bboxlimits[2] - dx1, dy1, xname], {
-            fixed: true,
             anchorX: 'right',
             anchorY: 'top'
         });
@@ -111,8 +110,6 @@ var MacroLib = (function(JXG) {
         var dx2 = (bboxlimits[2]-bboxlimits[0])/50;
         var dy2 = (bboxlimits[1]-bboxlimits[3])/40;
         var ylabel = board.create('text', [-dx2, bboxlimits[1] - dy2, yname], {
-            fixed: true,
-            fixed: true,
             anchorX: 'right',
             anchorY: 'top'
         });

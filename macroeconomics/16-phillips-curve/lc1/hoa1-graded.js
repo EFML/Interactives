@@ -20,9 +20,6 @@ var Macro = (function(JXG, MacroLib) {
             name: 'SRAS',
             color: 'Gray'
         });
-        Supply.setAttribute({
-            fixed: true
-        });
 
         //Demand Line 1 - fixed
         AD1 = MacroLib.createLine(brd1, {
@@ -31,8 +28,7 @@ var Macro = (function(JXG, MacroLib) {
             color: 'Gray'
         });
         AD1.setAttribute({
-            dash: 1,
-            fixed: true
+            dash: 1
         });
 
         //Demand Line 2 - moveable
@@ -59,7 +55,6 @@ var Macro = (function(JXG, MacroLib) {
         // Dashes for fixed Line
         ////////////
         var dashB1 = MacroLib.createDashedLines2Axis(brd1, iSDfix, {
-            fixed: true,
             withLabel: true,
             xlabel: '',
             ylabel: 'PL<sub>1</sub>',
