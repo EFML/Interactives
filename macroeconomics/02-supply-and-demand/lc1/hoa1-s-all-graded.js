@@ -78,7 +78,7 @@ var Macro = (function(JXG, MacroLib) {
             [3.25, -1.55,'<strong>&Delta;D</strong>'],
             {strokeColor: 'DodgerBlue', anchorX: 'right', anchorY: 'middle'}
         );
-        demandSlider.on('mousedown', demandSliderMouseDown);
+        demandSlider.on('down', demandSliderMouseDown);
         demandSlider.on('drag', demandSliderMouseDrag);
 
         // Price slider
@@ -97,7 +97,7 @@ var Macro = (function(JXG, MacroLib) {
             {strokeColor: 'Crimson', anchorY: 'top'}
         );
 
-        priceSlider.on('mousedown', priceSliderMouseDown);
+        priceSlider.on('down', priceSliderMouseDown);
         priceSlider.on('drag', priceSliderMouseDrag);
     }
 

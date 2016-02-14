@@ -41,7 +41,7 @@ var Macro = (function(JXG, MacroLib) {
             name: 'A'
         });
 
-        brd1.on('mousedown', function() {
+        brd1.on('down', function() {
             brd1.update();
         });
     }

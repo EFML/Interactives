@@ -267,7 +267,7 @@ var Macro = (function(JXG, MacroLib) {
         //////////////////
         // Interactivity
         //////////////////
-        brd1.on('mousedown', function() {
+        brd1.on('down', function() {
             dashB1.X1.setAttribute({
                 withLabel: true
             });
@@ -280,7 +280,7 @@ var Macro = (function(JXG, MacroLib) {
             });
         });
 
-        brd2.on('mousedown', function() {
+        brd2.on('down', function() {
             dashB2.X1.setAttribute({
                 withLabel: true
             });
@@ -289,7 +289,7 @@ var Macro = (function(JXG, MacroLib) {
             });
         });
 
-        brd3.on('mousedown', function() {
+        brd3.on('down', function() {
             dashB3.X1.setAttribute({
                 withLabel: true
             });

@@ -37,7 +37,7 @@ var Macro = (function(JXG, MacroLib) {
         });
 
         //Interactivity
-        brd1.on('mousedown', function() {
+        brd1.on('down', function() {
             SRPC2.setAttribute({
                 withLabel: true
             });

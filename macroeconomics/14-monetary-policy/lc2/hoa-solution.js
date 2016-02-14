@@ -236,7 +236,7 @@ var Macro = (function(JXG, MacroLib) {
         //////////////////
         // Interactivity
         //////////////////
-        brd1.on('mousedown', function() {
+        brd1.on('down', function() {
             dashB1.X1.setAttribute({
                 withLabel: true
             });

@@ -162,7 +162,7 @@ var Macro = (function(JXG, MacroLib) {
 
         });
 
-        brd1.on('mousedown', function() {
+        brd1.on('down', function() {
             dashesSonly.Y1.setAttribute({
                 withLabel: true
             });

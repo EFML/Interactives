@@ -81,7 +81,7 @@ var Macro = (function(JXG, MacroLib) {
             brd1.update();
         });
 
-        brd1.on('mousedown', function() {
+        brd1.on('down', function() {
             toggleLabels(true);
             brd1.update();
         });

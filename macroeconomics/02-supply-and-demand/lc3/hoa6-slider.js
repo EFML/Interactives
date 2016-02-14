@@ -83,7 +83,7 @@ var Macro = (function(JXG, MacroLib) {
             color: 'DodgerBlue'
         });
 
-        demandSlider.on('mousedown', function() {
+        demandSlider.on('down', function() {
             demandLine2.setAttribute({
                 withLabel: true,
                 offset: [125, -85]

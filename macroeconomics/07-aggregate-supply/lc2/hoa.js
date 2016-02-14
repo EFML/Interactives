@@ -113,7 +113,7 @@ var Macro = (function(JXG, MacroLib) {
             ptAxis2.moveTo([LRAS2.point1.X(), 0]);
         });
 
-        brd1.on('mousedown', function() {
+        brd1.on('down', function() {
             LRAS2.setAttribute({
                 withLabel: true
             });

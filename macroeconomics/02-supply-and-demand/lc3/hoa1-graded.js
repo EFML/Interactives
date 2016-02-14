@@ -125,7 +125,7 @@ var Macro = (function(JXG, MacroLib) {
                 [3.25, demandSliderY,'<strong>&Delta;D</strong>'],
                 {strokeColor: 'DodgerBlue', anchorX: 'right', anchorY: 'middle'}
             );
-            c.demandSlider.on('mousedown', function() {
+            c.demandSlider.on('down', function() {
                 demandSliderMouseDown(c)
             });
             c.demandSlider.on('drag', function() {
@@ -149,7 +149,7 @@ var Macro = (function(JXG, MacroLib) {
                 [3.25, supplySliderY,'<strong>&Delta;S</strong>'],
                 {strokeColor: 'Orange', anchorX: 'right', anchorY: 'middle'}
             );
-            c.supplySlider.on('mousedown', function() {
+            c.supplySlider.on('down', function() {
                 supplySliderMouseDown(c)
             });
             c.supplySlider.on('drag', function() {

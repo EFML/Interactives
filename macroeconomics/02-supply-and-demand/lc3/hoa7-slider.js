@@ -83,7 +83,7 @@ var Macro = (function(JXG, MacroLib) {
             color: 'Orange'
         });
 
-        supplySlider.on('mousedown', function() {
+        supplySlider.on('down', function() {
             supplyLine2.setAttribute({
                 withLabel: true,
                 offset: [125, -85]

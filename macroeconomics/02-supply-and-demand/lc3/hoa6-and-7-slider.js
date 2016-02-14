@@ -88,7 +88,7 @@ var Macro = (function(JXG, MacroLib) {
             color: 'DodgerBlue'
         });
 
-        demandSlider.on('mousedown', function() {
+        demandSlider.on('down', function() {
             demandLine12.setAttribute({
                 withLabel: true,
                 offset: [125, -85]
@@ -188,7 +188,7 @@ var Macro = (function(JXG, MacroLib) {
             color: 'Orange'
         });
 
-        supplySlider.on('mousedown', function() {
+        supplySlider.on('down', function() {
             supplyLine22.setAttribute({
                 withLabel: true,
                 offset: [125, -85]

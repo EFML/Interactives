@@ -141,7 +141,7 @@ var Macro = (function(JXG, MacroLib) {
                 })
             );
             // Interactivity
-            yAxisPts[i-1].on('mousedown', function() {
+            yAxisPts[i-1].on('down', function() {
                 var index = getIndex(yAxisPts, this);
                 selectPoint(index)
             });

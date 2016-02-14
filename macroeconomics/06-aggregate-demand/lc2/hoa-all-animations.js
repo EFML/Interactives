@@ -39,7 +39,7 @@ var Macro = (function(JXG, MacroLib) {
             name: 'A'
         });
 
-        brd1.on('mousedown', function() {
+        brd1.on('down', function() {
             AD2.setAttribute({
                 withLabel: true,
                 offset: [125, -85]

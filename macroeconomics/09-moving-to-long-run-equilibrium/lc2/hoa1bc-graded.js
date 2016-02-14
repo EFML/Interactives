@@ -124,7 +124,7 @@ var Macro = (function(JXG, MacroLib) {
 
         });
 
-        brd1.on('mousedown', function() {
+        brd1.on('down', function() {
             AD2.setAttribute({
                 withLabel: true
             });
