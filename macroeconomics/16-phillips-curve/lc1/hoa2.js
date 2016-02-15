@@ -37,7 +37,15 @@ var Macro = (function(JXG, MacroLib) {
             color: 'Orange'
         });
         AD2.setAttribute({
-            withLabel: false
+            withLabel: false,
+            highlight: true,
+            fixed: false
+        });
+        AD2.point1.setAttribute({
+            fixed: false
+        });
+        AD2.point2.setAttribute({
+            fixed: false
         });
 
         ////////////
@@ -140,20 +148,7 @@ var Macro = (function(JXG, MacroLib) {
         //////////////////
         // Interactivity
         //////////////////
-        brd1.on('drag', function() {
-            //Moving Dashed Lines in Board 1
-            dashesB1.Y1.moveTo([0, iS2D.Y()]);
-            dashesB1.Y2.moveTo([iS2D.X(), iS2D.Y()]);
-
-            dashesB1.X1.moveTo([iS2D.X(), 0]);
-            dashesB1.X2.moveTo([iS2D.X(), iS2D.Y()]);
-
-            DB2YP1.moveTo([0, iS2D.Y()]);
-            DB2YP2.moveTo([iB2SRPC.X(), iS2D.Y()]);
-
-        });
-
-        brd1.on('down', function() {
+        AD2.on('down', function() {
             AD2.setAttribute({
                 withLabel: true
             });
@@ -176,6 +171,19 @@ var Macro = (function(JXG, MacroLib) {
             });
 
             brd1.update();
+        });
+
+        AD2.on('drag', function() {
+            //Moving Dashed Lines in Board 1
+            dashesB1.Y1.moveTo([0, iS2D.Y()]);
+            dashesB1.Y2.moveTo([iS2D.X(), iS2D.Y()]);
+
+            dashesB1.X1.moveTo([iS2D.X(), 0]);
+            dashesB1.X2.moveTo([iS2D.X(), iS2D.Y()]);
+
+            DB2YP1.moveTo([0, iS2D.Y()]);
+            DB2YP2.moveTo([iB2SRPC.X(), iS2D.Y()]);
+
         });
     }
 

@@ -137,7 +137,7 @@ var Macro = (function(JXG, MacroLib) {
         //////////////////
         // Interactivity
         //////////////////
-        brd1.on('drag', function() {
+        slidery.on('drag', function() {
             //Moving Dashed Lines for Supply
             dashesSonly.Y1.moveTo([0, iSonly.Y()]);
             dashesSonly.Y2.moveTo([iSonly.X(), iSonly.Y()]);
@@ -151,23 +151,6 @@ var Macro = (function(JXG, MacroLib) {
 
             dashesDonly.X1.moveTo([iDonly.X(), 0]);
             dashesDonly.X2.moveTo([iDonly.X(), iDonly.Y()]);
-
-        });
-
-        brd1.on('down', function() {
-            dashesSonly.Y1.setAttribute({
-                withLabel: true
-            });
-            dashesSonly.X1.setAttribute({
-                withLabel: true
-            });
-            dashesDonly.Y1.setAttribute({
-                withLabel: true
-            });
-            dashesDonly.X1.setAttribute({
-                withLabel: true
-            });
-            brd1.update();
         });
     }
 

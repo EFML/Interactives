@@ -122,6 +122,7 @@ var Macro = (function(JXG, MacroLib) {
                     fillColor: 'gray',
                     withLabel: false,
                     visible: true,
+                    highlight: true,
                     size: 5
                 })
             );

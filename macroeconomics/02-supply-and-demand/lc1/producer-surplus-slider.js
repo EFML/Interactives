@@ -74,7 +74,7 @@ var Macro = (function(JXG, MacroLib) {
             fillColor: 'Orange',
             fillOpacity: 0.5,
             label: {
-                offset: [35, 0]
+                offset: [25, 0]
             }
         });
         // Dashed horizontal line

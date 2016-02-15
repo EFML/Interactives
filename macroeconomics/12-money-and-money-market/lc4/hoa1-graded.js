@@ -121,13 +121,15 @@ var Macro = (function(JXG, MacroLib) {
         //////////////////
         // Interactivity
         //////////////////
-        brd1.on('drag', function() {
+        MD2.on('drag', function() {
+            brd1.suspendUpdate();
             //Moving 1st set of Dashed Lines in Board 1
             dashS2.Y1.moveTo([0, iB1SD.Y()]);
             dashS2.Y2.moveTo([iB1SD.X(), iB1SD.Y()]);
 
             dashS2.X1.moveTo([iB1SD.X(), 0]);
             dashS2.X2.moveTo([iB1SD.X(), iB1SD.Y()]);
+            brd1.unsuspendUpdate();
         });
     }
 

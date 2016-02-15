@@ -34,7 +34,15 @@ var Macro = (function(JXG, MacroLib) {
             color: 'Orange'
         });
         SB1.setAttribute({
-            withLabel: true
+            withLabel: true,
+            highlight: true,
+            fixed: false
+        });
+        SB1.point1.setAttribute({
+            fixed: false
+        });
+        SB1.point2.setAttribute({
+            fixed: false
         });
 
         //Demand Line 1 - fixed
@@ -49,14 +57,22 @@ var Macro = (function(JXG, MacroLib) {
             withLabel: false
         });
 
-        //Demand Line 2 - moveable -- Error?
+        //Demand Line 2 - moveable
         DB1 = MacroLib.createLine(brd1, {
             ltype: 'Demand',
             name: 'D<sub>LF</sub>',
             color: 'DodgerBlue'
         });
         DB1.setAttribute({
-            withLabel: true
+            withLabel: true,
+            highlight: true,
+            fixed: false
+        });
+        DB1.point1.setAttribute({
+            fixed: false
+        });
+        DB1.point2.setAttribute({
+            fixed: false
         });
 
         ////////////
@@ -142,7 +158,10 @@ var Macro = (function(JXG, MacroLib) {
         //////////////////
         // Interactivity
         //////////////////
-        brd1.on('drag', function() {
+        SB1.on('drag', lineDrag);
+        DB1.on('drag', lineDrag);
+
+        function lineDrag() {
             //Moving Dashed Lines in Board 1
             dashesB1.Y1.moveTo([0, iSDB1.Y()]);
             dashesB1.Y2.moveTo([iSDB1.X(), iSDB1.Y()]);
@@ -154,7 +173,7 @@ var Macro = (function(JXG, MacroLib) {
             dashesB2.Y2.moveTo([iIDy.X(), iSDB1.Y()]);
             dashesB2.X1.moveTo([iIDy.X(), 0]);
             dashesB2.X2.moveTo([iIDy.X(), iSDB1.Y()]);
-        });
+        }
     }
 
     ////////////////////////

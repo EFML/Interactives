@@ -219,7 +219,7 @@ var Macro = (function(JXG, MacroLib) {
         //////////////////
         // Interactivity
         //////////////////
-        brd1.on('down', function() {
+        sliderx.on('down', function() {
             dashB1.X1.setAttribute({
                 withLabel: true
             });
@@ -250,27 +250,30 @@ var Macro = (function(JXG, MacroLib) {
         });
 
 
-        brd1.on('drag', function() {
+        sliderx.on('drag', function() {
             //Moving 1st set of Dashed Lines in Board 1
+            brd1.suspendUpdate();
             dashB1.Y1.moveTo([0, iSDB1.Y()]);
             dashB1.Y2.moveTo([iSDB1.X(), iSDB1.Y()]);
-
             dashB1.X1.moveTo([iSDB1.X(), 0]);
             dashB1.X2.moveTo([iSDB1.X(), iSDB1.Y()]);
+            brd1.unsuspendUpdate();
 
             //Moving Board 2 Dashed Lines
+            brd2.suspendUpdate();
             dashB2.Y1.moveTo([0, iSDB2.Y()]);
             dashB2.Y2.moveTo([iSDB2.X(), iSDB2.Y()]);
-
             dashB2.X1.moveTo([iSDB2.X(), 0]);
             dashB2.X2.moveTo([iSDB2.X(), iSDB2.Y()]);
+            brd2.unsuspendUpdate();
 
-            //Moving Board 2 Dashed Lines
+            //Moving Board 3 Dashed Lines
+            brd3.suspendUpdate();
             dashB3.Y1.moveTo([0, iSDB3.Y()]);
             dashB3.Y2.moveTo([iSDB3.X(), iSDB3.Y()]);
-
             dashB3.X1.moveTo([iSDB3.X(), 0]);
             dashB3.X2.moveTo([iSDB3.X(), iSDB3.Y()]);
+            brd3.unsuspendUpdate();
         });
     }
 

@@ -120,17 +120,7 @@ var Macro = (function(JXG, MacroLib) {
         //////////////////
         // Interactivity
         //////////////////
-        brd1.on('drag', function() {
-            //Moving Dashed Lines for Demand/Supply
-            dashesSD.Y1.moveTo([0, iSD.Y()]);
-            dashesSD.Y2.moveTo([iSD.X(), iSD.Y()]);
-
-            dashesSD.X1.moveTo([iSD.X(), 0]);
-            dashesSD.X2.moveTo([iSD.X(), iSD.Y()]);
-
-        });
-
-        brd1.on('down', function() {
+        sliderx.on('down', function() {
             AD2.setAttribute({
                 withLabel: true
             });
@@ -141,6 +131,16 @@ var Macro = (function(JXG, MacroLib) {
                 withLabel: true
             });
             brd1.update();
+        });
+
+        sliderx.on('drag', function() {
+            //Moving Dashed Lines for Demand/Supply
+            dashesSD.Y1.moveTo([0, iSD.Y()]);
+            dashesSD.Y2.moveTo([iSD.X(), iSD.Y()]);
+
+            dashesSD.X1.moveTo([iSD.X(), 0]);
+            dashesSD.X2.moveTo([iSD.X(), iSD.Y()]);
+
         });
     }
 

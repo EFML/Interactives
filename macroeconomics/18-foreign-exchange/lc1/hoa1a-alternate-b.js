@@ -89,15 +89,15 @@ var Macro = (function(JXG, MacroLib) {
         //////////////////
         // Interactivity
         //////////////////
-        brd1.on('drag', function() {
-            //Moving Dashed Lines in Board 1
-            dashS2.Y1.moveTo([0, iS2D.Y()]);
-            dashS2.Y2.moveTo([iS2D.X(), iS2D.Y()]);
+        // brd1.on('drag', function() {alert(1)
+        //     //Moving Dashed Lines in Board 1
+        //     dashS2.Y1.moveTo([0, iS2D.Y()]);
+        //     dashS2.Y2.moveTo([iS2D.X(), iS2D.Y()]);
 
-            dashS2.X1.moveTo([iS2D.X(), 0]);
-            dashS2.X2.moveTo([iS2D.X(), iS2D.Y()]);
+        //     dashS2.X1.moveTo([iS2D.X(), 0]);
+        //     dashS2.X2.moveTo([iS2D.X(), iS2D.Y()]);
 
-        });
+        // });
     }
 
     init();

@@ -250,7 +250,7 @@ var Macro = (function(JXG, MacroLib) {
         //////////////////
         // Interactivity
         //////////////////
-        brd1.on('down', function() {
+        sliderB1.on('down', function() {
             dashB1.X1.setAttribute({
                 withLabel: true
             });
@@ -263,7 +263,7 @@ var Macro = (function(JXG, MacroLib) {
             });
         });
 
-        brd2.on('down', function() {
+        sliderB2.on('down', function() {
             dashB2.X1.setAttribute({
                 withLabel: true
             });
@@ -272,7 +272,7 @@ var Macro = (function(JXG, MacroLib) {
             });
         });
 
-        brd3.on('down', function() {
+        sliderB3.on('down', function() {
             dashB3.X1.setAttribute({
                 withLabel: true
             });
@@ -286,31 +286,37 @@ var Macro = (function(JXG, MacroLib) {
         });
 
 
-        brd1.on('drag', function() {
+        sliderB1.on('drag', function() {
+            brd1.suspendUpdate();
             //Moving 1st set of Dashed Lines in Board 1
             dashB1.Y1.moveTo([0, iSDB1.Y()]);
             dashB1.Y2.moveTo([iSDB1.X(), iSDB1.Y()]);
 
             dashB1.X1.moveTo([iSDB1.X(), 0]);
             dashB1.X2.moveTo([iSDB1.X(), iSDB1.Y()]);
+            brd1.unsuspendUpdate();
         });
 
-        brd2.on('drag', function() {
+        sliderB2.on('drag', function() {
+            brd2.suspendUpdate();
             //Moving Board 2 Dashed Lines
             dashB2.Y1.moveTo([0, iSDB2.Y()]);
             dashB2.Y2.moveTo([iSDB2.X(), iSDB2.Y()]);
 
             dashB2.X1.moveTo([iSDB2.X(), 0]);
             dashB2.X2.moveTo([iSDB2.X(), iSDB2.Y()]);
+            brd2.unsuspendUpdate();
         });
 
-        brd3.on('drag', function() {
+        sliderB3.on('drag', function() {
+            brd3.suspendUpdate();
             //Moving Board 2 Dashed Lines
             dashB3.Y1.moveTo([0, iSDB3.Y()]);
             dashB3.Y2.moveTo([iSDB3.X(), iSDB3.Y()]);
 
             dashB3.X1.moveTo([iSDB3.X(), 0]);
             dashB3.X2.moveTo([iSDB3.X(), iSDB3.Y()]);
+            brd3.unsuspendUpdate();
         });
     }
 

@@ -217,19 +217,24 @@ var Macro = (function(JXG, MacroLib) {
 
         // Draggable consumer surplus label to the bottom left
         var p1 = board.create('point', [0.5, -1], {
-            visible: false
+            visible: false,
+            fixed: false
         });
         var p2 = board.create('point', [0.5, -1.5], {
-            visible: false
+            visible: false,
+            fixed: false
         });
         var p3 = board.create('point', [1.0, -1.5], {
-            visible: false
+            visible: false,
+            fixed: false
         });
         var p4 = board.create('point', [1.0, -1], {
-            visible: false
+            visible: false,
+            fixed: false
         });
         var csLabel = board.create('polygon', [p1, p2, p3, p4], {
             name: 'Consumer<br>Surplus',
+            fixed: false,
             hasInnerPoints: true,
             withLabel: true,
             withLines: false,
@@ -246,19 +251,24 @@ var Macro = (function(JXG, MacroLib) {
 
         // Draggable producer surplus label to the bottom right
         var p5 = board.create('point', [4.5, -1], {
-            visible: false
+            visible: false,
+            fixed: false
         });
         var p6 = board.create('point', [4.5, -1.5], {
-            visible: false
+            visible: false,
+            fixed: false
         });
         var p7 = board.create('point', [5.0, -1.5], {
-            visible: false
+            visible: false,
+            fixed: false
         });
         var p8 = board.create('point', [5.0, -1], {
-            visible: false
+            visible: false,
+            fixed: false
         });
         var psLabel = board.create('polygon', [p5, p6, p7, p8], {
             name: 'Producer<br>Surplus',
+            fixed: false,
             hasInnerPoints: true,
             withLabel: true,
             withLines: false,
@@ -275,19 +285,24 @@ var Macro = (function(JXG, MacroLib) {
 
         // Draggable erase gray label to the bottom right
         var p9 = board.create('point', [8.5, -1], {
-            visible: false
+            visible: false,
+            fixed: false
         });
         var p10 = board.create('point', [8.5, -1.5], {
-            visible: false
+            visible: false,
+            fixed: false
         });
         var p11 = board.create('point', [9.0, -1.5], {
-            visible: false
+            visible: false,
+            fixed: false
         });
         var p12 = board.create('point', [9.0, -1], {
-            visible: false
+            visible: false,
+            fixed: false
         });
         var eraseLabel = board.create('polygon', [p9, p10, p11, p12], {
             name: '',
+            fixed: false,
             hasInnerPoints: true,
             withLabel: false,
             withLines: false,

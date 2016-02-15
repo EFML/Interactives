@@ -69,7 +69,7 @@ var Macro = (function(JXG, MacroLib) {
             color: 'Lime'
         });
         S1B1.setAttribute({
-            dash: 1,
+            dash: 1
         });
 
         //Supply Line 2 - moveable
@@ -80,7 +80,6 @@ var Macro = (function(JXG, MacroLib) {
             color: 'Lime'
         });
         S2B1.setAttribute({
-            highlight: true,
             withLabel: false
         });
 
@@ -102,8 +101,7 @@ var Macro = (function(JXG, MacroLib) {
             color: 'Orange'
         });
         AD2.setAttribute({
-            withLabel: false,
-            highlight: true
+            withLabel: false
         });
 
         //LRAS - fixed
@@ -114,7 +112,6 @@ var Macro = (function(JXG, MacroLib) {
         });
         LRAS.setAttribute({
             withLabel: true,
-            highlight: true,
             strokeWidth: 3
         });
 
@@ -384,34 +381,12 @@ var Macro = (function(JXG, MacroLib) {
         //////////////////
         // Interactivity
         //////////////////
-        brd1.on('drag', function() {
-            //Moving Dashed Lines in Board 1
-            dashesB1.Y1.moveTo([0, iS2D.Y()]);
-            dashesB1.Y2.moveTo([iS2D.X(), iS2D.Y()]);
-            dashesB1.X1.moveTo([iS2D.X(), 0]);
-            dashesB1.X2.moveTo([iS2D.X(), iS2D.Y()]);
+        sliderx.on('down', sliderDown);
+        slidery.on('down', sliderDown);
+        sliderx.on('drag', sliderDrag);
+        slidery.on('drag', sliderDrag);
 
-            //Green Dashed Lines Board 1
-            dashesLRASB1.Y1.moveTo([0, iSLB1.Y()]);
-            dashesLRASB1.Y2.moveTo([iSLB1.X(), iSLB1.Y()]);
-            dashesLRASB1.X1.moveTo([iSLB1.X(), 0]);
-            dashesLRASB1.X2.moveTo([iSLB1.X(), iSLB1.Y()]);
-            brd1.update();
-
-            //BOARD 2
-            //Moving Point A2
-            // DB2YP1.moveTo([0, iS2D.Y()]);
-            // DB2YP2.moveTo([iB2SRPC1.X(),iS2D.Y()]);
-
-            //Orange Dashed Lines Board 2
-            dashesA2B2.Y1.moveTo([0, iB2SRPC1.Y()]);
-            dashesA2B2.Y2.moveTo([iB2SRPC1.X(), iB2SRPC1.Y()]);
-            dashesA2B2.X1.moveTo([iB2SRPC1.X(), 0]);
-            dashesA2B2.X2.moveTo([iB2SRPC1.X(), iB2SRPC1.Y()]);
-
-        });
-
-        brd1.on('down', function() {
+        function sliderDown() {
             // AD2.setAttribute({withLabel:true});
             // iB2SRPC.setAttribute({visible:true});
 
@@ -482,7 +457,34 @@ var Macro = (function(JXG, MacroLib) {
                 visible: true
             });
             brd2.update();
-        });
+        }
+
+        function sliderDrag() {
+            //Moving Dashed Lines in Board 1
+            dashesB1.Y1.moveTo([0, iS2D.Y()]);
+            dashesB1.Y2.moveTo([iS2D.X(), iS2D.Y()]);
+            dashesB1.X1.moveTo([iS2D.X(), 0]);
+            dashesB1.X2.moveTo([iS2D.X(), iS2D.Y()]);
+
+            //Green Dashed Lines Board 1
+            dashesLRASB1.Y1.moveTo([0, iSLB1.Y()]);
+            dashesLRASB1.Y2.moveTo([iSLB1.X(), iSLB1.Y()]);
+            dashesLRASB1.X1.moveTo([iSLB1.X(), 0]);
+            dashesLRASB1.X2.moveTo([iSLB1.X(), iSLB1.Y()]);
+            brd1.update();
+
+            //BOARD 2
+            //Moving Point A2
+            // DB2YP1.moveTo([0, iS2D.Y()]);
+            // DB2YP2.moveTo([iB2SRPC1.X(),iS2D.Y()]);
+
+            //Orange Dashed Lines Board 2
+            dashesA2B2.Y1.moveTo([0, iB2SRPC1.Y()]);
+            dashesA2B2.Y2.moveTo([iB2SRPC1.X(), iB2SRPC1.Y()]);
+            dashesA2B2.X1.moveTo([iB2SRPC1.X(), 0]);
+            dashesA2B2.X2.moveTo([iB2SRPC1.X(), iB2SRPC1.Y()]);
+
+        }
     }
 
     /////////////////////////

@@ -21,7 +21,6 @@ var Macro = (function(JXG, MacroLib) {
             color: 'Gray'
         });
         C1.setAttribute({
-            withLabel: true,
             highlight: true
         });
 
@@ -32,22 +31,16 @@ var Macro = (function(JXG, MacroLib) {
             color: 'Gray'
         });
         C2.setAttribute({
-            withLabel: true,
             highlight: true
         });
 
-        //Curve 3 - fixed
-        C3 = brd1.create('segment', [
-            [5.75, 11.0],
-            [5.75, 1.0]
-        ], {
-            strokeColor: 'Gray',
-            strokeWidth: '5',
+        C3 = MacroLib.createLine(brd1, {
+            ltype: 'Vertical',
             name: 'C<sub>3</sub>',
-            withLabel: true,
-            label: {
-                offset: [0, -190]
-            }
+            color: 'Gray'
+        });
+        C3.setAttribute({
+            highlight: true
         });
 
         brd1.update();

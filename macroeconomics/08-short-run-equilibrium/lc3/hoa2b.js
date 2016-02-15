@@ -197,31 +197,7 @@ var Macro = (function(JXG, MacroLib) {
         //////////////////
         // Interactivity
         //////////////////
-        brd1.on('drag', function() {
-            //Moving Dashed Lines for Demand/Supply
-            dashesSD.Y1.moveTo([0, iSD.Y()]);
-            dashesSD.Y2.moveTo([iSD.X(), iSD.Y()]);
-
-            dashesSD.X1.moveTo([iSD.X(), 0]);
-            dashesSD.X2.moveTo([iSD.X(), iSD.Y()]);
-
-            //Moving Dashed Lines for Supply only
-            dashesSonly.Y1.moveTo([0, iSonly.Y()]);
-            dashesSonly.Y2.moveTo([iSonly.X(), iSonly.Y()]);
-
-            dashesSonly.X1.moveTo([iSonly.X(), 0]);
-            dashesSonly.X2.moveTo([iSonly.X(), iSonly.Y()]);
-
-            //Moving Dashed Lines for Demand only
-            dashesDonly.Y1.moveTo([0, iDonly.Y()]);
-            dashesDonly.Y2.moveTo([iDonly.X(), iDonly.Y()]);
-
-            dashesDonly.X1.moveTo([iDonly.X(), 0]);
-            dashesDonly.X2.moveTo([iDonly.X(), iDonly.Y()]);
-
-        });
-
-        brd1.on('down', function() {
+        slidery.on('down', function() {
             SRAS2.setAttribute({
                 withLabel: true
             });
@@ -247,6 +223,30 @@ var Macro = (function(JXG, MacroLib) {
                 visible: true
             });
             brd1.update();
+        });
+
+        slidery.on('drag', function() {
+            //Moving Dashed Lines for Demand/Supply
+            dashesSD.Y1.moveTo([0, iSD.Y()]);
+            dashesSD.Y2.moveTo([iSD.X(), iSD.Y()]);
+
+            dashesSD.X1.moveTo([iSD.X(), 0]);
+            dashesSD.X2.moveTo([iSD.X(), iSD.Y()]);
+
+            //Moving Dashed Lines for Supply only
+            dashesSonly.Y1.moveTo([0, iSonly.Y()]);
+            dashesSonly.Y2.moveTo([iSonly.X(), iSonly.Y()]);
+
+            dashesSonly.X1.moveTo([iSonly.X(), 0]);
+            dashesSonly.X2.moveTo([iSonly.X(), iSonly.Y()]);
+
+            //Moving Dashed Lines for Demand only
+            dashesDonly.Y1.moveTo([0, iDonly.Y()]);
+            dashesDonly.Y2.moveTo([iDonly.X(), iDonly.Y()]);
+
+            dashesDonly.X1.moveTo([iDonly.X(), 0]);
+            dashesDonly.X2.moveTo([iDonly.X(), iDonly.Y()]);
+
         });
     }
 

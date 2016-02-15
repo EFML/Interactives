@@ -33,14 +33,6 @@ var Macro = (function(JXG, MacroLib) {
             'withLabel': false,
             'highlight': false
         });
-
-        //Interactivity
-        brd1.on('down', function() {
-            SRPC2.setAttribute({
-                withLabel: true
-            });
-            brd1.update();
-        });
     }
 
     //Animation for Inflationary Expectations
@@ -65,6 +57,9 @@ var Macro = (function(JXG, MacroLib) {
 
     //Animation for Unknown Condition
     function increaseLaborProd() {
+        SRPC2.setAttribute({
+            withLabel: true
+        });
         SRPC2.point1.moveTo([1.0, 8.5], 1000);
         SRPC2.point2.moveTo([8.5, 1.0], 1000);
         SRPC2.setAttribute({

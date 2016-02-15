@@ -107,9 +107,6 @@ var Macro = (function(JXG, MacroLib) {
         dashD2.Y1.setAttribute({
             withLabel: toggle
         });
-        AD2.setAttribute({
-            withLabel: toggle
-        });
     }
 
     //Animation for shifting curve SouthWest

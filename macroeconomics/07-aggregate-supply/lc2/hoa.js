@@ -105,12 +105,7 @@ var Macro = (function(JXG, MacroLib) {
         //////////////////
         // Interactivity
         //////////////////
-        brd1.on('drag', function() {
-            //Moving projection of LRAS2 on x-axis
-            ptAxis2.moveTo([LRAS2.point1.X(), 0]);
-        });
-
-        brd1.on('down', function() {
+        sliderx.on('down', function() {
             LRAS2.setAttribute({
                 withLabel: true
             });
@@ -118,6 +113,16 @@ var Macro = (function(JXG, MacroLib) {
                 withLabel: true
             });
             brd1.update();
+        });
+
+        sliderx.on('drag', function() {
+            //Moving projection of LRAS2 on x-axis
+            ptAxis2.moveTo([LRAS2.point1.X(), 0]);
+        });
+
+        sliderx.on('up', function() {
+            //Moving projection of LRAS2 on x-axis
+            ptAxis2.moveTo([LRAS2.point1.X(), 0]);
         });
     }
 

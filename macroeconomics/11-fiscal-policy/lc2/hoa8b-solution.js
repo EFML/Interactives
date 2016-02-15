@@ -134,17 +134,7 @@ var Macro = (function(JXG, MacroLib) {
         //////////////////
         // Interactivity
         //////////////////
-        brd1.on('drag', function() {
-            //Moving Dashed Lines in Board 1
-            dashS2.Y1.moveTo([0, iS2D.Y()]);
-            dashS2.Y2.moveTo([iS2D.X(), iS2D.Y()]);
-
-            dashS2.X1.moveTo([iS2D.X(), 0]);
-            dashS2.X2.moveTo([iS2D.X(), iS2D.Y()]);
-
-        });
-
-        brd1.on('down', function() {
+        sliderx.on('down', function() {
             AD2.setAttribute({
                 withLabel: true
             });
@@ -158,6 +148,16 @@ var Macro = (function(JXG, MacroLib) {
                 withLabel: true
             });
             brd1.update();
+        });
+
+        sliderx.on('drag', function() {
+            //Moving Dashed Lines in Board 1
+            dashS2.Y1.moveTo([0, iS2D.Y()]);
+            dashS2.Y2.moveTo([iS2D.X(), iS2D.Y()]);
+
+            dashS2.X1.moveTo([iS2D.X(), 0]);
+            dashS2.X2.moveTo([iS2D.X(), iS2D.Y()]);
+
         });
     }
 

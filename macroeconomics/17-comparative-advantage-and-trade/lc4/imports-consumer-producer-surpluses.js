@@ -111,7 +111,7 @@ var Macro = (function(JXG, MacroLib) {
             name: 'Consumer<br>surplus',
             withLabel: true,
             label: {
-                offset: [45, 45]
+                offset: [45, 39]
             }
         });
 

@@ -73,7 +73,7 @@ var Macro = (function(JXG, MacroLib) {
             xlabel: 'Q<sub>s</sub>',
             xoffsets: [5, 15],
             ylabel: 'P<sub>1</sub>',
-            yoffsets: [-30, 15],
+            yoffsets: [-30, 0],
             color: 'Gray'
         });
     }

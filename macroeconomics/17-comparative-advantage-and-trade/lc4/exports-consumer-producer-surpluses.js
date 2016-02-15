@@ -43,7 +43,7 @@ var Macro = (function(JXG, MacroLib) {
             name: 'P world',
             withLabel: true,
             label: {
-                offset: [150, 0]
+                offset: [150, 2]
             }
         });
 
@@ -110,7 +110,7 @@ var Macro = (function(JXG, MacroLib) {
             name: 'Consumer<br>surplus',
             withLabel: true,
             label: {
-                offset: [45, 44]
+                offset: [45, 37]
             }
         });
 
@@ -121,7 +121,7 @@ var Macro = (function(JXG, MacroLib) {
             name: 'Producer<br>surplus',
             withLabel: true,
             label: {
-                offset: [45, -20]
+                offset: [45, -27]
             }
         });
     }

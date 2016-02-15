@@ -112,14 +112,14 @@ var Macro = (function(JXG, MacroLib) {
         var speed = 1000;
         toggleLabels(true);
 
-        D2.point1.moveTo([D2.point1.X() - 1.5, D2.point1.Y()], speed);
-        D2.point2.moveTo([D2.point2.X() - 1.5, D2.point2.Y()], speed);
+        D2.point1.moveTo([D2.point1.X() - 1.35, D2.point1.Y()], speed);
+        D2.point2.moveTo([D2.point2.X() - 1.35, D2.point2.Y()], speed);
 
         dashD2.Y1.moveTo([0, G.Y()], speed);
-        dashD2.Y2.moveTo([G.X() - 1.5, G.Y()], speed);
+        dashD2.Y2.moveTo([G.X() - 1.35, G.Y()], speed);
 
-        dashD2.X1.moveTo([G.X() - 1.5, 0], speed);
-        dashD2.X2.moveTo([G.X() - 1.5, G.Y()], speed);
+        dashD2.X1.moveTo([G.X() - 1.35, 0], speed);
+        dashD2.X2.moveTo([G.X() - 1.35, G.Y()], speed);
 
         brd1.update();
     }
@@ -131,14 +131,14 @@ var Macro = (function(JXG, MacroLib) {
         toggleLabels(true);
         brd1.update();
 
-        D2.point1.moveTo([D2.point1.X() + 1.5, D2.point1.Y()], speed);
-        D2.point2.moveTo([D2.point2.X() + 1.5, D2.point2.Y()], speed);
+        D2.point1.moveTo([D2.point1.X() + 1.35, D2.point1.Y()], speed);
+        D2.point2.moveTo([D2.point2.X() + 1.35, D2.point2.Y()], speed);
 
         dashD2.Y1.moveTo([0, G.Y()], speed);
-        dashD2.Y2.moveTo([G.X() + 1.5, G.Y()], speed);
+        dashD2.Y2.moveTo([G.X() + 1.35, G.Y()], speed);
 
-        dashD2.X1.moveTo([G.X() + 1.5, 0], speed);
-        dashD2.X2.moveTo([G.X() + 1.5, G.Y()], speed);
+        dashD2.X1.moveTo([G.X() + 1.35, 0], speed);
+        dashD2.X2.moveTo([G.X() + 1.35, G.Y()], speed);
 
         brd1.update();
     }

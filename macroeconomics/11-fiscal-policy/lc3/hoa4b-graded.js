@@ -31,8 +31,17 @@ var Macro = (function(JXG, MacroLib) {
             color: 'DodgerBlue'
         });
         SRAS2.setAttribute({
-            withLabel: false
+            withLabel: false,
+            highlight: true,
+            fixed: false
         });
+        SRAS2.point1.setAttribute({
+            fixed: false
+        });
+        SRAS2.point2.setAttribute({
+            fixed: false
+        });
+
 
         //Demand Line 1 - fixed
         AD1 = MacroLib.createLine(brd1, {
@@ -51,7 +60,15 @@ var Macro = (function(JXG, MacroLib) {
             color: 'Orange'
         });
         AD2.setAttribute({
-            withLabel: false
+            withLabel: false,
+            highlight: true,
+            fixed: false
+        });
+        AD2.point1.setAttribute({
+            fixed: false
+        });
+        AD2.point2.setAttribute({
+            fixed: false
         });
 
 
@@ -107,17 +124,12 @@ var Macro = (function(JXG, MacroLib) {
         //////////////////
         // Interactivity
         //////////////////
-        brd1.on('drag', function() {
-            //Moving Dashed Lines in Board 1
-            dashS2.Y1.moveTo([0, iS2D.Y()]);
-            dashS2.Y2.moveTo([iS2D.X(), iS2D.Y()]);
+        SRAS2.on('down', lineDown);
+        SRAS2.on('drag', lineDrag);
+        AD2.on('down', lineDown);
+        AD2.on('drag', lineDrag);
 
-            dashS2.X1.moveTo([iS2D.X(), 0]);
-            dashS2.X2.moveTo([iS2D.X(), iS2D.Y()]);
-
-        });
-
-        brd1.on('down', function() {
+        function lineDown() {
             AD2.setAttribute({
                 withLabel: true
             });
@@ -131,7 +143,17 @@ var Macro = (function(JXG, MacroLib) {
                 withLabel: true
             });
             brd1.update();
-        });
+        }
+
+        function lineDrag() {
+            //Moving Dashed Lines in Board 1
+            dashS2.Y1.moveTo([0, iS2D.Y()]);
+            dashS2.Y2.moveTo([iS2D.X(), iS2D.Y()]);
+
+            dashS2.X1.moveTo([iS2D.X(), 0]);
+            dashS2.X2.moveTo([iS2D.X(), iS2D.Y()]);
+
+        }
     }
 
     /////////////////////////

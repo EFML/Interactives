@@ -47,8 +47,6 @@ var Macro = (function(JXG, MacroLib) {
             strokeWidth: '5',
             name: 'M<sub>S2</sub>',
             withLabel: false,
-            fixed: false,
-            highlight: true,
             label: {
                 offset: [0, 185]
             }
@@ -77,24 +75,6 @@ var Macro = (function(JXG, MacroLib) {
             xlabel: 'Q<sub>1</sub>',
             ylabel: 'R<sub>1</sub>',
             color: 'Gray'
-        });
-
-        //////////////////
-        // Interactivity
-        //////////////////
-        brd1.on('drag', function() {
-            //Moving Dashed Lines in Board 1
-            dashS1.Y1.moveTo([0, iSD.Y()]);
-            dashS1.Y2.moveTo([iSD.X(), iSD.Y()]);
-
-            dashS1.X1.moveTo([iSD.X(), 0]);
-            dashS1.X2.moveTo([iSD.X(), iSD.Y()]);
-            brd1.update();
-        });
-
-        brd1.on('down', function() {
-            toggleLabels(true);
-            brd1.update();
         });
     }
 

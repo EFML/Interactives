@@ -87,7 +87,7 @@ var Macro = (function(JXG, MacroLib) {
         //////////////////
         // Interactivity
         //////////////////
-        brd1.on('drag', function() {
+        slidery.on('drag', function() {
             //Moving Dashed Lines in Board 1
 
             dashA.Y1.moveTo([0, iA.Y()]);
