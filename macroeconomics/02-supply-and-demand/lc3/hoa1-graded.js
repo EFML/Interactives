@@ -407,7 +407,7 @@ var Macro = (function(JXG, MacroLib) {
                 supplySliderMouseDrag(rightComponents);
             }
         }
-        console.debug('State updated successfully from saved.');
+        console.info('State updated successfully from saved.');
     }
 
     function getState() {
@@ -415,8 +415,8 @@ var Macro = (function(JXG, MacroLib) {
             'demand': leftComponents.demandSlider.Value(),
             'supply': rightComponents.supplySlider.Value()
         };
+        console.info('State successfully saved.');
         return JSON.stringify(state);
-        console.debug('State successfully saved.');
     }
 
     function getGrade() {

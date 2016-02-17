@@ -108,6 +108,7 @@ var Macro = (function(JXG, MacroLib) {
             'input': JSON.parse(getGrade())
         };
         var statestr = JSON.stringify(state);
+        console.info('State successfully saved.');
         return statestr;
     }
 
@@ -126,7 +127,7 @@ var Macro = (function(JXG, MacroLib) {
             });
         }
         brd1.update();
-        console.debug('State updated successfully from saved.');
+        console.info('State updated successfully from saved.');
     }
 
     MacroLib.createChannel(getGrade, getState, setState);

@@ -362,7 +362,7 @@ var Macro = (function(JXG, MacroLib) {
                 sliderB3, state.sliderB3)
             );
         }
-        console.debug('State updated successfully from saved.');
+        console.info('State updated successfully from saved.');
     }
 
     function getState() {
@@ -372,7 +372,7 @@ var Macro = (function(JXG, MacroLib) {
             'sliderB3': sliderB3.Value()
         };
         return JSON.stringify(state);
-        console.debug('State successfully saved.');
+        console.info('State successfully saved.');
     }
 
     function getGrade() {

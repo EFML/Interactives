@@ -395,7 +395,7 @@ var MacroLib = (function(JXG) {
             channel.bind('getState', getState);
             channel.bind('setState', setState);
         } else {
-            console.log(msg);
+            console.info(msg);
         }
     }
 

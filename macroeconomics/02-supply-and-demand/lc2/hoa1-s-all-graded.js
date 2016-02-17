@@ -253,7 +253,7 @@ var Macro = (function(JXG, MacroLib) {
                 priceSliderMouseDrag();
             }
         }
-        console.debug('State updated successfully from saved.');
+        console.info('State updated successfully from saved.');
     }
 
     function getState() {
@@ -261,8 +261,8 @@ var Macro = (function(JXG, MacroLib) {
             'supply': supplySlider.Value(),
             'price': priceSlider.Value()
         };
+        console.info('State successfully saved.');
         return JSON.stringify(state);
-        console.debug('State successfully saved.');
     }
 
     function getGrade() {
