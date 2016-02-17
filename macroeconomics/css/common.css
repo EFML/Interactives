@@ -1,0 +1,171 @@
+.dnext-tool-header {
+   min-width: 476px;
+   max-width: 820px;
+   background-color: #e0e0e0;
+   box-sizing: border-box;
+   overflow: hidden;
+   /*margin: 0 auto; centers the tool*/
+   border: solid #505050 1px;
+   border-top-left-radius: 10px;
+   border-top-right-radius: 10px;
+   border-bottom: none;
+   padding: 5px;
+   color: #555555;
+   text-align: left;
+   font-family: "Open Sans", "Verdana", "Geneva", sans-serif;
+   font-weight: 700;
+   font-size: 18px;
+}
+
+.dnext-tool-container {
+	background: #c8c8c8;
+	overflow: hidden;
+	/*margin: 0 auto; centers the tool*/
+	padding: 20px;
+	box-sizing: border-box;
+  border: solid #505050 1px;
+  border-bottom-left-radius: 10px;
+  border-bottom-right-radius: 10px;
+  white-space: nowrap;
+  word-spacing: 0;
+  font-size: 0px;
+}
+
+/*
+  Width of content area in edX is:
+  min-width: 476px;
+  max-width: 820px;
+*/
+
+.single-board {
+  min-width: 476px;
+  max-width: 544px;
+}
+
+.double-board {
+  min-width: 476px;
+  max-width: 756px;
+}
+
+.triple-board {
+  min-width: 476px;
+  max-width: 816px;
+}
+
+.dnext-tool-container::after {
+  clear: both;
+  content: "";
+  display: table;
+}
+
+.dnext-tool-container .jxgbox {
+  background: white;
+  border: solid #356aa0 1px;
+  -webkit-border-radius: 10px;
+  -moz-border-radius: 10px;
+  -ms-border-radius: 10px;
+  border-radius: 10px;
+  vertical-align: top;
+  margin-bottom: 0px;
+  display: inline-block;
+}
+
+/* Match text used in JSXGraph to the one used in edX for normal text. */
+.dnext-tool-container .JXGtext {
+    font-family: "Open Sans", "Verdana", "Geneva", sans-serif;
+    font-weight: 400 ;
+    /* No idea where this is set further down the line by JSXGraph. Give this rule precedence.*/
+    color: #4c4c4c !important;
+}
+
+.dnext-tool-container .single-board-center {
+	width: 500px;
+	height: 450px;
+}
+
+.dnext-tool-container .double-board-left {
+	width: 350px;
+	height: 300px;
+  margin-right: 10px;
+}
+
+.dnext-tool-container .double-board-right {
+	width: 350px;
+	height: 300px;
+}
+
+.dnext-tool-container .triple-board-left {
+	width: 250px;
+	height: 240px;
+	margin-right: 10px;
+}
+
+.dnext-tool-container .triple-board-center {
+	width: 250px;
+	height: 240px;
+	display: inline-block;
+}
+
+.dnext-tool-container .triple-board-right {
+	width: 250px;
+	height: 240px;
+	margin-left: 10px;
+	display: inline-block;
+}
+
+.dnext-tool-container .full-line {
+  margin-top: 20px;
+}
+
+.dnext-tool-container .half-line {
+  margin-top: 10px;
+}
+
+.dnext-tool-container .quarter-line {
+  margin-top: 5px;
+}
+
+/* Added to new Macro interatives only */
+.dnext-tool-container .left-column {
+  float: left;
+}
+
+.dnext-tool-container .right-column {
+  float: right;
+}
+/* End add */
+
+.dnext-tool-container .button {
+  font-family: "Open Sans", "Verdana", "Geneva", sans-serif;
+  font-weight: 400;
+  font-size: 14px;
+}
+
+.dnext-tool-container .button {
+  color: white;
+  background: #4479ba;
+  -webkit-border-radius: 4px;
+  -moz-border-radius: 4px;
+  -ms-border-radius: 4px;
+  border-radius: 4px;
+  border: solid 1px #20538D;
+  text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.4);
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.4), 0 1px;
+  padding: 5px 10px;
+  margin-right: 2px;
+  -webkit-transition-duration: 0.2s;
+  -moz-transition-duration: 0.2s;
+  transition-duration: 0.2s;
+}
+
+.dnext-tool-container .button:hover {
+  background: #356094;
+  border: solid 1px #2A4E77;
+  text-decoration: none;
+}
+
+.dnext-tool-container .button:active {
+  box-shadow: inset 0 1px 4px rgba(0, 0, 0, 0.6);
+  background: #2E5481;
+  border: solid 1px #203E5F;
+}

@@ -1,0 +1,37 @@
+<!--
+The sole purpose of this HTML files is to load the JavaScript code snippet that will resize
+any iFrame on the page when receiving an 'iframe-resize' message from them.
+This file will be loaded via an invisible iFrame.
+-->
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <script type="text/javascript">
+            (function() {
+                var AUTHORIZED_DOMAIN = 'https://dnext.s3.amazonaws.com',
+                    parentWindow = window.parent,
+                    $ = parentWindow.$;
+
+                parentWindow.addEventListener('message', function(event) {
+                    var initialHeight, height, iframe;
+
+                    if (event.origin === AUTHORIZED_DOMAIN && event.data.type === 'iframe-resize') {
+                        iframe = $('iframe[src="' + event.data.url + '"]');
+                        initialHeight = iframe.height();
+                        if (!isNaN(event.data.height)) {
+                            height = parseInt(event.data.height);
+                            iframe.height(height);
+                            console.info(
+                                'The iFrame containing the interactive located at ' + event.data.url +
+                                ' had its height resized from ' + initialHeight + ' px' + ' to ' + height + ' px'
+                            );
+                        }
+                    }
+                }, false);
+            })();
+        </script>
+    </head>
+    <body>
+    </body>
+</html>
