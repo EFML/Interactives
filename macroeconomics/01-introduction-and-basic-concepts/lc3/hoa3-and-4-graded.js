@@ -8,9 +8,9 @@ var Macro = (function(JXG, MacroLib) {
     function init() {
         MacroLib.init(MacroLib.ONE_BOARD);
         board = MacroLib.createBoard('jxgbox1', {
-            xname: 'Capital Goods',
-            yname: 'Consumer<br>Goods',
-            bboxlimits: [-3.0, 12, 12, -1.75]
+            xname: 'Consumer<br>Goods',
+            yname: 'Capital<br>Goods',
+            bboxlimits: [-2.0, 12, 12, -2]
         });
 
         var radius = 8.0;
