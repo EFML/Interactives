@@ -1,6 +1,6 @@
 var Macro = (function(JXG, MacroLib) {
     'use strict';
-    var board;
+    var board, slider;
 
     function init() {
         MacroLib.init(MacroLib.ONE_BOARD);
@@ -12,19 +12,19 @@ var Macro = (function(JXG, MacroLib) {
         });
 
         // Slider
-        var xSlider = board.create('slider', [
+        slider = board.create('slider', [
             [2.5, -1.2],
             [7.5, -1.2],
             [-2.0, 0.0, 2.0]
         ], {
             withLabel: false,
-            color: 'DodgerBlue'
+            color: 'dodgerblue'
         });
 
         // Positive Slider Transformations
         var xSliderTransform = board.create('transform', [
             function() {
-                return xSlider.Value();
+                return slider.Value();
             },
             function() {
                 return 0.0;
@@ -38,7 +38,7 @@ var Macro = (function(JXG, MacroLib) {
                 return 0.0;
             },
             function() {
-                return xSlider.Value();
+                return slider.Value();
             }
         ], {
             type: 'translate'
@@ -60,31 +60,6 @@ var Macro = (function(JXG, MacroLib) {
         var py = board.create('point', [pyFixed, ySliderTransform], {
             visible: false
         });
-        // Bezier curve control points
-        // var pControl1 = board.create('point', [0.73*radius, 0.73*radius], {visible: false});
-        // var pControl2 = board.create('point', [0.73*radius, 0.73*radius], {visible: false});
-
-        // // Fixed curve
-        // var curve1 = board.create(
-        //     'curve',
-        //     JXG.Math.Numerics.bezier([pxFixed, pControl1, pControl2, pyFixed]),
-        //     {
-        //         strokeColor: 'gray',
-        //         strokeWidth: 5,
-        //         fixed: true
-        //     }
-        // );
-
-        // // Moveable curve
-        // var curve2 = board.create(
-        //     'curve',
-        //     JXG.Math.Numerics.bezier([px, pControl1, pControl2, py]),
-        //     {
-        //         strokeColor: 'dodgerblue',
-        //         strokeWidth: 5,
-        //         fixed: true
-        //     }
-        // );
         // Fixed curve
         var fixedCurve = board.create('arc', [center, pxFixed, pyFixed], {
             strokeWidth: 5,
@@ -99,6 +74,12 @@ var Macro = (function(JXG, MacroLib) {
         });
     }
 
+    // Map the slider values in [slider._smin, slider._smax] to [0, 1]
+    // This is used to set the slider value directly via the glider.
+    function normalizeSliderValue(slider, value) {
+        return (value - slider._smin) / (slider._smax - slider._smin);
+    }
+
     /////////////////////////
     // External DOM button
     /////////////////////////
@@ -110,6 +91,39 @@ var Macro = (function(JXG, MacroLib) {
     });
 
     init();
-    MacroLib.onLoadPostMessage();
+
+    // Standard edX JSinput functions
+    function setState(transaction, stateStr) {
+        var state = JSON.parse(stateStr), normVal, val;
+
+        if (state.sliderValue) {
+            if (state.sliderValue !== 0.0) {
+                normVal = normalizeSliderValue(slider, state.sliderValue);
+                val = slider.point1.X() + normVal*(slider.point2.X() - slider.point1.X());
+                slider.moveTo([val, 0], 0);
+            }
+        }
+        console.info('State updated successfully from saved.');
+    }
+
+    function getState() {
+        var state = {
+            sliderValue: slider.Value()
+        };
+        console.info('State successfully saved.');
+        return JSON.stringify(state);
+    }
+
+    function getGrade() {
+        return getState();
+    }
+
+    MacroLib.createChannel(getGrade, getState, setState);
+
+    return {
+        setState: setState,
+        getState: getState,
+        getGrade: getGrade
+    };
 
 })(JXG, MacroLib, undefined);

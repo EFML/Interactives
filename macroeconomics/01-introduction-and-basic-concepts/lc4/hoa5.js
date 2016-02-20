@@ -1,6 +1,6 @@
 var Macro = (function(JXG, MacroLib) {
     'use strict';
-    var board;
+    var board, slider;
 
     function init() {
         MacroLib.init(MacroLib.ONE_BOARD);
@@ -12,19 +12,19 @@ var Macro = (function(JXG, MacroLib) {
         });
 
         // Slider
-        var xSlider = board.create('slider', [
+        slider = board.create('slider', [
             [2.5, -1.2],
             [7.5, -1.2],
             [-2.0, 0.0, 2.0]
         ], {
             withLabel: false,
-            color: 'DodgerBlue'
+            color: 'dodgerblue'
         });
 
         // Positive Slider Transformation
-        var xSliderTransform = board.create('transform', [
+        var sliderTransform = board.create('transform', [
             function() {
-                return xSlider.Value();
+                return slider.Value();
             },
             function() {
                 return 0.0;
@@ -37,7 +37,7 @@ var Macro = (function(JXG, MacroLib) {
         var pxFixed = board.create('point', [radius, 0.0], {
             visible: false
         });
-        var px = board.create('point', [pxFixed, xSliderTransform], {
+        var px = board.create('point', [pxFixed, sliderTransform], {
             visible: false
         });
         var py = board.create('point', [0.0, radius], {
@@ -70,6 +70,12 @@ var Macro = (function(JXG, MacroLib) {
         );
     }
 
+    // Map the slider values in [slider._smin, slider._smax] to [0, 1]
+    // This is used to set the slider value directly via the glider.
+    function normalizeSliderValue(slider, value) {
+        return (value - slider._smin) / (slider._smax - slider._smin);
+    }
+
     /////////////////////////
     // External DOM button
     /////////////////////////
@@ -81,6 +87,39 @@ var Macro = (function(JXG, MacroLib) {
     });
 
     init();
-    MacroLib.onLoadPostMessage();
+
+    // Standard edX JSinput functions
+    function setState(transaction, stateStr) {
+        var state = JSON.parse(stateStr), normVal, val;
+
+        if (state.sliderValue) {
+            if (state.sliderValue !== 0.0) {
+                normVal = normalizeSliderValue(slider, state.sliderValue);
+                val = slider.point1.X() + normVal*(slider.point2.X() - slider.point1.X());
+                slider.moveTo([val, 0], 0);
+            }
+        }
+        console.info('State updated successfully from saved.');
+    }
+
+    function getState() {
+        var state = {
+            sliderValue: slider.Value()
+        };
+        console.info('State successfully saved.');
+        return JSON.stringify(state);
+    }
+
+    function getGrade() {
+        return getState();
+    }
+
+    MacroLib.createChannel(getGrade, getState, setState);
+
+    return {
+        setState: setState,
+        getState: getState,
+        getGrade: getGrade
+    };
 
 })(JXG, MacroLib, undefined);
