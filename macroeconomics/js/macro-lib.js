@@ -26,6 +26,7 @@ var MacroLib = (function(JXG) {
         JXG.Options.curve.fixed = true;
         JXG.Options.slider.highlight = true;
         JXG.Options.slider.fixed = false;
+        JXG.Options.slider.withTicks = false;
 
         switch (nbrBoards) {
             case ONE_BOARD:
