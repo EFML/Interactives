@@ -1,6 +1,6 @@
 var Macro = (function(JXG, MacroLib) {
     'use strict';
-    var board, slider;
+    var board, xSlider, ySlider;
 
     function init() {
         MacroLib.init(MacroLib.ONE_BOARD);
@@ -11,8 +11,8 @@ var Macro = (function(JXG, MacroLib) {
             bboxlimits: [-2, 12, 12, -2]
         });
 
-        // Slider
-        slider = board.create('slider', [
+        // xSlider
+        xSlider = board.create('slider', [
             [2.5, -1.2],
             [7.5, -1.2],
             [-2.0, 0.0, 2.0]
@@ -21,10 +21,10 @@ var Macro = (function(JXG, MacroLib) {
             color: 'dodgerblue'
         });
 
-        // Positive Slider Transformation
-        var sliderTransform = board.create('transform', [
+        // xSlider Transformation
+        var xSliderTransform = board.create('transform', [
             function() {
-                return slider.Value();
+                return xSlider.Value();
             },
             function() {
                 return 0.0;
@@ -33,14 +33,40 @@ var Macro = (function(JXG, MacroLib) {
             type: 'translate'
         });
 
+        // ySlider
+        ySlider = board.create('slider', [
+            [-1.2, 2.5],
+            [-1.2, 7.5],
+            [-2.0, 0.0, 2.0]
+        ], {
+            withLabel: false,
+            color: 'dodgerblue'
+        });
+
+        // ySlider Transformation
+        var ySliderTransform = board.create('transform', [
+            function() {
+                return 0.0;
+            },
+            function() {
+                return ySlider.Value();
+            }
+        ], {
+            type: 'translate'
+        });
+
+
         var radius = 8.0;
         var pxFixed = board.create('point', [radius, 0.0], {
             visible: false
         });
-        var px = board.create('point', [pxFixed, sliderTransform], {
+        var px = board.create('point', [pxFixed, xSliderTransform], {
             visible: false
         });
-        var py = board.create('point', [0.0, radius], {
+        var pyFixed = board.create('point', [0.0, radius], {
+            visible: false
+        });
+        var py = board.create('point', [pyFixed, ySliderTransform], {
             visible: false
         });
         // Bezier curve control points
@@ -50,7 +76,7 @@ var Macro = (function(JXG, MacroLib) {
         // Fixed curve
         var fixedCurve = board.create(
             'curve',
-            JXG.Math.Numerics.bezier([pxFixed, pControl1, pControl2, py]),
+            JXG.Math.Numerics.bezier([pxFixed, pControl1, pControl2, pyFixed]),
             {
                 strokeColor: 'gray',
                 strokeWidth: 5,
@@ -92,11 +118,18 @@ var Macro = (function(JXG, MacroLib) {
     function setState(transaction, stateStr) {
         var state = JSON.parse(stateStr), normVal, val;
 
-        if (state.sliderValue) {
-            if (state.sliderValue !== 0.0) {
-                normVal = normalizeSliderValue(slider, state.sliderValue);
-                val = slider.point1.X() + normVal*(slider.point2.X() - slider.point1.X());
-                slider.moveTo([val, 0], 0);
+        if (state.xSliderValue) {
+            if (state.xSliderValue !== 0.0) {
+                normVal = normalizeSliderValue(xSlider, state.xSliderValue);
+                val = xSlider.point1.X() + normVal*(xSlider.point2.X() - xSlider.point1.X());
+                xSlider.moveTo([val, 0], 0);
+            }
+        }
+        if (state.ySliderValue) {
+            if (state.ySliderValue !== 0.0) {
+                normVal = normalizeSliderValue(ySlider, state.ySliderValue);
+                val = ySlider.point1.Y() + normVal*(ySlider.point2.Y() - ySlider.point1.Y());
+                ySlider.moveTo([0, val], 0);
             }
         }
         console.info('State updated successfully from saved.');
@@ -104,7 +137,8 @@ var Macro = (function(JXG, MacroLib) {
 
     function getState() {
         var state = {
-            sliderValue: slider.Value()
+            xSliderValue: xSlider.Value(),
+            ySliderValue: ySlider.Value()
         };
         console.info('State successfully saved.');
         return JSON.stringify(state);
