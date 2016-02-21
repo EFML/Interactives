@@ -1,7 +1,7 @@
 // Used as JSInput
 var Macro = (function(JXG, MacroLib) {
     'use strict';
-    var brd1, sliderx, LRAS1, LRAS2;
+    var brd1, sliderx, LRAS1, LRAS2, iS2D, dashS2;
 
     function init() {
         MacroLib.init(MacroLib.ONE_BOARD);
@@ -84,14 +84,14 @@ var Macro = (function(JXG, MacroLib) {
         var iSDfix = brd1.create('intersection', [LRAS1, SRAS1, 0], {
             visible: false
         });
-        var iS2D = brd1.create('intersection', [LRAS2, SRAS1, 0], {
+        iS2D = brd1.create('intersection', [LRAS2, SRAS1, 0], {
             visible: false
         });
 
         ////////////
         // Draggable Dashed Lines for Board 1
         ////////////
-        var dashS2 = MacroLib.createDashedLines2Axis(brd1, iS2D, {
+        dashS2 = MacroLib.createDashedLines2Axis(brd1, iS2D, {
             fixed: false,
             withLabel: false,
             xlabel: 'Y<sub>2</sub>',
@@ -126,28 +126,30 @@ var Macro = (function(JXG, MacroLib) {
         //////////////////
         // Interactivity
         //////////////////
-        sliderx.on('down', function() {
-            LRAS2.setAttribute({
-                withLabel: true
-            });
-            dashS2.X1.setAttribute({
-                withLabel: true
-            });
-            dashS2.Y1.setAttribute({
-                withLabel: true
-            });
-            brd1.update();
+        sliderx.on('down', sliderDown);
+
+        sliderx.on('drag', sliderDrag);
+    }
+
+    function sliderDown() {
+        LRAS2.setAttribute({
+            withLabel: true
         });
-
-        sliderx.on('drag', function() {
-            //Moving Dashed Lines in Board 1
-            dashS2.Y1.moveTo([0, iS2D.Y()]);
-            dashS2.Y2.moveTo([iS2D.X(), iS2D.Y()]);
-
-            dashS2.X1.moveTo([iS2D.X(), 0]);
-            dashS2.X2.moveTo([iS2D.X(), iS2D.Y()]);
-
+        dashS2.X1.setAttribute({
+            withLabel: true
         });
+        dashS2.Y1.setAttribute({
+            withLabel: true
+        });
+    }
+
+    function sliderDrag() {
+        //Moving Dashed Lines in Board 1
+        dashS2.Y1.moveTo([0, iS2D.Y()]);
+        dashS2.Y2.moveTo([iS2D.X(), iS2D.Y()]);
+
+        dashS2.X1.moveTo([iS2D.X(), 0]);
+        dashS2.X2.moveTo([iS2D.X(), iS2D.Y()]);
     }
 
     /////////////////////////
@@ -174,6 +176,8 @@ var Macro = (function(JXG, MacroLib) {
             LRAS2.setAttribute({
                 withLabel: true
             });
+            sliderDown();
+            sliderDrag();
             brd1.update();
         }
         console.info('State updated successfully from saved.');
