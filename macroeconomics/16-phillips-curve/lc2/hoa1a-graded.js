@@ -9,9 +9,9 @@ var Macro = (function(JXG, MacroLib) {
         // BOARD
         ////////////
         board = MacroLib.createBoard('jxgbox1', {
-            bboxlimits: [-1.5, 12, 12, -1],
+            bboxlimits: [-2.25, 12, 12, -1],
             xname: 'UR',
-            yname: '\u03c0'
+            yname: 'Inflation<br>Rate'
         });
 
         // SRPC1 - fixed
