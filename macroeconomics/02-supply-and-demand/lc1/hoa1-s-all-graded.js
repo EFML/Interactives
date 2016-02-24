@@ -17,7 +17,7 @@ var Macro = (function(JXG, MacroLib) {
         demandLine1 = MacroLib.createLine(board, {
             ltype: 'Demand',
             name: 'D<sub>1</sub>',
-            color: 'Gray'
+            color: 'gray'
         });
         demandLine1.setAttribute({
             dash: 1,
@@ -29,7 +29,7 @@ var Macro = (function(JXG, MacroLib) {
         demandLine2 = MacroLib.createLine(board, {
             ltype: 'Demand',
             name: 'D<sub>2</sub>',
-            color: 'DodgerBlue'
+            color: 'dodgerblue'
         });
         demandLine2.setAttribute({
             withLabel: false
@@ -51,7 +51,7 @@ var Macro = (function(JXG, MacroLib) {
             withLabel: true,
             xlabel: 'Q<sub>1</sub>',
             ylabel: 'P<sub>1</sub>',
-            color: 'Gray'
+            color: 'gray'
         });
 
         // Dashes to x, y axes for glider 2
@@ -59,7 +59,7 @@ var Macro = (function(JXG, MacroLib) {
             withLabel: true,
             xlabel: 'Q<sub>2</sub>',
             ylabel: 'P<sub>2</sub>',
-            color: 'Gray'
+            color: 'gray'
         });
         dashedLinesVisibility(dashes2, false);
 
@@ -71,12 +71,12 @@ var Macro = (function(JXG, MacroLib) {
         ], {
             withLabel: false,
             snapWidth: 0.01,
-            color: 'DodgerBlue'
+            color: 'dodgerblue'
         });
         demandSliderText = board.create(
             'text',
             [3.25, -1.55,'<strong>&Delta;D</strong>'],
-            {strokeColor: 'DodgerBlue', anchorX: 'right', anchorY: 'middle'}
+            {strokeColor: 'dodgerblue', anchorX: 'right', anchorY: 'middle'}
         );
         demandSlider.on('down', demandSliderMouseDown);
         demandSlider.on('drag', demandSliderMouseDrag);
@@ -89,12 +89,12 @@ var Macro = (function(JXG, MacroLib) {
         ], {
             withLabel: false,
             snapWidth: 0.05,
-            color: 'Crimson'
+            color: 'crimson'
         });
         priceSliderText = board.create(
             'text',
             [-1.90, 3.5,'<strong>&Delta;QD</strong>'],
-            {strokeColor: 'Crimson', anchorY: 'top'}
+            {strokeColor: 'crimson', anchorY: 'top'}
         );
 
         priceSlider.on('down', priceSliderMouseDown);

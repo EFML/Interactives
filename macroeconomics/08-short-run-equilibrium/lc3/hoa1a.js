@@ -20,10 +20,10 @@ var Macro = (function(JXG, MacroLib) {
         ], {
             withLabel: false,
             snapWidth: 0.05,
-            color: 'Crimson'
+            color: 'crimson'
         });
         // var slidery = brd1.create('slider',[[-1.0,2.75],[-1.0,8.75],[-1.4,0,0]],{withLabel:false,snapWidth:0.05,
-        //                                                                        color:'Black'});
+        //                                                                        color:'black'});
 
         //Positive Slider Transformation
         var sliderXPositive = brd1.create('transform', [
@@ -41,7 +41,7 @@ var Macro = (function(JXG, MacroLib) {
         var SRAS1 = MacroLib.createLine(brd1, {
             ltype: 'Supply',
             name: 'AS<sub>1924</sub>',
-            color: 'DodgerBlue'
+            color: 'dodgerblue'
         });
         SRAS1.setAttribute({
             dash: 1,
@@ -52,7 +52,7 @@ var Macro = (function(JXG, MacroLib) {
             transformList: [sliderXPositive],
             ltype: 'Supply',
             name: 'AS<sub>1929</sub>',
-            color: 'DodgerBlue'
+            color: 'dodgerblue'
         });
         SRAS2.setAttribute({
             withLabel: false,
@@ -64,14 +64,14 @@ var Macro = (function(JXG, MacroLib) {
         var AD1 = MacroLib.createLine(brd1, {
             ltype: 'Demand',
             name: 'AD',
-            color: 'Crimson'
+            color: 'crimson'
         });
 
         //Fake line for intersection at equilibrium
         var H1 = MacroLib.createLine(brd1, {
             ltype: 'Horizontal',
             name: 'H',
-            color: 'Orange'
+            color: 'orange'
         });
         H1.setAttribute({
             withLabel: false,
@@ -92,12 +92,12 @@ var Macro = (function(JXG, MacroLib) {
         var iDonly = brd1.create('intersection', [H1, AD1, 0], {
             visible: true,
             withLabel: false,
-            color: 'Red'
+            color: 'red'
         });
         var iSonly = brd1.create('intersection', [H1, SRAS2, 0], {
             visible: true,
             withLabel: false,
-            color: 'Blue'
+            color: 'blue'
         });
 
 
@@ -109,7 +109,7 @@ var Macro = (function(JXG, MacroLib) {
             xlabel: 'RGDP<sub>1924</sub>',
             ylabel: '102',
             yoffsets: [5, 10],
-            color: 'DarkGray'
+            color: 'darkgray'
         });
 
 
@@ -122,7 +122,7 @@ var Macro = (function(JXG, MacroLib) {
             xoffsets: [5, 24],
             ylabel: '',
             yoffsets: [5, 10],
-            color: 'Lime'
+            color: 'lime'
         });
 
         ////////////
@@ -134,7 +134,7 @@ var Macro = (function(JXG, MacroLib) {
             xoffsets: [5, 24],
             ylabel: '',
             yoffsets: [5, 10],
-            color: 'DodgerBlue'
+            color: 'dodgerblue'
         });
 
         ////////////
@@ -146,7 +146,7 @@ var Macro = (function(JXG, MacroLib) {
             xoffsets: [5, 12],
             ylabel: 'PL<sub>1</sub>',
             yoffsets: [5, 10],
-            color: 'Crimson'
+            color: 'crimson'
         });
 
 

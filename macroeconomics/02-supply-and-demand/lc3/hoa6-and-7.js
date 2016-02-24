@@ -16,7 +16,7 @@ var Macro = (function(JXG, MacroLib) {
         demandLine11 = MacroLib.createLine(brd1, {
             ltype: 'Demand',
             name: 'D<sub>1</sub>',
-            color: 'Gray'
+            color: 'gray'
         });
         demandLine11.setAttribute({
             dash: 1,
@@ -28,7 +28,7 @@ var Macro = (function(JXG, MacroLib) {
         demandLine12 = MacroLib.createLine(brd1, {
             ltype: 'Demand',
             name: 'D<sub>2</sub>',
-            color: 'DodgerBlue'
+            color: 'dodgerblue'
         });
         demandLine12.setAttribute({
             withLabel: false
@@ -38,7 +38,7 @@ var Macro = (function(JXG, MacroLib) {
         supplyLine = MacroLib.createLine(brd1, {
             ltype: 'Supply',
             name: 'S',
-            color: 'Orange'
+            color: 'orange'
         });
         supplyLine.setAttribute({
             fixed: true,
@@ -63,7 +63,7 @@ var Macro = (function(JXG, MacroLib) {
             xoffsets: [5, 12],
             ylabel: 'P<sub>1</sub>',
             yoffsets: [5, 12],
-            color: 'Gray'
+            color: 'gray'
         });
 
         // Dashes to x, y axes for glider 2
@@ -73,7 +73,7 @@ var Macro = (function(JXG, MacroLib) {
             xoffsets: [5, 12],
             ylabel: 'P<sub>2</sub>',
             yoffsets: [5, 12],
-            color: 'Gray'
+            color: 'gray'
         });
         dashedLinesVisibility(dashes12, false);
     }
@@ -91,7 +91,7 @@ var Macro = (function(JXG, MacroLib) {
         supplyLine21 = MacroLib.createLine(brd2, {
             ltype: 'Supply',
             name: 'S<sub>1</sub>',
-            color: 'Gray'
+            color: 'gray'
         });
         supplyLine21.setAttribute({
             dash: 1,
@@ -103,7 +103,7 @@ var Macro = (function(JXG, MacroLib) {
         supplyLine22 = MacroLib.createLine(brd2, {
             ltype: 'Supply',
             name: 'S<sub>2</sub>',
-            color: 'Orange'
+            color: 'orange'
         });
         supplyLine22.setAttribute({
             withLabel: false
@@ -113,7 +113,7 @@ var Macro = (function(JXG, MacroLib) {
         demandLine = MacroLib.createLine(brd2, {
             ltype: 'Demand',
             name: 'D',
-            color: 'DodgerBlue'
+            color: 'dodgerblue'
         });
         demandLine.setAttribute({
             fixed: true,
@@ -138,7 +138,7 @@ var Macro = (function(JXG, MacroLib) {
             xoffsets: [5, 12],
             ylabel: 'P<sub>1</sub>',
             yoffsets: [5, 12],
-            color: 'Gray'
+            color: 'gray'
         });
 
         // Dashes to x, y axes for glider 2
@@ -148,7 +148,7 @@ var Macro = (function(JXG, MacroLib) {
             xoffsets: [5, 12],
             ylabel: 'P<sub>2</sub>',
             yoffsets: [5, 12],
-            color: 'Gray'
+            color: 'gray'
         });
         dashedLinesVisibility(dashes22, false);
     }

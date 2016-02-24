@@ -24,7 +24,7 @@ var Macro = (function(JXG, MacroLib) {
         ], {
             withLabel: false,
             snapWidth: 0.05,
-            color: 'DarkGray'
+            color: 'darkgray'
         });
 
         //Positive Slider Transformation
@@ -43,7 +43,7 @@ var Macro = (function(JXG, MacroLib) {
         var LRAS1 = MacroLib.createLine(brd1, {
             ltype: 'Vertical',
             name: 'LRAS<sub>1</sub>',
-            color: 'DarkGray'
+            color: 'darkgray'
         });
         LRAS1.setAttribute({
             dash: 1
@@ -59,7 +59,7 @@ var Macro = (function(JXG, MacroLib) {
             transformList: [sliderXPositive],
             ltype: 'Vertical',
             name: 'LRAS<sub>2</sub>',
-            color: 'DarkGray'
+            color: 'darkgray'
         });
         LRAS2.setAttribute({
             fixed: false,
@@ -71,7 +71,7 @@ var Macro = (function(JXG, MacroLib) {
             name: 'Y<sub>1</sub>',
             withLabel: true,
             size: '0.5',
-            strokeColor: 'Gray',
+            strokeColor: 'gray',
             visible: true,
             label: {
                 offset: [-5, -15]
@@ -79,7 +79,7 @@ var Macro = (function(JXG, MacroLib) {
         });
 
         var dash1 = brd1.create('segment', [ptAxis1, LRAS1.point1], {
-            strokeColor: 'DarkGray',
+            strokeColor: 'darkgray',
             strokeWidth: 2,
             dash: 1
         });
@@ -89,7 +89,7 @@ var Macro = (function(JXG, MacroLib) {
             name: 'Y<sub>2</sub>',
             withLabel: false,
             size: '0.5',
-            strokeColor: 'Gray',
+            strokeColor: 'gray',
             visible: true,
             label: {
                 offset: [-5, -15]
@@ -97,7 +97,7 @@ var Macro = (function(JXG, MacroLib) {
         });
 
         var dash2 = brd1.create('segment', [ptAxis2, LRAS2.point1], {
-            strokeColor: 'DarkGray',
+            strokeColor: 'darkgray',
             strokeWidth: 2,
             dash: 1
         });

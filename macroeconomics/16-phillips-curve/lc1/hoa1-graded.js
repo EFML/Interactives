@@ -18,14 +18,14 @@ var Macro = (function(JXG, MacroLib) {
         var Supply = MacroLib.createLine(brd1, {
             ltype: 'Supply',
             name: 'SRAS',
-            color: 'Gray'
+            color: 'gray'
         });
 
         //Demand Line 1 - fixed
         AD1 = MacroLib.createLine(brd1, {
             ltype: 'Demand',
             name: 'AD<sub>1</sub>',
-            color: 'Gray'
+            color: 'gray'
         });
         AD1.setAttribute({
             dash: 1
@@ -35,7 +35,7 @@ var Macro = (function(JXG, MacroLib) {
         AD2 = MacroLib.createLine(brd1, {
             ltype: 'Demand',
             name: 'AD<sub>2</sub>',
-            color: 'DodgerBlue'
+            color: 'dodgerblue'
         });
         AD2.setAttribute({
             withLabel: false,
@@ -66,7 +66,7 @@ var Macro = (function(JXG, MacroLib) {
             withLabel: true,
             xlabel: '',
             ylabel: 'PL<sub>1</sub>',
-            color: 'Gray'
+            color: 'gray'
         });
 
         ////////////
@@ -77,7 +77,7 @@ var Macro = (function(JXG, MacroLib) {
             withLabel: false,
             xlabel: '',
             ylabel: 'PL<sub>2</sub>',
-            color: 'DodgerBlue'
+            color: 'dodgerblue'
         });
 
         //////////////////

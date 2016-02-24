@@ -24,7 +24,7 @@ var Macro = (function(JXG, MacroLib) {
         ], {
             withLabel: false,
             snapWidth: 0.05,
-            color: 'Lime'
+            color: 'lime'
         });
 
         var sliderx = brd1.create('slider', [
@@ -34,7 +34,7 @@ var Macro = (function(JXG, MacroLib) {
         ], {
             withLabel: false,
             snapWidth: 0.05,
-            color: 'Orange'
+            color: 'orange'
         });
 
         //Positive Slider Transformation
@@ -66,7 +66,7 @@ var Macro = (function(JXG, MacroLib) {
         var S1B1 = MacroLib.createLine(brd1, {
             ltype: 'Supply',
             name: 'SRAS<sub>1</sub>',
-            color: 'Lime'
+            color: 'lime'
         });
         S1B1.setAttribute({
             dash: 1
@@ -77,7 +77,7 @@ var Macro = (function(JXG, MacroLib) {
             transformList: [sliderYPositive],
             ltype: 'Supply',
             name: 'SRAS<sub>2</sub>',
-            color: 'Lime'
+            color: 'lime'
         });
         S2B1.setAttribute({
             withLabel: false
@@ -87,7 +87,7 @@ var Macro = (function(JXG, MacroLib) {
         var AD1 = MacroLib.createLine(brd1, {
             ltype: 'Demand',
             name: 'AD<sub>1</sub>',
-            color: 'Orange'
+            color: 'orange'
         });
         AD1.setAttribute({
             dash: 1
@@ -98,7 +98,7 @@ var Macro = (function(JXG, MacroLib) {
             transformList: [sliderXPositive],
             ltype: 'Demand',
             name: 'AD<sub>2</sub>',
-            color: 'Orange'
+            color: 'orange'
         });
         AD2.setAttribute({
             withLabel: false
@@ -108,7 +108,7 @@ var Macro = (function(JXG, MacroLib) {
         var LRAS = MacroLib.createLine(brd1, {
             ltype: 'Vertical',
             name: 'LRAS',
-            color: 'DodgerBlue'
+            color: 'dodgerblue'
         });
         LRAS.setAttribute({
             withLabel: true,
@@ -137,7 +137,7 @@ var Macro = (function(JXG, MacroLib) {
             xoffsets: [5, 15],
             ylabel: 'PL<sub>1</sub>',
             yoffsets: [5, 10],
-            color: 'Gray'
+            color: 'gray'
         });
 
         ////////////
@@ -149,7 +149,7 @@ var Macro = (function(JXG, MacroLib) {
             xoffsets: [5, 15],
             ylabel: 'PL<sub>2</sub>',
             yoffsets: [5, 10],
-            color: 'Orange'
+            color: 'orange'
         });
 
         dashesB1.Y1.setAttribute({
@@ -174,7 +174,7 @@ var Macro = (function(JXG, MacroLib) {
             xoffsets: [5, 15],
             ylabel: 'PL<sub>3</sub>',
             yoffsets: [5, 10],
-            color: 'Lime'
+            color: 'lime'
         });
 
         dashesLRASB1.X1.setAttribute({
@@ -239,7 +239,7 @@ var Macro = (function(JXG, MacroLib) {
             fixed: false,
             withLabel: false,
             strokeWidth: 5,
-            strokeColor: 'Lime',
+            strokeColor: 'lime',
             label: {
                 offset: [95, -95]
             }
@@ -251,16 +251,16 @@ var Macro = (function(JXG, MacroLib) {
         var SRPC1 = MacroLib.createLine(brd2, {
             ltype: 'Demand',
             name: 'SRPC<sub>1</sub>',
-            color: 'DodgerBlue'
+            color: 'dodgerblue'
         });
 
         //LRAS - fixed
-        // var LRAS = createLine(brd2, {ltype: 'Vertical', name: 'LRPC', color: 'DodgerBlue'})
+        // var LRAS = createLine(brd2, {ltype: 'Vertical', name: 'LRPC', color: 'dodgerblue'})
         var LRPC = brd2.create('segment', [
             [6.25, 0.5],
             [6.25, 11.0]
         ], {
-            strokeColor: 'DodgerBlue',
+            strokeColor: 'dodgerblue',
             name: 'LRPC',
             withLabel: true,
             label: {
@@ -277,8 +277,8 @@ var Macro = (function(JXG, MacroLib) {
         //Intersection B2
         var iSDB2fix = brd2.create('intersection', [SRPC1, LRPC, 0], {
             name: 'A1',
-            fillColor: 'DodgerBlue',
-            strokeColor: 'DodgerBlue',
+            fillColor: 'dodgerblue',
+            strokeColor: 'dodgerblue',
             withLabel: true,
             visible: true
         });
@@ -286,8 +286,8 @@ var Macro = (function(JXG, MacroLib) {
         //Intersection B2
         var iSLB2 = brd2.create('intersection', [SRPC2, LRPC, 0], {
             name: 'A3',
-            fillColor: 'Lime',
-            strokeColor: 'Lime',
+            fillColor: 'lime',
+            strokeColor: 'lime',
             withLabel: true,
             visible: false
         });
@@ -301,7 +301,7 @@ var Macro = (function(JXG, MacroLib) {
             xoffsets: [5, 10],
             ylabel: '2.0%',
             yoffsets: [5, 10],
-            color: 'DodgerBlue'
+            color: 'dodgerblue'
         });
 
         ////////
@@ -326,8 +326,8 @@ var Macro = (function(JXG, MacroLib) {
 
         var iB2SRPC1 = brd2.create('intersection', [fakeD, SRPC1, 0], {
             name: 'A2',
-            fillColor: 'Orange',
-            strokeColor: 'Orange',
+            fillColor: 'orange',
+            strokeColor: 'orange',
             withLabel: true,
             visible: false
         });
@@ -339,7 +339,7 @@ var Macro = (function(JXG, MacroLib) {
             withLabel: true,
             xlabel: '',
             ylabel: '',
-            color: 'Orange'
+            color: 'orange'
         });
 
         dashesA2B2.Y1.setAttribute({

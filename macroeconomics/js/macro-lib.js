@@ -273,7 +273,7 @@ var MacroLib = (function(JXG) {
             visible: true,
             size: 0.5,
             fixed: fixed,
-            strokeColor: 'Gray',
+            strokeColor: 'gray',
             label: {
                 offset: yoffsets
             }
@@ -300,7 +300,7 @@ var MacroLib = (function(JXG) {
             visible: true,
             size: 0.5,
             fixed: fixed,
-            strokeColor: 'Gray',
+            strokeColor: 'gray',
             label: {
                 offset: xoffsets
             }

@@ -14,7 +14,7 @@ var Macro = (function(JXG, MacroLib) {
         var D1 = MacroLib.createLine(brd1, {
             ltype: 'Demand',
             name: 'M<sub>D1</sub>',
-            color: 'Orange'
+            color: 'orange'
         });
 
         ////////////
@@ -29,7 +29,7 @@ var Macro = (function(JXG, MacroLib) {
             [5.75, 10.5],
             [5.75, 0.5]
         ], {
-            strokeColor: 'Gray',
+            strokeColor: 'gray',
             strokeWidth: '5',
             name: 'M<sub>S1</sub>',
             withLabel: true,
@@ -43,7 +43,7 @@ var Macro = (function(JXG, MacroLib) {
             [5.75, 10.5],
             [5.75, 0.5]
         ], {
-            strokeColor: 'DodgerBlue',
+            strokeColor: 'dodgerblue',
             strokeWidth: '5',
             name: 'M<sub>S2</sub>',
             withLabel: false,
@@ -67,14 +67,14 @@ var Macro = (function(JXG, MacroLib) {
             withLabel: false,
             xlabel: 'Q<sub>2</sub>',
             ylabel: 'R<sub>2</sub>',
-            color: 'Gray'
+            color: 'gray'
         });
 
         var dashSfix = MacroLib.createDashedLines2Axis(brd1, iSDfix, {
             withLabel: true,
             xlabel: 'Q<sub>1</sub>',
             ylabel: 'R<sub>1</sub>',
-            color: 'Gray'
+            color: 'gray'
         });
     }
 

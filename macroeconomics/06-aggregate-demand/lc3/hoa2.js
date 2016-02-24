@@ -20,7 +20,7 @@ var Macro = (function(JXG, MacroLib) {
             c1: [2.0, 9.5],
             c2: [9.5, 2.0],
             name: 'AD',
-            color: 'Gray'
+            color: 'gray'
         });
 
         //Demand Line AD1 - fixed
@@ -28,7 +28,7 @@ var Macro = (function(JXG, MacroLib) {
             c1: [1.5, 9],
             c2: [9, 1.5],
             name: 'AD<sub>1</sub>',
-            color: 'DodgerBlue'
+            color: 'dodgerblue'
         });
         AD1.setAttribute({
             fixed: true,
@@ -40,7 +40,7 @@ var Macro = (function(JXG, MacroLib) {
             c1: [0.75, 8.25],
             c2: [8.25, 0.75],
             name: 'AD<sub>2</sub>',
-            color: 'Blue'
+            color: 'blue'
         });
     }
 

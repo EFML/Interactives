@@ -5,7 +5,7 @@ var Macro = (function(JXG, MacroLib) {
     function init() {
         MacroLib.init(MacroLib.ONE_BOARD);
         //General Parameters for Macro
-        JXG.Options.segment.strokeColor = 'Gray';
+        JXG.Options.segment.strokeColor = 'gray';
         JXG.Options.text.fontSize = 15;
 
         ////////////
@@ -36,7 +36,7 @@ var Macro = (function(JXG, MacroLib) {
         ], {
             withLabel: false,
             snapWidth: 0.05,
-            color: 'Orange'
+            color: 'orange'
         });
 
         //Positive Slider Transformation
@@ -102,7 +102,7 @@ var Macro = (function(JXG, MacroLib) {
         var D1 = brd1.create('segment', [pD1, pD2], {
             withLabel: true,
             name: 'M<sub>D2</sub>',
-            color: 'DodgerBlue',
+            color: 'dodgerblue',
             label: {
                 offset: [90, -90]
             }
@@ -154,7 +154,7 @@ var Macro = (function(JXG, MacroLib) {
         var D2 = brd2.create('segment', [As, Bs], {
             withLabel: true,
             name: 'D<sub>2</sub>',
-            color: 'DodgerBlue',
+            color: 'dodgerblue',
             label: {
                 offset: [90, -90]
             }
@@ -178,7 +178,7 @@ var Macro = (function(JXG, MacroLib) {
                 name: ylabel,
                 visible: true,
                 size: '0.5',
-                strokeColor: 'Gray',
+                strokeColor: 'gray',
                 label: {
                     offset: [2, 12]
                 }
@@ -204,7 +204,7 @@ var Macro = (function(JXG, MacroLib) {
                 name: xlabel,
                 visible: true,
                 size: '0.5',
-                strokeColor: 'Gray',
+                strokeColor: 'gray',
                 label: {
                     offset: [2, 12]
                 }
@@ -242,12 +242,12 @@ var Macro = (function(JXG, MacroLib) {
         //Dashed Lines - Board 1
         var dashB1fixed = createDashedLines2Axis(brd1, iSDB, {
             withLabel: false,
-            color: 'Gray'
+            color: 'gray'
         });
         var dashB1 = createDashedLines2Axis(brd1, iSDB, {
             fixed: false,
             withLabel: true,
-            color: 'DodgerBlue',
+            color: 'dodgerblue',
             xlabel: 'Q',
             ylabel: 'NIR<sub>2</sub>'
         });
@@ -255,12 +255,12 @@ var Macro = (function(JXG, MacroLib) {
         //Dashed Lines - Board 2
         var dashB2fixed = createDashedLines2Axis(brd2, iSDB2, {
             withLabel: false,
-            color: 'Gray'
+            color: 'gray'
         });
         var dashB2 = createDashedLines2Axis(brd2, iSDB2, {
             fixed: false,
             withLabel: true,
-            color: 'DodgerBlue',
+            color: 'dodgerblue',
             xlabel: 'Q<sub>2</sub>',
             ylabel: 'P<sub>2</sub>'
         });

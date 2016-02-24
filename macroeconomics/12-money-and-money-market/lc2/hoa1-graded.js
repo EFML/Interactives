@@ -18,7 +18,7 @@ var Macro = (function(JXG, MacroLib) {
         C1 = MacroLib.createLine(brd1, {
             ltype: 'Demand',
             name: 'C<sub>1</sub>',
-            color: 'Gray'
+            color: 'gray'
         });
         C1.setAttribute({
             highlight: true
@@ -28,7 +28,7 @@ var Macro = (function(JXG, MacroLib) {
         C2 = MacroLib.createLine(brd1, {
             ltype: 'Supply',
             name: 'C<sub>2</sub>',
-            color: 'Gray'
+            color: 'gray'
         });
         C2.setAttribute({
             highlight: true
@@ -37,7 +37,7 @@ var Macro = (function(JXG, MacroLib) {
         C3 = MacroLib.createLine(brd1, {
             ltype: 'Vertical',
             name: 'C<sub>3</sub>',
-            color: 'Gray'
+            color: 'gray'
         });
         C3.setAttribute({
             highlight: true
@@ -72,7 +72,7 @@ var Macro = (function(JXG, MacroLib) {
         function resetColors(curves) {
             for (var i = 0; i < curves.length; i++) {
                 curves[i].setAttribute({
-                    strokeColor: 'Gray',
+                    strokeColor: 'gray',
                     strokeWidth: 4
                 });
             }

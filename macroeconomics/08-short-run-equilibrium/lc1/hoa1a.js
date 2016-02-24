@@ -21,7 +21,7 @@ var Macro = (function(JXG, MacroLib) {
         ], {
             withLabel: false,
             snapWidth: 0.05,
-            color: 'Black'
+            color: 'black'
         });
 
         //Positive Slider Transformation
@@ -40,14 +40,14 @@ var Macro = (function(JXG, MacroLib) {
         var SRAS1 = MacroLib.createLine(brd1, {
             ltype: 'Supply',
             name: 'AS<sub>0</sub>',
-            color: 'DodgerBlue'
+            color: 'dodgerblue'
         });
 
         //Demand Line 1 - fixed
         var AD1 = MacroLib.createLine(brd1, {
             ltype: 'Demand',
             name: 'AD<sub>0</sub>',
-            color: 'Crimson'
+            color: 'crimson'
         });
 
         //Demand Line 2 - moveable
@@ -55,7 +55,7 @@ var Macro = (function(JXG, MacroLib) {
             transformList: [sliderYPositive],
             ltype: 'Horizontal',
             name: 'H',
-            color: 'Orange'
+            color: 'orange'
         });
         H.setAttribute({
             withLabel: false,
@@ -74,12 +74,12 @@ var Macro = (function(JXG, MacroLib) {
         var iDonly = brd1.create('intersection', [H, AD1, 0], {
             visible: true,
             withLabel: false,
-            color: 'Red'
+            color: 'red'
         });
         var iSonly = brd1.create('intersection', [H, SRAS1, 0], {
             visible: true,
             withLabel: false,
-            color: 'Blue'
+            color: 'blue'
         });
 
 
@@ -91,7 +91,7 @@ var Macro = (function(JXG, MacroLib) {
             xlabel: 'RGDP<sub>0</sub>',
             ylabel: 'PL<sub>0</sub>',
             yoffsets: [5, 10],
-            color: 'DarkGray'
+            color: 'darkgray'
         });
 
 
@@ -104,7 +104,7 @@ var Macro = (function(JXG, MacroLib) {
             xoffsets: [5, 15],
             ylabel: 'PL<sup>*</sup>',
             yoffsets: [5, 10],
-            color: 'DodgerBlue'
+            color: 'dodgerblue'
         });
 
         dashesSonly.X1.setAttribute({
@@ -123,7 +123,7 @@ var Macro = (function(JXG, MacroLib) {
             xoffsets: [5, 15],
             ylabel: '',
             yoffsets: [5, 10],
-            color: 'Crimson'
+            color: 'crimson'
         });
 
         dashesDonly.X1.setAttribute({

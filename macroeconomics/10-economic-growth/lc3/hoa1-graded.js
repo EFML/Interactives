@@ -25,7 +25,7 @@ var Macro = (function(JXG, MacroLib) {
         ], {
             withLabel: false,
             snapWidth: 0.05,
-            color: 'DarkGray'
+            color: 'darkgray'
         });
 
         //Positive Slider Transformation
@@ -44,7 +44,7 @@ var Macro = (function(JXG, MacroLib) {
         var SRAS1 = MacroLib.createLine(brd1, {
             ltype: 'Horizontal',
             name: 'SRAS',
-            color: 'DodgerBlue'
+            color: 'dodgerblue'
         });
         SRAS1.setAttribute({
             visible: false
@@ -54,7 +54,7 @@ var Macro = (function(JXG, MacroLib) {
         LRAS1 = MacroLib.createLine(brd1, {
             ltype: 'Vertical',
             name: 'LRAS<sub>1</sub>',
-            color: 'DarkGray'
+            color: 'darkgray'
         });
         LRAS1.setAttribute({
             dash: 1,
@@ -71,7 +71,7 @@ var Macro = (function(JXG, MacroLib) {
             transformList: [sliderXPositive],
             ltype: 'Vertical',
             name: 'LRAS<sub>2</sub>',
-            color: 'DodgerBlue'
+            color: 'dodgerblue'
         });
         LRAS2.setAttribute({
             fixed: false,
@@ -96,7 +96,7 @@ var Macro = (function(JXG, MacroLib) {
             withLabel: false,
             xlabel: 'Y<sub>2</sub>',
             ylabel: ' ',
-            color: 'DodgerBlue'
+            color: 'dodgerblue'
         });
 
         dashS2.Y1.setAttribute({
@@ -113,7 +113,7 @@ var Macro = (function(JXG, MacroLib) {
             withLabel: true,
             xlabel: 'Y<sub>1</sub>',
             ylabel: ' ',
-            color: 'DarkGray'
+            color: 'darkgray'
         });
 
         dashesFixedB1.Y1.setAttribute({

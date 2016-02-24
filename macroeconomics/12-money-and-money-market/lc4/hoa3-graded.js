@@ -28,7 +28,7 @@ var Macro = (function(JXG, MacroLib) {
         });
         xaxis.removeAllTicks();
         brd1.create('ticks', [xaxis, [0, 100, 200, 300, 400, 500, 600, 700, 800]], {
-            strokeColor: 'Black',
+            strokeColor: 'black',
             majorHeight: 15,
             drawLabels: true,
             label: {
@@ -46,7 +46,7 @@ var Macro = (function(JXG, MacroLib) {
         });
         yaxis.removeAllTicks();
         brd1.create('ticks', [yaxis, [0, 5, 10, 15, 20, 25, 30]], {
-            strokeColor: 'Black',
+            strokeColor: 'black',
             majorHeight: 15,
             drawLabels: true
         });
@@ -57,7 +57,7 @@ var Macro = (function(JXG, MacroLib) {
             [cfx * 6.0, cfy * 11.0],
             [cfx * 6.0, cfy * 1.0]
         ], {
-            strokeColor: 'Gray',
+            strokeColor: 'gray',
             strokeWidth: '5',
             name: '',
             withLabel: false,
@@ -69,7 +69,7 @@ var Macro = (function(JXG, MacroLib) {
             [cfx * 1.45, cfy * 9.0],
             [cfx * 9.0, cfy * 1.45]
         ], {
-            strokeColor: 'Orange',
+            strokeColor: 'orange',
             strokeWidth: '5',
             name: 'M<sub>D</sub>',
             withLabel: true,
@@ -83,7 +83,7 @@ var Macro = (function(JXG, MacroLib) {
             [cfx * 6.0, cfy * 11.0],
             [cfx * 6.0, cfy * 1.0]
         ], {
-            strokeColor: 'DodgerBlue',
+            strokeColor: 'dodgerblue',
             strokeWidth: '5',
             name: 'M<sub>S</sub>',
             withLabel: true,
@@ -101,8 +101,8 @@ var Macro = (function(JXG, MacroLib) {
         iB1SD = brd1.create('intersection', [MS2, MD1, 0], {
             size: 4,
             visible: true,
-            color: 'DarkBlue',
-            strokeColor: 'DarkBlue'
+            color: 'darkblue',
+            strokeColor: 'darkblue'
         });
 
         ////////////
@@ -113,7 +113,7 @@ var Macro = (function(JXG, MacroLib) {
             withLabel: false,
             xlabel: '',
             ylabel: '',
-            color: 'Gray'
+            color: 'gray'
         });
 
         //////////////////

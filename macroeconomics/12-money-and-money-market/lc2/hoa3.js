@@ -14,7 +14,7 @@ var Macro = (function(JXG, MacroLib) {
         var D1 = MacroLib.createLine(brd1, {
             ltype: 'Demand',
             name: 'D<sub>1</sub>',
-            color: 'Gray'
+            color: 'gray'
         });
         D1.setAttribute({
             dash: 1
@@ -30,7 +30,7 @@ var Macro = (function(JXG, MacroLib) {
             withLabel: true,
             xlabel: 'M<sub>1</sub>',
             ylabel: 'r<sub>1</sub>',
-            color: 'Gray'
+            color: 'gray'
         });
 
 
@@ -38,7 +38,7 @@ var Macro = (function(JXG, MacroLib) {
         D2 = MacroLib.createLine(brd1, {
             ltype: 'Demand',
             name: 'D<sub>2</sub>',
-            color: 'DodgerBlue'
+            color: 'dodgerblue'
         });
         D2.setAttribute({
             withLabel: false,
@@ -59,7 +59,7 @@ var Macro = (function(JXG, MacroLib) {
             withLabel: false,
             xlabel: 'M<sub>2</sub>',
             ylabel: '',
-            color: 'DodgerBlue'
+            color: 'dodgerblue'
         });
 
         //////////////////

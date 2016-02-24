@@ -24,7 +24,7 @@ var Macro = (function(JXG, MacroLib) {
         ], {
             withLabel: false,
             snapWidth: 0.01,
-            color: 'Crimson'
+            color: 'crimson'
         });
 
         //Positive Slider Transformation
@@ -53,7 +53,7 @@ var Macro = (function(JXG, MacroLib) {
         });
         var semi = brd1.create('arc', [po, tmpx, tmpy], {
             strokeWidth: 5,
-            strokeColor: 'DodgerBlue'
+            strokeColor: 'dodgerblue'
         });
 
 
@@ -81,7 +81,7 @@ var Macro = (function(JXG, MacroLib) {
             withLabel: true,
             xlabel: 'K<sub>A</sub>',
             ylabel: 'C<sub>A</sub>',
-            color: 'Gray'
+            color: 'gray'
         });
 
         //////////////////

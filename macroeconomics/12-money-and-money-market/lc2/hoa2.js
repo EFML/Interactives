@@ -16,7 +16,7 @@ var Macro = (function(JXG, MacroLib) {
         //Demand Line 1 - fixed
         var AD1 = MacroLib.createLine(brd1, {
             ltype: 'Demand',
-            color: 'Gray'
+            color: 'gray'
         });
         AD1.setAttribute({
             dash: 1
@@ -26,7 +26,7 @@ var Macro = (function(JXG, MacroLib) {
         var AD2 = MacroLib.createLine(brd1, {
             ltype: 'Demand',
             name: 'D<sub>m</sub>',
-            color: 'DodgerBlue'
+            color: 'dodgerblue'
         });
         AD2.setAttribute({
             withLabel: true,

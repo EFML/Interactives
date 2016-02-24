@@ -31,7 +31,7 @@ var Macro = (function(JXG, MacroLib) {
         var D = MacroLib.createLine(brd1, {
             ltype: 'Demand',
             name: 'D',
-            color: 'DodgerBlue'
+            color: 'dodgerblue'
         });
         translateLine(D, [-2, 0], 0);
 
@@ -73,7 +73,7 @@ var Macro = (function(JXG, MacroLib) {
         var CS = brd1.create('polygon', [D.point1, ptAxis, IWD], {
             withLabel: false,
             withLines: false,
-            fillColor: 'DodgerBlue',
+            fillColor: 'dodgerblue',
             fillOpacity: 0.5
         });
 
@@ -81,20 +81,20 @@ var Macro = (function(JXG, MacroLib) {
         var PS = brd1.create('polygon', [S.point1, ptAxis, IWS], {
             withLabel: false,
             withLines: false,
-            fillColor: 'Orange',
+            fillColor: 'orange',
             fillOpacity: 0.5
         });
 
         // Lines segments representing Supply Line
         var S1 = brd1.create('segment', [S.point1, IWS], {
-            strokeColor: 'Orange',
+            strokeColor: 'orange',
             strokeWidth: 3,
             withLabel: false,
             layer:0
         });
 
         var S2 = brd1.create('segment', [IDS, S.point2], {
-            strokeColor: 'Orange',
+            strokeColor: 'orange',
             strokeWidth: 3,
             name: 'S',
             withLabel: true,

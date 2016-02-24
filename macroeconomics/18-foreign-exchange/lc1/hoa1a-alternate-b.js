@@ -19,7 +19,7 @@ var Macro = (function(JXG, MacroLib) {
         var SRAS1 = MacroLib.createLine(brd1, {
             ltype: 'Supply',
             name: '&euro;S<sub>1</sub>',
-            color: 'DodgerBlue'
+            color: 'dodgerblue'
         });
         SRAS1.setAttribute({
             dash: 1
@@ -29,7 +29,7 @@ var Macro = (function(JXG, MacroLib) {
         var SRAS2 = MacroLib.createLine(brd1, {
             ltype: 'Supply',
             name: '&euro;S<sub>2</sub>',
-            color: 'DodgerBlue'
+            color: 'dodgerblue'
         });
         SRAS2.setAttribute({
             withLabel: false
@@ -39,7 +39,7 @@ var Macro = (function(JXG, MacroLib) {
         var AD1 = MacroLib.createLine(brd1, {
             ltype: 'Demand',
             name: '&euro;D<sub>1</sub>',
-            color: 'Orange'
+            color: 'orange'
         });
         AD1.setAttribute({
             dash: 1
@@ -49,7 +49,7 @@ var Macro = (function(JXG, MacroLib) {
         var AD2 = MacroLib.createLine(brd1, {
             ltype: 'Demand',
             name: '$D<sub>2</sub>',
-            color: 'Orange'
+            color: 'orange'
         });
         AD2.setAttribute({
             withLabel: false
@@ -76,7 +76,7 @@ var Macro = (function(JXG, MacroLib) {
             xlabel: 'Q<sup>*</sup>',
             ylabel: 'E1',
             yoffsets: [-35, 0],
-            color: 'Orange'
+            color: 'orange'
         });
 
         dashS2.X1.setAttribute({

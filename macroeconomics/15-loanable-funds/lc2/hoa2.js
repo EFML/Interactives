@@ -19,7 +19,7 @@ var Macro = (function(JXG, MacroLib) {
         var SBfix = MacroLib.createLine(brd1, {
             ltype: 'Supply',
             name: 'S<sub>LF</sub>',
-            color: 'Orange',
+            color: 'orange',
             storkeWidth: 4
         });
         SBfix.setAttribute({
@@ -31,7 +31,7 @@ var Macro = (function(JXG, MacroLib) {
         var SB1 = MacroLib.createLine(brd1, {
             ltype: 'Supply',
             name: 'S<sub>LF</sub>',
-            color: 'Orange'
+            color: 'orange'
         });
         SB1.setAttribute({
             withLabel: true,
@@ -49,7 +49,7 @@ var Macro = (function(JXG, MacroLib) {
         var DB1 = MacroLib.createLine(brd1, {
             ltype: 'Demand',
             name: 'D<sub>LF</sub>',
-            color: 'DodgerBlue',
+            color: 'dodgerblue',
             storkeWidth: 4
         });
         DB1.setAttribute({
@@ -61,7 +61,7 @@ var Macro = (function(JXG, MacroLib) {
         DB1 = MacroLib.createLine(brd1, {
             ltype: 'Demand',
             name: 'D<sub>LF</sub>',
-            color: 'DodgerBlue'
+            color: 'dodgerblue'
         });
         DB1.setAttribute({
             withLabel: true,
@@ -89,7 +89,7 @@ var Macro = (function(JXG, MacroLib) {
         var DB2 = MacroLib.createLine(brd2, {
             ltype: 'Demand',
             name: 'Investment<br>Demand</sub>',
-            color: 'Crimson'
+            color: 'crimson'
         });
         DB2.setAttribute({
             withLabel: true
@@ -111,7 +111,7 @@ var Macro = (function(JXG, MacroLib) {
             xoffsets: [5, 15],
             ylabel: 'RIR<sub>1</sub>',
             // yoffsets:[5,10],
-            color: 'Gray'
+            color: 'gray'
         });
 
 
@@ -127,7 +127,7 @@ var Macro = (function(JXG, MacroLib) {
             // xoffsets:[5,15],
             ylabel: 'RIR<sub>1</sub>',
             // yoffsets:[5,10],
-            color: 'Gray'
+            color: 'gray'
         });
 
         //DYNAMIC SET
@@ -138,7 +138,7 @@ var Macro = (function(JXG, MacroLib) {
             // xoffsets:[5,15],
             ylabel: 'RIR<sub>2</sub>',
             // yoffsets:[5,10],
-            color: 'DarkGray'
+            color: 'darkgray'
         });
 
         ////////

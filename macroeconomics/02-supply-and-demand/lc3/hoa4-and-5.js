@@ -25,7 +25,7 @@ var Macro = (function(JXG, MacroLib) {
         var S = MacroLib.createLine(brd1, {
             ltype: 'Supply',
             name: 'S',
-            color: 'Orange'
+            color: 'orange'
         });
         S.setAttribute({
             fixed: true,
@@ -36,7 +36,7 @@ var Macro = (function(JXG, MacroLib) {
         var D = MacroLib.createLine(brd1, {
             ltype: 'Demand',
             name: 'D',
-            color: 'DodgerBlue'
+            color: 'dodgerblue'
         });
         D.setAttribute({
             fixed: true,
@@ -60,7 +60,7 @@ var Macro = (function(JXG, MacroLib) {
             xoffsets: [5, 15],
             ylabel: 'P<sub>1</sub>',
             yoffsets: [5, 15],
-            color: 'Gray'
+            color: 'gray'
         });
 
         // Dashes to x, y axes for previous Demand Line glider point
@@ -70,7 +70,7 @@ var Macro = (function(JXG, MacroLib) {
             xoffsets: [5, 15],
             ylabel: 'P<sub>1</sub>',
             yoffsets: [5, 15],
-            color: 'Gray'
+            color: 'gray'
         });
 
         // Intersection of Supply and Demand Lines (equilibrium) - fixed

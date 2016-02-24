@@ -17,14 +17,14 @@ var Macro = (function(JXG, MacroLib) {
         var SB1 = MacroLib.createLine(brd1, {
             ltype: 'Supply',
             name: 'SRAS',
-            color: 'Gray'
+            color: 'gray'
         });
 
         //Demand Line 1 - fixed
         var AD1 = MacroLib.createLine(brd1, {
             ltype: 'Demand',
             name: 'AD<sub>1</sub>',
-            color: 'Gray'
+            color: 'gray'
         });
         AD1.setAttribute({
             dash: 1
@@ -34,7 +34,7 @@ var Macro = (function(JXG, MacroLib) {
         var AD2 = MacroLib.createLine(brd1, {
             ltype: 'Demand',
             name: 'AD<sub>2</sub>',
-            color: 'Orange'
+            color: 'orange'
         });
         AD2.setAttribute({
             withLabel: false,
@@ -65,7 +65,7 @@ var Macro = (function(JXG, MacroLib) {
             withLabel: true,
             xlabel: 'rY<sub>1</sub>',
             ylabel: 'PL<sub>1</sub>',
-            color: 'Gray'
+            color: 'gray'
         });
 
         ////////////
@@ -75,7 +75,7 @@ var Macro = (function(JXG, MacroLib) {
             withLabel: true,
             xlabel: 'rY<sub>2</sub>',
             ylabel: 'PL<sub>2</sub>',
-            color: 'Orange'
+            color: 'orange'
         });
 
         dashesB1.Y1.setAttribute({
@@ -110,7 +110,7 @@ var Macro = (function(JXG, MacroLib) {
         var SRPC = MacroLib.createLine(brd2, {
             ltype: 'Demand',
             name: 'SRPC',
-            color: 'Blue'
+            color: 'blue'
         });
 
         ////////
@@ -141,8 +141,8 @@ var Macro = (function(JXG, MacroLib) {
         var iB2fixed = brd2.create('point', [iB2SRPC.X(), iB2SRPC.Y()], {
             name: 'A<sub>1</sub>',
             visible: true,
-            fillColor: 'Gray',
-            strokeColor: 'Gray'
+            fillColor: 'gray',
+            strokeColor: 'gray'
         });
 
         //////////////////

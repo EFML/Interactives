@@ -15,7 +15,7 @@ var Macro = (function(JXG, MacroLib) {
         supplyLine1 = MacroLib.createLine(board, {
             ltype: 'Supply',
             name: 'S<sub>1</sub>',
-            color: 'Gray'
+            color: 'gray'
         });
         supplyLine1.setAttribute({
             dash: 1
@@ -25,7 +25,7 @@ var Macro = (function(JXG, MacroLib) {
         supplyLine2 = MacroLib.createLine(board, {
             ltype: 'Supply',
             name: 'S<sub>2</sub>',
-            color: 'Orange'
+            color: 'orange'
         });
         supplyLine2.setAttribute({
             withLabel: false
@@ -47,7 +47,7 @@ var Macro = (function(JXG, MacroLib) {
             withLabel: true,
             xlabel: 'Q<sub>1</sub>',
             ylabel: 'P<sub>1</sub>',
-            color: 'Gray'
+            color: 'gray'
         });
 
         // Dashes to x, y axes for glider 2
@@ -55,7 +55,7 @@ var Macro = (function(JXG, MacroLib) {
             withLabel: true,
             xlabel: 'Q<sub>2</sub>',
             ylabel: 'P<sub>2</sub>',
-            color: 'Gray'
+            color: 'gray'
         });
         dashedLinesVisibility(dashes2, false);
     }

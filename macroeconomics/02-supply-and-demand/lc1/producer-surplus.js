@@ -20,7 +20,7 @@ var Macro = (function(JXG, MacroLib) {
         var S = MacroLib.createLine(brd1, {
             ltype: 'Supply',
             name: 'S',
-            color: 'Orange'
+            color: 'orange'
         });
         translateLine(S, [-2, 0], 0);
 
@@ -46,7 +46,7 @@ var Macro = (function(JXG, MacroLib) {
             name:"Producer<br>Surplus",
             withLabel: true,
             withLines: false,
-            fillColor: 'Orange',
+            fillColor: 'orange',
             fillOpacity: 0.5,
             label: {
                 offset: [-70, 30]

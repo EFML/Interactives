@@ -20,7 +20,7 @@ var Macro = (function(JXG, MacroLib) {
         var S = MacroLib.createLine(brd1, {
             ltype: 'Supply',
             name: 'S',
-            color: 'Orange'
+            color: 'orange'
         });
         translateLine(S, [-2, 0], 0);
 
@@ -37,8 +37,8 @@ var Macro = (function(JXG, MacroLib) {
             name: 'P',
             withLabel: true,
             visible: true,
-            strokeColor: 'Gray',
-            fillColor: 'Gray',
+            strokeColor: 'gray',
+            fillColor: 'gray',
             label: {
                 offset: [-25, 0]
             }
@@ -51,7 +51,7 @@ var Macro = (function(JXG, MacroLib) {
         var PS = brd1.create('polygon', [S.point1, ptSupply, ptAxis2, ptAxis1], {
             withLabel: false,
             withLines: false,
-            fillColor: 'Orange',
+            fillColor: 'orange',
             fillOpacity: 0.5,
             label: {
                 offset: [-70, 30]
@@ -71,7 +71,7 @@ var Macro = (function(JXG, MacroLib) {
             name:"Producer<br>Surplus",
             withLabel: true,
             withLines: false,
-            fillColor: 'Orange',
+            fillColor: 'orange',
             fillOpacity: 0.5,
             label: {
                 offset: [25, 0]
@@ -92,7 +92,7 @@ var Macro = (function(JXG, MacroLib) {
         ], {
             withLabel: false,
             snapWidth: 0.05,
-            color: 'Crimson'
+            color: 'crimson'
         });
 
         priceSlider.on('drag', function() {

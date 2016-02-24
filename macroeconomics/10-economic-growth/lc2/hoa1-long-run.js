@@ -24,7 +24,7 @@ var Macro = (function(JXG, MacroLib) {
         ], {
             withLabel: false,
             snapWidth: 0.01,
-            color: 'DodgerBlue'
+            color: 'dodgerblue'
         });
 
         //Sliders
@@ -82,12 +82,12 @@ var Macro = (function(JXG, MacroLib) {
 
         var semifix = brd1.create('arc', [po, tmpx, tmpy], {
             strokeWidth: 4,
-            strokeColor: 'Gray',
+            strokeColor: 'gray',
             dash: 1
         });
         var semi = brd1.create('arc', [po, px, py], {
             strokeWidth: 5,
-            strokeColor: 'DodgerBlue'
+            strokeColor: 'dodgerblue'
         });
 
         var hA = brd1.create('segment', [
@@ -107,7 +107,7 @@ var Macro = (function(JXG, MacroLib) {
             withLabel: true,
             xlabel: 'K<sub>A</sub>',
             ylabel: 'C<sub>A</sub>',
-            color: 'Gray'
+            color: 'gray'
         });
 
         //////////////////
