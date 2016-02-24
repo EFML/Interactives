@@ -198,37 +198,37 @@ var Macro = (function(JXG, MacroLib) {
 
     function getGrade() {
         var state = {
-            'iS2D': {
-                'X': iS2D.X(),
-                'Y': iS2D.Y()
+            iS2D: {
+                X: iS2D.X(),
+                Y: iS2D.Y()
             },
-            'iSDfix': {
-                'X': iSDfix.X(),
-                'Y': iSDfix.Y()
+            iSDfix: {
+                X: iSDfix.X(),
+                Y: iSDfix.Y()
             },
-            'AD2': {
-                'p1X': AD2.point1.X(),
-                'p2X': AD2.point2.X(),
-                'p1Y': AD2.point1.Y(),
-                'p2Y': AD2.point2.Y()
+            AD2: {
+                p1X: AD2.point1.X(),
+                p2X: AD2.point2.X(),
+                p1Y: AD2.point1.Y(),
+                p2Y: AD2.point2.Y()
             },
-            'AD1': {
-                'p1X': AD1.point1.X(),
-                'p2X': AD1.point2.X(),
-                'p1Y': AD1.point1.Y(),
-                'p2Y': AD1.point2.Y()
+            AD1: {
+                p1X: AD1.point1.X(),
+                p2X: AD1.point2.X(),
+                p1Y: AD1.point1.Y(),
+                p2Y: AD1.point2.Y()
             },
-            'SRAS2': {
-                'p1X': SRAS2.point1.X(),
-                'p2X': SRAS2.point2.X(),
-                'p1Y': SRAS2.point1.Y(),
-                'p2Y': SRAS2.point2.Y()
+            SRAS2: {
+                p1X: SRAS2.point1.X(),
+                p2X: SRAS2.point2.X(),
+                p1Y: SRAS2.point1.Y(),
+                p2Y: SRAS2.point2.Y()
             },
-            'SRAS1': {
-                'p1X': SRAS1.point1.X(),
-                'p2X': SRAS1.point2.X(),
-                'p1Y': SRAS1.point1.Y(),
-                'p2Y': SRAS1.point2.Y()
+            SRAS1: {
+                p1X: SRAS1.point1.X(),
+                p2X: SRAS1.point2.X(),
+                p1Y: SRAS1.point1.Y(),
+                p2Y: SRAS1.point2.Y()
             }
         };
         var statestr = JSON.stringify(state);

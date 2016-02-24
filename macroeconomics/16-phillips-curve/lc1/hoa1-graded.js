@@ -143,17 +143,17 @@ var Macro = (function(JXG, MacroLib) {
     //Standard edX JSinput functions
     function getGrade() {
         var state = {
-            'dragLine': {
-                'p1X': AD2.point1.X(),
-                'p2X': AD2.point2.X(),
-                'p1Y': AD2.point1.Y(),
-                'p2Y': AD2.point2.Y()
+            dragLine: {
+                p1X: AD2.point1.X(),
+                p2X: AD2.point2.X(),
+                p1Y: AD2.point1.Y(),
+                p2Y: AD2.point2.Y()
             },
-            'staticLine': {
-                'p1X': AD1.point1.X(),
-                'p2X': AD1.point2.X(),
-                'p1Y': AD1.point1.Y(),
-                'p2Y': AD1.point2.Y()
+            staticLine: {
+                p1X: AD1.point1.X(),
+                p2X: AD1.point2.X(),
+                p1Y: AD1.point1.Y(),
+                p2Y: AD1.point2.Y()
             }
         };
         var statestr = JSON.stringify(state);

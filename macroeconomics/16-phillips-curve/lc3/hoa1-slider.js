@@ -255,7 +255,7 @@ var Macro = (function(JXG, MacroLib) {
         });
 
         //LRAS - fixed
-        // var LRAS = createLine(brd2,{'ltype':'Vertical','name':'LRPC','color':'DodgerBlue'})
+        // var LRAS = createLine(brd2, {ltype: 'Vertical', name: 'LRPC', color: 'DodgerBlue'})
         var LRPC = brd2.create('segment', [
             [6.25, 0.5],
             [6.25, 11.0]

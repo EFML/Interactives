@@ -149,17 +149,17 @@ var Macro = (function(JXG, MacroLib) {
     //Standard edX JSinput functions
     function getGrade() {
         var state = {
-            'MD1': {
-                'X1': MD1.point1.X(),
-                'X2': MD1.point2.X(),
-                'Y1': MD1.point1.Y(),
-                'Y2': MD1.point2.Y()
+            MD1: {
+                X1: MD1.point1.X(),
+                X2: MD1.point2.X(),
+                Y1: MD1.point1.Y(),
+                Y2: MD1.point2.Y()
             },
-            'MD2': {
-                'X1': MD2.point1.X(),
-                'X2': MD2.point2.X(),
-                'Y1': MD2.point1.Y(),
-                'Y2': MD2.point2.Y()
+            MD2: {
+                X1: MD2.point1.X(),
+                X2: MD2.point2.X(),
+                Y1: MD2.point1.Y(),
+                Y2: MD2.point2.Y()
             }
         };
         var statestr = JSON.stringify(state);

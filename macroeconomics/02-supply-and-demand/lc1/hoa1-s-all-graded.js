@@ -20,9 +20,9 @@ var Macro = (function(JXG, MacroLib) {
             color: 'Gray'
         });
         demandLine1.setAttribute({
-            'dash': 1,
-            'fixed': true,
-            'highlight': false
+            dash: 1,
+            fixed: true,
+            highlight: false
         });
 
         // Demand Line 2 - moveable
@@ -263,8 +263,8 @@ var Macro = (function(JXG, MacroLib) {
 
     function getState() {
         var state = {
-            'demand': demandSlider.Value(),
-            'price': priceSlider.Value()
+            demand: demandSlider.Value(),
+            price: priceSlider.Value()
         };
         console.info('State successfully saved.');
         return JSON.stringify(state);

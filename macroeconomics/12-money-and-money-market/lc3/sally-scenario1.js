@@ -180,7 +180,7 @@ var Macro = (function(JXG, MacroLib) {
                 size: '0.5',
                 strokeColor: 'Gray',
                 label: {
-                    'offset': [2, 12]
+                    offset: [2, 12]
                 }
             });
 

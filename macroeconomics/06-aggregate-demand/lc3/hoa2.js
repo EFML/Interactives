@@ -31,8 +31,8 @@ var Macro = (function(JXG, MacroLib) {
             color: 'DodgerBlue'
         });
         AD1.setAttribute({
-            'fixed': true,
-            'highlight': false
+            fixed: true,
+            highlight: false
         });
 
         //Demand Line AD2 - fixed

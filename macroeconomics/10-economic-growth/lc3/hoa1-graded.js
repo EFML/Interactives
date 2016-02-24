@@ -192,9 +192,9 @@ var Macro = (function(JXG, MacroLib) {
 
     function getGrade() {
         var state = {
-            'LRAS2': {
-                'X0': LRAS1.point1.X(),
-                'slider': sliderx.Value()
+            LRAS2: {
+                X0: LRAS1.point1.X(),
+                slider: sliderx.Value()
             }
         };
         var statestr = JSON.stringify(state);

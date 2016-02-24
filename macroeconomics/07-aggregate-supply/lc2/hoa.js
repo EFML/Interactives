@@ -50,7 +50,7 @@ var Macro = (function(JXG, MacroLib) {
         });
         LRAS1.setAttribute({
             label: {
-                'offset': [20, 0]
+                offset: [20, 0]
             }
         });
 

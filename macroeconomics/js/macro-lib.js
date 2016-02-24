@@ -414,7 +414,7 @@ var MacroLib = (function(JXG) {
       2. Add a state variable like the t value of tSlider :
 
       var state = {
-        't': 0.0
+        t: 0.0
       };
 
 

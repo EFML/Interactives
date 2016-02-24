@@ -412,8 +412,8 @@ var Macro = (function(JXG, MacroLib) {
 
     function getState() {
         var state = {
-            'demand': leftComponents.demandSlider.Value(),
-            'supply': rightComponents.supplySlider.Value()
+            demand: leftComponents.demandSlider.Value(),
+            supply: rightComponents.supplySlider.Value()
         };
         console.info('State successfully saved.');
         return JSON.stringify(state);

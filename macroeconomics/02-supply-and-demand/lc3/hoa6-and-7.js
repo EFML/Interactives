@@ -19,9 +19,9 @@ var Macro = (function(JXG, MacroLib) {
             color: 'Gray'
         });
         demandLine11.setAttribute({
-            'dash': 1,
-            'fixed': true,
-            'highlight': false
+            dash: 1,
+            fixed: true,
+            highlight: false
         });
 
         // Demand Line 2 - moveable
@@ -41,8 +41,8 @@ var Macro = (function(JXG, MacroLib) {
             color: 'Orange'
         });
         supplyLine.setAttribute({
-            'fixed': true,
-            'highlight': false
+            fixed: true,
+            highlight: false
         });
 
         // Glider on Demand Line 1
@@ -94,9 +94,9 @@ var Macro = (function(JXG, MacroLib) {
             color: 'Gray'
         });
         supplyLine21.setAttribute({
-            'dash': 1,
-            'fixed': true,
-            'highlight': false
+            dash: 1,
+            fixed: true,
+            highlight: false
         });
 
         // Supply Line 2 - moveable
@@ -116,8 +116,8 @@ var Macro = (function(JXG, MacroLib) {
             color: 'DodgerBlue'
         });
         demandLine.setAttribute({
-            'fixed': true,
-            'highlight': false
+            fixed: true,
+            highlight: false
         });
 
         // Glider on Supply Line 1

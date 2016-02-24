@@ -367,9 +367,9 @@ var Macro = (function(JXG, MacroLib) {
 
     function getState() {
         var state = {
-            'sliderB1': sliderB1.Value(),
-            'sliderB2': sliderB2.Value(),
-            'sliderB3': sliderB3.Value()
+            sliderB1: sliderB1.Value(),
+            sliderB2: sliderB2.Value(),
+            sliderB3: sliderB3.Value()
         };
         return JSON.stringify(state);
         console.info('State successfully saved.');

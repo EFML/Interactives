@@ -20,8 +20,8 @@ var Macro = (function(JXG, MacroLib) {
             color: 'Orange'
         });
         S.setAttribute({
-            'fixed': true,
-            'highlight': false
+            fixed: true,
+            highlight: false
         });
 
         // Demand Line  - fixed
@@ -31,8 +31,8 @@ var Macro = (function(JXG, MacroLib) {
             color: 'DodgerBlue'
         });
         D.setAttribute({
-            'fixed': true,
-            'highlight': false
+            fixed: true,
+            highlight: false
         });
 
         // Intersection of Supply and Demand Lines - fixed

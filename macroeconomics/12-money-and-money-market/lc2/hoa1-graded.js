@@ -95,9 +95,9 @@ var Macro = (function(JXG, MacroLib) {
     //Standard edX JSinput functions
     function getGrade() {
         var state = {
-            'C1': C1.getAttribute('strokeColor'),
-            'C2': C2.getAttribute('strokeColor'),
-            'C3': C3.getAttribute('strokeColor'),
+            C1: C1.getAttribute('strokeColor'),
+            C2: C2.getAttribute('strokeColor'),
+            C3: C3.getAttribute('strokeColor'),
         };
         var statestr = JSON.stringify(state);
         return statestr;
@@ -105,7 +105,7 @@ var Macro = (function(JXG, MacroLib) {
 
     function getState() {
         var state = {
-            'input': JSON.parse(getGrade())
+            input: JSON.parse(getGrade())
         };
         var statestr = JSON.stringify(state);
         console.info('State successfully saved.');

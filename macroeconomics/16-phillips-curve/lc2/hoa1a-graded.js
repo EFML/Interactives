@@ -103,17 +103,17 @@ var Macro = (function(JXG, MacroLib) {
     //Standard edX JSinput functions
     function getGrade() {
         var state = {
-            'SRPC1': {
-                'pt1x': SRPC1.point1.X(),
-                'pt2x': SRPC1.point2.X(),
-                'pt1y': SRPC1.point1.Y(),
-                'pt2y': SRPC1.point2.Y()
+            SRPC1: {
+                pt1x: SRPC1.point1.X(),
+                pt2x: SRPC1.point2.X(),
+                pt1y: SRPC1.point1.Y(),
+                pt2y: SRPC1.point2.Y()
             },
-            'SRPC2': {
-                'pt1x': SRPC2.point1.X(),
-                'pt2x': SRPC2.point2.X(),
-                'pt1y': SRPC2.point1.Y(),
-                'pt2y': SRPC2.point2.Y()
+            SRPC2: {
+                pt1x: SRPC2.point1.X(),
+                pt2x: SRPC2.point2.X(),
+                pt1y: SRPC2.point1.Y(),
+                pt2y: SRPC2.point2.Y()
             },
         };
         return JSON.stringify(state);
