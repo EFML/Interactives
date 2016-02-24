@@ -17,7 +17,7 @@ var Macro = (function(JXG, MacroLib) {
         ////////////
         brd1 = MacroLib.createBoard('jxgbox1', {
             bboxlimits: [-2, 12, 12, -2],
-            xname: 'Quantity of Wheat',
+            xname: 'Quantity<br>of Wheat',
             yname: 'Price of<br>Wheat'
         });
 
@@ -57,9 +57,7 @@ var Macro = (function(JXG, MacroLib) {
         DGS = MacroLib.createDashedLines2Axis(brd1, GS, {
             withLabel: true,
             xlabel: 'QS',
-            xoffsets: [5, 15],
             ylabel: 'P<sub>1</sub>',
-            yoffsets: [5, 15],
             color: 'gray'
         });
 
@@ -67,9 +65,7 @@ var Macro = (function(JXG, MacroLib) {
         DGD = MacroLib.createDashedLines2Axis(brd1, GD, {
             withLabel: true,
             xlabel: 'QD',
-            xoffsets: [5, 15],
             ylabel: 'P<sub>1</sub>',
-            yoffsets: [5, 15],
             color: 'gray'
         });
 

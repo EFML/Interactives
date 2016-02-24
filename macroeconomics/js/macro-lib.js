@@ -36,8 +36,8 @@ var MacroLib = (function(JXG) {
                     X: 10,
                     Y: 10
                 };
-                defaultXoffset = [-5, -15];
-                defaultYoffset = [-35, -2];
+                defaultXoffset = [0, -6];
+                defaultYoffset = [-8, 0];
                 break;
             case TWO_BOARDS:
                 JXG.Options.text.fontSize = 15;
@@ -46,8 +46,8 @@ var MacroLib = (function(JXG) {
                     X: 5,
                     Y: 5
                 };
-                defaultXoffset = [-5, -15];
-                defaultYoffset = [-35, -2];
+                defaultXoffset = [0, -4];
+                defaultYoffset = [-6, 0];
                 break;
             case THREE_BOARDS:
                 JXG.Options.text.fontSize = 15;
@@ -56,8 +56,8 @@ var MacroLib = (function(JXG) {
                     X: 5,
                     Y: 5
                 };
-                defaultXoffset = [2, 10];
-                defaultYoffset = [4, -10];
+                defaultXoffset = [0, -2];
+                defaultYoffset = [-4, 0];
                 break;
         }
     }
@@ -100,7 +100,7 @@ var MacroLib = (function(JXG) {
         // x offset of xwidth/40 from right edge of graph
         // y offset of yheight/50 from x-axis
         var dx1 = (bboxlimits[2]-bboxlimits[0])/40;
-        var dy1 = (bboxlimits[3]-bboxlimits[1])/50;
+        var dy1 = (bboxlimits[3]-bboxlimits[1])/100;
         var xlabel = board.create('text', [bboxlimits[2] - dx1, dy1, xname], {
             anchorX: 'right',
             anchorY: 'top'
@@ -275,7 +275,9 @@ var MacroLib = (function(JXG) {
             fixed: fixed,
             strokeColor: 'gray',
             label: {
-                offset: yoffsets
+                offset: yoffsets,
+                anchorX: 'right',
+                anchorY: 'middle'
             }
         });
 
@@ -302,7 +304,9 @@ var MacroLib = (function(JXG) {
             fixed: fixed,
             strokeColor: 'gray',
             label: {
-                offset: xoffsets
+                offset: xoffsets,
+                anchorX: 'middle',
+                anchorY: 'top'
             }
         });
 

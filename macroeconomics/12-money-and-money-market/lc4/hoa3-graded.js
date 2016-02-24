@@ -10,7 +10,7 @@ var Macro = (function(JXG, MacroLib) {
         ////////////
         var cfx = 800.0 / 12.0;
         var cfy = 27.0 / 12.0;
-        var newbbox = [-170, 27, 800, -4];
+        var newbbox = [-170, 27, 800, -4.5];
 
         brd1 = MacroLib.createBoard('jxgbox1', {
             xname: ' ',
@@ -27,15 +27,15 @@ var Macro = (function(JXG, MacroLib) {
             withLabel: false,
         });
         xaxis.removeAllTicks();
-        brd1.create('ticks', [xaxis, [0, 100, 200, 300, 400, 500, 600, 700, 800]], {
+        brd1.create('ticks', [xaxis, [0, 100, 200, 300, 400, 500, 600, 700]], {
             strokeColor: 'black',
-            majorHeight: 15,
+            majorHeight: 7,
             drawLabels: true,
             label: {
                 offset: [0, -20]
             }
         });
-        var xlabel1 = brd1.create('text', [380, -2.75, 'Quantity of Money ($billions)']);
+        var xlabel1 = brd1.create('text', [380, -3, 'Quantity of Money ($billions)']);
 
         var yaxis = brd1.create('axis', [
             [0, 0],
@@ -47,7 +47,7 @@ var Macro = (function(JXG, MacroLib) {
         yaxis.removeAllTicks();
         brd1.create('ticks', [yaxis, [0, 5, 10, 15, 20, 25, 30]], {
             strokeColor: 'black',
-            majorHeight: 15,
+            majorHeight: 7,
             drawLabels: true
         });
         var ylabel1 = brd1.create('text', [-150, 24, 'Nominal<br>Interest<br>Rate']);
@@ -58,7 +58,7 @@ var Macro = (function(JXG, MacroLib) {
             [cfx * 6.0, cfy * 1.0]
         ], {
             strokeColor: 'gray',
-            strokeWidth: '5',
+            strokeWidth: 5,
             name: '',
             withLabel: false,
             dash: 1,
@@ -70,7 +70,7 @@ var Macro = (function(JXG, MacroLib) {
             [cfx * 9.0, cfy * 1.45]
         ], {
             strokeColor: 'orange',
-            strokeWidth: '5',
+            strokeWidth: 5,
             name: 'M<sub>D</sub>',
             withLabel: true,
             label: {
@@ -84,13 +84,13 @@ var Macro = (function(JXG, MacroLib) {
             [cfx * 6.0, cfy * 1.0]
         ], {
             strokeColor: 'dodgerblue',
-            strokeWidth: '5',
+            strokeWidth: 5,
             name: 'M<sub>S</sub>',
             withLabel: true,
             fixed: false,
             highlight: true,
             label: {
-                offset: [-10, 185]
+                offset: [-10, 180]
             }
         });
 

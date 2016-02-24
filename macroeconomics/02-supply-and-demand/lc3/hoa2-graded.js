@@ -1,7 +1,7 @@
 // Used as JSInput
 var Macro = (function(JXG, MacroLib) {
     'use strict';
-    var boundingBox, board, xAxis, yAxis, xTicks, yTicks, xLabels, yLabels,
+    var boundingBox, board, xAxis, yAxis, xTicks, yTicks, xLabels, yLabels, eqLabel,
         supplyLine, demandLine, supplyDashedLines, demandDashedLines,
         yAxisPts, supplyLinePts, demandLinePts,
         state = {
@@ -33,7 +33,7 @@ var Macro = (function(JXG, MacroLib) {
             withLabel: true,
             label: {
                 //position: 'rt',
-                offset: [240, -15]
+                offset: [480, -15]
             }
         });
         xAxis.removeAllTicks();
@@ -73,7 +73,7 @@ var Macro = (function(JXG, MacroLib) {
         var yVals = [0, 1, 2, 3, 4, 5];
         for (i = 0; i < yVals.length; i++) {
             yLabels.push(
-                board.create('text', [-14, yVals[i] + 0.155, yVals[i].toString()])
+                board.create('text', [-14, yVals[i] + 0.2, yVals[i].toString()])
             );
         }
 
@@ -137,9 +137,9 @@ var Macro = (function(JXG, MacroLib) {
         supplyDashedLines = MacroLib.createDashedLines2Axis(board, supplyLinePts[0], {
             withLabel: true,
             xlabel: 'QS',
-            xoffsets: [5, 15],
+            xoffsets: [17, 23],
             ylabel: 'P',
-            yoffsets: [15, 10],
+            yoffsets: [20, 13],
             color: 'gray'
         });
         supplyDashedLines.X1.setAttribute({
@@ -159,9 +159,9 @@ var Macro = (function(JXG, MacroLib) {
         demandDashedLines = MacroLib.createDashedLines2Axis(board, demandLinePts[4], {
             withLabel: true,
             xlabel: 'QD',
-            xoffsets: [5, 15],
+            xoffsets: [17, 23],
             ylabel: 'P',
-            yoffsets: [15, 10],
+            yoffsets: [20, 13],
             color: 'gray'
         });
         demandDashedLines.X1.setAttribute({
@@ -176,6 +176,8 @@ var Macro = (function(JXG, MacroLib) {
             size: 5
         });
         dashedLinesVisibility(demandDashedLines, false);
+        eqLabel = board.create('text', [154.5, 0.21, 'QS = QD']);
+        eqLabel.hideElement();
     }
 
     function selectPoint(index) {
@@ -209,12 +211,17 @@ var Macro = (function(JXG, MacroLib) {
 
         // Equilibrium
         if (index === 2) {
+            // Bug, label will be shifter when set to QS afterwards
+            // supplyDashedLines.X1.setAttribute({
+            //     name: 'QS = QD'
+            // });
             supplyDashedLines.X1.setAttribute({
-                name: 'QS = QD'
+                name: ''
             });
             demandDashedLines.X1.setAttribute({
                 name: ''
             });
+            eqLabel.showElement();
         }
         else {
             supplyDashedLines.X1.setAttribute({
@@ -223,6 +230,7 @@ var Macro = (function(JXG, MacroLib) {
             demandDashedLines.X1.setAttribute({
                 name: 'QD'
             });
+            eqLabel.hideElement();
         }
     }
 

@@ -36,8 +36,8 @@ var Macro = (function(JXG, MacroLib) {
 
         //Slider Board 1
         sliderB1 = brd1.create('slider', [
-            [2.0, -1.75],
-            [8, -1.75],
+            [2.0, -2.5],
+            [8, -2.5],
             [-1.75, 0, 1.75]
         ], {
             withLabel: false,
@@ -58,8 +58,8 @@ var Macro = (function(JXG, MacroLib) {
 
         //Slider Board 2
         sliderB2 = brd2.create('slider', [
-            [2.0, -1.75],
-            [8, -1.75],
+            [2.0, -2.5],
+            [8, -2.5],
             [-1.75, 0, 1.75]
         ], {
             withLabel: false,
@@ -79,8 +79,8 @@ var Macro = (function(JXG, MacroLib) {
 
         //Slider Board 1
         sliderB3 = brd3.create('slider', [
-            [2.0, -1.75],
-            [8, -1.75],
+            [2.0, -2.5],
+            [8, -2.5],
             [-1.75, 0, 1.75]
         ], {
             withLabel: false,

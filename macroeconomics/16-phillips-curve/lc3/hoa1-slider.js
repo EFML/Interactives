@@ -134,9 +134,9 @@ var Macro = (function(JXG, MacroLib) {
         var dashesB1fixed = MacroLib.createDashedLines2Axis(brd1, iSDfix, {
             withLabel: true,
             xlabel: 'rY<sub>1</sub>',
-            xoffsets: [5, 15],
+            xoffsets: [15, 25],
             ylabel: 'PL<sub>1</sub>',
-            yoffsets: [5, 10],
+            yoffsets: [30, 15],
             color: 'gray'
         });
 
@@ -146,9 +146,9 @@ var Macro = (function(JXG, MacroLib) {
         var dashesB1 = MacroLib.createDashedLines2Axis(brd1, iS2D, {
             withLabel: true,
             xlabel: 'rY<sub>2</sub>',
-            xoffsets: [5, 15],
+            xoffsets: [15, 25],
             ylabel: 'PL<sub>2</sub>',
-            yoffsets: [5, 10],
+            yoffsets: [30, 15],
             color: 'orange'
         });
 
@@ -173,7 +173,7 @@ var Macro = (function(JXG, MacroLib) {
             xlabel: '',
             xoffsets: [5, 15],
             ylabel: 'PL<sub>3</sub>',
-            yoffsets: [5, 10],
+            yoffsets: [30, 15],
             color: 'lime'
         });
 
@@ -264,7 +264,7 @@ var Macro = (function(JXG, MacroLib) {
             name: 'LRPC',
             withLabel: true,
             label: {
-                offset: [0, 125]
+                offset: [-15, 130]
             }
         });
         LRPC.setAttribute({
@@ -298,9 +298,8 @@ var Macro = (function(JXG, MacroLib) {
         var dashesB2 = MacroLib.createDashedLines2Axis(brd2, iSDB2fix, {
             withLabel: true,
             xlabel: '5.0%',
-            xoffsets: [5, 10],
+            xoffsets: [18, 22],
             ylabel: '2.0%',
-            yoffsets: [5, 10],
             color: 'dodgerblue'
         });
 
@@ -366,9 +365,9 @@ var Macro = (function(JXG, MacroLib) {
         });
 
 
-        var sliderLabelB2Y = brd2.create('text', [-1.75,
+        var sliderLabelB2Y = brd2.create('text', [-1.45,
             function(y) {
-                return (iB2SRPC1.Y() + 0.0);
+                return (iB2SRPC1.Y());
             },
             function() {
                 return (2.0 + sliderx.Value()).toFixed(1) + '%';

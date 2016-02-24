@@ -7,8 +7,6 @@ var Macro = (function(JXG, MacroLib) {
         //General Parameters for Macro
         JXG.Options.segment.strokeColor = 'gray';
         JXG.Options.text.fontSize = 15;
-        MacroLib.defaultXoffset([2, 12]);
-        MacroLib.defaultYoffset([2, 12]);
 
         ////////////
         // BOARD 1
@@ -73,7 +71,7 @@ var Macro = (function(JXG, MacroLib) {
             name: 'M<sub>D</sub>',
             withLabel: true,
             label: {
-                offset: [100, -100]
+                offset: [90, -85]
             }
         });
 
@@ -106,7 +104,7 @@ var Macro = (function(JXG, MacroLib) {
             name: 'M<sub>S2</sub>',
             color: 'dodgerblue',
             label: {
-                offset: [0, 115]
+                offset: [-10, 117]
             }
         });
 
@@ -125,7 +123,7 @@ var Macro = (function(JXG, MacroLib) {
             withLabel: true,
             name: 'D',
             label: {
-                offset: [90, -90]
+                offset: [90, -85]
             }
         });
 
@@ -176,7 +174,8 @@ var Macro = (function(JXG, MacroLib) {
             withLabel: true,
             color: 'dodgerblue',
             xlabel: 'Q<sub>S</sub>',
-            ylabel: 'NIR'
+            ylabel: 'NIR',
+            xoffsets: [15, 25]
         });
 
         //Dashed Lines - Board 2
@@ -189,7 +188,8 @@ var Macro = (function(JXG, MacroLib) {
             withLabel: true,
             color: 'dodgerblue',
             xlabel: 'Q<sub>2</sub>',
-            ylabel: 'P<sub>2</sub>'
+            ylabel: 'P<sub>2</sub>',
+            xoffsets: [15, 25]
         });
 
         //////////////////

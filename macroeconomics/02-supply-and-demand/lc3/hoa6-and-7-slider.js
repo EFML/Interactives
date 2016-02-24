@@ -60,9 +60,7 @@ var Macro = (function(JXG, MacroLib) {
         dashes11 = MacroLib.createDashedLines2Axis(brd1, glider11, {
             withLabel: true,
             xlabel: 'Q<sub>1</sub>',
-            xoffsets: [5, 12],
             ylabel: 'P<sub>1</sub>',
-            yoffsets: [5, 12],
             color: 'gray'
         });
 
@@ -70,17 +68,15 @@ var Macro = (function(JXG, MacroLib) {
         dashes12 = MacroLib.createDashedLines2Axis(brd1, glider12, {
             withLabel: true,
             xlabel: 'Q<sub>2</sub>',
-            xoffsets: [5, 12],
             ylabel: 'P<sub>2</sub>',
-            yoffsets: [5, 12],
             color: 'gray'
         });
         dashedLinesVisibility(dashes12, false);
 
         // Slider
         demandSlider = brd1.create('slider', [
-            [3.75, -1.4],
-            [7.75, -1.4],
+            [3.75, -2],
+            [7.75, -2],
             [-1.0, 0.0, 1.0]
         ], {
             withLabel: false,
@@ -160,9 +156,7 @@ var Macro = (function(JXG, MacroLib) {
         dashes21 = MacroLib.createDashedLines2Axis(brd2, glider21, {
             withLabel: true,
             xlabel: 'Q<sub>1</sub>',
-            xoffsets: [5, 12],
             ylabel: 'P<sub>1</sub>',
-            yoffsets: [5, 12],
             color: 'gray'
         });
 
@@ -170,17 +164,15 @@ var Macro = (function(JXG, MacroLib) {
         dashes22 = MacroLib.createDashedLines2Axis(brd2, glider22, {
             withLabel: true,
             xlabel: 'Q<sub>2</sub>',
-            xoffsets: [5, 12],
             ylabel: 'P<sub>2</sub>',
-            yoffsets: [5, 12],
             color: 'gray'
         });
         dashedLinesVisibility(dashes22, false);
 
         // Slider
         supplySlider = brd2.create('slider', [
-            [3.75, -1.4],
-            [7.75, -1.4],
+            [3.75, -2],
+            [7.75, -2],
             [-1.0, 0.0, 1.0]
         ], {
             withLabel: false,

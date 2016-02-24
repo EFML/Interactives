@@ -3,7 +3,7 @@ var Macro = (function(JXG, MacroLib) {
     var brd1;
 
     function init() {
-        MacroLib.init(MacroLib.ONE_BOARD);
+        MacroLib.init(MacroLib.TWO_BOARDS);
         //General Parameters for Macro
         JXG.Options.segment.strokeColor = 'gray';
         JXG.Options.text.fontSize = 15;
@@ -12,8 +12,8 @@ var Macro = (function(JXG, MacroLib) {
         // BOARD 1
         ////////////
         brd1 = MacroLib.createBoard('jxgbox1', {
-            bboxlimits: [-3.0, 12, 12, -2.0],
-            xname: 'Quantity of Money',
+            bboxlimits: [-3.0, 12, 12, -3.0],
+            xname: 'Quantity<br>of Money',
             yname: 'Nominal<br>Interest<br>Rate',
             grid: true
         });
@@ -22,16 +22,16 @@ var Macro = (function(JXG, MacroLib) {
         // BOARD 2
         ////////////
         var brd2 = MacroLib.createBoard('jxgbox2', {
-            bboxlimits: [-3.0, 12, 12, -2.0],
-            xname: 'Quantity of Bonds per Period',
+            bboxlimits: [-3.0, 12, 12, -3.0],
+            xname: 'Quantity of Bonds<br>per Period',
             yname: 'Price of<br>Bonds',
             grid: true
         });
 
         //Sliders
         var slidery = brd1.create('slider', [
-            [-1.5, 2.0],
-            [-1.5, 8],
+            [-2.5, 2],
+            [-2.5, 8],
             [-1.5, 0, 1.5]
         ], {
             withLabel: false,
@@ -71,7 +71,7 @@ var Macro = (function(JXG, MacroLib) {
             withLabel: true,
             name: 'M<sub>S</sub>',
             label: {
-                offset: [0, 115]
+                offset: [-10, 112]
             }
         });
 
@@ -104,7 +104,7 @@ var Macro = (function(JXG, MacroLib) {
             name: 'M<sub>D2</sub>',
             color: 'dodgerblue',
             label: {
-                offset: [90, -90]
+                offset: [100, -70]
             }
         });
 
@@ -156,7 +156,7 @@ var Macro = (function(JXG, MacroLib) {
             name: 'D<sub>2</sub>',
             color: 'dodgerblue',
             label: {
-                offset: [90, -90]
+                offset: [100, -70]
             }
         });
 
@@ -164,105 +164,32 @@ var Macro = (function(JXG, MacroLib) {
             withLabel: false
         });
 
-
-        function createDashedLines2Axis(board, intersection, options) {
-            var fixed = options.fixed || true; // defaults
-            var withLabel = options.withLabel || false;
-            var xlabel = options.xlabel || '';
-            var ylabel = options.ylabel || '';
-            var color = options.color || 'gray';
-            var visible = options.visible || true;
-
-            var Y1 = board.create('point', [0, intersection.Y()], {
-                withLabel: withLabel,
-                name: ylabel,
-                visible: true,
-                size: '0.5',
-                strokeColor: 'gray',
-                label: {
-                    offset: [2, 12]
-                }
-            });
-
-            var Y2 = board.create('point', [intersection.X(), intersection.Y()], {
-                withLabel: false,
-                visible: false,
-                size: '0.0',
-                strokeColor: ''
-            });
-
-            var YLine = board.create('segment', [Y1, Y2], {
-                strokeColor: color,
-                strokeWidth: '2',
-                dash: '1',
-                fixed: fixed,
-                visible: visible
-            });
-
-            var X1 = board.create('point', [intersection.X(), 0], {
-                withLabel: withLabel,
-                name: xlabel,
-                visible: true,
-                size: '0.5',
-                strokeColor: 'gray',
-                label: {
-                    offset: [2, 12]
-                }
-            });
-
-            var X2 = board.create('point', [intersection.X(), intersection.Y()], {
-                withLabel: false,
-                visible: false,
-                size: '0.0',
-                strokeColor: ''
-            });
-
-            var XLine = board.create('segment', [X1, X2], {
-                strokeColor: color,
-                strokeWidth: '2',
-                dash: '1',
-                fixed: fixed,
-                visible: visible
-            });
-
-
-            var obj = {
-                Y1: Y1,
-                Y2: Y2,
-                YLine: YLine,
-                X1: X1,
-                X2: X2,
-                XLine: XLine
-            };
-
-            return obj;
-        }
-
-
         //Dashed Lines - Board 1
-        var dashB1fixed = createDashedLines2Axis(brd1, iSDB, {
+        var dashB1fixed = MacroLib.createDashedLines2Axis(brd1, iSDB, {
             withLabel: false,
             color: 'gray'
         });
-        var dashB1 = createDashedLines2Axis(brd1, iSDB, {
+        var dashB1 = MacroLib.createDashedLines2Axis(brd1, iSDB, {
             fixed: false,
             withLabel: true,
             color: 'dodgerblue',
             xlabel: 'Q',
-            ylabel: 'NIR<sub>2</sub>'
+            ylabel: 'NIR<sub>2</sub>',
+            xoffsets: [15, 25]
         });
 
         //Dashed Lines - Board 2
-        var dashB2fixed = createDashedLines2Axis(brd2, iSDB2, {
+        var dashB2fixed = MacroLib.createDashedLines2Axis(brd2, iSDB2, {
             withLabel: false,
             color: 'gray'
         });
-        var dashB2 = createDashedLines2Axis(brd2, iSDB2, {
+        var dashB2 = MacroLib.createDashedLines2Axis(brd2, iSDB2, {
             fixed: false,
             withLabel: true,
             color: 'dodgerblue',
             xlabel: 'Q<sub>2</sub>',
-            ylabel: 'P<sub>2</sub>'
+            ylabel: 'P<sub>2</sub>',
+            xoffsets: [15, 25]
         });
 
         //////////////////

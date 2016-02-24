@@ -60,7 +60,7 @@ var Macro = (function(JXG, MacroLib) {
             strokeWidth: '2',
             dash: '2',
             label: {
-                offset: [-187, 0]
+                offset: [-187, 3]
             }
         });
     }

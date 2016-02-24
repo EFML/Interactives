@@ -5,8 +5,8 @@ var Macro = (function(JXG, MacroLib) {
     function init() {
         MacroLib.init(MacroLib.ONE_BOARD);
         brd1 = MacroLib.createBoard('jxgbox1', {
-            bboxlimits: [-2.5, 12, 12, -1.1],
-            xname: 'Quantity of Money',
+            bboxlimits: [-2.5, 12, 12, -2],
+            xname: 'Quantity<br>of Money',
             yname: 'Nominal<br>Interest<br>Rate'
         });
 
@@ -35,7 +35,7 @@ var Macro = (function(JXG, MacroLib) {
             withLabel: true,
             dash: 1,
             label: {
-                offset: [0, 185]
+                offset: [-10, 180]
             }
         });
 
@@ -48,7 +48,7 @@ var Macro = (function(JXG, MacroLib) {
             name: 'M<sub>S2</sub>',
             withLabel: false,
             label: {
-                offset: [0, 185]
+                offset: [-10, 180]
             }
         });
 

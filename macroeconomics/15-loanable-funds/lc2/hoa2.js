@@ -108,13 +108,10 @@ var Macro = (function(JXG, MacroLib) {
         var dashesB1 = MacroLib.createDashedLines2Axis(brd1, iSDB1, {
             withLabel: true,
             xlabel: 'Q<sub>1</sub>',
-            xoffsets: [5, 15],
+            xoffsets: [15, 25],
             ylabel: 'RIR<sub>1</sub>',
-            // yoffsets:[5,10],
             color: 'gray'
         });
-
-
 
         ////////////
         // Dashes in Box 2
@@ -124,9 +121,7 @@ var Macro = (function(JXG, MacroLib) {
         var dashesB2fix = MacroLib.createDashedLines2Axis(brd2, iSDB1, {
             withLabel: false,
             xlabel: 'I<sub>1</sub>',
-            // xoffsets:[5,15],
             ylabel: 'RIR<sub>1</sub>',
-            // yoffsets:[5,10],
             color: 'gray'
         });
 
@@ -135,10 +130,9 @@ var Macro = (function(JXG, MacroLib) {
         var dashesB2 = MacroLib.createDashedLines2Axis(brd2, iSDB1, {
             withLabel: true,
             xlabel: 'I<sub>2</sub>',
-            // xoffsets:[5,15],
             ylabel: 'RIR<sub>2</sub>',
-            // yoffsets:[5,10],
-            color: 'darkgray'
+            color: 'darkgray',
+            xoffsets: [15, 25]
         });
 
         ////////

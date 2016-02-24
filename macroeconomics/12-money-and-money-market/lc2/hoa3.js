@@ -5,8 +5,8 @@ var Macro = (function(JXG, MacroLib) {
     function init() {
         MacroLib.init(MacroLib.ONE_BOARD);
         brd1 = MacroLib.createBoard('jxgbox1', {
-            bboxlimits: [-2.5, 12, 12, -1.1],
-            xname: 'Quantity of Money',
+            bboxlimits: [-2.5, 12, 12, -2],
+            xname: 'Quantity<br>of Money',
             yname: 'Nominal<br>Interest<br>Rate'
         });
 

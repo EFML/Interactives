@@ -76,7 +76,6 @@ var Macro = (function(JXG, MacroLib) {
             withLabel: true,
             xlabel: 'RGDP<sub>1</sub>',
             ylabel: 'PL<sub>1</sub>',
-            yoffsets: [5, 10],
             color: 'darkgray'
         });
 

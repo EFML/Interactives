@@ -6,7 +6,7 @@ var Macro = (function(JXG, MacroLib) {
         MacroLib.init(MacroLib.ONE_BOARD);
 
         brd1 = MacroLib.createBoard('jxgbox1', {
-            bboxlimits: [-1.5, 12, 12, -1.5],
+            bboxlimits: [-2, 12, 12, -2],
             xname: 'Real GDP',
             yname: 'Price<br>Level',
             grid: false
@@ -14,8 +14,8 @@ var Macro = (function(JXG, MacroLib) {
 
         //Sliders
         var sliderx = brd1.create('slider', [
-            [3.0, -1.0],
-            [8, -1.0],
+            [3.0, -1.5],
+            [8, -1.5],
             [-1.4, 0, 0]
         ], {
             withLabel: false,
@@ -105,7 +105,6 @@ var Macro = (function(JXG, MacroLib) {
             withLabel: true,
             xlabel: 'RGDP<sub>1929</sub>',
             ylabel: '100',
-            yoffsets: [5, 10],
             color: 'darkgray'
         });
 
@@ -127,7 +126,7 @@ var Macro = (function(JXG, MacroLib) {
         var dashesSonly = MacroLib.createDashedLines2Axis(brd1, iSonly, {
             withLabel: false,
             xlabel: 'QAS<sup>*</sup>',
-            xoffsets: [5, 35],
+            xoffsets: [25, 40],
             ylabel: '',
             yoffsets: [5, 10],
             color: 'dodgerblue'
@@ -139,7 +138,7 @@ var Macro = (function(JXG, MacroLib) {
         var dashesDonly = MacroLib.createDashedLines2Axis(brd1, iDonly, {
             withLabel: false,
             xlabel: 'QAD<sup>*</sup>',
-            xoffsets: [5, 35],
+            xoffsets: [25, 40],
             ylabel: '',
             yoffsets: [5, 10],
             color: 'lime'

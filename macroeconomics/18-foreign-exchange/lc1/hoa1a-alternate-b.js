@@ -75,7 +75,6 @@ var Macro = (function(JXG, MacroLib) {
             withLabel: true,
             xlabel: 'Q<sup>*</sup>',
             ylabel: 'E1',
-            yoffsets: [-35, 0],
             color: 'orange'
         });
 

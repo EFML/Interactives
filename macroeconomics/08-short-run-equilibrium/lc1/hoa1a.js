@@ -90,7 +90,7 @@ var Macro = (function(JXG, MacroLib) {
             withLabel: true,
             xlabel: 'RGDP<sub>0</sub>',
             ylabel: 'PL<sub>0</sub>',
-            yoffsets: [5, 10],
+            yoffsets: [30, 15],
             color: 'darkgray'
         });
 
@@ -101,9 +101,9 @@ var Macro = (function(JXG, MacroLib) {
         var dashesSonly = MacroLib.createDashedLines2Axis(brd1, iSonly, {
             withLabel: true,
             xlabel: 'AS<sup>*</sup>',
-            xoffsets: [5, 15],
+            xoffsets: [20, 23],
             ylabel: 'PL<sup>*</sup>',
-            yoffsets: [5, 10],
+            yoffsets: [30, 15],
             color: 'dodgerblue'
         });
 
@@ -120,7 +120,7 @@ var Macro = (function(JXG, MacroLib) {
         var dashesDonly = MacroLib.createDashedLines2Axis(brd1, iDonly, {
             withLabel: true,
             xlabel: 'AD<sup>*</sup>',
-            xoffsets: [5, 15],
+            xoffsets: [20, 23],
             ylabel: '',
             yoffsets: [5, 10],
             color: 'crimson'

@@ -7,7 +7,7 @@ var Macro = (function(JXG, MacroLib) {
 
         board = MacroLib.createBoard('jxgbox1', {
             bboxlimits: [-2, 12, 12, -2],
-            xname: 'Quantity of Wheat',
+            xname: 'Quantity<br>of Wheat',
             yname: 'Price of<br>Wheat'
         });
 

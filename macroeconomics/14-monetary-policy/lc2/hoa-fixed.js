@@ -19,7 +19,7 @@ var Macro = (function(JXG, MacroLib) {
         ////////////
         brd2 = MacroLib.createBoard('jxgbox2', {
             bboxlimits: bbox,
-            xname: 'Investment Demand',
+            xname: 'Investment<br>Demand',
             yname: 'RIR'
         });
 

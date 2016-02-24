@@ -136,7 +136,10 @@ var Macro = (function(JXG, MacroLib) {
         var iB2SRPC = brd2.create('intersection', [DB2Y, SRPC, 0], {
             name: 'A<sub>2</sub>',
             withLabel: true,
-            visible: false
+            visible: false,
+            label: {
+                offset: [10, 19]
+            }
         });
         var iB2fixed = brd2.create('point', [iB2SRPC.X(), iB2SRPC.Y()], {
             name: 'A<sub>1</sub>',

@@ -14,8 +14,8 @@ var Macro = (function(JXG, MacroLib) {
 
         //Sliders
         var sliderx = brd1.create('slider', [
-            [3.0, -1.0],
-            [8, -1.0],
+            [3.0, -1.5],
+            [8, -1.5],
             [0.0, 0, 1.4]
         ], {
             withLabel: false,
@@ -100,7 +100,6 @@ var Macro = (function(JXG, MacroLib) {
             withLabel: true,
             xlabel: 'RGDP<sub>1</sub>',
             ylabel: 'PL<sub>1</sub>',
-            yoffsets: [5, 10],
             color: 'darkgray'
         });
 
@@ -110,9 +109,7 @@ var Macro = (function(JXG, MacroLib) {
         var dashesSD = MacroLib.createDashedLines2Axis(brd1, iSD, {
             withLabel: false,
             xlabel: 'RGDP<sub>2</sub>',
-            xoffsets: [5, 15],
             ylabel: 'PL<sub>2</sub>',
-            yoffsets: [5, 10],
             color: 'orange'
         });
 

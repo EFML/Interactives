@@ -7,8 +7,8 @@ var Macro = (function(JXG, MacroLib) {
         MacroLib.init(MacroLib.TWO_BOARDS);
 
         brd1 = MacroLib.createBoard('jxgbox1', {
-            bboxlimits: [-3, 12, 12, -2],
-            xname: 'Quantity of Wheat',
+            bboxlimits: [-3, 12, 12, -3],
+            xname: 'Quantity<br>of Wheat',
             yname: 'Price of<br>Wheat'
         });
 
@@ -60,9 +60,7 @@ var Macro = (function(JXG, MacroLib) {
         dashes11 = MacroLib.createDashedLines2Axis(brd1, glider11, {
             withLabel: true,
             xlabel: 'Q<sub>1</sub>',
-            xoffsets: [5, 12],
             ylabel: 'P<sub>1</sub>',
-            yoffsets: [5, 12],
             color: 'gray'
         });
 
@@ -70,9 +68,7 @@ var Macro = (function(JXG, MacroLib) {
         dashes12 = MacroLib.createDashedLines2Axis(brd1, glider12, {
             withLabel: true,
             xlabel: 'Q<sub>2</sub>',
-            xoffsets: [5, 12],
             ylabel: 'P<sub>2</sub>',
-            yoffsets: [5, 12],
             color: 'gray'
         });
         dashedLinesVisibility(dashes12, false);
@@ -82,8 +78,8 @@ var Macro = (function(JXG, MacroLib) {
         MacroLib.init(MacroLib.TWO_BOARDS);
 
         brd2 = MacroLib.createBoard('jxgbox2', {
-            bboxlimits: [-3, 12, 12, -2],
-            xname: 'Quantity of Wheat',
+            bboxlimits: [-3, 12, 12, -3],
+            xname: 'Quantity<br>of Wheat',
             yname: 'Price of<br>Wheat'
         });
 
@@ -135,9 +131,7 @@ var Macro = (function(JXG, MacroLib) {
         dashes21 = MacroLib.createDashedLines2Axis(brd2, glider21, {
             withLabel: true,
             xlabel: 'Q<sub>1</sub>',
-            xoffsets: [5, 12],
             ylabel: 'P<sub>1</sub>',
-            yoffsets: [5, 12],
             color: 'gray'
         });
 
@@ -145,9 +139,7 @@ var Macro = (function(JXG, MacroLib) {
         dashes22 = MacroLib.createDashedLines2Axis(brd2, glider22, {
             withLabel: true,
             xlabel: 'Q<sub>2</sub>',
-            xoffsets: [5, 12],
             ylabel: 'P<sub>2</sub>',
-            yoffsets: [5, 12],
             color: 'gray'
         });
         dashedLinesVisibility(dashes22, false);
