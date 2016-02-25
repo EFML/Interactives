@@ -1,15 +1,15 @@
 // Used as JSInput
 var Macro = (function(JXG, MacroLib) {
     'use strict';
-    var board, regLine, points = [], xVals = [], yVals = [],
-        f = '', a = '', b = '', lineWasGenerated = false;
+    var board, regCurve, points = [], xVals = [], yVals = [], xyVals = [],
+        f = '', a = '', b = '', curveWasGenerated = false, xMin = 0.0, xMax = 7.0;
 
     function init() {
         MacroLib.init(MacroLib.ONE_BOARD);
         ////////////
         // BOARD
         ////////////
-        var boundingBox = [-0.75, 7, 7, -0.75];
+        var boundingBox = [-0.75, 7, xMax, -0.75];
 
         board = JXG.JSXGraph.initBoard('jxgbox1', {
             boundingbox: boundingBox,
@@ -66,12 +66,16 @@ var Macro = (function(JXG, MacroLib) {
         //////////////////
         board.on('down', function(event) {
             var coords;
-            if (!lineWasGenerated) {
+            if (!curveWasGenerated) {
                 coords = board.getUsrCoordsOfMouse(event);
-                // Only plot points in  first quadrant
-                if (coords[0] >= 0 && coords[1] >= 0) {
-                    xVals.push(coords[0]);
-                    yVals.push(coords[1]);
+                // Only plot points in  first quadrant with a small 0.1 tolerance
+                if (coords[0] >= -0.1 && coords[1] >= -0.1) {
+                    // Put the points exactly on axis if they are slightly out of bounds because of clicking tolerance
+                    coords[0] = coords[0] < 0.0 ? 0 : coords[0];
+                    coords[1] = coords[1] < 0.0 ? 0 : coords[1];
+                    xVals.push(coords[0]); // Used to replot points on reload
+                    yVals.push(coords[1]); // Used to replot points on reload
+                    xyVals.push([coords[0], coords[1]]); // Used with the regression library
                     points.push(
                         board.create('point', coords, {
                             withLabel: false,
@@ -85,37 +89,84 @@ var Macro = (function(JXG, MacroLib) {
         });
     }
 
-    function inBounds(x, y) {
-        return x >= 0 && y >= 0;
+    function generateRegCurve() {
+        var poly, curveXMinMax, curveIsVertical = false;
+        // Use regression library from https://github.com/Tom-Alexander/regression-js
+        // JXG.Math.Numerics.regressionPolynomial is buggy
+        poly = regression('polynomial', xyVals, 1);
+        a = poly.equation[1];
+        b = poly.equation[0];
+        if (!isValid(a) || !isValid(b)) {
+            // Approximate by a vertical line
+            a = Number.MAX_VALUE;
+            b = 0;
+            curveIsVertical = true;
+        }
+
+        f = function(x) {
+            return a*x + b;
+            console.log(x)
+        }
+
+        curveXMinMax = findCurveXMinMax();
+
+        if (!curveIsVertical) {
+            regCurve = board.create(
+                'functiongraph',
+                [f, curveXMinMax[0], curveXMinMax[1]], // plot the curve only in first quadrant
+                {
+                    withLabel: false,
+                    highlight: false,
+                    strokeWidth: 4,
+                    strokeColor: 'dodgerblue'
+                }
+            );
+        }
+        else {
+            // Plot a vertical line using the first point
+            regCurve = board.create('segment',
+                [[xVals[0], 0],  [xVals[0], 7]],
+                {
+                    withLabel: false,
+                    highlight: false,
+                    strokeWidth: 4,
+                    strokeColor: 'dodgerblue'
+                }
+            );
+        }
+        curveWasGenerated = true;
     }
 
-    function generateRegLine() {
-        var x1, y1, x2, y2;
-        f = JXG.Math.Numerics.regressionPolynomial(1, xVals, yVals);
-        // f.getTerm() doesn't work, calculate parameters of line (y = ax + b) manually instead
-        b = f(0.0);
-        a = f(1.0) - b;
-        x1 = 0;
-        y1 = b;
-        // Check out to see if value for x = right boundary of graph is in first quadrant.
-        // If not, calculate intercept with x-axis
-        x2 = 7;
-        y2 = f(7);
-        if (y2 < 0) {
-            x2 = -b/a; // a cannot be 0
-            y2 = 0;
-        }
-        regLine = board.create(
-            'segment',
-            [[x1, y1], [x2, y2]], // plot the line only in first quadrant
-            {
-                withLabel: false,
-                highlight: false,
-                strokeWidth: 4,
-                strokeColor: 'dodgerblue'
+    // Find if there's a root in plotting range (first quadrant), [xMin, xMax]
+    function findCurveXMinMax() {
+        var df, root, xRangeMin = xMin, xRangeMax = xMax;
+
+        // Get the intersection of curve (a line) with the x-axis
+        if (a !== 0) {
+            root = -b/a;
+            if (inRange(root)) {
+                // Take everything from root
+                if (a > 0) {
+                    xRangeMin = root;
+                }
+                // a < 0
+                // Take eveything up to root
+                else {
+                    xRangeMax = root
+                }
             }
-        );
-        lineWasGenerated = true;
+        }
+        // Do not clip anything when a = 0 or when the root is out of range
+        return [xRangeMin, xRangeMax];
+    }
+
+    // From UnderscoreJS: http://underscorejs.org/docs/underscore.html
+    function isValid(nbr) {
+        return isFinite(nbr) && !isNaN(parseFloat(nbr));
+    };
+
+    function inRange(x) {
+        return xMin <= x && x <= xMax;
     }
 
     /////////////////////////
@@ -128,7 +179,8 @@ var Macro = (function(JXG, MacroLib) {
         points.length = 0;
         xVals.length = 0;
         yVals.length = 0;
-        lineWasGenerated = false;
+        xyVals.length = 0;
+        curveWasGenerated = false;
         f = '';
         a = '';
         b = '';
@@ -137,14 +189,14 @@ var Macro = (function(JXG, MacroLib) {
     });
 
     plotBtn.addEventListener('click', function() {
-        // Need at least 2 points to define the regression line
+        // Need at least 2 points to define the quadratic curve
         if (xVals.length > 1 && yVals.length > 1) {
-            generateRegLine();
+            generateRegCurve();
         }
         else {
-            console.info('Please create at least 2 points before trying to generate the best fit line.');
+            console.info('Please create at least 2 points before trying to generate the linear regression curve.');
         }
-    });
+    })
 
     init();
     MacroLib.onLoadPostMessage();
@@ -154,7 +206,8 @@ var Macro = (function(JXG, MacroLib) {
         var state = {
             xVals: xVals,
             yVals: yVals,
-            lineWasGenerated: lineWasGenerated,
+            xyVals: xyVals,
+            curveWasGenerated: curveWasGenerated,
             a: a,
             b: b
         };
@@ -166,9 +219,10 @@ var Macro = (function(JXG, MacroLib) {
         var state = JSON.parse(statestr), i, len;
 
         // Draw saved points
-        if (state.xVals && state.yVals) {
+        if (state.xVals.length !== 0 && state.yVals.length !== 0 && state.xyVals.length !== 0) {
             xVals = state.xVals;
             yVals = state.yVals;
+            xyVals = state.xyVals;
             for (i = 0, len = xVals.length; i < len; i++) {
                 points.push(
                     board.create('point', [xVals[i], yVals[i]], {
@@ -180,9 +234,9 @@ var Macro = (function(JXG, MacroLib) {
                 );
             }
             // Generate and draw regression line if more than 2 points
-            if (state.lineWasGenerated) {
-                lineWasGenerated = state.lineWasGenerated;
-                generateRegLine();
+            if (state.curveWasGenerated) {
+                curveWasGenerated = state.curveWasGenerated;
+                generateRegCurve();
             }
         }
         board.update();
