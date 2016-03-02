@@ -13,7 +13,7 @@ else:
 print('Opening all HTML files in %s with Chromium' % rootdir)
 nbr_html_files = 0
 
-excluded_dir = ['CSS', 'JS', 'Macro_Interactive_ToDo', 'OldStructure', 'Python', 'WWW']
+excluded_dir = ['css', 'fonts', 'js', 'various']
 for dir, subdirs, files in os.walk(rootdir):
     subdirs[:] = [d for d in subdirs if d not in excluded_dir]
     for file in files:

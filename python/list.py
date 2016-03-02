@@ -4,6 +4,21 @@ import os
 import sys
 import re
 import json
+from collections import OrderedDict
+
+
+# Returns additional interactive infos:
+# type: IFrame or JSInput
+# storage: internal (/static/) or S3 (bucket URL)
+# resizing: if it's the internal IFrame used for resizing
+def interactive_infos(url, type):
+    if url.startswith('/static/'):
+        storage = 'Internal'
+        resizing = url == '/static/resize-iframes.html'
+    else:
+        storage = 'S3'
+        resizing = False
+    return {'type': type, 'storage': storage, 'resizing': resizing}
 
 # Set the directory you want to start from. Defaults to '.''
 if len(sys.argv) > 1:
@@ -15,8 +30,6 @@ print('Starting %s directory walk' % rootdir)
 
 outputfile = open(rootdir+'/list.json', 'w')
 
-jsinput_nbr = 0
-iframe_nbr = 0
 found_list = []
 # Open course XML
 for dir, subdir, files in os.walk(rootdir + '/course'):
@@ -46,75 +59,104 @@ for dir, subdir, files in os.walk(rootdir + '/course'):
                     vertical_file = open(vertical_path, 'r')
                     vertical_bytes = vertical_file.read()
                     vertical_file.close()
-                    vertical_name = ''.join(re.findall(r'display_name="(.*?)"', vertical_bytes))
+                    vertical_name = ''.join(re.findall(r'vertical display_name="(.*?)"', vertical_bytes))
                     # Find all problems
                     problems = re.findall(r'<problem url_name="(.*?)"', vertical_bytes)
                     for problem in problems:
                         problem_path = './problem/' + problem + '.xml'
                         problem_file = open(problem_path, 'r')
                         problem_bytes = problem_file.read()
-                        problem_name = ''.join(re.findall(r'display_name="(.*?)"', problem_bytes))
+                        problem_name = ''.join(re.findall(r'problem display_name="(.*?)"', problem_bytes))
                         problem_file.close()
                         problem_file = open(problem_path, 'r')
                         for line in problem_file:
                             # Problem files can contain JSInput and IFrame
-                            if line.find('<jsinput') != -1 or line.find('<iframe') != -1:
-                                if line.find('<jsinput') != -1:
+                            found_jsinput = line.find('<jsinput') != -1
+                            found_iframe = line.find('<iframe') != -1
+                            if found_jsinput or found_iframe:
+                                if found_jsinput:
                                     jsinput_url = re.findall(r'(?<=html_file=\").+(?=html)', line)
-                                    found_list.append({
-                                        'type': 'JSInput',
-                                        'path': problem_path,
-                                        'location': {
-                                            'chapter': chapter_name,
-                                            'sequential': sequential_name,
-                                            'vertical': vertical_name,
-                                            'name': problem_name
-                                         },
-                                         'url': ''.join(jsinput_url) + 'html'
-                                    })
-                                    jsinput_nbr += 1
-                                if line.find('<iframe') != -1:
+                                    if jsinput_url:
+                                        jsinput_url = ''.join(jsinput_url) + 'html'
+                                        infos = interactive_infos(jsinput_url, 'JSInput')
+                                        od = OrderedDict(
+                                            [
+                                                ('type', infos['type']),
+                                                ('storage', infos['storage']),
+                                                ('resizing', infos['resizing']),
+                                                ('url', jsinput_url),
+                                                ('location', OrderedDict(
+                                                    [
+                                                        ('chapter', chapter_name),
+                                                        ('sequential', sequential_name),
+                                                        ('vertical', vertical_name),
+                                                        ('name', problem_name)
+                                                    ]
+                                                )),
+                                                ('path', problem_path)
+                                            ]
+                                        )
+                                        found_list.append(od)
+                                if found_iframe:
                                     html_url = re.findall(r'(?<=src=\").+(?=html)', line)
-                                    found_list.append({
-                                        'type': 'IFrame',
-                                        'path': problem_path,
-                                        'location': {
-                                            'chapter': chapter_name,
-                                            'sequential': sequential_name,
-                                            'vertical': vertical_name,
-                                            'name': problem_name
-                                         },
-                                         'url': ''.join(html_url) + 'html'
-                                    })
-                                    iframe_nbr += 1
+                                    if html_url:
+                                        html_url = ''.join(html_url) + 'html'
+                                        infos = interactive_infos(html_url, 'IFrame')
+                                        od = OrderedDict(
+                                            [
+                                                ('type', infos['type']),
+                                                ('storage', infos['storage']),
+                                                ('resizing', infos['resizing']),
+                                                ('url', html_url),
+                                                ('location', OrderedDict(
+                                                    [
+                                                        ('chapter', chapter_name),
+                                                        ('sequential', sequential_name),
+                                                        ('vertical', vertical_name),
+                                                        ('name', problem_name)
+                                                    ]
+                                                )),
+                                                ('path', problem_path)
+                                            ]
+                                        )
+                                        found_list.append(od)
                         problem_file.close()
                     # Find all HTML
                     htmls = re.findall(r'<html url_name="(.*?)"', vertical_bytes)
                     for html in htmls:
+                         # The HTML name is contained in the associated xml file
+                        html_xml_path = './html/' + html + '.xml'
+                        html_xml_file = open(html_xml_path, 'r')
+                        html_xml_bytes = html_xml_file.read()
+                        html_name = ''.join(re.findall(r'display_name="(.*?)"', html_xml_bytes))
+                        html_xml_file.close()
                         html_path = './html/' + html + '.html'
-                        html_file = open(html_path, 'r')
-                        html_bytes = html_file.read()
-                        html_name = ''.join(re.findall(r'display_name="(.*?)"', html_bytes))
-                        html_file.close()
                         html_file = open(html_path, 'r')
                         for line in html_file:
                             if line.find('<iframe') != -1:
                                 html_url = re.findall(r'(?<=src=\").+(?=html)', line)
-                                found_list.append({
-                                    'type': 'IFrame',
-                                    'path': html_path,
-                                    'location': {
-                                        'chapter': chapter_name,
-                                        'sequential': sequential_name,
-                                        'vertical': vertical_name,
-                                        'name': html_name
-                                        },
-                                        'url': ''.join(html_url) + 'html'
-                                    })
-                                iframe_nbr += 1
+                                if html_url:
+                                    html_url = ''.join(html_url) + 'html'
+                                    infos = interactive_infos(html_url, 'IFrame')
+                                    od = OrderedDict(
+                                        [
+                                            ('type', infos['type']),
+                                            ('storage', infos['storage']),
+                                            ('resizing', infos['resizing']),
+                                            ('url', html_url),
+                                            ('location', OrderedDict(
+                                                [
+                                                    ('chapter', chapter_name),
+                                                    ('sequential', sequential_name),
+                                                    ('vertical', vertical_name),
+                                                    ('name', html_name)
+                                                ]
+                                            )),
+                                            ('path', html_path)
+                                        ]
+                                    )
+                                    found_list.append(od)
                         html_file.close()
-# outputfile.write('Number of JSInput: %s\n' % str(jsinput_nbr))
-# outputfile.write('Number of IFrame: %s\n' % str(iframe_nbr))
 found_list_string = json.dumps(found_list, indent=4)
 outputfile.write(found_list_string)
 outputfile.close()
@@ -128,4 +170,3 @@ for line in lines:
     line = line.rstrip() + '\n'
     outputfile.write(line)
 outputfile.close()
-
