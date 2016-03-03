@@ -1,7 +1,7 @@
 // Used as JSInput
 var Macro = (function(JXG, MacroLib) {
     'use strict';
-    var brd1, AD1, AD2, SRAS1, SRAS2;
+    var brd1, AD1, AD2, SRAS1, SRAS2, iS2D, dashS2;
 
     function init() {
         MacroLib.init(MacroLib.ONE_BOARD);
@@ -76,14 +76,14 @@ var Macro = (function(JXG, MacroLib) {
         var iSDfix = brd1.create('intersection', [AD1, SRAS1, 0], {
             visible: false
         });
-        var iS2D = brd1.create('intersection', [AD2, SRAS2, 0], {
+        iS2D = brd1.create('intersection', [AD2, SRAS2, 0], {
             visible: false
         });
 
         ////////////
         // Draggable Dashed Lines for Board 1
         ////////////
-        var dashS2 = MacroLib.createDashedLines2Axis(brd1, iS2D, {
+        dashS2 = MacroLib.createDashedLines2Axis(brd1, iS2D, {
             fixed: false,
             withLabel: false,
             xlabel: 'Y<sub>2</sub>',
@@ -126,31 +126,31 @@ var Macro = (function(JXG, MacroLib) {
         AD2.on('drag', lineDrag);
         SRAS2.on('down', lineDown);
         SRAS2.on('drag', lineDrag);
+    }
 
-        function lineDrag() {
-            //Moving Dashed Lines in Board 1
-            dashS2.Y1.moveTo([0, iS2D.Y()]);
-            dashS2.Y2.moveTo([iS2D.X(), iS2D.Y()]);
+    function lineDrag() {
+        //Moving Dashed Lines in Board 1
+        dashS2.Y1.moveTo([0, iS2D.Y()]);
+        dashS2.Y2.moveTo([iS2D.X(), iS2D.Y()]);
 
-            dashS2.X1.moveTo([iS2D.X(), 0]);
-            dashS2.X2.moveTo([iS2D.X(), iS2D.Y()]);
-        }
+        dashS2.X1.moveTo([iS2D.X(), 0]);
+        dashS2.X2.moveTo([iS2D.X(), iS2D.Y()]);
+    }
 
-        function lineDown() {
-            AD2.setAttribute({
-                withLabel: true
-            });
-            SRAS2.setAttribute({
-                withLabel: true
-            });
-            dashS2.Y1.setAttribute({
-                withLabel: true
-            });
-            dashS2.X1.setAttribute({
-                withLabel: true
-            });
-            brd1.update();
-        }
+    function lineDown() {
+        AD2.setAttribute({
+            withLabel: true
+        });
+        SRAS2.setAttribute({
+            withLabel: true
+        });
+        dashS2.Y1.setAttribute({
+            withLabel: true
+        });
+        dashS2.X1.setAttribute({
+            withLabel: true
+        });
+        brd1.update();
     }
 
     /////////////////////////
@@ -179,6 +179,8 @@ var Macro = (function(JXG, MacroLib) {
             point2 = [state.SRAS2.p2X, state.SRAS2.p2Y];
             SRAS2.point1.moveTo(point1, 0);
             SRAS2.point2.moveTo(point2, 0);
+            lineDown();
+            lineDrag();
 
             brd1.update();
         }
