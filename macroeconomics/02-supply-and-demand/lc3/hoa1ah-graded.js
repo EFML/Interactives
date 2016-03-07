@@ -114,7 +114,7 @@
             });
             c.demandSliderText = c.board.create(
                 'text',
-                [3.25, demandSliderY,'<strong>&Delta;D</strong>'],
+                [3.25, demandSliderY,'&Delta;D'],
                 {strokeColor: 'dodgerblue', anchorX: 'right', anchorY: 'middle'}
             );
             c.demandSlider.on('down', function() {
@@ -138,7 +138,7 @@
             });
             c.supplySliderText = c.board.create(
                 'text',
-                [3.25, supplySliderY,'<strong>&Delta;S</strong>'],
+                [3.25, supplySliderY,'&Delta;S'],
                 {strokeColor: 'orange', anchorX: 'right', anchorY: 'middle'}
             );
             c.supplySlider.on('down', function() {

@@ -75,7 +75,7 @@
         });
         demandSliderText = board.create(
             'text',
-            [3.25, -1.55,'<strong>&Delta;D</strong>'],
+            [3.25, -1.55,'&Delta;D'],
             {strokeColor: 'dodgerblue', anchorX: 'right', anchorY: 'middle'}
         );
         demandSlider.on('down', demandSliderMouseDown);
@@ -93,7 +93,7 @@
         });
         priceSliderText = board.create(
             'text',
-            [-1.90, 3.5,'<strong>&Delta;QD</strong>'],
+            [-1.90, 3.5,'&Delta;QD'],
             {strokeColor: 'crimson', anchorY: 'top'}
         );
 
