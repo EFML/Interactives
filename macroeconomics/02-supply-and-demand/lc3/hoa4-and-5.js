@@ -1,4 +1,4 @@
-var Macro = (function(JXG, MacroLib) {
+(function(JXG, MacroLib) {
     'use strict';
     var brd1, GS, GD, ISD, DGS, DGD;
     var config = window.MacroSettings || {

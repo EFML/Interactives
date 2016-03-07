@@ -1,4 +1,4 @@
-var Macro = (function(JXG, MacroLib) {
+(function(JXG, MacroLib) {
     'use strict';
     var brd1, AD1, AD2, SRAS1, SRAS2;
 

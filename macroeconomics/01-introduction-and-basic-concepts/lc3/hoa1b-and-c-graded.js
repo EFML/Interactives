@@ -1,5 +1,5 @@
 // Used as JSInput
-var Macro = (function(JXG, MacroLib) {
+(function(JXG, MacroLib) {
     'use strict';
     var board, regCurve, points = [], xVals = [], yVals = [], xyVals = [],
         f = '', a = '', b = '', c = '', curveWasGenerated = false, xMin = 0.0, xMax = 7.0;
@@ -266,9 +266,4 @@ var Macro = (function(JXG, MacroLib) {
 
     MacroLib.createChannel(getGrade, getState, setState);
 
-    return {
-        setState: setState,
-        getState: getState,
-        getGrade: getGrade
-    };
 })(JXG, MacroLib, undefined);

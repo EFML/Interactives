@@ -1,4 +1,4 @@
-var Macro = (function(JXG, MacroLib) {
+(function(JXG, MacroLib) {
     'use strict';
     var brd1, demandLine11, demandLine12, supplyLine, glider11, glider12, dashes11, dashes12; // Board 1
     var brd2, supplyLine21, supplyLine22, demandLine, glider21, glider22, dashes21, dashes22; // Board 2

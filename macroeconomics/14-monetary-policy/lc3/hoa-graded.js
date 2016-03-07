@@ -1,5 +1,5 @@
 // Used as JSInput
-var Macro = (function(JXG, MacroLib) {
+(function(JXG, MacroLib) {
     'use strict';
     var brd1, brd2, brd3, sliderB1, sliderB2, sliderB3;;
 
@@ -381,9 +381,4 @@ var Macro = (function(JXG, MacroLib) {
 
     MacroLib.createChannel(getGrade, getState, setState);
 
-    return {
-        setState: setState,
-        getState: getState,
-        getGrade: getGrade
-    };
 })(JXG, MacroLib, undefined);

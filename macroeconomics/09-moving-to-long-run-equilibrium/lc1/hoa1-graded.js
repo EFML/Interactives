@@ -1,5 +1,5 @@
 // Used as JSInput
-var Macro = (function(JXG, MacroLib) {
+(function(JXG, MacroLib) {
     'use strict';
     var board, state = {}, savedState, selectedLine = {}, lineDown = false,
         eqPoint, dashedLines, LRASxLabel;
@@ -291,9 +291,4 @@ var Macro = (function(JXG, MacroLib) {
 
     MacroLib.createChannel(getGrade, getState, setState);
 
-    return {
-        setState: setState,
-        getState: getState,
-        getGrade: getGrade
-    };
 })(JXG, MacroLib, undefined);

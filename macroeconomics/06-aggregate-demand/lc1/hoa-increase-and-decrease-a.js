@@ -1,4 +1,4 @@
-var Macro = (function(JXG, MacroLib) {
+(function(JXG, MacroLib) {
     'use strict';
     var animationSpeed, curveShift, brd1, D2, AD2, dashD2, G;
 

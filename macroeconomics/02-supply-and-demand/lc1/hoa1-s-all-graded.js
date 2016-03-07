@@ -1,5 +1,5 @@
 // Used as JSInput
-var Macro = (function(JXG, MacroLib) {
+(function(JXG, MacroLib) {
     'use strict';
     var board, demandLine1, demandLine2, glider1, glider2, dashes1, dashes2,
         demandSlider, priceSlider, demandSliderText, priceSliderText;
@@ -275,11 +275,5 @@ var Macro = (function(JXG, MacroLib) {
     }
 
     MacroLib.createChannel(getGrade, getState, setState);
-
-    return {
-        setState: setState,
-        getState: getState,
-        getGrade: getGrade
-    };
 
 })(JXG, MacroLib, undefined);
