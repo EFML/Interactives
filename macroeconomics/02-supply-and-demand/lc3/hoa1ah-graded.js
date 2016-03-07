@@ -287,8 +287,6 @@
         }
     }
 
-    init();
-
     // Standard edX JSinput functions.
     // These are adapted to a left board containing only a demand slider and to
     // a right board containing only a supply slider.
@@ -329,6 +327,8 @@
         return getState();
     }
 
+    init();
+    MacroLib.onLoadPostMessage();
     MacroLib.createChannel(getGrade, getState, setState);
 
 })(JXG, MacroLib, undefined);

@@ -166,9 +166,6 @@
         init();
     });
 
-    init();
-    MacroLib.onLoadPostMessage();
-
     //Standard edX JSinput functions
     function setState(transaction, statestr) {
         var state = JSON.parse(statestr);
@@ -235,6 +232,8 @@
         return statestr;
     }
 
+    init();
+    MacroLib.onLoadPostMessage();
     MacroLib.createChannel(getGrade, getState, setState);
 
 })(JXG, MacroLib, undefined);

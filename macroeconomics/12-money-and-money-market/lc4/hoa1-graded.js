@@ -144,9 +144,6 @@
         init();
     });
 
-    init();
-    MacroLib.onLoadPostMessage();
-
     //Standard edX JSinput functions
     function getGrade() {
         var state = {
@@ -197,6 +194,8 @@
         console.info('State updated successfully from saved.');
     }
 
+    init();
+    MacroLib.onLoadPostMessage();
     MacroLib.createChannel(getGrade, getState, setState);
 
 })(JXG, MacroLib, undefined);

@@ -214,9 +214,6 @@
         }
     })
 
-    init();
-    MacroLib.onLoadPostMessage();
-
     // Standard edX JSinput functions
     function getState() {
         var state = {
@@ -264,6 +261,8 @@
         return getState();
     }
 
+    init();
+    MacroLib.onLoadPostMessage();
     MacroLib.createChannel(getGrade, getState, setState);
 
 })(JXG, MacroLib, undefined);
