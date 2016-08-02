@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <title>Data Entry</title>
+    <link rel="stylesheet" type="text/css" href="../css/vendor/jquery_ui/smoothness/jquery-ui.min.css">
+    <link rel="stylesheet" type="text/css" href="../css/vendor/handsontable/handsontable.full.min.css">
+    <link rel="stylesheet" type="text/css" href="../css/common.css">
+    <link rel="stylesheet" type="text/css" href="../css/app/data_entry/data-entry.css">
+    <script type="text/javascript" src="../js/vendor/jsxgraphcore.js"></script>
+    <script type="text/javascript" src="../js/vendor/underscore-min.js"></script>
+    <script type="text/javascript" src="../js/vendor/jquery.min.js"></script>
+    <script type="text/javascript" src="../js/vendor/jquery-ui.min.js"></script>
+    <script type="text/javascript" src="../js/vendor/jquery.ui.touch-punch.min.js"></script>
+    <script type="text/javascript" src="../js/vendor/handsontable.full.min.js"></script>
+    <script type="text/javascript">
+      var DataEntrySettings = {
+        tables: [
+          {
+            name: 'Experiment 1',
+            data: [
+              [0.0, 0.0], [0.0, 0.0], [-4.9, ''], [-4.9, ''], [-19.6, ''], [-19.6, ''], [-44.1, ''], [-44.1, ''], [-78.4, ''], [-78.4, ''], [-122.5, ''], [-122.5, ''], ['', ''], ['', ''], ['', '']
+            ],
+            headers: ['Y<sub>c</sub> (cm)', 'X<sub>p</sub>, X<sub>m</sub> (cm)'],
+            xColumn: 1,
+            yColumn: 0,
+            dataPoints: {
+              color: 'DodgerBlue'
+            },
+            fitLine: {
+              color: 'Crimson',
+              precision: 3,
+              render: true
+            },
+          }
+        ],
+        initBoundingBox: [-11.0, 11.0, 11.0, -11.0],
+        render: true
+      };
+    </script>
+    <script type="text/javascript" src="../js/app/data_entry/data_entry.js" defer></script>
+  </head>
+  <body>
+    <div class="container">
+      <div class="control-panel"></div>
+      <div class="jxgbox" id="jxgbox"></div>
+      <div id="choose-columns-dialog-form"></div>
+      <div id="reset-dialog-form"></div>
+    </div>
+  </body>
+</html>
