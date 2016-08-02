@@ -1,7 +1,7 @@
 // Used as JSInput
 (function(JXG, MacroLib) {
     'use strict';
-    var board, LRPC, SRPC1, SRPC2, intersection1, intersection2, intersection3, dashes1, dashes2, ptA, ptB, ptC;
+    var board, LRPC, SRPC1, SRPC2, intersection1, intersection2, intersection3, dashes1, dashes2, ptA, ptB, ptC, pointSize = 3, pointColor = 'red';
 
     function init() {
         MacroLib.init(MacroLib.ONE_BOARD);
@@ -50,14 +50,18 @@
         intersection1 = board.create('intersection', [LRPC, SRPC1, 0], {
             visible: true,
             name: '',
-            size: 0.5
+            size: pointSize,
+            strokecolor: pointColor,
+            fillcolor: pointColor,
         });
 
         // Intersections of LRPC and SRPC2 - fixed: (4.75, 7.75)
         intersection2 = board.create('intersection', [LRPC, SRPC2, 0], {
             visible: true,
             name: '',
-            size: 0.5
+            size: pointSize,
+            strokecolor: pointColor,
+            fillcolor: pointColor,
         });
 
         // Dashes for SRPC1 -- fixed
@@ -67,8 +71,16 @@
             ylabel: '',
             color: 'darkgray'
         });
-        dashes1.X1.setAttribute({strokecolor: 'red'});
-        dashes1.Y1.setAttribute({strokecolor: 'red'});
+        dashes1.X1.setAttribute({
+            strokecolor: pointColor,
+            fillcolor: pointColor,
+            size: pointSize
+        });
+        dashes1.Y1.setAttribute({
+            strokecolor: pointColor,
+            fillcolor: pointColor,
+            size: pointSize
+        });
 
         // Dashes for SRPC2 -- fixed
         dashes2 = MacroLib.createDashedLines2Axis(board, intersection2, {
@@ -77,14 +89,24 @@
             ylabel: '',
             color: 'darkgray'
         });
-        dashes2.X1.setAttribute({strokecolor: 'red'});
-        dashes2.Y1.setAttribute({strokecolor: 'red'});
+        dashes2.X1.setAttribute({
+            strokecolor: pointColor,
+            fillcolor: pointColor,
+            size: pointSize
+        });
+        dashes2.Y1.setAttribute({
+            strokecolor: pointColor,
+            fillcolor: pointColor,
+            size: pointSize
+        });
 
         // Intersections of SRPC1 and y dashes of SRPC2 - fixed: (2.75, 7.75)
         intersection3 = board.create('intersection', [SRPC1, dashes2.YLine, 0], {
             visible: true,
             name: '',
-            size: 0.5
+            strokecolor: pointColor,
+            fillcolor: pointColor,
+            size: pointSize
         });
 
         // Draggable points
