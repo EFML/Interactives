@@ -203,7 +203,51 @@ Library.
  *    + string method
  *    + (optional) any params
  */
+//Establish a channel to communicate with edX when the application is used
 
+//inside a JSInput and hosted completely on a different domain.
+
+function createChannel(getGrade, getState, setState) {
+
+var channel,
+
+msg = ‘The application is not embedded in an iframe. ‘ +
+
+       ‘A channel could not be established’;
+
+//Establish a channel only if this application is embedded in an iframe.
+
+//This will let the parent window communicate with the child window using
+
+// RPC and bypass SOP restrictions.
+
+if (window.parent !== window) {
+
+   channel = Channel.build({
+
+window: window.parent,
+
+origin: ‘*’,
+
+scope: ‘JSInput’
+
+});
+
+channel.bind(‘getGrade’, getGrade);
+
+channel.bind(‘getState’, getState);
+
+channel.bind(‘setState’, setState);
+
+}
+
+else {
+
+console.log(msg);
+
+}
+
+}
 ;var Channel = (function() {
     "use strict";
 
