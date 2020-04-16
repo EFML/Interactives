@@ -1,3 +1,4 @@
+
 var DataEntry = (function($, _, JXG, undefined) {
     'use strict';
     var config = window.DataEntrySettings || {
@@ -32,7 +33,7 @@ var DataEntry = (function($, _, JXG, undefined) {
         textHeaders = []; // Last minute hack to deal with headers containing HTML markup as <sub></sub>, <sup></sup>
 
     init();
-
+    
     function init() {
         // Deep clone config.tables
         $.extend(true, tables, config.tables);
@@ -46,6 +47,7 @@ var DataEntry = (function($, _, JXG, undefined) {
 
         if (config.render) {
             plotTable(tables[0]);
+            
         }
     }
 
@@ -64,11 +66,12 @@ var DataEntry = (function($, _, JXG, undefined) {
         var xAxis, yAxis, xAxisLabel, yAxisLabel, xOffset1, yOffset1, xOffset2, yOffset2;
 
         JXG.Options.text.fontSize = 14;
+        
 
         board = JXG.JSXGraph.initBoard('jxgbox', {
             boundingbox: boundingBox,
             axis: false,
-            showNavigation: false,
+            showNavigation: true,
             zoom: false,
             pan: false,
             showCopyright: false
@@ -85,7 +88,7 @@ var DataEntry = (function($, _, JXG, undefined) {
         yOffset1 = Math.abs(boundingBox[3] - boundingBox[1]) / 25.0;
         xOffset2 = Math.abs(boundingBox[2] - boundingBox[0]) / 50.0;
         yOffset2 = Math.abs(boundingBox[3] - boundingBox[1]) / 50.0;
-
+        
         xAxisLabel = board.create('text', [boundingBox[2] - xOffset1, yOffset1, table.headers[table.xColumn]], {
             anchorX: 'right',
             fixed:true
@@ -94,6 +97,7 @@ var DataEntry = (function($, _, JXG, undefined) {
             anchorX: 'left',
             fixed:true
         });
+        
     }
 
     function setTableIds() {
@@ -208,8 +212,9 @@ var DataEntry = (function($, _, JXG, undefined) {
     }
 
     function createChooseColumnsDialog() {
+       
         var index = getActiveTable(),
-            optionsHtmlFragment = '', htmlFragment, el, text;
+            optionsHtmlFragment = '', htmlFragment, el, text,col=0;
 
         el = $('<div/>');
 
@@ -217,11 +222,14 @@ var DataEntry = (function($, _, JXG, undefined) {
             // Last minute hack, strip HTML from headers.
             el.html(header);
             text = el.text();
-            optionsHtmlFragment += '<option>' + text + '</option>';
-            textHeaders.push(text);
+            //replace text with col index          
+            optionsHtmlFragment += '<option>' + col + '</option>';
+            //pushing column index rather than name to avoid MathJax issues
+            textHeaders.push(col);
+            col++;
         });
-
-        htmlFragment = [
+        
+        htmlFragment = [            
             '<label class="quarter-line" for="x-column">Select a column for x</label>',
             '<select class="full-line" name="x-column" id="x-column">',
                 optionsHtmlFragment,
@@ -266,6 +274,10 @@ var DataEntry = (function($, _, JXG, undefined) {
 
         $('#y-column').val(textHeaders[tables[index].yColumn]);
         $('#y-column').selectmenu('refresh');
+        //add mathjax queue but not working once column selected?
+        MathJax.Hub.Queue(["Typeset",MathJax.Hub]);
+        
+
     }
 
     function createResetDialog() {
@@ -289,10 +301,12 @@ var DataEntry = (function($, _, JXG, undefined) {
 
     function okChooseColumnsDialog() {
         var xColumnSelectedItem = $('#x-column').val(),
-            yColumnSelectedItem = $('#y-column').val(),
+            yColumnSelectedItem = $('#y-column').val(),            
             index = getActiveTable();
-        tables[index].xColumn = textHeaders.indexOf(xColumnSelectedItem);
-        tables[index].yColumn = textHeaders.indexOf(yColumnSelectedItem);
+        tables[index].xColumn = xColumnSelectedItem;
+        tables[index].yColumn = yColumnSelectedItem;
+        //tables[index].xColumn = textHeaders.indexOf(xColumnSelectedItem);
+        //tables[index].yColumn = textHeaders.indexOf(yColumnSelectedItem);
         chooseColumnsDialog.dialog('close');
     }
 
