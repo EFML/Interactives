@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <title>Data Entry</title>
+    <link rel="stylesheet" type="text/css" href="../css/vendor/jquery_ui/smoothness/jquery-ui.min.css">
+    <link rel="stylesheet" type="text/css" href="../css/vendor/handsontable/handsontable.full.min.css">
+    <link rel="stylesheet" type="text/css" href="../css/common.css">
+    <link rel="stylesheet" type="text/css" href="../css/app/data_entry/data-entry.css">
+    <script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <script type="text/javascript" src="../js/vendor/jsxgraphcore.js"></script>
+    <script type="text/javascript" src="../js/vendor/underscore-min.js"></script>
+    <script type="text/javascript" src="../js/vendor/jquery.min.js"></script>
+    <script type="text/javascript" src="../js/vendor/jquery-ui.min.js"></script>
+    <script type="text/javascript" src="../js/vendor/jquery.ui.touch-punch.min.js"></script>
+    <script type="text/javascript" src="../js/vendor/handsontable.full.min.js"></script>
+    
+    <script type="text/javascript">
+      var DataEntrySettings = {
+        tables: [
+        {
+            name: 'Experiment 1',
+            data: [
+              [0.0,'', 77,''], 
+              [1.0,'', 300,''], 
+              [2.0,'', 1200,''], 
+              [4.0,'', 4850,''], 
+              [6,'', 10900,''], 
+              [8,'', 19500,''], 
+              [10,'',30500,''], 
+              [15,'',68300,''],
+              [20,'',121500,''], 
+              [25,'',190000,''], 
+              [30,'', 273000,''], 
+              [35,'', 372100,''], 
+              [40,'',485250,''], 
+              [45,'',615000,'']
+            ],
+            headers: ['\\(U,\\;m/s\\)', '\\(\\Pi_u\\)', '\\(\\Delta P\\;N/m^2\\) ', '\\(\\Pi_{\\Delta P}\\)'],
+            xColumn: 0,
+            yColumn: 2,
+            dataPoints: {
+            	color: 'DodgerBlue'
+            },
+            fitLine: {
+              color: 'Crimson',
+              precision: 3,
+              render: true
+            },
+          }
+        ],
+        initBoundingBox: [-11.0, 11.0, 11.0, -11.0],
+        render: true
+      };
+    </script>
+    <script type="text/javascript" src="../js/app/data_entry/data_entry.js" defer></script>
+  </head>
+  <body>
+    <div class="container">
+      <div class="control-panel"></div>
+      <div class="jxgbox" id="jxgbox"></div>
+      <div id="choose-columns-dialog-form"></div>
+      <div id="reset-dialog-form"></div>
+    </div>
+  </body>
+</html>
