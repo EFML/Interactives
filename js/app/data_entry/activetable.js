@@ -89,6 +89,7 @@ var ActiveTable = (function () {
     }
 
     function setState(state) {
+        console.log("setting State");
         // Regenerate the table based on the state data.  This function is also
         // responsible for initially generating the table based on the initial
         // state exported by the Python code and for setting the background
