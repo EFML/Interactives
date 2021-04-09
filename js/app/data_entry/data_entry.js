@@ -243,19 +243,19 @@ function createChooseColumnsDialog() {
         overflow: 'visible'
     });
 
-    $('#x-column').selectmenu({
-        width: 300,
-    });
+    // $('#x-column').selectmenu({
+    //     width: 300,
+    // });
 
-    $('#y-column').selectmenu({
-        width: 300,
-    });
+    // $('#y-column').selectmenu({
+    //     width: 300,
+    // });
 
-    $('#x-column').val(textHeaders[tables[index].xColumn]);
-    $('#x-column').selectmenu('refresh');
+    // $('#x-column').val(textHeaders[tables[index].xColumn]);
+    // $('#x-column').selectmenu('refresh');
 
-    $('#y-column').val(textHeaders[tables[index].yColumn]);
-    $('#y-column').selectmenu('refresh');
+    // $('#y-column').val(textHeaders[tables[index].yColumn]);
+    // $('#y-column').selectmenu('refresh');
     //add mathjax queue but not working once column selected?
     MathJax.Hub.Queue(["Typeset",MathJax.Hub]);
     

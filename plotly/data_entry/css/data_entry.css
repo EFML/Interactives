@@ -65,3 +65,8 @@ div {
     background-color: #4CAF50; /* Green */
     color: white;
   }
+
+  .container input, .container label, .container button, .container .error-message, .container .regular-text, .container .mathjax-output, .container .ui-tabs .ui-tabs-nav li a {
+    font-family: "Roboto", "Open Sans", "Verdana", "Geneva", sans-serif;
+    font-weight: 400;
+    font-size: 14px; }

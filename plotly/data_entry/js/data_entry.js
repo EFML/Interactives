@@ -22,8 +22,8 @@ window.onload = function(){
          $(window).on('resize', resizeBox);
 
         setTableIds();
-        createTabPanel();
-        // drawChart();
+        createTabPanel();        
+        drawChart(tables[0]);
 
     }
 
@@ -71,12 +71,14 @@ window.onload = function(){
     }
 
     function createTabContent(container, table) {
-        var chooseColumnsBt, plotTableBt, fitLineBtn, resetBtn, htmlFragment;
+        var chooseColumnsBt, plotTableBt, 
+        fitLineBtn, resetBtn, htmlFragment,addRowBt;
     
         htmlFragment = [
             '<div class="half-line">',
                 '<div id="table-' + table.id + '" />',
             '</div>',
+            '<button class="button" id="add-row-' + table.id + '">Add Row</button>',
             '<div class="half-line" id="reg-line-eq-' + table.id + '" />',
             '<div class="half-line">',
                 '<button class="button" id="choose-columns-' + table.id + '">Choose Columns</button>',
@@ -100,6 +102,11 @@ window.onload = function(){
             readOnly: table.readOnly
         });
         // Bind button event listeners
+        addRowBt = $('#add-row-' + table.id);
+        addRowBt.on('click', function() {
+            addRow();
+        });
+
         chooseColumnsBt = $('#choose-columns-' + table.id);
         chooseColumnsBt.on('click', function() {
             openChooseColumnsDialog();
@@ -108,7 +115,7 @@ window.onload = function(){
         plotTableBt = $('#plot-table-' + table.id);
         plotTableBt.on('click', function() {
             try {
-                plotTable(table);
+                drawChart(table);
             }
             catch (err) {
                 window.alert(err.toString());
@@ -138,27 +145,195 @@ window.onload = function(){
         // Last minute hack to get the table resize when browser window does
         return table.htmlTable;
     }
+    function addRow(){
+        // add row to table and regenerate table
+        var index =getActiveTable(),
+        table = tables[index],
+        blankRow = [];
+        for(i=0;i<table.data[0].length;i++){
+            blankRow.push('')
+        }
+        table.data.push(blankRow)
 
-    function drawChart() {
+        // now redraw
+        // Generate handsontable
+        table.htmlTable = new Handsontable($('#table-' + table.id).get(0), {
+            data: table.data,
+            colHeaders: table.headers,
+            // Last minute hack to get the table resize when browser window does
+            width: $('.container').width() - 40,
+            stretchH: 'all',
+            height: 390,
+            // End hack
+            readOnly: table.readOnly
+        });
+    }
+    function drawChart(table) {
         // get data
-        var data = getData()
+        var data = getData(table),
+        config = {responsive: true}, xlabel,ylabel,
+        layout;
+
+        xlabel = table.headers[table.xColumn];
+        ylabel = table.headers[table.yColumn];
+
+        // console.log(xlabel)
+        
+        layout={
+        xaxis: {
+            title: {
+                text: xlabel,
+                font: {
+                    
+                    size: 18,
+                    color: '#7f7f7f'
+              }
+            },
+          },
+          yaxis: {
+            title: {
+                text: ylabel,
+                font: {                
+                    size: 18,
+                    color: '#7f7f7f'
+              }
+            }
+          }
+        };
+
+        console.log(layout)
+        Plotly.newPlot('chart-div',[data],layout,config)
+
     };
 
-    function getData(){
+    function createChooseColumnsDialog() {
+   
+        var index = getActiveTable(),
+            optionsHtmlFragment = '', htmlFragment, el, text,col=0;
+    
+        el = $('<div/>');
+    
+        _.each(tables[index].headers, function(header) {
+            // Last minute hack, strip HTML from headers.
+            el.html(header);
+            text = el.text();
+            //replace text with col index          
+            optionsHtmlFragment += '<option>' + col + '</option>';
+            //pushing column index rather than name to avoid MathJax issues
+            textHeaders.push(col);
+            col++;
+        });
+        
+        htmlFragment = [            
+            '<label class="quarter-line" for="x-column">Select a column for x</label>',
+            '<select class="full-line" name="x-column" id="x-column">',
+                optionsHtmlFragment,
+            '</select>',
+            '<p></p>',
+            '<label for="y-column">Select a column for y</label>',
+            '<select name="y-column" id="y-column">',
+                optionsHtmlFragment,
+            '</select>'
+        ].join('');
+    
+        chooseColumnsDialog = $('#choose-columns-dialog-form').empty();
+    
+        chooseColumnsDialog
+            .append(htmlFragment)
+            .dialog({
+                autoOpen: false,
+                title: 'Choose Columns',
+                modal: true,
+                width: 350,
+                resizable: false,
+                buttons: {
+                    'OK': okChooseColumnsDialog,
+                    'Cancel': cancelChooseColumnsDialog
+                }
+            });
+    
+        $('.ui-dialog').css({
+            overflow: 'visible'
+        });
+    
+        $('#x-column').selectmenu({
+            width: 300,
+        });
+    
+        $('#y-column').selectmenu({
+            width: 300,
+        });
+    
+        // $('#x-column').val(textHeaders[tables[index].xColumn]);
+        $('#x-column').selectmenu('refresh');
+    
+        $('#y-column').val(textHeaders[tables[index].yColumn]);
+        $('#y-column').selectmenu('refresh');
+        //add mathjax queue but not working once column selected?
+        MathJax.Hub.Queue(["Typeset",MathJax.Hub]);
+        
+    
+    }
+
+    function openChooseColumnsDialog() {
+        createChooseColumnsDialog();
+        chooseColumnsDialog.dialog('open');
+    }
+
+    function okChooseColumnsDialog() {
+        var xColumnSelectedItem = $('#x-column').val(),
+            yColumnSelectedItem = $('#y-column').val(),            
+            index = getActiveTable();
+        tables[index].xColumn = xColumnSelectedItem;
+        tables[index].yColumn = yColumnSelectedItem;
+        //tables[index].xColumn = textHeaders.indexOf(xColumnSelectedItem);
+        //tables[index].yColumn = textHeaders.indexOf(yColumnSelectedItem);
+        chooseColumnsDialog.dialog('close');
+    }
+    
+    function cancelChooseColumnsDialog() {
+        chooseColumnsDialog.dialog('close');
+    }
+
+    function getActiveTable() {
+                return tables.length > 1 ? $('#table-tabs').tabs('option', 'active') : 0;
+            }
+
+    function getData(table){
         // get data from table in x y format to plot
         var x=[],y=[],type='scatter';
 
         // may want to change this...
-    }
-    var trace = {
-        x: [1, 2, 3, 4, 5],
-        y: [1, 2, 4, 8, 16],
-        mode: 'lines'
-    };
+        for (i = 0; i < table.data.length; i++) {
+            x.push(table.data[i][table.xColumn]);
+            y.push(table.data[i][table.yColumn]);
+            };
+                    
+        
+        
+        // trace.x=x;
+        // trace.y=y;
+        var trace={
+            x:x,
+            y:y,
+            mode:'markers',
+            type:type,
+            marker:{size:12,opacity:0.5,line:{width:1}}
+        }
+        
+        return trace
+            
+        }
+
+    // var trace = {
+    //     x: [1, 2, 3, 4, 5],
+    //     y: [1, 2, 4, 8, 16],
+    //     mode: 'lines'
+    // };
     
-    var data = [trace];
-    var config = {responsive: true}
-    Plotly.newPlot('chart-div',data,config)
+    // var data = [trace];
+    // var config = {responsive: true}
+    // Plotly.newPlot('chart-div',data,config)
 }
 // $(window).on('resize', resizeBox);
 /* Current Plotly.js version */

@@ -2,12 +2,17 @@
   
   <link rel="stylesheet" type="text/css" href="css/data_entry.css">
   <link rel="stylesheet" type="text/css" href="css/handsontable/handsontable.full.min.css">
+  <link href = "https://code.jquery.com/ui/1.11.0/themes/ui-lightness/jquery-ui.css"
+         rel = "stylesheet">
 <!-- Plotly.js -->
   <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.0.0/jquery.min.js"></script>
+  <script src = "https://code.jquery.com/ui/1.11.0/jquery-ui.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui-touch-punch/0.2.3/jquery.ui.touch-punch.min.js"></script>
   <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/underscore@1.12.1/underscore-min.js"></script>
   <script type="text/javascript" src="js/data_entry.js"></script>
   <script type="text/javascript" src="js/handsontable.full.min.js"></script>
+  <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
 
   <!-- fonts -->
   <link rel="preconnect" href="https://fonts.gstatic.com"> 
@@ -22,12 +27,12 @@
     {
         name: 'Experiment 1',
         data: [
-          ['0.01','50','50'],
-          ['0.02','45','65'],
-          ['0.03','38','75'],
-          ['0.04','30','65'],
-          ['0.05','20','60'],
-          ['0.06','10','55']
+          [0.01,50,50],
+          [0.02,45,65],
+          [0.03,38,75],
+          [0.04,30,65],
+          [0.05,20,60],
+          [0.06,10,55]
           
         ],
         headers: ['Flow','head', 'efficiency'],
@@ -53,7 +58,7 @@
 <body>
 <div class="container">
   <div class="control-panel"></div>
-  
+  <div id="add-row"></div>
   <div id="choose-columns-dialog-form"></div>
   <div id="choose-fit-dialog-form"></div>
   <div id="reset-dialog-form"></div>
