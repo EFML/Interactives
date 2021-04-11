@@ -1,6 +1,6 @@
 
 
-
+// import regression from 'regression';
 
 window.onload = function(){
 
@@ -103,7 +103,9 @@ window.onload = function(){
             stretchH: 'all',
             height: 390,
             // End hack
-            readOnly: table.readOnly
+            readOnly: table.readOnly,
+            licenseKey:'non-commercial-and-evaluation',
+            formulas:true   
         });
         // Bind button event listeners
         addRowBt = $('#add-row-' + table.id);
@@ -130,12 +132,7 @@ window.onload = function(){
         fitLineBtn = $('#fit-line-' + table.id);
         fitLineBtn.on('click', function() {
             openChooseFitDialog();
-            //try {
-            //    fitLine(table);
-            //}
-            //catch (err) {
-            //    window.alert(err.toString());
-            //}
+           
         });
     
         if(!table.fitLine.render) {
@@ -148,6 +145,7 @@ window.onload = function(){
         });
     
         // Last minute hack to get the table resize when browser window does
+        MathJax.Hub.Queue(["Typeset",MathJax.Hub]);
         return table.htmlTable;
     }
     function addRow(){
@@ -170,7 +168,9 @@ window.onload = function(){
             stretchH: 'all',
             height: 390,
             // End hack
-            readOnly: table.readOnly
+            readOnly: table.readOnly,
+            licenseKey:'non-commercial-and-evaluation',
+            formulas:true
         });
         MathJax.Hub.Queue(["Typeset",MathJax.Hub]);
     }
@@ -340,8 +340,12 @@ window.onload = function(){
             // Last minute hack, strip HTML from headers.
             el.html(header);
             text = el.text();
-            //replace text with col index          
-            optionsHtmlFragment2 += '<option>' + trendlines[col] + '</option>';
+            //replace text with col index
+            if(col==0){  
+                optionsHtmlFragment2 += '<option selected>' + trendlines[col] + '</option>';
+            } else{
+                optionsHtmlFragment2 += '<option>' + trendlines[col] + '</option>';
+            }
             //pushing column index rather than name to avoid MathJax issues
             textHeaders.push(col);
             col++;
@@ -355,7 +359,7 @@ window.onload = function(){
             '<p></p>'
                     
             ].join('');
-        
+        // console.log(htmlFragment2)
         chooseFitDialog = $('#choose-fit-dialog-form').empty();
         
         chooseFitDialog
@@ -379,8 +383,10 @@ window.onload = function(){
         $('#trendline').selectmenu({
             width: 300,
         });
+        //set initial trendline
+        //trendlineType = $('#trendline').val()
         
-        $('#trendline').val(textHeaders[tables[index].xColumn]);
+        //$('#trendline').val(textHeaders[tables[index].xColumn]);
         $('#trendline').selectmenu('refresh');
         
         //add mathjax queue but not working once column selected?
@@ -397,41 +403,8 @@ window.onload = function(){
         var trendlineType = $('#trendline').val(),
                 
         index = getActiveTable();
-                
-        if(trendlineType=="linear"){
-            try {
-            fitLine(tables[index]);
-            }
-            catch (err) {
-                window.alert(err.toString());
-            }            
-        }else if(trendlineType=='cubic'){
-            try {
-                fitLine(tables[index],3);
-            }
-            catch (err) {
-                 window.alert(err.toString());
-            } 
-        }else if(trendlineType=='quadratic'){
-            try {
-                fitLine(tables[index],2);
-            }
-            catch (err) {
-                window.alert(err.toString());
-            } 
-        }else if(trendlineType=='expontential'){
-            try {
-                fitLine(tables[index],1);
-            }
-            catch (err) {
-                window.alert(err.toString());
-            } 
-        }
-                    //index = getActiveTable();
-                //tables[index].xColumn = xColumnSelectedItem;
-                //tables[index].yColumn = yColumnSelectedItem;
-                //tables[index].xColumn = textHeaders.indexOf(xColumnSelectedItem);
-                //tables[index].yColumn = textHeaders.indexOf(yColumnSelectedItem);
+        fitLine(tables[index],trendlineType)        
+      
         chooseFitDialog.dialog('close');
     }
 
@@ -442,33 +415,69 @@ window.onload = function(){
     function okResetDialog() {
         reset();
         resetDialog.dialog('close');
+        MathJax.Hub.Queue(["Typeset",MathJax.Hub]);
     }
         
     function cancelResetDialog() {
         resetDialog.dialog('close');
+        MathJax.Hub.Queue(["Typeset",MathJax.Hub]);
     }
 
-    function fitLine(table){
+    function fitLine(table,trendType){
         var x=[],y=[],type='scatter',lr={},
         index=getActiveTable();
 
-        // get trace data
+        // get trace data in x and y
         data=getData(table)
         // console.log(trace.data[0].x)
         //get bounds
         var fit_from = Math.min(...data.data[0].x)
-        var fit_to = Math.max(...data.data[0].x)     
-        //fit line
+        var fit_to = Math.max(...data.data[0].x)
         
-        lr = linearRegression(data.data[0].x,data.data[0].y);
+        // sort data in format for regression library
+        var newData=[];
+        var x = data.data[0].x, y = data.data[0].y
+        for (i=0;i<x.length;i++){
+            newData.push([x[i],y[i]])
+        }
+        //fit line
+        if(trendType=='linear'){
+            lr = regression.linear(newData)
+        }
+        else if(trendType=='quadratic'){
+            lr = regression.polynomial(newData,{order:2})
+            
+        }
+        else if(trendType=='cubic'){
+            lr = regression.polynomial(newData,{order:3})
+            
+        }
+        else if(trendType=='exponential'){
+            lr = regression.exponential(newData,{order:3})
+            
+        }
+        // lr = linearRegression(data.data[0].x,data.data[0].y);
         // console.log(lr)
+
+        // fill in the gaps
+        var step = (fit_to-fit_from)/100;
+        var xx =Array.from({length: 100}, (_, i) => fit_from + step * i);
+        
+        
+        // get points in correct format
+        var yy=[]
+        for (i=0;i<xx.length;i++){
+            yy.push(lr.predict(xx[i])[1])
+        }
+        
         var fit={
-            x:[fit_from,fit_to],
-            y: [fit_from*lr.sl+lr.off, fit_to*lr.sl+lr.off],
+            x:xx,
+            y: yy,
             mode: 'lines',
             type: 'scatter',
+            name: "$".concat(lr.string,"$")
             }
-        
+        // console.log(fit)
         data.data.push(fit)//= {data:[trace,fit]}
         
         drawChart(tables[index],data)
@@ -525,15 +534,19 @@ window.onload = function(){
         // Update table display
         tables[tableIndex].htmlTable.loadData(data);
         
+        var chartData=getData(tables[tableIndex])
         if (config.render) {
-            drawChart(tables[tableIndex]);
+            drawChart(tables[tableIndex],chartData);
         }
     }
 
     function reset() {
-        clearRegLineEq();
+        var index = getActiveTable();
+        var table= tables[index];
+        var data = getData(table)
+        //clearRegLineEq();
         resetCellsBoard();
-        drawChart(tables[getActiveTable()]);
+        drawChart(table,data);
     }
 
     // Linear fitting
@@ -560,6 +573,20 @@ window.onload = function(){
         lr['r2'] = Math.pow((n*sum_xy - sum_x*sum_y)/Math.sqrt((n*sum_xx-sum_x*sum_x)*(n*sum_yy-sum_y*sum_y)),2);
 
         return lr;
+    }
+
+    function polyRegression(x,y,n){
+        // sort x, y in [[x,y]]
+        // n is the order of the polynomial
+        var data=[];
+
+        for (i=0;i<x.length;i++){
+            data.push([x[i],y[i]])
+        }
+
+        var reg = regression.polynomial(data,{order:n});
+
+        return reg
     }
     MathJax.Hub.Queue(["Typeset",MathJax.Hub]);
 }
