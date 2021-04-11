@@ -22,8 +22,12 @@ window.onload = function(){
          $(window).on('resize', resizeBox);
 
         setTableIds();
-        createTabPanel();        
-        drawChart(tables[0]);
+        createTabPanel();
+        createResetDialog();
+        // createChooseFitDialog();
+        var data = getData(tables[0]);
+        // console.log(data)    
+        drawChart(tables[0],data);
 
     }
 
@@ -83,7 +87,7 @@ window.onload = function(){
             '<div class="half-line">',
                 '<button class="button" id="choose-columns-' + table.id + '">Choose Columns</button>',
                 '<button class="button" id="plot-table-' + table.id + '">Plot Table</button>',
-                '<button class="button" id="fit-line-' + table.id + '" disabled>Choose Fit</button>',
+                '<button class="button" id="fit-line-' + table.id + '" >Choose Fit</button>',
                 
                 '<button class="button" id="reset-' + table.id + '">Reset</button>',
             '</div>'
@@ -115,7 +119,8 @@ window.onload = function(){
         plotTableBt = $('#plot-table-' + table.id);
         plotTableBt.on('click', function() {
             try {
-                drawChart(table);
+                var data=getData(table);
+                drawChart(table,data);
             }
             catch (err) {
                 window.alert(err.toString());
@@ -167,11 +172,12 @@ window.onload = function(){
             // End hack
             readOnly: table.readOnly
         });
+        MathJax.Hub.Queue(["Typeset",MathJax.Hub]);
     }
-    function drawChart(table) {
-        // get data
-        var data = getData(table),
-        config = {responsive: true}, xlabel,ylabel,
+    function drawChart(table,data) {
+        // data should be in {data:[trace]} format
+        // var data = getData(table),
+        var config = {responsive: true}, xlabel,ylabel,
         layout;
 
         xlabel = table.headers[table.xColumn];
@@ -179,10 +185,14 @@ window.onload = function(){
 
         // console.log(xlabel)
         
+        xlabel=xlabel.replace("\\(","")
+        xlabel=xlabel.replace("\\)","")
+        ylabel=ylabel.replace("\\(","")
+        ylabel=ylabel.replace("\\)","")
         layout={
         xaxis: {
             title: {
-                text: xlabel,
+                text: "$".concat(xlabel,"$"),
                 font: {
                     
                     size: 18,
@@ -192,19 +202,37 @@ window.onload = function(){
           },
           yaxis: {
             title: {
-                text: ylabel,
+                text: "$".concat(ylabel,"$"),
                 font: {                
                     size: 18,
-                    color: '#7f7f7f'
+                    color: '#7f7f7f',
+                textangle:0
               }
             }
           }
         };
 
-        console.log(layout)
-        Plotly.newPlot('chart-div',[data],layout,config)
+        //add layout and config to data json
+        data.layout=layout;
+        data.config=config;
+        // console.log(layout)
+        Plotly.newPlot('chart-div',data)
 
     };
+
+    function createResetDialog() {
+        resetDialog = $('#reset-dialog-form')
+            .append('<p>The items you entered will be permanently deleted and cannot be recovered. Are you sure?</p>')
+            .dialog({
+                autoOpen: false,
+                title: 'Warning',
+                modal: true,
+                buttons: {
+                    'OK': okResetDialog,
+                    'Cancel': cancelResetDialog
+                }
+            });
+    }
 
     function createChooseColumnsDialog() {
    
@@ -295,9 +323,161 @@ window.onload = function(){
         chooseColumnsDialog.dialog('close');
     }
 
+    function openChooseFitDialog() {
+        createChooseFitDialog();
+        chooseFitDialog.dialog('open');
+    }
+
+    function createChooseFitDialog() {
+       
+        var index = getActiveTable(),
+            optionsHtmlFragment2 = '', htmlFragment2, el, text,col=0,
+            trendlines=['linear','cubic','quadratic','exponential'];
+        
+        el = $('<div/>');
+        
+        _.each(tables[index].headers, function(header) {
+            // Last minute hack, strip HTML from headers.
+            el.html(header);
+            text = el.text();
+            //replace text with col index          
+            optionsHtmlFragment2 += '<option>' + trendlines[col] + '</option>';
+            //pushing column index rather than name to avoid MathJax issues
+            textHeaders.push(col);
+            col++;
+        });
+                
+        htmlFragment2 = [            
+            '<label class="quarter-line" for="trendline">Select a trendline</label>',
+            '<select class="full-line" name="trendline" id="trendline">',
+             optionsHtmlFragment2,
+            '</select>',
+            '<p></p>'
+                    
+            ].join('');
+        
+        chooseFitDialog = $('#choose-fit-dialog-form').empty();
+        
+        chooseFitDialog
+            .append(htmlFragment2)
+            .dialog({
+                autoOpen: false,
+                title: 'Choose Type of Fit',
+                modal: true,
+                width: 350,
+                resizable: false,
+                buttons: {
+                    'Plot': okFitPlot,
+                    'Close': cancelFitDialog
+                }
+                });
+        
+        $('.ui-dialog').css({
+            overflow: 'visible'
+        });
+        
+        $('#trendline').selectmenu({
+            width: 300,
+        });
+        
+        $('#trendline').val(textHeaders[tables[index].xColumn]);
+        $('#trendline').selectmenu('refresh');
+        
+        //add mathjax queue but not working once column selected?
+        MathJax.Hub.Queue(["Typeset",MathJax.Hub]);
+                
+        
+    }
+    
+    function cancelFitDialog() {
+        chooseFitDialog.dialog('close');
+    }
+
+    function okFitPlot() {
+        var trendlineType = $('#trendline').val(),
+                
+        index = getActiveTable();
+                
+        if(trendlineType=="linear"){
+            try {
+            fitLine(tables[index]);
+            }
+            catch (err) {
+                window.alert(err.toString());
+            }            
+        }else if(trendlineType=='cubic'){
+            try {
+                fitLine(tables[index],3);
+            }
+            catch (err) {
+                 window.alert(err.toString());
+            } 
+        }else if(trendlineType=='quadratic'){
+            try {
+                fitLine(tables[index],2);
+            }
+            catch (err) {
+                window.alert(err.toString());
+            } 
+        }else if(trendlineType=='expontential'){
+            try {
+                fitLine(tables[index],1);
+            }
+            catch (err) {
+                window.alert(err.toString());
+            } 
+        }
+                    //index = getActiveTable();
+                //tables[index].xColumn = xColumnSelectedItem;
+                //tables[index].yColumn = yColumnSelectedItem;
+                //tables[index].xColumn = textHeaders.indexOf(xColumnSelectedItem);
+                //tables[index].yColumn = textHeaders.indexOf(yColumnSelectedItem);
+        chooseFitDialog.dialog('close');
+    }
+
+    function openResetDialog() {
+        resetDialog.dialog('open');
+    }
+        
+    function okResetDialog() {
+        reset();
+        resetDialog.dialog('close');
+    }
+        
+    function cancelResetDialog() {
+        resetDialog.dialog('close');
+    }
+
+    function fitLine(table){
+        var x=[],y=[],type='scatter',lr={},
+        index=getActiveTable();
+
+        // get trace data
+        data=getData(table)
+        // console.log(trace.data[0].x)
+        //get bounds
+        var fit_from = Math.min(...data.data[0].x)
+        var fit_to = Math.max(...data.data[0].x)     
+        //fit line
+        
+        lr = linearRegression(data.data[0].x,data.data[0].y);
+        // console.log(lr)
+        var fit={
+            x:[fit_from,fit_to],
+            y: [fit_from*lr.sl+lr.off, fit_to*lr.sl+lr.off],
+            mode: 'lines',
+            type: 'scatter',
+            }
+        
+        data.data.push(fit)//= {data:[trace,fit]}
+        
+        drawChart(tables[index],data)
+        // drawChart(table,trace)
+    }
+
     function getActiveTable() {
                 return tables.length > 1 ? $('#table-tabs').tabs('option', 'active') : 0;
-            }
+    }
 
     function getData(table){
         // get data from table in x y format to plot
@@ -321,20 +501,70 @@ window.onload = function(){
             marker:{size:12,opacity:0.5,line:{width:1}}
         }
         
-        return trace
+        return {data: [trace]};
             
-        }
+    }
 
-    // var trace = {
-    //     x: [1, 2, 3, 4, 5],
-    //     y: [1, 2, 4, 8, 16],
-    //     mode: 'lines'
-    // };
-    
-    // var data = [trace];
-    // var config = {responsive: true}
-    // Plotly.newPlot('chart-div',data,config)
+    function clearRegLineEq() {
+        var table, tableIndex = getActiveTable();
+
+        table = tables[tableIndex];
+
+        $('#fit-line-' + table.id).attr('disabled', true);
+        $('#reg-line-eq-' + table.id).html('');
+    }
+
+    function resetCellsBoard() {
+        var data, tableIndex = getActiveTable();
+        
+        // Deep clone relevant table
+        $.extend(true, tables[tableIndex], config.tables[tableIndex]);
+        
+        data = tables[tableIndex].data;
+        
+        // Update table display
+        tables[tableIndex].htmlTable.loadData(data);
+        
+        if (config.render) {
+            drawChart(tables[tableIndex]);
+        }
+    }
+
+    function reset() {
+        clearRegLineEq();
+        resetCellsBoard();
+        drawChart(tables[getActiveTable()]);
+    }
+
+    // Linear fitting
+    function linearRegression(x,y){
+        var lr = {};
+        var n = y.length;
+        var sum_x = 0;
+        var sum_y = 0;
+        var sum_xy = 0;
+        var sum_xx = 0;
+        var sum_yy = 0;
+
+        for (var i = 0; i < y.length; i++) {
+
+            sum_x += x[i];
+            sum_y += y[i];
+            sum_xy += (x[i]*y[i]);
+            sum_xx += (x[i]*x[i]);
+            sum_yy += (y[i]*y[i]);
+        } 
+
+        lr['sl'] = (n * sum_xy - sum_x * sum_y) / (n*sum_xx - sum_x * sum_x);
+        lr['off'] = (sum_y - lr.sl * sum_x)/n;
+        lr['r2'] = Math.pow((n*sum_xy - sum_x*sum_y)/Math.sqrt((n*sum_xx-sum_x*sum_x)*(n*sum_yy-sum_y*sum_y)),2);
+
+        return lr;
+    }
+    MathJax.Hub.Queue(["Typeset",MathJax.Hub]);
 }
+
+
 // $(window).on('resize', resizeBox);
 /* Current Plotly.js version */
 // console.log( Plotly.BUILD );
