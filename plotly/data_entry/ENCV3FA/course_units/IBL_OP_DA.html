@@ -1,0 +1,90 @@
+
+<head>
+  
+  <link rel="stylesheet" type="text/css" href="../../css/data_entry.css">
+  <link rel="stylesheet" type="text/css" href="../../css/handsontable/handsontable.full.min.css">
+  <link href = "https://code.jquery.com/ui/1.11.0/themes/ui-lightness/jquery-ui.css"
+         rel = "stylesheet">
+<!-- Plotly.js -->
+  
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.0.0/jquery.min.js"></script>
+  <script src = "https://code.jquery.com/ui/1.11.0/jquery-ui.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui-touch-punch/0.2.3/jquery.ui.touch-punch.min.js"></script>
+  <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/underscore@1.12.1/underscore-min.js"></script>
+  <script type="text/javascript" src="../../js/data_entry.js"></script>
+  <!-- <script type="text/javascript" src="js/handsontable.full.min.js"></script> -->
+  <script src="https://cdn.jsdelivr.net/npm/handsontable@8.3.2/dist/handsontable.full.min.js"></script>
+  <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+  <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+<!-- regression library -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/regression/2.0.1/regression.min.js" integrity="sha512-0k6FXllQktdobw8Nc8KQN2WtZrOuxpMn7jC2RKCF6LR7EdOhhrg3H5cBPxhs3CFzQVlO6ni1B9SDLUPhBs0Alg==" crossorigin="anonymous"></script>
+  <!-- fonts -->
+  <link rel="preconnect" href="https://fonts.gstatic.com"> 
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@100;300;400&display=swap" rel="stylesheet">  
+</head>
+
+
+<script type="text/javascript">
+      var DataEntrySettings = {
+        tables: [
+        {
+            name: 'Experiment 1',
+            data: [
+            [75,'','',1.6, '' ],
+[80,'','',1.8, '' ],
+[85,'','',1.9, '' ],
+[90,'','',2.0, '' ],
+[95,'','',2.2, '' ],
+[100,'','',2.3, '' ],
+[105,'','',2.3, '' ],
+[110,'','',2.4, '' ],
+[115,'','',2.6, '' ],
+[120,'','',2.5, '' ],
+[125,'','',2.8, '' ],
+[130,'','',2.75, '' ],
+[135,'','',2.5, '' ],
+[140,'','',2.22, '' ],
+[145,'','',2.12, '' ],
+[150,'','',2.5, '' ],
+[155,'','',3.3, '' ],
+[160,'','',3.5, '' ],
+[165,'','',3.8, '' ],
+[170,'','',3.9, '' ],
+[175,'','',4, '' ],
+[180,'','',4.1, '' ],
+[185,'','',4.2, '' ],
+[190,'','',4.3, '' ],
+            ],
+            headers: ['\\(U,\\;(mph)\\)', '\\(U,\\;(m/s)\\)','\\(R_e\\)' ,'\\(F\\;(N)\\) ', '\\(C_d\\)'],
+            xColumn: 0,
+            yColumn: 3,
+            dataPoints: {
+            	color: 'DodgerBlue'
+            },
+            fitLine: {
+              color: 'Crimson',
+              precision: 3,
+              render: true
+            },
+          }
+        ],
+        initBoundingBox: [-11.0, 11.0, 11.0, -11.0],
+        render: true
+      };
+    </script>
+
+
+</head>
+<body>
+<div class="container">
+  <div class="control-panel"></div>
+  <div id="add-row"></div>
+  <div id="choose-columns-dialog-form"></div>
+  <div id="choose-fit-dialog-form"></div>
+  <div id="reset-dialog-form"></div>
+</div>
+<div class="container">
+  <div class="chart-div" id="chart-div"></div>
+</div>
+
+</body>
