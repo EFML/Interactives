@@ -105,7 +105,9 @@ window.onload = function(){
             // End hack
             readOnly: table.readOnly,
             licenseKey:'non-commercial-and-evaluation',
-            formulas:true   
+            formulas:true,
+            manualColumnMove: true,
+            manualRowMove: true
         });
         // Bind button event listeners
         addRowBt = $('#add-row-' + table.id);
@@ -170,7 +172,9 @@ window.onload = function(){
             // End hack
             readOnly: table.readOnly,
             licenseKey:'non-commercial-and-evaluation',
-            formulas:true
+            formulas:true,
+            manualColumnMove: true,
+            manualRowMove: true
         });
         MathJax.Hub.Queue(["Typeset",MathJax.Hub]);
     }
